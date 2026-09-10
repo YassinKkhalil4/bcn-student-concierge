@@ -1,0 +1,25 @@
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# Secrets — never commit
+.env
+.env.local
+.env*.local
+
+# Encrypted client data. Even encrypted, this never belongs in version control.
+.data/
+
+# Official government form templates are not redistributable; download them
+# per docs/FORMS.md.
+templates/forms/*.pdf
+
+# Agent tooling state — per-session timestamps and metrics, regenerated on
+# each run. Not project code.
+.claude-flow/
+
+.DS_Store
+coverage/

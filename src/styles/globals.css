@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bone text-ink antialiased;
+    font-feature-settings: "kern", "liga";
+  }
+
+  /* Visible focus for keyboard users; suppressed for mouse clicks. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-olive ring-offset-2 ring-offset-bone;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-olive-light;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3
+           text-sm font-semibold transition-colors disabled:cursor-not-allowed
+           disabled:opacity-50;
+  }
+  .btn-primary { @apply btn bg-olive text-bone hover:bg-olive-deep; }
+  .btn-secondary {
+    @apply btn border border-bone-line bg-transparent text-ink hover:bg-bone-warm;
+  }
+
+  .field-label {
+    @apply block text-sm font-medium text-ink;
+  }
+
+  /* text-transform: uppercase is presentational only. The authoritative
+     uppercase conversion happens in the zod schema on the server — CSS here
+     just stops the input looking different from what will be filed. */
+  .field-input {
+    @apply mt-1.5 w-full rounded-lg border border-bone-line bg-white px-3.5 py-2.5
+           text-sm text-ink placeholder:text-ink-soft focus:border-olive
+           focus:outline-none focus:ring-1 focus:ring-olive;
+  }
+  .field-input-upper { @apply field-input uppercase placeholder:normal-case; }
+
+  .field-error {
+    @apply mt-1.5 text-xs font-medium text-terracotta;
+  }
+}
