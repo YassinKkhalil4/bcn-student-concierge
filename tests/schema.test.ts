@@ -14,8 +14,8 @@ const validIdentity = {
   gender: "M",
   birthDate: "14/03/2004",
   birthCity: "Amsterdam",
-  birthCountry: "Netherlands",
-  nationality: "Dutch",
+  birthCountry: "NL",
+  nationality: "NL",
 };
 
 describe("uppercase coercion", () => {

@@ -42,7 +42,7 @@ const raw = {
   tierId: "baseline",
   identity: {
     passportNumber: "ab1234567", firstSurname: "okonkwo", givenName: "chidi", gender: "H",
-    birthDate: "14/03/2004", birthCity: "lagos", birthCountry: "nigeria", nationality: "nigerian",
+    birthDate: "14/03/2004", birthCity: "lagos", birthCountry: "NG", nationality: "NG",
   },
   family: { maritalStatus: "S", fatherFirstName: "emeka", motherFirstName: "ngozi" },
   address: { streetName: "carrer de mallorca", buildingNumber: "183", city: "barcelona", postalCode: "08036", province: "barcelona" },

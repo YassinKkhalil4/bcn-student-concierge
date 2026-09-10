@@ -4,6 +4,7 @@ import { GENDERS, MARITAL_STATUSES } from "@/lib/schema";
 import { Field, SelectField, FieldGroup } from "./Field";
 import { ConsentBox } from "./ConsentBox";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
+import { countryOptions } from "@/lib/countries";
 import {
   GENDER_OPTIONS,
   MARITAL_OPTIONS,
@@ -11,6 +12,12 @@ import {
   type Values,
   type Errors,
 } from "./constants";
+
+// Computed once. Names come from the browser's own locale data; the codes are
+// what get stored. Spain is not offered as a nationality: Spanish citizens need
+// neither form.
+const BIRTH_COUNTRIES = countryOptions("en");
+const NATIONALITIES = countryOptions("en", ["ES"]);
 
 export interface StepProps {
   values: Values;
@@ -50,12 +57,12 @@ export function IdentityStep({ values, errors, set }: StepProps) {
         inputMode="numeric" maxLength={10} />
       <Field label="City of birth" name="birthCity" value={values.birthCity ?? ""}
         onChange={set("birthCity")} error={errors.birthCity} />
-      <Field label="Country of birth" name="birthCountry"
+      <SelectField label="Country of birth" name="birthCountry"
         value={values.birthCountry ?? ""} onChange={set("birthCountry")}
-        error={errors.birthCountry} />
-      <Field label="Nationality" name="nationality" value={values.nationality ?? ""}
-        onChange={set("nationality")} error={errors.nationality}
-        hint="This determines whether we prepare an EX-17 (TIE) or EX-18 (EU certificate)." />
+        options={BIRTH_COUNTRIES} error={errors.birthCountry} />
+      <SelectField label="Nationality" name="nationality" value={values.nationality ?? ""}
+        onChange={set("nationality")} options={NATIONALITIES} error={errors.nationality}
+        hint="As on your passport. It decides whether we prepare an EX-17 (TIE) or an EX-18 (EU certificate)." />
     </FieldGroup>
   );
 }

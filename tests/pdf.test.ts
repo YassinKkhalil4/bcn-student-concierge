@@ -58,8 +58,8 @@ const base = {
     gender: "H",
     birthDate: "14/03/2004",
     birthCity: "lagos",
-    birthCountry: "nigeria",
-    nationality: "nigerian",
+    birthCountry: "NG",
+    nationality: "NG",
   },
   family: { maritalStatus: "Sp", fatherFirstName: "emeka", motherFirstName: "ngozi" },
   address: {
@@ -288,8 +288,8 @@ describe.skipIf(!haveOfficial)("EX-18 routing and fill", () => {
         ...base,
         identity: {
           ...base.identity,
-          nationality: "italy",
-          birthCountry: "italy",
+          nationality: "IT",
+          birthCountry: "IT",
           gender: "M",
         },
         family: { ...base.family, maritalStatus: "S" },
@@ -304,7 +304,9 @@ describe.skipIf(!haveOfficial)("EX-18 routing and fill", () => {
 
   it("draws the applicant data onto the EX-18 page", () => {
     expect(euText).toContain("OKONKWO");
-    expect(euText).toContain("ITALY");
+    // Spanish country names on the form, never English (Phase 1.2).
+    expect(euText).toContain("ITALIA");
+    expect(euText).not.toContain("ITALY");
     expect(euText).toContain("08036");
   });
 
@@ -324,7 +326,7 @@ describe.skipIf(!haveOfficial)("EX-18 routing and fill", () => {
       fillFormStrict(
         intakeSchema.parse({
           ...base,
-          identity: { ...base.identity, nationality: "germany" },
+          identity: { ...base.identity, nationality: "DE" },
         }),
       ),
     ).resolves.toBeDefined();

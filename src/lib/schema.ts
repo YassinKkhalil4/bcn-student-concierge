@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isCountryCode } from "./countries/codes";
 
 /**
  * Canonical intake schema. This is the contract shared by the client wizard,
@@ -38,6 +39,17 @@ const upper = (max: number, label = "This field") =>
         .min(1, `${label} is required`)
         .max(max, `${label} must be ${max} characters or fewer`),
     );
+
+/**
+ * ISO 3166-1 alpha-2 country code, chosen from a picker. Stored as the code so
+ * the form route is exact and the forms can print the Spanish name.
+ */
+const countryCode = (label: string) =>
+  z
+    .string({ required_error: `${label} is required` })
+    .trim()
+    .toUpperCase()
+    .refine(isCountryCode, `Choose ${label.toLowerCase()} from the list`);
 
 /**
  * Optional printed field.
@@ -117,8 +129,12 @@ export const identitySchema = z.object({
   gender: z.enum(GENDERS, { message: "Select H, M or X" }),
   birthDate: spanishDateSchema,
   birthCity: upper(60, "City of birth"),
-  birthCountry: upper(60, "Country of birth"),
-  nationality: upper(60, "Nationality"),
+  birthCountry: countryCode("Country of birth"),
+  // Spanish citizens need neither an EX-17 nor an EX-18.
+  nationality: countryCode("Nationality").refine(
+    (code) => code !== "ES",
+    "Spanish citizens do not need a TIE or an EU registration certificate",
+  ),
 });
 
 export const familySchema = z.object({

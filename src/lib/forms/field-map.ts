@@ -1,4 +1,5 @@
 import type { IntakeData } from "@/lib/schema";
+import { EU_EEA_CH, isCountryCode, spanishFormName } from "@/lib/countries";
 
 /**
  * Maps our domain model to the logical field names the form layout draws.
@@ -71,15 +72,21 @@ export const TEMPLATES: Record<FormId, FormTemplate> = {
 
 /**
  * EU/EEA/Swiss nationals register via EX-18 (CUE certificate); everyone else
- * applies for a TIE card via EX-17. An applicant needs one or the other —
- * never both — so the engine routes on nationality instead of asking the
- * student to self-select a form they have no way to choose correctly.
+ * applies for a TIE card via EX-17. One or the other, never both — so the
+ * route is derived from nationality rather than chosen by the student.
  *
- * Nationality arrives uppercased and may be given in English or Spanish, so
- * both spellings are matched.
+ * Nationality is an ISO code from the picker, making this an exact lookup.
+ * Free-text values from before the picker still route by name.
  */
-const EU_EEA_SWISS = new Set([
-  "AUSTRIA", "BELGIUM", "BELGICA", "BÉLGICA", "BULGARIA", "CROATIA", "CROACIA",
+export function selectForm(nationality: string): FormId {
+  const v = nationality.trim().toUpperCase();
+  if (isCountryCode(v)) return EU_EEA_CH.has(v) ? "EX-18" : "EX-17";
+  return LEGACY_EU_NAMES.has(normalizeCountry(v)) ? "EX-18" : "EX-17";
+}
+
+/** Pre-picker free-text nationalities, English and Spanish spellings. */
+const LEGACY_EU_NAMES = new Set([
+  "AUSTRIA", "BELGIUM", "BELGICA", "BULGARIA", "CROATIA", "CROACIA",
   "CYPRUS", "CHIPRE", "CZECH REPUBLIC", "CHEQUIA", "REPUBLICA CHECA",
   "DENMARK", "DINAMARCA", "ESTONIA", "FINLAND", "FINLANDIA", "FRANCE", "FRANCIA",
   "GERMANY", "ALEMANIA", "GREECE", "GRECIA", "HUNGARY", "HUNGRIA",
@@ -88,20 +95,12 @@ const EU_EEA_SWISS = new Set([
   "LUXEMBURGO", "MALTA", "NETHERLANDS", "PAISES BAJOS", "HOLANDA",
   "NORWAY", "NORUEGA", "POLAND", "POLONIA", "PORTUGAL", "ROMANIA",
   "RUMANIA", "SLOVAKIA", "ESLOVAQUIA", "SLOVENIA", "ESLOVENIA",
-  "SPAIN", "ESPANA", "SWEDEN", "SUECIA", "SWITZERLAND", "SUIZA",
+  "SWEDEN", "SUECIA", "SWITZERLAND", "SUIZA",
 ]);
 
 /** Strip diacritics so "ESPAÑA" and "ESPANA" both match. */
 function normalizeCountry(value: string): string {
-  return value
-    .trim()
-    .toUpperCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-}
-
-export function selectForm(nationality: string): FormId {
-  return EU_EEA_SWISS.has(normalizeCountry(nationality)) ? "EX-18" : "EX-17";
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 /**
@@ -129,8 +128,8 @@ export function buildFieldValues(data: IntakeData, formId: FormId): FieldValues 
     fecha_nacimiento_mes: month,
     fecha_nacimiento_anio: year,
     lugar_nacimiento: identity.birthCity,
-    pais_nacimiento: identity.birthCountry,
-    nacionalidad: identity.nationality,
+    pais_nacimiento: spanishFormName(identity.birthCountry),
+    nacionalidad: spanishFormName(identity.nationality),
     estado_civil: family.maritalStatus,
     nombre_padre: family.fatherFirstName,
     nombre_madre: family.motherFirstName,

@@ -12,7 +12,7 @@ const raw = {
   identity: {
     passportNumber: "ab1234567", nie: "X1234567L", firstSurname: "okonkwo",
     secondSurname: "adeyemi", givenName: "chidi", gender: "H", birthDate: "14/03/2004",
-    birthCity: "lagos", birthCountry: "nigeria", nationality: "nigerian",
+    birthCity: "lagos", birthCountry: "NG", nationality: "NG",
   },
   family: { maritalStatus: "S", fatherFirstName: "emeka", motherFirstName: "ngozi" },
   address: {

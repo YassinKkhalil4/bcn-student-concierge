@@ -49,7 +49,7 @@ const raw = {
   identity: {
     passportNumber: "ab1234567", firstSurname: "okonkwo", givenName: "chidi",
     gender: "H", birthDate: "14/03/2004", birthCity: "lagos",
-    birthCountry: "nigeria", nationality: "nigerian",
+    birthCountry: "NG", nationality: "NG",
   },
   family: { maritalStatus: "S", fatherFirstName: "emeka", motherFirstName: "ngozi" },
   address: {
@@ -70,7 +70,7 @@ describe("cases", () => {
     expect(rec.paymentStatus).toBe("pending");
 
     const eu = await createCase(
-      intakeSchema.parse({ ...raw, identity: { ...raw.identity, nationality: "italy" } }),
+      intakeSchema.parse({ ...raw, identity: { ...raw.identity, nationality: "IT" } }),
     );
     expect(eu.formId).toBe("EX-18");
   });

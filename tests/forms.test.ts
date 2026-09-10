@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { buildFieldValues, selectForm, TEMPLATES } from "../src/lib/forms/field-map";
+import { COUNTRY_CODES, EU_EEA_CH, spanishFormName } from "../src/lib/countries";
 import { intakeSchema } from "../src/lib/schema";
 import { validateUpload, sanitizeFilename } from "../src/lib/server/uploads";
 
@@ -12,8 +13,8 @@ const raw = {
     gender: "H",
     birthDate: "14/03/2004",
     birthCity: "lagos",
-    birthCountry: "nigeria",
-    nationality: "nigerian",
+    birthCountry: "NG",
+    nationality: "NG",
   },
   family: { maritalStatus: "S", fatherFirstName: "emeka", motherFirstName: "ngozi" },
   address: {
@@ -32,6 +33,7 @@ const raw = {
 };
 
 const data = intakeSchema.parse(raw);
+const forms_raw = () => structuredClone(raw);
 
 describe("form routing", () => {
   it("routes non-EU nationals to EX-17 (TIE)", () => {
@@ -45,10 +47,54 @@ describe("form routing", () => {
     expect(selectForm("SWITZERLAND")).toBe("EX-18");
   });
 
-  it("matches Spanish spellings and ignores diacritics", () => {
+  it("still routes legacy free-text names, ignoring diacritics", () => {
     expect(selectForm("ALEMANIA")).toBe("EX-18");
-    expect(selectForm("ESPAÑA")).toBe("EX-18");
-    expect(selectForm("españa")).toBe("EX-18");
+    expect(selectForm("BÉLGICA")).toBe("EX-18");
+    expect(selectForm("belgica")).toBe("EX-18");
+  });
+
+  it("routes ISO codes exactly", () => {
+    expect(selectForm("NG")).toBe("EX-17");
+    expect(selectForm("GB")).toBe("EX-17"); // post-Brexit: not EU
+    expect(selectForm("US")).toBe("EX-17");
+    for (const eu of ["IT", "DE", "FR", "NL", "PL", "IE", "NO", "IS", "LI", "CH"]) {
+      expect(selectForm(eu), eu).toBe("EX-18");
+    }
+  });
+
+  it("never routes Spain to EX-18 — Spanish citizens need neither form", () => {
+    expect(selectForm("ES")).toBe("EX-17");
+    expect(EU_EEA_CH.has("ES")).toBe(false);
+  });
+});
+
+describe("countries on the forms", () => {
+  it("prints the Spanish name, never the English one", () => {
+    expect(spanishFormName("GB")).toBe("REINO UNIDO");
+    expect(spanishFormName("US")).toBe("ESTADOS UNIDOS");
+    expect(spanishFormName("NL")).toBe("PAÍSES BAJOS");
+    expect(spanishFormName("IT")).toBe("ITALIA");
+    expect(spanishFormName("DE")).toBe("ALEMANIA");
+  });
+
+  it("uses form-appropriate names where ICU's display name is not", () => {
+    expect(spanishFormName("HK")).toBe("HONG KONG");
+    expect(spanishFormName("VI")).not.toContain("EE. UU.");
+  });
+
+  it("has a Spanish name for every code", () => {
+    for (const code of COUNTRY_CODES) expect(spanishFormName(code), code).toMatch(/^[A-ZÁÉÍÓÚÜÑ .,'()-]+$/);
+  });
+
+  it("keeps legacy free text as entered", () => {
+    expect(spanishFormName("utopia")).toBe("UTOPIA");
+  });
+
+  it("refuses Spanish nationality and unknown codes at intake", () => {
+    const base = forms_raw();
+    expect(() => intakeSchema.parse({ ...base, identity: { ...base.identity, nationality: "ES" } })).toThrow(/Spanish citizens/);
+    expect(() => intakeSchema.parse({ ...base, identity: { ...base.identity, nationality: "XX" } })).toThrow();
+    expect(intakeSchema.parse({ ...base, identity: { ...base.identity, nationality: "gb" } }).identity.nationality).toBe("GB");
   });
 });
 

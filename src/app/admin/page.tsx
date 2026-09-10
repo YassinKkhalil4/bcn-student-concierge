@@ -3,6 +3,7 @@ import { requireAdmin } from "@/lib/admin/guard";
 import { BUCKETS, countCasesByBucket, listCases, type CaseBucket } from "@/lib/server/case-listing";
 import type { DocumentKind } from "@/lib/db/schema";
 import { getTier } from "@/lib/pricing";
+import { countryDisplayName } from "@/lib/countries";
 import {
   Badge,
   BUCKET_LABEL,
@@ -141,7 +142,9 @@ export default async function CasesPage({
                 <td className="px-4 py-3 font-mono text-xs text-ink-muted">{c.ref}</td>
                 <td className="px-4 py-3">
                   <Badge>{c.formId}</Badge>
-                  {c.nationality && <div className="mt-1 text-xs text-ink-soft">{c.nationality}</div>}
+                  {c.nationality && (
+                    <div className="mt-1 text-xs text-ink-soft">{countryDisplayName(c.nationality, "en")}</div>
+                  )}
                 </td>
                 <td className="px-4 py-3 text-ink-muted">
                   {getTier(c.tierId)?.name.replace(/^The /, "") ?? c.tierId}

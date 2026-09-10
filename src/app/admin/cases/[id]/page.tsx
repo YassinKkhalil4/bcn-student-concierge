@@ -5,6 +5,7 @@ import { getCase, type StoredDocument } from "@/lib/server/storage";
 import type { DocumentKind } from "@/lib/db/schema";
 import { getTier, priceWithIva, formatEur } from "@/lib/pricing";
 import { buildTasa012 } from "@/lib/tasa012";
+import { countryDisplayName, spanishFormName } from "@/lib/countries";
 import { listInvoicesForCase } from "@/lib/server/invoices";
 import { InvoiceList } from "@/components/portal/InvoiceList";
 import { Tasa012Helper } from "@/components/admin/Tasa012Helper";
@@ -98,8 +99,8 @@ export default async function CasePage({
                   ["Given name(s)", i.identity.givenName],
                   ["Gender", GENDER[i.identity.gender] ?? i.identity.gender],
                   ["Date of birth", i.identity.birthDate],
-                  ["Place of birth", `${i.identity.birthCity}, ${i.identity.birthCountry}`],
-                  ["Nationality", i.identity.nationality],
+                  ["Place of birth", `${i.identity.birthCity}, ${countryDisplayName(i.identity.birthCountry, "en")}`],
+                  ["Nationality", `${countryDisplayName(i.identity.nationality, "en")} · on the form: ${spanishFormName(i.identity.nationality)}`],
                   ["Marital status", MARITAL[i.family.maritalStatus] ?? i.family.maritalStatus],
                   ["Father", i.family.fatherFirstName],
                   ["Mother", i.family.motherFirstName],
