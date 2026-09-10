@@ -11,25 +11,20 @@ import { mkdir, readFile, writeFile, rm, readdir } from "node:fs/promises";
 import path from "node:path";
 
 /**
- * Object storage for encrypted document bodies.
+ * Storage for encrypted document bodies, separate from case metadata.
  *
- * WHY THIS EXISTS
- * Ciphertext used to be base64-encoded and embedded inline in the case JSON on
- * local disk. That was wrong in three ways:
- *   1. Local disk is ephemeral on serverless — uploads vanish between deploys
- *      and are invisible to other instances.
- *   2. Base64 inflates every document by ~33%, and the whole record had to be
- *      parsed to read a single metadata field.
- *   3. Document bodies and case metadata have completely different access
- *      patterns, sizes and lifecycles, and belong in different stores.
+ * Two drivers behind one interface:
+ *   - local  — files under DATA_DIR; on the VPS, the `documents` Docker volume
+ *              (the default deployment).
+ *   - s3     — any S3-compatible bucket (AWS S3, Cloudflare R2, MinIO), used
+ *              when S3_BUCKET is set.
  *
- * Bodies now live in S3-compatible object storage keyed by case and document
- * id; only the key and the wrapped DEK stay in the metadata record.
+ * Bodies are keyed `cases/<caseId>/documents/<documentId>`, so erasing a case is
+ * a single prefix delete. Only the key and the wrapped DEK live in Postgres.
  *
- * The envelope encryption in crypto.ts is unchanged and still applies. Provider
- * encryption (SSE-KMS on S3, automatic on R2) sits *underneath* ours — it
- * protects against the provider's disks being stolen; ours protects against the
- * provider account itself being compromised. Neither replaces the other.
+ * Bodies are stored as raw ciphertext — never plaintext, never base64 — already
+ * sealed by crypto.ts. Any provider encryption (SSE-KMS on S3, disk encryption
+ * on the VPS) sits underneath ours; neither replaces the other.
  */
 
 export interface BlobStore {
@@ -199,19 +194,23 @@ class S3BlobStore implements BlobStore {
 }
 
 // ─────────────────────────────────────────────────────────────────────────
-// Local filesystem driver (development only)
+// Local filesystem driver (VPS volume, or development)
 // ─────────────────────────────────────────────────────────────────────────
 
 /**
- * Development driver. Writes raw ciphertext to files — NOT base64 inside JSON —
- * so the local layout mirrors the object-store layout and the code path under
- * test is the same shape as production.
+ * Writes raw ciphertext to files — NOT base64 inside JSON — laid out exactly
+ * like the object-store keys. Files are 0600 in 0700 directories. The contents
+ * are already envelope-encrypted, so a copied volume or backup decrypts nothing
+ * without the master key.
  */
 class LocalBlobStore implements BlobStore {
   private readonly root: string;
 
   constructor() {
-    this.root = path.join(
+    // Resolve to an absolute path. The containment check in resolve() compares
+    // absolute paths, so a relative DATA_DIR (the documented "./.data") would
+    // otherwise make every key look like an escape and reject every upload.
+    this.root = path.resolve(
       process.env.DATA_DIR ?? path.join(process.cwd(), ".data"),
       "blobs",
     );
@@ -273,24 +272,27 @@ class LocalBlobStore implements BlobStore {
 let store: BlobStore | null = null;
 
 /**
- * Select the driver. S3 whenever a bucket is configured, local otherwise.
+ * Select the driver: S3/R2 when a bucket is configured, otherwise local disk.
  *
- * Production without S3_BUCKET is a hard error rather than a silent fallback to
- * local disk: on serverless that fallback loses every uploaded passport at the
- * next deploy, and it would fail silently until a client asked for a document
- * that no longer existed.
+ * On a VPS, local disk is legitimate — a Docker volume persists across restarts
+ * and deploys. What is NOT acceptable is writing passports to an implicit path
+ * inside the container, which would vanish with it and sit outside backups. So
+ * in production the local driver requires DATA_DIR to be set explicitly to an
+ * absolute path (the mounted volume); anything else is a hard startup error.
  */
 export function blobStore(): BlobStore {
   if (store) return store;
 
   if (process.env.S3_BUCKET) {
     store = new S3BlobStore();
-  } else if (process.env.NODE_ENV === "production") {
-    throw new Error(
-      "S3_BUCKET is not configured. Refusing to store identity documents on " +
-        "local disk in production — see docs/SECURITY.md.",
-    );
   } else {
+    const dir = process.env.DATA_DIR;
+    if (process.env.NODE_ENV === "production" && (!dir || !path.isAbsolute(dir))) {
+      throw new Error(
+        "Document storage is not configured. Set DATA_DIR to an absolute path on a " +
+          "persistent volume (or S3_BUCKET for object storage) — see docs/DEPLOY.md.",
+      );
+    }
     store = new LocalBlobStore();
   }
 

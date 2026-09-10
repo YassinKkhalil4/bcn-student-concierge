@@ -1,0 +1,17 @@
+# Never send secrets or local data into the build context.
+.env
+.env.*
+!.env.example
+.data
+.test-data
+
+# Official government templates are mounted at runtime, not baked in.
+templates/forms/*.pdf
+
+node_modules
+.next
+.git
+.claude
+.claude-flow
+coverage
+*.log

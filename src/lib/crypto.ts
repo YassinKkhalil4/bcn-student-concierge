@@ -1,4 +1,5 @@
 import {
+  createHmac,
   createCipheriv,
   createDecipheriv,
   randomBytes,
@@ -7,7 +8,8 @@ import {
 } from "node:crypto";
 
 /**
- * Envelope encryption for identity documents at rest.
+ * Envelope encryption for personal data at rest — uploaded identity documents
+ * AND the intake questionnaire (via sealJson / openJson below).
  *
  * DESIGN NOTE — why this is not "end-to-end" encryption:
  * The brief asked for E2EE. True E2EE would mean only the client holds the key
@@ -164,4 +166,42 @@ export function safeEqual(a: string, b: string): boolean {
 /** URL-safe opaque identifier, 256 bits of entropy. */
 export function generateToken(): string {
   return randomBytes(32).toString("base64url");
+}
+
+/**
+ * Encrypt a JSON-serialisable value (the intake questionnaire) with the same
+ * envelope scheme as documents. `aad` must bind it to its owner — the intake
+ * uses `case:<id>:intake`, so an envelope copied onto another case row fails
+ * authentication rather than showing one applicant's data on another's file.
+ */
+export function sealJson(value: unknown, aad: string): EncryptedPayload {
+  const plaintext = Buffer.from(JSON.stringify(value), "utf8");
+  try {
+    return encryptDocument(plaintext, aad);
+  } finally {
+    plaintext.fill(0);
+  }
+}
+
+export function openJson<T>(payload: EncryptedPayload, aad: string): T {
+  const plaintext = decryptDocument(payload, aad);
+  try {
+    return JSON.parse(plaintext.toString("utf8")) as T;
+  } finally {
+    plaintext.fill(0);
+  }
+}
+
+/**
+ * Keyed, one-way pseudonym for a low-entropy identifier such as an IP address.
+ *
+ * A plain SHA-256 of an IPv4 address is reversible by brute force (there are
+ * only 2^32 of them); an HMAC under a key derived from the master key is not.
+ * Stable for a given input and purpose, so it still works as a counter key.
+ */
+export function pseudonymize(value: string, purpose: string): string {
+  return createHmac("sha256", deriveKek(`pseudonym:${purpose}`))
+    .update(value)
+    .digest("base64url")
+    .slice(0, 32);
 }

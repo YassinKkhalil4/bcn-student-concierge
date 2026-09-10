@@ -6,32 +6,32 @@ your infrastructure layer before launch.
 
 ---
 
-## 1. TLS 1.3 — MUST be configured at the edge
+## 1. TLS 1.3 — enforced by Caddy
 
-**Application code cannot enforce a TLS version.** By the time a request reaches
-Next.js, the handshake is already complete. Anyone claiming to enforce TLS 1.3
-"in the app" has not enforced it at all.
+**Application code cannot enforce a TLS version**: by the time a request reaches
+Next.js, the handshake is over. It is enforced by the reverse proxy in
+`deploy/Caddyfile`:
 
-What the app does: emits `Strict-Transport-Security` with a two-year max-age,
-`includeSubDomains` and `preload`, plus `upgrade-insecure-requests` in the CSP.
-That forces HTTPS on repeat visits but says nothing about the version.
+```
+tls {
+    protocols tls1.3
+}
+```
 
-What you must configure:
+TLS 1.2 and older are refused outright. Certificates for `bcnstudent.com` and
+`www.bcnstudent.com` are issued and renewed automatically by Let's Encrypt.
 
-| Platform | Setting |
-|---|---|
-| **Cloudflare** | SSL/TLS → Edge Certificates → Minimum TLS Version = **1.3**; enable TLS 1.3 |
-| **Vercel** | TLS 1.3 is enabled and 1.0/1.1 disabled by default. To *require* 1.3, front it with Cloudflare — Vercel still permits 1.2. |
-| **AWS ALB** | Security policy `ELBSecurityPolicy-TLS13-1-3-2021-06` (1.3 only) |
-| **nginx** | `ssl_protocols TLSv1.3;` and `ssl_prefer_server_ciphers off;` |
+The app adds `Strict-Transport-Security` (two years, `includeSubDomains`,
+`preload`) and `upgrade-insecure-requests`, so browsers refuse plain HTTP after
+the first visit.
 
 Verify after deploying — do not assume:
 
 ```bash
 # Should CONNECT:
-openssl s_client -tls1_3 -connect bcnstudentconcierge.com:443 </dev/null
-# Should FAIL if 1.3 is genuinely required:
-openssl s_client -tls1_2 -connect bcnstudentconcierge.com:443 </dev/null
+openssl s_client -tls1_3 -connect bcnstudent.com:443 </dev/null
+# Should FAIL:
+openssl s_client -tls1_2 -connect bcnstudent.com:443 </dev/null
 ```
 
 Submit the domain to <https://hstspreload.org> once you are confident, since
@@ -41,15 +41,21 @@ preload is difficult to reverse.
 
 ## 2. Encryption at rest — what it is, and what it is not
 
-Implemented in `src/lib/crypto.ts`:
+Implemented in `src/lib/crypto.ts`. **All personal data is encrypted before it
+is stored** — both the intake questionnaire and every uploaded document:
 
-- **AES-256-GCM** authenticated encryption per document.
-- **A unique data-encryption key (DEK) per file**, so one compromised object
-  never unlocks another.
-- **Each DEK wrapped** under a key-encryption key derived from a master secret
+- **AES-256-GCM** authenticated encryption.
+- **A unique data-encryption key (DEK) per record** — per case intake, per
+  document — so one compromised record never unlocks another.
+- **Each DEK wrapped** under a key-encryption key derived from the master key
   via HKDF with domain separation.
-- **AAD binding** to `caseId:documentId:kind`, so a swapped database row fails
-  authentication rather than decrypting as another applicant's passport.
+- **AAD binding.** Intake envelopes are bound to `case:<id>:intake`, documents to
+  `<caseId>:<documentId>:<kind>`. An envelope copied onto another row fails
+  authentication instead of showing one applicant's data on another's file.
+
+What Postgres holds, therefore: opaque ids, workflow stage, payment status,
+timestamps, and ciphertext. A dump of the database — or a stolen backup, or a
+volume snapshot — reveals no name, passport number or address.
 
 ### This is not end-to-end encryption
 
@@ -63,47 +69,60 @@ the privacy notice says so plainly, because:
 
 Claiming E2EE while holding a decryption key would be a **false statement in a
 GDPR privacy notice** — a regulatory liability, not merely imprecise marketing.
-The threat this design defeats is database/object-store exfiltration. It does
-not defeat a fully compromised application server, and the privacy page says
-that too.
 
-### Where ciphertext actually lives
+### The threat model on a single VPS — read this
 
-Document **bodies** go to S3-compatible object storage (`src/lib/server/blob-store.ts`),
-keyed `cases/<caseId>/documents/<documentId>`. Only **metadata** — the wrapped
-DEK, IV and auth tag — stays in the case record. Ciphertext is never embedded
-inline in JSON.
+The master key lives in `.env` on the same server as the data. So:
 
-Works with AWS S3, Cloudflare R2 or MinIO. R2 needs `S3_ENDPOINT`,
-`S3_REGION=auto` and `S3_FORCE_PATH_STYLE=true`, and must **not** be sent SSE
-headers — it encrypts at rest unconditionally and rejects them.
+| Threat | Protected? |
+|---|---|
+| Database dump, stolen backup, leaked volume snapshot | **Yes** — ciphertext only, as long as the key is not in the backup |
+| Someone with read access to Postgres but not the host | **Yes** |
+| Root compromise of the VPS | **No** — the attacker has the key and the data |
+| Compromise of the running app process | **No** — it must decrypt to work |
 
-Provider encryption (SSE-KMS on S3) sits *underneath* the envelope encryption.
-It protects against the provider's disks being stolen; ours protects against the
-provider account being compromised. Neither replaces the other.
+Two rules follow:
 
-In production, a missing `S3_BUCKET` is a **hard startup error**, not a fallback
-to local disk — on serverless that fallback silently loses every uploaded
-passport at the next deploy.
+1. **Never put `.env` in the same backup as the database and documents.** A
+   backup containing both is a plaintext backup.
+2. Harden the host itself (see `docs/DEPLOY.md`): SSH keys only, firewall,
+   unattended security updates. On a VPS, host security *is* data security.
 
-⚠️ **Still outstanding:** case *metadata* remains a local JSON file. It has no
-transactions and no replication, and concurrent writes to one case can interleave
-and lose data. Replace it with Postgres before scaling beyond one instance. The
-sensitive document bodies are no longer affected by this.
+To move beyond this, keep the master key off the host — a KMS such as AWS KMS or
+a Hashicorp Vault instance, with `getMasterKey()` in `crypto.ts` replaced by a
+call to it. The wrapped-DEK structure is already shaped for that.
 
-### Key management
+### Where the data lives
 
-Development reads `DOCUMENT_MASTER_KEY` from the environment. **Production must
-not.** Move the master key into a KMS/HSM:
+| Data | Store | Form |
+|---|---|---|
+| Case metadata + intake | Postgres `cases` | intake as AES-GCM envelope (`intake_envelope`) |
+| Document envelopes | Postgres `case_documents` | wrapped DEK, IV, tag — no ciphertext |
+| Document bodies | `documents` volume at `DATA_DIR` (or S3 if `S3_BUCKET` set) | raw ciphertext, 0600 files |
+| Master key | `.env` on the host | plaintext — protect accordingly |
 
-- AWS KMS, GCP Cloud KMS, or Azure Key Vault
-- Replace `getMasterKey()` in `src/lib/crypto.ts` with a KMS `Decrypt` call for
-  the wrapped DEK — the envelope structure is already correct for this, which is
-  why DEKs are wrapped rather than used directly.
+Documents are rows rather than a list inside the case, so concurrent uploads
+cannot overwrite each other. Production refuses to start unless `DATABASE_URL`
+is set and document storage points at an explicit absolute path (the volume) or
+a bucket — never an implicit path inside the container.
 
-**Rotation.** Bump `DOCUMENT_KEY_VERSION`, then re-wrap existing DEKs under the
-new KEK. Because only the small wrapped keys change, rotation never rewrites
-ciphertext — no re-encryption of document bodies is required.
+**Erasure is enforced by the database**, not just the code:
+`CHECK (purged_at IS NULL OR intake_envelope IS NULL)` makes a "purged" record
+that still holds personal data impossible to write.
+
+**Searching encrypted data.** Postgres cannot search inside the intake, so the
+dashboard decrypts and matches in the app (accent- and case-insensitive). Each
+search scans at most the 5,000 most recent cases in the selected queue — ample
+for this business. Past that, add blind indexes (HMACs of normalised surname,
+email and passport number) instead of decrypting to search.
+
+### Key rotation — not yet implemented
+
+Every envelope records `keyVersion`, so rotation can be added without a data
+migration: introduce the new key alongside the old, and re-wrap each record's
+small DEK under the new one (no bulk re-encryption). There is no tooling for
+this yet. Until there is, `DOCUMENT_MASTER_KEY` must not change — replacing it
+makes every existing record undecryptable.
 
 ---
 
@@ -132,51 +151,53 @@ curl -sI https://your-domain.com | grep -i content-security-policy
 
 ---
 
-## 4. Rate limiting — Upstash Redis
+## 4. Rate limiting — Postgres
 
-Enforced in `src/middleware.ts`, backed by `@upstash/ratelimit` over Upstash
-Redis. Limiting lives in middleware rather than in each route handler so a new
-API route **cannot ship unprotected by omission** — the default is protected.
+Backed by the same Postgres as everything else (`src/lib/rate-limit.ts`, table
+`rate_limits`) — no extra service on the VPS.
 
-Upstash is used rather than a raw Redis client because middleware runs on the
-Edge runtime, which has no TCP sockets. Upstash speaks HTTP.
+| Endpoint | Limit | Window | If the limiter fails |
+|---|---|---|---|
+| `POST /api/intake` | 5 | 1 hour | allow |
+| `POST /api/documents` | 20 | 1 hour | allow |
+| `POST /api/checkout` | 10 | 15 min | allow |
+| `POST /api/admin/login` | 5 | 15 min | **deny** (production) |
 
-| Endpoint | Limit | Window |
-|---|---|---|
-| `POST /api/intake` | 5 | 1 hour |
-| `POST /api/documents` | 20 | 1 hour |
-| `POST /api/checkout` | 10 | 15 min |
+**Sliding-window counter**, not a fixed window: the effective count is the
+current window plus the previous one weighted by its remaining overlap, so a
+caller cannot burst a full quota at the end of one window and again at the start
+of the next. Each check is a single atomic `INSERT … ON CONFLICT` — verified to
+admit exactly 5 of 20 simultaneous requests against a real Postgres server.
 
-Sliding window, not fixed: a fixed window lets a caller burst the full quota at
-the end of one window and again at the start of the next, giving 2x the intended
-rate across the boundary.
+**Enforced in route handlers, not middleware.** Next.js middleware runs in the
+Edge sandbox, which cannot open a Postgres connection. To keep the guarantee that
+a new route cannot ship unprotected by omission, `tests/rate-limit.test.ts`
+scans every API route and **fails if a POST handler does not call the limiter**.
+Exemptions are listed in that test with their reason:
 
-**The Stripe webhook is deliberately not rate limited.** Stripe retries on any
-non-2xx, so a 429 would cause redelivery, and a burst of legitimate events could
-throttle payment confirmations. It is protected by signature verification, which
-is the right control for a machine caller.
+- **Stripe webhook** — Stripe retries on 429, which would delay payment
+  confirmations. Protected by signature verification instead.
+- **Admin logout** — only clears the caller's own cookie.
 
-### Failure mode: fails open, loudly
+**No IP addresses are stored.** The counter key is an HMAC of the client IP
+under a key derived from the master key — an IP is personal data under GDPR,
+and a plain hash of an IPv4 address can be reversed by brute force. Counters
+older than two hours are deleted by the hourly maintenance job.
 
-If Redis is unreachable or unconfigured, requests are **allowed** and the result
-is flagged `degraded`, with an error logged in production.
+**Where the client IP comes from.** Caddy overwrites `X-Real-IP` with the
+connecting socket's address and strips `X-Forwarded-For`; the app port is never
+published. The header can therefore only have come from Caddy. **Do not publish
+the app port** (`3000`) — if clients could reach the app directly, they could
+set `X-Real-IP` themselves and evade every limit.
 
-This is deliberate. Rate limiting is abuse protection, not authentication.
-Failing closed would turn an Upstash outage into a total outage of the intake
-portal, blocking legitimate families mid-application. If your threat model makes
-abuse costlier than downtime, invert it in `src/lib/rate-limit.ts` — but do it
-deliberately.
+### Failure mode
 
-### Configuration
-
-```bash
-UPSTASH_REDIS_REST_URL=https://...upstash.io
-UPSTASH_REDIS_REST_TOKEN=...
-```
-
-`TRUST_PROXY` must stay `false` unless your edge **appends** to
-`x-forwarded-for` rather than passing it through. If a client can spoof that
-header, they vary it per request and are never limited.
+Public forms fail **open**: rate limiting is abuse protection, not
+authentication, and a limiter fault must not lock families out mid-application.
+(On this deployment the limiter shares Postgres with the forms, so a database
+outage takes both down together anyway.) Admin login is the one scope that fails
+**closed** in production — a brief staff lockout beats unlimited password
+guesses.
 
 ---
 
@@ -220,41 +241,67 @@ automatically on eligible devices under the existing `card` method type.
 | Requirement | Implementation |
 |---|---|
 | Consent must be affirmative | `z.literal(true)` — an unchecked box fails validation. `ConsentBox` offers no `defaultChecked` path at all. |
-| Storage limitation (Art. 5(1)(e)) | `scripts/purge-expired.mts`, run daily |
-| Retention period | 30 days after `serviceCompletedAt` |
-| Right to erasure | `purgeCase()` — call on request, ahead of the automatic job |
-| Accountability (Art. 5(2)) | A tombstone records that the file existed and was purged |
-| Legal retention override (Art. 17(3)(b)) | Invoice metadata survives the purge; Spanish commercial law requires it |
+| Storage limitation (Art. 5(1)(e)) | The server purges expired cases itself, hourly (`src/lib/server/jobs.ts`) |
+| Retention period | `RETENTION_DAYS` (30) after a case is marked completed in the dashboard |
+| Right to erasure | "Erase now" on the case page, ahead of the automatic job |
+| Accountability (Art. 5(2)) | A tombstone records that the file existed and when it was purged |
+| Legal retention override (Art. 17(3)(b)) | Payment metadata survives the purge; Spanish commercial law requires it |
 
-Install the cron job:
+**The purge runs inside the app process** — no cron to install or forget. It
+starts 30 seconds after boot and repeats every `MAINTENANCE_INTERVAL_MINUTES`,
+under a Postgres advisory lock so a second instance never runs it concurrently.
+It is idempotent: the "purged" marker is written only after the documents and
+the intake are gone, so an interrupted run is finished by the next.
 
-```bash
-0 3 * * * cd /srv/bcn && npm run purge:expired >> /var/log/bcn-purge.log 2>&1
-```
-
-Dry-run first — it reports what it would delete without deleting anything:
+Preview or force a run by hand (from a checkout with `DATABASE_URL` set):
 
 ```bash
 npm run purge:expired -- --dry-run
 ```
 
-The job is idempotent, so a retry after a failure is always safe.
+⚠️ **Backups outlive the purge.** A deleted case still exists in any backup taken
+before its deletion. Keep backup retention at or below 30 days so the privacy
+notice stays true, or state the backup period in it. (Backups hold only
+ciphertext — provided `.env` is not backed up with them.)
 
 ---
 
-## 8. Pre-launch checklist
+## 8. Staff dashboard (`/admin`)
 
-- [ ] TLS 1.3 minimum enforced at the edge, and **verified with `openssl`**
-- [ ] `DOCUMENT_MASTER_KEY` moved into a KMS, not an env file
-- [ ] `UPSTASH_REDIS_REST_URL` / `_TOKEN` set (limiter fails open without them)
-- [ ] `S3_BUCKET` configured; bucket private, versioning + lifecycle rules set
-- [ ] Case metadata store migrated off local JSON to Postgres
-- [ ] `TRUST_PROXY` set correctly for your actual edge behaviour
-- [ ] Stripe webhook endpoint registered; signing secret set
-- [ ] Apple Pay domain verified in Stripe
-- [ ] Purge cron installed and dry-run reviewed
+- **Auth:** one admin password, scrypt-hashed in `ADMIN_PASSWORD_HASH`
+  (`npm run admin:hash-password`; colon-separated so Next's env expansion cannot
+  corrupt it). Sessions are HMAC-signed with `ADMIN_SESSION_SECRET`, 8-hour TTL,
+  `HttpOnly`, `Secure`, `SameSite=Strict`.
+- **Two gates:** middleware rejects unauthenticated `/admin` and `/api/admin`
+  requests, and every page, route handler and server action re-verifies the
+  session itself, so one matcher mistake cannot expose documents.
+- **Login rate limit** (5 per 15 min) is the one limiter that **fails closed** in
+  production: if the limiter breaks, a short staff lockout beats unlimited guesses.
+- **Revocation:** sessions are stateless. To sign everyone out, rotate
+  `ADMIN_SESSION_SECRET`.
+- **Documents** are decrypted on demand and served as attachments, never inline.
+  Filenames carry the case reference, not the applicant's name.
+- **Access log:** downloads, stage changes, manual erasures and failed logins are
+  logged by case reference, with no personal data.
+
+**Limitation:** a single shared credential means the log records *what* was
+accessed but not *who*. Once more than one or two people use the dashboard,
+move to per-user accounts (e.g. SSO via your identity provider).
+
+## 9. Pre-launch checklist
+
+- [ ] `openssl s_client -tls1_2 -connect bcnstudent.com:443` **fails** (TLS 1.3 only)
+- [ ] App port 3000 not published; `curl http://<server-ip>:3000` refused from outside
+- [ ] `.env` is `chmod 600`, and excluded from every backup that holds data
+- [ ] `DOCUMENT_MASTER_KEY` backed up somewhere separate — losing it loses all data
+- [ ] `ADMIN_PASSWORD_HASH` and `ADMIN_SESSION_SECRET` set (dashboard stays locked otherwise)
+- [ ] Postgres + `documents` volume backed up nightly, retention ≤ 30 days (`docs/DEPLOY.md`)
+- [ ] A restore rehearsed at least once
+- [ ] Stripe webhook registered at `https://bcnstudent.com/api/webhooks/stripe`; signing secret set
+- [ ] Apple Pay domain `bcnstudent.com` verified in Stripe
+- [ ] Retention seen running: `docker compose logs app | grep "\[retention\] run ok"` (one line per hour)
+- [ ] Host hardened: SSH keys only, firewall (22/80/443), unattended upgrades
 - [ ] Malware scanning added to the upload path
-- [ ] Official EX-17/EX-18 templates installed and field map verified (`docs/FORMS.md`)
+- [ ] Official EX-17/EX-18 templates in `templates/forms/` and printouts signed off (`docs/FORMS.md`)
 - [ ] Privacy notice reviewed by a Spanish data-protection lawyer
 - [ ] Scope-of-service disclaimer reviewed against current anti-intrusismo guidance
-- [ ] `.data/` and `.env*` confirmed absent from version control

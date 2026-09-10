@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { constructWebhookEvent } from "@/lib/server/stripe";
-import { getCase, updateCase } from "@/lib/server/storage";
+import { findCaseIdByPaymentIntent, getCase, updateCase } from "@/lib/server/storage";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -50,6 +50,12 @@ export async function POST(request: Request): Promise<NextResponse> {
           await updateCase(caseId, {
             paymentStatus: "paid",
             stripeSessionId: session.id,
+            // Stored so a later refund can be matched: `charge.refunded` carries
+            // the PaymentIntent id, not the Checkout Session's metadata.
+            stripePaymentIntentId:
+              typeof session.payment_intent === "string"
+                ? session.payment_intent
+                : (session.payment_intent?.id ?? null),
           });
         }
         break;
@@ -57,10 +63,16 @@ export async function POST(request: Request): Promise<NextResponse> {
 
       case "charge.refunded": {
         const charge = event.data.object;
-        const caseId = charge.metadata?.caseId;
-        if (caseId && (await getCase(caseId))) {
-          await updateCase(caseId, { paymentStatus: "refunded" });
-        }
+        // `refunded` is true only for a FULL refund. A partial refund (e.g. a
+        // goodwill discount) leaves the engagement paid and active.
+        if (!charge.refunded) break;
+        const paymentIntentId =
+          typeof charge.payment_intent === "string"
+            ? charge.payment_intent
+            : charge.payment_intent?.id;
+        if (!paymentIntentId) break;
+        const caseId = await findCaseIdByPaymentIntent(paymentIntentId);
+        if (caseId) await updateCase(caseId, { paymentStatus: "refunded" });
         break;
       }
 

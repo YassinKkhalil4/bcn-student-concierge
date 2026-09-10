@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { enforceRateLimit } from "@/lib/rate-limit";
 import { z } from "zod";
 import { createCheckoutSession } from "@/lib/server/stripe";
 import { getCase, updateCase } from "@/lib/server/storage";
@@ -7,21 +8,22 @@ import { getTier } from "@/lib/pricing";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// Rate limiting for this route is enforced in src/middleware.ts, so a new
-// route cannot ship unprotected by omission.
 
 const bodySchema = z.object({
   caseId: z.string().regex(/^[A-Za-z0-9_-]{16,64}$/),
 });
 
 export async function POST(request: Request): Promise<NextResponse> {
+  const limited = await enforceRateLimit(request, "checkout");
+  if (limited) return limited;
+
   const parsed = bodySchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
   const record = await getCase(parsed.data.caseId);
-  if (!record || record.purgedAt) {
+  if (!record || record.purgedAt || !record.intake) {
     return NextResponse.json({ error: "Case not found" }, { status: 404 });
   }
   if (record.paymentStatus === "paid") {

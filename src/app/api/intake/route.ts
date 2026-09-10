@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
+import { enforceRateLimit } from "@/lib/rate-limit";
 import { intakeSchema } from "@/lib/schema";
 import { createCase } from "@/lib/server/storage";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// Rate limiting for this route is enforced in src/middleware.ts, so a new
-// route cannot ship unprotected by omission.
 
 /**
  * Accept a completed intake questionnaire and open a case.
@@ -16,6 +15,9 @@ export const dynamic = "force-dynamic";
  * response is ever logged by an intermediary.
  */
 export async function POST(request: Request): Promise<NextResponse> {
+  const limited = await enforceRateLimit(request, "intake");
+  if (limited) return limited;
+
   let body: unknown;
   try {
     body = await request.json();

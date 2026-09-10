@@ -1,34 +1,25 @@
 import { NextResponse, type NextRequest } from "next/server";
-import {
-  rateLimit,
-  clientIdentifier,
-  rateLimitHeaders,
-  type LimitScope,
-} from "@/lib/rate-limit";
+import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin/session";
 
 /**
- * Middleware does two jobs: it issues the per-request CSP nonce, and it
- * enforces distributed rate limits on the write endpoints.
+ * Middleware does two jobs: it issues the per-request CSP nonce, and it is the
+ * first of two gates on the staff dashboard.
  *
- * Rate limiting lives here rather than in each route handler so a new API route
- * cannot ship unprotected by omission — the default is protected, and opting
- * out means editing this table.
+ * Rate limiting is NOT here: middleware runs in the Edge sandbox, which cannot
+ * reach Postgres. It is enforced in each route handler (src/lib/rate-limit.ts),
+ * and a test fails if a POST route stops calling it.
  */
 
-/**
- * Path prefix → limit scope. Ordered, first match wins.
- *
- * The Stripe webhook is deliberately ABSENT. Stripe retries with backoff on
- * non-2xx, so a 429 would cause it to redeliver, and a burst of legitimate
- * events (several checkouts closing at once) could throttle payment
- * confirmations. The webhook is protected by signature verification instead,
- * which is the appropriate control for a machine caller.
- */
-const RATE_LIMITED_ROUTES: readonly { prefix: string; scope: LimitScope }[] = [
-  { prefix: "/api/intake", scope: "intake" },
-  { prefix: "/api/documents", scope: "upload" },
-  { prefix: "/api/checkout", scope: "checkout" },
-];
+/** Admin surface. Login is the only unauthenticated entry point. */
+function isAdminPath(pathname: string): boolean {
+  return (
+    pathname === "/admin" ||
+    pathname.startsWith("/admin/") ||
+    pathname === "/api/admin" ||
+    pathname.startsWith("/api/admin/")
+  );
+}
+const ADMIN_PUBLIC = new Set(["/admin/login", "/api/admin/login"]);
 
 function buildCsp(nonce: string, isDev: boolean): string {
   return [
@@ -54,67 +45,45 @@ function buildCsp(nonce: string, isDev: boolean): string {
   ].join("; ");
 }
 
+/** Staff pages carry personal data: never index, never cache anywhere. */
+function markAdmin(response: NextResponse): void {
+  response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  response.headers.set("Cache-Control", "no-store, max-age=0");
+}
+
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   const isDev = process.env.NODE_ENV === "development";
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const csp = buildCsp(nonce, isDev);
+  const { pathname } = request.nextUrl;
+  const admin = isAdminPath(pathname);
 
-  // ── Rate limiting ────────────────────────────────────────────────────
-  // Only mutating requests consume a token. A GET to an API route (or a
-  // preflight) should not burn a family's intake quota.
-  const route = RATE_LIMITED_ROUTES.find((r) =>
-    request.nextUrl.pathname.startsWith(r.prefix),
-  );
-
-  if (route && request.method === "POST") {
-    const identifier = clientIdentifier(request.headers);
-    const result = await rateLimit(identifier, route.scope);
-
-    if (!result.allowed) {
-      const retryAfter = Math.max(1, Math.ceil((result.resetAt - Date.now()) / 1000));
-      return NextResponse.json(
-        { error: "Too many requests. Please wait and try again." },
-        {
-          status: 429,
-          headers: {
-            ...rateLimitHeaders(result),
-            "Retry-After": String(retryAfter),
-            "Content-Security-Policy": csp,
-            "Cache-Control": "no-store",
-          },
-        },
-      );
+  // ── Admin gate (first of two) ────────────────────────────────────────
+  // Every admin handler verifies the session again itself; this gate is not
+  // relied on alone. Pages go to the login screen, API calls get a bare 401.
+  if (admin && !ADMIN_PUBLIC.has(pathname)) {
+    const valid = await verifySessionToken(request.cookies.get(ADMIN_COOKIE)?.value);
+    if (!valid) {
+      const denied = pathname.startsWith("/api/")
+        ? NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+        : NextResponse.redirect(new URL("/admin/login", request.url));
+      denied.headers.set("Content-Security-Policy", csp);
+      markAdmin(denied);
+      return denied;
     }
-
-    // Next reads x-nonce to stamp its inline scripts.
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set("x-nonce", nonce);
-
-    const response = NextResponse.next({ request: { headers: requestHeaders } });
-    response.headers.set("Content-Security-Policy", csp);
-    for (const [key, value] of Object.entries(rateLimitHeaders(result))) {
-      response.headers.set(key, value);
-    }
-    return response;
   }
 
-  // ── Everything else: CSP only ────────────────────────────────────────
+  // Next reads x-nonce to stamp its inline bootstrap scripts.
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
   response.headers.set("Content-Security-Policy", csp);
+  if (admin) markAdmin(response);
   return response;
 }
 
 export const config = {
-  /**
-   * Static assets are excluded — they carry no scripts and must not consume
-   * Redis round-trips.
-   *
-   * NOTE: the prefetch `missing` conditions were removed. They were correct for
-   * a CSP-only middleware, but skipping middleware on prefetches would also
-   * skip rate limiting, and a prefetch header is trivially forgeable.
-   */
+  // Static assets carry no scripts and need neither a nonce nor the gate.
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

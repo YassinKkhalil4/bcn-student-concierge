@@ -1,25 +1,37 @@
 # BCN Student Concierge
 
-Production-ready Next.js application for a boutique administrative facilitation
-agency serving international students at private universities in Barcelona.
+Next.js application for **BCN Student Concierge** (<https://bcnstudent.com>),
+a boutique administrative facilitation agency serving international students at
+private universities in Barcelona. Self-hosted on a single VPS with Docker —
+see **[docs/DEPLOY.md](docs/DEPLOY.md)**.
 
-## Quick start
+## Local development
 
 ```bash
 npm install
 cp .env.example .env.local
-# Generate the document encryption key:
 openssl rand -base64 32   # paste into DOCUMENT_MASTER_KEY
-
-# Optional: object storage + rate limiting (required in production).
-# Without S3_BUCKET, documents go to local disk in dev and the app REFUSES to
-# start in production. Without Upstash, rate limiting fails open and logs.
-
-# Official form templates are not redistributable — see docs/FORMS.md.
-# PDF render tests skip when they are absent.
-
 npm run dev
 ```
+
+No database server needed: with `DATABASE_URL` unset, development uses an
+embedded Postgres (PGlite) under `.data/`, migrated automatically — same SQL,
+same constraints as production. To use the staff dashboard locally, set
+`ADMIN_PASSWORD_HASH` (`npm run admin:hash-password`) and `ADMIN_SESSION_SECRET`.
+
+Official form templates are not redistributable — see `docs/FORMS.md`. PDF
+render tests skip when they are absent.
+
+## Production
+
+```bash
+cp .env.example .env && chmod 600 .env   # fill it in
+docker compose up -d --build
+```
+
+Caddy (TLS 1.3, automatic certificates) → Next.js → Postgres, on one VPS.
+Migrations and the 30-day retention purge run inside the app. Full runbook,
+hardening and backups: [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## Commands
 
@@ -27,9 +39,12 @@ npm run dev
 |---|---|
 | `npm run dev` | Development server |
 | `npm run build` | Production build |
-| `npm test` | Vitest suite (108 tests) |
+| `npm test` | Vitest suite |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run purge:expired` | GDPR retention job — add `-- --dry-run` first |
+| `npm run db:generate` | Generate a migration after editing `src/lib/db/schema.ts` |
+| `npm run db:migrate` | Apply migrations to `DATABASE_URL` (deploy step) |
+| `npm run admin:hash-password` | Produce `ADMIN_PASSWORD_HASH` for the staff dashboard |
 | `npm run forms:inspect -- <pdf>` | Check whether a template has form fields |
 | `npm run forms:grid -- <pdf>` | Render a measurement grid for calibration |
 | `npm run forms:proof` | Box every mapped coordinate on the template |
@@ -40,30 +55,45 @@ npm run dev
 ```
 src/
 ├─ app/
-│  ├─ page.tsx                  Landing — value prop, problem/solution, pricing, FAQ
-│  ├─ pricing/                  Three tiers, Modelo 790 guidance, exclusions
-│  ├─ intake/                   Secure multi-step portal (noindex)
-│  ├─ terms|privacy|legal/      Legal pages
+│  ├─ (site)/                   Public site (route group — shares header/footer)
+│  │  ├─ page.tsx                 Landing — value prop, problem/solution, pricing, FAQ
+│  │  ├─ pricing/                 Three tiers, Modelo 790 guidance, exclusions
+│  │  ├─ intake/                  Secure multi-step portal (noindex)
+│  │  └─ terms|privacy|legal/     Legal pages
+│  ├─ admin/                    Staff dashboard (authenticated, noindex)
+│  │  ├─ page.tsx                 Case queues + search
+│  │  ├─ cases/[id]/              Case file, documents, workflow, Tasa 012 helper
+│  │  └─ login/                   Password sign-in
 │  └─ api/
 │     ├─ intake/                Validate + open a case
 │     ├─ documents/             Magic-byte validated, encrypted upload
 │     ├─ checkout/              Stripe session (server-side pricing)
-│     └─ webhooks/stripe/       Signature-verified, idempotent
+│     ├─ webhooks/stripe/       Signature-verified, idempotent
+│     └─ admin/                 Login/logout, document + form downloads
 ├─ lib/
 │  ├─ schema.ts                 Zod contract — shared by client, API and PDF engine
 │  ├─ pricing.ts                Single source of truth for prices and IVA
 │  ├─ crypto.ts                 AES-256-GCM envelope encryption
-│  ├─ rate-limit.ts             Upstash Redis sliding-window limiter
+│  ├─ rate-limit.ts             Postgres sliding-window limiter
+│  ├─ tasa012.ts                Modelo 790-012 portal summary + student message
+│  ├─ db/                       Drizzle schema + node-postgres pool (PGlite locally)
+│  ├─ admin/                    Session signing, password hashing, guards
 │  ├─ forms/                    Coordinate overlay engine for EX-17/EX-18
 │  │  ├─ field-map.ts             Domain model → logical field names
 │  │  ├─ layout.ts                Logical names → absolute page coordinates
 │  │  └─ pdf.ts                   Draws values onto the flat template
 │  └─ server/
 │     ├─ blob-store.ts            S3/R2 object storage for document bodies
-│     ├─ storage.ts               Case metadata + retention purge
+│     ├─ storage.ts               Case repository — intake sealed before Postgres
+│     ├─ maintenance.ts           Retention purge + housekeeping
+│     ├─ jobs.ts                  Boot-time migrations + hourly scheduler
 │     ├─ uploads.ts               Magic-byte validation
 │     └─ stripe.ts                Checkout + webhook verification
-└─ middleware.ts                Per-request nonce CSP + rate limiting
+├─ middleware.ts                Nonce CSP, admin gate
+└─ instrumentation.ts           Starts background jobs once per server process
+drizzle/                        SQL migrations (generated, committed)
+deploy/                         Caddyfile, backup script
+Dockerfile, docker-compose.yml  VPS deployment
 ```
 
 ### Design decisions worth knowing
@@ -119,14 +149,15 @@ calibration workflow and the mandatory print sign-off before live use.
 
 ## What must be done before launch
 
-`docs/SECURITY.md` carries the full checklist. The load-bearing items:
+`docs/SECURITY.md` §9 has the full checklist. The load-bearing items:
 
-- TLS 1.3 minimum configured **and verified** at the edge
-- `DOCUMENT_MASTER_KEY` moved into a KMS
-- `UPSTASH_REDIS_REST_URL` / `_TOKEN` set — the limiter fails open without them
-- `S3_BUCKET` configured — production refuses to start without it
-- Case metadata migrated off local JSON to Postgres
-- EX-17 and EX-18 coordinates signed off against a physical printout (docs/FORMS.md)
+- TLS 1.2 verified **refused** at `bcnstudent.com` (Caddy enforces 1.3)
+- `.env` is `chmod 600` and **never** in the same backup as the data
+- `DOCUMENT_MASTER_KEY` stored in a password manager — losing it loses all data
+- Nightly backups running, copied off-server, restore rehearsed once
+- Admin credentials set (`npm run admin:hash-password`, `ADMIN_SESSION_SECRET`)
+- Stripe webhook registered at `https://bcnstudent.com/api/webhooks/stripe`
+- EX-17 and EX-18 coordinates signed off against a physical printout (`docs/FORMS.md`)
 - Legal pages reviewed by a Spanish data-protection lawyer
 
 ## Legal positioning

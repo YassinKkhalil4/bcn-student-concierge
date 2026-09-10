@@ -19,8 +19,8 @@ export default function PrivacyPage() {
           BCN Student Concierge (the “controller”) determines how and why your personal
           data is processed. Contact for all data-protection matters, including
           exercising the rights below:{" "}
-          <a href="mailto:privacy@bcnstudentconcierge.com" className="text-olive underline">
-            privacy@bcnstudentconcierge.com
+          <a href="mailto:privacy@bcnstudent.com" className="text-olive underline">
+            privacy@bcnstudent.com
           </a>
           .
         </p>
@@ -42,17 +42,19 @@ export default function PrivacyPage() {
         </p>
       </Clause>
 
-      <Clause heading="How your documents are protected">
+      <Clause heading="How your data is protected">
         <p>
-          Every uploaded document is encrypted at rest with AES-256-GCM under a key
-          unique to that file. Those per-file keys are themselves encrypted under a
-          master key held in a managed key store, separate from the database — so a
-          copy of the database alone does not decrypt anything, and one compromised
-          file never exposes another.
+          Your questionnaire answers (passport number, names, date and place of birth,
+          address) and every document you upload are encrypted at rest with
+          AES-256-GCM, each under its own key. Those keys are themselves encrypted
+          under a master key that is kept separately from the database and its
+          backups — so a copy of the database or of a backup decrypts nothing on its
+          own, and one compromised record never exposes another.
         </p>
         <p>
-          All traffic is served over TLS with HTTP Strict Transport Security. Payment
-          card details are handled entirely by Stripe and never reach our servers.
+          All traffic is served over TLS 1.3 only, with HTTP Strict Transport
+          Security. Payment card details are handled entirely by Stripe and never
+          reach our servers.
         </p>
         <p>
           <span className="font-medium text-ink">An honest limitation: </span>
@@ -85,7 +87,7 @@ export default function PrivacyPage() {
       <Clause heading="Who else sees your data">
         <p>
           Stripe (payment processing, Ireland/USA under the EU-US Data Privacy
-          Framework) and our EU-based hosting and email providers, each under a data
+          Framework), and the EU-based providers of our server and email, each under a data
           processing agreement. We do not sell your data, we do not share it with
           advertisers, and we do not transfer it outside the EEA except as stated here.
         </p>

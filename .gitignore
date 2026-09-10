@@ -9,6 +9,8 @@ next-env.d.ts
 .env
 .env.local
 .env*.local
+.env.production
+.env.*.backup
 
 # Encrypted client data. Even encrypted, this never belongs in version control.
 .data/

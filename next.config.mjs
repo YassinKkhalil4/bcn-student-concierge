@@ -2,10 +2,9 @@
  * Security headers are defined here so they apply to every response, including
  * static assets and error pages.
  *
- * NOTE ON TLS: TLS 1.3 cannot be enforced from application code. It is a
- * termination-layer control. This config emits HSTS (which forces HTTPS on
- * repeat visits) but the minimum TLS version MUST be set at your edge:
- * see docs/SECURITY.md for the required Vercel / Cloudflare / nginx settings.
+ * NOTE ON TLS: TLS 1.3 is enforced by the reverse proxy, not here — see the
+ * `protocols tls1.3` line in deploy/Caddyfile. This config adds HSTS so
+ * browsers refuse plain HTTP on every visit after the first.
  */
 
 /**
@@ -35,7 +34,11 @@ const securityHeaders = [
 export default {
   reactStrictMode: true,
   poweredByHeader: false,
-  serverExternalPackages: ["pdf-lib"],
+  // Self-contained server bundle (.next/standalone) for the Docker image: only
+  // the files the server actually needs, no full node_modules.
+  output: "standalone",
+  // PGlite ships WASM that webpack cannot bundle; load it from node_modules.
+  serverExternalPackages: ["pdf-lib", "@electric-sql/pglite", "pg"],
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

@@ -1,0 +1,33 @@
+# Reverse proxy and TLS termination for BCN Student Concierge.
+# Certificates are obtained and renewed automatically from Let's Encrypt.
+
+{
+	email {$ACME_EMAIL}
+}
+
+{$DOMAIN}, www.{$DOMAIN} {
+	# One canonical host: www redirects to the apex.
+	@www host www.{$DOMAIN}
+	redir @www https://{$DOMAIN}{uri} permanent
+
+	# TLS 1.3 only. TLS 1.2 and older are refused outright. Every browser from
+	# roughly 2018 onward supports 1.3; the trade is a handful of very old
+	# clients in exchange for no downgrade surface at all.
+	tls {
+		protocols tls1.3
+	}
+
+	encode zstd gzip
+
+	# Uploads are capped at 10 MB in the app; allow multipart overhead on top.
+	request_body {
+		max_size 12MB
+	}
+
+	reverse_proxy app:3000 {
+		# OVERWRITE, never append: the app's rate limiter keys on this header,
+		# so a value a client sent must never survive to reach it.
+		header_up X-Real-IP {remote_host}
+		header_up -X-Forwarded-For
+	}
+}

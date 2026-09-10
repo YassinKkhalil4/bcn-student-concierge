@@ -69,3 +69,27 @@ describe("safeEqual", () => {
     expect(safeEqual("token-abc", "token-abd")).toBe(false);
   });
 });
+
+describe("JSON sealing and pseudonyms", () => {
+  it("round-trips a JSON value", async () => {
+    const { sealJson, openJson } = await import("../src/lib/crypto");
+    const value = { identity: { passportNumber: "AB1234567" }, n: 1 };
+    const sealed = sealJson(value, "case:x:intake");
+    expect(JSON.stringify(sealed)).not.toContain("AB1234567");
+    expect(openJson(sealed, "case:x:intake")).toEqual(value);
+  });
+
+  it("refuses to open under different AAD", async () => {
+    const { sealJson, openJson } = await import("../src/lib/crypto");
+    expect(() => openJson(sealJson({ a: 1 }, "case:x:intake"), "case:y:intake")).toThrow();
+  });
+
+  it("derives a stable, purpose-bound pseudonym that is not the input", async () => {
+    const { pseudonymize } = await import("../src/lib/crypto");
+    const a = pseudonymize("203.0.113.7", "rate-limit");
+    expect(a).toBe(pseudonymize("203.0.113.7", "rate-limit"));
+    expect(a).not.toContain("203.0.113.7");
+    expect(a).not.toBe(pseudonymize("203.0.113.8", "rate-limit"));
+    expect(a).not.toBe(pseudonymize("203.0.113.7", "other-purpose"));
+  });
+});

@@ -1,60 +1,29 @@
 /**
- * Lifecycle data deletion — GDPR Art. 5(1)(e) storage limitation.
+ * Run retention by hand. The server already does this hourly (src/lib/server/
+ * jobs.ts); use this to preview or to force a run.
  *
- * Permanently purges passport scans and identity data 30 days after service
- * completion. Run daily from cron / a scheduled function:
- *
- *   0 3 * * *  cd /srv/bcn && npm run purge:expired >> /var/log/bcn-purge.log
- *
- * Idempotent: already-purged cases are skipped, so a retry is always safe.
- * Pass --dry-run to see what would be deleted without deleting it.
+ *   npm run purge:expired -- --dry-run     list what would be deleted
+ *   npm run purge:expired                  delete it now
  */
-import { listCases, purgeCase } from "../src/lib/server/storage.ts";
+import { runMaintenance } from "../src/lib/server/maintenance.ts";
+import { closeDb, withAdvisoryLock } from "../src/lib/db/client.ts";
 
-const RETENTION_DAYS = Number(process.env.RETENTION_DAYS ?? "30");
 const dryRun = process.argv.includes("--dry-run");
+let failed = 0;
 
-const cutoff = Date.now() - RETENTION_DAYS * 24 * 60 * 60 * 1000;
+const ran = await withAdvisoryLock("bcn:maintenance", async () => {
+  const r = await runMaintenance({ dryRun });
+  for (const id of r.wouldPurge) console.log(`[dry-run] would purge ${id}`);
+  for (const id of r.purged) console.log(`[purged] ${id}`);
+  for (const id of r.failed) console.error(`[failed] ${id}`);
+  for (const id of r.stale) console.warn(`[review] ${id} open >180 days, never completed`);
+  failed = r.failed.length;
+  console.log(
+    `\nRetention ${r.retentionDays}d — ` +
+      (dryRun ? `would purge ${r.wouldPurge.length} (dry run)` : `purged ${r.purged.length}, failed ${failed}`),
+  );
+});
 
-const cases = await listCases();
-let purged = 0;
-let skipped = 0;
-
-for (const record of cases) {
-  if (record.purgedAt) {
-    skipped += 1;
-    continue;
-  }
-  // Cases with no completion date are still active engagements; the clock has
-  // not started. They are reported so an abandoned case cannot linger unseen.
-  if (!record.serviceCompletedAt) {
-    const ageDays = Math.floor(
-      (Date.now() - Date.parse(record.createdAt)) / 86_400_000,
-    );
-    if (ageDays > 180) {
-      console.warn(
-        `[review] case ${record.id} created ${ageDays}d ago and never completed`,
-      );
-    }
-    skipped += 1;
-    continue;
-  }
-
-  if (Date.parse(record.serviceCompletedAt) > cutoff) {
-    skipped += 1;
-    continue;
-  }
-
-  if (dryRun) {
-    console.log(`[dry-run] would purge ${record.id} (${record.documents.length} docs)`);
-  } else {
-    await purgeCase(record.id);
-    console.log(`[purged] ${record.id}`);
-  }
-  purged += 1;
-}
-
-console.log(
-  `\nRetention ${RETENTION_DAYS}d — ${purged} purged, ${skipped} skipped, ` +
-    `${cases.length} total.${dryRun ? " (dry run, nothing deleted)" : ""}`,
-);
+if (!ran) console.log("Another process is running maintenance right now; nothing done.");
+await closeDb();
+process.exit(failed > 0 ? 1 : 0);
