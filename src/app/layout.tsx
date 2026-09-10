@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 
+/**
+ * Every page renders per request. This is REQUIRED by the nonce-based CSP in
+ * src/middleware.ts: a page pre-rendered at build time is sent without the
+ * per-request nonce on its scripts, and the browser then blocks all of them.
+ * (That happened: /, /pricing and the legal pages shipped with 0 of 12
+ * scripts nonced until this line was added.) tests/csp.test.ts guards it.
+ */
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.PUBLIC_ORIGIN ?? "https://bcnstudent.com"),
   title: {

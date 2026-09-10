@@ -104,9 +104,11 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     }
   }
 
-  // Next reads x-nonce to stamp its inline bootstrap scripts.
+  // Next reads the nonce from the REQUEST's Content-Security-Policy header and
+  // stamps it onto every script it renders. x-nonce is for our own code.
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);
+  requestHeaders.set("Content-Security-Policy", csp);
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
   response.headers.set("Content-Security-Policy", csp);
