@@ -2,39 +2,47 @@
 
 import { useState, useRef } from "react";
 import { MAX_UPLOAD_BYTES } from "@/lib/server/uploads";
+import type { DocumentKind } from "@/lib/db/schema";
 
-export type DocumentKind = "passport" | "acceptance-letter" | "lease";
-
-interface UploadSlot {
-  kind: DocumentKind;
+interface SlotCopy {
   label: string;
   description: string;
-  required: boolean;
 }
 
-export const UPLOAD_SLOTS: readonly UploadSlot[] = [
-  {
-    kind: "passport",
+/** What each kind of document is, in words a student understands. */
+export const SLOT_COPY: Record<DocumentKind, SlotCopy> = {
+  passport: {
     label: "Passport — photo page",
-    description:
-      "The page showing the machine-readable zone. If your visa is in the passport, include that page too.",
-    required: true,
+    description: "The page with the machine-readable zone. If your visa is in the passport, add that page too.",
   },
-  {
-    kind: "acceptance-letter",
-    label: "University acceptance letter (matrícula)",
-    description:
-      "The official enrolment confirmation from your university, on letterhead, showing course dates.",
-    required: true,
+  "acceptance-letter": {
+    label: "Certificado de matrícula",
+    description: "The official enrolment certificate from your university, stamped and signed.",
   },
-  {
-    kind: "lease",
-    label: "Lease or accommodation contract",
-    description:
-      "Needed for the Padrón. Student residence confirmation letters are accepted in place of a lease.",
-    required: false,
+  lease: {
+    label: "Lease or property deed",
+    description: "The full signed contract (or the deed, if the signer owns the flat), all pages.",
   },
-];
+  "utility-bill": {
+    label: "Recent utility bill",
+    description: "Electricity, water or gas, for this address, from the last three months.",
+  },
+  "padron-authorization": {
+    label: "Signed authorisation",
+    description: "The authorisation form, signed by hand and dated by the person who authorises you.",
+  },
+  "authorizer-id": {
+    label: "ID of the person who signed",
+    description: "A clear photo or scan of their DNI, NIE card or passport — front and back.",
+  },
+  "collective-authorization": {
+    label: "Residence authorisation",
+    description: "Barcelona's form for collective homes, signed by the residence and stamped.",
+  },
+};
+
+/** Slots on the intake form: what most students have to hand on day one. */
+const INTAKE_KINDS: DocumentKind[] = ["passport", "acceptance-letter"];
 
 type Status =
   | { state: "idle" }
@@ -43,16 +51,22 @@ type Status =
   | { state: "error"; message: string };
 
 /**
- * Uploads go straight to the encrypting API route. Files are never held in
- * component state beyond the request, and never written to localStorage — a
- * passport scan sitting in browser storage outlives the session and is
- * readable by any script that later runs on the origin.
+ * Uploads go straight to the encrypting API route, into the signed-in
+ * student's own file (the server reads the case from the session cookie).
+ * Files are never held in component state beyond the request, and never
+ * written to localStorage — a passport scan in browser storage outlives the
+ * session and is readable by any script that later runs on the origin.
+ *
+ * `uploaded` lists kinds already on file, so a returning student sees what is
+ * done without the file itself ever coming back to the browser.
  */
-/**
- * Uploads go to the signed-in student's own file: the server reads the case
- * from the session cookie, so no case id is sent from the browser.
- */
-export function DocumentUpload() {
+export function DocumentUpload({
+  kinds = INTAKE_KINDS,
+  uploaded = [],
+}: {
+  kinds?: readonly DocumentKind[];
+  uploaded?: readonly DocumentKind[];
+}) {
   const [statuses, setStatuses] = useState<Record<string, Status>>({});
   const inputs = useRef<Record<string, HTMLInputElement | null>>({});
 
@@ -105,21 +119,21 @@ export function DocumentUpload() {
 
   return (
     <div className="space-y-4">
-      {UPLOAD_SLOTS.map((slot) => {
-        const status = statuses[slot.kind] ?? { state: "idle" as const };
+      {kinds.map((kind) => {
+        const slot = { kind, ...SLOT_COPY[kind] };
+        const status = statuses[kind] ?? { state: "idle" as const };
+        const onFile = uploaded.includes(kind) || status.state === "done";
         return (
           <div
-            key={slot.kind}
+            key={kind}
             className="rounded-xl border border-bone-line bg-white p-5"
           >
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="max-w-lg">
                 <p className="text-sm font-medium text-ink">
                   {slot.label}
-                  {!slot.required && (
-                    <span className="ml-2 text-xs font-normal text-ink-soft">
-                      optional
-                    </span>
+                  {onFile && status.state !== "done" && (
+                    <span className="ml-2 text-xs font-medium text-olive">✓ on file</span>
                   )}
                 </p>
                 <p className="mt-1.5 text-xs leading-relaxed text-ink-muted">
@@ -128,7 +142,7 @@ export function DocumentUpload() {
               </div>
 
               <label className="btn-secondary cursor-pointer text-xs">
-                {status.state === "done" ? "Replace" : "Choose file"}
+                {onFile ? "Replace" : "Choose file"}
                 <input
                   ref={(el) => {
                     inputs.current[slot.kind] = el;

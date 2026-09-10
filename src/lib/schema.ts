@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { isCountryCode } from "./countries/codes";
+import { isValidNie } from "./spanish-ids";
 
 /**
  * Canonical intake schema. This is the contract shared by the client wizard,
@@ -73,18 +74,12 @@ const upperOptional = (max: number) =>
     );
 
 /** Spanish NIE: X/Y/Z + 7 digits + control letter. */
-const NIE_LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE";
 export const nieSchema = z
   .string()
   .trim()
   .toUpperCase()
   .regex(/^[XYZ]\d{7}[A-Z]$/, "NIE must be X, Y or Z followed by 7 digits and a letter")
-  .refine((nie) => {
-    // Control letter = remainder of the numeric body mod 23, X=0 Y=1 Z=2.
-    const prefix = "XYZ".indexOf(nie[0]!);
-    const body = Number(`${prefix}${nie.slice(1, 8)}`);
-    return NIE_LETTERS[body % 23] === nie[8];
-  }, "NIE control letter is invalid — check the number on your visa");
+  .refine(isValidNie, "NIE control letter is invalid — check the number on your visa");
 
 /** DD/MM/YYYY with real calendar validation (rejects 31/02/2004). */
 export const spanishDateSchema = z

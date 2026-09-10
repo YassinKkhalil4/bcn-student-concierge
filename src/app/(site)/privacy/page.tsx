@@ -85,6 +85,22 @@ export default function PrivacyPage() {
         <p>You may request deletion earlier than 30 days at any time.</p>
       </Clause>
 
+      <Clause heading="If someone authorises your address">
+        <p>
+          When the flat is not in your name, the person who holds it (the owner or the
+          main tenant) authorises your Padrón registration on the City of Barcelona&rsquo;s
+          official form. You type their name and ID number so we can fill the form in
+          for you. We use those details once, to produce the PDF, and do not store them.
+        </p>
+        <p>
+          The signed form, a copy of their ID and the lease that you then upload are
+          needed by the city to register you. We hold them encrypted, like your own
+          documents, use them only to prepare your Padrón file, and delete them with
+          the rest of your file 30 days after your service completes. Please let the
+          person know you are sharing these documents with us for that purpose.
+        </p>
+      </Clause>
+
       <Clause heading="Who else sees your data">
         <p>
           Stripe (payment processing, Ireland/USA under the EU-US Data Privacy

@@ -88,7 +88,8 @@ and lists them all — check `docker compose logs app` after the first start.
 Copy the official form templates to the server (they are not in git):
 
 ```bash
-scp EX-17-official.pdf EX-18-official.pdf deploy@bcnstudent.com:/srv/bcnstudent/templates/forms/
+scp EX-17-official.pdf EX-18-official.pdf Autoritzaciodomicili_cat.pdf \
+    deploy@bcnstudent.com:/srv/bcnstudent/templates/forms/
 ```
 
 Start:

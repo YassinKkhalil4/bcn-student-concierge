@@ -1,7 +1,7 @@
 "use client";
 
 import type { Tasa012Summary } from "@/lib/tasa012";
-import { CopyButton } from "./CopyButton";
+import { CopyButton } from "@/components/CopyButton";
 
 /**
  * Modelo 790 Código 012 panel.

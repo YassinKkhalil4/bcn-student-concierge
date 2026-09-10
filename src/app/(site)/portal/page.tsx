@@ -3,6 +3,9 @@ import { requirePortalCaseId } from "@/lib/portal/guard";
 import { getCase } from "@/lib/server/storage";
 import { getTier, priceWithIva, formatEur } from "@/lib/pricing";
 import { DocumentUpload } from "@/components/intake/DocumentUpload";
+import { PadronWizard } from "@/components/portal/PadronWizard";
+import { titleCase } from "@/lib/request-templates";
+import { EnrolmentWizard } from "@/components/portal/EnrolmentWizard";
 import { PayButton } from "@/components/portal/PayButton";
 import { InvoiceList } from "@/components/portal/InvoiceList";
 import { listInvoicesForCase } from "@/lib/server/invoices";
@@ -11,16 +14,6 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Your file",
   robots: { index: false, follow: false },
-};
-
-const DOC_LABEL: Record<string, string> = {
-  passport: "Passport",
-  "acceptance-letter": "University enrolment (matrícula)",
-  lease: "Lease or property deed",
-  "utility-bill": "Recent utility bill",
-  "padron-authorization": "Signed Padrón authorisation",
-  "authorizer-id": "ID of the person who signed the authorisation",
-  "collective-authorization": "Residence authorisation (signed and stamped)",
 };
 
 const DATE = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Madrid" });
@@ -53,6 +46,10 @@ export default async function PortalPage({
   const tier = getTier(record.tierId);
   const price = tier ? priceWithIva(tier.basePriceCents) : null;
   const paid = record.paymentStatus === "paid";
+  const uploadedKinds = [...new Set(record.documents.map((d) => d.kind))];
+  // Only what the wizards need to fill templates: the student's own data,
+  // sent to the student's own signed-in browser.
+  const person = { identity: record.intake.identity, address: record.intake.address };
 
   return (
     <div className="container-x py-12 sm:py-16">
@@ -60,7 +57,7 @@ export default async function PortalPage({
         <div>
           <p className="eyebrow">Your file</p>
           <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink">
-            {record.intake.identity.givenName.split(" ")[0]}, here is your file
+            {titleCase(record.intake.identity.givenName.split(" ")[0]!)}, here is your file
           </h1>
           <p className="mt-2 text-sm text-ink-muted">
             Reference <span className="font-mono font-medium text-ink">{record.ref}</span>
@@ -92,21 +89,28 @@ export default async function PortalPage({
           )}
 
           <section className="rounded-2xl border border-bone-line bg-white p-6">
-            <h2 className="font-display text-xl font-semibold text-ink">Your documents</h2>
-            {record.documents.length > 0 ? (
-              <ul className="mt-4 divide-y divide-bone-line text-sm">
-                {record.documents.map((d) => (
-                  <li key={d.id} className="flex justify-between gap-4 py-2.5">
-                    <span className="text-ink">{DOC_LABEL[d.kind] ?? d.kind}</span>
-                    <span className="text-ink-soft">{DATE.format(new Date(d.uploadedAt))}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="mt-2 text-sm text-ink-muted">Nothing uploaded yet.</p>
-            )}
-            <div className="mt-6">
-              <DocumentUpload />
+            <h2 className="font-display text-xl font-semibold text-ink">1. Passport</h2>
+            <div className="mt-4">
+              <DocumentUpload kinds={["passport"]} uploaded={uploadedKinds} />
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-bone-line bg-white p-6">
+            <h2 className="font-display text-xl font-semibold text-ink">2. University enrolment</h2>
+            <div className="mt-4">
+              <EnrolmentWizard person={person} uploaded={uploadedKinds} />
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-bone-line bg-white p-6">
+            <h2 className="font-display text-xl font-semibold text-ink">3. Proof of address for the Padrón</h2>
+            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+              To register at the Padrón — the city&rsquo;s register of residents — you must show
+              you live at {record.intake.address.streetName} {record.intake.address.buildingNumber}.
+              What counts as proof depends on how you live.
+            </p>
+            <div className="mt-5">
+              <PadronWizard person={person} uploaded={uploadedKinds} />
             </div>
           </section>
         </div>

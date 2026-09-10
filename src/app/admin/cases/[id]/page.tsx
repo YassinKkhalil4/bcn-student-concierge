@@ -9,7 +9,7 @@ import { countryDisplayName, spanishFormName } from "@/lib/countries";
 import { listInvoicesForCase } from "@/lib/server/invoices";
 import { InvoiceList } from "@/components/portal/InvoiceList";
 import { Tasa012Helper } from "@/components/admin/Tasa012Helper";
-import { CopyButton } from "@/components/admin/CopyButton";
+import { CopyButton } from "@/components/CopyButton";
 import {
   Badge,
   Card,
