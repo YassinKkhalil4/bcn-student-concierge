@@ -23,7 +23,15 @@ import { pseudonymize } from "@/lib/crypto";
  * enforceRateLimit(), so a new route cannot ship unprotected by omission.
  */
 
-export type LimitScope = "intake" | "upload" | "checkout" | "admin-login";
+export type LimitScope =
+  | "intake"
+  | "upload"
+  | "checkout"
+  | "admin-login"
+  | "portal-link"
+  | "portal-link-email"
+  | "portal-verify"
+  | "portal-action";
 
 interface Quota {
   tokens: number;
@@ -45,6 +53,15 @@ export const QUOTAS: Record<LimitScope, Quota> = {
   // scope that fails CLOSED: if the limiter breaks, refusing staff logins for a
   // while is a far better trade than allowing unlimited guesses.
   "admin-login": { tokens: 5, windowMs: 15 * MINUTE, failClosed: true },
+  // Sign-in link requests, per IP…
+  "portal-link": { tokens: 5, windowMs: 15 * MINUTE },
+  // …and per email address (keyed by its blind index), so the form cannot be
+  // used to flood one student's inbox from many IPs.
+  "portal-link-email": { tokens: 3, windowMs: 60 * MINUTE },
+  // Link redemption. Tokens are HMAC-signed, so this bounds noise, not guessing.
+  "portal-verify": { tokens: 20, windowMs: 15 * MINUTE },
+  // Portal actions: submit for review, PDF generation, invoice downloads.
+  "portal-action": { tokens: 60, windowMs: 15 * MINUTE },
 };
 
 export interface RateLimitResult {

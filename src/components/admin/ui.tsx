@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import type { CaseBucket, PaymentStatus, Stage } from "@/lib/server/storage";
+import type { CaseBucket } from "@/lib/server/case-listing";
+import type { PaymentStatus, Stage } from "@/lib/server/storage";
 
 /** Small, shared building blocks for the staff dashboard. Server-safe. */
 

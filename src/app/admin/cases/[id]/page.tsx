@@ -5,6 +5,8 @@ import { getCase, type StoredDocument } from "@/lib/server/storage";
 import type { DocumentKind } from "@/lib/db/schema";
 import { getTier, priceWithIva, formatEur } from "@/lib/pricing";
 import { buildTasa012 } from "@/lib/tasa012";
+import { listInvoicesForCase } from "@/lib/server/invoices";
+import { InvoiceList } from "@/components/portal/InvoiceList";
 import { Tasa012Helper } from "@/components/admin/Tasa012Helper";
 import { CopyButton } from "@/components/admin/CopyButton";
 import {
@@ -16,7 +18,6 @@ import {
   formatDate,
   formatBytes,
   formatDateTime,
-  shortRef,
 } from "@/components/admin/ui";
 import { changeStage, eraseNow } from "./actions";
 
@@ -46,6 +47,7 @@ export default async function CasePage({
   const { error } = await searchParams;
   const c = await getCase(id);
   if (!c) notFound();
+  const invoices = await listInvoicesForCase(c.id);
 
   const tier = getTier(c.tierId);
   const price = tier ? priceWithIva(tier.basePriceCents) : null;
@@ -68,8 +70,8 @@ export default async function CasePage({
           <StageBadge stage={c.stage} purged={Boolean(c.purgedAt)} />
         </div>
         <p className="mt-1 flex items-center gap-2 text-sm text-ink-muted">
-          Ref <span className="font-mono">{shortRef(c.id)}</span>
-          <CopyButton value={c.id} label="Copy full ref" />
+          Ref <span className="font-mono">{c.ref}</span>
+          <CopyButton value={c.ref} label="Copy ref" />
           · Received {formatDateTime(c.createdAt)}
         </p>
       </div>
@@ -201,6 +203,19 @@ export default async function CasePage({
                 ]}
               />
             </Card>
+
+            <Card title="Invoices">
+              <InvoiceList invoices={invoices} hrefBase="/api/admin/invoices" />
+            </Card>
+
+            {c.documentsSubmittedAt && (
+              <Card title="Documents submitted">
+                <p className="text-sm text-ink-muted">
+                  The student marked their file complete on{" "}
+                  <strong className="text-ink">{formatDateTime(c.documentsSubmittedAt)}</strong>.
+                </p>
+              </Card>
+            )}
 
             <Card title="Erase personal data" className="border-terracotta/30">
               <form action={eraseNow} id="erase" className="space-y-3">

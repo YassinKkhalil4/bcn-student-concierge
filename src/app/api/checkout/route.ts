@@ -1,28 +1,26 @@
 import { NextResponse } from "next/server";
 import { enforceRateLimit } from "@/lib/rate-limit";
-import { z } from "zod";
 import { createCheckoutSession } from "@/lib/server/stripe";
 import { getCase, updateCase } from "@/lib/server/storage";
 import { getTier } from "@/lib/pricing";
+import { portalCaseId } from "@/lib/portal/guard";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 
-const bodySchema = z.object({
-  caseId: z.string().regex(/^[A-Za-z0-9_-]{16,64}$/),
-});
 
 export async function POST(request: Request): Promise<NextResponse> {
   const limited = await enforceRateLimit(request, "checkout");
   if (limited) return limited;
 
-  const parsed = bodySchema.safeParse(await request.json().catch(() => null));
-  if (!parsed.success) {
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  // The case comes from the signed session, never from the request body.
+  const caseId = await portalCaseId();
+  if (!caseId) {
+    return NextResponse.json({ error: "Your session has expired. Please sign in again." }, { status: 401 });
   }
 
-  const record = await getCase(parsed.data.caseId);
+  const record = await getCase(caseId);
   if (!record || record.purgedAt || !record.intake) {
     return NextResponse.json({ error: "Case not found" }, { status: 404 });
   }

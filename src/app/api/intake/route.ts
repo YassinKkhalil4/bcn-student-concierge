@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { enforceRateLimit } from "@/lib/rate-limit";
+import { LOCALES, type Locale } from "@/lib/db/schema";
+import { PORTAL_COOKIE, createPortalSession, portalCookieOptions } from "@/lib/portal/session";
 import { intakeSchema } from "@/lib/schema";
 import { createCase } from "@/lib/server/storage";
 
@@ -41,9 +43,20 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
+  // The page's language, sent alongside (not inside) the questionnaire.
+  const requested = (body as { locale?: unknown }).locale;
+  const locale: Locale = (LOCALES as readonly unknown[]).includes(requested)
+    ? (requested as Locale)
+    : "en";
+
   try {
-    const record = await createCase(parsed.data);
-    return NextResponse.json({ caseId: record.id }, { status: 201 });
+    const record = await createCase(parsed.data, { locale });
+    // Sign the student straight into the file they just created, so uploads
+    // and payment continue under their session. The response carries only the
+    // human reference — the case id is a credential and stays in the cookie.
+    const response = NextResponse.json({ ref: record.ref }, { status: 201 });
+    response.cookies.set(PORTAL_COOKIE, await createPortalSession(record.id), portalCookieOptions);
+    return response;
   } catch (error) {
     // Never leak the exception message: it can contain file paths or key
     // configuration details. Log server-side, return an opaque error.

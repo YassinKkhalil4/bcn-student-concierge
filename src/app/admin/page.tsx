@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/admin/guard";
-import { BUCKETS, countCasesByBucket, listCases, type CaseBucket } from "@/lib/server/storage";
+import { BUCKETS, countCasesByBucket, listCases, type CaseBucket } from "@/lib/server/case-listing";
 import type { DocumentKind } from "@/lib/db/schema";
 import { getTier } from "@/lib/pricing";
 import {
@@ -9,7 +9,6 @@ import {
   PaymentBadge,
   StageBadge,
   formatDate,
-  shortRef,
 } from "@/components/admin/ui";
 
 export const dynamic = "force-dynamic";
@@ -63,6 +62,7 @@ export default async function CasesPage({
               : "No paid cases waiting."}
           </p>
         </div>
+        <InvoiceExport />
         <form method="get" className="flex gap-2" role="search">
           <input type="hidden" name="bucket" value={bucket} />
           <input
@@ -138,7 +138,7 @@ export default async function CasesPage({
                   </Link>
                   {c.email && <div className="text-xs text-ink-soft">{c.email}</div>}
                 </td>
-                <td className="px-4 py-3 font-mono text-xs text-ink-muted">{shortRef(c.id)}</td>
+                <td className="px-4 py-3 font-mono text-xs text-ink-muted">{c.ref}</td>
                 <td className="px-4 py-3">
                   <Badge>{c.formId}</Badge>
                   {c.nationality && <div className="mt-1 text-xs text-ink-soft">{c.nationality}</div>}
@@ -154,7 +154,12 @@ export default async function CasesPage({
                     <DocDots kinds={c.documentKinds} />
                   )}
                 </td>
-                <td className="px-4 py-3"><StageBadge stage={c.stage} purged={Boolean(c.purgedAt)} /></td>
+                <td className="px-4 py-3">
+                  <StageBadge stage={c.stage} purged={Boolean(c.purgedAt)} />
+                  {c.documentsSubmittedAt && !c.purgedAt && (
+                    <div className="mt-1 text-xs text-olive">Docs submitted</div>
+                  )}
+                </td>
                 <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums text-ink-muted">{formatDate(c.createdAt)}</td>
               </tr>
             ))}
@@ -194,5 +199,37 @@ function DocDots({ kinds }: { kinds: DocumentKind[] }) {
         {missing.length ? `Missing: ${missing.map((d) => d.name).join(", ")}` : "All required documents uploaded"}
       </span>
     </div>
+  );
+}
+
+/**
+ * CSV invoice register for the gestor. Defaults to the current quarter —
+ * IVA (modelo 303) is filed quarterly, so that is the range asked for most.
+ * A plain GET form: the browser downloads the file directly.
+ */
+function InvoiceExport() {
+  const now = new Date();
+  const q = Math.floor(now.getUTCMonth() / 3);
+  const year = now.getUTCFullYear();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const from = `${year}-${pad(q * 3 + 1)}-01`;
+  const lastDay = new Date(Date.UTC(year, q * 3 + 3, 0)).getUTCDate();
+  const to = `${year}-${pad(q * 3 + 3)}-${pad(lastDay)}`;
+  return (
+    <form
+      method="get"
+      action="/api/admin/invoices/export"
+      className="flex items-end gap-2 rounded-xl border border-bone-line bg-white px-3 py-2"
+    >
+      <label className="text-xs text-ink-soft">
+        From
+        <input type="date" name="from" defaultValue={from} required className="field-input !mt-1 !py-1.5" />
+      </label>
+      <label className="text-xs text-ink-soft">
+        To
+        <input type="date" name="to" defaultValue={to} required className="field-input !mt-1 !py-1.5" />
+      </label>
+      <button type="submit" className="btn-secondary !py-2 whitespace-nowrap">Export invoices (CSV)</button>
+    </form>
   );
 }

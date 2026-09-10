@@ -48,7 +48,11 @@ type Status =
  * passport scan sitting in browser storage outlives the session and is
  * readable by any script that later runs on the origin.
  */
-export function DocumentUpload({ caseId }: { caseId: string }) {
+/**
+ * Uploads go to the signed-in student's own file: the server reads the case
+ * from the session cookie, so no case id is sent from the browser.
+ */
+export function DocumentUpload() {
   const [statuses, setStatuses] = useState<Record<string, Status>>({});
   const inputs = useRef<Record<string, HTMLInputElement | null>>({});
 
@@ -67,7 +71,6 @@ export function DocumentUpload({ caseId }: { caseId: string }) {
     setStatuses((s) => ({ ...s, [kind]: { state: "uploading" } }));
 
     const body = new FormData();
-    body.append("caseId", caseId);
     body.append("kind", kind);
     body.append("file", file);
 

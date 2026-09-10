@@ -16,11 +16,10 @@ import {
   attachDocument,
   readDocument,
   purgeCase,
-  listCases,
-  countCasesByBucket,
   listExpiredCaseIds,
   findCaseIdByPaymentIntent,
 } from "../src/lib/server/storage";
+import { listCases, countCasesByBucket } from "../src/lib/server/case-listing";
 import { useTestDb } from "./helpers/db";
 
 const DATA_DIR = path.join(process.cwd(), ".test-data");

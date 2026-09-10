@@ -1,4 +1,5 @@
 import { runMigrations, withAdvisoryLock } from "@/lib/db/client";
+import { assertProductionConfig } from "@/lib/config";
 import { runMaintenance } from "./maintenance";
 
 /**
@@ -22,6 +23,9 @@ export async function startBackgroundJobs(): Promise<void> {
   if (started) return;
   started = true;
   const production = process.env.NODE_ENV === "production";
+
+  // Fail fast and loudly, before serving a single request.
+  if (production) assertProductionConfig();
 
   if ((process.env.MIGRATE_ON_START ?? (production ? "true" : "false")) === "true") {
     // Awaited: Next waits for register() before serving, so no request ever

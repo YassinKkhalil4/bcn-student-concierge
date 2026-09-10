@@ -16,54 +16,21 @@
 export const ADMIN_COOKIE = "bcn_admin";
 export const SESSION_TTL_SECONDS = 8 * 60 * 60; // one working day
 
-const encoder = new TextEncoder();
-
-function b64url(bytes: ArrayBuffer | Uint8Array): string {
-  const arr = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-  let s = "";
-  for (const b of arr) s += String.fromCharCode(b);
-  return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-}
-
-function fromB64url(input: string): Uint8Array<ArrayBuffer> | null {
-  try {
-    const s = atob(input.replace(/-/g, "+").replace(/_/g, "/"));
-    const out = new Uint8Array(new ArrayBuffer(s.length));
-    for (let i = 0; i < s.length; i++) out[i] = s.charCodeAt(i);
-    return out;
-  } catch {
-    return null;
-  }
-}
+import { hmacSign, hmacVerify, randomNonce, secretFromEnv } from "@/lib/auth/hmac";
 
 /** Null when unconfigured or too short — admin is then disabled, not open. */
-function secretBytes(): Uint8Array<ArrayBuffer> | null {
-  const raw = process.env.ADMIN_SESSION_SECRET;
-  if (!raw) return null;
-  const bytes = fromB64url(raw.replace(/=+$/, ""));
-  return bytes && bytes.length >= 32 ? bytes : null;
-}
+const secretBytes = () => secretFromEnv("ADMIN_SESSION_SECRET");
 
 export function adminConfigured(): boolean {
   return secretBytes() !== null && Boolean(process.env.ADMIN_PASSWORD_HASH);
 }
 
-async function hmacKey(usage: "sign" | "verify"): Promise<CryptoKey | null> {
-  const secret = secretBytes();
-  if (!secret) return null;
-  return crypto.subtle.importKey("raw", secret, { name: "HMAC", hash: "SHA-256" }, false, [
-    usage,
-  ]);
-}
-
 export async function createSessionToken(now = Date.now()): Promise<string> {
-  const key = await hmacKey("sign");
-  if (!key) throw new Error("ADMIN_SESSION_SECRET is not configured (min 32 bytes)");
+  const secret = secretBytes();
+  if (!secret) throw new Error("ADMIN_SESSION_SECRET is not configured (min 32 bytes)");
   const expiresAt = now + SESSION_TTL_SECONDS * 1000;
-  const nonce = b64url(crypto.getRandomValues(new Uint8Array(16)));
-  const payload = `v1.${expiresAt}.${nonce}`;
-  const sig = await crypto.subtle.sign("HMAC", key, encoder.encode(payload));
-  return `${expiresAt}.${nonce}.${b64url(sig)}`;
+  const nonce = randomNonce();
+  return `${expiresAt}.${nonce}.${await hmacSign(secret, `v1.${expiresAt}.${nonce}`)}`;
 }
 
 export async function verifySessionToken(
@@ -73,17 +40,14 @@ export async function verifySessionToken(
   if (!token) return false;
   const parts = token.split(".");
   if (parts.length !== 3) return false;
-  const [expiresRaw, nonce, sigRaw] = parts as [string, string, string];
+  const [expiresRaw, nonce, sig] = parts as [string, string, string];
 
   const expiresAt = Number(expiresRaw);
   if (!Number.isSafeInteger(expiresAt) || expiresAt <= now) return false;
   // Refuse tokens claiming a lifetime longer than we ever issue.
   if (expiresAt > now + SESSION_TTL_SECONDS * 1000 + 60_000) return false;
 
-  const sig = fromB64url(sigRaw);
-  const key = await hmacKey("verify");
-  if (!sig || !key) return false;
-
-  // crypto.subtle.verify is constant-time; never compare signatures with ===.
-  return crypto.subtle.verify("HMAC", key, sig, encoder.encode(`v1.${expiresAt}.${nonce}`));
+  const secret = secretBytes();
+  if (!secret) return false;
+  return hmacVerify(secret, `v1.${expiresAt}.${nonce}`, sig);
 }

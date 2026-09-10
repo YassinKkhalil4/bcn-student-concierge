@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { attachDocument, getCase } from "@/lib/server/storage";
+import { DOCUMENT_KINDS, type DocumentKind } from "@/lib/db/schema";
+import { portalCaseId } from "@/lib/portal/guard";
 import { validateUpload, sanitizeFilename, MAX_UPLOAD_BYTES } from "@/lib/server/uploads";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 
-const KINDS = new Set(["passport", "acceptance-letter", "lease"]);
+const KINDS = new Set<string>(DOCUMENT_KINDS);
 
 /**
  * Encrypted document upload.
@@ -24,7 +26,12 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "Expected multipart form data" }, { status: 400 });
   }
 
-  const caseId = String(form.get("caseId") ?? "");
+  // The case comes from the signed session, never from the form: a student can
+  // only ever add documents to their own file.
+  const caseId = await portalCaseId();
+  if (!caseId) {
+    return NextResponse.json({ error: "Your session has expired. Please sign in again." }, { status: 401 });
+  }
   const kind = String(form.get("kind") ?? "");
   const file = form.get("file");
 
@@ -56,7 +63,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   try {
     const doc = await attachDocument(
       caseId,
-      kind as "passport" | "acceptance-letter" | "lease",
+      kind as DocumentKind,
       sanitizeFilename(file.name),
       check.mimeType,
       Buffer.from(bytes),

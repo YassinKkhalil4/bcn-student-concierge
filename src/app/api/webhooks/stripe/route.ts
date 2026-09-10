@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
-import { constructWebhookEvent } from "@/lib/server/stripe";
+import { billingFromSession, constructWebhookEvent } from "@/lib/server/stripe";
 import { findCaseIdByPaymentIntent, getCase, updateCase } from "@/lib/server/storage";
+import { issueInvoiceForCheckout, issueRefundRectification } from "@/lib/server/invoices";
+import { getTier, priceWithIva } from "@/lib/pricing";
+import { notifyPaymentReceived } from "@/lib/notify/events";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -38,15 +41,14 @@ export async function POST(request: Request): Promise<NextResponse> {
       case "checkout.session.completed": {
         const session = event.data.object;
         const caseId = session.client_reference_id ?? session.metadata?.caseId;
-        if (!caseId) break;
-
-        const record = await getCase(caseId);
-        // Idempotency: a repeated delivery is a no-op, not a double-fulfilment.
-        if (!record || record.paymentStatus === "paid") break;
-
         // `payment_status` is authoritative; a completed session with an async
         // payment method can still be unpaid.
-        if (session.payment_status === "paid") {
+        if (!caseId || session.payment_status !== "paid") break;
+
+        const record = await getCase(caseId);
+        if (!record) break;
+
+        if (record.paymentStatus !== "paid") {
           await updateCase(caseId, {
             paymentStatus: "paid",
             stripeSessionId: session.id,
@@ -58,21 +60,56 @@ export async function POST(request: Request): Promise<NextResponse> {
                 : (session.payment_intent?.id ?? null),
           });
         }
+
+        // ALWAYS ensure the invoice exists — even when the case was already
+        // marked paid. If issuing failed on an earlier delivery (say, the
+        // issuer was not configured yet), Stripe's retry must still produce
+        // it; returning early on "already paid" would lose it for good.
+        // issueInvoiceForCheckout is idempotent per session.
+        if (session.currency !== "eur" || !session.amount_total) {
+          throw new Error(`Unexpected checkout amount for case ${record.ref}`);
+        }
+        const tier = getTier(record.tierId);
+        if (tier && session.amount_total !== priceWithIva(tier.basePriceCents).totalCents) {
+          // Invoice what was actually charged, but make the gap visible.
+          console.warn(`[invoice] ${record.ref}: charged ${session.amount_total} differs from tier price`);
+        }
+        const result = await issueInvoiceForCheckout({
+          caseId,
+          stripeSessionId: session.id,
+          grossCents: session.amount_total,
+          description: `Servicio de acompañamiento administrativo — ${tier?.name ?? record.tierId}`,
+          billing: billingFromSession(session),
+          // When Stripe recorded the payment, not when this delivery arrived:
+          // a retry hours later must not move the invoice date.
+          issuedAt: new Date(event.created * 1000),
+        });
+        // Created exactly once per payment, so staff are notified exactly once.
+        if (result.created) await notifyPaymentReceived(caseId);
         break;
       }
 
       case "charge.refunded": {
         const charge = event.data.object;
-        // `refunded` is true only for a FULL refund. A partial refund (e.g. a
-        // goodwill discount) leaves the engagement paid and active.
-        if (!charge.refunded) break;
         const paymentIntentId =
           typeof charge.payment_intent === "string"
             ? charge.payment_intent
             : charge.payment_intent?.id;
         if (!paymentIntentId) break;
         const caseId = await findCaseIdByPaymentIntent(paymentIntentId);
-        if (caseId) await updateCase(caseId, { paymentStatus: "refunded" });
+        if (!caseId) break;
+
+        // `refunded` is true only for a FULL refund. A partial refund (e.g. a
+        // goodwill discount) leaves the engagement paid and active…
+        if (charge.refunded) await updateCase(caseId, { paymentStatus: "refunded" });
+        // …but EVERY refund changes the taxable base, so each one needs a
+        // factura rectificativa. amount_refunded is cumulative; the
+        // rectification covers only what is not rectified yet.
+        await issueRefundRectification({
+          caseId,
+          refundedTotalCents: charge.amount_refunded,
+          issuedAt: new Date(event.created * 1000),
+        });
         break;
       }
 

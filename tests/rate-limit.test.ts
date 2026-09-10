@@ -120,6 +120,7 @@ describe("every POST route is rate limited", () => {
     "api/webhooks/stripe/route.ts":
       "Stripe retries on 429, so limiting would delay payment confirmations; protected by signature verification",
     "api/admin/logout/route.ts": "Only clears the caller's own cookie",
+    "api/portal/logout/route.ts": "Only clears the caller's own cookie",
   };
 
   const routes: string[] = [];

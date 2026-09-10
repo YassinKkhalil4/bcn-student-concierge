@@ -1,9 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin/session";
+import { PORTAL_COOKIE, verifyPortalSession } from "@/lib/portal/session";
 
 /**
- * Middleware does two jobs: it issues the per-request CSP nonce, and it is the
- * first of two gates on the staff dashboard.
+ * Middleware issues the per-request CSP nonce and is the first of two gates on
+ * both the staff dashboard and the student portal.
  *
  * Rate limiting is NOT here: middleware runs in the Edge sandbox, which cannot
  * reach Postgres. It is enforced in each route handler (src/lib/rate-limit.ts),
@@ -20,6 +21,22 @@ function isAdminPath(pathname: string): boolean {
   );
 }
 const ADMIN_PUBLIC = new Set(["/admin/login", "/api/admin/login"]);
+
+/** Student portal. Sign-in and link redemption are its only open entry points. */
+function isPortalPath(pathname: string): boolean {
+  return (
+    pathname === "/portal" ||
+    pathname.startsWith("/portal/") ||
+    pathname.startsWith("/api/portal/")
+  );
+}
+const PORTAL_PUBLIC = new Set([
+  "/portal/login",
+  "/portal/verify",
+  "/api/portal/login",
+  "/api/portal/verify",
+  "/api/portal/logout",
+]);
 
 function buildCsp(nonce: string, isDev: boolean): string {
   return [
@@ -45,8 +62,8 @@ function buildCsp(nonce: string, isDev: boolean): string {
   ].join("; ");
 }
 
-/** Staff pages carry personal data: never index, never cache anywhere. */
-function markAdmin(response: NextResponse): void {
+/** Staff and portal pages carry personal data: never index, never cache. */
+function markPrivate(response: NextResponse): void {
   response.headers.set("X-Robots-Tag", "noindex, nofollow");
   response.headers.set("Cache-Control", "no-store, max-age=0");
 }
@@ -57,6 +74,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   const csp = buildCsp(nonce, isDev);
   const { pathname } = request.nextUrl;
   const admin = isAdminPath(pathname);
+  const portal = isPortalPath(pathname);
 
   // ── Admin gate (first of two) ────────────────────────────────────────
   // Every admin handler verifies the session again itself; this gate is not
@@ -68,7 +86,20 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
         ? NextResponse.json({ error: "Unauthorized" }, { status: 401 })
         : NextResponse.redirect(new URL("/admin/login", request.url));
       denied.headers.set("Content-Security-Policy", csp);
-      markAdmin(denied);
+      markPrivate(denied);
+      return denied;
+    }
+  }
+
+  // ── Portal gate (first of two) ───────────────────────────────────────
+  if (portal && !PORTAL_PUBLIC.has(pathname)) {
+    const caseId = await verifyPortalSession(request.cookies.get(PORTAL_COOKIE)?.value);
+    if (!caseId) {
+      const denied = pathname.startsWith("/api/")
+        ? NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+        : NextResponse.redirect(new URL("/portal/login", request.url));
+      denied.headers.set("Content-Security-Policy", csp);
+      markPrivate(denied);
       return denied;
     }
   }
@@ -79,7 +110,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
   response.headers.set("Content-Security-Policy", csp);
-  if (admin) markAdmin(response);
+  if (admin || portal) markPrivate(response);
   return response;
 }
 

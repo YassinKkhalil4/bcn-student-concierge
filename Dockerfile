@@ -35,6 +35,8 @@ COPY --from=build --chown=app:app /app/.next/standalone ./
 COPY --from=build --chown=app:app /app/.next/static ./.next/static
 # Applied automatically at startup (MIGRATE_ON_START).
 COPY --from=build --chown=app:app /app/drizzle ./drizzle
+# Unicode fonts for generated PDFs (invoices, authorisation, appointment sheet).
+COPY --from=build --chown=app:app /app/assets ./assets
 
 USER app
 EXPOSE 3000

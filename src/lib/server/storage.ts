@@ -1,27 +1,31 @@
-import { and, asc, desc, eq, inArray, isNotNull, isNull, lte, sql, type SQL } from "drizzle-orm";
-import { encryptDocument, decryptDocument, generateToken, sealJson, openJson } from "@/lib/crypto";
+import { and, asc, eq, isNull, lte, sql } from "drizzle-orm";
+import { encryptDocument, decryptDocument, generateToken } from "@/lib/crypto";
 import type { EncryptedPayload } from "@/lib/crypto";
 import type { IntakeData } from "@/lib/schema";
 import { selectForm, type FormId } from "@/lib/forms/field-map";
 import { getDb } from "@/lib/db/client";
 import {
+  appointments,
   cases,
   caseDocuments,
   type CaseRow,
+  type Locale,
   type DocumentKind,
   type DocumentRow,
   type PaymentStatus,
   type Stage,
 } from "@/lib/db/schema";
 import { blobStore, documentKey, casePrefix } from "./blob-store";
+import { emailIndexFor, generateCaseRef, iso, openIntake, sealIntake } from "./case-codec";
 
 /**
  * Case repository — Postgres for metadata, blob storage for document bodies.
  *
  * ENCRYPTED INTAKE
- * The intake questionnaire is sealed before it reaches Postgres and opened only
- * in this module. Nothing outside it ever sees an envelope, and the database
- * never sees a name, passport number or address in the clear.
+ * The intake questionnaire is sealed before it reaches Postgres (case-codec.ts)
+ * and returned to callers already opened. Nothing outside the repository ever
+ * handles an envelope, and the database never sees a name, passport number or
+ * address in the clear.
  *
  * ORDERING INSTEAD OF TRANSACTIONS
  * Multi-step operations span Postgres AND blob storage, and no transaction can
@@ -46,6 +50,9 @@ export interface StoredDocument {
 
 export interface CaseRecord {
   id: string;
+  /** Human reference, e.g. "BCN-58213". */
+  ref: string;
+  locale: Locale;
   tierId: string;
   formId: FormId;
   stage: Stage;
@@ -61,20 +68,13 @@ export interface CaseRecord {
   serviceCompletedAt: string | null;
   /** Set by the purge. A purged case keeps only non-personal accounting fields. */
   purgedAt: string | null;
+  /** The student pressed "Submit for review". */
+  documentsSubmittedAt: string | null;
 }
 
 /** Case ids are server-generated tokens. Reject anything else before querying. */
 export function isValidCaseId(id: string): boolean {
   return /^[A-Za-z0-9_-]{16,64}$/.test(id);
-}
-
-const iso = (d: Date | null): string | null => (d ? d.toISOString() : null);
-
-/** AAD for a case's intake envelope — binds the ciphertext to this case row. */
-const intakeAad = (caseId: string) => `case:${caseId}:intake`;
-
-function openIntake(row: CaseRow): IntakeData | null {
-  return row.intakeEnvelope ? openJson<IntakeData>(row.intakeEnvelope, intakeAad(row.id)) : null;
 }
 
 function toDocument(row: DocumentRow): StoredDocument {
@@ -99,6 +99,8 @@ function toDocument(row: DocumentRow): StoredDocument {
 function toRecord(row: CaseRow, docs: DocumentRow[]): CaseRecord {
   return {
     id: row.id,
+    ref: row.ref,
+    locale: row.locale,
     tierId: row.tierId,
     formId: row.formId,
     stage: row.stage,
@@ -111,25 +113,54 @@ function toRecord(row: CaseRow, docs: DocumentRow[]): CaseRecord {
     updatedAt: row.updatedAt.toISOString(),
     serviceCompletedAt: iso(row.serviceCompletedAt),
     purgedAt: iso(row.purgedAt),
+    documentsSubmittedAt: iso(row.documentsSubmittedAt),
   };
 }
 
 // ── Cases ──────────────────────────────────────────────────────────────────
 
-export async function createCase(intake: IntakeData): Promise<CaseRecord> {
+export async function createCase(
+  intake: IntakeData,
+  options: { locale?: Locale } = {},
+): Promise<CaseRecord> {
   const db = await getDb();
   // The id is part of the AAD, so it must exist before the intake is sealed.
   const id = generateToken();
-  const [row] = await db
-    .insert(cases)
-    .values({
-      id,
-      tierId: intake.tierId,
-      formId: selectForm(intake.identity.nationality),
-      intakeEnvelope: sealJson(intake, intakeAad(id)),
-    })
-    .returning();
-  return toRecord(row!, []);
+  const values = {
+    id,
+    tierId: intake.tierId,
+    formId: selectForm(intake.identity.nationality),
+    locale: options.locale ?? "en",
+    emailIndex: emailIndexFor(intake.contact.email),
+    intakeEnvelope: sealIntake(id, intake),
+  } as const;
+
+  // The human reference is random, so it can collide with an existing one;
+  // retry with a fresh reference on that specific unique violation only.
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const [row] = await db
+        .insert(cases)
+        .values({ ...values, ref: generateCaseRef() })
+        .returning();
+      return toRecord(row!, []);
+    } catch (error) {
+      if (attempt >= 8 || !isUniqueViolation(error, "cases_ref_unique")) throw error;
+    }
+  }
+}
+
+/** True when a Postgres unique constraint named `constraint` was violated. */
+export function isUniqueViolation(error: unknown, constraint: string): boolean {
+  for (let e: unknown = error; e instanceof Error || (e && typeof e === "object"); ) {
+    const candidate = e as { code?: string; constraint?: string; message?: string; cause?: unknown };
+    if (candidate.code === "23505" && (candidate.constraint === constraint || candidate.message?.includes(constraint))) {
+      return true;
+    }
+    e = candidate.cause;
+    if (!e) break;
+  }
+  return false;
 }
 
 export async function getCase(id: string): Promise<CaseRecord | null> {
@@ -197,151 +228,6 @@ export async function findCaseIdByPaymentIntent(
     .where(eq(cases.stripePaymentIntentId, paymentIntentId))
     .limit(1);
   return row?.id ?? null;
-}
-
-// ── Admin listing ──────────────────────────────────────────────────────────
-
-/**
- * Dashboard queues. Each open case sits in exactly one of the first four, so
- * the tab counts add up and nothing is double-listed:
- *   action      paid, not yet started — the queue staff work from
- *   in_progress being handled
- *   unpaid      intake submitted, payment not received
- *   completed   done; retention clock running
- *   purged      personal data erased, accounting record only
- */
-export const BUCKETS = ["action", "in_progress", "unpaid", "completed", "purged", "all"] as const;
-export type CaseBucket = (typeof BUCKETS)[number];
-
-function bucketWhere(bucket: CaseBucket): SQL | undefined {
-  const open = isNull(cases.purgedAt);
-  switch (bucket) {
-    case "action":
-      return and(open, eq(cases.paymentStatus, "paid"), eq(cases.stage, "new"));
-    case "in_progress":
-      return and(open, eq(cases.stage, "in_progress"));
-    case "unpaid":
-      return and(open, eq(cases.stage, "new"), eq(cases.paymentStatus, "pending"));
-    case "completed":
-      return and(open, eq(cases.stage, "completed"));
-    case "purged":
-      return isNotNull(cases.purgedAt);
-    case "all":
-      return undefined;
-  }
-}
-
-/** Lowercase and strip accents, so "garcia" finds "GARCÍA". */
-function fold(value: string): string {
-  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-}
-
-export interface CaseSummary {
-  id: string;
-  formId: FormId;
-  tierId: string;
-  stage: Stage;
-  paymentStatus: PaymentStatus;
-  applicant: string | null;
-  nationality: string | null;
-  email: string | null;
-  documentKinds: DocumentKind[];
-  createdAt: string;
-  serviceCompletedAt: string | null;
-  purgedAt: string | null;
-}
-
-/**
- * Upper bound on rows decrypted per search.
- *
- * The intake is encrypted, so Postgres cannot search inside it — matching
- * happens here, after decryption. That is cheap at boutique volumes (thousands
- * of cases decrypt in milliseconds) but it is a scan, so it is capped: a search
- * covers the most recent SEARCH_SCAN_LIMIT cases in the selected queue. Beyond
- * that scale, add blind indexes (HMACs of normalised surname/email/passport).
- */
-export const SEARCH_SCAN_LIMIT = 5000;
-
-export async function listCases(options: {
-  bucket?: CaseBucket;
-  query?: string;
-  limit?: number;
-} = {}): Promise<CaseSummary[]> {
-  const db = await getDb();
-  const limit = Math.min(options.limit ?? 200, 500);
-  const q = options.query?.trim() ? fold(options.query.trim()) : "";
-
-  const rows = await db
-    .select()
-    .from(cases)
-    .where(bucketWhere(options.bucket ?? "all"))
-    .orderBy(desc(cases.createdAt))
-    .limit(q ? SEARCH_SCAN_LIMIT : limit);
-
-  const summaries: CaseSummary[] = [];
-  for (const r of rows) {
-    const intake = openIntake(r);
-    const id = intake?.identity;
-    if (q) {
-      // The reference is not personal data and is matched as a prefix; the
-      // rest is matched anywhere in the decrypted fields.
-      const haystack = intake
-        ? fold(
-            [id!.firstSurname, id!.secondSurname, id!.givenName, id!.passportNumber, id!.nie,
-              intake.contact.email, intake.contact.phone].filter(Boolean).join(" "),
-          )
-        : "";
-      if (!fold(r.id).startsWith(q) && !haystack.includes(q)) continue;
-    }
-    summaries.push({
-      id: r.id,
-      formId: r.formId,
-      tierId: r.tierId,
-      stage: r.stage,
-      paymentStatus: r.paymentStatus,
-      applicant: id
-        ? [id.firstSurname, id.secondSurname].filter(Boolean).join(" ") + `, ${id.givenName}`
-        : null,
-      nationality: id?.nationality ?? null,
-      email: intake?.contact.email ?? null,
-      documentKinds: [],
-      createdAt: r.createdAt.toISOString(),
-      serviceCompletedAt: iso(r.serviceCompletedAt),
-      purgedAt: iso(r.purgedAt),
-    });
-    if (summaries.length >= limit) break;
-  }
-
-  if (summaries.length) {
-    const docs = await db
-      .select({ caseId: caseDocuments.caseId, kind: caseDocuments.kind })
-      .from(caseDocuments)
-      .where(inArray(caseDocuments.caseId, summaries.map((c) => c.id)));
-    const byCase = new Map<string, Set<DocumentKind>>();
-    for (const d of docs) byCase.set(d.caseId, (byCase.get(d.caseId) ?? new Set()).add(d.kind));
-    for (const c of summaries) c.documentKinds = [...(byCase.get(c.id) ?? [])];
-  }
-
-  return summaries;
-}
-
-export async function countCasesByBucket(): Promise<Record<CaseBucket, number>> {
-  const db = await getDb();
-  const count = (where: SQL | undefined) =>
-    (where ? sql<number>`count(*) FILTER (WHERE ${where})` : sql<number>`count(*)`).mapWith(
-      Number,
-    );
-  const [row] = await db
-    .select({
-      action: count(bucketWhere("action")),
-      in_progress: count(bucketWhere("in_progress")),
-      unpaid: count(bucketWhere("unpaid")),
-      completed: count(bucketWhere("completed")),
-      purged: count(bucketWhere("purged")),
-      all: count(undefined),
-    })
-    .from(cases);
-  return row!;
 }
 
 // ── Documents ──────────────────────────────────────────────────────────────
@@ -455,8 +341,11 @@ export async function listStaleOpenCaseIds(createdBefore: Date): Promise<string[
  *
  * Order is the whole design — each step idempotent, the marker written last:
  *   1. Document bodies in object storage   (the most sensitive data)
- *   2. Document rows (wrapped keys)
- *   3. Intake envelope nulled and purged_at set, in ONE statement
+ *   2. Document rows (wrapped keys) and appointments
+ *   3. Intake envelope and email index nulled and purged_at set, in ONE
+ *      statement
+ * Invoices are NOT touched: tax law requires keeping them, and their payer
+ * details remain encrypted.
  * A crash between steps leaves purged_at unset, so the next run retries and
  * finishes. purged_at is never recorded for a deletion that did not complete,
  * and the cases_purged_has_no_intake CHECK makes that true at the database.
@@ -473,8 +362,9 @@ export async function purgeCase(id: string): Promise<void> {
 
   await blobStore().deletePrefix(casePrefix(id));
   await db.delete(caseDocuments).where(eq(caseDocuments.caseId, id));
+  await db.delete(appointments).where(eq(appointments.caseId, id));
   await db
     .update(cases)
-    .set({ intakeEnvelope: null, purgedAt: new Date(), updatedAt: new Date() })
+    .set({ intakeEnvelope: null, emailIndex: null, purgedAt: new Date(), updatedAt: new Date() })
     .where(and(eq(cases.id, id), isNull(cases.purgedAt)));
 }

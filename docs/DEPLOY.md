@@ -78,6 +78,12 @@ Fill in `.env`:
 | `ADMIN_PASSWORD_HASH` | on your own machine, in a checkout: `npm run admin:hash-password`, then paste the line |
 | `STRIPE_SECRET_KEY` | Stripe dashboard → Developers → API keys |
 | `STRIPE_WEBHOOK_SECRET` | after step 5 |
+| `PORTAL_SESSION_SECRET` | `openssl rand -base64 32` |
+| `RESEND_API_KEY`, `EMAIL_FROM` | see "Email" below |
+| `INVOICE_ISSUER_NAME`, `_TAX_ID`, `_ADDRESS` | your legal name, NIF and fiscal address, exactly as on your invoices |
+
+The server refuses to start in production if any required setting is missing,
+and lists them all — check `docker compose logs app` after the first start.
 
 Copy the official form templates to the server (they are not in git):
 
@@ -115,7 +121,20 @@ curl -sI https://bcnstudent.com | grep -iE "strict-transport|content-security"
 
 Then sign in at `https://bcnstudent.com/admin`.
 
-## 5. Stripe
+## 5. Email (Resend)
+
+Sign-in links and notices are sent through [Resend](https://resend.com).
+
+1. Resend → Domains → Add `bcnstudent.com`, **region: EU (eu-west-1)**.
+2. Add the DNS records Resend shows (SPF, DKIM, and optionally DMARC). Wait
+   until all show as verified — unverified domains land in spam or bounce.
+3. Create an API key with "sending access" only; put it in `RESEND_API_KEY`.
+4. `EMAIL_FROM="BCN Student Concierge <hello@bcnstudent.com>"`.
+
+Test it: open `https://bcnstudent.com/portal/login`, enter the email of a test
+case, and redeem the link on your phone.
+
+## 6. Stripe
 
 Dashboard → Developers → Webhooks → Add endpoint:
 
@@ -126,7 +145,7 @@ Copy the signing secret into `STRIPE_WEBHOOK_SECRET`, then
 `docker compose up -d` to apply it. For Apple Pay, verify `bcnstudent.com`
 under Settings → Payment methods → Apple Pay.
 
-## 6. Updating
+## 7. Updating
 
 ```bash
 cd /srv/bcnstudent
@@ -136,7 +155,7 @@ docker compose up -d --build
 
 Migrations apply automatically at startup, under an advisory lock.
 
-## 7. Backups
+## 8. Backups
 
 `deploy/backup.sh` dumps Postgres and archives the documents volume, keeping 30
 days (matching the retention promised in the privacy notice):
@@ -166,7 +185,7 @@ docker compose up -d
 The restored data is readable only with the **same** `DOCUMENT_MASTER_KEY`.
 Rehearse this once before launch.
 
-## 8. Day to day
+## 9. Day to day
 
 | Task | Command |
 |---|---|

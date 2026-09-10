@@ -288,13 +288,85 @@ ciphertext — provided `.env` is not backed up with them.)
 accessed but not *who*. Once more than one or two people use the dashboard,
 move to per-user accounts (e.g. SSO via your identity provider).
 
-## 9. Pre-launch checklist
+## 9. Student portal (`/portal`)
+
+Students return to their file via **emailed one-time sign-in links** — no
+passwords to leak or reset.
+
+- **Links** are HMAC-signed (`PORTAL_SESSION_SECRET`), expire after **30
+  minutes**, and are **single-use without a token table**: a link is accepted
+  only if it was issued after the case's last sign-in (`cases.portal_login_at`),
+  and redeeming it moves that marker in one compare-and-set UPDATE. Using any
+  link therefore kills every older one, and two simultaneous uses of one link
+  cannot both succeed (tested).
+- **Opening a link does not sign you in.** It shows a "Continue" button that
+  POSTs the token. Email security scanners fetch every link in a message; a GET
+  that redeemed the token would spend the student's link before they saw it.
+- **No enumeration.** "Send me a link" answers identically whether or not the
+  address has a file, and sends the email in the background after responding,
+  so neither the reply nor its timing reveals who is a client. Limited per IP
+  (5 / 15 min) and per address (3 / hour) so the form cannot flood an inbox.
+- **Finding a case by email** uses a blind index — an HMAC of the normalised
+  address. The email itself stays inside the encrypted intake. The index is
+  personal data too, so the purge nulls it (enforced by a CHECK).
+- **Sessions** are signed cookies (24 h, `HttpOnly`, `Secure`, `SameSite=Lax`)
+  bound to one case. Lax rather than Strict so that arriving from the email
+  keeps the student signed in; Lax still withholds the cookie from cross-site
+  POSTs. Every portal handler takes the case from the session — never from the
+  request body — so a student can only ever touch their own file.
+- The session signing key and the link signing key are the same secret under
+  different purpose strings: a session cannot be replayed as a link, nor a link
+  as a session (tested).
+
+Email is sent through Resend (`RESEND_API_KEY`, `EMAIL_FROM`). Production
+without it refuses to start — a dev-style console fallback would print working
+sign-in links into production logs.
+
+## 10. Invoicing (facturas)
+
+Implements Spanish invoicing rules (RD 1619/2012) in the database, not only in
+code:
+
+| Rule | Enforcement |
+|---|---|
+| Correlative numbering, no gaps | Counter row incremented in the same transaction as the insert (not a SEQUENCE, which leaks numbers on rollback) |
+| Invoices never altered after issue | Trigger rejects UPDATE and DELETE on `invoices` |
+| Corrections by rectificativa only | `RECT` series, negative amounts, must reference the original and state a reason (CHECKs) |
+| Amounts consistent | CHECK `base + iva = total`; integer cents; IVA split as a remainder |
+| One invoice per payment | Case row locked per issue + unique index on the Stripe session |
+
+- Numbering restarts per **Madrid** calendar year: a sale at 00:30 on 1 January
+  in Barcelona (still 31 December in UTC) is numbered in the new year.
+- The payer comes from Stripe's `customer_details` — often a parent or a
+  company, not the student — and is **encrypted** like the intake. Business tax
+  IDs are collected by Stripe Checkout (`tax_id_collection`). Stripe's own
+  invoices are disabled, so each sale has exactly one invoice.
+- Refunds: every refund, partial or full, issues a rectificativa for the amount
+  not already rectified (idempotent across Stripe redeliveries).
+- Invoices survive the 30-day purge (tax law requires keeping them).
+- Issuer details (`INVOICE_ISSUER_*`) are frozen onto each invoice; production
+  refuses to start without them, and a missing issuer never consumes a number.
+
+**For the gestor to confirm:** series format and yearly restart; whether EU
+business payers with a valid VAT number should be invoiced under *inversión del
+sujeto pasivo* (reverse charge) — the system invoices exactly what Stripe
+charged (21 % IVA) and does not make that call.
+
+**Known cost:** invoice PDFs embed the full Noto Sans font (~630 KB each).
+pdf-lib's font subsetting silently dropped glyphs — letters and the total line
+vanished from a structurally valid PDF — so subsetting is off, and a test
+inspects the embedded font program to keep it that way.
+
+## 11. Pre-launch checklist
 
 - [ ] `openssl s_client -tls1_2 -connect bcnstudent.com:443` **fails** (TLS 1.3 only)
 - [ ] App port 3000 not published; `curl http://<server-ip>:3000` refused from outside
 - [ ] `.env` is `chmod 600`, and excluded from every backup that holds data
 - [ ] `DOCUMENT_MASTER_KEY` backed up somewhere separate — losing it loses all data
 - [ ] `ADMIN_PASSWORD_HASH` and `ADMIN_SESSION_SECRET` set (dashboard stays locked otherwise)
+- [ ] `PORTAL_SESSION_SECRET` set; bcnstudent.com verified in Resend (EU region), SPF/DKIM live
+- [ ] A real sign-in link received and redeemed on a phone
+- [ ] `INVOICE_ISSUER_*` set, and the invoice layout and numbering approved by your gestor
 - [ ] Postgres + `documents` volume backed up nightly, retention ≤ 30 days (`docs/DEPLOY.md`)
 - [ ] A restore rehearsed at least once
 - [ ] Stripe webhook registered at `https://bcnstudent.com/api/webhooks/stripe`; signing secret set

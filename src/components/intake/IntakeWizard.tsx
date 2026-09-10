@@ -62,7 +62,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
     marketingOptIn: false,
   });
   const [errors, setErrors] = useState<Errors>({});
-  const [caseId, setCaseId] = useState<string | null>(null);
+  const [caseRef, setCaseRef] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -146,7 +146,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
         body: JSON.stringify(buildPayload()),
       });
       const json = (await res.json()) as {
-        caseId?: string;
+        ref?: string;
         error?: string;
         issues?: { path: string; message: string }[];
       };
@@ -166,7 +166,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
         return;
       }
 
-      setCaseId(json.caseId ?? null);
+      setCaseRef(json.ref ?? null);
       setStep(5);
     } catch {
       setSubmitError("Network error. Your answers are still here — please retry.");
@@ -176,14 +176,15 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   }
 
   async function startCheckout(): Promise<void> {
-    if (!caseId) return;
+    if (!caseRef) return;
     setBusy(true);
     setSubmitError(null);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ caseId }),
+        // No body: the server takes the case from the signed session cookie
+        // it set when the intake was submitted.
       });
       const json = (await res.json()) as { url?: string; error?: string };
       if (json.url) {
@@ -244,7 +245,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
             <ConsentStep consent={consent} setConsent={setConsent} errors={errors} />
           )}
 
-          {step === 5 && caseId && (
+          {step === 5 && caseRef && (
             <div>
               <h2 className="font-display text-xl font-semibold text-ink">
                 Upload your documents
@@ -252,13 +253,21 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
               <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                 Your file is open. Reference{" "}
                 <code className="rounded bg-bone-warm px-1.5 py-0.5 text-xs">
-                  {caseId.slice(0, 8)}
+                  {caseRef}
                 </code>
-                . Upload each document below, then continue to payment.
+                . Upload what you have now, then continue to payment.
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                Missing something, like a Padrón document from your landlord? That is
+                normal. Pay now and upload it later from{" "}
+                <a href="/portal" className="font-medium text-olive underline">
+                  your file
+                </a>
+                : sign in any time with the email you gave us.
               </p>
 
               <div className="mt-7">
-                <DocumentUpload caseId={caseId} />
+                <DocumentUpload />
               </div>
 
               <div className="mt-8">

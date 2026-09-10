@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import { getTier, priceWithIva, type Tier } from "@/lib/pricing";
+import type { BillingDetails } from "./invoices";
 
 /**
  * Stripe Checkout. Card and Apple Pay are both served by the `card` payment
@@ -80,11 +81,43 @@ export async function createCheckoutSession(
     client_reference_id: params.caseId,
     metadata: { caseId: params.caseId, tierId: tier.id },
     success_url: `${params.origin}/intake/complete?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${params.origin}/pricing?checkout=cancelled`,
-    // Spanish invoicing: collect the billing address for the factura.
+    cancel_url: `${params.origin}/portal?checkout=cancelled`,
+    // Spanish invoicing: the payer's name and address go on the factura.
     billing_address_collection: "required",
-    invoice_creation: { enabled: true },
+    // Lets a company paying for a student enter its tax ID (Stripe collects
+    // business IDs only; private payers need none on a Spanish invoice).
+    tax_id_collection: { enabled: true },
+    // Stripe's own invoices are deliberately OFF. We issue the factura, with
+    // Spanish correlative numbering; a Stripe invoice as well would mean two
+    // invoices, differently numbered, for one sale.
   });
+}
+
+/**
+ * The payer, as entered at checkout. Deliberately not the student's intake:
+ * the payer is often a parent or a company.
+ */
+export function billingFromSession(session: Stripe.Checkout.Session): BillingDetails {
+  const d = session.customer_details;
+  // Present when a business entered a tax ID; not in every API version's types.
+  const businessName = (d as { business_name?: string | null } | null)?.business_name;
+  const tax = d?.tax_ids?.[0];
+  const a = d?.address;
+  return {
+    name: (businessName || d?.name || d?.email || "").trim() || "—",
+    email: d?.email ?? null,
+    taxId: tax?.value ? { type: tax.type, value: tax.value } : null,
+    address: a
+      ? {
+          line1: a.line1 ?? null,
+          line2: a.line2 ?? null,
+          postalCode: a.postal_code ?? null,
+          city: a.city ?? null,
+          state: a.state ?? null,
+          country: a.country ?? null,
+        }
+      : null,
+  };
 }
 
 /**

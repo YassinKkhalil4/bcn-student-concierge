@@ -78,8 +78,9 @@ export default function PrivacyPage() {
           and was deleted, and invoice data. Spanish commercial and tax law (Código de
           Comercio Art. 30; Ley General Tributaria) requires invoice records to be kept
           for several years, and that obligation overrides erasure requests for those
-          specific records under GDPR Art. 17(3)(b). Nothing in the retained invoice
-          data includes your passport number or document scans.
+          specific records under GDPR Art. 17(3)(b). An invoice holds the payer's name,
+          billing address and, for a business, its tax ID — stored encrypted — plus the
+          amounts. It never includes your passport number or document scans.
         </p>
         <p>You may request deletion earlier than 30 days at any time.</p>
       </Clause>
@@ -87,9 +88,10 @@ export default function PrivacyPage() {
       <Clause heading="Who else sees your data">
         <p>
           Stripe (payment processing, Ireland/USA under the EU-US Data Privacy
-          Framework), and the EU-based providers of our server and email, each under a data
-          processing agreement. We do not sell your data, we do not share it with
-          advertisers, and we do not transfer it outside the EEA except as stated here.
+          Framework); Resend (delivery of our emails, such as your sign-in links); and the
+          EU-based provider of our server — each under a data processing agreement. We do
+          not sell your data, we do not share it with advertisers, and we do not transfer
+          it outside the EEA except as stated here.
         </p>
         <p>
           Public authorities receive only what you submit to them yourself, in your own
@@ -123,8 +125,10 @@ export default function PrivacyPage() {
       <Clause heading="Cookies">
         <p>
           This site sets no advertising or analytics cookies and runs no third-party
-          trackers. Stripe sets cookies strictly necessary for fraud prevention during
-          checkout. There is no consent banner because there is nothing to consent to.
+          trackers. The only cookies are strictly necessary ones: a sign-in cookie that
+          keeps you in your file for up to 24 hours, and the cookies Stripe sets for fraud
+          prevention during checkout. There is no consent banner because there is nothing
+          to consent to.
         </p>
       </Clause>
     </LegalPage>

@@ -6,8 +6,11 @@ import {
   jsonb,
   timestamp,
   index,
+  uniqueIndex,
+  unique,
   check,
   primaryKey,
+  type AnyPgColumn,
 } from "drizzle-orm/pg-core";
 import type { EncryptedPayload } from "../crypto";
 
@@ -31,11 +34,29 @@ import type { EncryptedPayload } from "../crypto";
 export const STAGES = ["new", "in_progress", "completed"] as const;
 export const PAYMENT_STATUSES = ["pending", "paid", "refunded"] as const;
 export const FORM_IDS = ["EX-17", "EX-18"] as const;
-export const DOCUMENT_KINDS = ["passport", "acceptance-letter", "lease"] as const;
+export const LOCALES = ["en", "es", "ca", "fr", "it", "de"] as const;
+/**
+ * `lease` doubles as the proof of domicile the city asks for alongside an
+ * authorisation (the lease or the property deed), so it keeps its name.
+ */
+export const DOCUMENT_KINDS = [
+  "passport",
+  "acceptance-letter",
+  "lease",
+  "utility-bill",
+  "padron-authorization", // signed "Autorització per inscriure-us al domicili"
+  "authorizer-id", // ID of whoever signed that authorisation
+  "collective-authorization", // student residence form, signed and stamped
+] as const;
+export const INVOICE_SERIES = ["INV", "RECT"] as const;
+export const APPOINTMENT_KINDS = ["padron", "police"] as const;
 
 export type Stage = (typeof STAGES)[number];
 export type PaymentStatus = (typeof PAYMENT_STATUSES)[number];
 export type DocumentKind = (typeof DOCUMENT_KINDS)[number];
+export type Locale = (typeof LOCALES)[number];
+export type InvoiceSeries = (typeof INVOICE_SERIES)[number];
+export type AppointmentKind = (typeof APPOINTMENT_KINDS)[number];
 
 const inList = (values: readonly string[]) =>
   sql.raw(values.map((v) => `'${v}'`).join(", "));
@@ -47,6 +68,22 @@ export const cases = pgTable(
   {
     /** Opaque 256-bit token. Doubles as the Stripe client_reference_id. */
     id: text("id").primaryKey(),
+    /**
+     * Human reference for staff, the student and notifications: "BCN-58213".
+     * Random rather than sequential — a counting reference would tell every
+     * client how many clients came before them.
+     */
+    ref: text("ref").notNull().unique(),
+    /** Language the student uses; their guides and emails are generated in it. */
+    locale: text("locale", { enum: LOCALES }).notNull().default("en"),
+    /**
+     * Blind index for sign-in-by-email: an HMAC of the normalised email under a
+     * key derived from the master key. The email itself stays inside the
+     * encrypted intake; this lets us find a case by email without storing it
+     * readable. Still personal data (it identifies a person), so it is nulled
+     * by the purge like the intake.
+     */
+    emailIndex: text("email_index"),
     tierId: text("tier_id").notNull(),
     /** Derived from nationality at intake; stored so the dashboard can filter. */
     formId: text("form_id", { enum: FORM_IDS }).notNull(),
@@ -74,12 +111,21 @@ export const cases = pgTable(
     serviceCompletedAt: tstz("service_completed_at"),
     /** Set last by the purge, only after documents and intake are gone. */
     purgedAt: tstz("purged_at"),
+    /**
+     * Last successful sign-in-link use. A link is valid only if it was issued
+     * AFTER this moment, so using one link invalidates every link issued
+     * before it — single-use without a token table.
+     */
+    portalLoginAt: tstz("portal_login_at"),
+    /** The student pressed "Submit for review": all their documents are in. */
+    documentsSubmittedAt: tstz("documents_submitted_at"),
   },
   (t) => [
     index("cases_created_at_idx").on(t.createdAt),
     index("cases_stage_idx").on(t.stage),
     index("cases_payment_status_idx").on(t.paymentStatus),
     index("cases_payment_intent_idx").on(t.stripePaymentIntentId),
+    index("cases_email_index_idx").on(t.emailIndex),
     // The purge job's query: completed, not yet purged, oldest first.
     index("cases_retention_idx")
       .on(t.serviceCompletedAt)
@@ -93,8 +139,10 @@ export const cases = pgTable(
     // A purged case must not still hold personal data.
     check(
       "cases_purged_has_no_intake",
-      sql`${t.purgedAt} IS NULL OR ${t.intakeEnvelope} IS NULL`,
+      sql`${t.purgedAt} IS NULL OR (${t.intakeEnvelope} IS NULL AND ${t.emailIndex} IS NULL)`,
     ),
+    check("cases_locale_check", sql`${t.locale} IN (${inList(LOCALES)})`),
+    check("cases_ref_format", sql`${t.ref} ~ '^BCN-[0-9]{5}$'`),
   ],
 );
 
@@ -146,5 +194,129 @@ export const rateLimits = pgTable(
   ],
 );
 
+/**
+ * Police / Padrón appointments booked for a case. Feeds the appointment-day
+ * sheet. `officeCode` refers to the office list in src/lib/offices.ts.
+ * Deleted by the purge with everything else.
+ */
+export const appointments = pgTable(
+  "appointments",
+  {
+    id: text("id").primaryKey(),
+    caseId: text("case_id")
+      .notNull()
+      .references(() => cases.id, { onDelete: "cascade" }),
+    kind: text("kind", { enum: APPOINTMENT_KINDS }).notNull(),
+    officeCode: text("office_code").notNull(),
+    scheduledAt: tstz("scheduled_at").notNull(),
+    /** The number on the "justificante de cita", if staff record it. */
+    confirmationCode: text("confirmation_code"),
+    createdAt: tstz("created_at").notNull().defaultNow(),
+    updatedAt: tstz("updated_at").notNull().defaultNow(),
+  },
+  (t) => [
+    unique("appointments_case_kind_unique").on(t.caseId, t.kind),
+    check("appointments_kind_check", sql`${t.kind} IN (${inList(APPOINTMENT_KINDS)})`),
+  ],
+);
+
+// ── Invoicing (facturas) ─────────────────────────────────────────────────────
+//
+// Spanish invoicing law (RD 1619/2012) requires correlative numbering within a
+// series, invoices that are never altered after issue, and corrections only by
+// a separate *factura rectificativa*. The design follows from that:
+//
+//  - Numbers come from `invoice_counters`, incremented in the SAME transaction
+//    as the invoice insert. A Postgres SEQUENCE is deliberately not used: a
+//    sequence value consumed by a rolled-back transaction is lost, leaving a
+//    gap in the numbering. The counter rolls back with the insert.
+//  - A trigger (migration 0002) rejects UPDATE and DELETE on `invoices`.
+//  - Refunds produce RECT-series invoices with negative amounts that point at
+//    the invoice they correct.
+//  - Invoices are kept after the 30-day purge: tax law requires it. The payer's
+//    identity is still encrypted, like the intake.
+
+/** The issuing business, frozen onto each invoice at the moment of issue. */
+export interface InvoiceIssuer {
+  name: string;
+  taxId: string;
+  address: string;
+}
+
+export const invoiceCounters = pgTable(
+  "invoice_counters",
+  {
+    series: text("series", { enum: INVOICE_SERIES }).notNull(),
+    /** Calendar year in Europe/Madrid — numbering restarts each year. */
+    year: integer("year").notNull(),
+    last: integer("last").notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.series, t.year] }),
+    check("invoice_counters_series_check", sql`${t.series} IN (${inList(INVOICE_SERIES)})`),
+    check("invoice_counters_last_positive", sql`${t.last} > 0`),
+  ],
+);
+
+export const invoices = pgTable(
+  "invoices",
+  {
+    id: text("id").primaryKey(),
+    /** "INV-2026-0001" / "RECT-2026-0001". */
+    number: text("number").notNull().unique(),
+    series: text("series", { enum: INVOICE_SERIES }).notNull(),
+    year: integer("year").notNull(),
+    sequence: integer("sequence").notNull(),
+    caseId: text("case_id")
+      .notNull()
+      .references(() => cases.id, { onDelete: "restrict" }),
+    /** Set on a rectificativa: the invoice it corrects. */
+    rectifiesId: text("rectifies_id").references((): AnyPgColumn => invoices.id, {
+      onDelete: "restrict",
+    }),
+    /** Why a rectificativa was issued ("Devolución total", "Devolución parcial"). */
+    reason: text("reason"),
+    issuedAt: tstz("issued_at").notNull(),
+    /** The line as sold, frozen: the package name at the time of sale. */
+    description: text("description").notNull(),
+    // Integer cents throughout: no floating-point money.
+    baseCents: integer("base_cents").notNull(),
+    /** Basis points: 2100 = 21 % IVA. */
+    ivaRateBp: integer("iva_rate_bp").notNull(),
+    ivaCents: integer("iva_cents").notNull(),
+    totalCents: integer("total_cents").notNull(),
+    currency: text("currency").notNull().default("EUR"),
+    issuer: jsonb("issuer").$type<InvoiceIssuer>().notNull(),
+    /** Payer's name, tax ID and address — encrypted, AAD `invoice:<id>`. */
+    billingEnvelope: jsonb("billing_envelope").$type<EncryptedPayload>().notNull(),
+    stripeSessionId: text("stripe_session_id"),
+    createdAt: tstz("created_at").notNull().defaultNow(),
+  },
+  (t) => [
+    unique("invoices_series_year_sequence_unique").on(t.series, t.year, t.sequence),
+    // One invoice per paid Checkout Session: the backstop behind the webhook's
+    // own idempotency check.
+    uniqueIndex("invoices_session_unique")
+      .on(t.stripeSessionId)
+      .where(sql`${t.series} = 'INV'`),
+    index("invoices_case_id_idx").on(t.caseId),
+    index("invoices_issued_at_idx").on(t.issuedAt),
+    check("invoices_series_check", sql`${t.series} IN (${inList(INVOICE_SERIES)})`),
+    check("invoices_totals_add_up", sql`${t.baseCents} + ${t.ivaCents} = ${t.totalCents}`),
+    // A rectificativa must name its original and its reason; an invoice must not.
+    check(
+      "invoices_rect_links_original",
+      sql`(${t.series} = 'RECT') = (${t.rectifiesId} IS NOT NULL AND ${t.reason} IS NOT NULL)`,
+    ),
+    check(
+      "invoices_sign_matches_series",
+      sql`(${t.series} = 'INV' AND ${t.totalCents} > 0) OR (${t.series} = 'RECT' AND ${t.totalCents} < 0)`,
+    ),
+    check("invoices_number_matches_parts", sql`${t.number} = ${t.series} || '-' || ${t.year} || '-' || lpad(${t.sequence}::text, 4, '0')`),
+  ],
+);
+
 export type CaseRow = typeof cases.$inferSelect;
 export type DocumentRow = typeof caseDocuments.$inferSelect;
+export type InvoiceRow = typeof invoices.$inferSelect;
+export type AppointmentRow = typeof appointments.$inferSelect;

@@ -4,6 +4,7 @@ const NAV = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/pricing", label: "Services & pricing" },
   { href: "/#faq", label: "FAQ" },
+  { href: "/portal", label: "My file" },
 ];
 
 export function SiteHeader() {
