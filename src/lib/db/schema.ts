@@ -207,7 +207,16 @@ export const appointments = pgTable(
       .notNull()
       .references(() => cases.id, { onDelete: "cascade" }),
     kind: text("kind", { enum: APPOINTMENT_KINDS }).notNull(),
+    /** Preset key from src/lib/offices.ts, or "custom". */
     officeCode: text("office_code").notNull(),
+    /**
+     * The office as staff recorded it when booking, frozen onto the
+     * appointment: the sheet prints exactly what staff confirmed, and a later
+     * edit to a preset cannot move an appointment that is already booked.
+     */
+    officeName: text("office_name").notNull().default(""),
+    officeAddress: text("office_address").notNull().default(""),
+    nearestMetro: text("nearest_metro"),
     scheduledAt: tstz("scheduled_at").notNull(),
     /** The number on the "justificante de cita", if staff record it. */
     confirmationCode: text("confirmation_code"),

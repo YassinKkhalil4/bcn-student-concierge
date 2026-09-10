@@ -289,3 +289,36 @@ The residence path (*Autorització d'empadronament de domicili col·lectiu*,
 `Domicilicolectiu_cat.pdf`) is not pre-filled: the residence completes, signs
 and stamps it. The portal gives the student a Spanish request to send to
 reception, with the link to the city's form.
+
+---
+
+## Generated guides
+
+### Appointment-day sheet
+
+A one-page A4 PDF for the police appointment
+(`src/lib/guides/appointment-content.ts` for what it says,
+`appointment-sheet.ts` for how it is drawn). Staff record the appointment on
+the case page — office, address, nearest Metro, justificante number — and the
+student downloads the sheet, with their pre-filled EX form, from the portal.
+
+- **Route-specific.** EX-17 includes the 32 × 26 mm photo and the fingerprint
+  phrase; EX-18 includes neither (EU registration involves no photo and no
+  fingerprints) and lists the Ready File documents instead.
+- **Never more than one page.** The renderer throws `SheetOverflowError` rather
+  than spilling onto a second page that can get lost at the printer.
+- **Only verified locations.** Office details are what staff recorded for that
+  booking, frozen onto the appointment. `src/lib/offices.ts` holds presets that
+  only pre-fill the form; add an office there only after checking its address
+  on a real booking confirmation. The Metro line is printed only when recorded.
+- Times are entered and printed in Barcelona time across DST changes
+  (`src/lib/time.ts`, tested on the changeover days).
+
+### CaixaBank ATM payment guide
+
+⚠️ **Verify before launch.** The five steps in `src/lib/guides/caixabank-atm.ts`
+were supplied by the business and have not been checked against a live ATM —
+in particular the on-screen label "Pagar impuestos y tasas", the "13-digit"
+barcode and "staple the voucher to page 3". Make one real payment, correct that
+file if anything differs, and only then rely on it. It is the single place the
+steps are defined.

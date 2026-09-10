@@ -375,5 +375,7 @@ inspects the embedded font program to keep it that way.
 - [ ] Host hardened: SSH keys only, firewall (22/80/443), unattended upgrades
 - [ ] Malware scanning added to the upload path
 - [ ] Official EX-17/EX-18 templates in `templates/forms/` and printouts signed off (`docs/FORMS.md`)
+- [ ] `Autoritzaciodomicili_cat.pdf` in `templates/forms/` (Padrón authorisation download)
+- [ ] CaixaBank ATM steps checked against one real payment (`docs/FORMS.md`)
 - [ ] Privacy notice reviewed by a Spanish data-protection lawyer
 - [ ] Scope-of-service disclaimer reviewed against current anti-intrusismo guidance

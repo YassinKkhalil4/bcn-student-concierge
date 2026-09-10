@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/admin/guard";
 import { isValidCaseId, purgeCase, setStage } from "@/lib/server/storage";
-import { STAGES, type Stage } from "@/lib/db/schema";
+import { APPOINTMENT_KINDS, STAGES, type AppointmentKind, type Stage } from "@/lib/db/schema";
+import { appointmentInputSchema, deleteAppointment, saveAppointment } from "@/lib/server/appointments";
 
 /**
  * Staff actions. Each re-checks the session: server actions are public HTTP
@@ -41,4 +42,29 @@ export async function eraseNow(formData: FormData): Promise<void> {
   console.info(`[admin] manual erasure case=${id.slice(0, 8)}`);
   revalidatePath("/admin");
   redirect(`/admin/cases/${id}`);
+}
+
+/** Record or rebook an appointment (police or Padrón) for a case. */
+export async function saveAppointmentAction(formData: FormData): Promise<void> {
+  await requireAdmin();
+  const id = readId(formData);
+  const parsed = appointmentInputSchema.safeParse(Object.fromEntries(formData));
+  if (!parsed.success) {
+    const message = parsed.error.issues[0]?.message ?? "Check the appointment details";
+    redirect(`/admin/cases/${id}?appointment_error=${encodeURIComponent(message)}#appointments`);
+  }
+  await saveAppointment(id, parsed.data);
+  console.info(`[admin] appointment saved case=${id.slice(0, 8)} kind=${parsed.data.kind}`);
+  revalidatePath(`/admin/cases/${id}`);
+  redirect(`/admin/cases/${id}#appointments`);
+}
+
+export async function removeAppointmentAction(formData: FormData): Promise<void> {
+  await requireAdmin();
+  const id = readId(formData);
+  const kind = String(formData.get("kind") ?? "");
+  if (!(APPOINTMENT_KINDS as readonly string[]).includes(kind)) throw new Error("Invalid kind");
+  await deleteAppointment(id, kind as AppointmentKind);
+  revalidatePath(`/admin/cases/${id}`);
+  redirect(`/admin/cases/${id}#appointments`);
 }

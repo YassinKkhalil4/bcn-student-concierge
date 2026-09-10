@@ -7,6 +7,8 @@ import { getTier, priceWithIva, formatEur } from "@/lib/pricing";
 import { buildTasa012 } from "@/lib/tasa012";
 import { countryDisplayName, spanishFormName } from "@/lib/countries";
 import { listInvoicesForCase } from "@/lib/server/invoices";
+import { listAppointments } from "@/lib/server/appointments";
+import { AppointmentsCard } from "@/components/admin/AppointmentsCard";
 import { InvoiceList } from "@/components/portal/InvoiceList";
 import { Tasa012Helper } from "@/components/admin/Tasa012Helper";
 import { CopyButton } from "@/components/CopyButton";
@@ -41,14 +43,15 @@ export default async function CasePage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; appointment_error?: string }>;
 }) {
   await requireAdmin();
   const { id } = await params;
-  const { error } = await searchParams;
+  const { error, appointment_error: appointmentError } = await searchParams;
   const c = await getCase(id);
   if (!c) notFound();
   const invoices = await listInvoicesForCase(c.id);
+  const appointmentRows = await listAppointments(c.id);
 
   const tier = getTier(c.tierId);
   const price = tier ? priceWithIva(tier.basePriceCents) : null;
@@ -181,6 +184,8 @@ export default async function CasePage({
                   : `Marking completed starts the ${RETENTION_DAYS}-day deletion clock.`}
               </p>
             </Card>
+
+            <AppointmentsCard caseId={c.id} appointments={appointmentRows} error={appointmentError} />
 
             <Card title={`Official form · ${c.formId}`}>
               <a href={`/api/admin/cases/${c.id}/form`} className="btn-primary w-full !py-2.5">
