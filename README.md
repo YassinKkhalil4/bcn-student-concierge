@@ -11,10 +11,12 @@ cp .env.example .env.local
 # Generate the document encryption key:
 openssl rand -base64 32   # paste into DOCUMENT_MASTER_KEY
 
-# Generate test form fixtures (the official templates are not redistributable —
-# see docs/FORMS.md):
-npx tsx scripts/make-test-template.mts templates/forms/EX-17.pdf
-npx tsx scripts/make-test-template.mts templates/forms/EX-18.pdf
+# Optional: object storage + rate limiting (required in production).
+# Without S3_BUCKET, documents go to local disk in dev and the app REFUSES to
+# start in production. Without Upstash, rate limiting fails open and logs.
+
+# Official form templates are not redistributable — see docs/FORMS.md.
+# PDF render tests skip when they are absent.
 
 npm run dev
 ```
@@ -25,10 +27,13 @@ npm run dev
 |---|---|
 | `npm run dev` | Development server |
 | `npm run build` | Production build |
-| `npm test` | Vitest suite (74 tests) |
+| `npm test` | Vitest suite (108 tests) |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run purge:expired` | GDPR retention job — add `-- --dry-run` first |
-| `npm run forms:inspect -- <pdf>` | Dump a template's AcroForm field names |
+| `npm run forms:inspect -- <pdf>` | Check whether a template has form fields |
+| `npm run forms:grid -- <pdf>` | Render a measurement grid for calibration |
+| `npm run forms:proof` | Box every mapped coordinate on the template |
+| `npm run forms:zoom -- <pdf> <x> <y> <w> <h> [scale]` | Magnify a region |
 
 ## Architecture
 
@@ -48,10 +53,17 @@ src/
 │  ├─ schema.ts                 Zod contract — shared by client, API and PDF engine
 │  ├─ pricing.ts                Single source of truth for prices and IVA
 │  ├─ crypto.ts                 AES-256-GCM envelope encryption
-│  ├─ rate-limit.ts             Fixed-window limiter (see caveat in SECURITY.md)
-│  ├─ forms/                    EX-17/EX-18 field map + pdf-lib fill engine
-│  └─ server/                   Storage, uploads, Stripe
-└─ middleware.ts                Per-request nonce CSP
+│  ├─ rate-limit.ts             Upstash Redis sliding-window limiter
+│  ├─ forms/                    Coordinate overlay engine for EX-17/EX-18
+│  │  ├─ field-map.ts             Domain model → logical field names
+│  │  ├─ layout.ts                Logical names → absolute page coordinates
+│  │  └─ pdf.ts                   Draws values onto the flat template
+│  └─ server/
+│     ├─ blob-store.ts            S3/R2 object storage for document bodies
+│     ├─ storage.ts               Case metadata + retention purge
+│     ├─ uploads.ts               Magic-byte validation
+│     └─ stripe.ts                Checkout + webhook verification
+└─ middleware.ts                Per-request nonce CSP + rate limiting
 ```
 
 ### Design decisions worth knowing
@@ -97,14 +109,24 @@ The brief implied generating both. An applicant needs one: EX-17 for the TIE
 (non-EU), EX-18 for the CUE (EU/EEA/Swiss). The engine routes on nationality
 rather than asking students to choose a form they cannot correctly choose.
 
+**4. The official templates have no form fields to populate.**
+The brief specified populating official AcroForm templates. The real EX-17 and
+EX-18 are flat print documents — page 1 of EX-17 is 38 bitmap images, with no
+AcroForm, no XFA and no widget annotations. The engine therefore draws values at
+calibrated absolute coordinates. Both forms are calibrated as separate layouts —
+EX-18's rows sit 2-5pt lower than EX-17's. `docs/FORMS.md` carries the
+calibration workflow and the mandatory print sign-off before live use.
+
 ## What must be done before launch
 
 `docs/SECURITY.md` carries the full checklist. The load-bearing items:
 
 - TLS 1.3 minimum configured **and verified** at the edge
 - `DOCUMENT_MASTER_KEY` moved into a KMS
-- Rate limiter backed by Redis — the in-memory one is per-instance
-- Official EX-17/EX-18 templates installed, field map verified
+- `UPSTASH_REDIS_REST_URL` / `_TOKEN` set — the limiter fails open without them
+- `S3_BUCKET` configured — production refuses to start without it
+- Case metadata migrated off local JSON to Postgres
+- EX-17 and EX-18 coordinates signed off against a physical printout (docs/FORMS.md)
 - Legal pages reviewed by a Spanish data-protection lawyer
 
 ## Legal positioning

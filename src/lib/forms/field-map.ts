@@ -1,22 +1,17 @@
 import type { IntakeData } from "@/lib/schema";
 
 /**
- * Mapping between our domain model and the AcroForm field names inside the
- * official Ministerio de Inclusión templates.
+ * Maps our domain model to the logical field names the form layout draws.
  *
- * ⚠️ THESE FIELD NAMES MUST BE VERIFIED AGAINST THE TEMPLATE YOU SHIP.
- * The ministry re-exports these PDFs periodically and the internal field names
- * are not stable across revisions — they are an implementation detail of
- * whatever tool produced the form, not a published contract.
+ * These names are OURS, not the template's. The official ministry PDFs carry no
+ * AcroForm — they are flat scans — so there are no internal field names to
+ * match. Each name here is a key into the coordinate map in `layout.ts`, which
+ * is where the actual page positions live.
  *
- * Workflow when a new template revision drops:
- *   1. Put the PDF in templates/forms/
- *   2. npm run forms:inspect -- templates/forms/EX-17.pdf
- *   3. Paste the emitted names into the map below.
- *   4. npm test — the mapping tests fail loudly on unknown/missing fields.
- *
- * The engine treats an unmapped field as a hard error rather than silently
- * producing a half-empty form that gets rejected at the police station.
+ * Adding a value here without a matching position in `layout.ts` is reported by
+ * the engine as `unmappedFields`, and `fillFormStrict()` refuses to emit the
+ * form — a value the client supplied must never be silently dropped from their
+ * application.
  */
 
 export type FormId = "EX-17" | "EX-18";
@@ -29,17 +24,24 @@ export interface FormTemplate {
   title: string;
   file: string;
   /**
-   * Fields belonging to Section 2 (DATOS DEL REPRESENTANTE LEGAL). We assert
-   * these stay empty rather than merely not filling them — see pdf.ts.
+   * Sections that must never receive data, recorded for documentation and for
+   * the calibration proof render.
+   *
+   * These are NOT enforced by filtering at runtime. They are enforced
+   * structurally: no coordinate for them exists in `layout.ts`, so the engine
+   * has no way to write there even if a future change tried to. That is a
+   * stronger guarantee than a runtime check, which a refactor could remove.
+   *
+   *  - Section 2, DATOS DEL REPRESENTANTE: filling it declares that we act as
+   *    the applicant's legal representative, which triggers a power-of-attorney
+   *    requirement we neither hold nor claim.
+   *  - Section 3, DOMICILIO A EFECTOS DE NOTIFICACIONES: belongs to the
+   *    applicant, not to us.
+   *  - The DEHú consent box: opting in starts legally binding deadlines in a
+   *    mailbox that needs a Spanish digital certificate to open, which a newly
+   *    arrived student does not have.
    */
-  representativeFields: readonly string[];
-  /**
-   * Electronic-notification (DEHú) opt-in checkboxes. Left UNCHECKED: a student
-   * without a Spanish digital certificate cannot access the DEHú mailbox, and
-   * opting in starts legally-binding notification deadlines they would never
-   * see. Checking this box is one of the most damaging defaults on the form.
-   */
-  electronicNotificationFields: readonly string[];
+  neverFilled: readonly string[];
 }
 
 export const TEMPLATES: Record<FormId, FormTemplate> = {
@@ -47,33 +49,23 @@ export const TEMPLATES: Record<FormId, FormTemplate> = {
     id: "EX-17",
     title: "Solicitud de Tarjeta de Identidad de Extranjero (TIE)",
     file: "EX-17.pdf",
-    representativeFields: [
-      "rep_nie",
-      "rep_pasaporte",
-      "rep_primer_apellido",
-      "rep_segundo_apellido",
-      "rep_nombre",
-      "rep_titulo",
-      "rep_telefono",
-      "rep_email",
+    neverFilled: [
+      "seccion_2_representante",
+      "seccion_3_domicilio_notificaciones",
+      "representante_legal_en_su_caso",
+      "dehu_consentimiento",
     ],
-    electronicNotificationFields: ["notificacion_electronica", "dehu_consentimiento"],
   },
   "EX-18": {
     id: "EX-18",
     title: "Solicitud de Certificado de Registro de Ciudadano de la UE (CUE)",
     file: "EX-18.pdf",
-    representativeFields: [
-      "rep_nie",
-      "rep_pasaporte",
-      "rep_primer_apellido",
-      "rep_segundo_apellido",
-      "rep_nombre",
-      "rep_titulo",
-      "rep_telefono",
-      "rep_email",
+    neverFilled: [
+      "seccion_2_representante",
+      "seccion_3_domicilio_notificaciones",
+      "representante_legal_en_su_caso",
+      "dehu_consentimiento",
     ],
-    electronicNotificationFields: ["notificacion_electronica", "dehu_consentimiento"],
   },
 };
 

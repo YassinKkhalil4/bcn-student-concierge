@@ -67,6 +67,30 @@ The threat this design defeats is database/object-store exfiltration. It does
 not defeat a fully compromised application server, and the privacy page says
 that too.
 
+### Where ciphertext actually lives
+
+Document **bodies** go to S3-compatible object storage (`src/lib/server/blob-store.ts`),
+keyed `cases/<caseId>/documents/<documentId>`. Only **metadata** — the wrapped
+DEK, IV and auth tag — stays in the case record. Ciphertext is never embedded
+inline in JSON.
+
+Works with AWS S3, Cloudflare R2 or MinIO. R2 needs `S3_ENDPOINT`,
+`S3_REGION=auto` and `S3_FORCE_PATH_STYLE=true`, and must **not** be sent SSE
+headers — it encrypts at rest unconditionally and rejects them.
+
+Provider encryption (SSE-KMS on S3) sits *underneath* the envelope encryption.
+It protects against the provider's disks being stolen; ours protects against the
+provider account being compromised. Neither replaces the other.
+
+In production, a missing `S3_BUCKET` is a **hard startup error**, not a fallback
+to local disk — on serverless that fallback silently loses every uploaded
+passport at the next deploy.
+
+⚠️ **Still outstanding:** case *metadata* remains a local JSON file. It has no
+transactions and no replication, and concurrent writes to one case can interleave
+and lose data. Replace it with Postgres before scaling beyond one instance. The
+sensitive document bodies are no longer affected by this.
+
 ### Key management
 
 Development reads `DOCUMENT_MASTER_KEY` from the environment. **Production must
@@ -108,24 +132,51 @@ curl -sI https://your-domain.com | grep -i content-security-policy
 
 ---
 
-## 4. Rate limiting — single-instance only
+## 4. Rate limiting — Upstash Redis
 
-`src/lib/rate-limit.ts` is an **in-memory** fixed-window limiter. On Vercel or
-any multi-instance deploy, each instance keeps its own counter, so the effective
-limit multiplies by the instance count.
+Enforced in `src/middleware.ts`, backed by `@upstash/ratelimit` over Upstash
+Redis. Limiting lives in middleware rather than in each route handler so a new
+API route **cannot ship unprotected by omission** — the default is protected.
 
-Treat it as an abuse speed-bump, not a security control, until you back it with
-Redis (Upstash works well on serverless). Current limits:
+Upstash is used rather than a raw Redis client because middleware runs on the
+Edge runtime, which has no TCP sockets. Upstash speaks HTTP.
 
-| Endpoint | Limit |
-|---|---|
-| `POST /api/intake` | 5 / hour / IP |
-| `POST /api/documents` | 20 / hour / IP |
-| `POST /api/checkout` | 10 / 15 min / IP |
+| Endpoint | Limit | Window |
+|---|---|---|
+| `POST /api/intake` | 5 | 1 hour |
+| `POST /api/documents` | 20 | 1 hour |
+| `POST /api/checkout` | 10 | 15 min |
+
+Sliding window, not fixed: a fixed window lets a caller burst the full quota at
+the end of one window and again at the start of the next, giving 2x the intended
+rate across the boundary.
+
+**The Stripe webhook is deliberately not rate limited.** Stripe retries on any
+non-2xx, so a 429 would cause redelivery, and a burst of legitimate events could
+throttle payment confirmations. It is protected by signature verification, which
+is the right control for a machine caller.
+
+### Failure mode: fails open, loudly
+
+If Redis is unreachable or unconfigured, requests are **allowed** and the result
+is flagged `degraded`, with an error logged in production.
+
+This is deliberate. Rate limiting is abuse protection, not authentication.
+Failing closed would turn an Upstash outage into a total outage of the intake
+portal, blocking legitimate families mid-application. If your threat model makes
+abuse costlier than downtime, invert it in `src/lib/rate-limit.ts` — but do it
+deliberately.
+
+### Configuration
+
+```bash
+UPSTASH_REDIS_REST_URL=https://...upstash.io
+UPSTASH_REDIS_REST_TOKEN=...
+```
 
 `TRUST_PROXY` must stay `false` unless your edge **appends** to
 `x-forwarded-for` rather than passing it through. If a client can spoof that
-header, rate limiting is trivially bypassed.
+header, they vary it per request and are never limited.
 
 ---
 
@@ -195,7 +246,9 @@ The job is idempotent, so a retry after a failure is always safe.
 
 - [ ] TLS 1.3 minimum enforced at the edge, and **verified with `openssl`**
 - [ ] `DOCUMENT_MASTER_KEY` moved into a KMS, not an env file
-- [ ] Rate limiter backed by Redis
+- [ ] `UPSTASH_REDIS_REST_URL` / `_TOKEN` set (limiter fails open without them)
+- [ ] `S3_BUCKET` configured; bucket private, versioning + lifecycle rules set
+- [ ] Case metadata store migrated off local JSON to Postgres
 - [ ] `TRUST_PROXY` set correctly for your actual edge behaviour
 - [ ] Stripe webhook endpoint registered; signing secret set
 - [ ] Apple Pay domain verified in Stripe

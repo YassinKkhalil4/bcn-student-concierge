@@ -3,21 +3,18 @@ import { z } from "zod";
 import { createCheckoutSession } from "@/lib/server/stripe";
 import { getCase, updateCase } from "@/lib/server/storage";
 import { getTier } from "@/lib/pricing";
-import { rateLimit, clientKey } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+// Rate limiting for this route is enforced in src/middleware.ts, so a new
+// route cannot ship unprotected by omission.
 
 const bodySchema = z.object({
   caseId: z.string().regex(/^[A-Za-z0-9_-]{16,64}$/),
 });
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const limit = rateLimit(clientKey(request.headers, "checkout"), 10, 15 * 60 * 1000);
-  if (!limit.allowed) {
-    return NextResponse.json({ error: "Too many attempts" }, { status: 429 });
-  }
-
   const parsed = bodySchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });

@@ -14,7 +14,8 @@ next-env.d.ts
 .data/
 
 # Official government form templates are not redistributable; download them
-# per docs/FORMS.md.
+# per docs/FORMS.md. Calibration artifacts (-GRID, -PROOF, -ZOOM, -SAMPLE) are
+# generated on demand and contain sample applicant data.
 templates/forms/*.pdf
 
 # Agent tooling state — per-session timestamps and metrics, regenerated on

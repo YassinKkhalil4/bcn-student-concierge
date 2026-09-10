@@ -80,17 +80,18 @@ describe("field mapping", () => {
     expect(values.fecha_nacimiento).toBe("14/03/2004");
   });
 
-  it("never populates a representative field", () => {
-    // Section 2 must stay blank: a populated representative section triggers a
-    // power-of-attorney requirement at the police station.
-    for (const field of TEMPLATES["EX-17"].representativeFields) {
+  it("never emits a value for a section that must stay blank", () => {
+    // Section 2 (representative), Section 3 (notification address) and the DEHú
+    // box. The mapper must not produce them; layout.ts additionally gives them
+    // no coordinate, so there is nowhere to draw them even if it did.
+    for (const field of TEMPLATES["EX-17"].neverFilled) {
       expect(values[field]).toBeUndefined();
     }
   });
 
-  it("never emits a DEHú electronic-notification value", () => {
-    for (const field of TEMPLATES["EX-17"].electronicNotificationFields) {
-      expect(values[field]).toBeUndefined();
+  it("emits no key that looks like representative or notification data", () => {
+    for (const key of Object.keys(values)) {
+      expect(key).not.toMatch(/^rep_|representante|notificacion|dehu/i);
     }
   });
 

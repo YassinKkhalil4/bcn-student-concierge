@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
 import { attachDocument, getCase } from "@/lib/server/storage";
 import { validateUpload, sanitizeFilename, MAX_UPLOAD_BYTES } from "@/lib/server/uploads";
-import { rateLimit, clientKey } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+// Rate limiting for this route is enforced in src/middleware.ts, so a new
+// route cannot ship unprotected by omission.
 
 const KINDS = new Set(["passport", "acceptance-letter", "lease"]);
 
@@ -15,11 +17,6 @@ const KINDS = new Set(["passport", "acceptance-letter", "lease"]);
  * AES-256-GCM key, and never written to disk in plaintext at any point.
  */
 export async function POST(request: Request): Promise<NextResponse> {
-  const limit = rateLimit(clientKey(request.headers, "upload"), 20, 60 * 60 * 1000);
-  if (!limit.allowed) {
-    return NextResponse.json({ error: "Upload limit reached" }, { status: 429 });
-  }
-
   const form = await request.formData().catch(() => null);
   if (!form) {
     return NextResponse.json({ error: "Expected multipart form data" }, { status: 400 });

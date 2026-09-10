@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
 import { intakeSchema } from "@/lib/schema";
 import { createCase } from "@/lib/server/storage";
-import { rateLimit, clientKey } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+// Rate limiting for this route is enforced in src/middleware.ts, so a new
+// route cannot ship unprotected by omission.
 
 /**
  * Accept a completed intake questionnaire and open a case.
@@ -14,14 +16,6 @@ export const dynamic = "force-dynamic";
  * response is ever logged by an intermediary.
  */
 export async function POST(request: Request): Promise<NextResponse> {
-  const limit = rateLimit(clientKey(request.headers, "intake"), 5, 60 * 60 * 1000);
-  if (!limit.allowed) {
-    return NextResponse.json(
-      { error: "Too many submissions. Please try again later." },
-      { status: 429, headers: { "Retry-After": String(Math.ceil((limit.resetAt - Date.now()) / 1000)) } },
-    );
-  }
-
   let body: unknown;
   try {
     body = await request.json();
