@@ -22,7 +22,9 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx scripts/db-migrate.mts",
     "db:studio": "drizzle-kit studio",
-    "admin:hash-password": "tsx scripts/admin-hash-password.mts"
+    "admin:hash-password": "tsx scripts/admin-hash-password.mts",
+    "i18n:translate": "tsx --env-file=.env.local scripts/i18n-translate.mts",
+    "i18n:check": "tsx scripts/i18n-translate.mts --check"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1129.0",
@@ -30,6 +32,7 @@
     "@pdf-lib/fontkit": "1.1.1",
     "drizzle-orm": "^0.45.2",
     "next": "15.1.6",
+    "next-intl": "^4.14.3",
     "pdf-lib": "1.17.1",
     "pg": "^8.23.0",
     "react": "19.0.0",

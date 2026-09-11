@@ -11,11 +11,15 @@ import { caixabankAtmSteps } from "../src/lib/guides/caixabank-atm";
 import { appointmentInputSchema, saveAppointment, listAppointments, deleteAppointment } from "../src/lib/server/appointments";
 import { createCase, purgeCase } from "../src/lib/server/storage";
 import { useTestDb } from "./helpers/db";
+import { translatorFor, type ServerTranslator } from "../src/i18n/messages";
+import { LOCALES } from "../src/i18n/routing";
 
 let client: PGlite;
+let tg: ServerTranslator;
 beforeAll(async () => {
   process.env.DOCUMENT_MASTER_KEY = randomBytes(32).toString("base64");
   ({ client } = await useTestDb());
+  tg = await translatorFor("en", "guides");
 });
 beforeEach(async () => {
   await client.exec("TRUNCATE case_documents, appointments, cases CASCADE");
@@ -60,14 +64,14 @@ const base = {
 
 describe("appointment sheet content by route", () => {
   it("EX-17: photo, fingerprints and card collection", () => {
-    const c = appointmentSheetContent({ ...base, formId: "EX-17" });
+    const c = appointmentSheetContent({ ...base, formId: "EX-17" }, tg, "en");
     expect(c.checklist.join(" ")).toMatch(/32 × 26 mm/);
     expect(c.phrases[0]!.spanish).toMatch(/toma de huellas/);
     expect(c.after.join(" ")).toMatch(/resguardo/);
   });
 
   it("EX-18: no photo and no fingerprints — EU registration involves neither", () => {
-    const c = appointmentSheetContent({ ...base, formId: "EX-18" });
+    const c = appointmentSheetContent({ ...base, formId: "EX-18" }, tg, "en");
     const all = JSON.stringify(c);
     // "photocopy" of the ID is legitimate; a *photo* (the 32 × 26 mm picture) is not.
     expect(all).not.toMatch(/32 × 26|\bphotos?\b|huellas|fingerprint/i);
@@ -76,7 +80,7 @@ describe("appointment sheet content by route", () => {
 
   it("both: the paid fee receipt and the printed appointment confirmation", () => {
     for (const formId of ["EX-17", "EX-18"] as const) {
-      const list = appointmentSheetContent({ ...base, formId }).checklist.join(" ");
+      const list = appointmentSheetContent({ ...base, formId }, tg, "en").checklist.join(" ");
       expect(list, formId).toMatch(/Modelo 790 Código 012, paid/);
       expect(list, formId).toMatch(/justificante de cita/);
       expect(list, formId).toMatch(new RegExp(`Your ${formId}, printed and signed`));
@@ -85,7 +89,7 @@ describe("appointment sheet content by route", () => {
 
   it("gives every Spanish phrase a phonetic and a meaning", () => {
     for (const formId of ["EX-17", "EX-18"] as const) {
-      for (const p of appointmentSheetContent({ ...base, formId }).phrases) {
+      for (const p of appointmentSheetContent({ ...base, formId }, tg, "en").phrases) {
         expect(p.phonetic.length).toBeGreaterThan(5);
         expect(p.meaning.length).toBeGreaterThan(5);
       }
@@ -93,18 +97,58 @@ describe("appointment sheet content by route", () => {
   });
 });
 
+describe("appointment sheet languages", () => {
+  it("keeps the phrases in Spanish and translates only their meaning", async () => {
+    const fr = appointmentSheetContent({ ...base, formId: "EX-17" }, await translatorFor("fr", "guides"), "fr");
+    const en = appointmentSheetContent({ ...base, formId: "EX-17" }, tg, "en");
+    expect(fr.phrases.map((p) => p.spanish)).toEqual(en.phrases.map((p) => p.spanish));
+    // French readers get a French respelling, not the English one.
+    expect(fr.phrases[0]!.phonetic).not.toBe(en.phrases[0]!.phonetic);
+    expect(fr.phoneticKey).toMatch(/Bach/);
+  });
+
+  it("gives Spanish and Catalan readers no phrasebook", async () => {
+    for (const locale of ["es", "ca"] as const) {
+      const c = appointmentSheetContent({ ...base, formId: "EX-17" }, await translatorFor(locale, "guides"), locale);
+      expect(c.phrases, locale).toEqual([]);
+      expect(c.phoneticKey, locale).toBeNull();
+    }
+  });
+
+  it("writes the date in the student's language", async () => {
+    const de = appointmentSheetContent({ ...base, formId: "EX-18" }, await translatorFor("de", "guides"), "de");
+    expect(de.when.date).toMatch(/Oktober/);
+    expect(de.when.time).toBe("09:30");
+  });
+});
+
 describe("appointment sheet rendering", () => {
   it("fits on exactly one page for both routes, with or without Metro", async () => {
     for (const formId of ["EX-17", "EX-18"] as const) {
       for (const nearestMetro of [null, "L2 · Bac de Roda, then 6 minutes walking along the Rambla"]) {
-        const bytes = await renderAppointmentSheet(appointmentSheetContent({ ...base, formId, nearestMetro }));
+        const bytes = await renderAppointmentSheet(appointmentSheetContent({ ...base, formId, nearestMetro }, tg, "en"));
         expect((await PDFDocument.load(bytes)).getPageCount(), `${formId} metro=${Boolean(nearestMetro)}`).toBe(1);
       }
     }
   });
 
+  it("fits on one page in every language, for both routes", async () => {
+    for (const locale of LOCALES) {
+      const t = await translatorFor(locale, "guides");
+      for (const formId of ["EX-17", "EX-18"] as const) {
+        const content = appointmentSheetContent(
+          { ...base, formId, nearestMetro: "L2 · Bac de Roda, then 6 minutes walking along the Rambla" },
+          t,
+          locale,
+        );
+        const bytes = await renderAppointmentSheet(content);
+        expect((await PDFDocument.load(bytes)).getPageCount(), `${locale} ${formId}`).toBe(1);
+      }
+    }
+  });
+
   it("refuses to spill onto a second page", async () => {
-    const c = appointmentSheetContent({ ...base, formId: "EX-17" });
+    const c = appointmentSheetContent({ ...base, formId: "EX-17" }, tg, "en");
     c.checklist = Array.from({ length: 60 }, (_, i) => `Item ${i} with a fairly long description to take space`);
     await expect(renderAppointmentSheet(c)).rejects.toBeInstanceOf(SheetOverflowError);
   });
@@ -162,7 +206,7 @@ describe("recording appointments", () => {
 
 describe("CaixaBank ATM guide", () => {
   it("walks through the five steps in order, with the route's fee", () => {
-    const steps = caixabankAtmSteps("16,08 €");
+    const steps = caixabankAtmSteps(tg.raw, "16,08 €");
     expect(steps.map((s) => s.title)).toEqual([
       "Go to a CaixaBank ATM",
       "Select ‘Pagar impuestos y tasas’",

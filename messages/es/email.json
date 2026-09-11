@@ -1,0 +1,10 @@
+{
+  "loginLink": {
+    "subject": "Su enlace de inicio de sesión — BCN Student Concierge",
+    "introOne": "Aquí tiene su enlace de acceso a su expediente de BCN Student Concierge.",
+    "introMany": "Aquí tiene sus enlaces de acceso: uno para cada expediente asociado a esta dirección de correo electrónico.",
+    "file": "Expediente {ref}",
+    "button": "Abrir mi expediente",
+    "footer": "Cada enlace es válido una sola vez y caduca a los 30 minutos. Si no ha solicitado el acceso, puede ignorar este correo electrónico: nadie puede utilizarlo sin tener acceso a su bandeja de entrada."
+  }
+}

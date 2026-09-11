@@ -68,11 +68,20 @@ describe("required fields reject empty input", () => {
     ).toBe(false);
   });
 
-  it("names the offending field in the message", () => {
+  it("names the offending field in the message the student reads", async () => {
     const result = identitySchema.safeParse({ ...validIdentity, givenName: "" });
     expect(result.success).toBe(false);
     if (!result.success) {
-      expect(result.error.issues[0]!.message).toMatch(/given name/i);
+      const issue = result.error.issues[0]!;
+      // The schema says WHAT is wrong (a key) and WHERE (the path)…
+      expect(issue.message).toBe("v.required");
+      expect(issue.path).toEqual(["givenName"]);
+      // …and the form turns that into a sentence naming the field.
+      const { createTranslator } = await import("next-intl");
+      const { translateIssue } = await import("../src/lib/validation-keys");
+      const validation = (await import("../messages/en/validation.json")).default;
+      const t = createTranslator({ locale: "en", messages: { validation }, namespace: "validation" });
+      expect(translateIssue(issue.message, "Given name", t)).toBe("Given name is required");
     }
   });
 
@@ -119,7 +128,7 @@ describe("NIE validation", () => {
   });
 
   it("rejects a NIE whose control letter does not match", () => {
-    expect(() => nieSchema.parse("X1234567Z")).toThrow(/control letter/i);
+    expect(() => nieSchema.parse("X1234567Z")).toThrow(/v\.nieCheckLetter/);
   });
 
   it("rejects a NIE with a bad prefix", () => {
@@ -133,8 +142,8 @@ describe("Spanish date validation", () => {
   });
 
   it("rejects a date that does not exist", () => {
-    expect(() => spanishDateSchema.parse("31/02/2004")).toThrow(/does not exist/i);
-    expect(() => spanishDateSchema.parse("29/02/2005")).toThrow(/does not exist/i);
+    expect(() => spanishDateSchema.parse("31/02/2004")).toThrow(/v\.dateNonexistent/);
+    expect(() => spanishDateSchema.parse("29/02/2005")).toThrow(/v\.dateNonexistent/);
   });
 
   it("rejects ISO format, which would silently reorder day and month", () => {
@@ -183,7 +192,7 @@ describe("address", () => {
       postalCode: "0801",
       province: "barcelona",
     };
-    expect(() => intakeSchema.shape.address.parse(addr)).toThrow(/5 digits/i);
+    expect(() => intakeSchema.shape.address.parse(addr)).toThrow(/v\.postalCode/);
     expect(
       intakeSchema.shape.address.parse({ ...addr, postalCode: "08036" }).streetName,
     ).toBe("CARRER DE MALLORCA");

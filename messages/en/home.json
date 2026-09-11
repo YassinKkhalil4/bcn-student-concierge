@@ -1,0 +1,97 @@
+{
+  "metaTitle": "BCN Student Concierge — Frictionless Arrivals in Barcelona",
+  "metaDescription": "Independent administrative facilitation for international university students arriving in Barcelona. Padrón, TIE/CUE appointments, and document preparation.",
+  "hero": {
+    "eyebrow": "Barcelona · Established for international families",
+    "title": "Frictionless arrivals and legal landing for international university students in Barcelona.",
+    "body": "Your child has a place at a Barcelona university. What stands between them and settling in is a chain of Spanish bureaucracy that is unforgiving of small errors — and conducted entirely in Spanish. We handle the chain, correctly, the first time.",
+    "primaryCta": "Begin secure intake",
+    "secondaryCta": "Compare packages",
+    "note": "Fixed fees, quoted with IVA before you pay. No hourly billing."
+  },
+  "trust": {
+    "heading": "Supporting students arriving at",
+    "disclaimer": "Universities named are those our clients attend. We are an independent service and are not affiliated with, endorsed by, or acting on behalf of any institution listed."
+  },
+  "problems": {
+    "eyebrow": "What actually goes wrong",
+    "title": "Four failure points, and how we remove each one.",
+    "approach": "Our approach — ",
+    "items": [
+      {
+        "problem": "Cita previa slots vanish in seconds",
+        "detail": "Padrón and National Police appointments are released irregularly and taken within minutes by automated agents. Families refreshing a Spanish-language portal from another timezone rarely win one.",
+        "solution": "We monitor release windows across Barcelona's districts and secure the appointment in your student's name, then send the confirmation with directions and the exact documents to carry."
+      },
+      {
+        "problem": "One wrong box voids the whole file",
+        "detail": "An EX-17 with a second surname filled in as “N/A”, a representative section completed by a well-meaning parent, or a form printed with shifted field text is refused at the counter — and the next appointment is weeks away.",
+        "solution": "Forms are generated programmatically from your verified data, flattened so nothing shifts on print, and cross-checked against the passport before the file leaves our hands."
+      },
+      {
+        "problem": "The tax form cannot be paid online",
+        "detail": "Modelo 790 Código 012 carries a unique barcode and, for most students, must be paid in cash at a Spanish bank counter or ATM scanner. Students routinely arrive at the police station with an unpaid form.",
+        "solution": "We configure the barcoded form for cash payment and give step-by-step instructions for CaixaBank, BBVA and Santander — including which branches accept non-customer payments."
+      },
+      {
+        "problem": "Housing fraud targets arriving students",
+        "detail": "Listings advertised from abroad are frequently sublet illegally, owned by someone other than the “landlord”, or bound to deposits above the legal cap. Deposits wired before arrival are rarely recovered.",
+        "solution": "On our Turnkey tier we pull the Nota Simple from the property registry to confirm who actually owns the flat, and check the contract's deposit against the statutory limit before anyone transfers money."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "The process",
+    "title": "Four stages, from intake to collected card.",
+    "steps": [
+      {
+        "title": "Secure intake",
+        "body": "Your student completes the encrypted questionnaire and uploads their passport, matrícula letter and lease. Documents are encrypted per-file with AES-256."
+      },
+      {
+        "title": "File assembly",
+        "body": "We generate the correct form — EX-17 for non-EU students, EX-18 for EU nationals — configure the Modelo 790, and assemble a pre-checked Ready File."
+      },
+      {
+        "title": "Appointments secured",
+        "body": "We book the Padrón and TIE/CUE appointments and deliver a dated itinerary: where to go, what to carry, what will be asked."
+      },
+      {
+        "title": "Settling in & tracking",
+        "body": "Banking, transit and connectivity are set up in the first week. We track the file for 90 days, through to card collection."
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Transparent pricing",
+    "title": "Three packages. Fixed fees, stated with IVA.",
+    "body": "Government fees (Modelo 790, card issuance) are paid directly by you to the Spanish authorities and are not included in our fee.",
+    "cta": "See full comparison"
+  },
+  "faq": {
+    "eyebrow": "Straight answers",
+    "title": "Questions parents ask first.",
+    "items": [
+      {
+        "q": "Are you lawyers or a gestoría?",
+        "a": "No. We are an independent administrative facilitation service. We prepare documents from information you provide, book appointments, and guide you through the process. We do not represent you before any authority and we do not give legal advice. Where a case needs legal analysis, we will tell you plainly and recommend you consult a colegiado abogado."
+      },
+      {
+        "q": "Does my student have to attend appointments in person?",
+        "a": "Yes. Biometric appointments require the applicant to appear personally with original documents. We prepare the file, secure the slot and brief them thoroughly — but the appearance is theirs, in their own name."
+      },
+      {
+        "q": "What happens to the passport scans afterwards?",
+        "a": "They are encrypted at rest with a unique key per file and permanently deleted 30 days after your service completes, by an automated retention job. You can request earlier deletion at any time."
+      },
+      {
+        "q": "Can you guarantee the residency card is approved?",
+        "a": "No, and any service that guarantees this is misleading you. Decisions rest entirely with the Spanish authorities. What we control is that the file is complete, correct and submitted on time — which is where most rejections actually originate."
+      },
+      {
+        "q": "Why is the Modelo 790 paid in cash?",
+        "a": "The Spanish tax agency's process for this form relies on a unique barcode read at a bank counter or ATM scanner. Without a Spanish digital certificate — which new arrivals do not have — online settlement is not available, so the form is configured for payment 'en efectivo'."
+      }
+    ]
+  }
+}

@@ -92,7 +92,7 @@ describe("countries on the forms", () => {
 
   it("refuses Spanish nationality and unknown codes at intake", () => {
     const base = forms_raw();
-    expect(() => intakeSchema.parse({ ...base, identity: { ...base.identity, nationality: "ES" } })).toThrow(/Spanish citizens/);
+    expect(() => intakeSchema.parse({ ...base, identity: { ...base.identity, nationality: "ES" } })).toThrow(/v\.spanishCitizen/);
     expect(() => intakeSchema.parse({ ...base, identity: { ...base.identity, nationality: "XX" } })).toThrow();
     expect(intakeSchema.parse({ ...base, identity: { ...base.identity, nationality: "gb" } }).identity.nationality).toBe("GB");
   });

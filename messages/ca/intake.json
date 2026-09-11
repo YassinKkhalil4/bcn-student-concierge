@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "title": "Alta segura de clients",
+    "description": "Qüestionari d’alta i portal de documents xifrats per als clients de BCN Student Concierge."
+  },
+  "page": {
+    "eyebrow": "Alta segura",
+    "title": "El vostre expedient comença aquí.",
+    "intro": "Sis passos breus. Tota la informació que introduïu es transmet mitjançant TLS i s’emmagatzema en format xifrat; els documents d’identitat pujats es xifren individualment amb la seva pròpia clau AES-256."
+  },
+  "steps": {
+    "progress": "Progrés",
+    "identity": "Identitat",
+    "family": "Estat civil",
+    "address": "Adreça a Espanya",
+    "contact": "Contacte",
+    "consent": "Consentiment",
+    "documents": "Documents"
+  },
+  "field": {
+    "optional": "(opcional)",
+    "select": "Seleccioneu…",
+    "officialCodes": "Codis oficials: {codes}"
+  },
+  "identity": {
+    "title": "Identitat",
+    "description": "Introduïu aquestes dades exactament com consten al passaport. Les autoritats espanyoles comproven cada caràcter, i una discrepància aquí és el motiu més habitual de rebuig d’un expedient."
+  },
+  "family": {
+    "title": "Estat civil i familiar",
+    "description": "Els formularis de residència a Espanya requereixen els noms dels progenitors, fins i tot en el cas de sol·licitants adults. Només es demanen els noms; els cognoms no són necessaris."
+  },
+  "address": {
+    "title": "Adreça a Espanya",
+    "description": "Ha de coincidir exactament amb el vostre certificat del Padró, inclosos el pis i la porta. Si encara no us hi heu empadronat, feu servir l’adreça del contracte de lloguer."
+  },
+  "contact": {
+    "title": "Contacte",
+    "description": "Fem servir aquestes dades per confirmar les cites. Si ja el sabeu, indiqueu el número que l’estudiant farà servir a Espanya."
+  },
+  "fields": {
+    "passportNumber": {
+      "label": "Número de passaport"
+    },
+    "nie": {
+      "label": "NIE preassignat",
+      "hint": "Consta al vostre visat, si ja us l’han assignat. Deixeu-ho en blanc si encara no en teniu."
+    },
+    "firstSurname": {
+      "label": "Primer cognom"
+    },
+    "secondSurname": {
+      "label": "Segon cognom",
+      "hint": "Deixeu-ho en blanc si el passaport només mostra un cognom. No hi escriviu mai «N/A»."
+    },
+    "givenName": {
+      "label": "Nom(s)"
+    },
+    "gender": {
+      "label": "Sexe"
+    },
+    "birthDate": {
+      "label": "Data de naixement",
+      "hint": "Primer el dia, com als formularis espanyols.",
+      "placeholder": "DD/MM/AAAA"
+    },
+    "birthCity": {
+      "label": "Ciutat de naixement"
+    },
+    "birthCountry": {
+      "label": "País de naixement"
+    },
+    "nationality": {
+      "label": "Nacionalitat",
+      "hint": "Tal com figura al vostre passaport. Això determina si hem de tramitar un EX-17 (TIE) o un EX-18 (certificat de la UE)."
+    },
+    "maritalStatus": {
+      "label": "Estat civil"
+    },
+    "fatherFirstName": {
+      "label": "Nom del pare"
+    },
+    "motherFirstName": {
+      "label": "Nom de la mare"
+    },
+    "streetName": {
+      "label": "Nom del carrer",
+      "hint": "Inclogueu-hi el tipus de via: CARRER, CALLE, AVINGUDA, PASSEIG…"
+    },
+    "buildingNumber": {
+      "label": "Número de l’edifici"
+    },
+    "floorDoor": {
+      "label": "Pis / porta",
+      "hint": "Deixeu-ho en blanc si l’adreça no té pis ni porta."
+    },
+    "city": {
+      "label": "Ciutat / municipi"
+    },
+    "postalCode": {
+      "label": "Codi postal"
+    },
+    "province": {
+      "label": "Província"
+    },
+    "phone": {
+      "label": "Telèfon mòbil",
+      "hint": "Format internacional, incloent-hi el prefix del país."
+    },
+    "email": {
+      "label": "Adreça de correu electrònic"
+    }
+  },
+  "gender": {
+    "H": "Home",
+    "M": "Dona",
+    "X": "Altres / no especificat"
+  },
+  "marital": {
+    "S": "solter/a",
+    "C": "casat/ada",
+    "V": "vidu/vídua",
+    "D": "divorciat/ada",
+    "Sp": "separat/ada"
+  },
+  "consent": {
+    "title": "Consentiment i abast del servei",
+    "intro": "Cap casella no està marcada per defecte: les heu de marcar vosaltres. No considerem consentiment ni el silenci ni una casella marcada prèviament.",
+    "optional": "opcional",
+    "gdprDataProcessing": {
+      "label": "Dono el meu consentiment al tractament de les meves dades personals",
+      "body": "BCN Student Concierge pot tractar les dades anteriors per preparar els meus formularis, concertar cites i gestionar el meu expedient, d’acord amb l’article 6.1.b del RGPD. Les dades s’emmagatzemen dins de la UE i s’eliminen 30 dies després de completar el servei.",
+      "error": "Necessari per tramitar el vostre expedient"
+    },
+    "gdprSensitiveDocuments": {
+      "label": "Dono el meu consentiment per a l’emmagatzematge dels meus documents d’identitat",
+      "body": "El meu passaport, el meu visat i els meus documents de matrícula es poden conservar xifrats mentre duri el servei. Entenc que puc retirar aquest consentiment i demanar-ne la supressió en qualsevol moment, i que retirar-lo pot impedir completar el servei.",
+      "error": "Necessari per custodiar els vostres documents"
+    },
+    "disclaimerAcknowledged": {
+      "label": "Entenc que això no constitueix representació legal",
+      "body": "Entenc que BCN Student Concierge és un servei independent de suport administratiu, que no és un despatx d’advocats ni una gestoria, que no em representa davant de cap autoritat i que no ofereix assessorament jurídic ni d’immigració vinculant. Totes les sol·licituds es presenten en nom meu.",
+      "error": "Confirmeu que heu llegit l’abast del servei"
+    },
+    "marketingOptIn": {
+      "label": "Envieu-me consells per a l’arribada abans del viatge",
+      "body": "Correus electrònics pràctics ocasionals sobre l’arribada a Barcelona. Us podeu donar de baixa en qualsevol moment. Això és totalment opcional i no afecta el vostre servei."
+    }
+  },
+  "wizard": {
+    "back": "Enrere",
+    "continue": "Continua",
+    "saving": "S’està desant…",
+    "submit": "Envia i continua",
+    "fixEarlier": "Algunes respostes s’han de corregir; si us plau, reviseu els passos anteriors.",
+    "submitFailed": "No hem pogut desar la vostra sol·licitud. Torneu-ho a provar.",
+    "networkRetry": "Error de xarxa. Les vostres respostes encara són aquí; si us plau, torneu-ho a provar.",
+    "checkoutFailed": "No s’ha pogut obrir la pàgina de pagament. Torneu-ho a provar.",
+    "checkoutNetwork": "Error de xarxa en obrir la pàgina de pagament.",
+    "sessionExpired": "La vostra sessió ha expirat. Torneu a iniciar la sessió.",
+    "alreadyPaid": "Aquest expedient ja està pagat.",
+    "uploadTitle": "Pugeu els vostres documents",
+    "uploadIntro": "El vostre expedient ja està obert. Referència <code>{ref}</code>. Pugeu ara el que tingueu i després continueu amb el pagament.",
+    "uploadLater": "Us falta alguna cosa, com ara un document per al Padró que us ha de donar el propietari? És normal. Pagueu ara i pugeu-lo més tard des del <link>vostre expedient</link>: podeu iniciar la sessió quan vulgueu amb el correu electrònic que ens vau donar.",
+    "openingCheckout": "S’està obrint el pagament segur…",
+    "pay": "Continua amb el pagament — {total}",
+    "stripeNote": "Targeta i Apple Pay, processats per Stripe. No veiem mai les dades de la vostra targeta."
+  },
+  "summary": {
+    "selected": "Paquet seleccionat",
+    "serviceFee": "Preu del servei",
+    "iva": "IVA (21 %)",
+    "total": "Total",
+    "change": "Canvia de paquet",
+    "govFees": "Les taxes de l’Administració (Modelo 790, expedició de la targeta) les pagueu directament a les autoritats espanyoles i no hi estan incloses."
+  },
+  "documents": {
+    "slots": {
+      "passport": {
+        "label": "Passaport — pàgina de la fotografia",
+        "description": "La pàgina amb la zona de lectura mecànica. Si el visat és al passaport, afegiu-hi també aquesta pàgina."
+      },
+      "acceptance-letter": {
+        "label": "Certificat de matrícula (certificado de matrícula)",
+        "description": "El certificat oficial de matrícula de la vostra universitat, segellat i signat."
+      },
+      "lease": {
+        "label": "Contracte de lloguer o escriptura de propietat",
+        "description": "El contracte signat complet (o l’escriptura, si el signatari és el propietari del pis), totes les pàgines."
+      },
+      "utility-bill": {
+        "label": "Factura recent de subministraments",
+        "description": "Una factura d’electricitat, aigua o gas per a aquesta adreça, emesa durant els últims tres mesos."
+      },
+      "padron-authorization": {
+        "label": "Autorització signada",
+        "description": "El formulari d’autorització, signat a mà i datat per la persona que atorga l’autorització."
+      },
+      "authorizer-id": {
+        "label": "Document d’identitat del signatari",
+        "description": "Una foto clara o un escaneig del seu document d’identitat —DNI espanyol, targeta NIE o passaport—, per les dues cares."
+      },
+      "collective-authorization": {
+        "label": "Autorització de la vostra residència",
+        "description": "El formulari de Barcelona per a domicilis col·lectius, signat i segellat per la residència."
+      }
+    },
+    "onFile": "✓ rebut",
+    "replace": "Substitueix",
+    "choose": "Trieu un fitxer",
+    "uploading": "S’està xifrant i pujant…",
+    "done": "✓ {name} — xifrat i emmagatzemat",
+    "tooLarge": "El fitxer és més gran que {mb} MB.",
+    "wrongType": "Només s’accepten arxius PDF, JPEG i PNG. Si us plau, torneu a exportar l’arxiu.",
+    "failed": "No s’ha pogut pujar el fitxer. Torneu-ho a provar.",
+    "network": "Error de xarxa. Si us plau, comproveu la connexió i torneu-ho a provar.",
+    "footer": "PDF, JPEG o PNG, de fins a {mb} MB cadascun. Cada fitxer es xifra amb la seva pròpia clau AES-256 en rebre’l i s’elimina definitivament 30 dies després que finalitzi el servei."
+  },
+  "complete": {
+    "metaTitle": "Alta completada",
+    "eyebrow": "Pagament rebut",
+    "title": "El vostre expedient ja està obert.",
+    "intro": "Us hem enviat una confirmació i una factura a l’adreça de correu electrònic que ens heu proporcionat. Això és exactament el que passarà a continuació, i l’únic pagament que haureu de fer vosaltres mateixos.",
+    "steps": [
+      {
+        "title": "Revisem el vostre expedient (en un dia laborable)",
+        "body": "Contrastem els documents que heu pujat amb les dades que heu introduït. Si alguna cosa no quadra —un cognom diferent del del passaport, un escaneig il·legible—, us escrivim abans de presentar res."
+      },
+      {
+        "title": "Formularis generats i enviats per a revisió",
+        "body": "Preparem el vostre EX-17 o EX-18 i el Modelo 790 Código 012, i us els enviem tots dos en PDF a punt per imprimir. Reviseu-los amb atenció: el sol·licitant sou vosaltres, i la declaració és vostra."
+      },
+      {
+        "title": "Cites assegurades",
+        "body": "Seguim el sistema de cita prèvia («cita previa») i reservem les vostres cites al Padró i a la policia; després us enviem un itinerari amb la data, l’adreça, els documents que cal portar i què us preguntaran."
+      }
+    ],
+    "home": "Torna a la pàgina d’inici"
+  }
+}

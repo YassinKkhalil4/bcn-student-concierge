@@ -1,0 +1,80 @@
+{
+  "tiers": {
+    "baseline": {
+      "name": "Administrative Baseline",
+      "shortName": "Administrative Baseline",
+      "tagline": "Die rechtlichen Grundlagen – auf Anhieb korrekt erledigt.",
+      "bestFor": "Studierende in Studentenwohnheimen, die Unterstützung bei der Erledigung der Formalitäten benötigen.",
+      "features": [
+        "Terminvereinbarung für den Padrón (Melderegister)",
+        "Terminvereinbarung bei der Policía Nacional (TIE / CUE)",
+        "Erstellung der Formulare EX-17 oder EX-18, vorausgefüllt und druckfertig",
+        "Einrichtung des Steuerformulars „Modelo 790 Código 012“ mit Barcode",
+        "Vorab geprüfter „Ready File“ in Papierform und digital"
+      ]
+    },
+    "soft-landing": {
+      "name": "Digital Soft-Landing",
+      "shortName": "Digital Soft-Landing",
+      "tagline": "Behördengänge sowie alles, was das Leben in der Stadt erleichtert.",
+      "bestFor": "Die meisten internationalen Erstsemester, die allein anreisen.",
+      "features": [
+        "Anleitung zur Einrichtung eines spanischen Bankkontos (vom Nichtansässigen zum Ansässigen)",
+        "Anmeldung für die Fahrkarten „T-mobilitat“ / „T-jove“",
+        "Anleitung zur Auswahl und Aktivierung einer digitalen SIM-Karte bzw. eSIM",
+        "Beantragung des Carnet Jove und des ISIC-Studentenausweises",
+        "Eigene WhatsApp-Supportleitung während der Eingewöhnung"
+      ]
+    },
+    "turnkey": {
+      "name": "Turnkey Relocation & Housing Audit",
+      "shortName": "Turnkey Relocation & Housing Audit",
+      "tagline": "Wir prüfen die Wohnung, bevor Sie eine Kaution überweisen.",
+      "bestFor": "Familien, die sich aus dem Ausland eine private Unterkunft sichern, ohne diese zuvor gesehen zu haben.",
+      "features": [
+        "Geprüfte Wohnungssuche anhand betrugsgeprüfter Angebote",
+        "Eigentumsprüfung im Grundbuch (Nota Simple)",
+        "Prüfung von Mietverträgen einschließlich rechtlicher Überprüfung der Kautionshöchstgrenze",
+        "Anleitung zur Freischaltung von Versorgungsleistungen (Wasser, Strom, Internet)",
+        "90-tägige Nachverfolgung der Unterlagen bis zur Abholung der TIE-Karte"
+      ]
+    }
+  },
+  "card": {
+    "mostChosen": "Am häufigsten gewählt",
+    "plusIva": "+ IVA",
+    "ivaLine": "{iva} IVA (21 %) · <strong>{total} Gesamtbetrag</strong>",
+    "everythingIn": "Alles aus {name}, zusätzlich:",
+    "bestFor": "Am besten geeignet für:",
+    "select": "{name} wählen"
+  },
+  "page": {
+    "metaTitle": "Dienstleistungen & Preise",
+    "metaDescription": "Drei Pauschalpakete für internationale Studierende, die nach Barcelona kommen: Administrative Baseline, Digital Soft-Landing und Turnkey Relocation & Housing Audit.",
+    "eyebrow": "Dienstleistungen & Preise",
+    "title": "Feste Gebühren für ein Verfahren ohne festen Zeitrahmen.",
+    "intro": "Jedes Paket wird ohne IVA angeboten und vor der Zahlung mit dem Gesamtbetrag einschließlich {rate} % IVA angezeigt. Es erfolgt keine Abrechnung nach Stundensatz, und in keinem Paket sind behördliche Gebühren enthalten.",
+    "govEyebrow": "Behördengebühren",
+    "govTitle": "Die einzige Zahlung, die wir nicht für Sie vornehmen können.",
+    "exclusionsEyebrow": "Volle Transparenz",
+    "exclusionsTitle": "Was unsere Gebühr nicht abdeckt.",
+    "exclusions": [
+      {
+        "item": "Staatliche Gebühr Modelo 790 Código 012",
+        "note": "Die Zahlung erfolgt direkt von Ihnen an die spanische Steuerbehörde bei einer Bank. Der Betrag wird von der Regierung festgelegt und variiert je nach Kartentyp."
+      },
+      {
+        "item": "Studiengebühren, Kautionen und Miete",
+        "note": "Wir verwalten niemals Kundengelder für Dritte. Alle Zahlungen erfolgen direkt von Ihnen an den Vermieter oder die Einrichtung."
+      },
+      {
+        "item": "Rechtsvertretung oder Rechtsmittel",
+        "note": "Liegt außerhalb unseres Zuständigkeitsbereichs. Sollte Ihr Fall dies erfordern, werden wir Sie darauf hinweisen und Ihnen einen „colegiado abogado“ empfehlen."
+      },
+      {
+        "item": "Übersetzungs- oder Apostille-Dienstleistungen",
+        "note": "Wir ermitteln, welche Unterlagen eine beglaubigte Übersetzung erfordern, und können Sie an einen „traductor jurado“ verweisen; dessen Honorar wird separat berechnet."
+      }
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "metaTitle": "BCN Student Concierge – Reibungsloser Start in Barcelona",
+  "metaDescription": "Unabhängige administrative Unterstützung für internationale Studierende, die nach Barcelona kommen. Padrón, TIE-/CUE-Termine und Vorbereitung von Unterlagen.",
+  "hero": {
+    "eyebrow": "Barcelona · Für internationale Familien gegründet",
+    "title": "Reibungslose Ankunft und rechtmäßiger Aufenthalt für internationale Studierende in Barcelona.",
+    "body": "Ihr Kind hat einen Studienplatz an einer Universität in Barcelona erhalten. Was zwischen ihm und dem erfolgreichen Start in das neue Leben steht, ist eine Kette spanischer Verwaltungsabläufe, die selbst kleinste Fehler nicht verzeiht – und die vollständig auf Spanisch abgewickelt wird. Wir kümmern uns um diese Abläufe – korrekt und gleich beim ersten Mal.",
+    "primaryCta": "Sichere Aufnahme starten",
+    "secondaryCta": "Pakete vergleichen",
+    "note": "Feste Gebühren, die vor der Zahlung inklusive IVA angegeben werden. Keine Abrechnung nach Stunden."
+  },
+  "trust": {
+    "heading": "Wir begleiten Studierende an",
+    "disclaimer": "Die genannten Universitäten sind diejenigen, die unsere Kunden besuchen. Wir sind ein unabhängiger Dienstleister und stehen in keiner Verbindung zu den aufgeführten Einrichtungen, werden von diesen nicht unterstützt und handeln nicht in deren Namen."
+  },
+  "problems": {
+    "eyebrow": "Was tatsächlich schiefgeht",
+    "title": "Vier Fehlerquellen – und wie wir jede einzelne beseitigen.",
+    "approach": "Unser Ansatz — ",
+    "items": [
+      {
+        "problem": "Cita previa-Slots werden innerhalb von Sekunden ausgebucht",
+        "detail": "Termine für den Padrón und bei der Nationalpolizei werden in unregelmäßigen Abständen freigegeben und innerhalb weniger Minuten von automatisierten Systemen vergeben. Familien, die ein spanischsprachiges Portal aus einer anderen Zeitzone heraus aktualisieren, erhalten selten einen Termin.",
+        "solution": "Wir überwachen die Terminvergabe in den verschiedenen Stadtbezirken Barcelonas und vereinbaren den Termin im Namen Ihres Kindes; anschließend senden wir Ihnen die Bestätigung mit einer Wegbeschreibung und einer genauen Auflistung der mitzubringenden Unterlagen zu."
+      },
+      {
+        "problem": "Ein einziges falsch ausgefülltes Feld macht den gesamten Antrag ungültig",
+        "detail": "Ein EX-17-Formular, bei dem unter dem zweiten Nachnamen „N/A“ eingetragen wurde, ein Abschnitt „Vertreter“, der von einem wohlmeinenden Elternteil ausgefüllt wurde, oder ein Formular, bei dem der Text in den Feldern verschoben ist, wird am Schalter abgelehnt – und der nächste Termin liegt erst in mehreren Wochen.",
+        "solution": "Die Formulare werden programmgesteuert aus Ihren verifizierten Daten erstellt, so abgeflacht, dass sich beim Drucken nichts verschiebt, und mit dem Reisepass abgeglichen, bevor die Akte unser Haus verlässt."
+      },
+      {
+        "problem": "Das Steuerformular kann nicht online bezahlt werden",
+        "detail": "Das Formular „Modelo 790 Código 012“ ist mit einem eindeutigen Barcode versehen und muss von den meisten Studierenden in bar am Schalter einer spanischen Bank oder an einem Geldautomaten mit Scanner bezahlt werden. Es kommt regelmäßig vor, dass Studierende mit einem noch nicht bezahlten Formular bei der Polizei erscheinen.",
+        "solution": "Wir richten das Formular mit Barcode für Barzahlungen ein und geben Schritt-für-Schritt-Anleitungen für die CaixaBank, BBVA und Santander – einschließlich der Angabe, welche Filialen Zahlungen von Nichtkunden akzeptieren."
+      },
+      {
+        "problem": "Wohnungsbetrug zielt auf neu ankommende Studierende ab",
+        "detail": "Aus dem Ausland ausgeschriebene Angebote sind häufig illegal untervermietet, befinden sich im Besitz einer anderen Person als des „Vermieters“ oder sind an Kautionen gebunden, die über der gesetzlichen Obergrenze liegen. Vor der Ankunft überwiesene Kautionen werden selten zurückerstattet.",
+        "solution": "Im Rahmen unseres „Turnkey“-Pakets rufen wir die „Nota Simple“ aus dem Grundbuch ab, um zu überprüfen, wem die Wohnung tatsächlich gehört, und wir überprüfen die Höhe der Kaution im Vertrag auf Einhaltung der gesetzlichen Obergrenze, bevor eine Geldüberweisung erfolgt."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Der Ablauf",
+    "title": "Vier Schritte – von der Aufnahme bis zur Karte in der Hand.",
+    "steps": [
+      {
+        "title": "Sichere Aufnahme",
+        "body": "Ihr Kind füllt den verschlüsselten Fragebogen aus und lädt Reisepass, Immatrikulationsbescheinigung und Mietvertrag hoch. Jedes Dokument wird einzeln mit AES-256 verschlüsselt."
+      },
+      {
+        "title": "Zusammenstellung der Unterlagen",
+        "body": "Wir erstellen das richtige Formular – EX-17 für Studierende aus Nicht-EU-Ländern, EX-18 für EU-Bürger –, füllen das Formular „Modelo 790“ aus und stellen eine vorab geprüfte „Ready File“-Unterlage zusammen."
+      },
+      {
+        "title": "Termine vereinbart",
+        "body": "Wir vereinbaren die Termine für den Padrón sowie die TIE/CUE-Karte und übermitteln Ihnen einen datierten Ablaufplan: wohin Sie gehen müssen, was Sie mitbringen müssen und welche Fragen gestellt werden."
+      },
+      {
+        "title": "Einleben & Nachverfolgung",
+        "body": "Bankangelegenheiten, öffentliche Verkehrsmittel und Internetanschluss werden in der ersten Woche eingerichtet. Wir verfolgen den Vorgang 90 Tage lang bis zur Abholung der Karte."
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Transparente Preisgestaltung",
+    "title": "Drei Pakete. Festpreise, inklusive IVA angegeben.",
+    "body": "Behördengebühren (Modelo 790, Kartenausstellung) zahlen Sie direkt an die spanischen Behörden; sie sind nicht in unserem Honorar enthalten.",
+    "cta": "Vollständigen Vergleich anzeigen"
+  },
+  "faq": {
+    "eyebrow": "Klare Antworten",
+    "title": "Fragen, die Eltern als Erstes stellen.",
+    "items": [
+      {
+        "q": "Sind Sie Rechtsanwälte oder eine gestoría?",
+        "a": "Nein. Wir sind ein unabhängiger Dienstleister zur Unterstützung bei Verwaltungsangelegenheiten. Wir erstellen Dokumente auf der Grundlage der von Ihnen bereitgestellten Informationen, vereinbaren Termine und begleiten Sie durch den gesamten Prozess. Wir vertreten Sie nicht gegenüber Behörden und erteilen keine Rechtsberatung. Sollte ein Fall eine rechtliche Prüfung erfordern, werden wir Ihnen dies klar mitteilen und Ihnen empfehlen, einen colegiado abogado zu konsultieren."
+      },
+      {
+        "q": "Muss mein Kind persönlich zu den Terminen erscheinen?",
+        "a": "Ja. Bei Terminen zur Erfassung biometrischer Daten muss der Antragsteller persönlich mit den Originaldokumenten erscheinen. Wir bereiten die Unterlagen vor, sichern den Termin und weisen die Antragsteller ausführlich ein – doch das Erscheinen erfolgt in eigenem Namen."
+      },
+      {
+        "q": "Was geschieht anschließend mit den Pass-Scans?",
+        "a": "Die Daten werden im Ruhezustand mit einem eindeutigen Schlüssel pro Datei verschlüsselt und 30 Tage nach Abschluss Ihrer Dienstleistung durch einen automatisierten Löschvorgang endgültig gelöscht. Sie können jederzeit eine vorzeitige Löschung beantragen."
+      },
+      {
+        "q": "Können Sie garantieren, dass die Aufenthaltskarte genehmigt wird?",
+        "a": "Nein, und jeder Dienstleister, der dies garantiert, führt Sie in die Irre. Die Entscheidungen liegen ausschließlich bei den spanischen Behörden. Was wir kontrollieren können, ist, dass die Unterlagen vollständig, korrekt und fristgerecht eingereicht werden – denn genau hier liegen die meisten Ablehnungen tatsächlich begründet."
+      },
+      {
+        "q": "Warum wird das Formular „Modelo 790“ in bar bezahlt?",
+        "a": "Das Verfahren der spanischen Steuerbehörde für dieses Formular basiert auf einem eindeutigen Barcode, der am Bankschalter oder am Scanner eines Geldautomaten eingelesen wird. Ohne ein spanisches digitales Zertifikat – über das Neuankömmlinge nicht verfügen – ist eine Online-Abwicklung nicht möglich, weshalb das Formular für die Zahlung „en efectivo“ ausgelegt ist."
+      }
+    ]
+  }
+}

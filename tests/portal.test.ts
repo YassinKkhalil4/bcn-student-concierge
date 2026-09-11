@@ -15,6 +15,7 @@ import { consumeLoginLink, findCasesByEmail, markDocumentsSubmitted } from "../s
 import { createCase, getCase, purgeCase } from "../src/lib/server/storage";
 import { appointments, cases } from "../src/lib/db/schema";
 import { loginLinkEmail } from "../src/lib/email/templates";
+import { translatorFor } from "../src/i18n/messages";
 import type { Db } from "../src/lib/db/client";
 import { generateCaseRef } from "../src/lib/server/case-codec";
 import { useTestDb } from "./helpers/db";
@@ -199,18 +200,20 @@ describe("submit for review", () => {
 });
 
 describe("sign-in email", () => {
-  it("contains the link and escapes what it interpolates", () => {
-    const e = loginLinkEmail("a@b.com", [{ ref: "BCN-12345", url: "https://bcnstudent.com/portal/verify?token=x&y" }]);
+  it("contains the link and escapes what it interpolates", async () => {
+    const t = await translatorFor("en", "email");
+    const e = loginLinkEmail("a@b.com", [{ ref: "BCN-12345", url: "https://bcnstudent.com/portal/verify?token=x&y" }], t, "en");
     expect(e.text).toContain("https://bcnstudent.com/portal/verify?token=x&y");
     expect(e.html).toContain("token=x&amp;y");
     expect(e.html).not.toMatch(/<img|<script/i);
   });
 
-  it("lists each file when an address has several", () => {
+  it("lists each file when an address has several", async () => {
+    const t = await translatorFor("en", "email");
     const e = loginLinkEmail("a@b.com", [
       { ref: "BCN-11111", url: "https://x/1" },
       { ref: "BCN-22222", url: "https://x/2" },
-    ]);
+    ], t, "en");
     expect(e.text).toContain("BCN-11111");
     expect(e.text).toContain("BCN-22222");
   });

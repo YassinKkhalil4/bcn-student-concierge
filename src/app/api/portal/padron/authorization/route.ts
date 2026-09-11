@@ -53,7 +53,8 @@ export async function POST(request: Request): Promise<Response> {
     });
   } catch (error) {
     if (error instanceof AuthorizationNotApplicableError || error instanceof UnprintableCharactersError) {
-      return NextResponse.json({ error: error.message }, { status: 422 });
+      // The code lets the portal say it in the student's language.
+      return NextResponse.json({ error: error.message, code: error.code, params: error.params }, { status: 422 });
     }
     if (error instanceof TemplateNotFoundError) {
       return NextResponse.json(

@@ -1,0 +1,80 @@
+{
+  "tiers": {
+    "baseline": {
+      "name": "Administrative Baseline",
+      "shortName": "Administrative Baseline",
+      "tagline": "Les formalités juridiques indispensables, correctement remplies dès le départ.",
+      "bestFor": "Les étudiants logés en résidence universitaire qui ont besoin d’aide pour leurs démarches administratives.",
+      "features": [
+        "Prise de rendez-vous pour le Padrón (inscription sur le registre municipal)",
+        "Prise de rendez-vous auprès de la Policía Nacional pour la carte TIE / CUE",
+        "Génération des formulaires EX-17 ou EX-18, préremplis et prêts à imprimer",
+        "Configuration du formulaire fiscal « Modelo 790 Código 012 » avec code-barres",
+        "Constitution du « Ready File » pré-vérifié, en version papier et numérique"
+      ]
+    },
+    "soft-landing": {
+      "name": "Digital Soft-Landing",
+      "shortName": "Digital Soft-Landing",
+      "tagline": "Les démarches, plus tout ce qui rend la ville pratique au quotidien.",
+      "bestFor": "La plupart des étudiants internationaux de première année qui arrivent seuls.",
+      "features": [
+        "Guide pour l’ouverture d’un compte bancaire en Espagne (de non-résident à résident)",
+        "Inscription aux abonnements de transport T-mobilitat / T-jove",
+        "Guide de sélection et d’activation d’une carte SIM numérique / eSIM",
+        "Configuration du Carnet Jove et de la carte d’étudiant ISIC",
+        "Ligne d’assistance dédiée sur WhatsApp pendant la phase d’intégration"
+      ]
+    },
+    "turnkey": {
+      "name": "Turnkey Relocation & Housing Audit",
+      "shortName": "Turnkey Relocation & Housing Audit",
+      "tagline": "Nous vérifions l’appartement avant que vous ne versiez la caution.",
+      "bestFor": "Les familles qui réservent un logement privé depuis l’étranger, sans l’avoir visité.",
+      "features": [
+        "Recherche de logements vérifiés parmi des annonces filtrées contre la fraude",
+        "Vérification de la propriété au registre foncier (Nota Simple)",
+        "Vérification d’un contrat de location, y compris la vérification légale du plafond de la caution",
+        "Aide à l’ouverture des contrats d’eau, d’électricité et d’Internet",
+        "Suivi des démarches pendant 90 jours jusqu’à la réception de la carte TIE"
+      ]
+    }
+  },
+  "card": {
+    "mostChosen": "Le plus choisi",
+    "plusIva": "+ IVA",
+    "ivaLine": "{iva} IVA (21 %) · <strong>{total} total</strong>",
+    "everythingIn": "Tout ce qui figure dans {name}, plus :",
+    "bestFor": "Idéal pour :",
+    "select": "Choisir {name}"
+  },
+  "page": {
+    "metaTitle": "Services et tarifs",
+    "metaDescription": "Trois formules à prix fixe pour les étudiants internationaux qui arrivent à Barcelone : Administrative Baseline, Digital Soft-Landing et Turnkey Relocation & Housing Audit.",
+    "eyebrow": "Services et tarifs",
+    "title": "Tarifs forfaitaires pour une procédure dont la durée n’est pas fixée.",
+    "intro": "Chaque forfait est indiqué hors IVA et son montant total, incluant {rate} % d’IVA, est affiché avant le paiement. Aucune prestation n’est facturée à l’heure, et aucun forfait ne comprend les frais administratifs.",
+    "govEyebrow": "Frais administratifs",
+    "govTitle": "Le seul paiement que nous ne pouvons pas effectuer à votre place.",
+    "exclusionsEyebrow": "Transparence totale",
+    "exclusionsTitle": "Ce que nos honoraires ne couvrent pas.",
+    "exclusions": [
+      {
+        "item": "Taxe d’État Modelo 790 Código 012",
+        "note": "À régler directement par vos soins à l’administration fiscale espagnole dans une banque. Le montant est fixé par le gouvernement et varie en fonction du type de carte."
+      },
+      {
+        "item": "Frais de scolarité, cautions et loyer",
+        "note": "Nous ne gérons jamais les fonds de nos clients pour le compte de tiers. Tous les paiements sont effectués directement par vous au propriétaire ou à l’établissement."
+      },
+      {
+        "item": "Représentation juridique ou recours",
+        "note": "Hors de notre champ d’intervention. Si votre situation l’exige, nous vous le signalerons et vous recommanderons un colegiado abogado."
+      },
+      {
+        "item": "Services de traduction ou d’apostille",
+        "note": "Nous identifions les documents nécessitant une traduction assermentée et pouvons vous orienter vers un « traductor jurado » ; ses honoraires sont facturés séparément."
+      }
+    ]
+  }
+}

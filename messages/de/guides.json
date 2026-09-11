@@ -1,0 +1,71 @@
+{
+  "atm": {
+    "summary": "So bezahlen Sie an einem CaixaBank-Geldautomaten ohne spanische Bankkarte",
+    "steps": [
+      {
+        "title": "Gehen Sie zu einem CaixaBank-Geldautomaten",
+        "detail": "Sie benötigen weder ein Konto bei der CaixaBank noch eine spanische Bankkarte. Bringen Sie Ihr ausgedrucktes Formular „Modelo 790“ und den genauen Betrag in bar mit."
+      },
+      {
+        "title": "Wählen Sie „Pagar impuestos y tasas“",
+        "detail": "Wählen Sie die Option auf dem Startbildschirm, ohne eine Karte einzuführen."
+      },
+      {
+        "title": "Scannen Sie den 13-stelligen Barcode",
+        "detail": "Halten Sie den Barcode auf Ihrem ausgedruckten Formular an das Lesegerät des Geldautomaten. Der Betrag erscheint auf dem Bildschirm: Überprüfen Sie, ob dort {fee} steht."
+      },
+      {
+        "title": "Legen Sie den genauen Geldbetrag ein",
+        "detail": "Zahlen Sie genau {fee}."
+      },
+      {
+        "title": "Heften Sie den Beleg an Seite 3",
+        "detail": "Nehmen Sie den ausgedruckten Beleg an sich: Er ist Ihr Zahlungsnachweis. Heften Sie ihn an Seite 3 des Formulars und bringen Sie beides zu Ihrem Termin mit."
+      }
+    ],
+    "fallback": "Sollte der Geldautomat den Barcode nicht lesen, zahlen Sie bitte während der Öffnungszeiten am Schalter in einer beliebigen Filiale der CaixaBank, der BBVA oder der Santander. In einigen Filialen werden Steuerzahlungen nur vormittags entgegengenommen."
+  },
+  "sheet": {
+    "title": "Ihr Termintag",
+    "purposeTie": "Fingerabdrücke für Ihre TIE-Karte (EX-17)",
+    "purposeEu": "Ihre EU-Anmeldebescheinigung (EX-18)",
+    "when": "WANN",
+    "where": "WO",
+    "arrive": "Seien Sie bitte 15 Minuten früher da.",
+    "metro": "NÄCHSTE U-BAHN-STATION",
+    "bring": "Mitzubringen",
+    "phrases": "Sagen Sie es auf Spanisch",
+    "after": "Nach dem Termin",
+    "checklistTie": [
+      "Reisepass (Original) sowie eine Kopie der Seite mit dem Foto und Ihres Visums",
+      "Ihr {form}, ausgedruckt und unterschrieben",
+      "Ein aktuelles Farbfoto, 32 × 26 mm, weißer Hintergrund (bitte ein Ersatzfoto mitbringen)",
+      "Modelo 790 Código 012, bezahlt: die abgestempelte Kopie oder der daran angeheftete Bankautomatenbeleg",
+      "Ihre ausgedruckte Terminbestätigung (justificante de cita)"
+    ],
+    "checklistEu": [
+      "Reisepass oder Personalausweis (Original) sowie eine Fotokopie",
+      "Ihr {form}, ausgedruckt und unterzeichnet",
+      "Modelo 790 Código 012, bezahlt: die abgestempelte Kopie oder der daran angeheftete Bankautomatenbeleg",
+      "Ihre ausgedruckte Terminbestätigung („justificante de cita“)",
+      "Ihre „Ready File“-Unterlagen: Immatrikulationsbescheinigung, Krankenversicherung und Nachweis ausreichender Mittel"
+    ],
+    "afterTie": [
+      "Sie erhalten eine Quittung (resguardo). Bewahren Sie diese auf: Sie benötigen sie, um Ihre Karte abzuholen.",
+      "Sie holen Ihre Karte später persönlich ab. Wir teilen Ihnen mit, wann und wo."
+    ],
+    "afterEu": [
+      "Die Bescheinigung wird in der Regel beim Termin ausgehändigt. Überprüfen Sie alle Angaben darauf, bevor Sie den Ort verlassen.",
+      "Bewahren Sie sie zusammen mit Ihrem Reisepass auf: Sie belegt Ihre Registrierung."
+    ],
+    "meaning": {
+      "greetTie": "Guten Morgen, ich habe einen Termin zur Abgabe von Fingerabdrücken.",
+      "greetEu": "Guten Morgen, ich habe einen Termin für die EU-Anmeldebescheinigung.",
+      "handOver": "Hier sind mein Reisepass und die Quittung über die Gebühr.",
+      "collectCard": "Wann kann ich die Karte abholen?",
+      "certificateToday": "Erhalte ich die Bescheinigung noch heute?",
+      "repeat": "Entschuldigung, könnten Sie das bitte noch einmal langsamer wiederholen?"
+    },
+    "footer": "{name} · {ref} · BCN Student Concierge – praktische Hilfestellung, keine Rechtsberatung. Die Anforderungen werden von der Policía Nacional festgelegt und können sich ändern."
+  }
+}

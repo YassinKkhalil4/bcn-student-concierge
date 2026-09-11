@@ -1,0 +1,10 @@
+{
+  "loginLink": {
+    "subject": "Your sign-in link — BCN Student Concierge",
+    "introOne": "Here is your sign-in link for your BCN Student Concierge file.",
+    "introMany": "Here are your sign-in links — one for each file under this email address.",
+    "file": "File {ref}",
+    "button": "Open my file",
+    "footer": "Each link works once and expires in 30 minutes. If you did not ask to sign in, you can ignore this email — nobody can use it without access to your inbox."
+  }
+}

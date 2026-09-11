@@ -1,0 +1,71 @@
+{
+  "atm": {
+    "summary": "Come effettuare un pagamento presso un bancomat CaixaBank senza una carta spagnola",
+    "steps": [
+      {
+        "title": "Si rechi a un bancomat CaixaBank",
+        "detail": "Non servono un conto CaixaBank né una carta bancaria spagnola. Porti con sé il Modelo 790 stampato e l’importo esatto in contanti."
+      },
+      {
+        "title": "Selezioni «Pagar impuestos y tasas»",
+        "detail": "La selezioni nella schermata iniziale, senza inserire alcuna carta."
+      },
+      {
+        "title": "Scansioni il codice a barre di 13 cifre",
+        "detail": "Avvicini il codice a barre presente sul modulo stampato al lettore del bancomat. L’importo apparirà sullo schermo: verifichi che riporti {fee}."
+      },
+      {
+        "title": "Inserisca l’importo esatto in contanti",
+        "detail": "Paghi esattamente {fee}."
+      },
+      {
+        "title": "Pinzi la ricevuta alla pagina 3",
+        "detail": "Ritiri la ricevuta stampata: è la prova del pagamento. La pinzi alla pagina 3 del modulo e porti entrambi all’appuntamento."
+      }
+    ],
+    "fallback": "Se il bancomat non legge il codice a barre, effettui il pagamento allo sportello all’interno di qualsiasi filiale di CaixaBank, BBVA o Santander durante l’orario di apertura. Alcune filiali accettano il pagamento delle tasse solo al mattino."
+  },
+  "sheet": {
+    "title": "Il giorno del Suo appuntamento",
+    "purposeTie": "Rilevamento delle impronte per la Sua TIE (EX-17)",
+    "purposeEu": "Il Suo certificato di registrazione UE (EX-18)",
+    "when": "QUANDO",
+    "where": "DOVE",
+    "arrive": "Arrivi con 15 minuti di anticipo.",
+    "metro": "METRO PIÙ VICINA",
+    "bring": "Da portare con sé",
+    "phrases": "Lo dica in spagnolo",
+    "after": "Dopo l’appuntamento",
+    "checklistTie": [
+      "Passaporto (originale), più una fotocopia della pagina con la foto e del visto",
+      "Il Suo {form}, stampato e firmato",
+      "Una foto recente a colori, 32 × 26 mm, su sfondo bianco (ne porti una di riserva)",
+      "Modelo 790 Código 012, pagato: la copia timbrata o la ricevuta del bancomat spillata ad essa",
+      "La conferma stampata dell’appuntamento (justificante de cita)"
+    ],
+    "checklistEu": [
+      "Passaporto o carta d’identità nazionale (originale), più una fotocopia",
+      "Il Suo {form}, stampato e firmato",
+      "Modelo 790 Código 012, pagato: la copia timbrata o la ricevuta del bancomat spillata ad essa",
+      "La conferma stampata dell’appuntamento (justificante de cita)",
+      "I documenti del «Ready File»: certificato di iscrizione, assicurazione sanitaria e dichiarazione dei mezzi finanziari"
+    ],
+    "afterTie": [
+      "Le verrà consegnata una ricevuta (resguardo). La conservi: ne avrà bisogno per ritirare la sua tessera.",
+      "Ritirerà la tessera più tardi, di persona. Le comunicheremo quando e dove."
+    ],
+    "afterEu": [
+      "Il certificato viene solitamente consegnato durante l’appuntamento. Verifichi ogni dettaglio riportato su di esso prima di andarsene.",
+      "Lo conservi insieme al passaporto: attesta la Sua registrazione come cittadino dell’UE."
+    ],
+    "meaning": {
+      "greetTie": "Buongiorno, ho un appuntamento per il rilevamento delle impronte digitali.",
+      "greetEu": "Buongiorno, ho un appuntamento per il certificato di registrazione di cittadino dell’Unione.",
+      "handOver": "Ecco il mio passaporto e la ricevuta di pagamento.",
+      "collectCard": "Quando potrò ritirare la tessera?",
+      "certificateToday": "Riceverò il certificato oggi?",
+      "repeat": "Mi scusi, potrebbe ripetere più lentamente, per favore?"
+    },
+    "footer": "{name} · {ref} · BCN Student Concierge — indicazioni pratiche, non consulenza legale. I requisiti sono stabiliti dalla Policía Nacional e possono subire modifiche."
+  }
+}

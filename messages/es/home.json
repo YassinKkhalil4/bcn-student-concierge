@@ -1,0 +1,97 @@
+{
+  "metaTitle": "BCN Student Concierge — Llegadas sin complicaciones a Barcelona",
+  "metaDescription": "Servicio independiente de tramitación administrativa para estudiantes universitarios internacionales que llegan a Barcelona. Padrón, citas para el TIE/CUE y preparación de documentos.",
+  "hero": {
+    "eyebrow": "Barcelona · Creada para familias internacionales",
+    "title": "Llegadas sin complicaciones y tramitación legal de la residencia para estudiantes universitarios internacionales en Barcelona.",
+    "body": "Su hijo o hija ha obtenido una plaza en una universidad de Barcelona. Lo único que se interpone entre él o ella y su instalación es una serie de trámites burocráticos españoles que no perdonan los más mínimos errores —y que se llevan a cabo íntegramente en español—. Nosotros nos encargamos de todos esos trámites, de forma correcta y a la primera.",
+    "primaryCta": "Empezar el alta segura",
+    "secondaryCta": "Comparar paquetes",
+    "note": "Tarifas fijas, con el IVA incluido en el presupuesto antes de realizar el pago. No se aplica facturación por horas."
+  },
+  "trust": {
+    "heading": "Acompañamos a estudiantes que llegan a",
+    "disclaimer": "Las universidades mencionadas son aquellas a las que asisten nuestros clientes. Somos un servicio independiente y no estamos afiliados a ninguna de las instituciones mencionadas, ni contamos con su respaldo, ni actuamos en nombre de ninguna de ellas."
+  },
+  "problems": {
+    "eyebrow": "Lo que falla de verdad",
+    "title": "Cuatro puntos de fallo, y cómo eliminamos cada uno.",
+    "approach": "Nuestro enfoque — ",
+    "items": [
+      {
+        "problem": "Las citas previas se agotan en segundos",
+        "detail": "Las citas para el Padrón y la Policía Nacional se publican de forma irregular y se agotan en cuestión de minutos a través de sistemas automatizados. Las familias que actualizan la página en español desde otra zona horaria rara vez consiguen una cita.",
+        "solution": "Supervisamos los plazos de apertura de citas en todos los distritos de Barcelona y reservamos la cita a nombre de su estudiante; a continuación, le enviamos la confirmación con las indicaciones y la lista exacta de documentos que debe llevar."
+      },
+      {
+        "problem": "Una casilla mal marcada invalida todo el expediente",
+        "detail": "Un formulario EX-17 en el que se haya rellenado el segundo apellido como «N/A», una sección de representación cumplimentada por un padre bienintencionado o un formulario impreso con el texto de los campos desplazado será rechazado en la ventanilla —y la próxima cita no estará disponible hasta dentro de varias semanas.",
+        "solution": "Los formularios se generan mediante un programa a partir de sus datos verificados, se ajustan para que nada se desplace al imprimirlos y se cotejan con el pasaporte antes de que el expediente salga de nuestras manos."
+      },
+      {
+        "problem": "El formulario fiscal no se puede pagar en línea",
+        "detail": "El Modelo 790 Código 012 lleva un código de barras único y, para la mayoría de los estudiantes, debe abonarse en efectivo en la ventanilla de un banco español o en el escáner de un cajero automático. Es habitual que los estudiantes acudan a la comisaría con un formulario sin pagar.",
+        "solution": "Configuramos el formulario con código de barras para el pago en efectivo y ofrecemos instrucciones paso a paso para CaixaBank, BBVA y Santander, incluyendo qué sucursales aceptan pagos de personas que no son clientes."
+      },
+      {
+        "problem": "El fraude en materia de vivienda se dirige a los estudiantes recién llegados",
+        "detail": "Los anuncios publicados desde el extranjero suelen corresponder a subalquileres ilegales, a viviendas que no pertenecen al supuesto «propietario» o a fianzas que superan el límite legal. Las fianzas transferidas antes de la llegada rara vez se recuperan.",
+        "solution": "En nuestro paquete Turnkey, obtenemos la Nota Simple del Registro de la Propiedad para confirmar quién es realmente el propietario del piso, y comprobamos que la fianza del contrato respeta el límite legal antes de que nadie transfiera dinero."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "El proceso",
+    "title": "Cuatro etapas, desde la solicitud inicial hasta la recogida de la tarjeta.",
+    "steps": [
+      {
+        "title": "Admisión segura",
+        "body": "Su estudiante rellena el cuestionario cifrado y sube su pasaporte, la carta de matrícula y el contrato de alquiler. Los documentos se cifran por archivo con AES-256."
+      },
+      {
+        "title": "Preparación de la documentación",
+        "body": "Generamos el formulario adecuado —el EX-17 para estudiantes de fuera de la UE y el EX-18 para ciudadanos de la UE—, configuramos el Modelo 790 y preparamos un «Ready File» con toda la documentación ya revisada."
+      },
+      {
+        "title": "Citas concertadas",
+        "body": "Reservamos las citas para el Padrón y la TIE/CUE y le entregamos un itinerario con las fechas: dónde debe acudir, qué debe llevar y qué le preguntarán."
+      },
+      {
+        "title": "Adaptación y seguimiento",
+        "body": "La gestión de la banca, el transporte público y la conectividad se lleva a cabo durante la primera semana. Realizamos un seguimiento del expediente durante 90 días, hasta la recogida de la tarjeta."
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Precios transparentes",
+    "title": "Tres paquetes. Tarifas fijas, indicadas con IVA incluido.",
+    "body": "Las tasas administrativas (Modelo 790, expedición de tarjetas) las abona usted directamente a las autoridades españolas y no están incluidas en nuestros honorarios.",
+    "cta": "Ver la comparación completa"
+  },
+  "faq": {
+    "eyebrow": "Respuestas directas",
+    "title": "Las preguntas que los padres plantean en primer lugar.",
+    "items": [
+      {
+        "q": "¿Son ustedes abogados o una gestoría?",
+        "a": "No. Somos un servicio independiente de facilitación administrativa. Preparamos los documentos a partir de la información que usted nos facilita, concertamos citas y le guiamos a lo largo del proceso. No le representamos ante ninguna autoridad y no ofrecemos asesoramiento jurídico. En caso de que un asunto requiera análisis jurídico, se lo indicaremos con claridad y le recomendaremos que consulte a un colegiado abogado."
+      },
+      {
+        "q": "¿Tiene mi hijo o hija que acudir a las citas en persona?",
+        "a": "Sí. Las citas para la toma de datos biométricos requieren que el solicitante se presente personalmente con los documentos originales. Nosotros preparamos el expediente, reservamos la cita y les informamos detalladamente; sin embargo, la comparecencia debe realizarla el propio solicitante, en su propio nombre."
+      },
+      {
+        "q": "¿Qué ocurre después con las copias escaneadas del pasaporte?",
+        "a": "Se cifran en reposo con una clave única por archivo y se eliminan de forma permanente 30 días después de que finalice el servicio, mediante una tarea de retención automatizada. Puede solicitar su eliminación anticipada en cualquier momento."
+      },
+      {
+        "q": "¿Pueden garantizar que se apruebe la tarjeta de residencia?",
+        "a": "No, y cualquier servicio que le garantice esto le está engañando. Las decisiones recaen exclusivamente en las autoridades españolas. Lo que sí controlamos es que el expediente esté completo, sea correcto y se presente a tiempo; ahí es donde, de hecho, se originan la mayoría de las denegaciones."
+      },
+      {
+        "q": "¿Por qué se abona el Modelo 790 en efectivo?",
+        "a": "El proceso de la Agencia Tributaria española para este formulario se basa en un código de barras único que se lee en la ventanilla de un banco o en el escáner de un cajero automático. Sin un certificado digital español —del que no disponen los recién llegados—, no es posible realizar la liquidación en línea, por lo que el formulario está configurado para el pago «en efectivo»."
+      }
+    ]
+  }
+}

@@ -1,20 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import type { DocumentKind } from "@/lib/db/schema";
 import type { IntakeData } from "@/lib/schema";
 import { residenceRequest, COLLECTIVE_AUTHORIZATION_URL } from "@/lib/request-templates";
-import { CopyButton } from "@/components/CopyButton";
+import { LocalizedCopyButton } from "@/components/LocalizedCopyButton";
 import { DocumentUpload } from "@/components/intake/DocumentUpload";
 import { AuthorizationForm } from "./AuthorizationForm";
 
 type Path = "residence" | "own-lease" | "not-in-name";
 
-const PATHS: { value: Path; title: string; detail: string }[] = [
-  { value: "residence", title: "A student residence", detail: "Halls or a residence with a reception desk" },
-  { value: "own-lease", title: "A flat I rent", detail: "The lease is in my name" },
-  { value: "not-in-name", title: "A room or sublet", detail: "The lease is in someone else's name, or I live with family or friends" },
-];
+const PATHS: Path[] = ["residence", "own-lease", "not-in-name"];
+
+const em = (chunks: ReactNode) => <em>{chunks}</em>;
+const strong = (chunks: ReactNode) => <strong className="text-ink">{chunks}</strong>;
 
 /** Start the student on the path their uploads already point to. */
 function initialPath(uploaded: readonly DocumentKind[]): Path | null {
@@ -37,24 +37,25 @@ export function PadronWizard({
   person: Pick<IntakeData, "identity" | "address">;
   uploaded: readonly DocumentKind[];
 }) {
+  const t = useTranslations("portal.padron");
   const [path, setPath] = useState<Path | null>(() => initialPath(uploaded));
 
   return (
     <div>
       <fieldset>
-        <legend className="text-sm font-semibold text-ink">Where are you living?</legend>
+        <legend className="text-sm font-semibold text-ink">{t("question")}</legend>
         <div className="mt-3 grid gap-2 sm:grid-cols-3">
           {PATHS.map((p) => (
-            <label key={p.value}
+            <label key={p}
               className={`flex cursor-pointer flex-col rounded-xl border p-4 text-sm transition-colors ${
-                path === p.value ? "border-olive bg-olive/[0.04]" : "border-bone-line bg-white hover:bg-bone-warm/50"
+                path === p ? "border-olive bg-olive/[0.04]" : "border-bone-line bg-white hover:bg-bone-warm/50"
               }`}>
               <span className="flex items-center gap-2 font-medium text-ink">
-                <input type="radio" name="padron-path" value={p.value} checked={path === p.value}
-                  onChange={() => setPath(p.value)} />
-                {p.title}
+                <input type="radio" name="padron-path" value={p} checked={path === p}
+                  onChange={() => setPath(p)} />
+                {t(`paths.${p}.title`)}
               </span>
-              <span className="mt-1 pl-6 text-xs text-ink-muted">{p.detail}</span>
+              <span className="mt-1 pl-6 text-xs text-ink-muted">{t(`paths.${p}.detail`)}</span>
             </label>
           ))}
         </div>
@@ -70,58 +71,52 @@ export function PadronWizard({
 }
 
 function ResidencePath({ person, uploaded }: { person: Pick<IntakeData, "identity" | "address">; uploaded: readonly DocumentKind[] }) {
+  const t = useTranslations("portal.padron.residence");
+  const locale = useLocale();
   const request = residenceRequest(person);
   return (
     <div className="space-y-5">
-      <p className="text-sm leading-relaxed text-ink-muted">
-        Residences register their students with a special city form, the{" "}
-        <em>Autorització d&rsquo;empadronament de domicili col·lectiu</em>. The residence
-        fills it in, signs it and <strong className="text-ink">stamps it</strong> — without
-        the stamp it is not accepted. Send this message to reception:
-      </p>
+      <p className="text-sm leading-relaxed text-ink-muted">{t.rich("intro", { em, strong })}</p>
+      {locale !== "es" && <p className="text-xs text-ink-soft">{t("spanishNote")}</p>}
       <div className="rounded-xl border border-bone-line bg-white">
         <div className="flex items-center justify-between gap-3 border-b border-bone-line px-4 py-2.5">
           <p className="min-w-0 truncate text-xs text-ink-muted">
-            <span className="font-medium text-ink">Subject:</span> {request.subject}
+            <span className="font-medium text-ink">{t("subject")}</span>{" "}
+            <span lang="es">{request.subject}</span>
           </p>
-          <CopyButton value={request.subject} label="Copy subject" />
+          <LocalizedCopyButton value={request.subject} labelKey="copySubject" />
         </div>
-        <pre className="max-h-72 overflow-auto whitespace-pre-wrap px-4 py-3 font-sans text-sm leading-relaxed text-ink">
+        <pre lang="es" className="max-h-72 overflow-auto whitespace-pre-wrap px-4 py-3 font-sans text-sm leading-relaxed text-ink">
           {request.body}
         </pre>
         <div className="flex flex-wrap gap-2 border-t border-bone-line px-4 py-3">
-          <CopyButton value={request.body} label="Copy message" />
+          <LocalizedCopyButton value={request.body} labelKey="copyMessage" />
           <a href={COLLECTIVE_AUTHORIZATION_URL} target="_blank" rel="noopener noreferrer"
             className="rounded-md border border-bone-line px-2 py-1 text-xs font-medium text-ink-muted hover:bg-bone-warm">
-            Open the official form ↗
+            {t("openForm")}
           </a>
         </div>
       </div>
-      <p className="text-sm text-ink-muted">When the residence gives it back, upload it here:</p>
+      <p className="text-sm text-ink-muted">{t("uploadPrompt")}</p>
       <DocumentUpload kinds={["collective-authorization"]} uploaded={uploaded} />
     </div>
   );
 }
 
 function OwnLeasePath({ uploaded, onNotMine }: { uploaded: readonly DocumentKind[]; onNotMine: () => void }) {
+  const t = useTranslations("portal.padron.lease");
   const [checks, setChecks] = useState({ inMyName: false, longEnough: false, language: false });
   const toggle = (k: keyof typeof checks) => setChecks((c) => ({ ...c, [k]: !c[k] }));
   const allGood = checks.inMyName && checks.longEnough && checks.language;
 
   return (
     <div className="space-y-5">
-      <p className="text-sm leading-relaxed text-ink-muted">
-        The city accepts your lease only if all three are true. Check each one:
-      </p>
+      <p className="text-sm leading-relaxed text-ink-muted">{t("intro")}</p>
       <div className="space-y-2">
-        {([
-          ["inMyName", "My name is on the lease as a tenant."],
-          ["longEnough", "It lasts more than three months, or says explicitly that it extends."],
-          ["language", "It is written in Spanish or Catalan."],
-        ] as const).map(([key, text]) => (
+        {(["inMyName", "longEnough", "language"] as const).map((key) => (
           <label key={key} className="flex cursor-pointer items-start gap-3 rounded-lg border border-bone-line bg-white p-3 text-sm text-ink">
             <input type="checkbox" checked={checks[key]} onChange={() => toggle(key)} className="mt-0.5" />
-            {text}
+            {t(key)}
           </label>
         ))}
       </div>
@@ -130,35 +125,24 @@ function OwnLeasePath({ uploaded, onNotMine }: { uploaded: readonly DocumentKind
         <ul className="space-y-2 text-sm leading-relaxed text-ink-muted">
           {!checks.inMyName && (
             <li>
-              <strong className="text-ink">Not in your name?</strong> Then the person on the lease must
-              authorise you.{" "}
+              {t.rich("notMine", { strong })}{" "}
               <button type="button" onClick={onNotMine} className="font-medium text-olive underline">
-                Switch to that option
+                {t("switch")}
               </button>
             </li>
           )}
           {!checks.longEnough && (
-            <li>
-              <strong className="text-ink">Three months or less?</strong> Ask your landlord for an extension
-              in writing, or to authorise you with the city&rsquo;s form instead.
-            </li>
+            <li>{t.rich("tooShort", { strong })}</li>
           )}
           {!checks.language && (
-            <li>
-              <strong className="text-ink">In another language?</strong> The city needs an official
-              translation (a <em>traducción jurada</em>, or one from your consulate). A Spanish version
-              from your landlord is often quicker — ask first.
-            </li>
+            <li>{t.rich("otherLanguage", { strong, em })}</li>
           )}
         </ul>
       )}
 
       {allGood && (
         <>
-          <p className="text-sm leading-relaxed text-ink-muted">
-            Upload the full signed lease and a recent utility bill for the flat. The city asks for the
-            bill when the lease is a copy or has expired; we ask for it every time so nothing holds you up.
-          </p>
+          <p className="text-sm leading-relaxed text-ink-muted">{t("upload")}</p>
           <DocumentUpload kinds={["lease", "utility-bill"]} uploaded={uploaded} />
         </>
       )}
@@ -167,26 +151,21 @@ function OwnLeasePath({ uploaded, onNotMine }: { uploaded: readonly DocumentKind
 }
 
 function NotInNamePath({ uploaded }: { uploaded: readonly DocumentKind[] }) {
+  const t = useTranslations("portal.padron.sublet");
   return (
     <div className="space-y-5">
-      <p className="text-sm leading-relaxed text-ink-muted">
-        When the flat is not in your name, whoever holds it authorises you on Barcelona&rsquo;s
-        official form, the <em>Autorització per inscriure-us al domicili</em>.
-      </p>
+      <p className="text-sm leading-relaxed text-ink-muted">{t.rich("intro", { em })}</p>
       <AuthorizationForm />
       <div className="rounded-xl border border-bone-line bg-white p-5">
-        <h4 className="text-sm font-semibold text-ink">2. Get it signed</h4>
+        <h4 className="text-sm font-semibold text-ink">{t("signTitle")}</h4>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink-muted">
-          <li>Print it. The person who authorises you signs it <strong className="text-ink">by hand</strong>; the signature must match their ID.</li>
-          <li>They write the date next to the signature. The authorisation is valid for <strong className="text-ink">three months</strong> from that date.</li>
+          <li>{t.rich("signByHand", { strong })}</li>
+          <li>{t.rich("signDate", { strong })}</li>
         </ul>
       </div>
       <div>
-        <h4 className="text-sm font-semibold text-ink">3. Upload all three</h4>
-        <p className="mt-1.5 text-sm text-ink-muted">
-          The city will not accept the form on its own. It needs the signer&rsquo;s ID and proof that
-          the flat is theirs to offer: the lease in their name, or the deed if they own it.
-        </p>
+        <h4 className="text-sm font-semibold text-ink">{t("uploadTitle")}</h4>
+        <p className="mt-1.5 text-sm text-ink-muted">{t("uploadBody")}</p>
         <div className="mt-4">
           <DocumentUpload kinds={["padron-authorization", "authorizer-id", "lease"]} uploaded={uploaded} />
         </div>

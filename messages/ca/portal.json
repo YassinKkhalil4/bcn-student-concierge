@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "file": "El vostre expedient",
+    "login": "Accediu al vostre expedient",
+    "verify": "Accediu al vostre expedient"
+  },
+  "login": {
+    "eyebrow": "El vostre expedient",
+    "title": "Accediu al vostre expedient",
+    "intro": "Introduïu l’adreça de correu electrònic que vau fer servir en el formulari d’alta. Us enviarem un enllaç d’accés d’un sol ús; no cal cap contrasenya.",
+    "sent": "Si hi ha un expedient associat a aquesta adreça, us arribarà un enllaç d’accés. Només funciona una vegada i caduca al cap de 30 minuts; si no us arriba en pocs minuts, mireu la carpeta de correu brossa.",
+    "errors": {
+      "email": "Introduïu una adreça de correu electrònic vàlida.",
+      "link": "Aquest enllaç d’accés ha caducat o ja s’ha utilitzat. Demaneu-ne un de nou a continuació.",
+      "locked": "Massa intents. Si us plau, espereu 15 minuts i torneu-ho a provar."
+    },
+    "emailLabel": "Adreça de correu electrònic",
+    "submit": "Envieu-me un enllaç d’accés"
+  },
+  "verify": {
+    "title": "Accediu al vostre expedient",
+    "once": "Aquest enllaç només funciona una vegada.",
+    "open": "Obre el meu expedient",
+    "expiredTitle": "Aquest enllaç ha caducat",
+    "expiredBody": "Els enllaços d’accés duren 30 minuts i només funcionen una vegada.",
+    "newLink": "Envieu-me un enllaç nou"
+  },
+  "file": {
+    "notFoundTitle": "No hem pogut trobar el vostre expedient",
+    "notFoundBody": "Tanqueu la sessió i torneu a entrar amb l’adreça de correu electrònic que vau fer servir al formulari.",
+    "closedTitle": "Aquest expedient està tancat",
+    "closedBody": "El servei ha finalitzat i, tal com us vam prometre, les vostres dades personals i els vostres documents s’han eliminat definitivament. Els registres de facturació es conserven tal com exigeix la legislació fiscal espanyola.",
+    "eyebrow": "El vostre expedient",
+    "greeting": "{name}, aquí teniu el vostre expedient",
+    "reference": "Referència",
+    "signOut": "Tanca la sessió",
+    "submitted": "Gràcies; ja hem rebut els vostres documents. Els revisarem en un termini d’un dia laborable.",
+    "checkoutCancelled": "El pagament s’ha cancel·lat i no s’ha cobrat res. Podeu pagar quan vulgueu.",
+    "paymentTitle": "Pagament pendent",
+    "paymentBody": "Comencem a treballar tan bon punt es confirma el pagament.",
+    "paymentTotal": "Total {total}, inclòs l’IVA.",
+    "pay": "Paga {total}",
+    "payNow": "Paga ara",
+    "passport": "1. Passaport",
+    "enrolment": "2. Matrícula universitària",
+    "padron": "3. Justificant de domicili per al Padró",
+    "padronIntro": "Per empadronar-vos al Padró —el registre municipal d’habitants— heu de demostrar que viviu a {address}. Què serveix com a prova depèn de com viviu.",
+    "tasaTitle": "4. Pagueu la taxa estatal (Modelo 790 · 012)",
+    "tasaIntro": "La policia cobra aquesta taxa a banda del nostre servei. Es paga en efectiu en un banc espanyol, amb un formulari que genereu al web de la policia.",
+    "appointments": "Les vostres cites",
+    "police": "Policia",
+    "padronAppointment": "Padró",
+    "metro": "Metro: {metro}",
+    "sheet": "Guia per al dia de la cita",
+    "myForm": "El meu {form} emplenat",
+    "invoices": "Factures",
+    "reviewTitle": "Esteu a punt per a la revisió?",
+    "reviewDone": "Enviat el {date}. Encara podeu pujar un document de substitució si us ho demanem.",
+    "reviewPrompt": "Quan ho hàgiu pujat tot, aviseu-nos i revisarem el vostre expedient.",
+    "reviewSubmit": "Envia per a revisió"
+  },
+  "invoices": {
+    "empty": "La vostra factura apareixerà aquí un cop s’hagi confirmat el pagament.",
+    "refund": "reemborsament",
+    "pdf": "PDF"
+  },
+  "pay": {
+    "opening": "S’està obrint el pagament segur…",
+    "failed": "No s’ha pogut obrir la pàgina de pagament. Torneu-ho a provar.",
+    "network": "Error de xarxa. Torneu-ho a provar."
+  },
+  "padron": {
+    "question": "On viviu?",
+    "paths": {
+      "residence": {
+        "title": "Una residència d’estudiants",
+        "detail": "Residències universitàries o residències amb recepció"
+      },
+      "own-lease": {
+        "title": "Un pis que llogo",
+        "detail": "El contracte de lloguer està a nom meu"
+      },
+      "not-in-name": {
+        "title": "Una habitació o un subloguer",
+        "detail": "El contracte de lloguer està a nom d’una altra persona, o visc amb familiars o amics"
+      }
+    },
+    "residence": {
+      "intro": "Les residències empadronen els seus estudiants amb un formulari municipal específic, l’<em>Autorització d’empadronament de domicili col·lectiu</em>. La residència l’omple, el signa i <strong>el segella</strong>: sense el segell no s’accepta. Envieu aquest missatge a recepció:",
+      "subject": "Assumpte:",
+      "openForm": "Obre el formulari oficial ↗",
+      "uploadPrompt": "Quan la residència us el retorni, pugeu-lo aquí:",
+      "spanishNote": "El missatge és en castellà expressament: s’adreça al personal de la residència."
+    },
+    "lease": {
+      "intro": "L’Ajuntament només accepta el contracte si es compleixen totes tres condicions. Comproveu-les una per una:",
+      "inMyName": "El meu nom figura al contracte com a llogater.",
+      "longEnough": "Dura més de tres mesos, o diu explícitament que es prorroga.",
+      "language": "Està redactat en castellà o en català.",
+      "notMine": "<strong>No està a nom vostre?</strong> Aleshores us ha d’autoritzar la persona que figura al contracte.",
+      "switch": "Canvia a aquesta opció",
+      "tooShort": "<strong>Dura tres mesos o menys?</strong> Demaneu al propietari una pròrroga per escrit, o que us autoritzi amb el formulari de l’Ajuntament.",
+      "otherLanguage": "<strong>En un altre idioma?</strong> L’Ajuntament en demana una traducció oficial (una <em>traducció jurada</em>, o una del vostre consolat). Sovint és més ràpid demanar al propietari una versió en castellà: pregunteu-li-ho primer.",
+      "upload": "Pugeu el contracte de lloguer complet i signat, i una factura recent de subministraments del pis. L’Ajuntament demana la factura quan el contracte és una còpia o ha vençut; nosaltres la demanem sempre perquè res no us endarrereixi."
+    },
+    "sublet": {
+      "intro": "Quan el pis no està a nom vostre, qui el té al seu nom us autoritza amb el formulari oficial de Barcelona, l’<em>Autorització per inscriure-us al domicili</em>.",
+      "signTitle": "2. Feu-lo signar",
+      "signByHand": "Imprimiu-lo. La persona que l’autoritza l’ha de signar <strong>a mà</strong>; la signatura ha de coincidir amb la del seu document d’identitat.",
+      "signDate": "Aquesta persona escriu la data al costat de la seva signatura. L’autorització és vàlida durant <strong>tres mesos</strong> a partir d’aquesta data.",
+      "uploadTitle": "3. Pugeu els tres documents",
+      "uploadBody": "L’Ajuntament no accepta el formulari tot sol. Necessita el document d’identitat de qui el signa i una prova que pot disposar del pis: el contracte de lloguer a nom seu o, si n’és el propietari, l’escriptura."
+    }
+  },
+  "authorization": {
+    "title": "1. Genereu l’autorització",
+    "intro": "Signa qui té el pis al seu nom: el propietari, o el llogater principal que figura al contracte. Emplenem el formulari oficial de Barcelona amb les vostres dades i les d’aquesta persona. No desem res del que escriviu aquí.",
+    "fields": {
+      "signerName": {
+        "label": "Nom complet del signant",
+        "hint": "Exactament com consta al document d’identitat del signant."
+      },
+      "signerId": {
+        "label": "Número de DNI, NIE o passaport del signant"
+      },
+      "ownerName": {
+        "label": "Nom del propietari (persona física o empresa)"
+      },
+      "ownerTaxId": {
+        "label": "NIF del propietari"
+      },
+      "companyName": {
+        "label": "Nom de l’empresa"
+      },
+      "companyTaxId": {
+        "label": "NIF de l’empresa"
+      },
+      "cadastralRef": {
+        "label": "Referència cadastral",
+        "hint": "20 lletres i xifres, tal com apareix al rebut de l’impost sobre béns immobles (IBI). Deixeu-ho en blanc si no ho sabeu."
+      }
+    },
+    "relationLegend": "El signant és…",
+    "relations": {
+      "owner": "El propietari del pis",
+      "tenant": "El llogater principal (el que figura al contracte)",
+      "usufruct": "L’usufructuari"
+    },
+    "tenantNote": "Quan el llogater principal signa, el formulari també sol·licita les dades del propietari. Les trobareu al contracte de lloguer.",
+    "forCompany": "El signant actua en nom d’una empresa (per exemple, un operador de coliving)",
+    "cadastralToggle": "Opcional: referència cadastral",
+    "preparing": "S’està preparant el formulari…",
+    "download": "Descarrega el formulari emplenat",
+    "done": "✓ Descarregat. Ara imprimiu-lo i seguiu el pas 2.",
+    "checkFields": "Si us plau, comproveu els camps ressaltats.",
+    "notBarcelona": "Aquest és el formulari de l’Ajuntament de Barcelona, però la vostra adreça és a {city}. Cada municipi té la seva pròpia autorització per al Padró: poseu-vos en contacte amb nosaltres i us aconseguirem la correcta.",
+    "unprintable": "Aquests caràcters no es poden imprimir al formulari: {chars}. Escriviu els noms amb caràcters llatins, exactament tal com apareixen al document d’identitat.",
+    "unavailable": "Aquest formulari no està disponible temporalment. Torneu-ho a provar més tard o poseu-vos en contacte amb nosaltres.",
+    "failed": "El formulari no s’ha pogut generar. Torneu-ho a provar.",
+    "network": "Error de xarxa. Torneu-ho a provar."
+  },
+  "enrolment": {
+    "howTo": "Com l’aconsegueixo?",
+    "intro": "La carta d’admissió no és suficient. Demaneu a l’oficina d’admissions o a la secretaria de la vostra universitat un <em>certificado de matrícula</em> (certificat de matrícula), segellat i signat. Aquest missatge demana exactament el que busca l’oficina d’estrangeria:",
+    "spanishNote": "El missatge és en castellà expressament: s’adreça a l’oficina de la vostra universitat a Barcelona.",
+    "university": "La vostra universitat",
+    "programme": "El vostre programa",
+    "programmePlaceholder": "p. ex., Grau en Relacions Internacionals",
+    "subject": "Assumpte:",
+    "openEmail": "Obre-ho a la meva aplicació de correu"
+  },
+  "tasa": {
+    "missingNie": "Aquest pas necessita el vostre NIE, i encara no el tenim. Us avisarem tan bon punt el pugueu fer; de moment, no heu de fer res.",
+    "open": "Obriu el formulari oficial de la Policía Nacional:",
+    "fill": "Ompliu cada camp exactament com s’indica a continuació (deixeu els altres camps en blanc).",
+    "tick": "Marqueu només <em>«{tramite}»</em>: hi hauria d’aparèixer <strong>{fee}</strong>. Si el portal mostra un import diferent, el que val és el del portal: pagueu el que indiqui.",
+    "payment": "A <em>Forma de pago</em>, trieu <strong>{method}</strong>.",
+    "print": "Descarregueu el formulari i imprimiu-lo a escala 100 %, mai amb «ajusta a la pàgina»: si no, el codi de barres no s’escanejarà.",
+    "caption": "Què heu d’introduir al portal de la policia",
+    "labelsNote": "Els noms dels camps són en castellà perquè és el que mostra el web de la policia."
+  }
+}

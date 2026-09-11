@@ -1,0 +1,10 @@
+{
+  "loginLink": {
+    "subject": "El vostre enllaç d’accés — BCN Student Concierge",
+    "introOne": "Aquí teniu l’enllaç d’accés al vostre expedient de BCN Student Concierge.",
+    "introMany": "Aquí teniu els enllaços d’accés: un per a cada expedient associat a aquesta adreça de correu electrònic.",
+    "file": "Expedient {ref}",
+    "button": "Obre el meu expedient",
+    "footer": "Cada enllaç només és vàlid una vegada i caduca al cap de 30 minuts. Si no heu sol·licitat l’accés, podeu ignorar aquest correu electrònic: ningú no el pot utilitzar sense accedir a la vostra safata d’entrada."
+  }
+}

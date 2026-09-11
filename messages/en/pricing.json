@@ -1,0 +1,80 @@
+{
+  "tiers": {
+    "baseline": {
+      "name": "The Administrative Baseline",
+      "shortName": "Administrative Baseline",
+      "tagline": "The legal essentials, correctly filed the first time.",
+      "bestFor": "Students in university housing who need the paperwork handled.",
+      "features": [
+        "Padrón (municipal registration) appointment scheduling",
+        "TIE / CUE National Police appointment booking",
+        "EX-17 or EX-18 form generation, pre-filled and print-ready",
+        "Modelo 790 Código 012 barcoded tax form setup",
+        "Pre-checked physical and digital “Ready File” assembly"
+      ]
+    },
+    "soft-landing": {
+      "name": "The Digital Soft-Landing",
+      "shortName": "Digital Soft-Landing",
+      "tagline": "Paperwork, plus everything that makes the city usable.",
+      "bestFor": "Most first-year international students arriving alone.",
+      "features": [
+        "Spanish bank account setup guidance (non-resident to resident)",
+        "T-mobilitat / T-jove transit pass registration",
+        "Digital SIM / eSIM selection and activation guidance",
+        "Carnet Jove and ISIC student card configuration",
+        "Dedicated WhatsApp support line during onboarding"
+      ]
+    },
+    "turnkey": {
+      "name": "The Turnkey Relocation & Housing Audit",
+      "shortName": "Turnkey Relocation & Housing Audit",
+      "tagline": "We verify the apartment before you wire a deposit.",
+      "bestFor": "Families securing private housing from abroad, sight unseen.",
+      "features": [
+        "Verified housing sourcing against fraud-screened listings",
+        "Landlord registry (Nota Simple) ownership audit",
+        "Rental contract review with legal deposit-cap verification",
+        "Utility activation guidance (water, electricity, internet)",
+        "90-day document tracking through to TIE card collection"
+      ]
+    }
+  },
+  "card": {
+    "mostChosen": "Most chosen",
+    "plusIva": "+ IVA",
+    "ivaLine": "{iva} IVA (21%) · <strong>{total} total</strong>",
+    "everythingIn": "Everything in {name}, plus:",
+    "bestFor": "Best for:",
+    "select": "Select {name}"
+  },
+  "page": {
+    "metaTitle": "Services & Pricing",
+    "metaDescription": "Three fixed-fee packages for international students arriving in Barcelona: administrative baseline, digital soft-landing, and turnkey relocation with housing audit.",
+    "eyebrow": "Services & pricing",
+    "title": "Fixed fees for a process with no fixed timeline.",
+    "intro": "Every package is quoted exclusive of IVA and shown with its total including {rate}% IVA before you pay. Nothing is billed hourly, and no package includes government fees.",
+    "govEyebrow": "Government fees",
+    "govTitle": "The one payment we cannot make for you.",
+    "exclusionsEyebrow": "Full transparency",
+    "exclusionsTitle": "What our fee does not cover.",
+    "exclusions": [
+      {
+        "item": "Modelo 790 Código 012 state fee",
+        "note": "Paid by you directly to the Spanish tax agency at a bank. Amount is set by the government and varies by card type."
+      },
+      {
+        "item": "University tuition, deposits and rent",
+        "note": "We never handle client funds for third parties. All payments go directly from you to the landlord or institution."
+      },
+      {
+        "item": "Legal representation or appeals",
+        "note": "Outside our scope. If your case needs it, we will say so and recommend a colegiado abogado."
+      },
+      {
+        "item": "Translation or apostille services",
+        "note": "We identify what needs sworn translation and can refer you to a traductor jurado; their fee is separate."
+      }
+    ]
+  }
+}

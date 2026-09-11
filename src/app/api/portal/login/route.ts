@@ -6,18 +6,15 @@ import { emailIndexFor } from "@/lib/server/case-codec";
 import { createLoginLinkToken } from "@/lib/portal/session";
 import { sendEmail } from "@/lib/email/send";
 import { loginLinkEmail } from "@/lib/email/templates";
+import { formLocale, portalRedirect } from "@/lib/portal/redirect";
+import { translatorFor } from "@/i18n/messages";
+import { localizedPath, type SiteLocale } from "@/i18n/routing";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const emailSchema = z.string().trim().toLowerCase().email().max(254);
 
-function back(request: Request, query: string): NextResponse {
-  return NextResponse.redirect(
-    new URL(`/portal/login?${query}`, process.env.PUBLIC_ORIGIN ?? request.url),
-    { status: 303 },
-  );
-}
 
 /**
  * Request a sign-in link.
@@ -27,35 +24,39 @@ function back(request: Request, query: string): NextResponse {
  * nor its timing reveals who is a client.
  */
 export async function POST(request: Request): Promise<NextResponse> {
+  const form = await request.formData().catch(() => null);
+  const locale = formLocale(form);
+  const back = (query: string) => portalRedirect(request, locale, `/portal/login?${query}`);
+
   if (!(await rateLimit(clientIdentifier(request.headers), "portal-link")).allowed) {
-    return back(request, "error=locked");
+    return back("error=locked");
   }
 
-  const form = await request.formData().catch(() => null);
   const parsed = emailSchema.safeParse(form?.get("email"));
-  if (!parsed.success) return back(request, "error=email");
+  if (!parsed.success) return back("error=email");
   const email = parsed.data;
 
   // Per-address limit, keyed by the blind index rather than the address.
   if (!(await rateLimit(emailIndexFor(email), "portal-link-email")).allowed) {
-    return back(request, "sent=1");
+    return back("sent=1");
   }
 
-  void deliverLinks(email).catch((error) =>
+  void deliverLinks(email, locale).catch((error) =>
     console.error("[portal] sign-in email failed", error instanceof Error ? error.message : error),
   );
-  return back(request, "sent=1");
+  return back("sent=1");
 }
 
-async function deliverLinks(email: string): Promise<void> {
+/** In the language of the page the link was requested from. */
+async function deliverLinks(email: string, locale: SiteLocale): Promise<void> {
   const found = await findCasesByEmail(email);
   if (found.length === 0) return;
   const origin = process.env.PUBLIC_ORIGIN ?? "http://localhost:3000";
   const links = await Promise.all(
     found.map(async (c) => ({
       ref: c.ref,
-      url: `${origin}/portal/verify?token=${encodeURIComponent(await createLoginLinkToken(c.id))}`,
+      url: `${origin}${localizedPath(locale, "/portal/verify")}?token=${encodeURIComponent(await createLoginLinkToken(c.id))}`,
     })),
   );
-  await sendEmail(loginLinkEmail(email, links));
+  await sendEmail(loginLinkEmail(email, links, await translatorFor(locale, "email"), locale));
 }

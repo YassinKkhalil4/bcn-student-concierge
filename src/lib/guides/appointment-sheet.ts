@@ -39,7 +39,23 @@ function wrap(text: string, font: PDFFont, size: number, width: number): string[
   return lines;
 }
 
+/**
+ * One page, always. Longer languages (German runs a fifth longer than English)
+ * get the body set a little tighter before giving up.
+ */
 export async function renderAppointmentSheet(c: AppointmentSheetContent): Promise<Uint8Array> {
+  const scales = [1, 0.93, 0.86];
+  for (const [i, k] of scales.entries()) {
+    try {
+      return await draw(c, k);
+    } catch (error) {
+      if (!(error instanceof SheetOverflowError) || i === scales.length - 1) throw error;
+    }
+  }
+  throw new SheetOverflowError("unreachable");
+}
+
+async function draw(c: AppointmentSheetContent, k: number): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   doc.setTitle(`${c.title} — ${c.purpose}`);
   doc.setAuthor("BCN Student Concierge");
@@ -86,20 +102,20 @@ export async function renderAppointmentSheet(c: AppointmentSheetContent): Promis
   const colW = CONTENT / 2 - 24;
 
   y = panelTop - 22;
-  text("WHEN", colL, 7.5, bold, SOFT);
+  text(c.labels.when, colL, 7.5, bold, SOFT);
   y -= 17;
   text(c.when.date, colL, 11.5, bold);
   y -= 26;
   text(c.when.time, colL, 22, bold, OLIVE);
   y -= 18;
-  text("Arrive 15 minutes early.", colL, 9, regular, MUTED);
+  text(c.labels.arrive, colL, 9, regular, MUTED);
   if (c.confirmationCode) {
     y -= 16;
     text(`Justificante: ${c.confirmationCode}`, colL, 9, regular, MUTED);
   }
 
   y = panelTop - 22;
-  text("WHERE", colR, 7.5, bold, SOFT);
+  text(c.labels.where, colR, 7.5, bold, SOFT);
   y -= 17;
   para(c.office.name, colR, colW, 11, bold);
   para(c.office.address, colR, colW, 10, regular, INK, 13);
@@ -107,7 +123,7 @@ export async function renderAppointmentSheet(c: AppointmentSheetContent): Promis
   // helps nobody standing at a Metro entrance.
   if (c.office.metro) {
     y -= 6;
-    text("NEAREST METRO", colR, 7.5, bold, SOFT);
+    text(c.labels.metro, colR, 7.5, bold, SOFT);
     y -= 14;
     para(c.office.metro, colR, colW, 10, regular);
   }
@@ -115,30 +131,37 @@ export async function renderAppointmentSheet(c: AppointmentSheetContent): Promis
   y = panelTop - panelH - 8;
 
   // ── Checklist ──
-  section("Bring with you");
+  section(c.labels.bring);
   for (const item of c.checklist) {
     guard();
     page.drawRectangle({ x: M + 2, y: y - 1.5, width: 9, height: 9, borderColor: OLIVE, borderWidth: 1 });
-    para(item, M + 20, CONTENT - 20, 10, regular, INK, 13.5);
-    y -= 3;
+    para(item, M + 20, CONTENT - 20, 10 * k, regular, INK, 13.5 * k);
+    y -= 3 * k;
   }
 
-  // ── Phrases ──
-  section("Say it in Spanish");
-  for (const p of c.phrases) {
-    guard();
-    para(p.spanish, M, CONTENT, 10.5, bold, INK, 13.5);
-    para(p.phonetic, M, CONTENT, 9, regular, OLIVE, 12);
-    para(p.meaning, M, CONTENT, 9, regular, MUTED, 12);
-    y -= 6;
+  // ── Phrases (not for readers who already speak Spanish) ──
+  if (c.phrases.length) {
+    section(c.labels.phrases);
+    if (c.phoneticKey) {
+      y += 4;
+      para(c.phoneticKey, M, CONTENT, 7.5 * k, regular, SOFT, 10 * k);
+      y -= 4;
+    }
+    for (const p of c.phrases) {
+      guard();
+      para(p.spanish, M, CONTENT, 10.5 * k, bold, INK, 13.5 * k);
+      para(p.phonetic, M, CONTENT, 9 * k, regular, OLIVE, 12 * k);
+      para(p.meaning, M, CONTENT, 9 * k, regular, MUTED, 12 * k);
+      y -= 6 * k;
+    }
   }
 
   // ── After ──
-  section("After the appointment");
+  section(c.labels.after);
   for (const line of c.after) {
     guard();
-    text("•", M + 3, 9.5, bold, OLIVE);
-    para(line, M + 16, CONTENT - 16, 9.5, regular, INK, 12.5);
+    text("•", M + 3, 9.5 * k, bold, OLIVE);
+    para(line, M + 16, CONTENT - 16, 9.5 * k, regular, INK, 12.5 * k);
   }
   guard();
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import "@/styles/globals.css";
 
 /**
@@ -27,13 +28,14 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    // The language of the page being served; staff and API routes are English.
+    <html lang={await getLocale()}>
       {/* Page chrome lives in the (site) and admin layouts, so the staff
           dashboard does not inherit the marketing header and footer. */}
       <body className="flex min-h-screen flex-col">{children}</body>

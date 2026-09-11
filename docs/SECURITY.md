@@ -357,7 +357,26 @@ pdf-lib's font subsetting silently dropped glyphs — letters and the total line
 vanished from a structurally valid PDF — so subsetting is off, and a test
 inspects the embedded font program to keep it that way.
 
-## 11. Pre-launch checklist
+## 11. Translations
+
+The site is served in six languages from catalogues in `messages/`, which are
+committed. Translation happens on a developer machine, never on the server:
+
+- **No personal data reaches DeepL.** It receives site copy only — labels,
+  instructions, legal text. Student data is never translated; the emails and
+  PDFs a student receives are assembled from translated templates. DeepL is
+  therefore not a processor of personal data and is not listed in the privacy
+  notice.
+- **The key is a development secret.** `DEEPL_API_KEY` lives in `.env.local`
+  (gitignored) on the machine that runs `npm run i18n:translate`. It must not
+  be added to the server's `.env`, where nothing uses it.
+- **Translations cannot break a page.** Validation messages travel as keys and
+  are worded in the browser; `tests/i18n.test.ts` rejects a catalogue with a
+  missing key, a lost `{placeholder}` or tag, a changed official term, or a
+  message that does not parse.
+- **The English legal text prevails.** Each translated legal page says so.
+
+## 12. Pre-launch checklist
 
 - [ ] `openssl s_client -tls1_2 -connect bcnstudent.com:443` **fails** (TLS 1.3 only)
 - [ ] App port 3000 not published; `curl http://<server-ip>:3000` refused from outside
@@ -379,3 +398,5 @@ inspects the embedded font program to keep it that way.
 - [ ] CaixaBank ATM steps checked against one real payment (`docs/FORMS.md`)
 - [ ] Privacy notice reviewed by a Spanish data-protection lawyer
 - [ ] Scope-of-service disclaimer reviewed against current anti-intrusismo guidance
+- [ ] Translated legal pages reviewed, and each language read by a native speaker (Catalan first)
+- [ ] `DEEPL_API_KEY` absent from the server's `.env`

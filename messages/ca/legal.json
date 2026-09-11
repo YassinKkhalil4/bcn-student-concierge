@@ -1,0 +1,184 @@
+{
+  "scope": {
+    "metaTitle": "Abast del servei",
+    "metaDescription": "Què fa i què no fa BCN Student Concierge, i per què aquesta distinció és important segons la legislació espanyola.",
+    "eyebrow": "Legal",
+    "title": "Abast del servei",
+    "clauses": [
+      {
+        "heading": "Sobre nosaltres",
+        "paragraphs": [
+          "BCN Student Concierge és un servei privat d’assistència administrativa. Preparem documents basant-nos en la informació que ens proporcioneu, reservem cites en sistemes de reserva públics en nom vostre i us guiem en un procés que es fa en espanyol i que requereix coneixements locals que encara no teniu."
+        ]
+      },
+      {
+        "heading": "Què no som",
+        "paragraphs": [
+          "No som un despatx d’advocats ni estem col·legiats. No som una gestoria registrada. No som agents, representants ni intermediaris de cap autoritat pública espanyola, i no estem afiliats a cap universitat.",
+          "La legislació espanyola reserva determinades activitats —la representació legal, l’assessorament formal en matèria d’immigració i l’actuació davant les autoritats en nom d’una altra persona— a professionals regulats. Oferir-les sense la titulació corresponent constitueix intrusisme professional. Nosaltres no les oferim, i aquesta pàgina existeix perquè no hi hagi cap ambigüitat."
+        ]
+      },
+      {
+        "heading": "La secció 2 del vostre formulari roman en blanc",
+        "paragraphs": [
+          "Els formularis oficials EX-17 i EX-18 tenen un apartat per a les dades d’un representant legal. Nosaltres el deixem en blanc, deliberadament i sempre. Emplenar-lo equivaldria a declarar davant la Policía Nacional que actuem com el vostre representant, cosa que no és certa i que, a més, requeriria un poder notarial que no tenim ni us demanarem. En tots els formularis que preparem, el sol·licitant sou vosaltres."
+        ]
+      },
+      {
+        "heading": "Notificacions electròniques (DEHú)",
+        "paragraphs": [
+          "Deixem sense marcar la casella de consentiment per a les notificacions electròniques. En donar aquest consentiment s’activen terminis de notificació jurídicament vinculants, amb avisos enviats a una bústia del Govern d’Espanya a la qual només s’accedeix amb certificat digital, que un estudiant nouvingut no té. Una notificació no recollida pot fer que es tanqui un expedient. Si més endavant obteniu un certificat i voleu donar-hi el consentiment, és una decisió que heu de prendre amb coneixement de causa."
+        ]
+      },
+      {
+        "heading": "No es garanteixen resultats",
+        "paragraphs": [
+          "Les decisions relatives a la residència, la inscripció en el padró municipal i la documentació corresponen íntegrament a les autoritats espanyoles competents. No tenim cap influència en aquestes decisions i no podem garantir cap resultat, termini ni la disponibilitat de cites. La nostra responsabilitat és garantir que la vostra sol·licitud estigui completa, sigui coherent en el seu conjunt, estigui en el format correcte i es presenti a temps."
+        ]
+      },
+      {
+        "heading": "Les vostres responsabilitats",
+        "paragraphs": [
+          "La informació que proporcioneu es convertirà en una declaració que haureu de signar. Sou responsable de garantir-ne l’exactitud, de comprovar cada document abans de signar-lo i d’assistir a les cites en persona amb els documents originals. Indicarem clarament què heu de comprovar; no ho podem fer per vós, ja que no hem vist mai el vostre passaport original."
+        ]
+      },
+      {
+        "heading": "Quan us derivarem a una altra font",
+        "paragraphs": [
+          "Si la vostra situació implica una sol·licitud denegada, una situació de residència caducada o irregular, un certificat d’antecedents penals, una sol·licitud de reagrupament familiar o qualsevol assumpte que requereixi una anàlisi jurídica, us ho informarem i rebutjarem l’encàrrec en lloc d’intentar dur-lo a terme. Preferim perdre l’encàrrec que fer-vos confiar en uns consells per als quals no estem qualificats."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "metaTitle": "Privacitat i RGPD",
+    "metaDescription": "Com BCN Student Concierge recull, xifra, emmagatzema i elimina les dades personals d’acord amb el RGPD i la LOPDGDD.",
+    "eyebrow": "Privacitat",
+    "title": "Avís de privacitat i compromisos pel que fa al RGPD",
+    "clauses": [
+      {
+        "heading": "Qui és el responsable del tractament de les dades?",
+        "paragraphs": [
+          "BCN Student Concierge (el «responsable del tractament») determina com i per a què es tracten les vostres dades personals. Contacte per a qualsevol qüestió de protecció de dades, inclòs l’exercici dels drets que es detallen a continuació: <mail>privacy@bcnstudent.com</mail>."
+        ]
+      },
+      {
+        "heading": "Quines dades recollim i per què",
+        "paragraphs": [
+          "Dades d’identitat i estat civil (número de passaport, NIE, noms, sexe, dades de naixement, nacionalitat, estat civil, noms de pila dels pares), la vostra adreça a Espanya, dades de contacte i còpies escanejades del passaport, la carta d’admissió de la universitat i el contracte de lloguer.",
+          "Base jurídica: execució d’un contracte amb vosaltres (article 6.1.b del RGPD). Recollim aquestes dades perquè les exigeixen els formularis de residència espanyols, no perquè les vulguem. No recollim dades de salut, plantilles biomètriques ni cap dada de categoria especial de l’article 9, més enllà del que aparegui a la cara visible dels documents que pugeu."
+        ]
+      },
+      {
+        "heading": "Com es protegeixen les vostres dades",
+        "paragraphs": [
+          "Les respostes del vostre qüestionari (número de passaport, noms, data i lloc de naixement, adreça) i tots els documents que pugeu es xifren en repòs amb AES-256-GCM, cadascun amb la seva pròpia clau. Aquestes claus, al seu torn, es xifren amb una clau mestra que es guarda separada de la base de dades i de les còpies de seguretat; així, una còpia de la base de dades o d’una còpia de seguretat no desxifra res per si sola, i la filtració d’un registre mai no n’exposa cap altre.",
+          "Tot el trànsit es gestiona exclusivament mitjançant TLS 1.3, amb HTTP Strict Transport Security. Les dades de les targetes de pagament són gestionades íntegrament per Stripe i mai no arriben als nostres servidors.",
+          "<strong>Una limitació honesta:</strong> és un xifratge fort en repòs, però no és xifratge d’extrem a extrem. Els nostres sistemes poden desxifrar els vostres documents, perquè el nostre personal els ha de revisar i el nostre programari ha de llegir les vostres dades per emplenar els formularis. Qualsevol servei que afirmi guardar el vostre passaport amb xifratge d’extrem a extrem mentre us emplena la documentació descriu una cosa que no pot ser certa."
+        ]
+      },
+      {
+        "heading": "Quant de temps ho conservem: la regla dels 30 dies",
+        "paragraphs": [
+          "Les còpies escanejades del passaport, els documents pujats i les dades d’identitat s’eliminen definitivament 30 dies després que finalitzi el servei. És un procés automàtic, no un compromís manual: els fitxers vençuts s’eliminen sense que ningú ho hagi de decidir, i l’eliminació és irreversible.",
+          "Només sobreviuen a aquesta purga dues coses, i només aquestes: un registre que l’expedient va existir i es va eliminar, i les dades de facturació. La legislació mercantil i fiscal espanyola (article 30 del Codi de comerç; Llei general tributària) exigeix conservar els registres de facturació durant diversos anys, i aquesta obligació preval sobre les sol·licituds de supressió d’aquests registres concrets, d’acord amb l’article 17.3.b del RGPD. Una factura conté el nom del pagador, l’adreça de facturació i, en el cas d’una empresa, el seu número d’identificació fiscal —desat xifrat—, a més dels imports. Mai no inclou el vostre número de passaport ni escanejos de documents.",
+          "Podeu sol·licitar la supressió en qualsevol moment abans que hagin passat 30 dies."
+        ]
+      },
+      {
+        "heading": "Si algú autoritza el vostre domicili",
+        "paragraphs": [
+          "Quan el pis no és a nom vostre, la persona que el té al seu nom (el propietari o el llogater principal) autoritza el vostre empadronament al Padró amb el formulari oficial de l’Ajuntament de Barcelona. Vosaltres escriviu el nom i el número d’identificació del signant perquè puguem emplenar-vos el formulari. Fem servir aquestes dades una sola vegada, per generar el PDF, i no les desem.",
+          "L’Ajuntament necessita el formulari signat, una còpia del document d’identitat del signant i el contracte de lloguer, que pujareu després, per empadronar-vos. Els conservem xifrats, com els vostres propis documents, només els fem servir per preparar el vostre expedient del Padró i els eliminem amb la resta de l’expedient 30 dies després que finalitzi el servei. Informeu el signant que compartiu aquests documents amb nosaltres amb aquesta finalitat."
+        ]
+      },
+      {
+        "heading": "Qui més té accés a les vostres dades?",
+        "paragraphs": [
+          "Stripe (processament de pagaments, Irlanda/EUA en virtut de l’Acord de Protecció de Dades UE-EUA); Resend (enviament dels nostres correus electrònics, com ara enllaços d’inici de sessió); i el nostre proveïdor de servidors amb seu a la UE, cadascun dels quals està subjecte a un acord de processament de dades. No venem les vostres dades, no les compartim amb anunciants i no les transferim fora de l’EEE, excepte en els casos que s’estableixen aquí.",
+          "Les autoritats públiques només reben el que vosaltres mateixos els presenteu, en nom propi, a la vostra cita."
+        ]
+      },
+      {
+        "heading": "Els vostres drets",
+        "paragraphs": [
+          "Podeu sol·licitar l’accés a les vostres dades, la rectificació de les inexactituds, l’esborrament, la limitació del tractament, la portabilitat de les dades en un format llegible per màquina, i podeu oposar-vos al tractament. Quan el tractament es basi en el consentiment, podeu retirar-lo en qualsevol moment; no obstant això, retirar el consentiment per a la conservació dels vostres documents generalment significarà que no podrem completar el servei.",
+          "Respondrem en el termini d’un mes. Si no esteu satisfets, podeu presentar una reclamació davant l’Agència Espanyola de Protecció de Dades (AEPD), C/ Jorge Juan 6, 28001 Madrid, o a través de aepd.es."
+        ]
+      },
+      {
+        "heading": "Notificació de violació de dades",
+        "paragraphs": [
+          "Si es produeix una violació de dades que pugui suposar un risc per als vostres drets, notificarem l’AEPD en un termini de 72 hores i us ho comunicarem directament sense dilació indeguda. Especificarem a quines dades s’ha accedit, en lloc d’oferir-vos una assegurança vaga."
+        ]
+      },
+      {
+        "heading": "Cookies",
+        "paragraphs": [
+          "Aquest lloc web no instal·la galetes publicitàries ni d’analítica, ni fa servir seguidors de tercers. Les úniques galetes són les estrictament necessàries: una galeta d’inici de sessió que us manté connectats un màxim de 24 hores, i les galetes que instal·la Stripe per prevenir el frau durant el pagament. No hi ha cap bàner de consentiment perquè no hi ha res a consentir."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Condicions d’ús",
+    "metaDescription": "Termes i condicions per als serveis de tramitació administrativa de BCN Student Concierge.",
+    "eyebrow": "Condicions",
+    "title": "Condicions d’ús",
+    "priceLine": "{name} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "clauses": [
+      {
+        "heading": "1. Caràcter del servei",
+        "paragraphs": [
+          "Oferim assistència administrativa: preparació de documents a partir de la informació que ens proporcioneu, reserva de cites en sistemes públics en nom vostre i orientació pràctica per a la vostra instal·lació a Barcelona. No oferim representació legal ni assessorament vinculant en matèria d’immigració. Consulteu la nostra pàgina <scopeLink>sobre l’abast dels nostres serveis</scopeLink>, que forma part d’aquestes condicions generals."
+        ]
+      },
+      {
+        "heading": "2. Honoraris i IVA",
+        "priceListAfter": 0,
+        "paragraphs": [
+          "Els preus dels paquets són fixos i s’indiquen sense IVA; abans del pagament es mostren l’IVA del 21 % i l’import total:",
+          "Les taxes de l’Administració —inclosa la taxa estatal del Modelo 790 Código 012 i les despeses d’expedició de la targeta— les fixen les autoritats espanyoles, les pagueu directament i no s’inclouen en cap paquet. Mai no recaptem taxes en nom de l’Administració."
+        ]
+      },
+      {
+        "heading": "3. Dret de desistiment",
+        "paragraphs": [
+          "Com a consumidor que ha subscrit un contracte a distància, disposeu de 14 dies per desistir-ne sense haver de donar cap motiu (Reial decret legislatiu 1/2007, art. 102). Si ens demaneu que comencem a treballar dins d’aquest termini i completem el servei, el dret de desistiment s’extingeix quan el servei s’ha prestat, i si desistiu a mig procés haureu de pagar la part proporcional de la feina ja feta. No començarem a treballar dins del termini de desistiment sense la vostra sol·licitud expressa."
+        ]
+      },
+      {
+        "heading": "4. Les vostres obligacions",
+        "paragraphs": [
+          "Heu de proporcionar informació exacta i completa i documents autèntics, revisar tots els documents que us preparem abans de signar-los i assistir personalment a les cites amb els originals. La informació que ens doneu es converteix en una declaració que signeu en nom propi; no podem verificar originals que no hem vist mai.",
+          "La presentació de documents falsificats comportarà la rescissió immediata del contracte sense dret a reemborsament i podria constituir un delicte segons la legislació espanyola."
+        ]
+      },
+      {
+        "heading": "5. De què som i de què no som responsables",
+        "paragraphs": [
+          "Ens fem responsables dels nostres propis errors: un formulari que hàgim redactat incorrectament basant-nos en els detalls exactes que ens heu proporcionat, o una cita que no hàgim concertat tal com s’havia acordat. En aquests casos, corregirem l’error i tornarem a concertar la cita a càrrec nostre.",
+          "No som responsables de les decisions de les autoritats espanyoles, de la disponibilitat de cites, dels canvis en la legislació o els procediments, de les conseqüències d’informació inexacta que ens hàgiu donat ni de la vostra absència a una cita. La nostra responsabilitat total es limita als honoraris que ens hàgiu pagat, excepte quan la llei no permet limitar-la —inclosos els casos de mort, lesions personals, frau o negligència greu, cap dels quals no pretenem excloure."
+        ]
+      },
+      {
+        "heading": "6. Cancel·lacions i reemborsaments",
+        "paragraphs": [
+          "Abans de començar la feina: reemborsament íntegre. Un cop començada la preparació, però abans de reservar les cites: reemborsament del 50 %. Un cop reservades les cites: sense reemborsament, perquè el servei ja s’ha prestat en l’essencial. Si no podem prestar el servei per motius que depenen de nosaltres, us reemborsarem l’import íntegre."
+        ]
+      },
+      {
+        "heading": "7. Protecció de dades",
+        "paragraphs": [
+          "El tractament de dades està regulat per la nostra <privacyLink>política de privacitat</privacyLink>, inclosa l’eliminació automàtica dels documents d’identitat 30 dies després de finalitzar el servei."
+        ]
+      },
+      {
+        "heading": "8. Legislació aplicable",
+        "paragraphs": [
+          "Aquests termes i condicions es regeixen per la legislació espanyola. Les controvèrsies de consum es poden presentar davant dels tribunals del domicili del consumidor, i el consumidor pot recórrer al Sistema Arbitral de Consum d’Espanya o a la plataforma de resolució de litigis en línia de la UE."
+        ]
+      }
+    ]
+  }
+}

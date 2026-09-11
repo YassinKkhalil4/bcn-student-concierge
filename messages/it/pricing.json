@@ -1,0 +1,80 @@
+{
+  "tiers": {
+    "baseline": {
+      "name": "Administrative Baseline",
+      "shortName": "Administrative Baseline",
+      "tagline": "Gli adempimenti legali essenziali, presentati correttamente sin dal primo tentativo.",
+      "bestFor": "Studenti che alloggiano in residenze universitarie e necessitano di assistenza per l’espletamento delle pratiche burocratiche.",
+      "features": [
+        "Prenotazione di appuntamenti per il Padrón (registrazione comunale)",
+        "Prenotazione degli appuntamenti con la Policía Nacional per la TIE / CUE",
+        "Generazione dei moduli EX-17 o EX-18, precompilati e pronti per la stampa",
+        "Configurazione del modulo fiscale con codice a barre Modelo 790 Código 012",
+        "Preparazione del «Ready File» già verificato, in formato cartaceo e digitale"
+      ]
+    },
+    "soft-landing": {
+      "name": "Digital Soft-Landing",
+      "shortName": "Digital Soft-Landing",
+      "tagline": "Le pratiche burocratiche, oltre a tutto ciò che rende la città vivibile.",
+      "bestFor": "La maggior parte degli studenti internazionali del primo anno che arrivano da soli.",
+      "features": [
+        "Guida all’apertura di un conto corrente bancario in Spagna (da non residente a residente)",
+        "Registrazione dell’abbonamento ai mezzi pubblici T-mobilitat / T-jove",
+        "Guida alla scelta e all’attivazione di SIM digitali / eSIM",
+        "Configurazione della tessera Carnet Jove e della tessera studentesca ISIC",
+        "Linea di assistenza dedicata su WhatsApp durante la fase di inserimento"
+      ]
+    },
+    "turnkey": {
+      "name": "Turnkey Relocation & Housing Audit",
+      "shortName": "Turnkey Relocation & Housing Audit",
+      "tagline": "Verifichiamo l’appartamento prima che Lei effettui il bonifico della cauzione.",
+      "bestFor": "Famiglie che cercano un alloggio privato dall’estero, senza averlo mai visto di persona.",
+      "features": [
+        "Ricerca verificata di alloggi tra annunci sottoposti a controllo antifrode",
+        "Verifica della titolarità presso il registro immobiliare (Nota Simple)",
+        "Revisione del contratto di locazione con verifica legale del limite massimo di cauzione",
+        "Guida all’attivazione delle utenze (acqua, elettricità, Internet)",
+        "Monitoraggio della pratica per 90 giorni fino al ritiro della tessera TIE"
+      ]
+    }
+  },
+  "card": {
+    "mostChosen": "Il più scelto",
+    "plusIva": "+ IVA",
+    "ivaLine": "{iva} IVA (21%) · <strong>{total} totale</strong>",
+    "everythingIn": "Tutto quanto contenuto in {name}, oltre a:",
+    "bestFor": "Ideale per:",
+    "select": "Scegli {name}"
+  },
+  "page": {
+    "metaTitle": "Servizi e Prezzi",
+    "metaDescription": "Tre pacchetti a tariffa fissa per gli studenti internazionali in arrivo a Barcellona: Administrative Baseline, Digital Soft-Landing e Turnkey Relocation & Housing Audit.",
+    "eyebrow": "Servizi e prezzi",
+    "title": "Tariffe fisse per un iter senza tempistiche prestabilite.",
+    "intro": "Ogni pacchetto è indicato al netto dell’IVA e viene visualizzato con l’importo totale comprensivo di {rate}% di IVA prima del pagamento. Nessun servizio viene fatturato a ore e nessun pacchetto include le tasse amministrative.",
+    "govEyebrow": "Tasse amministrative",
+    "govTitle": "L’unico pagamento che non possiamo effettuare al posto Suo.",
+    "exclusionsEyebrow": "Piena trasparenza",
+    "exclusionsTitle": "Cosa non è compreso nella nostra tariffa.",
+    "exclusions": [
+      {
+        "item": "Tassa statale Modelo 790 Código 012",
+        "note": "Da versare direttamente all’agenzia delle entrate spagnola presso una banca. L’importo è fissato dal governo e varia a seconda del tipo di carta."
+      },
+      {
+        "item": "Tasse universitarie, depositi cauzionali e affitto",
+        "note": "Non gestiamo mai fondi dei clienti per conto di terzi. Tutti i pagamenti vengono effettuati direttamente da voi al locatore o all’istituzione."
+      },
+      {
+        "item": "Rappresentanza legale o ricorsi",
+        "note": "Al di fuori della nostra competenza. Qualora il Suo caso lo richiedesse, glielo comunicheremo e Le consiglieremo un colegiado abogado."
+      },
+      {
+        "item": "Servizi di traduzione o di apostille",
+        "note": "Individuiamo quali documenti richiedono una traduzione giurata e possiamo indirizzarLa a un traductor jurado; il suo onorario è a parte."
+      }
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "metaTitle": "BCN Student Concierge — Une installation sans encombre à Barcelone",
+  "metaDescription": "Accompagnement administratif indépendant destiné aux étudiants universitaires internationaux arrivant à Barcelone. Padrón, rendez-vous pour la carte TIE/CUE et préparation des documents.",
+  "hero": {
+    "eyebrow": "Barcelone · Créé pour les familles internationales",
+    "title": "Une arrivée sans encombre et une installation en toute légalité pour les étudiants universitaires internationaux à Barcelone.",
+    "body": "Votre enfant a obtenu une place dans une université de Barcelone. Seule une série de démarches administratives espagnoles, qui ne pardonne aucune petite erreur et se déroule entièrement en espagnol, l’empêche encore de s’installer. Nous nous chargeons de ces démarches, en les effectuant correctement dès la première fois.",
+    "primaryCta": "Commencer l’inscription sécurisée",
+    "secondaryCta": "Comparer les formules",
+    "note": "Tarifs fixes, IVA incluse, annoncés avant le paiement. Pas de facturation à l’heure."
+  },
+  "trust": {
+    "heading": "Nous accompagnons des étudiants de",
+    "disclaimer": "Les universités citées sont celles que fréquentent nos clients. Nous sommes un service indépendant et ne sommes ni affiliés à, ni soutenus par, ni agissons pour le compte d’aucune des institutions mentionnées."
+  },
+  "problems": {
+    "eyebrow": "Ce qui pose réellement problème",
+    "title": "Quatre points de rupture, et comment nous éliminons chacun d’eux.",
+    "approach": "Notre approche — ",
+    "items": [
+      {
+        "problem": "Les créneaux de cita previa disparaissent en quelques secondes",
+        "detail": "Les rendez-vous du Padrón et de la Policía Nacional sont publiés de façon irrégulière et pris en quelques minutes par des robots. Les familles qui actualisent un portail en espagnol depuis un autre fuseau horaire en obtiennent rarement un.",
+        "solution": "Nous suivons les créneaux horaires disponibles dans tous les quartiers de Barcelone et prenons rendez-vous au nom de votre étudiant, puis nous vous envoyons la confirmation accompagnée des indications pour vous y rendre et de la liste précise des documents à apporter."
+      },
+      {
+        "problem": "Une seule case mal cochée invalide l’ensemble du dossier",
+        "detail": "Un formulaire EX-17 sur lequel un deuxième nom de famille a été indiqué par « N/A », une rubrique « représentant » remplie par un parent bien intentionné, ou un formulaire imprimé avec du texte décalé dans les champs sera refusé au guichet — et le prochain rendez-vous n’est prévu que dans plusieurs semaines.",
+        "solution": "Les formulaires sont générés par un programme à partir de vos données vérifiées, mis en page de manière à ce que rien ne se décale à l’impression, puis recoupés avec les informations figurant sur votre passeport avant que le dossier ne quitte nos locaux."
+      },
+      {
+        "problem": "Le formulaire fiscal ne peut pas être réglé en ligne",
+        "detail": "Le formulaire Modelo 790 Código 012 comporte un code-barres unique et, pour la plupart des étudiants, doit être réglé en espèces au guichet d’une banque espagnole ou à un distributeur automatique équipé d’un lecteur de code-barres. Il arrive fréquemment que des étudiants se présentent au commissariat avec un formulaire non réglé.",
+        "solution": "Nous configurons le formulaire muni d’un code-barres pour le paiement en espèces et fournissons des instructions étape par étape pour CaixaBank, BBVA et Santander — en précisant notamment quelles agences acceptent les paiements des non-clients."
+      },
+      {
+        "problem": "La fraude au logement cible les étudiants nouvellement arrivés",
+        "detail": "Les annonces publiées depuis l’étranger concernent souvent des sous-locations illégales, des logements appartenant à une autre personne que le « propriétaire », ou des cautions supérieures au plafond légal. Les cautions versées par virement avant l’arrivée sont rarement récupérées.",
+        "solution": "Avec notre formule Turnkey, nous obtenons la Nota Simple auprès du registre foncier pour confirmer qui est réellement propriétaire de l’appartement, et nous vérifions que la caution prévue au contrat respecte le plafond légal avant tout virement."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "La procédure",
+    "title": "Quatre étapes, de l’inscription à la remise de la carte.",
+    "steps": [
+      {
+        "title": "Inscription sécurisée",
+        "body": "Votre étudiant remplit le questionnaire chiffré et envoie son passeport, son certificat de scolarité (matrícula) et son bail. Chaque document est chiffré individuellement en AES-256."
+      },
+      {
+        "title": "Constitution du dossier",
+        "body": "Nous générons le bon formulaire — EX-17 pour les étudiants hors UE, EX-18 pour les ressortissants de l’UE —, configurons le Modelo 790 et constituons un « Ready File » pré-vérifié."
+      },
+      {
+        "title": "Rendez-vous pris",
+        "body": "Nous prenons rendez-vous pour le Padrón et la carte TIE/CUE et vous remettons un itinéraire daté : où vous devez vous rendre, ce que vous devez apporter, ce qui vous sera demandé."
+      },
+      {
+        "title": "Installation et suivi",
+        "body": "Les démarches bancaires, les transports et la connexion Internet sont mis en place dès la première semaine. Nous assurons le suivi du dossier pendant 90 jours, jusqu’à la remise de la carte."
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Tarification transparente",
+    "title": "Trois formules. Tarifs fixes, IVA incluse.",
+    "body": "Les frais administratifs (Modelo 790, délivrance de cartes) sont à votre charge et doivent être réglés directement aux autorités espagnoles ; ils ne sont pas inclus dans nos honoraires.",
+    "cta": "Voir la comparaison complète"
+  },
+  "faq": {
+    "eyebrow": "Des réponses claires",
+    "title": "Les questions que les parents posent en premier lieu.",
+    "items": [
+      {
+        "q": "Êtes-vous des avocats ou une « gestoría » ?",
+        "a": "Non. Nous sommes un service indépendant d’aide administrative. Nous préparons les documents à partir des informations que vous nous fournissez, prenons des rendez-vous et vous guidons tout au long de la procédure. Nous ne vous représentons devant aucune autorité et ne fournissons pas de conseils juridiques. Lorsqu’un dossier nécessite une analyse juridique, nous vous l’indiquons clairement et vous recommandons de consulter un colegiado abogado."
+      },
+      {
+        "q": "Mon enfant doit-il se présenter en personne à ces rendez-vous ?",
+        "a": "Oui. Les rendez-vous pour la prise des données biométriques exigent que le demandeur se présente en personne muni des documents originaux. Nous préparons le dossier, réservons le créneau horaire et leur fournissons des explications détaillées — mais c’est à eux de se présenter, en leur propre nom."
+      },
+      {
+        "q": "Que deviennent les scans de passeport par la suite ?",
+        "a": "Ils sont chiffrés au repos à l’aide d’une clé unique par fichier et supprimés définitivement 30 jours après la fin de votre service, par une tâche de conservation automatisée. Vous pouvez demander une suppression anticipée à tout moment."
+      },
+      {
+        "q": "Pouvez-vous garantir que la carte de séjour sera approuvée ?",
+        "a": "Non, et tout service qui vous garantit cela vous induit en erreur. Les décisions relèvent entièrement des autorités espagnoles. Ce que nous contrôlons, c’est que le dossier soit complet, correct et remis dans les délais — c’est d’ailleurs là que réside la cause principale des refus."
+      },
+      {
+        "q": "Pourquoi le Modelo 790 est-il payé en espèces ?",
+        "a": "La procédure mise en place par l’administration fiscale espagnole pour ce formulaire repose sur un code-barres unique lu au guichet d’une banque ou par le scanner d’un distributeur automatique. Sans certificat numérique espagnol — dont les nouveaux arrivants ne disposent pas —, le règlement en ligne n’est pas possible ; le formulaire est donc configuré pour un paiement « en efectivo »."
+      }
+    ]
+  }
+}

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 /** Opens Stripe Checkout for the signed-in student's own file. */
 export function PayButton({ label }: { label: string }) {
+  const t = useTranslations("portal.pay");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -12,14 +14,14 @@ export function PayButton({ label }: { label: string }) {
     setError(null);
     try {
       const res = await fetch("/api/checkout", { method: "POST" });
-      const json = (await res.json()) as { url?: string; error?: string };
+      const json = (await res.json()) as { url?: string };
       if (json.url) {
         window.location.href = json.url;
         return;
       }
-      setError(json.error ?? "Could not open checkout.");
+      setError(t("failed"));
     } catch {
-      setError("Network error. Please try again.");
+      setError(t("network"));
     } finally {
       setBusy(false);
     }
@@ -28,7 +30,7 @@ export function PayButton({ label }: { label: string }) {
   return (
     <div>
       <button type="button" onClick={() => void pay()} disabled={busy} className="btn-primary">
-        {busy ? "Opening secure checkout…" : label}
+        {busy ? t("opening") : label}
       </button>
       {error && (
         <p role="alert" className="mt-2 text-sm text-terracotta">

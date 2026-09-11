@@ -1,0 +1,80 @@
+{
+  "tiers": {
+    "baseline": {
+      "name": "Administrative Baseline",
+      "shortName": "Administrative Baseline",
+      "tagline": "Los aspectos legales esenciales, tramitados correctamente a la primera.",
+      "bestFor": "Estudiantes en residencias universitarias que necesitan que alguien se ocupe del papeleo.",
+      "features": [
+        "Concertación de citas para el Padrón (registro municipal)",
+        "Reserva de citas con la Policía Nacional para el TIE / CUE",
+        "Generación de los formularios EX-17 o EX-18, ya cumplimentados y listos para imprimir",
+        "Configuración del formulario fiscal con código de barras Modelo 790 Código 012",
+        "Preparación del «Ready File», revisado, en papel y en formato digital"
+      ]
+    },
+    "soft-landing": {
+      "name": "Digital Soft-Landing",
+      "shortName": "Digital Soft-Landing",
+      "tagline": "Los trámites, y todo lo que hace la ciudad práctica desde el primer día.",
+      "bestFor": "La mayoría de los estudiantes internacionales de primer año que llegan solos.",
+      "features": [
+        "Guía para la apertura de una cuenta bancaria en España (de no residente a residente)",
+        "Inscripción en el abono de transporte T-mobilitat / T-jove",
+        "Guía para la selección y activación de tarjetas SIM digitales / eSIM",
+        "Configuración del Carnet Jove y de la tarjeta de estudiante ISIC",
+        "Línea de asistencia dedicada a través de WhatsApp durante el proceso de incorporación"
+      ]
+    },
+    "turnkey": {
+      "name": "Turnkey Relocation & Housing Audit",
+      "shortName": "Turnkey Relocation & Housing Audit",
+      "tagline": "Comprobamos el piso antes de que usted realice la transferencia del depósito.",
+      "bestFor": "Familias que contratan una vivienda privada desde el extranjero, sin haberla visto previamente.",
+      "features": [
+        "Búsqueda verificada de alojamientos a partir de anuncios sometidos a controles antifraude",
+        "Verificación de la titularidad en el Registro de la Propiedad (Nota Simple)",
+        "Revisión del contrato de alquiler con verificación legal del límite máximo de la fianza",
+        "Guía para la activación de los servicios públicos (agua, electricidad, Internet)",
+        "Seguimiento de la documentación durante 90 días hasta la recogida de la tarjeta TIE"
+      ]
+    }
+  },
+  "card": {
+    "mostChosen": "El más elegido",
+    "plusIva": "+ IVA",
+    "ivaLine": "{iva} IVA (21 %) · <strong>{total} total</strong>",
+    "everythingIn": "Todo lo incluido en {name}, además de:",
+    "bestFor": "Ideal para:",
+    "select": "Elegir {name}"
+  },
+  "page": {
+    "metaTitle": "Servicios y tarifas",
+    "metaDescription": "Tres paquetes de tarifa fija para estudiantes internacionales que llegan a Barcelona: Administrative Baseline, Digital Soft-Landing y Turnkey Relocation & Housing Audit.",
+    "eyebrow": "Servicios y tarifas",
+    "title": "Tarifas fijas para un trámite sin plazo de tramitación definido.",
+    "intro": "Todos los paquetes se cotizan sin IVA y se muestran con su importe total, que incluye un {rate} % de IVA, antes de que realice el pago. No se factura por horas y ningún paquete incluye las tasas administrativas.",
+    "govEyebrow": "Tasas administrativas",
+    "govTitle": "El único pago que no podemos realizar en su nombre.",
+    "exclusionsEyebrow": "Total transparencia",
+    "exclusionsTitle": "Lo que no cubre nuestra tarifa.",
+    "exclusions": [
+      {
+        "item": "Tasa estatal del Modelo 790 Código 012",
+        "note": "Se abona directamente a la Agencia Tributaria española en una entidad bancaria. El importe lo fija el Gobierno y varía según el tipo de tarjeta."
+      },
+      {
+        "item": "Matrícula universitaria, fianzas y alquiler",
+        "note": "Nunca gestionamos fondos de clientes para terceros. Todos los pagos se realizan directamente de usted al arrendador o a la institución."
+      },
+      {
+        "item": "Representación jurídica o recursos",
+        "note": "Queda fuera de nuestro ámbito de actuación. Si su caso lo requiere, se lo indicaremos y le recomendaremos un colegiado abogado."
+      },
+      {
+        "item": "Servicios de traducción o apostilla",
+        "note": "Identificamos qué documentos requieren traducción jurada y podemos remitirle a un traductor jurado; sus honorarios se cobran por separado."
+      }
+    ]
+  }
+}

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/admin/guard";
 import { getCase, type StoredDocument } from "@/lib/server/storage";
-import type { DocumentKind } from "@/lib/db/schema";
+import type { DocumentKind, Locale } from "@/lib/db/schema";
 import { getTier, priceWithIva, formatEur } from "@/lib/pricing";
 import { buildTasa012 } from "@/lib/tasa012";
 import { countryDisplayName, spanishFormName } from "@/lib/countries";
@@ -28,6 +28,15 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "Case" };
 
 const GENDER: Record<string, string> = { H: "H — male", M: "M — female", X: "X — not specified" };
+/** The student's language: their emails and appointment sheet are written in it. */
+const LANGUAGE: Record<Locale, string> = {
+  en: "English",
+  es: "Spanish",
+  ca: "Catalan",
+  fr: "French",
+  it: "Italian",
+  de: "German",
+};
 const MARITAL: Record<string, string> = {
   S: "S — single", C: "C — married", V: "V — widowed", D: "D — divorced", Sp: "Sp — separated",
 };
@@ -130,6 +139,7 @@ export default async function CasePage({
                     ["Phone", <a key="t" href={`tel:${i.contact.phone}`} className="hover:underline">{i.contact.phone}</a>],
                     ["WhatsApp", <a key="w" href={`https://wa.me/${i.contact.phone.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="hover:underline">Open chat ↗</a>],
                     ["Email", <a key="e" href={`mailto:${i.contact.email}`} className="hover:underline">{i.contact.email}</a>],
+                    ["Language", LANGUAGE[c.locale]],
                     ["Marketing", i.consent.marketingOptIn ? "Opted in" : "No"],
                   ]}
                 />

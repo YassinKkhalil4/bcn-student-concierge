@@ -1,0 +1,184 @@
+{
+  "scope": {
+    "metaTitle": "Scope of Service",
+    "metaDescription": "What BCN Student Concierge does and does not do, and why the distinction matters under Spanish law.",
+    "eyebrow": "Legal",
+    "title": "Scope of service",
+    "clauses": [
+      {
+        "heading": "What we are",
+        "paragraphs": [
+          "BCN Student Concierge is a private administrative facilitation service. We prepare documents from information you supply, book appointments on public booking systems in your name, and guide you through a process that is conducted in Spanish and assumes local knowledge you do not yet have."
+        ]
+      },
+      {
+        "heading": "What we are not",
+        "paragraphs": [
+          "We are not a law firm (despacho de abogados) and hold no colegiación. We are not a registered gestoría administrativa. We are not agents, representatives or intermediaries of any Spanish public authority, and we are not affiliated with any university.",
+          "Spanish law reserves certain activities — legal representation, formal immigration advice, and acting before authorities on another person's behalf — to regulated professionals. Offering those services without that qualification is intrusismo profesional. We do not offer them, and this page exists so there is no ambiguity about it."
+        ]
+      },
+      {
+        "heading": "Section 2 of your form stays blank",
+        "paragraphs": [
+          "Official forms EX-17 and EX-18 contain a section for the details of a legal representative. We leave it deliberately and permanently empty. Completing it would declare to the National Police that we act as your representative, which is both untrue and would require a power of attorney we neither hold nor will ask you for. You are the applicant on every form we prepare."
+        ]
+      },
+      {
+        "heading": "Electronic notifications (DEHú)",
+        "paragraphs": [
+          "We leave the electronic-notification consent box unchecked. Opting in starts legally binding notification deadlines delivered to a Spanish government mailbox that requires a digital certificate to open — something a newly arrived student does not have. A missed notification can close a file. If you later obtain a certificate and want to opt in, that is your decision to make knowingly."
+        ]
+      },
+      {
+        "heading": "No guaranteed outcome",
+        "paragraphs": [
+          "Decisions on residency, registration and documentation rest entirely with the competent Spanish authorities. We do not influence those decisions and cannot guarantee any outcome, timeline or appointment availability. What we are accountable for is that your file is complete, internally consistent, correctly formatted and submitted on time."
+        ]
+      },
+      {
+        "heading": "Your responsibilities",
+        "paragraphs": [
+          "The information you give us becomes a declaration you sign. You are responsible for its accuracy, for reviewing every document before signing, and for attending appointments in person with the original documents. We will tell you clearly what to check; we cannot check it for you, because we have never seen your original passport."
+        ]
+      },
+      {
+        "heading": "When we will refer you elsewhere",
+        "paragraphs": [
+          "If your situation involves a refused application, an expired or irregular status, a criminal record check, a family reunification claim, or any matter requiring legal analysis, we will say so and decline the work rather than attempt it. We would rather lose the engagement than have you rely on advice we are not qualified to give."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "metaTitle": "Privacy & GDPR",
+    "metaDescription": "How BCN Student Concierge collects, encrypts, retains and deletes personal data under the GDPR and LOPDGDD.",
+    "eyebrow": "Privacy",
+    "title": "Privacy notice and GDPR commitments",
+    "clauses": [
+      {
+        "heading": "Who is responsible for your data",
+        "paragraphs": [
+          "BCN Student Concierge (the “controller”) determines how and why your personal data is processed. Contact for all data-protection matters, including exercising the rights below: <mail>privacy@bcnstudent.com</mail>."
+        ]
+      },
+      {
+        "heading": "What we collect, and why",
+        "paragraphs": [
+          "Identity and civil-status data (passport number, NIE, names, gender, birth details, nationality, marital status, parents' given names), your Spanish address, contact details, and scans of your passport, university acceptance letter and lease.",
+          "Legal basis: performance of a contract with you (GDPR Art. 6(1)(b)). We collect this data because Spanish residency forms require it — not because we want it. We do not collect health data, biometric templates, or any special-category data under Art. 9 beyond what appears on the face of the documents you upload."
+        ]
+      },
+      {
+        "heading": "How your data is protected",
+        "paragraphs": [
+          "Your questionnaire answers (passport number, names, date and place of birth, address) and every document you upload are encrypted at rest with AES-256-GCM, each under its own key. Those keys are themselves encrypted under a master key that is kept separately from the database and its backups — so a copy of the database or of a backup decrypts nothing on its own, and one compromised record never exposes another.",
+          "All traffic is served over TLS 1.3 only, with HTTP Strict Transport Security. Payment card details are handled entirely by Stripe and never reach our servers.",
+          "<strong>An honest limitation:</strong> this is strong encryption at rest, but it is not end-to-end encryption. Our systems can decrypt your documents, because our staff must review them and our software must read your data to populate your forms. Any service telling you it holds your passport under end-to-end encryption while also filling in your paperwork is describing something that cannot be true."
+        ]
+      },
+      {
+        "heading": "How long we keep it — the 30-day rule",
+        "paragraphs": [
+          "Passport scans, uploaded documents and identity data are permanently deleted 30 days after your service completes. This runs as an automated job, not a manual promise: expired files are purged without anyone deciding to do it, and the deletion is irreversible.",
+          "Two things survive that purge, and only these: a record that the file existed and was deleted, and invoice data. Spanish commercial and tax law (Código de Comercio Art. 30; Ley General Tributaria) requires invoice records to be kept for several years, and that obligation overrides erasure requests for those specific records under GDPR Art. 17(3)(b). An invoice holds the payer's name, billing address and, for a business, its tax ID — stored encrypted — plus the amounts. It never includes your passport number or document scans.",
+          "You may request deletion earlier than 30 days at any time."
+        ]
+      },
+      {
+        "heading": "If someone authorises your address",
+        "paragraphs": [
+          "When the flat is not in your name, the person who holds it (the owner or the main tenant) authorises your Padrón registration on the City of Barcelona's official form. You type the signer's name and ID number so we can fill in the form for you. We use those details once, to produce the PDF, and do not store them.",
+          "The signed form, a copy of the signer's ID and the lease that you then upload are needed by the city to register you. We hold them encrypted, like your own documents, use them only to prepare your Padrón file, and delete them with the rest of your file 30 days after your service completes. Please let the signer know you are sharing these documents with us for that purpose."
+        ]
+      },
+      {
+        "heading": "Who else sees your data",
+        "paragraphs": [
+          "Stripe (payment processing, Ireland/USA under the EU-US Data Privacy Framework); Resend (delivery of our emails, such as your sign-in links); and the EU-based provider of our server — each under a data processing agreement. We do not sell your data, we do not share it with advertisers, and we do not transfer it outside the EEA except as stated here.",
+          "Public authorities receive only what you submit to them yourself, in your own name, at your appointment."
+        ]
+      },
+      {
+        "heading": "Your rights",
+        "paragraphs": [
+          "You may request access to your data, correction of inaccuracies, erasure, restriction of processing, portability in a machine-readable format, and you may object to processing. Where processing rests on consent, you may withdraw it at any time — though withdrawing consent to hold your documents will usually mean we cannot complete the service.",
+          "We respond within one month. If you are unsatisfied, you may complain to the Agencia Española de Protección de Datos (AEPD), C/ Jorge Juan 6, 28001 Madrid, or at aepd.es."
+        ]
+      },
+      {
+        "heading": "Breach notification",
+        "paragraphs": [
+          "If a breach occurs that is likely to result in a risk to your rights, we notify the AEPD within 72 hours and inform you directly without undue delay. We will tell you what was accessed, not a vague reassurance."
+        ]
+      },
+      {
+        "heading": "Cookies",
+        "paragraphs": [
+          "This site sets no advertising or analytics cookies and runs no third-party trackers. The only cookies are strictly necessary ones: a sign-in cookie that keeps you in your file for up to 24 hours, and the cookies Stripe sets for fraud prevention during checkout. There is no consent banner because there is nothing to consent to."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Terms of Service",
+    "metaDescription": "Contractual terms for BCN Student Concierge administrative facilitation services.",
+    "eyebrow": "Terms",
+    "title": "Terms of service",
+    "priceLine": "{name} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "clauses": [
+      {
+        "heading": "1. Nature of the service",
+        "paragraphs": [
+          "We provide administrative facilitation: document preparation from information you supply, appointment booking on public systems in your name, and practical guidance on settling in Barcelona. We do not provide legal representation or binding immigration advice. See our <scopeLink>scope of service</scopeLink> page, which forms part of these terms."
+        ]
+      },
+      {
+        "heading": "2. Fees and IVA",
+        "priceListAfter": 0,
+        "paragraphs": [
+          "Package fees are fixed and quoted exclusive of IVA, with the 21% and the gross total displayed before payment:",
+          "Government fees — including the Modelo 790 Código 012 state fee and card issuance costs — are set by the Spanish authorities, paid by you directly, and are not included in any package. We never collect fees on the government's behalf."
+        ]
+      },
+      {
+        "heading": "3. Right of withdrawal",
+        "paragraphs": [
+          "As a consumer contracted at distance, you have 14 days to withdraw without giving a reason (Real Decreto Legislativo 1/2007, Art. 102). If you ask us to begin work within that period and we complete the service, the right of withdrawal is lost once performance is complete, and you owe a proportionate amount for work already done if you withdraw part-way. We will not start work inside the withdrawal period without your express request."
+        ]
+      },
+      {
+        "heading": "4. Your obligations",
+        "paragraphs": [
+          "You must provide accurate, complete information and genuine documents, review every document we prepare before signing it, and attend appointments in person with the originals. Information you give us becomes a declaration you sign in your own name; we cannot verify originals we have never seen.",
+          "Supplying falsified documents ends the engagement immediately with no refund, and may constitute a criminal offence under Spanish law."
+        ]
+      },
+      {
+        "heading": "5. What we are and are not liable for",
+        "paragraphs": [
+          "We are liable for our own errors: a form we prepared incorrectly from accurate data you supplied, or an appointment we failed to book as agreed. In those cases we correct the error and rebook at our cost.",
+          "We are not liable for decisions of Spanish authorities, appointment availability, changes in law or procedure, consequences of inaccurate information you supplied, or your failure to attend an appointment. Our total liability is limited to the fee you paid us, except where liability cannot be limited by law — including death, personal injury, fraud, or gross negligence, none of which we attempt to exclude."
+        ]
+      },
+      {
+        "heading": "6. Cancellation and refunds",
+        "paragraphs": [
+          "Before we begin work: full refund. After preparation has begun but before appointments are booked: 50% refund. After appointments are secured: no refund, as the substantive value has been delivered. If we cannot deliver the service for reasons within our control, you receive a full refund."
+        ]
+      },
+      {
+        "heading": "7. Data protection",
+        "paragraphs": [
+          "Processing is governed by our <privacyLink>privacy notice</privacyLink>, including the automatic deletion of identity documents 30 days after service completion."
+        ]
+      },
+      {
+        "heading": "8. Governing law",
+        "paragraphs": [
+          "These terms are governed by Spanish law. Consumer disputes may be brought before the courts of the consumer's domicile, and you may use the Spanish consumer arbitration system (Sistema Arbitral de Consumo) or the EU Online Dispute Resolution platform."
+        ]
+      }
+    ]
+  }
+}

@@ -1,6 +1,8 @@
 import Stripe from "stripe";
 import { getTier, priceWithIva, type Tier } from "@/lib/pricing";
 import type { BillingDetails } from "./invoices";
+import type { Locale } from "@/lib/db/schema";
+import { localizedPath } from "@/i18n/routing";
 
 /**
  * Stripe Checkout. Card and Apple Pay are both served by the `card` payment
@@ -62,7 +64,22 @@ export interface CheckoutParams {
   caseId: string;
   customerEmail: string;
   origin: string;
+  /** The student's language: Stripe's page and our return pages use it. */
+  locale: Locale;
 }
+
+/**
+ * Stripe Checkout has no Catalan. Spanish is the closer fallback for someone
+ * who chose Catalan than English is.
+ */
+const STRIPE_LOCALES: Record<Locale, Stripe.Checkout.SessionCreateParams.Locale> = {
+  en: "en",
+  es: "es",
+  ca: "es",
+  fr: "fr",
+  it: "it",
+  de: "de",
+};
 
 export async function createCheckoutSession(
   params: CheckoutParams,
@@ -80,8 +97,9 @@ export async function createCheckoutSession(
     // everyone with dashboard access and should carry no personal data.
     client_reference_id: params.caseId,
     metadata: { caseId: params.caseId, tierId: tier.id },
-    success_url: `${params.origin}/intake/complete?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${params.origin}/portal?checkout=cancelled`,
+    locale: STRIPE_LOCALES[params.locale],
+    success_url: `${params.origin}${localizedPath(params.locale, "/intake/complete")}?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${params.origin}${localizedPath(params.locale, "/portal")}?checkout=cancelled`,
     // Spanish invoicing: the payer's name and address go on the factura.
     billing_address_collection: "required",
     // Lets a company paying for a student enter its tax ID (Stripe collects

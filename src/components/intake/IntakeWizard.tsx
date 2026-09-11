@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import type { z } from "zod";
 import {
   identitySchema,
@@ -11,6 +12,7 @@ import {
 import { TIERS, getTier, priceWithIva, formatEur } from "@/lib/pricing";
 import { DocumentUpload } from "./DocumentUpload";
 import { Modelo790Notice } from "@/components/Modelo790Notice";
+import { Link } from "@/i18n/navigation";
 import {
   IdentityStep,
   FamilyStep,
@@ -50,6 +52,9 @@ function collectErrors(result: z.SafeParseReturnType<unknown, unknown>): Errors 
 const STEP_SCHEMAS = [identitySchema, familySchema, addressSchema, contactSchema];
 
 export function IntakeWizard({ initialTier }: { initialTier: string }) {
+  const t = useTranslations("intake");
+  const tp = useTranslations("pricing");
+  const locale = useLocale();
   const [tierId, setTierId] = useState(() =>
     getTier(initialTier) ? initialTier : "soft-landing",
   );
@@ -90,12 +95,10 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
 
     if (index === 4) {
       const missing: Errors = {};
-      if (!consent.gdprDataProcessing)
-        missing.gdprDataProcessing = "Required to process your file";
-      if (!consent.gdprSensitiveDocuments)
-        missing.gdprSensitiveDocuments = "Required to hold your documents";
-      if (!consent.disclaimerAcknowledged)
-        missing.disclaimerAcknowledged = "Please acknowledge the scope of service";
+      // Only presence matters here: ConsentStep words the error itself.
+      if (!consent.gdprDataProcessing) missing.gdprDataProcessing = "missing";
+      if (!consent.gdprSensitiveDocuments) missing.gdprSensitiveDocuments = "missing";
+      if (!consent.disclaimerAcknowledged) missing.disclaimerAcknowledged = "missing";
       setErrors(missing);
       return Object.keys(missing).length === 0;
     }
@@ -106,6 +109,8 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   function buildPayload() {
     return {
       tierId,
+      // Emails and PDFs for this student are produced in this language.
+      locale,
       identity: {
         passportNumber: values.passportNumber,
         nie: values.nie,
@@ -159,17 +164,17 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
             if (key && !mapped[key]) mapped[key] = issue.message;
           }
           setErrors(mapped);
-          setSubmitError("Some answers need correcting — check the earlier steps.");
+          setSubmitError(t("wizard.fixEarlier"));
           return;
         }
-        setSubmitError(json.error ?? "Submission failed.");
+        setSubmitError(t("wizard.submitFailed"));
         return;
       }
 
       setCaseRef(json.ref ?? null);
       setStep(5);
     } catch {
-      setSubmitError("Network error. Your answers are still here — please retry.");
+      setSubmitError(t("wizard.networkRetry"));
     } finally {
       setBusy(false);
     }
@@ -186,14 +191,22 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
         // No body: the server takes the case from the signed session cookie
         // it set when the intake was submitted.
       });
-      const json = (await res.json()) as { url?: string; error?: string };
+      const json = (await res.json()) as { url?: string };
       if (json.url) {
         window.location.href = json.url;
         return;
       }
-      setSubmitError(json.error ?? "Could not open checkout.");
+      setSubmitError(
+        t(
+          res.status === 401
+            ? "wizard.sessionExpired"
+            : res.status === 409
+              ? "wizard.alreadyPaid"
+              : "wizard.checkoutFailed",
+        ),
+      );
     } catch {
-      setSubmitError("Network error opening checkout.");
+      setSubmitError(t("wizard.checkoutNetwork"));
     } finally {
       setBusy(false);
     }
@@ -213,10 +226,10 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   return (
     <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
       <div>
-        <nav aria-label="Progress" className="mb-9">
+        <nav aria-label={t("steps.progress")} className="mb-9">
           <ol className="flex flex-wrap gap-2 text-xs">
             {STEPS.map((s, i) => (
-              <li key={s.id}>
+              <li key={s}>
                 <span
                   aria-current={i === step ? "step" : undefined}
                   className={[
@@ -229,7 +242,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                   ].join(" ")}
                 >
                   {i < step ? "✓ " : ""}
-                  {s.label}
+                  {t(`steps.${s}`)}
                 </span>
               </li>
             ))}
@@ -248,22 +261,24 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
           {step === 5 && caseRef && (
             <div>
               <h2 className="font-display text-xl font-semibold text-ink">
-                Upload your documents
+                {t("wizard.uploadTitle")}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                Your file is open. Reference{" "}
-                <code className="rounded bg-bone-warm px-1.5 py-0.5 text-xs">
-                  {caseRef}
-                </code>
-                . Upload what you have now, then continue to payment.
+                {t.rich("wizard.uploadIntro", {
+                  ref: caseRef,
+                  code: (chunks) => (
+                    <code className="rounded bg-bone-warm px-1.5 py-0.5 text-xs">{chunks}</code>
+                  ),
+                })}
               </p>
               <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                Missing something, like a Padrón document from your landlord? That is
-                normal. Pay now and upload it later from{" "}
-                <a href="/portal" className="font-medium text-olive underline">
-                  your file
-                </a>
-                : sign in any time with the email you gave us.
+                {t.rich("wizard.uploadLater", {
+                  link: (chunks) => (
+                    <Link href="/portal" className="font-medium text-olive underline">
+                      {chunks}
+                    </Link>
+                  ),
+                })}
               </p>
 
               <div className="mt-7">
@@ -281,12 +296,10 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                 className="btn-primary mt-8 w-full"
               >
                 {busy
-                  ? "Opening secure checkout…"
-                  : `Continue to payment — ${formatEur(price.totalCents)}`}
+                  ? t("wizard.openingCheckout")
+                  : t("wizard.pay", { total: formatEur(price.totalCents) })}
               </button>
-              <p className="mt-3 text-center text-xs text-ink-soft">
-                Card and Apple Pay, processed by Stripe. We never see your card details.
-              </p>
+              <p className="mt-3 text-center text-xs text-ink-soft">{t("wizard.stripeNote")}</p>
             </div>
           )}
 
@@ -307,10 +320,10 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                 disabled={step === 0 || busy}
                 className="btn-secondary"
               >
-                Back
+                {t("wizard.back")}
               </button>
               <button type="button" onClick={next} disabled={busy} className="btn-primary">
-                {busy ? "Saving…" : step === 4 ? "Submit and continue" : "Continue"}
+                {busy ? t("wizard.saving") : step === 4 ? t("wizard.submit") : t("wizard.continue")}
               </button>
             </div>
           )}
@@ -319,22 +332,22 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
 
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <div className="rounded-2xl border border-bone-line bg-white p-6">
-          <p className="eyebrow">Selected package</p>
+          <p className="eyebrow">{t("summary.selected")}</p>
           <h2 className="mt-2.5 font-display text-lg font-semibold text-ink">
-            {tier.name}
+            {tp(`tiers.${tier.id}.name`)}
           </h2>
 
           <dl className="mt-5 space-y-2 border-y border-bone-line py-4 text-sm">
             <div className="flex justify-between">
-              <dt className="text-ink-muted">Service fee</dt>
+              <dt className="text-ink-muted">{t("summary.serviceFee")}</dt>
               <dd className="text-ink">{formatEur(price.baseCents)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-ink-muted">IVA (21%)</dt>
+              <dt className="text-ink-muted">{t("summary.iva")}</dt>
               <dd className="text-ink">{formatEur(price.ivaCents)}</dd>
             </div>
             <div className="flex justify-between pt-1 font-semibold">
-              <dt className="text-ink">Total</dt>
+              <dt className="text-ink">{t("summary.total")}</dt>
               <dd className="text-ink">{formatEur(price.totalCents)}</dd>
             </div>
           </dl>
@@ -344,7 +357,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
           {step === 0 && (
             <div className="mt-5">
               <label htmlFor="tier-switch" className="field-label">
-                Change package
+                {t("summary.change")}
               </label>
               <select
                 id="tier-switch"
@@ -352,19 +365,16 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                 onChange={(e) => setTierId(e.target.value)}
                 className="field-input"
               >
-                {TIERS.map((t) => (
-                  <option key={t.id} value={t.id}>
-                    {t.name}
+                {TIERS.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {tp(`tiers.${option.id}.name`)}
                   </option>
                 ))}
               </select>
             </div>
           )}
 
-          <p className="mt-5 text-xs leading-relaxed text-ink-soft">
-            Government fees (Modelo 790, card issuance) are paid by you directly to the
-            Spanish authorities and are not included.
-          </p>
+          <p className="mt-5 text-xs leading-relaxed text-ink-soft">{t("summary.govFees")}</p>
         </div>
       </aside>
     </div>

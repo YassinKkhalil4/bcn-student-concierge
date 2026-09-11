@@ -6,6 +6,7 @@ import type { IntakeData } from "@/lib/schema";
 import { embedUnicodeFonts, unsupportedCharacters } from "@/lib/pdf/fonts";
 import { formatSpanishId, isValidPersonalId, isValidSpanishTaxId, isValidCif } from "@/lib/spanish-ids";
 import { TemplateNotFoundError } from "./pdf";
+import { vkey } from "@/lib/validation-keys";
 
 /**
  * Barcelona's official "Autorització d'inscripció al Padró municipal
@@ -53,19 +54,21 @@ const RELATION = {
   // Opción4 (parent registering a minor) does not apply to our students.
 } as const;
 
-const upper = (label: string, max: number) =>
+// Messages are keys (see src/lib/validation-keys.ts): the portal words them in
+// the student's language and names the field itself.
+const upper = (max: number) =>
   z
-    .string({ required_error: `${label} is required` })
+    .string({ required_error: vkey("required") })
     .trim()
     .transform((s) => s.replace(/\s+/g, " ").toUpperCase())
-    .pipe(z.string().min(2, `${label} is required`).max(max, `${label} is too long`));
+    .pipe(z.string().min(2, vkey("required")).max(max, vkey("tooLong", { max })));
 
 const optionalText = (max: number) =>
   z
     .string()
     .optional()
     .transform((s) => s?.trim().replace(/\s+/g, " ").toUpperCase() || undefined)
-    .refine((s) => s === undefined || s.length <= max, "Too long");
+    .refine((s) => s === undefined || s.length <= max, vkey("tooLong", { max }));
 
 /**
  * What the student types about whoever signs. The signer's ID may be a
@@ -74,18 +77,16 @@ const optionalText = (max: number) =>
  */
 export const authorizationInputSchema = z
   .object({
-    signerName: upper("The signer's full name", 80),
+    signerName: upper(80),
     signerId: z
-      .string({ required_error: "The signer's ID number is required" })
+      .string({ required_error: vkey("required") })
       .transform(formatSpanishId)
-      .refine((v) => /^[A-Z0-9]{5,20}$/.test(v), "Enter the ID number as it appears on the document")
+      .refine((v) => /^[A-Z0-9]{5,20}$/.test(v), vkey("signerIdFormat"))
       .refine(
         (v) => !(/^\d{8}[A-Z]$/.test(v) || /^[XYZ]\d{7}[A-Z]$/.test(v)) || isValidPersonalId(v),
-        "That DNI/NIE's check letter is wrong — please compare it with the card",
+        vkey("signerIdCheckLetter"),
       ),
-    relation: z.enum(["owner", "usufruct", "tenant"], {
-      message: "Choose how the signer is related to the flat",
-    }),
+    relation: z.enum(["owner", "usufruct", "tenant"], { message: vkey("relation") }),
     ownerName: optionalText(80),
     ownerTaxId: z
       .string()
@@ -100,30 +101,44 @@ export const authorizationInputSchema = z
       .string()
       .optional()
       .transform((s) => s?.replace(/\s+/g, "").toUpperCase() || undefined)
-      .refine((s) => s === undefined || /^[0-9A-Z]{20}$/.test(s), "A cadastral reference has 20 letters and digits"),
+      .refine((s) => s === undefined || /^[0-9A-Z]{20}$/.test(s), vkey("cadastralRef")),
   })
   .superRefine((v, ctx) => {
     // A tenant signing needs the OWNER's details too: the form asks for the
     // landlord's name and NIF in the tenant row.
     if (v.relation === "tenant") {
-      if (!v.ownerName) ctx.addIssue({ code: "custom", path: ["ownerName"], message: "The owner's name is required when the signer is the tenant (it is on the lease)" });
-      if (!v.ownerTaxId) ctx.addIssue({ code: "custom", path: ["ownerTaxId"], message: "The owner's NIF is required when the signer is the tenant (it is on the lease)" });
+      if (!v.ownerName) ctx.addIssue({ code: "custom", path: ["ownerName"], message: vkey("ownerNameForTenant") });
+      if (!v.ownerTaxId) ctx.addIssue({ code: "custom", path: ["ownerTaxId"], message: vkey("ownerTaxIdForTenant") });
     }
     if (v.ownerTaxId && !isValidSpanishTaxId(v.ownerTaxId)) {
-      ctx.addIssue({ code: "custom", path: ["ownerTaxId"], message: "That NIF is not valid — check it against the lease" });
+      ctx.addIssue({ code: "custom", path: ["ownerTaxId"], message: vkey("taxIdInvalid") });
     }
     if (Boolean(v.companyName) !== Boolean(v.companyTaxId)) {
-      ctx.addIssue({ code: "custom", path: [v.companyName ? "companyTaxId" : "companyName"], message: "Give both the company's name and its NIF, or neither" });
+      ctx.addIssue({ code: "custom", path: [v.companyName ? "companyTaxId" : "companyName"], message: vkey("companyBoth") });
     }
     if (v.companyTaxId && !isValidCif(v.companyTaxId)) {
-      ctx.addIssue({ code: "custom", path: ["companyTaxId"], message: "That company NIF (CIF) is not valid" });
+      ctx.addIssue({ code: "custom", path: ["companyTaxId"], message: vkey("companyTaxIdInvalid") });
     }
   });
 
 export type AuthorizationInput = z.infer<typeof authorizationInputSchema>;
 
-export class AuthorizationNotApplicableError extends Error {}
-export class UnprintableCharactersError extends Error {}
+/**
+ * Errors the student can act on. `code` and `params` let the portal word them
+ * in the student's language; `message` is the English for logs and staff.
+ */
+export class AuthorizationNotApplicableError extends Error {
+  readonly code = "notBarcelona";
+  constructor(message: string, readonly params: Record<string, string>) {
+    super(message);
+  }
+}
+export class UnprintableCharactersError extends Error {
+  readonly code = "unprintable";
+  constructor(message: string, readonly params: Record<string, string>) {
+    super(message);
+  }
+}
 
 const BASE_SIZE = 10;
 const MIN_SIZE = 6;
@@ -142,6 +157,7 @@ function addressFor(intake: IntakeData) {
     throw new AuthorizationNotApplicableError(
       `This is the City of Barcelona's form, but the address is in ${intake.address.city}. ` +
         "Each municipality has its own Padrón authorisation — contact us and we will get the right one.",
+      { city: intake.address.city },
     );
   }
   return intake.address;
@@ -181,6 +197,7 @@ export async function fillPadronAuthorization(
     throw new UnprintableCharactersError(
       `These characters cannot be printed on the form: ${missing.join(" ")}. ` +
         "Please write names in Latin letters, exactly as on the ID document.",
+      { chars: missing.join(" ") },
     );
   }
 

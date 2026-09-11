@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Field } from "@/components/intake/Field";
+import { translateIssue } from "@/lib/validation-keys";
 
 type Relation = "owner" | "tenant" | "usufruct";
 type Errors = Record<string, string>;
@@ -11,6 +13,8 @@ type Errors = Record<string, string>;
  * Barcelona's official form, then discarded. Nothing typed here is stored.
  */
 export function AuthorizationForm() {
+  const t = useTranslations("portal.authorization");
+  const tv = useTranslations("validation");
   const [values, setValues] = useState({
     signerName: "",
     signerId: "",
@@ -25,6 +29,19 @@ export function AuthorizationForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "busy" | "done" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
+
+  /** Label, hint and (translated) error for one of the signer's fields. */
+  const field = (name: keyof typeof values) => {
+    const label = t(`fields.${name}.label`);
+    return {
+      name,
+      label,
+      hint: t.has(`fields.${name}.hint`) ? t(`fields.${name}.hint`) : undefined,
+      value: values[name],
+      onChange: set(name),
+      error: errors[name] ? translateIssue(errors[name], label, tv) : undefined,
+    };
+  };
 
   const set = (key: keyof typeof values) => (v: string) => {
     setValues((s) => ({ ...s, [key]: v }));
@@ -56,13 +73,22 @@ export function AuthorizationForm() {
 
       if (!res.ok) {
         const json = (await res.json().catch(() => ({}))) as {
-          error?: string;
+          code?: "notBarcelona" | "unprintable";
+          params?: Record<string, string>;
           issues?: { path: string; message: string }[];
         };
         const mapped: Errors = {};
         for (const issue of json.issues ?? []) mapped[issue.path] ??= issue.message;
         setErrors(mapped);
-        setMessage(json.error ?? "Could not generate the form.");
+        setMessage(
+          json.issues
+            ? t("checkFields")
+            : json.code
+              ? t(json.code, json.params ?? {})
+              : res.status === 503
+                ? t("unavailable")
+                : t("failed"),
+        );
         setStatus("error");
         return;
       }
@@ -79,93 +105,76 @@ export function AuthorizationForm() {
       URL.revokeObjectURL(url);
       setStatus("done");
     } catch {
-      setMessage("Network error. Please try again.");
+      setMessage(t("network"));
       setStatus("error");
     }
   }
 
   return (
     <div className="rounded-xl border border-bone-line bg-bone-warm/40 p-5">
-      <h4 className="text-sm font-semibold text-ink">1. Generate the authorisation</h4>
-      <p className="mt-1.5 text-xs leading-relaxed text-ink-muted">
-        The person who signs is whoever holds the flat: the owner, or the main tenant
-        whose name is on the lease. We fill in Barcelona&rsquo;s official form with your
-        details and theirs. We do not keep what you type here.
-      </p>
+      <h4 className="text-sm font-semibold text-ink">{t("title")}</h4>
+      <p className="mt-1.5 text-xs leading-relaxed text-ink-muted">{t("intro")}</p>
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
-        <Field label="Their full name" name="signerName" value={values.signerName}
-          onChange={set("signerName")} error={errors.signerName}
-          hint="Exactly as on their ID." />
-        <Field label="Their DNI, NIE or passport number" name="signerId" value={values.signerId}
-          onChange={set("signerId")} error={errors.signerId} maxLength={20} />
+        <Field {...field("signerName")} />
+        <Field {...field("signerId")} maxLength={20} />
       </div>
 
       <fieldset className="mt-5">
-        <legend className="field-label">They are…</legend>
+        <legend className="field-label">{t("relationLegend")}</legend>
         <div className="mt-2 grid gap-2 sm:grid-cols-3">
-          {([
-            ["owner", "The owner of the flat"],
-            ["tenant", "The main tenant (on the lease)"],
-            ["usufruct", "The usufruct holder"],
-          ] as const).map(([value, label]) => (
+          {(["owner", "tenant", "usufruct"] as const).map((value) => (
             <label key={value} className={`flex cursor-pointer items-start gap-2 rounded-lg border p-3 text-sm ${relation === value ? "border-olive bg-white" : "border-bone-line bg-white/60"}`}>
               <input type="radio" name="relation" value={value} checked={relation === value}
                 onChange={() => setRelation(value)} className="mt-0.5" />
-              <span>{label}</span>
+              <span>{t(`relations.${value}`)}</span>
             </label>
           ))}
         </div>
-        {errors.relation && <p role="alert" className="field-error">{errors.relation}</p>}
+        {errors.relation && (
+          <p role="alert" className="field-error">
+            {translateIssue(errors.relation, t("relationLegend"), tv)}
+          </p>
+        )}
       </fieldset>
 
       {relation === "tenant" && (
         <div className="mt-5 rounded-lg border border-bone-line bg-white p-4">
-          <p className="text-xs leading-relaxed text-ink-muted">
-            When the main tenant signs, the form also asks for the owner&rsquo;s details.
-            You will find them on the lease.
-          </p>
+          <p className="text-xs leading-relaxed text-ink-muted">{t("tenantNote")}</p>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
-            <Field label="Owner's name (person or company)" name="ownerName" value={values.ownerName}
-              onChange={set("ownerName")} error={errors.ownerName} />
-            <Field label="Owner's NIF" name="ownerTaxId" value={values.ownerTaxId}
-              onChange={set("ownerTaxId")} error={errors.ownerTaxId} maxLength={12} />
+            <Field {...field("ownerName")} />
+            <Field {...field("ownerTaxId")} maxLength={12} />
           </div>
         </div>
       )}
 
       <label className="mt-5 flex items-center gap-2 text-sm text-ink">
         <input type="checkbox" checked={forCompany} onChange={(e) => setForCompany(e.target.checked)} />
-        They sign on behalf of a company (for example a coliving operator)
+        {t("forCompany")}
       </label>
       {forCompany && (
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
-          <Field label="Company name" name="companyName" value={values.companyName}
-            onChange={set("companyName")} error={errors.companyName} />
-          <Field label="Company NIF" name="companyTaxId" value={values.companyTaxId}
-            onChange={set("companyTaxId")} error={errors.companyTaxId} maxLength={12} />
+          <Field {...field("companyName")} />
+          <Field {...field("companyTaxId")} maxLength={12} />
         </div>
       )}
 
       <details className="mt-4">
         <summary className="cursor-pointer text-xs font-medium text-ink-muted">
-          Optional: cadastral reference
+          {t("cadastralToggle")}
         </summary>
         <div className="mt-3 max-w-sm">
-          <Field label="Cadastral reference" name="cadastralRef" required={false}
-            value={values.cadastralRef} onChange={set("cadastralRef")} error={errors.cadastralRef}
-            hint="20 letters and digits, on the property tax (IBI) receipt. Leave blank if unknown."
-            maxLength={24} />
+          <Field {...field("cadastralRef")} required={false} maxLength={24} />
         </div>
       </details>
 
       <button type="button" onClick={() => void generate()} disabled={status === "busy"}
         className="btn-primary mt-6">
-        {status === "busy" ? "Preparing the form…" : "Download the pre-filled form"}
+        {status === "busy" ? t("preparing") : t("download")}
       </button>
       {status === "done" && (
         <p role="status" className="mt-3 text-sm text-olive">
-          ✓ Downloaded. Now print it and follow step 2.
+          {t("done")}
         </p>
       )}
       {message && status === "error" && (

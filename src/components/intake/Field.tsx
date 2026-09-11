@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 
 interface FieldProps {
   label: string;
@@ -34,6 +35,7 @@ export function Field({
   maxLength,
   inputMode,
 }: FieldProps) {
+  const t = useTranslations("intake.field");
   const errorId = `${name}-error`;
   const hintId = `${name}-hint`;
 
@@ -41,7 +43,7 @@ export function Field({
     <div>
       <label htmlFor={name} className="field-label">
         {label}
-        {!required && <span className="ml-1.5 text-xs text-ink-soft">(optional)</span>}
+        {!required && <span className="ml-1.5 text-xs text-ink-soft">{t("optional")}</span>}
       </label>
       <input
         id={name}
@@ -91,6 +93,7 @@ export function SelectField({
   error?: string;
   hint?: string;
 }) {
+  const t = useTranslations("intake.field");
   const errorId = `${name}-error`;
   return (
     <div>
@@ -106,7 +109,7 @@ export function SelectField({
         aria-describedby={error ? errorId : undefined}
         className="field-input"
       >
-        <option value="">Select…</option>
+        <option value="">{t("select")}</option>
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
             {opt.label}

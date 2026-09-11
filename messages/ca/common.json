@@ -1,0 +1,57 @@
+{
+  "brand": "BCN Student Concierge",
+  "skipToContent": "Anar al contingut",
+  "nav": {
+    "main": "Principal",
+    "howItWorks": "Com funciona",
+    "pricing": "Serveis i tarifes",
+    "faq": "Preguntes freqüents",
+    "myFile": "El meu expedient",
+    "beginIntake": "Comenceu l’alta",
+    "begin": "Comenceu"
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "footer": {
+    "tagline": "Un servei independent de suport administratiu per a estudiants internacionals que arriben a universitats privades de Barcelona.",
+    "services": "Serveis",
+    "packages": "Paquets i tarifes",
+    "intake": "Portal d’alta de clients",
+    "process": "Procés",
+    "legal": "Legal",
+    "terms": "Condicions d’ús",
+    "privacy": "Privacitat i RGPD",
+    "scope": "Abast del servei",
+    "copyright": "© {year} BCN Student Concierge. Barcelona, Espanya."
+  },
+  "disclaimer": {
+    "footerLabel": "Abast del servei.",
+    "prominentLabel": "Important: abast del servei",
+    "body": "BCN Student Concierge és un servei independent de suport administratiu i de gestió de cites. No som un despatx d’advocats ni una gestoria registrada. No oferim representació legal, no actuem com el vostre representant legal davant de cap autoritat espanyola i res del que us proporcionem constitueix assessorament jurídic o d’immigració vinculant. Totes les sol·licituds les presenteu vosaltres, en nom propi. Les decisions sobre residència, empadronament i documentació corresponen exclusivament a les autoritats espanyoles competents, i no es garanteix cap resultat. Per a assessorament jurídic sobre la vostra situació d’immigració, consulteu un advocat col·legiat."
+  },
+  "copy": {
+    "copy": "Copia",
+    "copied": "Copiat ✓",
+    "failed": "No s’ha pogut copiar",
+    "copySubject": "Copia l’assumpte",
+    "copyMessage": "Copia el missatge"
+  },
+  "legalPage": {
+    "lastUpdated": "Darrera actualització: {date}",
+    "translationNotice": "Aquesta pàgina és una traducció que es proporciona per a la vostra comoditat. En cas de discrepància amb la versió anglesa, prevaldrà la versió anglesa."
+  },
+  "modelo790": {
+    "title": "Modelo 790 Código 012: pagament en efectiu, a la finestreta d’un banc",
+    "intro": "La taxa estatal per a la vostra targeta de residència no està inclosa en les nostres tarifes i no es pot pagar amb targeta a través del nostre lloc web. La normativa de l’Agència Tributària Espanyola exigeix que aquest formulari es processi amb un codi de barres que s’ha d’escanejar en una sucursal bancària física: el pagament en línia requereix un certificat digital espanyol o un servei de banca en línia d’un banc espanyol, i els estudiants acabats d’arribar no disposen de cap d’aquestes dues coses.",
+    "steps": [
+      "Generem el vostre Modelo 790 Código 012 configurat per pagar en efectiu («en efectivo»), amb el codi de barres únic que llegeix l’escàner del banc.",
+      "Imprimiu-lo a tot color, per una sola cara i a escala 100 %. No canvieu la mida: un codi de barres redimensionat no es pot escanejar i el formulari serà rebutjat.",
+      "Porteu l’imprès a una oficina d’un banc espanyol o a un caixer automàtic amb lector de codis de barres. Presenteu-ne tots els exemplars; el personal de la finestreta els segellarà.",
+      "Conserveu l’exemplar segellat marcat com a «Ejemplar para el interesado». Porteu-lo a la cita a la comissaria juntament amb el vostre EX-17 o EX-18: amb un formulari sense segell, la cita s’acaba."
+    ],
+    "branchesTitle": "Oficines que accepten aquest pagament",
+    "branchesNote": "No totes les oficines accepten pagaments d’impostos de persones que no en són clients, i algunes només ho fan al matí. Amb l’itinerari de les vostres cites us confirmarem una oficina concreta propera i el seu horari de finestreta.",
+    "footnote": "L’import de la taxa l’estableix el Govern d’Espanya i varia periòdicament; la xifra que figura al vostre formulari en el moment de la seva generació és la que s’aplica. Nosaltres mai no recaptem aquesta taxa en nom del Govern."
+  }
+}

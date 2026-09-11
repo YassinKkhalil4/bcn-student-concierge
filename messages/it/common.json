@@ -1,0 +1,57 @@
+{
+  "brand": "BCN Student Concierge",
+  "skipToContent": "Vai al contenuto",
+  "nav": {
+    "main": "Principale",
+    "howItWorks": "Come funziona",
+    "pricing": "Servizi e tariffe",
+    "faq": "Domande frequenti",
+    "myFile": "La mia pratica",
+    "beginIntake": "Inizia la registrazione",
+    "begin": "Inizia"
+  },
+  "language": {
+    "label": "Lingua"
+  },
+  "footer": {
+    "tagline": "Assistenza amministrativa indipendente per gli studenti internazionali in arrivo nelle università private di Barcellona.",
+    "services": "Servizi",
+    "packages": "Pacchetti e prezzi",
+    "intake": "Portale di registrazione dei clienti",
+    "process": "Procedura",
+    "legal": "Informazioni legali",
+    "terms": "Condizioni di servizio",
+    "privacy": "Privacy e GDPR",
+    "scope": "Ambito del servizio",
+    "copyright": "© {year} BCN Student Concierge. Barcellona, Spagna."
+  },
+  "disclaimer": {
+    "footerLabel": "Ambito del servizio.",
+    "prominentLabel": "Importante — ambito del servizio",
+    "body": "BCN Student Concierge è un servizio indipendente di assistenza amministrativa e prenotazione di appuntamenti. Non siamo uno studio legale né una gestoría registrata. Non forniamo rappresentanza legale, non agiamo in qualità di Suo rappresentante legale dinanzi ad alcuna autorità spagnola e nulla di quanto da noi fornito costituisce una consulenza legale o in materia di immigrazione vincolante. Tutte le richieste vengono presentate da Lei, a Suo nome. Le decisioni in materia di residenza, iscrizione al Padrón e documentazione spettano esclusivamente alle autorità spagnole competenti e non viene garantito alcun esito. Per una consulenza legale in merito al proprio status di immigrazione, si raccomanda di rivolgersi a un colegiado abogado."
+  },
+  "copy": {
+    "copy": "Copia",
+    "copied": "Copiato ✓",
+    "failed": "Copia non riuscita",
+    "copySubject": "Copia l’oggetto",
+    "copyMessage": "Copia il messaggio"
+  },
+  "legalPage": {
+    "lastUpdated": "Ultimo aggiornamento: {date}",
+    "translationNotice": "La presente pagina è una traduzione fornita a titolo di comodità. In caso di discrepanze rispetto alla versione inglese, prevale quest’ultima."
+  },
+  "modelo790": {
+    "title": "Modelo 790 Código 012 — pagamento in contanti, allo sportello bancario",
+    "intro": "La tassa statale relativa alla carta di soggiorno non è inclusa nella nostra tariffa e non può essere pagata con carta di credito sul nostro sito. Le norme dell’Agenzia delle Entrate spagnola prevedono che questo modulo venga elaborato tramite la lettura di un codice a barre presso una filiale bancaria fisica: il pagamento online richiede un certificato digitale spagnolo o l’accesso al servizio di banca online di una banca spagnola, risorse di cui uno studente appena arrivato non dispone.",
+    "steps": [
+      "Generiamo il Suo Modelo 790 Código 012 configurato per il pagamento in contanti («en efectivo»), provvisto del codice a barre univoco leggibile dallo scanner della banca.",
+      "Lo stampi a colori, su un solo lato, in scala al 100%. Non ne modifichi le dimensioni: un codice a barre ridimensionato non verrà letto e il modulo verrà respinto.",
+      "Porti la stampa presso una filiale bancaria spagnola o un bancomat dotato di lettore di codici a barre. Presenti tutte le copie; l’impiegato le timbrerà.",
+      "Conservi la copia timbrata contrassegnata con la dicitura «Ejemplar para el interesado». La porti con sé all’appuntamento presso la polizia insieme al modulo EX-17 o EX-18: un modulo non timbrato comporta la chiusura dell’appuntamento."
+    ],
+    "branchesTitle": "Filiali che accettano questo pagamento",
+    "branchesNote": "Non tutte le filiali accettano pagamenti di imposte da chi non è cliente, e alcune solo al mattino. Insieme al programma dei Suoi appuntamenti Le confermiamo una filiale vicina e i suoi orari di sportello.",
+    "footnote": "L’importo della tassa è stabilito dal governo spagnolo e varia periodicamente; l’importo riportato sul modulo al momento della sua generazione è quello applicabile. Non riscuotiamo mai tale tassa per conto del governo."
+  }
+}

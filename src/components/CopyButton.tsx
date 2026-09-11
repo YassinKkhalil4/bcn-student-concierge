@@ -2,14 +2,22 @@
 
 import { useState } from "react";
 
-/** Copies `value` to the clipboard and confirms inline. */
+/**
+ * Copies `value` to the clipboard and confirms inline. Language-free on
+ * purpose: the English-only staff dashboard uses it as-is, and student pages
+ * pass translated labels through LocalizedCopyButton.
+ */
 export function CopyButton({
   value,
   label = "Copy",
+  copiedLabel = "Copied ✓",
+  failedLabel = "Copy failed",
   className = "",
 }: {
   value: string;
   label?: string;
+  copiedLabel?: string;
+  failedLabel?: string;
   className?: string;
 }) {
   const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
@@ -27,7 +35,7 @@ export function CopyButton({
       className={`rounded-md border border-bone-line bg-white px-2 py-1 text-xs font-medium text-ink-muted transition-colors hover:bg-bone-warm hover:text-ink disabled:opacity-40 ${className}`}
     >
       <span aria-live="polite">
-        {state === "copied" ? "Copied ✓" : state === "failed" ? "Copy failed" : label}
+        {state === "copied" ? copiedLabel : state === "failed" ? failedLabel : label}
       </span>
     </button>
   );

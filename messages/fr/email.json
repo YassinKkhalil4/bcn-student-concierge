@@ -1,0 +1,10 @@
+{
+  "loginLink": {
+    "subject": "Votre lien de connexion — BCN Student Concierge",
+    "introOne": "Voici votre lien de connexion pour accéder à votre dossier BCN Student Concierge.",
+    "introMany": "Voici vos liens de connexion — un pour chaque dossier associé à cette adresse e-mail.",
+    "file": "Dossier {ref}",
+    "button": "Ouvrir mon dossier",
+    "footer": "Chaque lien n’est valable qu’une seule fois et expire au bout de 30 minutes. Si vous n’avez pas demandé à vous connecter, vous pouvez ignorer cet e-mail : personne ne peut l’utiliser sans avoir accès à votre boîte de réception."
+  }
+}

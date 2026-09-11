@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { isCountryCode } from "./countries/codes";
 import { isValidNie } from "./spanish-ids";
+import { vkey } from "./validation-keys";
 
 /**
  * Canonical intake schema. This is the contract shared by the client wizard,
@@ -29,7 +30,11 @@ import { isValidNie } from "./spanish-ids";
  * validates as "". That would put a blank surname on a government form —
  * the schema must reject it, not the UI.
  */
-const upper = (max: number, label = "This field") =>
+/**
+ * `label` documents the field in code only: messages are keys, and the form
+ * supplies the field's translated label when it shows one.
+ */
+const upper = (max: number, _label = "This field") =>
   z
     .string()
     .trim()
@@ -37,20 +42,20 @@ const upper = (max: number, label = "This field") =>
     .pipe(
       z
         .string()
-        .min(1, `${label} is required`)
-        .max(max, `${label} must be ${max} characters or fewer`),
+        .min(1, vkey("required"))
+        .max(max, vkey("tooLong", { max })),
     );
 
 /**
  * ISO 3166-1 alpha-2 country code, chosen from a picker. Stored as the code so
  * the form route is exact and the forms can print the Spanish name.
  */
-const countryCode = (label: string) =>
+const countryCode = (_label: string) =>
   z
-    .string({ required_error: `${label} is required` })
+    .string({ required_error: vkey("required") })
     .trim()
     .toUpperCase()
-    .refine(isCountryCode, `Choose ${label.toLowerCase()} from the list`);
+    .refine(isCountryCode, vkey("chooseFromList"));
 
 /**
  * Optional printed field.
@@ -78,14 +83,14 @@ export const nieSchema = z
   .string()
   .trim()
   .toUpperCase()
-  .regex(/^[XYZ]\d{7}[A-Z]$/, "NIE must be X, Y or Z followed by 7 digits and a letter")
-  .refine(isValidNie, "NIE control letter is invalid — check the number on your visa");
+  .regex(/^[XYZ]\d{7}[A-Z]$/, vkey("nieFormat"))
+  .refine(isValidNie, vkey("nieCheckLetter"));
 
 /** DD/MM/YYYY with real calendar validation (rejects 31/02/2004). */
 export const spanishDateSchema = z
   .string()
   .trim()
-  .regex(/^\d{2}\/\d{2}\/\d{4}$/, "Date must be in DD/MM/YYYY format")
+  .regex(/^\d{2}\/\d{2}\/\d{4}$/, vkey("dateFormat"))
   .refine((v) => {
     const [d, m, y] = v.split("/").map(Number) as [number, number, number];
     if (m < 1 || m > 12 || d < 1) return false;
@@ -93,14 +98,14 @@ export const spanishDateSchema = z
     return (
       dt.getUTCFullYear() === y && dt.getUTCMonth() === m - 1 && dt.getUTCDate() === d
     );
-  }, "That date does not exist on the calendar")
+  }, vkey("dateNonexistent"))
   .refine((v) => {
     const [d, m, y] = v.split("/").map(Number) as [number, number, number];
     const dt = new Date(Date.UTC(y, m - 1, d));
     const now = new Date();
     if (dt.getTime() > now.getTime()) return false;
     return now.getUTCFullYear() - y <= 120;
-  }, "Birth date must be in the past and within the last 120 years");
+  }, vkey("birthDateRange"));
 
 export const GENDERS = ["H", "M", "X"] as const;
 export const MARITAL_STATUSES = ["S", "C", "V", "D", "Sp"] as const;
@@ -110,7 +115,7 @@ export const identitySchema = z.object({
     .string()
     .trim()
     .toUpperCase()
-    .regex(/^[A-Z0-9]{5,20}$/, "Passport number must be 5–20 letters and digits"),
+    .regex(/^[A-Z0-9]{5,20}$/, vkey("passportFormat")),
   /**
    * Pre-assigned NIE. Optional: students who have not yet been issued an NIE
    * (common before the first police appointment) leave this blank and the
@@ -121,20 +126,20 @@ export const identitySchema = z.object({
   /** Most non-Spanish nationals have no second surname. Left blank, never "N/A". */
   secondSurname: upperOptional(60),
   givenName: upper(60, "Given name"),
-  gender: z.enum(GENDERS, { message: "Select H, M or X" }),
+  gender: z.enum(GENDERS, { message: vkey("gender") }),
   birthDate: spanishDateSchema,
   birthCity: upper(60, "City of birth"),
   birthCountry: countryCode("Country of birth"),
   // Spanish citizens need neither an EX-17 nor an EX-18.
   nationality: countryCode("Nationality").refine(
     (code) => code !== "ES",
-    "Spanish citizens do not need a TIE or an EU registration certificate",
+    vkey("spanishCitizen"),
   ),
 });
 
 export const familySchema = z.object({
   maritalStatus: z.enum(MARITAL_STATUSES, {
-    message: "Select a marital status code",
+    message: vkey("marital"),
   }),
   fatherFirstName: upper(60, "Father's first name"),
   motherFirstName: upper(60, "Mother's first name"),
@@ -149,7 +154,7 @@ export const addressSchema = z.object({
   postalCode: z
     .string()
     .trim()
-    .regex(/^\d{5}$/, "Spanish postal codes are exactly 5 digits"),
+    .regex(/^\d{5}$/, vkey("postalCode")),
   province: upper(60, "Province"),
 });
 
@@ -158,9 +163,9 @@ export const contactSchema = z.object({
   phone: z
     .string()
     .trim()
-    .regex(/^\+[1-9]\d{7,14}$/, "Use international format, e.g. +34 600 000 000")
+    .regex(/^\+[1-9]\d{7,14}$/, vkey("phoneFormat"))
     .transform((s) => s.replace(/\s+/g, "")),
-  email: z.string().trim().toLowerCase().email("Enter a valid email address"),
+  email: z.string().trim().toLowerCase().email(vkey("email")),
 });
 
 export const consentSchema = z.object({
@@ -170,13 +175,13 @@ export const consentSchema = z.object({
    * can never be inferred from a default.
    */
   gdprDataProcessing: z.literal(true, {
-    message: "We cannot process your file without this consent",
+    message: vkey("consentProcessing"),
   }),
   gdprSensitiveDocuments: z.literal(true, {
-    message: "Required to hold your passport and visa documents",
+    message: vkey("consentDocuments"),
   }),
   disclaimerAcknowledged: z.literal(true, {
-    message: "Please acknowledge the scope-of-service disclaimer",
+    message: vkey("consentDisclaimer"),
   }),
   /** Genuinely optional — must not block submission. */
   marketingOptIn: z.boolean().default(false),

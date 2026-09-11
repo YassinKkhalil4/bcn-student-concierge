@@ -3,6 +3,7 @@ import { enforceRateLimit } from "@/lib/rate-limit";
 import { portalCaseId } from "@/lib/portal/guard";
 import { getCaseRef, markDocumentsSubmitted } from "@/lib/server/portal";
 import { notifyDocumentsSubmitted } from "@/lib/notify/events";
+import { formLocale, portalRedirect } from "@/lib/portal/redirect";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,7 +21,6 @@ export async function POST(request: Request): Promise<NextResponse> {
     const ref = await getCaseRef(caseId);
     if (ref) await notifyDocumentsSubmitted(ref);
   }
-  return NextResponse.redirect(new URL("/portal?submitted=1", process.env.PUBLIC_ORIGIN ?? request.url), {
-    status: 303,
-  });
+  const form = await request.formData().catch(() => null);
+  return portalRedirect(request, formLocale(form), "/portal?submitted=1");
 }

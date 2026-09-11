@@ -1,0 +1,97 @@
+{
+  "metaTitle": "BCN Student Concierge — Arribades sense complicacions a Barcelona",
+  "metaDescription": "Servei independent de suport administratiu per a estudiants universitaris internacionals que arriben a Barcelona. Padró, cites per a la TIE/CUE i preparació de documents.",
+  "hero": {
+    "eyebrow": "Barcelona · Creat per a famílies internacionals",
+    "title": "Arribades sense complicacions i tràmits de residència en regla per a estudiants universitaris internacionals a Barcelona.",
+    "body": "El vostre fill o filla té plaça en una universitat de Barcelona. Entre ell o ella i una instal·lació tranquil·la hi ha una cadena de tràmits burocràtics que no perdona els errors petits, i tot en castellà. Nosaltres ens n’encarreguem, correctament i a la primera.",
+    "primaryCta": "Comenceu l’alta segura",
+    "secondaryCta": "Compareu els paquets",
+    "note": "Preus fixos, amb l’IVA indicat abans de pagar. Sense facturació per hores."
+  },
+  "trust": {
+    "heading": "Acompanyem estudiants que arriben a",
+    "disclaimer": "Les universitats esmentades són les dels nostres clients. Som un servei independent: no hi estem afiliats, no en tenim l’aval i no actuem en nom de cap d’aquestes institucions."
+  },
+  "problems": {
+    "eyebrow": "Què falla de debò",
+    "title": "Quatre punts de fallada, i com eliminem cadascun.",
+    "approach": "El nostre enfocament — ",
+    "items": [
+      {
+        "problem": "Les cites prèvies s’esgoten en segons",
+        "detail": "Les cites per al Padró i la Policía Nacional es publiquen de manera irregular i s’omplen en qüestió de minuts a través de sistemes automatitzats. Les famílies que actualitzen la pàgina en espanyol des d’un altre fus horari rarament aconsegueixen una cita.",
+        "solution": "Vigilem quan s’obren cites a tots els districtes de Barcelona i reservem la cita a nom de l’estudiant; després us enviem la confirmació amb indicacions i la llista exacta de documents que cal portar."
+      },
+      {
+        "problem": "Una casella equivocada invalida tot l’expedient",
+        "detail": "Un EX-17 amb el segon cognom emplenat com a «N/A», un apartat de representant omplert per un pare o una mare amb bona intenció, o un formulari imprès amb el text desplaçat es rebutja a la finestreta, i la cita següent pot trigar setmanes.",
+        "solution": "Els formularis es generen automàticament a partir de les vostres dades verificades, s’aplanen perquè res no es desplaci en imprimir-los i es contrasten amb el passaport abans que l’expedient surti de les nostres mans."
+      },
+      {
+        "problem": "El formulari fiscal no es pot pagar en línia",
+        "detail": "El Modelo 790 Código 012 porta un codi de barres únic i, per a la majoria d’estudiants, s’ha de pagar en efectiu a la finestreta d’un banc espanyol o a l’escàner d’un caixer. Molts estudiants arriben a la comissaria amb el formulari sense pagar.",
+        "solution": "Configurem el formulari amb codi de barres per pagar-lo en efectiu i donem instruccions pas a pas per a CaixaBank, BBVA i Santander, incloent-hi quines oficines accepten pagaments de no clients."
+      },
+      {
+        "problem": "Els fraus d’habitatge apunten als estudiants que arriben",
+        "detail": "Els anuncis publicats des de l’estranger sovint són subarrendaments il·legals, pisos que no pertanyen al suposat «propietari» o fiances per sobre del límit legal. Les fiances transferides abans d’arribar rarament es recuperen.",
+        "solution": "Amb el paquet Turnkey obtenim la Nota Simple del Registre de la Propietat per confirmar qui és realment el propietari del pis, i comprovem que la fiança del contracte respecta el límit legal abans que ningú no transfereixi diners."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "El procés",
+    "title": "Quatre etapes, de l’alta a la targeta a les mans.",
+    "steps": [
+      {
+        "title": "Alta segura",
+        "body": "L’estudiant emplena el qüestionari xifrat i puja el passaport, la carta de matrícula i el contracte de lloguer. Cada document es xifra individualment amb AES-256."
+      },
+      {
+        "title": "Preparació de l’expedient",
+        "body": "Generem el formulari correcte —EX-17 per a estudiants de fora de la UE, EX-18 per a ciutadans de la UE—, configurem el Modelo 790 i muntem un «Ready File» revisat."
+      },
+      {
+        "title": "Cites assegurades",
+        "body": "Reservem les cites del Padró i de la TIE/CUE i us lliurem un itinerari amb dates: on anar, què portar i què us preguntaran."
+      },
+      {
+        "title": "Adaptació i seguiment",
+        "body": "Durant la primera setmana s’organitzen els tràmits bancaris, el transport públic i la connexió a internet. Fem un seguiment de la sol·licitud durant 90 dies, fins que es recull la targeta."
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Preus transparents",
+    "title": "Tres paquets. Preus fixos, mostrats amb l’IVA inclòs.",
+    "body": "Les taxes de l’Administració (Modelo 790, expedició de la targeta) les pagueu directament a les autoritats espanyoles i no formen part dels nostres honoraris.",
+    "cta": "Vegeu la comparació completa"
+  },
+  "faq": {
+    "eyebrow": "Respostes directes",
+    "title": "Les preguntes que fan primer els pares.",
+    "items": [
+      {
+        "q": "Sou advocats o una gestoria?",
+        "a": "No. Som un servei independent de suport administratiu. Preparem documents a partir de la informació que ens doneu, reservem cites i us guiem durant el procés. No us representem davant de cap autoritat i no donem assessorament jurídic. Quan un cas requereixi una anàlisi jurídica, us ho direm clarament i us recomanarem que consulteu un advocat col·legiat."
+      },
+      {
+        "q": "El meu fill o filla ha d’assistir a les cites en persona?",
+        "a": "Sí. Les cites biomètriques exigeixen que el sol·licitant hi vagi personalment amb els documents originals. Nosaltres preparem l’expedient, aconseguim la cita i l’informem a fons, però la compareixença és seva, en nom propi."
+      },
+      {
+        "q": "Què passa després amb les còpies escanejades del passaport?",
+        "a": "Es conserven xifrades amb una clau única per fitxer i s’eliminen definitivament 30 dies després que finalitzi el servei, mitjançant un procés automàtic. Podeu demanar-ne la supressió abans en qualsevol moment."
+      },
+      {
+        "q": "Podeu garantir que la targeta de residència serà aprovada?",
+        "a": "No, i qualsevol servei que us ho garanteixi us enganya. Les decisions depenen exclusivament de les autoritats espanyoles. El que sí que controlem és que l’expedient sigui complet, correcte i presentat a temps, que és d’on surten, de fet, la majoria de denegacions."
+      },
+      {
+        "q": "Per què el Modelo 790 es paga en efectiu?",
+        "a": "El procés de l’Agència Tributària per a aquest formulari es basa en un codi de barres únic que es llegeix a la finestreta d’un banc o a l’escàner d’un caixer. Sense un certificat digital espanyol —que els nouvinguts no tenen— no es pot pagar en línia, i per això el formulari es configura per al pagament «en efectivo»."
+      }
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { getLocale } from "next-intl/server";
+import { redirect } from "@/i18n/navigation";
 import { PORTAL_COOKIE, verifyPortalSession } from "./session";
 
 /**
@@ -14,6 +15,7 @@ export async function portalCaseId(): Promise<string | null> {
 
 export async function requirePortalCaseId(): Promise<string> {
   const caseId = await portalCaseId();
-  if (!caseId) redirect("/portal/login");
+  // Back to sign-in in the language the student was reading.
+  if (!caseId) return redirect({ href: "/portal/login", locale: await getLocale() });
   return caseId;
 }

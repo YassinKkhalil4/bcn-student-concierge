@@ -1,0 +1,71 @@
+{
+  "atm": {
+    "summary": "Comment effectuer un paiement à un distributeur CaixaBank sans carte espagnole",
+    "steps": [
+      {
+        "title": "Rendez-vous à un distributeur automatique de billets CaixaBank",
+        "detail": "Vous n’avez pas besoin d’un compte CaixaBank ni d’une carte bancaire espagnole. Apportez votre formulaire Modelo 790 imprimé et le montant exact en espèces."
+      },
+      {
+        "title": "Sélectionnez « Pagar impuestos y tasas »",
+        "detail": "Sélectionnez-le sur l’écran d’accueil, sans insérer de carte."
+      },
+      {
+        "title": "Scannez le code-barres à 13 chiffres",
+        "detail": "Placez le code-barres de votre formulaire imprimé devant le lecteur du distributeur. Le montant s’affiche à l’écran : vérifiez qu’il indique {fee}."
+      },
+      {
+        "title": "Insérez le montant exact en espèces",
+        "detail": "Payez exactement {fee}."
+      },
+      {
+        "title": "Agrafez le reçu à la page 3",
+        "detail": "Récupérez le justificatif imprimé : il s’agit de votre preuve de paiement. Agrafez-le à la page 3 du formulaire et apportez les deux documents lors de votre rendez-vous."
+      }
+    ],
+    "fallback": "Si le distributeur ne lit pas le code-barres, effectuez le paiement au guichet de n’importe quelle agence CaixaBank, BBVA ou Santander pendant les heures d’ouverture. Certaines agences n’acceptent les paiements de taxes que le matin."
+  },
+  "sheet": {
+    "title": "Le jour de votre rendez-vous",
+    "purposeTie": "Prise d’empreintes digitales pour votre carte TIE (EX-17)",
+    "purposeEu": "Votre certificat d’enregistrement de citoyen de l’UE (EX-18)",
+    "when": "QUAND",
+    "where": "OÙ",
+    "arrive": "Arrivez 15 minutes à l’avance.",
+    "metro": "MÉTRO LE PLUS PROCHE",
+    "bring": "À apporter",
+    "phrases": "Dites-le en espagnol",
+    "after": "Après le rendez-vous",
+    "checklistTie": [
+      "Passeport (original), ainsi qu’une photocopie de la page avec la photo et de votre visa",
+      "Votre {form}, imprimé et signé",
+      "Une photo récente en couleur, 32 × 26 mm, fond blanc (apportez-en une de rechange)",
+      "Modelo 790 Código 012, payé : la copie tamponnée ou le reçu de distributeur agrafé à celle-ci",
+      "Votre confirmation de rendez-vous imprimée (justificante de cita)"
+    ],
+    "checklistEu": [
+      "Passeport ou carte d’identité nationale (original), ainsi qu’une photocopie",
+      "Votre {form}, imprimé et signé",
+      "Modelo 790 Código 012, payé : la copie tamponnée ou le reçu du distributeur agrafé à celle-ci",
+      "Votre confirmation de rendez-vous imprimée (justificante de cita)",
+      "Vos documents « Ready File » : certificat de scolarité, assurance maladie et déclaration de ressources"
+    ],
+    "afterTie": [
+      "On vous remettra un reçu (resguardo). Conservez-le : vous en aurez besoin pour retirer votre carte.",
+      "Vous retirerez votre carte plus tard, en personne. Nous vous indiquerons quand et où."
+    ],
+    "afterEu": [
+      "Le certificat est généralement remis lors du rendez-vous. Vérifiez tous les détails qui y figurent avant de partir.",
+      "Conservez-le avec votre passeport : il prouve votre enregistrement."
+    ],
+    "meaning": {
+      "greetTie": "Bonjour, j’ai rendez-vous pour la prise d’empreintes digitales.",
+      "greetEu": "Bonjour, j’ai rendez-vous pour le certificat d’enregistrement de citoyen de l’Union.",
+      "handOver": "Voici mon passeport et le reçu de paiement de la taxe.",
+      "collectCard": "Quand puis-je retirer la carte ?",
+      "certificateToday": "Vais-je recevoir le certificat aujourd’hui ?",
+      "repeat": "Excusez-moi, pourriez-vous répéter cela plus lentement, s’il vous plaît ?"
+    },
+    "footer": "{name} · {ref} · BCN Student Concierge — conseils pratiques, et non conseils juridiques. Les conditions sont fixées par la Policía Nacional et peuvent être modifiées."
+  }
+}

@@ -53,6 +53,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       caseId: record.id,
       customerEmail: record.intake.contact.email,
       origin,
+      locale: record.locale,
     });
     await updateCase(record.id, { stripeSessionId: session.id });
     return NextResponse.json({ url: session.url }, { status: 200 });

@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 /**
  * A single GDPR consent control.
  *
@@ -25,6 +27,7 @@ export function ConsentBox({
   error?: string;
   optional?: boolean;
 }) {
+  const t = useTranslations("intake.consent");
   return (
     <div
       className={[
@@ -45,7 +48,7 @@ export function ConsentBox({
           <span className="block text-sm font-medium text-ink">
             {label}
             {optional && (
-              <span className="ml-2 text-xs font-normal text-ink-soft">optional</span>
+              <span className="ml-2 text-xs font-normal text-ink-soft">{t("optional")}</span>
             )}
           </span>
           <span

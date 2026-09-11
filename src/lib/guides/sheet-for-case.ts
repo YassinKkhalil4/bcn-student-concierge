@@ -3,6 +3,7 @@ import { listAppointments } from "@/lib/server/appointments";
 import { appointmentSheetContent } from "./appointment-content";
 import { renderAppointmentSheet } from "./appointment-sheet";
 import { titleCase } from "@/lib/request-templates";
+import { translatorFor } from "@/i18n/messages";
 
 /**
  * The appointment-day sheet for a case's POLICE appointment, or null when the
@@ -18,6 +19,8 @@ export async function appointmentSheetForCase(
   if (!police) return null;
 
   const { identity } = record.intake;
+  // In the student's language, whoever downloads it: staff print it for them.
+  const t = await translatorFor(record.locale, "guides");
   const content = appointmentSheetContent({
     ref: record.ref,
     formId: record.formId,
@@ -29,6 +32,6 @@ export async function appointmentSheetForCase(
     officeAddress: police.officeAddress,
     nearestMetro: police.nearestMetro,
     confirmationCode: police.confirmationCode,
-  });
+  }, t, record.locale);
   return { bytes: await renderAppointmentSheet(content), ref: record.ref };
 }

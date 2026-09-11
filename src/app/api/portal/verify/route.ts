@@ -1,18 +1,17 @@
 import { NextResponse } from "next/server";
 import { clientIdentifier, rateLimit } from "@/lib/rate-limit";
-import { consumeLoginLink } from "@/lib/server/portal";
+import { consumeLoginLink, setCaseLocale } from "@/lib/server/portal";
 import {
   PORTAL_COOKIE,
   createPortalSession,
   portalCookieOptions,
   verifyLoginLinkToken,
 } from "@/lib/portal/session";
+import { formLocale, portalRedirect } from "@/lib/portal/redirect";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const to = (request: Request, path: string) =>
-  NextResponse.redirect(new URL(path, process.env.PUBLIC_ORIGIN ?? request.url), { status: 303 });
 
 /**
  * Redeem a sign-in link. POST only: the emailed link opens a page with a
@@ -21,18 +20,23 @@ const to = (request: Request, path: string) =>
  * student's single-use link before the student ever clicked it.
  */
 export async function POST(request: Request): Promise<NextResponse> {
+  const form = await request.formData().catch(() => null);
+  const locale = formLocale(form);
+  const to = (path: string) => portalRedirect(request, locale, path);
+
   if (!(await rateLimit(clientIdentifier(request.headers), "portal-verify")).allowed) {
-    return to(request, "/portal/login?error=locked");
+    return to("/portal/login?error=locked");
   }
 
-  const form = await request.formData().catch(() => null);
   const token = form?.get("token");
   const link = await verifyLoginLinkToken(typeof token === "string" ? token : null);
   if (!link || !(await consumeLoginLink(link.caseId, link.issuedAt))) {
-    return to(request, "/portal/login?error=link");
+    return to("/portal/login?error=link");
   }
 
-  const response = to(request, "/portal");
+  // Signing in from a page in another language is a language choice too.
+  await setCaseLocale(link.caseId, locale);
+  const response = to("/portal");
   response.cookies.set(PORTAL_COOKIE, await createPortalSession(link.caseId), portalCookieOptions);
   return response;
 }

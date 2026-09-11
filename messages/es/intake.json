@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "title": "Admisión segura de clientes",
+    "description": "Cuestionario de admisión cifrado y portal de documentos para los clientes de BCN Student Concierge."
+  },
+  "page": {
+    "eyebrow": "Alta segura",
+    "title": "Su expediente comienza aquí.",
+    "intro": "Seis pasos breves. Toda la información que introduzca se transmite mediante TLS y se almacena cifrada; los documentos de identidad subidos se cifran individualmente con su propia clave AES-256."
+  },
+  "steps": {
+    "progress": "Progreso",
+    "identity": "Identidad",
+    "family": "Estado civil",
+    "address": "Dirección en España",
+    "contact": "Contacto",
+    "consent": "Consentimiento",
+    "documents": "Documentos"
+  },
+  "field": {
+    "optional": "(opcional)",
+    "select": "Seleccionar…",
+    "officialCodes": "Códigos oficiales: {codes}"
+  },
+  "identity": {
+    "title": "Identidad",
+    "description": "Introduzca estos datos exactamente tal y como aparecen en su pasaporte. Las autoridades españolas comprueban cada carácter, y una discrepancia en este punto es la causa más habitual de que se rechace una solicitud."
+  },
+  "family": {
+    "title": "Estado civil y familiar",
+    "description": "Los formularios de residencia en España exigen los nombres de pila de los padres, incluso en el caso de solicitantes adultos. Solo se solicitan los nombres de pila; no se piden los apellidos."
+  },
+  "address": {
+    "title": "Dirección en España",
+    "description": "Esta debe coincidir exactamente con su certificado del Padrón, incluyendo la planta y la puerta. Si aún no se ha empadronado, utilice la dirección que figura en su contrato de alquiler."
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "Utilizamos estos datos para confirmar las citas. Si ya lo conoce, indique el número que el estudiante llevará consigo en España."
+  },
+  "fields": {
+    "passportNumber": {
+      "label": "Número de pasaporte"
+    },
+    "nie": {
+      "label": "NIE preasignado",
+      "hint": "Figura en su visado, si ya se le ha asignado. Déjelo en blanco si todavía no lo tiene."
+    },
+    "firstSurname": {
+      "label": "Primer apellido"
+    },
+    "secondSurname": {
+      "label": "Segundo apellido",
+      "hint": "Déjelo en blanco si en su pasaporte solo figura un apellido. No introduzca nunca «N/A»."
+    },
+    "givenName": {
+      "label": "Nombre(s)"
+    },
+    "gender": {
+      "label": "Sexo"
+    },
+    "birthDate": {
+      "label": "Fecha de nacimiento",
+      "hint": "Primero el día, tal y como se indica en los formularios españoles.",
+      "placeholder": "DD/MM/AAAA"
+    },
+    "birthCity": {
+      "label": "Ciudad de nacimiento"
+    },
+    "birthCountry": {
+      "label": "País de nacimiento"
+    },
+    "nationality": {
+      "label": "Nacionalidad",
+      "hint": "Tal y como figura en su pasaporte. Esto determina si debemos tramitar un EX-17 (TIE) o un EX-18 (certificado de la UE)."
+    },
+    "maritalStatus": {
+      "label": "Estado civil"
+    },
+    "fatherFirstName": {
+      "label": "Nombre de pila del padre"
+    },
+    "motherFirstName": {
+      "label": "Nombre de pila de la madre"
+    },
+    "streetName": {
+      "label": "Nombre de la calle",
+      "hint": "Incluya el tipo: CARRER, CALLE, AVINGUDA, PASSEIG…"
+    },
+    "buildingNumber": {
+      "label": "Número de edificio"
+    },
+    "floorDoor": {
+      "label": "Planta / puerta",
+      "hint": "Déjelo en blanco si la dirección no tiene planta ni puerta."
+    },
+    "city": {
+      "label": "Ciudad / municipio"
+    },
+    "postalCode": {
+      "label": "Código postal"
+    },
+    "province": {
+      "label": "Provincia"
+    },
+    "phone": {
+      "label": "Teléfono móvil",
+      "hint": "Formato internacional, incluido el código de país."
+    },
+    "email": {
+      "label": "Dirección de correo electrónico"
+    }
+  },
+  "gender": {
+    "H": "Hombre",
+    "M": "Mujer",
+    "X": "Otros / sin especificar"
+  },
+  "marital": {
+    "S": "soltero/a",
+    "C": "casado/a",
+    "V": "viudo/a",
+    "D": "divorciado/a",
+    "Sp": "separado/a"
+  },
+  "consent": {
+    "title": "Consentimiento y alcance del servicio",
+    "intro": "Cada casilla que aparece a continuación está desmarcada por defecto y debe marcarse de forma activa. No consideramos que el silencio, ni una casilla marcada de antemano, constituyan un consentimiento.",
+    "optional": "opcional",
+    "gdprDataProcessing": {
+      "label": "Doy mi consentimiento para el tratamiento de mis datos personales",
+      "body": "BCN Student Concierge podrá tratar los datos anteriores para preparar mis formularios, concertar citas y gestionar mi expediente, de conformidad con el artículo 6, apartado 1, letra b), del RGPD. Los datos se conservan en la UE y se eliminan 30 días después de la finalización del servicio.",
+      "error": "Necesario para tramitar su expediente"
+    },
+    "gdprSensitiveDocuments": {
+      "label": "Doy mi consentimiento para el almacenamiento de mis documentos de identidad",
+      "body": "Mi pasaporte, mi visado y mis documentos de matrícula podrán conservarse cifrados mientras dure el servicio. Entiendo que puedo retirar este consentimiento y solicitar su supresión en cualquier momento, y que la retirada puede impedir que se complete el servicio.",
+      "error": "Necesario para custodiar sus documentos"
+    },
+    "disclaimerAcknowledged": {
+      "label": "Entiendo que esto no constituye una representación legal",
+      "body": "Entiendo que BCN Student Concierge es un servicio independiente de facilitación administrativa, no es un bufete de abogados ni una gestoría, no me representa ante ninguna autoridad y no ofrece asesoramiento jurídico ni en materia de inmigración vinculante. Todas las solicitudes se presentan a mi nombre.",
+      "error": "Confirme que ha leído el alcance del servicio"
+    },
+    "marketingOptIn": {
+      "label": "Envíenme consejos para la llegada antes de viajar",
+      "body": "Correos electrónicos prácticos ocasionales sobre la llegada a Barcelona. Puede darse de baja en cualquier momento. Esto es totalmente opcional y no afecta a su servicio."
+    }
+  },
+  "wizard": {
+    "back": "Atrás",
+    "continue": "Continuar",
+    "saving": "Guardando…",
+    "submit": "Enviar y continuar",
+    "fixEarlier": "Algunas respuestas deben corregirse; compruebe los pasos anteriores.",
+    "submitFailed": "No hemos podido guardar su envío. Por favor, inténtelo de nuevo.",
+    "networkRetry": "Error de red. Sus respuestas siguen aquí; por favor, vuelva a intentarlo.",
+    "checkoutFailed": "No se ha podido abrir la página de pago. Inténtelo de nuevo.",
+    "checkoutNetwork": "Error de red al abrir la página de pago.",
+    "sessionExpired": "Su sesión ha caducado. Por favor, vuelva a iniciar sesión.",
+    "alreadyPaid": "Este expediente ya está pagado.",
+    "uploadTitle": "Suba sus documentos",
+    "uploadIntro": "Su expediente está abierto. Referencia <code>{ref}</code>. Suba la documentación de la que dispone actualmente y, a continuación, continúe con el pago.",
+    "uploadLater": "¿Le falta algo, como un documento para el Padrón que debe darle su arrendador? Es normal. Pague ahora y súbalo más tarde desde <link>su expediente</link>: inicie sesión cuando quiera con el correo electrónico que nos facilitó.",
+    "openingCheckout": "Iniciando el proceso de pago seguro…",
+    "pay": "Continuar con el pago — {total}",
+    "stripeNote": "Tarjeta y Apple Pay, gestionados por Stripe. Nunca vemos los datos de su tarjeta."
+  },
+  "summary": {
+    "selected": "Paquete seleccionado",
+    "serviceFee": "Tarifa del servicio",
+    "iva": "IVA (21 %)",
+    "total": "Total",
+    "change": "Modificar paquete",
+    "govFees": "Las tasas administrativas (Modelo 790, expedición de tarjetas) las abona usted directamente a las autoridades españolas y no están incluidas."
+  },
+  "documents": {
+    "slots": {
+      "passport": {
+        "label": "Pasaporte — página de la fotografía",
+        "description": "La página con la zona legible por máquina. Si su visado figura en el pasaporte, añada también esa página."
+      },
+      "acceptance-letter": {
+        "label": "Certificado de matrícula",
+        "description": "El certificado oficial de matrícula de su universidad, sellado y firmado."
+      },
+      "lease": {
+        "label": "Contrato de alquiler o escritura de propiedad",
+        "description": "El contrato completo firmado (o la escritura, si el firmante es propietario del piso), todas las páginas."
+      },
+      "utility-bill": {
+        "label": "Factura reciente de suministros",
+        "description": "Factura de electricidad, agua o gas, correspondiente a esta dirección, de los últimos tres meses."
+      },
+      "padron-authorization": {
+        "label": "Autorización firmada",
+        "description": "El formulario de autorización, firmado a mano y fechado por la persona que le autoriza."
+      },
+      "authorizer-id": {
+        "label": "Documento de identidad de quien firma",
+        "description": "Una fotografía nítida o un escaneo de su documento de identidad —DNI español, tarjeta NIE o pasaporte— por ambas caras."
+      },
+      "collective-authorization": {
+        "label": "Autorización de su lugar de residencia",
+        "description": "Formulario de Barcelona para viviendas colectivas, firmado por la residencia y sellado."
+      }
+    },
+    "onFile": "✓ recibido",
+    "replace": "Sustituir",
+    "choose": "Seleccionar archivo",
+    "uploading": "Cifrando y subiendo…",
+    "done": "✓ {name} — cifrado y almacenado",
+    "tooLarge": "El archivo tiene un tamaño superior a {mb} MB.",
+    "wrongType": "Solo se aceptan archivos PDF, JPEG y PNG. Por favor, vuelva a exportar el archivo.",
+    "failed": "No se ha podido subir el archivo. Inténtelo de nuevo.",
+    "network": "Error de red. Compruebe su conexión e inténtelo de nuevo.",
+    "footer": "PDF, JPEG o PNG, hasta {mb} MB cada uno. Cada archivo se cifra con su propia clave AES-256 en el momento de su recepción y se elimina de forma permanente 30 días después de que finalice el servicio."
+  },
+  "complete": {
+    "metaTitle": "Alta completada",
+    "eyebrow": "Pago recibido",
+    "title": "Su expediente está abierto.",
+    "intro": "Le hemos enviado una confirmación y una factura a la dirección de correo electrónico que nos facilitó. Esto es exactamente lo que ocurrirá ahora, y el único pago que deberá hacer usted mismo.",
+    "steps": [
+      {
+        "title": "Verificamos su expediente (en el plazo de un día laborable)",
+        "body": "Cotejamos los documentos que ha subido con los datos que ha introducido. Si algo no cuadra —un apellido distinto al del pasaporte, un escaneo ilegible—, le escribimos antes de presentar nada."
+      },
+      {
+        "title": "Formularios generados y enviados para su revisión",
+        "body": "Preparamos su EX-17 o EX-18 y su Modelo 790 Código 012, y le enviamos ambos como archivos PDF listos para imprimir. Revíselos con atención: usted es el solicitante y la declaración es suya."
+      },
+      {
+        "title": "Citas concertadas",
+        "body": "Supervisamos el sistema de «cita previa» y reservamos sus citas para el Padrón y la comisaría; a continuación, le enviamos un itinerario con la fecha, la dirección, los documentos que debe llevar y lo que se le preguntará."
+      }
+    ],
+    "home": "Volver a la página de inicio"
+  }
+}

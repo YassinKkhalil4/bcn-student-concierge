@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "title": "Secure Client Intake",
+    "description": "Encrypted intake questionnaire and document portal for BCN Student Concierge clients."
+  },
+  "page": {
+    "eyebrow": "Secure intake",
+    "title": "Your file starts here.",
+    "intro": "Six short steps. Everything you enter is transmitted over TLS and stored encrypted; uploaded identity documents are encrypted individually with their own AES-256 key."
+  },
+  "steps": {
+    "progress": "Progress",
+    "identity": "Identity",
+    "family": "Civil status",
+    "address": "Address in Spain",
+    "contact": "Contact",
+    "consent": "Consent",
+    "documents": "Documents"
+  },
+  "field": {
+    "optional": "(optional)",
+    "select": "Select…",
+    "officialCodes": "Official codes: {codes}"
+  },
+  "identity": {
+    "title": "Identity",
+    "description": "Enter these exactly as they appear in your passport. Spanish authorities match every character, and a mismatch here is the most common cause of a rejected file."
+  },
+  "family": {
+    "title": "Civil and family status",
+    "description": "Spanish residency forms require parental given names even for adult applicants. First names only — surnames are not requested."
+  },
+  "address": {
+    "title": "Address in Spain",
+    "description": "This must match your Padrón certificate exactly, including floor and door. If you have not registered yet, use the address on your lease."
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "We use these for appointment confirmations. Give the number your student will actually carry in Spain if you already know it."
+  },
+  "fields": {
+    "passportNumber": {
+      "label": "Passport number"
+    },
+    "nie": {
+      "label": "Pre-assigned NIE",
+      "hint": "On your visa, if issued. Leave blank if you do not have one yet."
+    },
+    "firstSurname": {
+      "label": "First surname"
+    },
+    "secondSurname": {
+      "label": "Second surname",
+      "hint": "Leave blank if your passport shows only one surname. Never enter “N/A”."
+    },
+    "givenName": {
+      "label": "Given name(s)"
+    },
+    "gender": {
+      "label": "Gender"
+    },
+    "birthDate": {
+      "label": "Date of birth",
+      "hint": "Day first, as written on Spanish forms.",
+      "placeholder": "DD/MM/YYYY"
+    },
+    "birthCity": {
+      "label": "City of birth"
+    },
+    "birthCountry": {
+      "label": "Country of birth"
+    },
+    "nationality": {
+      "label": "Nationality",
+      "hint": "As on your passport. It decides whether we prepare an EX-17 (TIE) or an EX-18 (EU certificate)."
+    },
+    "maritalStatus": {
+      "label": "Marital status"
+    },
+    "fatherFirstName": {
+      "label": "Father's first name"
+    },
+    "motherFirstName": {
+      "label": "Mother's first name"
+    },
+    "streetName": {
+      "label": "Street name",
+      "hint": "Include the type: CARRER, CALLE, AVINGUDA, PASSEIG…"
+    },
+    "buildingNumber": {
+      "label": "Building number"
+    },
+    "floorDoor": {
+      "label": "Floor / door",
+      "hint": "Leave blank if the address has no floor or door."
+    },
+    "city": {
+      "label": "City / municipality"
+    },
+    "postalCode": {
+      "label": "Postal code"
+    },
+    "province": {
+      "label": "Province"
+    },
+    "phone": {
+      "label": "Mobile phone",
+      "hint": "International format, including the country code."
+    },
+    "email": {
+      "label": "Email address"
+    }
+  },
+  "gender": {
+    "H": "Male",
+    "M": "Female",
+    "X": "Other / not specified"
+  },
+  "marital": {
+    "S": "single",
+    "C": "married",
+    "V": "widowed",
+    "D": "divorced",
+    "Sp": "separated"
+  },
+  "consent": {
+    "title": "Consent and scope",
+    "intro": "Each box below is unchecked by default and must be actively ticked. We do not treat silence, or a pre-ticked box, as consent.",
+    "optional": "optional",
+    "gdprDataProcessing": {
+      "label": "I consent to the processing of my personal data",
+      "body": "BCN Student Concierge may process the data above to prepare my forms, book appointments and administer my file, under GDPR Art. 6(1)(b). Data is held in the EU and deleted 30 days after service completion.",
+      "error": "Required to process your file"
+    },
+    "gdprSensitiveDocuments": {
+      "label": "I consent to the storage of my identity documents",
+      "body": "My passport, visa and enrolment documents may be stored in encrypted form for the duration of my engagement. I understand I may withdraw this consent and request deletion at any time, and that withdrawal may prevent completion of the service.",
+      "error": "Required to hold your documents"
+    },
+    "disclaimerAcknowledged": {
+      "label": "I understand this is not legal representation",
+      "body": "I understand BCN Student Concierge is an independent administrative facilitation service, is not a law firm or gestoría, does not represent me before any authority, and does not provide binding legal or immigration advice. All applications are submitted in my own name.",
+      "error": "Please acknowledge the scope of service"
+    },
+    "marketingOptIn": {
+      "label": "Send me arrival tips before I travel",
+      "body": "Occasional practical email about arriving in Barcelona. Unsubscribe at any time. This is genuinely optional and does not affect your service."
+    }
+  },
+  "wizard": {
+    "back": "Back",
+    "continue": "Continue",
+    "saving": "Saving…",
+    "submit": "Submit and continue",
+    "fixEarlier": "Some answers need correcting — check the earlier steps.",
+    "submitFailed": "We could not save your submission. Please try again.",
+    "networkRetry": "Network error. Your answers are still here — please retry.",
+    "checkoutFailed": "Could not open checkout. Please try again.",
+    "checkoutNetwork": "Network error opening checkout.",
+    "sessionExpired": "Your session has expired. Please sign in again.",
+    "alreadyPaid": "This file is already paid.",
+    "uploadTitle": "Upload your documents",
+    "uploadIntro": "Your file is open. Reference <code>{ref}</code>. Upload what you have now, then continue to payment.",
+    "uploadLater": "Missing something, like a Padrón document from your landlord? That is normal. Pay now and upload it later from <link>your file</link>: sign in any time with the email you gave us.",
+    "openingCheckout": "Opening secure checkout…",
+    "pay": "Continue to payment — {total}",
+    "stripeNote": "Card and Apple Pay, processed by Stripe. We never see your card details."
+  },
+  "summary": {
+    "selected": "Selected package",
+    "serviceFee": "Service fee",
+    "iva": "IVA (21%)",
+    "total": "Total",
+    "change": "Change package",
+    "govFees": "Government fees (Modelo 790, card issuance) are paid by you directly to the Spanish authorities and are not included."
+  },
+  "documents": {
+    "slots": {
+      "passport": {
+        "label": "Passport — photo page",
+        "description": "The page with the machine-readable zone. If your visa is in the passport, add that page too."
+      },
+      "acceptance-letter": {
+        "label": "Certificado de matrícula (enrolment certificate)",
+        "description": "The official enrolment certificate from your university, stamped and signed."
+      },
+      "lease": {
+        "label": "Lease or property deed",
+        "description": "The full signed contract (or the deed, if the signer owns the flat), all pages."
+      },
+      "utility-bill": {
+        "label": "Recent utility bill",
+        "description": "Electricity, water or gas, for this address, from the last three months."
+      },
+      "padron-authorization": {
+        "label": "Signed authorisation",
+        "description": "The authorisation form, signed by hand and dated by the person who authorises you."
+      },
+      "authorizer-id": {
+        "label": "ID of the person who signed",
+        "description": "A clear photo or scan of their identity document — Spanish DNI, NIE card or passport — front and back."
+      },
+      "collective-authorization": {
+        "label": "Authorisation from your residence",
+        "description": "Barcelona's form for collective homes, signed by the residence and stamped."
+      }
+    },
+    "onFile": "✓ on file",
+    "replace": "Replace",
+    "choose": "Choose file",
+    "uploading": "Encrypting and uploading…",
+    "done": "✓ {name} — encrypted and stored",
+    "tooLarge": "File is larger than {mb} MB.",
+    "wrongType": "Only PDF, JPEG and PNG files are accepted. Please re-export the file.",
+    "failed": "Upload failed. Please try again.",
+    "network": "Network error. Check your connection and try again.",
+    "footer": "PDF, JPEG or PNG, up to {mb} MB each. Each file is encrypted with its own AES-256 key on receipt and permanently deleted 30 days after your service completes."
+  },
+  "complete": {
+    "metaTitle": "Intake complete",
+    "eyebrow": "Payment received",
+    "title": "Your file is open.",
+    "intro": "A confirmation and invoice are on their way to the email address you gave. Here is exactly what happens next — and the one payment you will need to make yourself.",
+    "steps": [
+      {
+        "title": "We verify your file (within 1 business day)",
+        "body": "Your uploads are checked against the data you entered. If anything is inconsistent — a surname that differs from the passport, an unreadable scan — we email you before anything is filed."
+      },
+      {
+        "title": "Forms generated and sent for review",
+        "body": "We prepare your EX-17 or EX-18 and your Modelo 790 Código 012, and send both as print-ready PDFs. Review them carefully: you are the applicant, and the declaration is yours."
+      },
+      {
+        "title": "Appointments secured",
+        "body": "We monitor the cita previa system and book your Padrón and police appointments, then send a dated itinerary with the address, documents to carry, and what will be asked."
+      }
+    ],
+    "home": "Return to homepage"
+  }
+}

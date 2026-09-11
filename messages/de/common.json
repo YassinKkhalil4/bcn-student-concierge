@@ -1,0 +1,57 @@
+{
+  "brand": "BCN Student Concierge",
+  "skipToContent": "Zum Inhalt springen",
+  "nav": {
+    "main": "Hauptnavigation",
+    "howItWorks": "So funktioniert es",
+    "pricing": "Leistungen & Preise",
+    "faq": "FAQ",
+    "myFile": "Meine Akte",
+    "beginIntake": "Jetzt starten",
+    "begin": "Starten"
+  },
+  "language": {
+    "label": "Sprache"
+  },
+  "footer": {
+    "tagline": "Unabhängige administrative Unterstützung für internationale Studierende, die ihr Studium an privaten Hochschulen in Barcelona beginnen.",
+    "services": "Dienstleistungen",
+    "packages": "Pakete & Preise",
+    "intake": "Portal zur Kundenaufnahme",
+    "process": "Ablauf",
+    "legal": "Rechtliches",
+    "terms": "Nutzungsbedingungen",
+    "privacy": "Datenschutz & DSGVO",
+    "scope": "Leistungsumfang",
+    "copyright": "© {year} BCN Student Concierge. Barcelona, Spanien."
+  },
+  "disclaimer": {
+    "footerLabel": "Leistungsumfang.",
+    "prominentLabel": "Wichtig – Leistungsumfang",
+    "body": "BCN Student Concierge ist ein unabhängiger Dienstleister für administrative Unterstützung und Terminvereinbarungen. Wir sind weder eine Anwaltskanzlei noch eine eingetragene gestoría. Wir bieten keine rechtliche Vertretung an, treten nicht als Ihr Rechtsvertreter vor spanischen Behörden auf, und nichts, was wir bereitstellen, stellt eine verbindliche Rechts- oder Einwanderungsberatung dar. Alle Anträge werden von Ihnen in Ihrem eigenen Namen eingereicht. Entscheidungen über Aufenthaltsgenehmigungen, Anmeldung und Unterlagen liegen ausschließlich bei den zuständigen spanischen Behörden, und es wird kein Ergebnis garantiert. Für rechtliche Beratung zu Ihrem Einwanderungsstatus wenden Sie sich bitte an einen bei der Anwaltskammer eingetragenen colegiado abogado."
+  },
+  "copy": {
+    "copy": "Kopieren",
+    "copied": "Kopiert ✓",
+    "failed": "Kopieren fehlgeschlagen",
+    "copySubject": "Betreff kopieren",
+    "copyMessage": "Nachricht kopieren"
+  },
+  "legalPage": {
+    "lastUpdated": "Zuletzt aktualisiert: {date}",
+    "translationNotice": "Diese Seite ist eine Übersetzung, die aus Gründen der Benutzerfreundlichkeit bereitgestellt wird. Sollte sie von der englischen Version abweichen, ist die englische Version maßgebend."
+  },
+  "modelo790": {
+    "title": "Modelo 790 Código 012 – Barzahlung am Bankschalter",
+    "intro": "Die staatliche Gebühr für Ihre Aufenthaltskarte ist nicht in unserem Honorar enthalten und kann auf unserer Website nicht per Karte bezahlt werden. Gemäß den Vorschriften der spanischen Steuerbehörde muss dieses Formular über einen Barcode bei einer physischen Bank eingelesen werden: Für die Online-Zahlung ist ein spanisches digitales Zertifikat oder das Online-Banking einer spanischen Bank erforderlich, über beides verfügt ein neu angekommener Studierender jedoch nicht.",
+    "steps": [
+      "Wir erstellen Ihr Modelo 790 Código 012 für die Barzahlung („en efectivo“) – mit dem eindeutigen Barcode, den der Scanner der Bank liest.",
+      "Drucken Sie das Formular in Farbe, einseitig und im Maßstab 100 % aus. Verändern Sie die Größe nicht – ein in der Größe angepasster Barcode lässt sich nicht scannen, und das Formular wird abgelehnt.",
+      "Bringen Sie den Ausdruck zu einer spanischen Bankfiliale oder zu einem Geldautomaten mit Barcode-Scanner. Legen Sie alle Kopien vor; der Bankangestellte stempelt diese ab.",
+      "Bewahren Sie die abgestempelte Kopie mit der Aufschrift „Ejemplar para el interesado“ auf. Bringen Sie diese zusammen mit Ihrem EX-17- oder EX-18-Formular zu Ihrem Termin bei der Polizei mit – ein nicht abgestempeltes Formular führt zur Beendigung des Termins."
+    ],
+    "branchesTitle": "Filialen, die diese Zahlungsart akzeptieren",
+    "branchesNote": "Nicht jede Filiale akzeptiert Steuerzahlungen von Nichtkunden, und manche nehmen diese nur vormittags entgegen. Wir bestätigen Ihnen im Rahmen Ihres Terminplans eine bestimmte Filiale in Ihrer Nähe sowie deren Öffnungszeiten am Schalter.",
+    "footnote": "Die Höhe der Gebühr wird von der spanischen Regierung festgelegt und ändert sich in regelmäßigen Abständen; maßgeblich ist der Betrag, der zum Zeitpunkt der Erstellung auf Ihrem Formular angegeben ist. Wir erheben diese Gebühr niemals im Auftrag der Regierung."
+  }
+}

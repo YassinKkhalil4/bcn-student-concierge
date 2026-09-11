@@ -1,0 +1,184 @@
+{
+  "scope": {
+    "metaTitle": "Alcance del servicio",
+    "metaDescription": "Lo que hace y lo que no hace BCN Student Concierge, y por qué esta distinción es importante según la legislación española.",
+    "eyebrow": "Legal",
+    "title": "Alcance del servicio",
+    "clauses": [
+      {
+        "heading": "Quiénes somos",
+        "paragraphs": [
+          "BCN Student Concierge es un servicio privado de asistencia administrativa. Preparamos los documentos a partir de la información que nos facilite, reservamos citas en los sistemas públicos de reserva a su nombre y le guiamos a lo largo de un proceso que se lleva a cabo en español y que requiere conocimientos locales de los que usted aún no dispone."
+        ]
+      },
+      {
+        "heading": "Lo que no somos",
+        "paragraphs": [
+          "No somos un despacho de abogados ni estamos colegiados. No somos una gestoría administrativa registrada. No somos agentes, representantes ni intermediarios de ninguna autoridad pública española, y no estamos afiliados a ninguna universidad.",
+          "La legislación española reserva determinadas actividades —la representación legal, el asesoramiento formal en materia de inmigración y la actuación ante las autoridades en nombre de otra persona— a profesionales regulados. Ofrecer dichos servicios sin la titulación correspondiente constituye intrusismo profesional. Nosotros no los ofrecemos, y esta página existe para que no haya ninguna ambigüedad al respecto."
+        ]
+      },
+      {
+        "heading": "La sección 2 de su formulario permanece en blanco",
+        "paragraphs": [
+          "Los formularios oficiales EX-17 y EX-18 contienen un apartado para los datos de un representante legal. Lo dejamos deliberada y permanentemente en blanco. Rellenarlo supondría declarar ante la Policía Nacional que actuamos como su representante, lo cual no es cierto y, además, requeriría un poder notarial del que no disponemos ni le pediremos. Usted es el solicitante en todos los formularios que preparamos."
+        ]
+      },
+      {
+        "heading": "Notificaciones electrónicas (DEHú)",
+        "paragraphs": [
+          "Dejamos sin marcar la casilla de consentimiento para la notificación electrónica. Al dar su consentimiento, se activan plazos de notificación legalmente vinculantes que se envían a un buzón del Gobierno español cuyo acceso requiere un certificado digital —algo de lo que un estudiante recién llegado no dispone—. Una notificación no recibida puede dar por cerrado un expediente. Si más adelante obtiene un certificado y desea dar su consentimiento, esa es una decisión que deberá tomar con pleno conocimiento de causa."
+        ]
+      },
+      {
+        "heading": "No se garantiza ningún resultado",
+        "paragraphs": [
+          "Las decisiones sobre residencia, empadronamiento y documentación recaen íntegramente en las autoridades españolas competentes. No influimos en dichas decisiones y no podemos garantizar ningún resultado, plazo ni disponibilidad de citas. De lo que sí respondemos es de que su expediente esté completo, sea coherente en su conjunto, tenga el formato correcto y se presente a tiempo."
+        ]
+      },
+      {
+        "heading": "Sus responsabilidades",
+        "paragraphs": [
+          "La información que nos facilite se convertirá en una declaración que usted firmará. Usted es responsable de su veracidad, de revisar cada documento antes de firmarlo y de acudir en persona a las citas con los documentos originales. Le indicaremos claramente qué debe comprobar; no podemos hacerlo por usted, ya que nunca hemos visto su pasaporte original."
+        ]
+      },
+      {
+        "heading": "Cuándo le remitiremos a otra fuente",
+        "paragraphs": [
+          "Si su situación implica una solicitud denegada, una situación de residencia caducada o irregular, una verificación de antecedentes penales, una solicitud de reagrupación familiar o cualquier asunto que requiera análisis jurídico, se lo indicaremos y rechazaremos el encargo en lugar de intentar llevarlo a cabo. Preferimos perder el encargo antes que hacer que usted confíe en un asesoramiento para el que no estamos cualificados."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "metaTitle": "Privacidad y RGPD",
+    "metaDescription": "Cómo recopila, cifra, conserva y elimina BCN Student Concierge los datos personales conforme al RGPD y a la LOPDGDD.",
+    "eyebrow": "Privacidad",
+    "title": "Aviso de privacidad y compromisos en materia del RGPD",
+    "clauses": [
+      {
+        "heading": "Quién es el responsable del tratamiento de sus datos",
+        "paragraphs": [
+          "BCN Student Concierge (el «responsable del tratamiento») determina cómo y por qué se tratan sus datos personales. Contacto para todas las cuestiones relacionadas con la protección de datos, incluido el ejercicio de los derechos que se indican a continuación: <mail>privacy@bcnstudent.com</mail>."
+        ]
+      },
+      {
+        "heading": "Qué datos recopilamos y por qué",
+        "paragraphs": [
+          "Datos de identidad y estado civil (número de pasaporte, NIE, nombres, sexo, datos de nacimiento, nacionalidad, estado civil, nombres de pila de los padres), su dirección en España, datos de contacto y copias escaneadas de su pasaporte, carta de admisión a la universidad y contrato de alquiler.",
+          "Base jurídica: ejecución de un contrato con usted (art. 6, apartado 1, letra b) del RGPD). Recogemos estos datos porque así lo exigen los formularios de residencia en España, no porque los queramos. No recogemos datos de salud, plantillas biométricas ni ningún dato de categorías especiales según el art. 9, más allá de lo que figura en la cara visible de los documentos que usted sube."
+        ]
+      },
+      {
+        "heading": "Cómo se protegen sus datos",
+        "paragraphs": [
+          "Las respuestas a su cuestionario (número de pasaporte, nombres, fecha y lugar de nacimiento, dirección) y todos los documentos que suba se cifran en reposo con AES-256-GCM, cada uno con su propia clave. Dichas claves, a su vez, se cifran con una clave maestra que se guarda por separado de la base de datos y de sus copias de seguridad; de este modo, una copia de la base de datos o de una copia de seguridad no descifra nada por sí sola, y el hecho de que un registro se vea comprometido nunca expone a otro.",
+          "Todo el tráfico se gestiona exclusivamente a través de TLS 1.3, con HTTP Strict Transport Security. Los datos de las tarjetas de pago son gestionados íntegramente por Stripe y nunca llegan a nuestros servidores.",
+          "<strong>Una limitación honesta:</strong> se trata de un cifrado sólido en reposo, pero no es un cifrado de extremo a extremo. Nuestros sistemas pueden descifrar sus documentos, ya que nuestro personal debe revisarlos y nuestro software debe leer sus datos para cumplimentar sus formularios. Cualquier servicio que le afirme que mantiene su pasaporte bajo cifrado de extremo a extremo al tiempo que se encarga de cumplimentar su documentación está describiendo algo que no puede ser cierto."
+        ]
+      },
+      {
+        "heading": "Cuánto tiempo lo conservamos: la regla de los 30 días",
+        "paragraphs": [
+          "Las copias escaneadas del pasaporte, los documentos subidos y los datos de identidad se eliminan de forma permanente 30 días después de que finalice el servicio. Se trata de un proceso automatizado, no de un compromiso manual: los archivos caducados se eliminan sin que nadie tenga que tomar la decisión de hacerlo, y la eliminación es irreversible.",
+          "Solo dos elementos sobreviven a esa purga, y únicamente estos: un registro de que el expediente existió y fue eliminado, y los datos de las facturas. La legislación mercantil y fiscal española (art. 30 del Código de Comercio; Ley General Tributaria) exige conservar los registros de facturación durante varios años, y esa obligación prevalece sobre las solicitudes de supresión de dichos registros en virtud del art. 17, apartado 3, letra b), del RGPD. Una factura contiene el nombre del pagador, la dirección de facturación y, en el caso de una empresa, su número de identificación fiscal —almacenado de forma cifrada—, además de los importes. Nunca incluye su número de pasaporte ni escaneos de documentos.",
+          "Puede solicitar la supresión antes de que transcurran 30 días en cualquier momento."
+        ]
+      },
+      {
+        "heading": "Si alguien autoriza su dirección",
+        "paragraphs": [
+          "Cuando el piso no está a su nombre, la persona que lo tiene a su nombre (el propietario o el arrendatario principal) autoriza su inscripción en el Padrón mediante el formulario oficial del Ayuntamiento de Barcelona. Usted introduce el nombre y el número de identificación del firmante para que podamos rellenar el formulario en su nombre. Utilizamos esos datos una sola vez, para generar el PDF, y no los almacenamos.",
+          "El ayuntamiento necesita el formulario firmado, una copia del documento de identidad del firmante y el contrato de alquiler que usted suba posteriormente para darle de alta. Los conservamos cifrados, al igual que sus propios documentos, los utilizamos únicamente para preparar su expediente del Padrón y los eliminamos junto con el resto de su expediente 30 días después de que finalice el servicio. Por favor, informe al firmante de que está compartiendo estos documentos con nosotros con ese fin."
+        ]
+      },
+      {
+        "heading": "¿Quién más tiene acceso a sus datos?",
+        "paragraphs": [
+          "Stripe (gestión de pagos, Irlanda/EE. UU. en el marco del Acuerdo de Protección de Datos UE-EE. UU.); Resend (envío de nuestros correos electrónicos, como los enlaces de inicio de sesión); y el proveedor de nuestro servidor con sede en la UE —cada uno de ellos sujeto a un acuerdo de tratamiento de datos—. No vendemos sus datos, no los compartimos con anunciantes y no los transferimos fuera del EEE, salvo en los casos aquí indicados.",
+          "Las autoridades públicas solo reciben lo que usted mismo les presenta, en su propio nombre, en su cita."
+        ]
+      },
+      {
+        "heading": "Sus derechos",
+        "paragraphs": [
+          "Puede solicitar el acceso a sus datos, la rectificación de inexactitudes, la supresión, la limitación del tratamiento, la portabilidad en un formato legible por máquina, así como oponerse al tratamiento. Cuando el tratamiento se base en el consentimiento, podrá retirarlo en cualquier momento; no obstante, la retirada del consentimiento para conservar sus documentos implicará, por lo general, que no podamos completar el servicio.",
+          "Responderemos en el plazo de un mes. Si no queda satisfecho, puede presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD), C/ Jorge Juan 6, 28001 Madrid, o a través de aepd.es."
+        ]
+      },
+      {
+        "heading": "Notificación de violación de datos",
+        "paragraphs": [
+          "Si se produce una violación de datos que pueda suponer un riesgo para sus derechos, lo notificaremos a la AEPD en un plazo de 72 horas y le informaremos directamente sin demora injustificada. Le indicaremos a qué datos se ha accedido, en lugar de ofrecerle una vaga garantía."
+        ]
+      },
+      {
+        "heading": "Cookies",
+        "paragraphs": [
+          "Este sitio web no instala cookies publicitarias ni de análisis, ni utiliza rastreadores de terceros. Las únicas cookies son las estrictamente necesarias: una cookie de inicio de sesión que le mantiene conectado durante un máximo de 24 horas, y las cookies que instala Stripe para la prevención del fraude durante el proceso de pago. No hay ningún banner de consentimiento porque no hay nada a lo que dar su consentimiento."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Condiciones de uso",
+    "metaDescription": "Condiciones contractuales de los servicios de tramitación administrativa de BCN Student Concierge.",
+    "eyebrow": "Condiciones",
+    "title": "Condiciones de uso",
+    "priceLine": "{name} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "clauses": [
+      {
+        "heading": "1. Naturaleza del servicio",
+        "paragraphs": [
+          "Ofrecemos asistencia administrativa: preparación de documentos a partir de la información que nos facilite, reserva de citas en los sistemas públicos a su nombre y orientación práctica para instalarse en Barcelona. No ofrecemos representación jurídica ni asesoramiento vinculante en materia de inmigración. Consulte nuestra página <scopeLink>sobre el alcance de nuestros servicios</scopeLink>, que forma parte de estas condiciones."
+        ]
+      },
+      {
+        "heading": "2. Tarifas e IVA",
+        "priceListAfter": 0,
+        "paragraphs": [
+          "Las tarifas de los paquetes son fijas y se indican sin IVA, mostrando el 21 % y el importe bruto total antes del pago:",
+          "Las tasas administrativas —incluida la tasa estatal del Modelo 790 Código 012, y los gastos de emisión de tarjetas— las fijan las autoridades españolas, las abona usted directamente y no están incluidas en ningún paquete. Nunca recaudamos tasas en nombre de la Administración."
+        ]
+      },
+      {
+        "heading": "3. Derecho de desistimiento",
+        "paragraphs": [
+          "Como consumidor que ha celebrado un contrato a distancia, dispone de 14 días para ejercer su derecho de desistimiento sin necesidad de justificación (Real Decreto Legislativo 1/2007, art. 102). Si nos solicita que iniciemos el trabajo dentro de ese plazo y completamos el servicio, el derecho de desistimiento se extingue una vez finalizada la prestación del servicio, y deberá abonar una cantidad proporcional por el trabajo ya realizado si desiste a mitad del proceso. No iniciaremos el trabajo dentro del plazo de desistimiento sin su solicitud expresa."
+        ]
+      },
+      {
+        "heading": "4. Sus obligaciones",
+        "paragraphs": [
+          "Debe facilitar información precisa y completa, así como documentos auténticos; revisar todos los documentos que le preparemos antes de firmarlos y acudir en persona a las citas con los originales. La información que nos facilite se convierte en una declaración que usted firma en su propio nombre; no podemos verificar los originales que nunca hayamos visto.",
+          "La presentación de documentos falsificados supone la rescisión inmediata del contrato sin derecho a reembolso y puede constituir un delito según la legislación española."
+        ]
+      },
+      {
+        "heading": "5. De qué somos y de qué no somos responsables",
+        "paragraphs": [
+          "Nos hacemos responsables de nuestros propios errores: un formulario que hayamos elaborado incorrectamente a partir de los datos exactos que usted nos haya facilitado, o una cita que no hayamos concertado según lo acordado. En esos casos, corregimos el error y volvemos a concertar la cita a nuestro cargo.",
+          "No nos hacemos responsables de las decisiones de las autoridades españolas, la disponibilidad de citas, los cambios en la legislación o los procedimientos, las consecuencias de la información inexacta que usted nos haya facilitado, ni de su inasistencia a una cita. Nuestra responsabilidad total se limita a los honorarios que nos haya abonado, salvo en los casos en que la ley no permita limitarla —incluidos los casos de fallecimiento, lesiones personales, fraude o negligencia grave, ninguno de los cuales pretendemos excluir—."
+        ]
+      },
+      {
+        "heading": "6. Cancelaciones y reembolsos",
+        "paragraphs": [
+          "Antes de comenzar el trabajo: reembolso íntegro. Una vez iniciada la preparación, pero antes de concertar las citas: reembolso del 50 %. Una vez concertadas las citas: no hay reembolso, ya que se ha prestado el servicio en su esencia. Si no podemos prestar el servicio por motivos que están bajo nuestro control, se le reembolsará el importe íntegro."
+        ]
+      },
+      {
+        "heading": "7. Protección de datos",
+        "paragraphs": [
+          "El tratamiento de datos se rige por nuestro <privacyLink>aviso de privacidad</privacyLink>, incluida la eliminación automática de los documentos de identidad 30 días después de la finalización del servicio."
+        ]
+      },
+      {
+        "heading": "8. Legislación aplicable",
+        "paragraphs": [
+          "Las presentes condiciones se rigen por la legislación española. Los litigios en materia de consumo podrán someterse a los tribunales del domicilio del consumidor, y podrá recurrir al Sistema Arbitral de Consumo español o a la plataforma de resolución de litigios en línea de la UE."
+        ]
+      }
+    ]
+  }
+}

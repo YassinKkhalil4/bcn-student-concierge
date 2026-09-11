@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "file": "La Sua pratica",
+    "login": "Acceda alla Sua pratica",
+    "verify": "Acceda alla Sua pratica"
+  },
+  "login": {
+    "eyebrow": "La Sua pratica",
+    "title": "Acceda alla Sua pratica",
+    "intro": "Inserisca l’indirizzo e-mail utilizzato nel modulo di registrazione. Le invieremo un link monouso: non serve alcuna password.",
+    "sent": "Se esiste una pratica associata a quell’indirizzo e-mail, Le arriverà un link di accesso. Il link vale una sola volta e scade dopo 30 minuti: se non arriva entro pochi minuti, controlli la cartella dello spam.",
+    "errors": {
+      "email": "Si prega di inserire un indirizzo e-mail valido.",
+      "link": "Quel link di accesso è scaduto o è già stato utilizzato. Richieda un nuovo link qui sotto.",
+      "locked": "Troppi tentativi. Attenda 15 minuti e riprovi."
+    },
+    "emailLabel": "Indirizzo e-mail",
+    "submit": "Inviatemi un link di accesso"
+  },
+  "verify": {
+    "title": "Acceda alla Sua pratica",
+    "once": "Questo link è valido per un solo utilizzo.",
+    "open": "Apri la mia pratica",
+    "expiredTitle": "Questo link è scaduto",
+    "expiredBody": "I link di accesso hanno una validità di 30 minuti e funzionano una sola volta.",
+    "newLink": "Inviatemi un nuovo link"
+  },
+  "file": {
+    "notFoundTitle": "Non siamo riusciti a trovare la Sua pratica",
+    "notFoundBody": "La preghiamo di disconnettersi e di effettuare nuovamente l’accesso utilizzando l’indirizzo e-mail indicato nel modulo.",
+    "closedTitle": "Questa pratica è chiusa",
+    "closedBody": "Il servizio è stato completato e, come promesso, i Suoi dati personali e i Suoi documenti sono stati cancellati in modo definitivo. I Suoi dati di fatturazione vengono conservati come previsto dalla normativa fiscale spagnola.",
+    "eyebrow": "La Sua pratica",
+    "greeting": "{name}, ecco la Sua pratica",
+    "reference": "Riferimento",
+    "signOut": "Esci",
+    "submitted": "Grazie — i Suoi documenti sono in nostro possesso. Li verificheremo entro un giorno lavorativo.",
+    "checkoutCancelled": "Il pagamento è stato annullato e non è stato addebitato nulla. Può pagare quando vuole.",
+    "paymentTitle": "Pagamento in sospeso",
+    "paymentBody": "Inizieremo a lavorare non appena il Suo pagamento sarà confermato.",
+    "paymentTotal": "Totale {total}, IVA inclusa.",
+    "pay": "Paga {total}",
+    "payNow": "Paga ora",
+    "passport": "1. Passaporto",
+    "enrolment": "2. Iscrizione all’università",
+    "padron": "3. Prova di residenza per il Padrón",
+    "padronIntro": "Per iscriversi al Padrón — il registro comunale dei residenti — è necessario dimostrare di risiedere all’indirizzo {address}. Ciò che costituisce una prova valida dipende dalla propria situazione abitativa.",
+    "tasaTitle": "4. Paghi la tassa statale (Modelo 790 · 012)",
+    "tasaIntro": "La polizia riscuote questa tassa separatamente dal nostro servizio. Si paga in contanti presso una banca spagnola, con un modulo che genera sul sito della polizia.",
+    "appointments": "I Suoi appuntamenti",
+    "police": "Polizia",
+    "padronAppointment": "Padrón",
+    "metro": "Metro: {metro}",
+    "sheet": "Scheda per il giorno dell’appuntamento",
+    "myForm": "Il mio {form} precompilato",
+    "invoices": "Fatture",
+    "reviewTitle": "È pronto per la revisione?",
+    "reviewDone": "Inviato il {date}. È ancora possibile caricare un documento sostitutivo qualora lo richiedessimo.",
+    "reviewPrompt": "Quando avrà caricato tutto, ce lo comunichi e verificheremo la Sua pratica.",
+    "reviewSubmit": "Invia per la revisione"
+  },
+  "invoices": {
+    "empty": "La Sua fattura apparirà qui una volta confermato il pagamento.",
+    "refund": "rimborso",
+    "pdf": "PDF"
+  },
+  "pay": {
+    "opening": "Avvio della procedura di pagamento sicura…",
+    "failed": "Impossibile aprire la pagina di pagamento. Si prega di riprovare.",
+    "network": "Errore di rete. Si prega di riprovare."
+  },
+  "padron": {
+    "question": "Dove risiede?",
+    "paths": {
+      "residence": {
+        "title": "Una residenza studentesca",
+        "detail": "Residenze universitarie o alloggi con reception"
+      },
+      "own-lease": {
+        "title": "Un appartamento che affitto",
+        "detail": "Il contratto di locazione è a mio nome"
+      },
+      "not-in-name": {
+        "title": "Una stanza o un subaffitto",
+        "detail": "Il contratto di locazione è intestato a un’altra persona, oppure vivo con la famiglia o con degli amici"
+      }
+    },
+    "residence": {
+      "intro": "Le residenze registrano i propri studenti con un apposito modulo comunale, l’<em>Autorització d’empadronament de domicili col·lectiu</em>. La residenza lo compila, lo firma e <strong>lo timbra</strong>: senza timbro non viene accettato. Invii questo messaggio alla reception:",
+      "subject": "Oggetto:",
+      "openForm": "Apri il modulo ufficiale ↗",
+      "uploadPrompt": "Quando la residenza glielo restituisce, lo carichi qui:",
+      "spanishNote": "Il messaggio è volutamente in spagnolo: è destinato al personale della residenza a Barcellona."
+    },
+    "lease": {
+      "intro": "Il Comune accetta il Suo contratto di locazione solo se tutte e tre le condizioni sono soddisfatte. Verifichi ciascuna di esse:",
+      "inMyName": "Il mio nome figura sul contratto di locazione in qualità di inquilino.",
+      "longEnough": "Ha una durata superiore a tre mesi, oppure indica esplicitamente che è prorogabile.",
+      "language": "È redatto in spagnolo o in catalano.",
+      "notMine": "<strong>Non è a Suo nome?</strong> In tal caso deve autorizzarLa la persona indicata nel contratto.",
+      "switch": "Passa a questa opzione",
+      "tooShort": "<strong>La durata è pari o inferiore a tre mesi?</strong> Chieda al Suo locatore una proroga per iscritto oppure che Le rilasci un’autorizzazione utilizzando il modulo del Comune.",
+      "otherLanguage": "<strong>In un’altra lingua?</strong> Il Comune richiede una traduzione ufficiale (una <em>traducción jurada</em>, o una del Suo consolato). Spesso è più rapido farsi dare dal locatore una versione in spagnolo: chieda prima a lui.",
+      "upload": "Carichi il contratto di locazione completo e firmato e una bolletta recente dell’appartamento. Il Comune chiede la bolletta quando il contratto è una copia o è scaduto; noi la chiediamo sempre, così niente La rallenta."
+    },
+    "sublet": {
+      "intro": "Se l’appartamento non è intestato a Lei, chi ne è titolare La autorizza con il modulo ufficiale di Barcellona, l’<em>Autorització per inscriure-us al domicili</em>.",
+      "signTitle": "2. Lo faccia firmare",
+      "signByHand": "Lo stampi. La persona che La autorizza lo firma <strong>a mano</strong>; la firma deve corrispondere a quella del suo documento d’identità.",
+      "signDate": "Accanto alla firma, quella persona scrive la data. L’autorizzazione vale <strong>tre mesi</strong> da quella data.",
+      "uploadTitle": "3. Carichi tutti e tre i documenti",
+      "uploadBody": "Il Comune non accetta il modulo da solo. Servono il documento d’identità del firmatario e una prova che può disporre dell’appartamento: il contratto di locazione a suo nome o, se ne è proprietario, l’atto di proprietà."
+    }
+  },
+  "authorization": {
+    "title": "1. Generi l’autorizzazione",
+    "intro": "Firma chi ha l’appartamento a proprio nome: il proprietario, o l’inquilino principale indicato nel contratto. Compiliamo il modulo ufficiale di Barcellona con i Suoi dati e con quelli di questa persona. Non conserviamo ciò che scrive qui.",
+    "fields": {
+      "signerName": {
+        "label": "Nome completo del firmatario",
+        "hint": "Esattamente come riportato sul documento d’identità del firmatario."
+      },
+      "signerId": {
+        "label": "Numero di DNI, NIE o passaporto del firmatario"
+      },
+      "ownerName": {
+        "label": "Nome del proprietario (persona fisica o società)"
+      },
+      "ownerTaxId": {
+        "label": "NIF del proprietario"
+      },
+      "companyName": {
+        "label": "Nome della società"
+      },
+      "companyTaxId": {
+        "label": "NIF della società"
+      },
+      "cadastralRef": {
+        "label": "Riferimento catastale",
+        "hint": "20 lettere e cifre, riportate sulla ricevuta dell’imposta immobiliare (IBI). Lasci vuoto se non lo conosce."
+      }
+    },
+    "relationLegend": "Il firmatario è…",
+    "relations": {
+      "owner": "Il proprietario dell’appartamento",
+      "tenant": "L’inquilino principale (indicato nel contratto di locazione)",
+      "usufruct": "Il titolare dell’usufrutto"
+    },
+    "tenantNote": "Quando l’inquilino principale firma, il modulo richiede anche i dati del proprietario. Li troverà nel contratto di locazione.",
+    "forCompany": "Il firmatario agisce per conto di un’azienda (ad esempio, un gestore di coliving)",
+    "cadastralToggle": "Facoltativo: riferimento catastale",
+    "preparing": "Preparazione del modulo…",
+    "download": "Scarica il modulo precompilato",
+    "done": "✓ Scaricato. Ora lo stampi e segua il passaggio 2.",
+    "checkFields": "La preghiamo di verificare i campi evidenziati.",
+    "notBarcelona": "Questo è il modulo del Comune di Barcellona, ma il Suo indirizzo si trova a {city}. Ogni comune ha la propria autorizzazione per il Padrón: ci contatti e Le procureremo quella giusta.",
+    "unprintable": "Questi caratteri non possono essere stampati sul modulo: {chars}. Si prega di scrivere i nomi in caratteri latini, esattamente come riportati sul documento d’identità.",
+    "unavailable": "Questo modulo non è temporaneamente disponibile. Si prega di riprovare più tardi o di contattarci.",
+    "failed": "Impossibile generare il modulo. Si prega di riprovare.",
+    "network": "Errore di rete. Si prega di riprovare."
+  },
+  "enrolment": {
+    "howTo": "Come posso ottenerlo?",
+    "intro": "La Sua lettera di ammissione non basta. Richieda all’ufficio ammissioni o alla segreteria della Sua università un <em>certificado de matrícula</em>, timbrato e firmato. Questo messaggio chiede esattamente ciò che cerca l’ufficio immigrazione:",
+    "spanishNote": "Il messaggio è volutamente in spagnolo: è destinato all’ufficio della Sua università a Barcellona.",
+    "university": "La Sua università",
+    "programme": "Il Suo corso di studi",
+    "programmePlaceholder": "ad es. BBA in International Business",
+    "subject": "Oggetto:",
+    "openEmail": "Apri nella mia app di posta elettronica"
+  },
+  "tasa": {
+    "missingNie": "Questo passaggio richiede il Suo NIE, che al momento non è ancora disponibile. La informeremo non appena potrà procedere; per ora non è necessario fare nulla.",
+    "open": "Apra il modulo ufficiale della Policía Nacional:",
+    "fill": "Compili ogni campo esattamente come indicato di seguito (lasci vuoti tutti gli altri campi).",
+    "tick": "Selezioni solo <em>«{tramite}»</em>: dovrebbe comparire <strong>{fee}</strong>. Se il portale indica un importo diverso, ha ragione il portale: paghi l’importo indicato.",
+    "payment": "Alla voce <em>Forma de pago</em>, selezioni <strong>{method}</strong>.",
+    "print": "Scarichi il modulo e lo stampi in scala al 100% — non utilizzi mai l’opzione «adatta alla pagina», altrimenti il codice a barre non potrà essere scansionato.",
+    "caption": "Cosa digitare sul portale della polizia",
+    "labelsNote": "I nomi dei campi sono in spagnolo perché è così che appaiono sul sito web della polizia."
+  }
+}

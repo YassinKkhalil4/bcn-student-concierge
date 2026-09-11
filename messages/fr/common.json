@@ -1,0 +1,57 @@
+{
+  "brand": "BCN Student Concierge",
+  "skipToContent": "Aller au contenu",
+  "nav": {
+    "main": "Principal",
+    "howItWorks": "Fonctionnement",
+    "pricing": "Services et tarifs",
+    "faq": "FAQ",
+    "myFile": "Mon dossier",
+    "beginIntake": "Commencer l’inscription",
+    "begin": "Commencer"
+  },
+  "language": {
+    "label": "Langue"
+  },
+  "footer": {
+    "tagline": "Accompagnement administratif indépendant pour les étudiants internationaux qui arrivent dans des universités privées de Barcelone.",
+    "services": "Services",
+    "packages": "Offres et tarifs",
+    "intake": "Portail d’inscription des clients",
+    "process": "Processus",
+    "legal": "Juridique",
+    "terms": "Conditions d’utilisation",
+    "privacy": "Confidentialité et RGPD",
+    "scope": "Périmètre du service",
+    "copyright": "© {year} BCN Student Concierge. Barcelone, Espagne."
+  },
+  "disclaimer": {
+    "footerLabel": "Périmètre du service.",
+    "prominentLabel": "Important — périmètre du service",
+    "body": "BCN Student Concierge est un service indépendant d’aide administrative et de prise de rendez-vous. Nous ne sommes ni un cabinet d’avocats ni une «gestoría» agréée. Nous n’assurons pas de représentation juridique, nous n’agissons pas en tant que votre représentant légal auprès des autorités espagnoles, et aucune de nos prestations ne constitue un conseil juridique ou en matière d’immigration ayant force obligatoire. Toutes les demandes sont déposées par vous-même, en votre nom propre. Les décisions relatives à la résidence, à l’inscription et aux documents relèvent de la seule compétence des autorités espagnoles compétentes, et aucun résultat n’est garanti. Pour obtenir des conseils juridiques concernant votre statut d’immigration, veuillez consulter un colegiado abogado."
+  },
+  "copy": {
+    "copy": "Copier",
+    "copied": "Copié ✓",
+    "failed": "Échec de la copie",
+    "copySubject": "Copier l’objet",
+    "copyMessage": "Copier le message"
+  },
+  "legalPage": {
+    "lastUpdated": "Dernière mise à jour : {date}",
+    "translationNotice": "Cette page est une traduction fournie à titre indicatif. En cas de divergence avec la version anglaise, c’est la version anglaise qui fait foi."
+  },
+  "modelo790": {
+    "title": "Modelo 790 Código 012 — paiement en espèces, au guichet d’une banque",
+    "intro": "Les frais administratifs liés à votre carte de séjour ne sont pas inclus dans nos honoraires et ne peuvent pas être réglés par carte bancaire sur notre site. Conformément aux règles de l’administration fiscale espagnole, ce formulaire doit être traité via un code-barres scanné dans une agence bancaire physique : le paiement en ligne nécessite un certificat numérique espagnol ou l’accès aux services bancaires en ligne d’une banque espagnole, deux éléments dont ne dispose généralement pas un étudiant nouvellement arrivé.",
+    "steps": [
+      "Nous générons votre formulaire Modelo 790 Código 012 configuré pour un paiement en espèces (« en efectivo »), muni du code-barres unique lu par le scanner de la banque.",
+      "Imprimez-le en couleur, recto seul, à l’échelle 100 %. Ne modifiez pas sa taille : un code-barres redimensionné ne pourra pas être scanné et le formulaire sera refusé.",
+      "Apportez l’impression à une agence bancaire espagnole ou à un distributeur automatique équipé d’un lecteur de codes-barres. Présentez toutes les copies ; le guichetier les tamponne.",
+      "Conservez la copie tamponnée portant la mention « Ejemplar para el interesado ». Apportez-la à votre rendez-vous à la police avec votre EX-17 ou EX-18 : un formulaire non tamponné met fin au rendez-vous."
+    ],
+    "branchesTitle": "Agences acceptant ce mode de paiement",
+    "branchesNote": "Toutes les agences n’acceptent pas les paiements d’impôts de non-clients, et certaines seulement le matin. Avec l’itinéraire de vos rendez-vous, nous vous confirmons une agence précise à proximité et ses horaires de guichet.",
+    "footnote": "Le montant des frais est fixé par le gouvernement espagnol et varie périodiquement ; le montant indiqué sur votre formulaire au moment de sa création est celui qui s’applique. Nous ne percevons jamais ces frais pour le compte du gouvernement."
+  }
+}

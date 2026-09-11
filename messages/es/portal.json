@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "file": "Su expediente",
+    "login": "Acceda a su expediente",
+    "verify": "Acceder a su expediente"
+  },
+  "login": {
+    "eyebrow": "Su expediente",
+    "title": "Acceda a su expediente",
+    "intro": "Introduzca la dirección de correo electrónico que utilizó en el formulario de alta. Le enviaremos un enlace de acceso de un solo uso; no necesita contraseña.",
+    "sent": "Si existe un expediente asociado a esa dirección de correo electrónico, se le enviará un enlace de inicio de sesión. Este enlace es válido una sola vez y caduca a los 30 minutos; compruebe su carpeta de correo no deseado si no lo ha recibido en unos minutos.",
+    "errors": {
+      "email": "Introduzca una dirección de correo electrónico válida.",
+      "link": "Ese enlace de inicio de sesión ha caducado o ya se ha utilizado. Solicite uno nuevo a continuación.",
+      "locked": "Demasiados intentos. Espere 15 minutos y vuelva a intentarlo."
+    },
+    "emailLabel": "Dirección de correo electrónico",
+    "submit": "Enviarme un enlace de acceso"
+  },
+  "verify": {
+    "title": "Acceder a su expediente",
+    "once": "Este enlace solo funciona una vez.",
+    "open": "Abrir mi expediente",
+    "expiredTitle": "Este enlace ha caducado",
+    "expiredBody": "Los enlaces de inicio de sesión tienen una validez de 30 minutos y solo funcionan una vez.",
+    "newLink": "Envíeme un nuevo enlace"
+  },
+  "file": {
+    "notFoundTitle": "No hemos podido encontrar su expediente",
+    "notFoundBody": "Por favor, cierre la sesión y vuelva a iniciar sesión con la dirección de correo electrónico que utilizó en el formulario.",
+    "closedTitle": "Este expediente está cerrado",
+    "closedBody": "Su servicio ha finalizado y, tal y como se le prometió, sus datos personales y documentos se han eliminado de forma definitiva. Sus registros de facturación se conservan conforme a lo exigido por la legislación fiscal española.",
+    "eyebrow": "Su expediente",
+    "greeting": "{name}, aquí tiene su expediente",
+    "reference": "Referencia",
+    "signOut": "Cerrar sesión",
+    "submitted": "Gracias; ya tenemos sus documentos. Los revisaremos en el plazo de un día laborable.",
+    "checkoutCancelled": "El pago se ha cancelado y no se ha cobrado nada. Puede pagar cuando esté listo.",
+    "paymentTitle": "Pago pendiente",
+    "paymentBody": "Comenzamos a trabajar tan pronto como se confirme su pago.",
+    "paymentTotal": "Total {total}, IVA incluido.",
+    "pay": "Pagar {total}",
+    "payNow": "Pagar ahora",
+    "passport": "1. Pasaporte",
+    "enrolment": "2. Matrícula universitaria",
+    "padron": "3. Justificante de domicilio para el Padrón",
+    "padronIntro": "Para inscribirse en el Padrón —el registro municipal de residentes— debe acreditar que reside en {address}. Lo que se considera prueba válida depende de su situación de residencia.",
+    "tasaTitle": "4. Abonar la tasa estatal (Modelo 790 · 012)",
+    "tasaIntro": "La policía cobra esta tasa por separado de nuestro servicio. Se abona en efectivo en un banco español, utilizando un formulario que se genera en la página web de la policía.",
+    "appointments": "Sus citas",
+    "police": "Policía",
+    "padronAppointment": "Padrón",
+    "metro": "Metro: {metro}",
+    "sheet": "Guía para el día de la cita",
+    "myForm": "Mi {form} cumplimentado",
+    "invoices": "Facturas",
+    "reviewTitle": "¿Todo listo para la revisión?",
+    "reviewDone": "Enviado el {date}. Aún puede subir un documento sustitutivo si se lo solicitamos.",
+    "reviewPrompt": "Cuando haya subido toda la documentación, avísenos y revisaremos su expediente.",
+    "reviewSubmit": "Enviar para revisión"
+  },
+  "invoices": {
+    "empty": "Su factura aparecerá aquí una vez se haya confirmado el pago.",
+    "refund": "reembolso",
+    "pdf": "PDF"
+  },
+  "pay": {
+    "opening": "Iniciando el proceso de pago seguro…",
+    "failed": "No se ha podido abrir la página de pago. Inténtelo de nuevo.",
+    "network": "Error de red. Inténtelo de nuevo."
+  },
+  "padron": {
+    "question": "¿Dónde reside?",
+    "paths": {
+      "residence": {
+        "title": "Una residencia de estudiantes",
+        "detail": "Residencias universitarias o residencias con mostrador de recepción"
+      },
+      "own-lease": {
+        "title": "Un piso que alquilo",
+        "detail": "El contrato de alquiler está a mi nombre"
+      },
+      "not-in-name": {
+        "title": "Una habitación o un subalquiler",
+        "detail": "El contrato de alquiler está a nombre de otra persona, o vivo con familiares o amigos"
+      }
+    },
+    "residence": {
+      "intro": "Las residencias inscriben a sus estudiantes con un formulario municipal específico, la <em>Autorització d’empadronament de domicili col·lectiu</em>. La residencia lo rellena, lo firma y <strong>lo sella</strong>: sin el sello no se acepta. Envíe este mensaje a recepción:",
+      "subject": "Asunto:",
+      "openForm": "Abrir el formulario oficial ↗",
+      "uploadPrompt": "Cuando la residencia se lo devuelva, súbalo aquí:",
+      "spanishNote": "El mensaje está en español a propósito: está dirigido al personal de la oficina de residencia de Barcelona."
+    },
+    "lease": {
+      "intro": "El Ayuntamiento solo aceptará su contrato de alquiler si se cumplen estas tres condiciones. Compruebe cada una de ellas:",
+      "inMyName": "Mi nombre figura en el contrato de alquiler como inquilino.",
+      "longEnough": "Tiene una duración de más de tres meses, o bien se indica explícitamente que se prorroga.",
+      "language": "Está redactado en español o catalán.",
+      "notMine": "<strong>¿No figura a su nombre?</strong> En ese caso, la persona que figura en el contrato de alquiler deberá autorizarle.",
+      "switch": "Seleccione esa opción",
+      "tooShort": "<strong>¿Su contrato dura tres meses o menos?</strong> Solicite a su arrendador una prórroga por escrito o que le autorice mediante el formulario municipal correspondiente.",
+      "otherLanguage": "<strong>¿En otro idioma?</strong> El ayuntamiento requiere una traducción oficial (una <em>traducción jurada</em> o una realizada por su consulado). A menudo es más rápido que su arrendador le facilite una versión en español; pregúntele primero.",
+      "upload": "Suba el contrato de alquiler completo y firmado, y una factura reciente de suministros del piso. El Ayuntamiento pide la factura cuando el contrato es una copia o ha vencido; nosotros la pedimos siempre para que nada le retrase."
+    },
+    "sublet": {
+      "intro": "Cuando el piso no está a su nombre, quien lo tiene a su nombre le autoriza con el formulario oficial de Barcelona, la <em>Autorització per inscriure-us al domicili</em>.",
+      "signTitle": "2. Consiga que se lo firmen",
+      "signByHand": "Imprímalo. La persona que le autorice deberá firmarlo <strong>a mano</strong>; la firma debe coincidir con la de su documento de identidad.",
+      "signDate": "Esa persona escribe la fecha junto a la firma. La autorización es válida durante <strong>tres meses</strong> a partir de esa fecha.",
+      "uploadTitle": "3. Suba los tres documentos",
+      "uploadBody": "El Ayuntamiento no acepta el formulario por sí solo. Necesita el documento de identidad de quien firma y una prueba de que puede disponer del piso: el contrato de alquiler a su nombre o, si es el propietario, la escritura."
+    }
+  },
+  "authorization": {
+    "title": "1. Generar la autorización",
+    "intro": "Firma quien tiene el piso a su nombre: el propietario, o el inquilino principal que figura en el contrato de alquiler. Rellenamos el formulario oficial de Barcelona con sus datos y los de esa persona. No guardamos lo que escriba aquí.",
+    "fields": {
+      "signerName": {
+        "label": "Nombre completo del firmante",
+        "hint": "Exactamente como figura en el documento de identidad del firmante."
+      },
+      "signerId": {
+        "label": "Número de DNI, NIE o pasaporte del firmante"
+      },
+      "ownerName": {
+        "label": "Nombre del propietario (persona o empresa)"
+      },
+      "ownerTaxId": {
+        "label": "NIF del propietario"
+      },
+      "companyName": {
+        "label": "Nombre de la empresa"
+      },
+      "companyTaxId": {
+        "label": "NIF de la empresa"
+      },
+      "cadastralRef": {
+        "label": "Referencia catastral",
+        "hint": "20 letras y dígitos, que figuran en el recibo del impuesto sobre bienes inmuebles (IBI). Déjelo en blanco si lo desconoce."
+      }
+    },
+    "relationLegend": "El firmante es…",
+    "relations": {
+      "owner": "El propietario del piso",
+      "tenant": "El arrendatario principal (que figura en el contrato de alquiler)",
+      "usufruct": "El usufructuario"
+    },
+    "tenantNote": "Cuando el inquilino principal firma, el formulario también solicita los datos del propietario. Los encontrará en el contrato de alquiler.",
+    "forCompany": "El firmante actúa en nombre de una empresa (por ejemplo, un operador de coliving)",
+    "cadastralToggle": "Opcional: referencia catastral",
+    "preparing": "Preparando el formulario…",
+    "download": "Descargar el formulario cumplimentado",
+    "done": "✓ Descargado. Ahora imprímalo y siga el paso 2.",
+    "checkFields": "Por favor, compruebe los campos resaltados.",
+    "notBarcelona": "Este es el formulario del Ayuntamiento de Barcelona, pero su dirección se encuentra en {city}. Cada municipio tiene su propia autorización del Padrón; póngase en contacto con nosotros y le facilitaremos la adecuada.",
+    "unprintable": "Estos caracteres no se pueden imprimir en el formulario: {chars}. Escriba los nombres en letras latinas, exactamente como figuran en el documento de identidad.",
+    "unavailable": "Este formulario no está disponible temporalmente. Inténtelo de nuevo más tarde o póngase en contacto con nosotros.",
+    "failed": "No se ha podido generar el formulario. Inténtelo de nuevo.",
+    "network": "Error de red. Inténtelo de nuevo."
+  },
+  "enrolment": {
+    "howTo": "¿Cómo lo consigo?",
+    "intro": "Su carta de admisión no es suficiente. Solicite a la oficina de admisiones o al servicio de secretaría de su universidad un <em>certificado de matrícula</em>, sellado y firmado. Este mensaje indica exactamente lo que busca la oficina de inmigración:",
+    "spanishNote": "El mensaje está en español a propósito: va dirigido a la oficina de su universidad en Barcelona.",
+    "university": "Su universidad",
+    "programme": "Su programa",
+    "programmePlaceholder": "p. ej., Grado en Relaciones Internacionales",
+    "subject": "Asunto:",
+    "openEmail": "Abrir en mi aplicación de correo electrónico"
+  },
+  "tasa": {
+    "missingNie": "Para este paso se necesita su NIE, y aún no lo tenemos. Le informaremos en cuanto pueda realizarlo; por el momento, no hay nada que hacer.",
+    "open": "Abra el formulario oficial de la Policía Nacional:",
+    "fill": "Rellene cada casilla exactamente como se indica a continuación (deje en blanco cualquier otra casilla).",
+    "tick": "Marque únicamente <em>«{tramite}»</em>; debería aparecer <strong>{fee}</strong>. Si el portal muestra un importe diferente, el portal tiene razón: abone lo que indique.",
+    "payment": "En <em>Forma de pago</em>, seleccione <strong>{method}</strong>.",
+    "print": "Descargue el formulario e imprímalo a escala 100 %; nunca seleccione «ajustar a la página», ya que, de lo contrario, el código de barras no se podrá escanear.",
+    "caption": "Qué debe introducir en el portal de la policía",
+    "labelsNote": "Los nombres de los campos están en español porque así es como aparecen en la página web de la policía."
+  }
+}

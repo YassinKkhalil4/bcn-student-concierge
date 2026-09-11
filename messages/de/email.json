@@ -1,0 +1,10 @@
+{
+  "loginLink": {
+    "subject": "Ihr Anmeldelink – BCN Student Concierge",
+    "introOne": "Hier ist Ihr Anmeldelink für Ihre Akte bei BCN Student Concierge.",
+    "introMany": "Hier sind Ihre Anmeldelinks – einer für jede Akte unter dieser E-Mail-Adresse.",
+    "file": "Akte {ref}",
+    "button": "Meine Akte öffnen",
+    "footer": "Jeder Link ist einmalig gültig und läuft nach 30 Minuten ab. Falls Sie keine Anmeldung beantragt haben, können Sie diese E-Mail ignorieren – niemand kann sie nutzen, ohne Zugriff auf Ihren Posteingang zu haben."
+  }
+}

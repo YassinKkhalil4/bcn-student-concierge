@@ -1,3 +1,7 @@
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
 /**
  * Security headers are defined here so they apply to every response, including
  * static assets and error pages.
@@ -31,7 +35,7 @@ const securityHeaders = [
 ];
 
 /** @type {import('next').NextConfig} */
-export default {
+export default withNextIntl({
   reactStrictMode: true,
   poweredByHeader: false,
   // Self-contained server bundle (.next/standalone) for the Docker image: only
@@ -51,4 +55,4 @@ export default {
       },
     ];
   },
-};
+});

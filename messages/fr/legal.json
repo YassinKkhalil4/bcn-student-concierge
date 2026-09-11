@@ -1,0 +1,184 @@
+{
+  "scope": {
+    "metaTitle": "Périmètre du service",
+    "metaDescription": "Ce que fait et ne fait pas BCN Student Concierge, et pourquoi cette distinction est importante au regard du droit espagnol.",
+    "eyebrow": "Juridique",
+    "title": "Périmètre du service",
+    "clauses": [
+      {
+        "heading": "Qui sommes-nous ?",
+        "paragraphs": [
+          "BCN Student Concierge est un service privé d’aide administrative. Nous préparons les documents à partir des informations que vous nous fournissez, prenons des rendez-vous en votre nom sur les systèmes de réservation publics et vous guidons tout au long d’une procédure qui se déroule en espagnol et qui suppose une connaissance des rouages locaux que vous ne possédez pas encore."
+        ]
+      },
+      {
+        "heading": "Ce que nous ne sommes pas",
+        "paragraphs": [
+          "Nous ne sommes pas un cabinet d’avocats (despacho de abogados) et ne disposons d’aucune affiliation à un ordre professionnel (colegiación). Nous ne sommes pas une gestoría administrative enregistrée. Nous ne sommes ni agents, ni représentants, ni intermédiaires d’une quelconque autorité publique espagnole, et nous ne sommes affiliés à aucune université.",
+          "La législation espagnole réserve certaines activités — la représentation juridique, le conseil officiel en matière d’immigration et le fait d’agir devant les autorités au nom d’une autre personne — à des professionnels réglementés. Proposer ces services sans disposer de cette qualification constitue un « intrusismo profesional ». Nous ne les proposons pas, et cette page a pour but d’écarter toute ambiguïté à ce sujet."
+        ]
+      },
+      {
+        "heading": "La section 2 de votre formulaire reste vide",
+        "paragraphs": [
+          "Les formulaires officiels EX-17 et EX-18 comportent une section réservée aux coordonnées d’un représentant légal. Nous la laissons délibérément et définitivement vide. La remplir reviendrait à déclarer à la Police nationale que nous agissons en tant que votre représentant, ce qui est à la fois faux et nécessiterait une procuration que nous ne détenons pas et que nous ne vous demanderons pas. Vous êtes le demandeur sur chaque formulaire que nous préparons."
+        ]
+      },
+      {
+        "heading": "Notifications électroniques (DEHú)",
+        "paragraphs": [
+          "Nous laissons décochée la case de consentement aux notifications électroniques. Consentir déclenche des délais de notification juridiquement contraignants, les notifications étant déposées dans une boîte électronique de l’administration espagnole accessible uniquement avec un certificat numérique — dont un étudiant nouvellement arrivé ne dispose pas. Une notification non consultée peut entraîner la clôture d’un dossier. Si vous obtenez plus tard un certificat et souhaitez donner votre consentement, c’est une décision à prendre en toute connaissance de cause."
+        ]
+      },
+      {
+        "heading": "Aucun résultat garanti",
+        "paragraphs": [
+          "Les décisions relatives à la résidence, à l’inscription et aux documents relèvent entièrement des autorités espagnoles compétentes. Nous n’exerçons aucune influence sur ces décisions et ne pouvons garantir aucun résultat, délai ni disponibilité de rendez-vous. Notre responsabilité consiste à veiller à ce que votre dossier soit complet, cohérent en son sein, correctement formaté et soumis dans les délais."
+        ]
+      },
+      {
+        "heading": "Vos responsabilités",
+        "paragraphs": [
+          "Les informations que vous nous fournissez constituent une déclaration que vous signez. Il vous incombe de vous assurer de leur exactitude, de vérifier chaque document avant de le signer et de vous présenter en personne aux rendez-vous muni des documents originaux. Nous vous indiquerons clairement ce qu’il convient de vérifier ; nous ne pouvons pas le faire à votre place, car nous n’avons jamais vu votre passeport original."
+        ]
+      },
+      {
+        "heading": "Quand nous vous orienterons vers d’autres ressources",
+        "paragraphs": [
+          "Si votre situation implique une demande rejetée, un statut périmé ou irrégulier, une vérification du casier judiciaire, une demande de regroupement familial ou toute autre question nécessitant une analyse juridique, nous vous le signalerons et refuserons la mission plutôt que de tenter de la mener à bien. Nous préférons perdre ce mandat plutôt que de vous voir vous fier à des conseils que nous ne sommes pas habilités à donner."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "metaTitle": "Confidentialité et RGPD",
+    "metaDescription": "Comment BCN Student Concierge collecte, chiffre, conserve et supprime les données à caractère personnel conformément au RGPD et à la LOPDGDD.",
+    "eyebrow": "Confidentialité",
+    "title": "Politique de confidentialité et engagements relatifs au RGPD",
+    "clauses": [
+      {
+        "heading": "Qui est responsable de vos données ?",
+        "paragraphs": [
+          "BCN Student Concierge (le « responsable du traitement ») détermine comment et pourquoi vos données à caractère personnel sont traitées. Contact pour toutes les questions relatives à la protection des données, y compris l’exercice des droits ci-dessous : <mail>privacy@bcnstudent.com</mail>."
+        ]
+      },
+      {
+        "heading": "Les données que nous collectons, et pourquoi",
+        "paragraphs": [
+          "Données d’identité et d’état civil (numéro de passeport, NIE, noms, sexe, détails de naissance, nationalité, situation matrimoniale, prénoms des parents), votre adresse en Espagne, vos coordonnées, ainsi que des scans de votre passeport, de votre lettre d’admission à l’université et de votre bail.",
+          "Base juridique : l’exécution d’un contrat conclu avec vous (art. 6, paragraphe 1, point b) du RGPD). Nous collectons ces données parce que les formulaires de résidence espagnols l’exigent — et non parce que nous le souhaitons. Nous ne collectons pas de données relatives à la santé, de modèles biométriques ni aucune donnée relevant des catégories particulières visées à l’article 9, au-delà de ce qui figure sur les documents que vous téléchargez."
+        ]
+      },
+      {
+        "heading": "Comment vos données sont-elles protégées ?",
+        "paragraphs": [
+          "Vos réponses au questionnaire (numéro de passeport, noms, date et lieu de naissance, adresse) ainsi que tous les documents que vous téléchargez sont chiffrés au repos à l’aide de l’algorithme AES-256-GCM, chacun sous sa propre clé. Ces clés sont elles-mêmes chiffrées à l’aide d’une clé principale conservée séparément de la base de données et de ses sauvegardes — ainsi, une copie de la base de données ou d’une sauvegarde ne permet à elle seule de déchiffrer aucune donnée, et la compromission d’un enregistrement n’entraîne jamais la divulgation d’un autre.",
+          "Tout le trafic est acheminé exclusivement via TLS 1.3, avec HTTP Strict Transport Security. Les données relatives aux cartes de paiement sont entièrement gérées par Stripe et ne transitent jamais par nos serveurs.",
+          "<strong>Une limitation honnête :</strong> il s’agit d’un chiffrement puissant au repos, mais ce n’est pas un chiffrement de bout en bout. Nos systèmes peuvent déchiffrer vos documents, car notre personnel doit les examiner et notre logiciel doit lire vos données pour remplir vos formulaires. Tout service vous affirmant qu’il conserve votre passeport sous chiffrement de bout en bout tout en remplissant vos formalités administratives décrit une situation qui ne peut être vraie."
+        ]
+      },
+      {
+        "heading": "Durée de conservation — la règle des 30 jours",
+        "paragraphs": [
+          "Les scans de passeport, les documents téléchargés et les données d’identité sont définitivement supprimés 30 jours après la fin de votre prestation. Il s’agit d’une tâche automatisée, et non d’un engagement manuel : les fichiers périmés sont supprimés sans intervention humaine, et cette suppression est irréversible.",
+          "Deux éléments survivent à cette purge, et uniquement ceux-ci : une trace attestant que le fichier existait et a été supprimé, ainsi que les données de facturation. Le droit commercial et fiscal espagnol (Code de commerce, art. 30 ; Loi générale fiscale) exige que les registres de facturation soient conservés pendant plusieurs années, et cette obligation prévaut sur les demandes d’effacement concernant ces documents spécifiques en vertu de l’article 17, paragraphe 3, point b), du RGPD. Une facture contient le nom du payeur, son adresse de facturation et, pour une entreprise, son numéro d’identification fiscale — stocké sous forme cryptée — ainsi que les montants. Elle ne contient jamais votre numéro de passeport ni de scans de documents.",
+          "Vous pouvez demander la suppression de vos données à tout moment, avant l’expiration du délai de 30 jours."
+        ]
+      },
+      {
+        "heading": "Si quelqu’un autorise votre adresse",
+        "paragraphs": [
+          "Lorsque l’appartement n’est pas à votre nom, la personne qui en est titulaire (le propriétaire ou le locataire principal) autorise votre inscription au Padrón sur le formulaire officiel de la ville de Barcelone. Vous saisissez le nom et le numéro d’identité du signataire afin que nous puissions remplir le formulaire pour vous. Nous utilisons ces informations une seule fois, pour générer le fichier PDF, et ne les conservons pas.",
+          "Le formulaire signé, une copie de la pièce d’identité du signataire et le bail que vous envoyez ensuite sont nécessaires à la mairie pour vous inscrire. Nous les conservons chiffrés, comme vos propres documents, ne les utilisons que pour préparer votre dossier Padrón et les supprimons avec le reste de votre dossier 30 jours après la fin de la prestation. Veuillez informer le signataire que vous partagez ces documents avec nous à cette fin."
+        ]
+      },
+      {
+        "heading": "Qui d’autre a accès à vos données ?",
+        "paragraphs": [
+          "Stripe (traitement des paiements, Irlande/États-Unis dans le cadre du cadre de protection des données UE-États-Unis) ; Resend (envoi de nos e-mails, tels que vos liens de connexion) ; et le fournisseur de notre serveur basé dans l’UE — chacun étant soumis à un accord de traitement des données. Nous ne vendons pas vos données, nous ne les partageons pas avec des annonceurs et nous ne les transférons pas en dehors de l’EEE, sauf dans les cas mentionnés ici.",
+          "Les autorités publiques ne reçoivent que ce que vous leur transmettez vous-même, en votre nom propre, lors de votre rendez-vous."
+        ]
+      },
+      {
+        "heading": "Vos droits",
+        "paragraphs": [
+          "Vous pouvez demander l’accès à vos données, la rectification d’inexactitudes, l’effacement, la limitation du traitement, la portabilité dans un format lisible par machine, et vous pouvez vous opposer au traitement. Lorsque le traitement repose sur le consentement, vous pouvez le retirer à tout moment — bien que le retrait de votre consentement à la conservation de vos documents implique généralement que nous ne puissions pas mener à bien la prestation de service.",
+          "Nous vous répondons dans un délai d’un mois. Si vous n’êtes pas satisfait, vous pouvez déposer une réclamation auprès de l’Agencia Española de Protección de Datos (AEPD), C/ Jorge Juan 6, 28001 Madrid, ou sur le site aepd.es."
+        ]
+      },
+      {
+        "heading": "Notification de violation de données",
+        "paragraphs": [
+          "En cas de violation susceptible de compromettre vos droits, nous en informons l’AEPD dans un délai de 72 heures et vous en informons directement sans retard injustifié. Nous vous indiquerons précisément quelles données ont été consultées, plutôt que de vous donner de vagues assurances."
+        ]
+      },
+      {
+        "heading": "Cookies",
+        "paragraphs": [
+          "Ce site n’installe aucun cookie publicitaire ou d’analyse et n’utilise aucun traceur tiers. Les seuls cookies utilisés sont ceux strictement nécessaires : un cookie de connexion qui vous permet de rester connecté pendant 24 heures maximum, et les cookies installés par Stripe à des fins de prévention de la fraude lors du paiement. Il n’y a pas de bannière de consentement, car il n’y a rien à accepter."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Conditions générales d’utilisation",
+    "metaDescription": "Conditions contractuelles relatives aux services d’assistance administrative proposés par BCN Student Concierge.",
+    "eyebrow": "Conditions générales",
+    "title": "Conditions générales d’utilisation",
+    "priceLine": "{name} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "clauses": [
+      {
+        "heading": "1. Nature du service",
+        "paragraphs": [
+          "Nous vous facilitons les démarches administratives : préparation des documents à partir des informations que vous nous fournissez, prise de rendez-vous sur les portails publics en votre nom, et conseils pratiques pour vous installer à Barcelone. Nous n’assurons pas de représentation juridique ni ne fournissons de conseils contraignants en matière d’immigration. Veuillez consulter notre page <scopeLink>relative à l’étendue de nos services</scopeLink>, qui fait partie intégrante des présentes conditions."
+        ]
+      },
+      {
+        "heading": "2. Tarifs et IVA",
+        "priceListAfter": 0,
+        "paragraphs": [
+          "Les tarifs des forfaits sont fixes et indiqués hors IVA ; l’IVA de 21 % et le montant total sont affichés avant le paiement :",
+          "Les frais administratifs — y compris la redevance d’État « Modelo 790 Código 012 » et les frais de délivrance des cartes — sont fixés par les autorités espagnoles, à votre charge directement, et ne sont inclus dans aucun forfait. Nous ne percevons jamais de frais pour le compte de l’État."
+        ]
+      },
+      {
+        "heading": "3. Droit de rétractation",
+        "paragraphs": [
+          "En tant que consommateur ayant conclu un contrat à distance, vous disposez d’un délai de 14 jours pour exercer votre droit de rétractation sans avoir à justifier de motif (Décret-loi royal 1/2007, art. 102). Si vous nous demandez de commencer les travaux pendant ce délai et que nous exécutons la prestation, le droit de rétractation s’éteint dès que la prestation est achevée, et vous êtes redevable d’un montant proportionnel au travail déjà effectué si vous vous rétractez en cours de prestation. Nous ne commencerons pas les travaux pendant le délai de rétractation sans votre demande expresse."
+        ]
+      },
+      {
+        "heading": "4. Vos obligations",
+        "paragraphs": [
+          "Vous devez fournir des informations exactes et complètes ainsi que des documents authentiques, vérifier chaque document que nous préparons avant de le signer et vous présenter en personne aux rendez-vous muni des originaux. Les informations que vous nous communiquez constituent une déclaration que vous signez en votre nom propre ; nous ne pouvons pas vérifier les originaux que nous n’avons jamais vus.",
+          "La fourniture de documents falsifiés met fin immédiatement à la prestation de services, sans remboursement, et peut constituer une infraction pénale en vertu de la législation espagnole."
+        ]
+      },
+      {
+        "heading": "5. Ce dont nous sommes et ne sommes pas responsables",
+        "paragraphs": [
+          "Nous sommes responsables de nos propres erreurs : un formulaire que nous avons mal rempli à partir des données exactes que vous nous avez fournies, ou un rendez-vous que nous n’avons pas réussi à prendre comme convenu. Dans ces cas-là, nous corrigeons l’erreur et prenons un nouveau rendez-vous à nos frais.",
+          "Nous ne sommes pas responsables des décisions des autorités espagnoles, de la disponibilité des rendez-vous, des modifications de la législation ou des procédures, des conséquences d’informations inexactes que vous avez fournies, ni de votre absence à un rendez-vous. Notre responsabilité totale est limitée aux honoraires que vous nous avez versés, sauf dans les cas où la responsabilité ne peut être limitée par la loi — notamment en cas de décès, de préjudice corporel, de fraude ou de négligence grave, éléments que nous ne cherchons en aucun cas à exclure."
+        ]
+      },
+      {
+        "heading": "6. Annulation et remboursements",
+        "paragraphs": [
+          "Avant le début des prestations : remboursement intégral. Une fois la préparation engagée mais avant la prise de rendez-vous : remboursement à 50 %. Une fois les rendez-vous fixés : aucun remboursement, la prestation ayant été fournie. Si nous ne pouvons pas fournir le service pour des raisons qui relèvent de notre responsabilité, vous bénéficiez d’un remboursement intégral."
+        ]
+      },
+      {
+        "heading": "7. Protection des données",
+        "paragraphs": [
+          "Le traitement des données est régi par notre <privacyLink>politique de confidentialité</privacyLink>, y compris la suppression automatique des pièces d’identité 30 jours après la fin de la prestation."
+        ]
+      },
+      {
+        "heading": "8. Droit applicable",
+        "paragraphs": [
+          "Les présentes conditions sont régies par le droit espagnol. Les litiges de consommation peuvent être portés devant les tribunaux du lieu de résidence du consommateur, et vous pouvez recourir au système d’arbitrage de consommation espagnol (Sistema Arbitral de Consumo) ou à la plateforme de règlement en ligne des litiges de l’UE."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "atm": {
+    "summary": "Cómo pagar en un cajero automático de CaixaBank sin una tarjeta española",
+    "steps": [
+      {
+        "title": "Acuda a un cajero automático de CaixaBank",
+        "detail": "No es necesario disponer de una cuenta en CaixaBank ni de ninguna tarjeta española. Lleve su Modelo 790 impreso y el importe exacto en efectivo."
+      },
+      {
+        "title": "Seleccione «Pagar impuestos y tasas»",
+        "detail": "Seleccione esta opción en la pantalla de inicio, sin introducir ninguna tarjeta."
+      },
+      {
+        "title": "Escanee el código de barras de 13 dígitos",
+        "detail": "Acerque el código de barras de su formulario impreso al lector del cajero. El importe aparecerá en pantalla: compruebe que indica {fee}."
+      },
+      {
+        "title": "Introduzca el importe exacto en efectivo",
+        "detail": "Pague exactamente {fee}."
+      },
+      {
+        "title": "Grape el comprobante a la página 3",
+        "detail": "Recoja el comprobante impreso: es su justificante de pago. Grápelo a la página 3 del formulario y lleve ambos documentos a su cita."
+      }
+    ],
+    "fallback": "Si el cajero automático no lee el código de barras, abone el importe en ventanilla en cualquier sucursal de CaixaBank, BBVA o Santander durante el horario de atención al público. Algunas sucursales solo aceptan pagos de impuestos por la mañana."
+  },
+  "sheet": {
+    "title": "El día de su cita",
+    "purposeTie": "Toma de huellas para su tarjeta TIE (EX-17)",
+    "purposeEu": "Su certificado de registro de la UE (EX-18)",
+    "when": "CUÁNDO",
+    "where": "DÓNDE",
+    "arrive": "Llegue 15 minutos antes.",
+    "metro": "METRO MÁS CERCANO",
+    "bring": "Qué debe llevar",
+    "phrases": "Dígalo en español",
+    "after": "Tras la cita",
+    "checklistTie": [
+      "Pasaporte (original), además de una fotocopia de la página de la fotografía y de su visado",
+      "Su {form}, impreso y firmado",
+      "Una fotografía reciente en color, de 32 × 26 mm, con fondo blanco (lleve otra de repuesto)",
+      "Modelo 790 Código 012, abonado: la copia sellada o el recibo del cajero automático grapado a la misma",
+      "Su confirmación impresa de la cita (justificante de cita)"
+    ],
+    "checklistEu": [
+      "Pasaporte o documento nacional de identidad (original), además de una fotocopia",
+      "Su {form}, impreso y firmado",
+      "Modelo 790 Código 012, abonado: la copia sellada o el recibo del cajero automático grapado a la misma",
+      "Su confirmación de cita impresa (justificante de cita)",
+      "Los documentos de su «Ready File»: certificado de matrícula, seguro médico y declaración de medios económicos"
+    ],
+    "afterTie": [
+      "Se le entregará un resguardo. Consérvelo: lo necesitará para recoger su tarjeta.",
+      "Su tarjeta se recogerá más adelante, en persona. Le indicaremos cuándo y dónde."
+    ],
+    "afterEu": [
+      "El certificado suele entregarse en la cita. Compruebe todos los datos que figuran en él antes de marcharse.",
+      "Guárdelo junto con su pasaporte: acredita su registro como ciudadano de la UE."
+    ],
+    "meaning": {
+      "greetTie": "Buenos días, tengo una cita para la toma de huellas dactilares.",
+      "greetEu": "Buenos días, tengo cita para el certificado de registro de ciudadano de la Unión.",
+      "handOver": "Aquí tiene mi pasaporte y el recibo del pago.",
+      "collectCard": "¿Cuándo puedo recoger la tarjeta?",
+      "certificateToday": "¿Recibiré el certificado hoy?",
+      "repeat": "Disculpe, ¿podría repetirlo más despacio, por favor?"
+    },
+    "footer": "{name} · {ref} · BCN Student Concierge: orientación práctica, no asesoramiento jurídico. Los requisitos los establece la Policía Nacional y pueden sufrir modificaciones."
+  }
+}

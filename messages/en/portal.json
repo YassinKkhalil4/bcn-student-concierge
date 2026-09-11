@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "file": "Your file",
+    "login": "Sign in to your file",
+    "verify": "Continue to your file"
+  },
+  "login": {
+    "eyebrow": "Your file",
+    "title": "Sign in to your file",
+    "intro": "Enter the email address you used on the intake form. We will email you a one-time link — no password needed.",
+    "sent": "If there is a file under that email address, a sign-in link is on its way. It works once and expires in 30 minutes — check your spam folder if it has not arrived in a few minutes.",
+    "errors": {
+      "email": "Please enter a valid email address.",
+      "link": "That sign-in link has expired or was already used. Request a new one below.",
+      "locked": "Too many attempts. Please wait 15 minutes and try again."
+    },
+    "emailLabel": "Email address",
+    "submit": "Email me a sign-in link"
+  },
+  "verify": {
+    "title": "Continue to your file",
+    "once": "This link works once.",
+    "open": "Open my file",
+    "expiredTitle": "This link has expired",
+    "expiredBody": "Sign-in links last 30 minutes and work once.",
+    "newLink": "Send me a new link"
+  },
+  "file": {
+    "notFoundTitle": "We could not find your file",
+    "notFoundBody": "Please sign out and sign in again with the email address you used on the form.",
+    "closedTitle": "This file is closed",
+    "closedBody": "Your service is complete and, as promised, your personal data and documents have been permanently deleted. Your invoice records are kept as Spanish tax law requires.",
+    "eyebrow": "Your file",
+    "greeting": "{name}, here is your file",
+    "reference": "Reference",
+    "signOut": "Sign out",
+    "submitted": "Thank you — your documents are with us. We check them within one business day.",
+    "checkoutCancelled": "Payment was cancelled, and nothing was charged. You can pay whenever you are ready.",
+    "paymentTitle": "Payment outstanding",
+    "paymentBody": "We start work as soon as your payment is confirmed.",
+    "paymentTotal": "Total {total}, IVA included.",
+    "pay": "Pay {total}",
+    "payNow": "Pay now",
+    "passport": "1. Passport",
+    "enrolment": "2. University enrolment",
+    "padron": "3. Proof of address for the Padrón",
+    "padronIntro": "To register at the Padrón — the city’s register of residents — you must show you live at {address}. What counts as proof depends on how you live.",
+    "tasaTitle": "4. Pay the state fee (Modelo 790 · 012)",
+    "tasaIntro": "The police charge this fee separately from our service. It is paid in cash at a Spanish bank, using a form you generate on the police website.",
+    "appointments": "Your appointments",
+    "police": "Police",
+    "padronAppointment": "Padrón",
+    "metro": "Metro: {metro}",
+    "sheet": "Appointment-day sheet",
+    "myForm": "My pre-filled {form}",
+    "invoices": "Invoices",
+    "reviewTitle": "Ready for review?",
+    "reviewDone": "Submitted on {date}. You can still upload a replacement if we ask for one.",
+    "reviewPrompt": "When everything is uploaded, tell us and we will check your file.",
+    "reviewSubmit": "Submit for review"
+  },
+  "invoices": {
+    "empty": "Your invoice appears here once payment is confirmed.",
+    "refund": "refund",
+    "pdf": "PDF"
+  },
+  "pay": {
+    "opening": "Opening secure checkout…",
+    "failed": "Could not open checkout. Please try again.",
+    "network": "Network error. Please try again."
+  },
+  "padron": {
+    "question": "Where are you living?",
+    "paths": {
+      "residence": {
+        "title": "A student residence",
+        "detail": "Halls or a residence with a reception desk"
+      },
+      "own-lease": {
+        "title": "A flat I rent",
+        "detail": "The lease is in my name"
+      },
+      "not-in-name": {
+        "title": "A room or sublet",
+        "detail": "The lease is in someone else's name, or I live with family or friends"
+      }
+    },
+    "residence": {
+      "intro": "Residences register their students with a special city form, the <em>Autorització d’empadronament de domicili col·lectiu</em>. The residence fills it in, signs it and <strong>stamps it</strong> — without the stamp it is not accepted. Send this message to reception:",
+      "subject": "Subject:",
+      "openForm": "Open the official form ↗",
+      "uploadPrompt": "When the residence gives it back, upload it here:",
+      "spanishNote": "The message is in Spanish on purpose: it is for the residence’s staff in Barcelona."
+    },
+    "lease": {
+      "intro": "The city accepts your lease only if all three are true. Check each one:",
+      "inMyName": "My name is on the lease as a tenant.",
+      "longEnough": "It lasts more than three months, or says explicitly that it extends.",
+      "language": "It is written in Spanish or Catalan.",
+      "notMine": "<strong>Not in your name?</strong> Then the person on the lease must authorise you.",
+      "switch": "Switch to that option",
+      "tooShort": "<strong>Lasts three months or less?</strong> Ask your landlord for an extension in writing, or to authorise you with the city’s form instead.",
+      "otherLanguage": "<strong>In another language?</strong> The city needs an official translation (a <em>traducción jurada</em>, or one from your consulate). A Spanish version from your landlord is often quicker — ask first.",
+      "upload": "Upload the full signed lease and a recent utility bill for the flat. The city asks for the bill when the lease is a copy or has expired; we ask for it every time so nothing holds you up."
+    },
+    "sublet": {
+      "intro": "When the flat is not in your name, whoever holds it authorises you on Barcelona’s official form, the <em>Autorització per inscriure-us al domicili</em>.",
+      "signTitle": "2. Get it signed",
+      "signByHand": "Print it. The person who authorises you signs it <strong>by hand</strong>; the signature must match their ID.",
+      "signDate": "They write the date next to the signature. The authorisation is valid for <strong>three months</strong> from that date.",
+      "uploadTitle": "3. Upload all three",
+      "uploadBody": "The city will not accept the form on its own. It needs the signer’s ID and proof that the flat is theirs to offer: the lease in their name, or the deed if they own it."
+    }
+  },
+  "authorization": {
+    "title": "1. Generate the authorisation",
+    "intro": "The person who signs is whoever holds the flat: the owner, or the main tenant whose name is on the lease. We fill in Barcelona’s official form with your details and theirs. We do not keep what you type here.",
+    "fields": {
+      "signerName": {
+        "label": "Signer's full name",
+        "hint": "Exactly as on the signer's ID."
+      },
+      "signerId": {
+        "label": "Signer's DNI, NIE or passport number"
+      },
+      "ownerName": {
+        "label": "Owner's name (person or company)"
+      },
+      "ownerTaxId": {
+        "label": "Owner's NIF"
+      },
+      "companyName": {
+        "label": "Company name"
+      },
+      "companyTaxId": {
+        "label": "Company NIF"
+      },
+      "cadastralRef": {
+        "label": "Cadastral reference",
+        "hint": "20 letters and digits, on the property tax (IBI) receipt. Leave blank if unknown."
+      }
+    },
+    "relationLegend": "The signer is…",
+    "relations": {
+      "owner": "The owner of the flat",
+      "tenant": "The main tenant (on the lease)",
+      "usufruct": "The usufruct holder"
+    },
+    "tenantNote": "When the main tenant signs, the form also asks for the owner’s details. You will find them on the lease.",
+    "forCompany": "The signer acts for a company (for example a coliving operator)",
+    "cadastralToggle": "Optional: cadastral reference",
+    "preparing": "Preparing the form…",
+    "download": "Download the pre-filled form",
+    "done": "✓ Downloaded. Now print it and follow step 2.",
+    "checkFields": "Please check the highlighted fields.",
+    "notBarcelona": "This is the City of Barcelona’s form, but your address is in {city}. Each municipality has its own Padrón authorisation — contact us and we will get the right one.",
+    "unprintable": "These characters cannot be printed on the form: {chars}. Please write names in Latin letters, exactly as on the ID document.",
+    "unavailable": "This form is temporarily unavailable. Please try again later or contact us.",
+    "failed": "Could not generate the form. Please try again.",
+    "network": "Network error. Please try again."
+  },
+  "enrolment": {
+    "howTo": "How do I get this?",
+    "intro": "Your acceptance letter is not enough. Ask your university’s admissions or registry office for a <em>certificado de matrícula</em>, stamped and signed. This message asks for exactly what the immigration office looks for:",
+    "spanishNote": "The message is in Spanish on purpose: it is for your university’s office in Barcelona.",
+    "university": "Your university",
+    "programme": "Your programme",
+    "programmePlaceholder": "e.g. BBA in International Business",
+    "subject": "Subject:",
+    "openEmail": "Open in my email app"
+  },
+  "tasa": {
+    "missingNie": "This step needs your NIE, and we do not have it yet. We will tell you as soon as you can do it — nothing to do for now.",
+    "open": "Open the official Policía Nacional form:",
+    "fill": "Fill in each box exactly as below (leave any other box empty).",
+    "tick": "Tick only <em>“{tramite}”</em> — it should show <strong>{fee}</strong>. If the portal shows a different amount, the portal is right: pay what it shows.",
+    "payment": "Under <em>Forma de pago</em>, choose <strong>{method}</strong>.",
+    "print": "Download the form and print it at 100% scale — never “fit to page”, or the barcode will not scan.",
+    "caption": "What to type on the police portal",
+    "labelsNote": "The box names are in Spanish because that is what the police website shows."
+  }
+}

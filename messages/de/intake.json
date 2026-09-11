@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "title": "Sichere Kundenaufnahme",
+    "description": "Verschlüsselter Aufnahmefragebogen und Dokumentenportal für Kunden von BCN Student Concierge."
+  },
+  "page": {
+    "eyebrow": "Sichere Aufnahme",
+    "title": "Hier beginnt Ihre Akte.",
+    "intro": "Sechs kurze Schritte. Alle eingegebenen Daten werden über TLS übertragen und verschlüsselt gespeichert; hochgeladene Ausweisdokumente werden einzeln mit einem eigenen AES-256-Schlüssel verschlüsselt."
+  },
+  "steps": {
+    "progress": "Fortschritt",
+    "identity": "Identität",
+    "family": "Personenstand",
+    "address": "Adresse in Spanien",
+    "contact": "Kontakt",
+    "consent": "Einwilligung",
+    "documents": "Dokumente"
+  },
+  "field": {
+    "optional": "(optional)",
+    "select": "Auswählen…",
+    "officialCodes": "Offizielle Codes: {codes}"
+  },
+  "identity": {
+    "title": "Identität",
+    "description": "Geben Sie diese Angaben genau so ein, wie sie in Ihrem Reisepass stehen. Die spanischen Behörden gleichen jedes einzelne Zeichen ab, und eine Abweichung an dieser Stelle ist der häufigste Grund für die Ablehnung eines Antrags."
+  },
+  "family": {
+    "title": "Personen- und Familienstand",
+    "description": "In spanischen Aufenthaltsformularen müssen die Vornamen der Eltern auch bei volljährigen Antragstellern angegeben werden. Es werden nur Vornamen benötigt – Nachnamen werden nicht abgefragt."
+  },
+  "address": {
+    "title": "Adresse in Spanien",
+    "description": "Diese muss exakt mit Ihrer Padrón-Bescheinigung übereinstimmen, einschließlich Etage und Türnummer. Falls Sie sich noch nicht angemeldet haben, verwenden Sie bitte die Adresse aus Ihrem Mietvertrag."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "description": "Wir verwenden diese Angaben für Terminbestätigungen. Wenn Sie sie schon kennen, geben Sie die Nummer an, die der Studierende in Spanien nutzen wird."
+  },
+  "fields": {
+    "passportNumber": {
+      "label": "Reisepassnummer"
+    },
+    "nie": {
+      "label": "Vorab zugewiesene NIE",
+      "hint": "Steht auf Ihrem Visum, falls bereits zugeteilt. Leer lassen, wenn Sie noch keine haben."
+    },
+    "firstSurname": {
+      "label": "Erster Nachname"
+    },
+    "secondSurname": {
+      "label": "Zweiter Nachname",
+      "hint": "Bitte lassen Sie das Feld leer, wenn in Ihrem Reisepass nur ein Nachname angegeben ist. Geben Sie niemals „N/A“ ein."
+    },
+    "givenName": {
+      "label": "Vorname(n)"
+    },
+    "gender": {
+      "label": "Geschlecht"
+    },
+    "birthDate": {
+      "label": "Geburtsdatum",
+      "hint": "Der Tag steht an erster Stelle, wie auf spanischen Formularen üblich.",
+      "placeholder": "TT/MM/JJJJ"
+    },
+    "birthCity": {
+      "label": "Geburtsort"
+    },
+    "birthCountry": {
+      "label": "Geburtsland"
+    },
+    "nationality": {
+      "label": "Staatsangehörigkeit",
+      "hint": "Wie in Ihrem Reisepass. Davon hängt ab, ob wir ein EX-17 (TIE) oder ein EX-18 (EU-Bescheinigung) vorbereiten."
+    },
+    "maritalStatus": {
+      "label": "Familienstand"
+    },
+    "fatherFirstName": {
+      "label": "Vorname des Vaters"
+    },
+    "motherFirstName": {
+      "label": "Vorname der Mutter"
+    },
+    "streetName": {
+      "label": "Straßenname",
+      "hint": "Bitte geben Sie den Typ an: CARRER, CALLE, AVINGUDA, PASSEIG…"
+    },
+    "buildingNumber": {
+      "label": "Hausnummer"
+    },
+    "floorDoor": {
+      "label": "Etage / Tür",
+      "hint": "Bitte leer lassen, wenn die Adresse weder eine Etage noch eine Tür hat."
+    },
+    "city": {
+      "label": "Stadt / Gemeinde"
+    },
+    "postalCode": {
+      "label": "Postleitzahl"
+    },
+    "province": {
+      "label": "Provinz"
+    },
+    "phone": {
+      "label": "Mobiltelefon",
+      "hint": "Internationales Format, einschließlich der Ländervorwahl."
+    },
+    "email": {
+      "label": "E-Mail-Adresse"
+    }
+  },
+  "gender": {
+    "H": "Männlich",
+    "M": "Weiblich",
+    "X": "Sonstiges / nicht angegeben"
+  },
+  "marital": {
+    "S": "ledig",
+    "C": "verheiratet",
+    "V": "verwitwet",
+    "D": "geschieden",
+    "Sp": "getrennt"
+  },
+  "consent": {
+    "title": "Einwilligung und Leistungsumfang",
+    "intro": "Jedes der untenstehenden Kontrollkästchen ist standardmäßig nicht markiert und muss aktiv angekreuzt werden. Schweigen oder ein vorab markiertes Kontrollkästchen werten wir nicht als Einwilligung.",
+    "optional": "optional",
+    "gdprDataProcessing": {
+      "label": "Ich stimme der Verarbeitung meiner personenbezogenen Daten zu",
+      "body": "BCN Student Concierge darf die oben genannten Daten gemäß Art. 6 Abs. 1 Buchstabe b DSGVO zur Erstellung meiner Formulare, zur Terminvereinbarung und zur Verwaltung meiner Akte verarbeiten. Die Daten werden in der EU gespeichert und 30 Tage nach Abschluss der Dienstleistung gelöscht.",
+      "error": "Erforderlich zur Bearbeitung Ihres Antrags"
+    },
+    "gdprSensitiveDocuments": {
+      "label": "Ich stimme der Speicherung meiner Ausweisdokumente zu",
+      "body": "Mein Reisepass, mein Visum und meine Immatrikulationsunterlagen dürfen für die Dauer der Zusammenarbeit verschlüsselt gespeichert werden. Mir ist bewusst, dass ich diese Einwilligung jederzeit widerrufen und die Löschung verlangen kann und dass ein Widerruf die Erbringung der Dienstleistung verhindern kann.",
+      "error": "Erforderlich zur Aufbewahrung Ihrer Dokumente"
+    },
+    "disclaimerAcknowledged": {
+      "label": "Mir ist bewusst, dass dies keine rechtliche Vertretung darstellt",
+      "body": "Ich nehme zur Kenntnis, dass BCN Student Concierge ein unabhängiger Verwaltungsdienstleister ist, keine Anwaltskanzlei oder gestoría darstellt, mich gegenüber keiner Behörde vertritt und keine verbindliche Rechts- oder Einwanderungsberatung erteilt. Alle Anträge werden in meinem eigenen Namen eingereicht.",
+      "error": "Bitte bestätigen Sie den Hinweis zum Leistungsumfang"
+    },
+    "marketingOptIn": {
+      "label": "Bitte senden Sie mir vor meiner Reise Tipps zur Ankunft",
+      "body": "Gelegentliche praktische E-Mails zur Ankunft in Barcelona. Abmeldung jederzeit möglich. Das ist wirklich freiwillig und hat keinen Einfluss auf unsere Leistung für Sie."
+    }
+  },
+  "wizard": {
+    "back": "Zurück",
+    "continue": "Weiter",
+    "saving": "Wird gespeichert…",
+    "submit": "Absenden und fortfahren",
+    "fixEarlier": "Einige Antworten müssen korrigiert werden – überprüfen Sie bitte die vorherigen Schritte.",
+    "submitFailed": "Wir konnten Ihre Eingabe nicht speichern. Bitte versuchen Sie es erneut.",
+    "networkRetry": "Netzwerkfehler. Ihre Antworten sind noch vorhanden – bitte versuchen Sie es erneut.",
+    "checkoutFailed": "Der Bezahlvorgang konnte nicht geöffnet werden. Bitte versuchen Sie es erneut.",
+    "checkoutNetwork": "Netzwerkfehler beim Öffnen des Bezahlvorgangs.",
+    "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
+    "alreadyPaid": "Diese Akte ist bereits bezahlt.",
+    "uploadTitle": "Laden Sie Ihre Dokumente hoch",
+    "uploadIntro": "Ihre Akte ist geöffnet. Referenz <code>{ref}</code>. Laden Sie die Ihnen derzeit vorliegenden Unterlagen hoch und fahren Sie anschließend mit der Zahlung fort.",
+    "uploadLater": "Fehlt etwas, etwa ein Dokument für den Padrón von Ihrem Vermieter? Das ist normal. Bezahlen Sie jetzt und laden Sie es später über <link>Ihre Akte</link> hoch: Melden Sie sich jederzeit mit der E-Mail-Adresse an, die Sie uns genannt haben.",
+    "openingCheckout": "Sicherer Bezahlvorgang wird geöffnet…",
+    "pay": "Weiter zur Zahlung — {total}",
+    "stripeNote": "Karte und Apple Pay, abgewickelt über Stripe. Ihre Kartendaten sehen wir nie."
+  },
+  "summary": {
+    "selected": "Ausgewähltes Paket",
+    "serviceFee": "Servicegebühr",
+    "iva": "IVA (21 %)",
+    "total": "Gesamt",
+    "change": "Paket ändern",
+    "govFees": "Behördengebühren (Modelo 790, Kartenausstellung) zahlen Sie direkt an die spanischen Behörden; sie sind nicht enthalten."
+  },
+  "documents": {
+    "slots": {
+      "passport": {
+        "label": "Reisepass – Seite mit dem Foto",
+        "description": "Die Seite mit dem maschinenlesbaren Bereich. Falls sich Ihr Visum im Reisepass befindet, fügen Sie bitte auch diese Seite hinzu."
+      },
+      "acceptance-letter": {
+        "label": "Certificado de matrícula (Immatrikulationsbescheinigung)",
+        "description": "Die offizielle Immatrikulationsbescheinigung Ihrer Universität, abgestempelt und unterschrieben."
+      },
+      "lease": {
+        "label": "Mietvertrag oder Eigentumsurkunde",
+        "description": "Der vollständige unterschriebene Vertrag (oder die Eigentumsurkunde, falls der Unterzeichner Eigentümer der Wohnung ist), alle Seiten."
+      },
+      "utility-bill": {
+        "label": "Aktuelle Strom-, Gas- oder Wasserrechnung",
+        "description": "Strom-, Wasser- oder Gasrechnung für diese Adresse aus den letzten drei Monaten."
+      },
+      "padron-authorization": {
+        "label": "Unterschriebene Genehmigung",
+        "description": "Das Genehmigungsformular, handschriftlich unterzeichnet und datiert von der Person, die Ihnen die Genehmigung erteilt."
+      },
+      "authorizer-id": {
+        "label": "Ausweis der unterzeichnenden Person",
+        "description": "Ein klares Foto oder ein Scan ihres Ausweisdokuments – spanischer DNI, NIE-Ausweis oder Reisepass – Vorder- und Rückseite."
+      },
+      "collective-authorization": {
+        "label": "Genehmigung Ihres Wohnheims",
+        "description": "Das Formular der Stadt Barcelona für Gemeinschaftsunterkünfte, unterschrieben und abgestempelt vom Wohnheim."
+      }
+    },
+    "onFile": "✓ vorhanden",
+    "replace": "Ersetzen",
+    "choose": "Datei auswählen",
+    "uploading": "Verschlüsseln und hochladen…",
+    "done": "✓ {name} — verschlüsselt und gespeichert",
+    "tooLarge": "Die Datei ist größer als {mb} MB.",
+    "wrongType": "Es werden ausschließlich PDF-, JPEG- und PNG-Dateien akzeptiert. Bitte exportieren Sie die Datei erneut.",
+    "failed": "Der Upload ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "network": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "footer": "PDF, JPEG oder PNG, jeweils bis zu {mb} MB. Jede Datei wird bei Erhalt mit einem eigenen AES-256-Schlüssel verschlüsselt und 30 Tage nach Abschluss Ihrer Dienstleistung endgültig gelöscht."
+  },
+  "complete": {
+    "metaTitle": "Aufnahme abgeschlossen",
+    "eyebrow": "Zahlung eingegangen",
+    "title": "Ihre Akte ist angelegt.",
+    "intro": "Eine Bestätigung und eine Rechnung werden Ihnen in Kürze an die von Ihnen angegebene E-Mail-Adresse gesendet. Hier erfahren Sie genau, was als Nächstes geschieht – und welche Zahlung Sie selbst vornehmen müssen.",
+    "steps": [
+      {
+        "title": "Wir prüfen Ihre Unterlagen (innerhalb eines Werktags)",
+        "body": "Ihre hochgeladenen Dokumente werden mit den von Ihnen eingegebenen Daten abgeglichen. Sollten Unstimmigkeiten vorliegen – beispielsweise ein Nachname, der vom Reisepass abweicht, oder ein unlesbarer Scan –, senden wir Ihnen eine E-Mail, bevor die Unterlagen eingereicht werden."
+      },
+      {
+        "title": "Formulare erstellt und zur Prüfung versendet",
+        "body": "Wir bereiten Ihr Formular EX-17 oder EX-18 sowie Ihr „Modelo 790 Código 012“ vor und senden Ihnen beides als druckfertige PDF-Dateien zu. Prüfen Sie diese sorgfältig: Sie sind der Antragsteller, und die Erklärung stammt von Ihnen."
+      },
+      {
+        "title": "Termine vereinbart",
+        "body": "Wir überwachen das „cita previa“-System und vereinbaren Ihre Termine für die Einwohnermeldung (Padrón) und bei der Polizei; anschließend senden wir Ihnen einen datierten Ablaufplan mit der Adresse, den mitzubringenden Unterlagen und den zu erwartenden Fragen zu."
+      }
+    ],
+    "home": "Zurück zur Startseite"
+  }
+}

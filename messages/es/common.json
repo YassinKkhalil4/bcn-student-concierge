@@ -1,0 +1,57 @@
+{
+  "brand": "BCN Student Concierge",
+  "skipToContent": "Ir al contenido",
+  "nav": {
+    "main": "Principal",
+    "howItWorks": "Cómo funciona",
+    "pricing": "Servicios y tarifas",
+    "faq": "Preguntas frecuentes",
+    "myFile": "Mi expediente",
+    "beginIntake": "Empezar el alta",
+    "begin": "Empezar"
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "footer": {
+    "tagline": "Servicio administrativo independiente de asistencia para estudiantes internacionales que llegan a universidades privadas de Barcelona.",
+    "services": "Servicios",
+    "packages": "Paquetes y tarifas",
+    "intake": "Portal de alta de clientes",
+    "process": "Proceso",
+    "legal": "Aviso legal",
+    "terms": "Condiciones de uso",
+    "privacy": "Privacidad y RGPD",
+    "scope": "Alcance del servicio",
+    "copyright": "© {year} BCN Student Concierge. Barcelona, España."
+  },
+  "disclaimer": {
+    "footerLabel": "Alcance del servicio.",
+    "prominentLabel": "Importante: alcance del servicio",
+    "body": "BCN Student Concierge es un servicio independiente de facilitación administrativa y gestión de citas. No somos un bufete de abogados ni una gestoría registrada. No ofrecemos representación legal, no actuamos como su representante legal ante ninguna autoridad española y nada de lo que proporcionamos constituye un asesoramiento jurídico o en materia de inmigración vinculante. Todas las solicitudes las presenta usted, en su propio nombre. Las decisiones sobre residencia, empadronamiento y documentación recaen exclusivamente en las autoridades españolas competentes, y no se garantiza ningún resultado. Para obtener asesoramiento jurídico sobre su situación migratoria, consulte a un colegiado abogado."
+  },
+  "copy": {
+    "copy": "Copiar",
+    "copied": "Copiado ✓",
+    "failed": "Error al copiar",
+    "copySubject": "Copiar asunto",
+    "copyMessage": "Copiar mensaje"
+  },
+  "legalPage": {
+    "lastUpdated": "Última actualización: {date}",
+    "translationNotice": "Esta página es una traducción facilitada para su comodidad. En caso de discrepancia con la versión en inglés, prevalecerá la versión en inglés."
+  },
+  "modelo790": {
+    "title": "Modelo 790 Código 012 — pago en efectivo, en ventanilla de un banco",
+    "intro": "La tasa estatal correspondiente a su tarjeta de residencia no forma parte de nuestros honorarios y no puede abonarse con tarjeta a través de nuestra página web. La normativa de la Agencia Tributaria española exige que este formulario se tramite mediante un código de barras que debe leerse en una sucursal bancaria física: el pago en línea requiere un certificado digital español o el servicio de banca en línea de un banco español, y los estudiantes recién llegados no disponen de ninguno de ellos.",
+    "steps": [
+      "Generamos su Modelo 790 Código 012 configurado para el pago en efectivo («en efectivo»), con el código de barras único que lee el escáner del banco.",
+      "Imprímalo en color, a una cara, a escala del 100 %. No cambie el tamaño: un código de barras redimensionado no se podrá escanear y el formulario será rechazado.",
+      "Lleve la copia impresa a una sucursal de un banco español o a un cajero automático con lector de códigos de barras. Presente todas las copias; el empleado de ventanilla las sellará.",
+      "Conserve la copia sellada marcada como «Ejemplar para el interesado». Llévela a su cita en la comisaría junto con su formulario EX-17 o EX-18; un formulario sin sellar dará por terminada la cita."
+    ],
+    "branchesTitle": "Sucursales que aceptan este pago",
+    "branchesNote": "No todas las oficinas aceptan el pago de impuestos de personas que no son clientes, y algunas solo lo admiten durante el horario de mañana. Le confirmaremos una oficina cercana concreta y su horario de atención al público junto con su itinerario de citas.",
+    "footnote": "El importe de la tasa lo fija el Gobierno español y varía periódicamente; la cifra que figura en su formulario en el momento de su generación es la que se aplica. Nunca recaudamos esta tasa en nombre del Gobierno."
+  }
+}

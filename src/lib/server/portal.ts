@@ -74,3 +74,15 @@ export async function getCaseRef(caseId: string): Promise<string | null> {
   const [row] = await db.select({ ref: cases.ref }).from(cases).where(eq(cases.id, caseId)).limit(1);
   return row?.ref ?? null;
 }
+
+/**
+ * The student switched language in the portal. Emails and the appointment
+ * sheet follow the file's language, so it is saved on the case.
+ */
+export async function setCaseLocale(caseId: string, locale: Locale): Promise<void> {
+  const db = await getDb();
+  await db
+    .update(cases)
+    .set({ locale, updatedAt: new Date() })
+    .where(and(eq(cases.id, caseId), isNull(cases.purgedAt)));
+}

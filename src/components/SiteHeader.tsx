@@ -1,40 +1,43 @@
-import Link from "next/link";
-
-const NAV = [
-  { href: "/#how-it-works", label: "How it works" },
-  { href: "/pricing", label: "Services & pricing" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/portal", label: "My file" },
-];
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function SiteHeader() {
+  const t = useTranslations("common");
+  const nav = [
+    { href: "/#how-it-works", label: t("nav.howItWorks") },
+    { href: "/pricing", label: t("nav.pricing") },
+    { href: "/#faq", label: t("nav.faq") },
+    { href: "/portal", label: t("nav.myFile") },
+  ];
+
   return (
     <header className="sticky top-0 z-40 border-b border-bone-line/70 bg-bone/85 backdrop-blur">
-      <div className="container-x flex h-[72px] items-center justify-between">
+      <div className="container-x flex h-[72px] items-center justify-between gap-4">
         <Link href="/" className="flex items-baseline gap-2.5">
           <span className="font-display text-lg font-semibold tracking-tight text-ink">
-            BCN Student Concierge
+            {t("brand")}
           </span>
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm text-ink-muted transition-colors hover:text-ink"
-            >
+        <nav aria-label={t("nav.main")} className="hidden items-center gap-7 md:flex">
+          {nav.map((item) => (
+            <Link key={item.href} href={item.href} className="text-sm text-ink-muted transition-colors hover:text-ink">
               {item.label}
             </Link>
           ))}
+          <LanguageSwitcher />
           <Link href="/intake" className="btn-primary">
-            Begin intake
+            {t("nav.beginIntake")}
           </Link>
         </nav>
 
-        <Link href="/intake" className="btn-primary md:hidden">
-          Begin
-        </Link>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSwitcher />
+          <Link href="/intake" className="btn-primary">
+            {t("nav.begin")}
+          </Link>
+        </div>
       </div>
     </header>
   );

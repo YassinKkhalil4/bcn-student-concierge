@@ -1,0 +1,71 @@
+{
+  "atm": {
+    "summary": "How to pay at a CaixaBank ATM without a Spanish card",
+    "steps": [
+      {
+        "title": "Go to a CaixaBank ATM",
+        "detail": "You do not need a CaixaBank account or any Spanish card. Take your printed Modelo 790 and the exact amount in cash."
+      },
+      {
+        "title": "Select ‘Pagar impuestos y tasas’",
+        "detail": "Choose it on the start screen, without inserting a card."
+      },
+      {
+        "title": "Scan the 13-digit barcode",
+        "detail": "Hold the barcode on your printed form to the ATM’s reader. The amount appears on screen: check it says {fee}."
+      },
+      {
+        "title": "Insert the exact cash",
+        "detail": "Pay exactly {fee}."
+      },
+      {
+        "title": "Staple the voucher to page 3",
+        "detail": "Collect the printed voucher: it is your proof of payment. Staple it to page 3 of the form and bring both to your appointment."
+      }
+    ],
+    "fallback": "If the ATM will not read the barcode, pay at the counter inside any CaixaBank, BBVA or Santander branch during opening hours. Some branches take tax payments only in the morning."
+  },
+  "sheet": {
+    "title": "Your appointment day",
+    "purposeTie": "Fingerprints for your TIE card (EX-17)",
+    "purposeEu": "Your EU registration certificate (EX-18)",
+    "when": "WHEN",
+    "where": "WHERE",
+    "arrive": "Arrive 15 minutes early.",
+    "metro": "NEAREST METRO",
+    "bring": "Bring with you",
+    "phrases": "Say it in Spanish",
+    "after": "After the appointment",
+    "checklistTie": [
+      "Passport (original), plus a photocopy of the photo page and of your visa",
+      "Your {form}, printed and signed",
+      "One recent colour photo, 32 × 26 mm, white background (bring a spare)",
+      "Modelo 790 Código 012, paid: the stamped copy or the ATM voucher stapled to it",
+      "Your printed appointment confirmation (justificante de cita)"
+    ],
+    "checklistEu": [
+      "Passport or national ID card (original), plus a photocopy",
+      "Your {form}, printed and signed",
+      "Modelo 790 Código 012, paid: the stamped copy or the ATM voucher stapled to it",
+      "Your printed appointment confirmation (justificante de cita)",
+      "Your Ready File documents: enrolment certificate, health insurance and declaration of means"
+    ],
+    "afterTie": [
+      "You will be given a receipt (resguardo). Keep it: you need it to collect your card.",
+      "Your card is collected later, in person. We will tell you when and where."
+    ],
+    "afterEu": [
+      "The certificate is usually handed over at the appointment. Check every detail on it before you leave.",
+      "Keep it with your passport: it proves your registration."
+    ],
+    "meaning": {
+      "greetTie": "Good morning, I have an appointment for fingerprints.",
+      "greetEu": "Good morning, I have an appointment for the EU registration certificate.",
+      "handOver": "Here is my passport and the fee receipt.",
+      "collectCard": "When can I collect the card?",
+      "certificateToday": "Will I get the certificate today?",
+      "repeat": "Sorry, could you say that again more slowly, please?"
+    },
+    "footer": "{name} · {ref} · BCN Student Concierge — practical guidance, not legal advice. Requirements are set by the Policía Nacional and can change."
+  }
+}

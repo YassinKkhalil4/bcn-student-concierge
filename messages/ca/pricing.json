@@ -1,0 +1,80 @@
+{
+  "tiers": {
+    "baseline": {
+      "name": "Administrative Baseline",
+      "shortName": "Administrative Baseline",
+      "tagline": "L’essencial legal, ben tramitat a la primera.",
+      "bestFor": "Estudiants en residències universitàries que necessiten algú que els gestioni la documentació.",
+      "features": [
+        "Reserva de cita per al Padró (empadronament)",
+        "Reserva de cita amb la Policía Nacional per a la TIE / CUE",
+        "Generació dels formularis EX-17 o EX-18, ja emplenats i a punt per imprimir",
+        "Configuració del Modelo 790 Código 012 amb codi de barres",
+        "Preparació del «Ready File» revisat, en paper i en format digital"
+      ]
+    },
+    "soft-landing": {
+      "name": "Digital Soft-Landing",
+      "shortName": "Digital Soft-Landing",
+      "tagline": "Els tràmits, i tot allò que fa la ciutat pràctica des del primer dia.",
+      "bestFor": "La majoria d’estudiants internacionals de primer any que arriben pel seu compte.",
+      "features": [
+        "Guia per obrir un compte bancari a Espanya (de no resident a resident)",
+        "Alta a la targeta de transport T-mobilitat / T-jove",
+        "Guia per triar i activar una SIM digital / eSIM",
+        "Configuració del Carnet Jove i del carnet d’estudiant ISIC",
+        "Línia de suport exclusiva per WhatsApp durant la instal·lació"
+      ]
+    },
+    "turnkey": {
+      "name": "Turnkey Relocation & Housing Audit",
+      "shortName": "Turnkey Relocation & Housing Audit",
+      "tagline": "Verifiquem el pis abans que transferiu la fiança.",
+      "bestFor": "Famílies que busquen habitatge privat des de l’estranger, sense haver-lo vist.",
+      "features": [
+        "Cerca verificada d’allotjament basada en anuncis sotmesos a controls antifrau",
+        "Verificació de la titularitat al Registre de la Propietat (Nota Simple)",
+        "Revisió del contracte de lloguer amb verificació legal del límit màxim de la fiança",
+        "Guia per a la contractació dels serveis bàsics (aigua, electricitat, internet)",
+        "Seguiment de la documentació durant 90 dies, fins a la recollida de la TIE"
+      ]
+    }
+  },
+  "card": {
+    "mostChosen": "L’opció més popular",
+    "plusIva": "+ IVA",
+    "ivaLine": "{iva} IVA (21 %) · <strong>{total} total</strong>",
+    "everythingIn": "Tot el que inclou {name}, i a més:",
+    "bestFor": "Ideal per a:",
+    "select": "Trieu {name}"
+  },
+  "page": {
+    "metaTitle": "Serveis i preus",
+    "metaDescription": "Tres paquets de preu fix per a estudiants internacionals que arriben a Barcelona: Administrative Baseline, Digital Soft-Landing i Turnkey Relocation & Housing Audit.",
+    "eyebrow": "Serveis i tarifes",
+    "title": "Tarifes fixes per a un procediment sense termini de tramitació definit.",
+    "intro": "Tots els paquets s’indiquen sense IVA i es mostra l’import total, que inclou un {rate} % d’IVA, abans de fer el pagament. No cobrem per hores i cap paquet inclou comissions administratives.",
+    "govEyebrow": "Taxes administratives",
+    "govTitle": "L’únic pagament que no podem fer en nom vostre.",
+    "exclusionsEyebrow": "Transparència total",
+    "exclusionsTitle": "Què no està cobert per la nostra tarifa.",
+    "exclusions": [
+      {
+        "item": "Taxa estatal del Modelo 790 Código 012",
+        "note": "La pagueu directament a l’Agència Tributària en un banc. L’import el fixa el Govern i varia segons el tipus de targeta."
+      },
+      {
+        "item": "Matrícula universitària, fiances i lloguer",
+        "note": "Mai no gestionem diners de clients per a tercers. Tots els pagaments van directament de vosaltres al propietari o a la institució."
+      },
+      {
+        "item": "Representació legal o recursos",
+        "note": "Queda fora del nostre abast. Si el vostre cas ho requereix, us ho direm i us recomanarem un advocat col·legiat."
+      },
+      {
+        "item": "Serveis de traducció o d’apostilla",
+        "note": "Podem identificar quins documents requereixen una traducció jurada i referir-vos a un traductor jurat; els seus honoraris s’apliquen per separat."
+      }
+    ]
+  }
+}

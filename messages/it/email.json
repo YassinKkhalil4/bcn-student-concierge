@@ -1,0 +1,10 @@
+{
+  "loginLink": {
+    "subject": "Il Suo link di accesso — BCN Student Concierge",
+    "introOne": "Ecco il Suo link di accesso alla Sua pratica BCN Student Concierge.",
+    "introMany": "Ecco i Suoi link di accesso: uno per ciascuna pratica associata a questo indirizzo e-mail.",
+    "file": "Pratica {ref}",
+    "button": "Apri la mia pratica",
+    "footer": "Ogni link è valido una sola volta e scade dopo 30 minuti. Se non ha richiesto di effettuare l’accesso, può ignorare questa e-mail: nessuno può utilizzarla senza avere accesso alla Sua casella di posta."
+  }
+}

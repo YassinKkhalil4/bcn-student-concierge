@@ -1,10 +1,13 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import createIntlMiddleware from "next-intl/middleware";
+import { localizedPath, routing, splitLocale } from "@/i18n/routing";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin/session";
 import { PORTAL_COOKIE, verifyPortalSession } from "@/lib/portal/session";
 
 /**
- * Middleware issues the per-request CSP nonce and is the first of two gates on
- * both the staff dashboard and the student portal.
+ * Middleware issues the per-request CSP nonce, routes public pages to their
+ * language (next-intl), and is the first of two gates on both the staff
+ * dashboard and the student portal.
  *
  * Rate limiting is NOT here: middleware runs in the Edge sandbox, which cannot
  * reach Postgres. It is enforced in each route handler (src/lib/rate-limit.ts),
@@ -21,6 +24,8 @@ function isAdminPath(pathname: string): boolean {
   );
 }
 const ADMIN_PUBLIC = new Set(["/admin/login", "/api/admin/login"]);
+
+const intl = createIntlMiddleware(routing);
 
 /** Student portal. Sign-in and link redemption are its only open entry points. */
 function isPortalPath(pathname: string): boolean {
@@ -74,7 +79,10 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   const csp = buildCsp(nonce, isDev);
   const { pathname } = request.nextUrl;
   const admin = isAdminPath(pathname);
-  const portal = isPortalPath(pathname);
+  // Public pages may carry a language prefix: "/fr/portal" is the portal too.
+  const { locale, path: unprefixed } = splitLocale(pathname);
+  const api = pathname.startsWith("/api/");
+  const portal = isPortalPath(api ? pathname : unprefixed);
 
   // ── Admin gate (first of two) ────────────────────────────────────────
   // Every admin handler verifies the session again itself; this gate is not
@@ -92,12 +100,13 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   }
 
   // ── Portal gate (first of two) ───────────────────────────────────────
-  if (portal && !PORTAL_PUBLIC.has(pathname)) {
+  if (portal && !PORTAL_PUBLIC.has(api ? pathname : unprefixed)) {
     const caseId = await verifyPortalSession(request.cookies.get(PORTAL_COOKIE)?.value);
     if (!caseId) {
-      const denied = pathname.startsWith("/api/")
+      // …to the sign-in page in the language they were browsing in.
+      const denied = api
         ? NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-        : NextResponse.redirect(new URL("/portal/login", request.url));
+        : NextResponse.redirect(new URL(localizedPath(locale, "/portal/login"), request.url));
       denied.headers.set("Content-Security-Policy", csp);
       markPrivate(denied);
       return denied;
@@ -110,7 +119,14 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   requestHeaders.set("x-nonce", nonce);
   requestHeaders.set("Content-Security-Policy", csp);
 
-  const response = NextResponse.next({ request: { headers: requestHeaders } });
+  // Public pages go through next-intl, which rewrites "/pricing" to the "en"
+  // route and handles "/fr/…". It copies the headers of the request it is
+  // given into its rewrite, so it receives ours — nonce and CSP included.
+  // Staff pages and the API have no language and skip it.
+  const response =
+    admin || api
+      ? NextResponse.next({ request: { headers: requestHeaders } })
+      : intl(new NextRequest(request, { headers: requestHeaders }));
   response.headers.set("Content-Security-Policy", csp);
   if (admin || portal) markPrivate(response);
   return response;

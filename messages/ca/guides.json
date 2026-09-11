@@ -1,0 +1,71 @@
+{
+  "atm": {
+    "summary": "Com pagar en un caixer automàtic de CaixaBank sense una targeta espanyola",
+    "steps": [
+      {
+        "title": "Aneu a un caixer automàtic de CaixaBank",
+        "detail": "No cal tenir compte a CaixaBank ni cap targeta espanyola. Porteu el Modelo 790 imprès i l’import exacte en efectiu."
+      },
+      {
+        "title": "Seleccioneu «Pagar impuestos y tasas»",
+        "detail": "Seleccioneu aquesta opció a la pantalla d’inici, sense introduir cap targeta."
+      },
+      {
+        "title": "Escanegeu el codi de barres de 13 xifres",
+        "detail": "Apropeu el codi de barres del vostre formulari imprès al lector del caixer automàtic. L’import apareixerà a la pantalla: comproveu que hi aparegui {fee}."
+      },
+      {
+        "title": "Introduïu l’import exacte en efectiu",
+        "detail": "Pagueu exactament {fee}."
+      },
+      {
+        "title": "Grapeu el comprovant a la pàgina 3",
+        "detail": "Recolliu el comprovant imprès: és el vostre justificant de pagament. Grapeu-lo a la pàgina 3 del formulari i porteu-ho tot a la cita."
+      }
+    ],
+    "fallback": "Si el caixer no llegeix el codi de barres, pagueu a la finestreta de qualsevol oficina de CaixaBank, BBVA o Santander en horari d’obertura. Algunes oficines només accepten pagaments d’impostos al matí."
+  },
+  "sheet": {
+    "title": "El dia de la vostra cita",
+    "purposeTie": "Presa d’empremtes per a la vostra TIE (EX-17)",
+    "purposeEu": "El vostre certificat de registre de la UE (EX-18)",
+    "when": "QUAN",
+    "where": "ON",
+    "arrive": "Arribeu-hi 15 minuts abans.",
+    "metro": "METRO MÉS PROPER",
+    "bring": "Què heu de portar",
+    "phrases": "Digueu-ho en espanyol",
+    "after": "Després de la cita",
+    "checklistTie": [
+      "Passaport (original) i una fotocòpia de la pàgina de la foto i del visat",
+      "El vostre {form}, imprès i signat",
+      "Una foto recent en color, de 32 × 26 mm, amb fons blanc (porteu-ne una de recanvi)",
+      "Modelo 790 Código 012 pagat: l’exemplar segellat o el comprovant del caixer grapat al formulari",
+      "La confirmació de la cita impresa (justificante de cita)"
+    ],
+    "checklistEu": [
+      "Passaport o document nacional d’identitat (original) i una fotocòpia",
+      "El vostre {form}, imprès i signat",
+      "Modelo 790 Código 012 pagat: l’exemplar segellat o el comprovant del caixer grapat al formulari",
+      "La confirmació de la cita impresa (justificante de cita)",
+      "Els documents del vostre «Ready File»: certificat de matrícula, assegurança mèdica i declaració de mitjans econòmics"
+    ],
+    "afterTie": [
+      "Us donaran un resguard («resguardo»). Guardeu-lo: el necessitareu per recollir la targeta.",
+      "La vostra targeta es recollirà més tard, en persona. Us direm quan i on."
+    ],
+    "afterEu": [
+      "Normalment el certificat es lliura a la mateixa cita. Comproveu-ne totes les dades abans de marxar.",
+      "Guardeu-lo juntament amb el passaport: demostra el vostre registre com a ciutadà de la UE."
+    ],
+    "meaning": {
+      "greetTie": "Bon dia, tinc una cita per a la presa d’empremtes dactilars.",
+      "greetEu": "Bon dia, tinc una cita per al certificat de registre de ciutadà de la Unió.",
+      "handOver": "Aquí teniu el meu passaport i el rebut del pagament.",
+      "collectCard": "Quan puc recollir la targeta?",
+      "certificateToday": "Rebré el certificat avui?",
+      "repeat": "Disculpi, podria repetir-ho més lentament, si us plau?"
+    },
+    "footer": "{name} · {ref} · BCN Student Concierge: orientació pràctica, no assessorament jurídic. Els requisits els fixa la Policía Nacional i poden canviar."
+  }
+}

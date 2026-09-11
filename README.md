@@ -49,16 +49,19 @@ hardening and backups: [docs/DEPLOY.md](docs/DEPLOY.md).
 | `npm run forms:grid -- <pdf>` | Render a measurement grid for calibration |
 | `npm run forms:proof` | Box every mapped coordinate on the template |
 | `npm run forms:zoom -- <pdf> <x> <y> <w> <h> [scale]` | Magnify a region |
+| `npm run i18n:translate` | Translate new or changed English strings with DeepL (needs `DEEPL_API_KEY` in `.env.local`) |
+| `npm run i18n:check` | Validate every catalogue without calling DeepL |
 
 ## Architecture
 
 ```
 src/
 ├─ app/
-│  ├─ (site)/                   Public site (route group — shares header/footer)
+│  ├─ [locale]/                 Public site in six languages (English unprefixed)
 │  │  ├─ page.tsx                 Landing — value prop, problem/solution, pricing, FAQ
 │  │  ├─ pricing/                 Three tiers, Modelo 790 guidance, exclusions
 │  │  ├─ intake/                  Secure multi-step portal (noindex)
+│  │  ├─ portal/                  Student file: sign-in, uploads, Padrón, fees
 │  │  └─ terms|privacy|legal/     Legal pages
 │  ├─ admin/                    Staff dashboard (authenticated, noindex)
 │  │  ├─ page.tsx                 Case queues + search
@@ -70,6 +73,7 @@ src/
 │     ├─ checkout/              Stripe session (server-side pricing)
 │     ├─ webhooks/stripe/       Signature-verified, idempotent
 │     └─ admin/                 Login/logout, document + form downloads
+├─ i18n/                       Routing, catalogue loading, translation safety rules
 ├─ lib/
 │  ├─ schema.ts                 Zod contract — shared by client, API and PDF engine
 │  ├─ pricing.ts                Single source of truth for prices and IVA
@@ -91,6 +95,7 @@ src/
 │     └─ stripe.ts                Checkout + webhook verification
 ├─ middleware.ts                Nonce CSP, admin gate
 └─ instrumentation.ts           Starts background jobs once per server process
+messages/<locale>/*.json        UI text; English is the source, the rest generated
 drizzle/                        SQL migrations (generated, committed)
 deploy/                         Caddyfile, backup script
 Dockerfile, docker-compose.yml  VPS deployment
@@ -115,6 +120,19 @@ enforced in the schema and tested from both directions.
 
 **Prices come from the server-side tier table,** keyed by the tier stored on the
 case — never from the request body.
+
+**Six languages, and only six:** English (main, unprefixed URLs), Spanish,
+Catalan, French, Italian and German (`/es`, `/ca`, `/fr`, `/it`, `/de`). The
+staff dashboard is English only. Catalogues are translated by
+`scripts/i18n-translate.mts` with DeepL — formal register, a glossary that
+keeps official names verbatim (Padrón, NIE, TIE, Modelo 790, EX-17, EX-18…),
+Catalan pivoted from the Spanish — then corrected by hand in
+`scripts/i18n-overrides.json`, which always wins. `tests/i18n.test.ts` fails the
+build on a missing key, a lost placeholder or tag, a mistranslated official
+term, or a message that no longer parses. Things students send to Spanish
+institutions (the residence and university emails, the phrases on the
+appointment sheet) stay in Spanish on purpose. The site never calls DeepL at
+runtime, and DeepL only ever sees site copy — never a student's data.
 
 ## Deliberate deviations from the brief
 
@@ -149,7 +167,7 @@ calibration workflow and the mandatory print sign-off before live use.
 
 ## What must be done before launch
 
-`docs/SECURITY.md` §9 has the full checklist. The load-bearing items:
+`docs/SECURITY.md` §12 has the full checklist. The load-bearing items:
 
 - TLS 1.2 verified **refused** at `bcnstudent.com` (Caddy enforces 1.3)
 - `.env` is `chmod 600` and **never** in the same backup as the data
@@ -158,7 +176,11 @@ calibration workflow and the mandatory print sign-off before live use.
 - Admin credentials set (`npm run admin:hash-password`, `ADMIN_SESSION_SECRET`)
 - Stripe webhook registered at `https://bcnstudent.com/api/webhooks/stripe`
 - EX-17 and EX-18 coordinates signed off against a physical printout (`docs/FORMS.md`)
-- Legal pages reviewed by a Spanish data-protection lawyer
+- Legal pages reviewed by a Spanish data-protection lawyer — the English, and
+  the five translations (each shows a notice that the English prevails)
+- A native-speaker read of each language, above all Catalan: DeepL's Catalan
+  needed rewriting in most places, and `scripts/i18n-overrides.json` holds that
+  hand translation
 
 ## Legal positioning
 

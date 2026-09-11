@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "file": "Ihre Akte",
+    "login": "Bei Ihrer Akte anmelden",
+    "verify": "Weiter zu Ihrer Akte"
+  },
+  "login": {
+    "eyebrow": "Ihre Akte",
+    "title": "Bei Ihrer Akte anmelden",
+    "intro": "Geben Sie die E-Mail-Adresse ein, die Sie im Aufnahmeformular angegeben haben. Wir senden Ihnen einen Einmal-Link – ein Passwort ist nicht nötig.",
+    "sent": "Falls es unter dieser E-Mail-Adresse eine Akte gibt, ist ein Anmeldelink unterwegs. Er funktioniert einmal und läuft nach 30 Minuten ab – sehen Sie in Ihrem Spam-Ordner nach, falls er nach einigen Minuten nicht angekommen ist.",
+    "errors": {
+      "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "link": "Dieser Anmeldelink ist abgelaufen oder wurde bereits verwendet. Fordern Sie unten einen neuen an.",
+      "locked": "Zu viele Versuche. Bitte warten Sie 15 Minuten und versuchen Sie es erneut."
+    },
+    "emailLabel": "E-Mail-Adresse",
+    "submit": "Anmeldelink per E-Mail senden"
+  },
+  "verify": {
+    "title": "Weiter zu Ihrer Akte",
+    "once": "Dieser Link funktioniert nur einmal.",
+    "open": "Meine Akte öffnen",
+    "expiredTitle": "Dieser Link ist abgelaufen",
+    "expiredBody": "Anmeldelinks sind 30 Minuten lang gültig und können nur einmal verwendet werden.",
+    "newLink": "Neuen Link senden"
+  },
+  "file": {
+    "notFoundTitle": "Wir konnten Ihre Akte nicht finden",
+    "notFoundBody": "Bitte melden Sie sich ab und melden Sie sich erneut mit der E-Mail-Adresse an, die Sie im Formular angegeben haben.",
+    "closedTitle": "Diese Akte ist geschlossen",
+    "closedBody": "Ihr Service ist abgeschlossen, und wie versprochen wurden Ihre personenbezogenen Daten und Dokumente dauerhaft gelöscht. Ihre Rechnungsunterlagen werden gemäß den spanischen Steuergesetzen aufbewahrt.",
+    "eyebrow": "Ihre Akte",
+    "greeting": "{name}, hier ist Ihre Akte",
+    "reference": "Referenz",
+    "signOut": "Abmelden",
+    "submitted": "Vielen Dank – Ihre Unterlagen liegen uns vor. Wir prüfen sie innerhalb eines Werktags.",
+    "checkoutCancelled": "Die Zahlung wurde abgebrochen, es wurde nichts berechnet. Sie können jederzeit bezahlen.",
+    "paymentTitle": "Ausstehende Zahlung",
+    "paymentBody": "Wir beginnen mit der Bearbeitung, sobald Ihre Zahlung bestätigt ist.",
+    "paymentTotal": "Gesamtbetrag {total}, inkl. IVA.",
+    "pay": "{total} bezahlen",
+    "payNow": "Jetzt bezahlen",
+    "passport": "1. Reisepass",
+    "enrolment": "2. Immatrikulation an der Universität",
+    "padron": "3. Adressnachweis für den Padrón",
+    "padronIntro": "Um sich beim Padrón – dem Einwohnermelderegister der Stadt – anzumelden, müssen Sie nachweisen, dass Sie unter der Adresse {address} wohnen. Was als Nachweis gilt, hängt davon ab, wie Sie wohnen.",
+    "tasaTitle": "4. Staatliche Gebühr bezahlen (Modelo 790 · 012)",
+    "tasaIntro": "Die Polizei erhebt diese Gebühr separat von unserer Dienstleistung. Sie wird in bar bei einer spanischen Bank bezahlt, wobei ein Formular verwendet wird, das Sie auf der Website der Polizei erstellen.",
+    "appointments": "Ihre Termine",
+    "police": "Polizei",
+    "padronAppointment": "Padrón",
+    "metro": "Metro: {metro}",
+    "sheet": "Merkblatt für den Termintag",
+    "myForm": "Mein vorausgefülltes {form}",
+    "invoices": "Rechnungen",
+    "reviewTitle": "Bereit zur Prüfung?",
+    "reviewDone": "Eingereicht am {date}. Sie können weiterhin ein Ersatzdokument hochladen, falls wir Sie darum bitten.",
+    "reviewPrompt": "Wenn alles hochgeladen ist, teilen Sie uns dies bitte mit, dann prüfen wir Ihre Unterlagen.",
+    "reviewSubmit": "Zur Überprüfung einreichen"
+  },
+  "invoices": {
+    "empty": "Ihre Rechnung wird hier angezeigt, sobald die Zahlung bestätigt wurde.",
+    "refund": "Rückerstattung",
+    "pdf": "PDF"
+  },
+  "pay": {
+    "opening": "Sicherer Bezahlvorgang wird geöffnet…",
+    "failed": "Der Bezahlvorgang konnte nicht geöffnet werden. Bitte versuchen Sie es erneut.",
+    "network": "Netzwerkfehler. Bitte versuchen Sie es erneut."
+  },
+  "padron": {
+    "question": "Wo wohnen Sie?",
+    "paths": {
+      "residence": {
+        "title": "Ein Studentenwohnheim",
+        "detail": "Studentenwohnheime oder eine Wohnanlage mit Rezeption"
+      },
+      "own-lease": {
+        "title": "Eine Wohnung, die ich miete",
+        "detail": "Der Mietvertrag läuft auf meinen Namen"
+      },
+      "not-in-name": {
+        "title": "Ein Zimmer oder eine Untermiete",
+        "detail": "Der Mietvertrag läuft auf den Namen einer anderen Person, oder ich wohne bei Familie oder Freunden"
+      }
+    },
+    "residence": {
+      "intro": "Wohnheime melden ihre Studierenden mit einem eigenen städtischen Formular an, der <em>Autorització d’empadronament de domicili col·lectiu</em>. Das Wohnheim füllt es aus, unterschreibt es und <strong>stempelt es ab</strong> – ohne Stempel wird es nicht angenommen. Senden Sie diese Nachricht an die Rezeption:",
+      "subject": "Betreff:",
+      "openForm": "Offizielles Formular öffnen ↗",
+      "uploadPrompt": "Sobald das Wohnheim es Ihnen zurückgibt, laden Sie es hier hoch:",
+      "spanishNote": "Die Nachricht ist bewusst auf Spanisch: Sie richtet sich an das Personal des Wohnheims."
+    },
+    "lease": {
+      "intro": "Die Stadt akzeptiert Ihren Mietvertrag nur, wenn alle drei Bedingungen erfüllt sind. Überprüfen Sie jede einzelne:",
+      "inMyName": "Mein Name ist im Mietvertrag als Mieter aufgeführt.",
+      "longEnough": "Er läuft länger als drei Monate oder sieht ausdrücklich eine Verlängerung vor.",
+      "language": "Er ist auf Spanisch oder Katalanisch verfasst.",
+      "notMine": "<strong>Läuft der Mietvertrag nicht auf Ihren Namen?</strong> Dann muss die im Mietvertrag genannte Person Sie autorisieren.",
+      "switch": "Zu dieser Option wechseln",
+      "tooShort": "<strong>Läuft er drei Monate oder weniger?</strong> Bitten Sie Ihren Vermieter um eine schriftliche Verlängerung – oder darum, Sie stattdessen mit dem Formular der Stadt zu autorisieren.",
+      "otherLanguage": "<strong>In einer anderen Sprache?</strong> Die Stadt benötigt eine beglaubigte Übersetzung (eine <em>„traducción jurada“</em> oder eine Übersetzung Ihres Konsulats). Eine spanische Version von Ihrem Vermieter ist oft schneller – fragen Sie zunächst nach.",
+      "upload": "Laden Sie den vollständig unterzeichneten Mietvertrag sowie eine aktuelle Strom-, Gas- oder Wasserrechnung für die Wohnung hoch. Die Stadt verlangt die Rechnung, wenn der Mietvertrag nur als Kopie vorliegt oder abgelaufen ist; wir bitten Sie in jedem Fall darum, damit es zu keinen Verzögerungen kommt."
+    },
+    "sublet": {
+      "intro": "Wenn die Wohnung nicht auf Ihren Namen läuft, autorisiert Sie die Person, auf deren Namen sie läuft, mit dem offiziellen Formular der Stadt Barcelona, der <em>Autorització per inscriure-us al domicili</em>.",
+      "signTitle": "2. Lassen Sie es unterschreiben",
+      "signByHand": "Drucken Sie das Dokument aus. Die Person, die Sie autorisiert, unterschreibt es <strong>eigenhändig</strong>; die Unterschrift muss mit dem Ausweis übereinstimmen.",
+      "signDate": "Diese Person schreibt das Datum neben die Unterschrift. Die Genehmigung gilt ab diesem Datum <strong>drei Monate</strong>.",
+      "uploadTitle": "3. Alle drei Dokumente hochladen",
+      "uploadBody": "Die Stadt akzeptiert das Formular nicht allein. Sie verlangt den Ausweis des Unterzeichners sowie einen Nachweis, dass er über die Wohnung verfügen darf: den Mietvertrag auf seinen Namen oder, falls er Eigentümer ist, die Eigentumsurkunde."
+    }
+  },
+  "authorization": {
+    "title": "1. Autorisierung erstellen",
+    "intro": "Unterschreiben muss, auf wen die Wohnung läuft: der Eigentümer oder der Hauptmieter, der im Mietvertrag steht. Wir füllen das offizielle Formular der Stadt Barcelona mit Ihren und seinen Angaben aus. Was Sie hier eingeben, speichern wir nicht.",
+    "fields": {
+      "signerName": {
+        "label": "Vollständiger Name des Unterzeichners",
+        "hint": "Genau wie auf dem Ausweis des Unterzeichners."
+      },
+      "signerId": {
+        "label": "DNI-, NIE- oder Reisepassnummer des Unterzeichners"
+      },
+      "ownerName": {
+        "label": "Name des Eigentümers (Person oder Unternehmen)"
+      },
+      "ownerTaxId": {
+        "label": "NIF des Eigentümers"
+      },
+      "companyName": {
+        "label": "Firmenname"
+      },
+      "companyTaxId": {
+        "label": "NIF des Unternehmens"
+      },
+      "cadastralRef": {
+        "label": "Katasterreferenz",
+        "hint": "20 Buchstaben und Ziffern, zu finden auf dem Grundsteuerbescheid (IBI). Bitte leer lassen, falls unbekannt."
+      }
+    },
+    "relationLegend": "Der Unterzeichner ist…",
+    "relations": {
+      "owner": "Der Eigentümer der Wohnung",
+      "tenant": "Der Hauptmieter (im Mietvertrag)",
+      "usufruct": "Der Nießbraucher"
+    },
+    "tenantNote": "Wenn der Hauptmieter unterschreibt, werden im Formular auch die Angaben des Eigentümers abgefragt. Diese finden Sie im Mietvertrag.",
+    "forCompany": "Der Unterzeichner handelt im Namen eines Unternehmens (zum Beispiel eines Coliving-Anbieters)",
+    "cadastralToggle": "Optional: Katasterreferenz",
+    "preparing": "Das Formular wird vorbereitet…",
+    "download": "Vorausgefülltes Formular herunterladen",
+    "done": "✓ Heruntergeladen. Drucken Sie das Dokument nun aus und befolgen Sie Schritt 2.",
+    "checkFields": "Bitte überprüfen Sie die hervorgehobenen Felder.",
+    "notBarcelona": "Dies ist das Formular der Stadt Barcelona, Ihre Adresse befindet sich jedoch in {city}. Jede Gemeinde hat ihr eigenes Formular für die Padrón-Anmeldung – kontaktieren Sie uns, und wir besorgen Ihnen das richtige.",
+    "unprintable": "Diese Zeichen können nicht auf das Formular gedruckt werden: {chars}. Bitte schreiben Sie Namen in lateinischen Buchstaben, genau wie im Ausweisdokument.",
+    "unavailable": "Dieses Formular ist vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns.",
+    "failed": "Das Formular konnte nicht generiert werden. Bitte versuchen Sie es erneut.",
+    "network": "Netzwerkfehler. Bitte versuchen Sie es erneut."
+  },
+  "enrolment": {
+    "howTo": "Wie bekomme ich das?",
+    "intro": "Ihre Zulassungsbescheinigung reicht nicht aus. Bitten Sie das Zulassungs- oder Studierendensekretariat Ihrer Universität um ein <em>Certificado de matrícula</em>, abgestempelt und unterschrieben. Diese Nachricht fragt genau nach dem, was die Ausländerbehörde prüft:",
+    "spanishNote": "Die Nachricht ist bewusst auf Spanisch: Sie richtet sich an das zuständige Büro Ihrer Universität in Barcelona.",
+    "university": "Ihre Universität",
+    "programme": "Ihr Studiengang",
+    "programmePlaceholder": "z. B. BBA in International Business",
+    "subject": "Betreff:",
+    "openEmail": "In meiner E-Mail-App öffnen"
+  },
+  "tasa": {
+    "missingNie": "Für diesen Schritt benötigen Sie Ihre NIE, über die wir jedoch noch nicht verfügen. Wir werden Sie informieren, sobald Sie diesen Schritt durchführen können – derzeit besteht noch kein Handlungsbedarf.",
+    "open": "Öffnen Sie das offizielle Formular der Policía Nacional:",
+    "fill": "Füllen Sie jedes Feld genau wie unten angegeben aus (lassen Sie alle anderen Felder leer).",
+    "tick": "Kreuzen Sie nur <em>„{tramite}“</em> an – es sollte <strong>{fee}</strong> angezeigt werden. Sollte das Portal einen anderen Betrag anzeigen, ist die Angabe des Portals korrekt: Zahlen Sie den dort angegebenen Betrag.",
+    "payment": "Wählen Sie unter <em>Forma de pago</em> die Option <strong>{method}</strong>.",
+    "print": "Laden Sie das Formular herunter und drucken Sie es im Maßstab 100 % aus – wählen Sie niemals „An Seite anpassen“, da der Barcode sonst nicht gescannt werden kann.",
+    "caption": "Was Sie auf dem Polizeiportal eingeben müssen",
+    "labelsNote": "Die Bezeichnungen der Felder sind auf Spanisch, da dies der Darstellung auf der Website der Polizei entspricht."
+  }
+}
