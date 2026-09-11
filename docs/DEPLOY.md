@@ -146,7 +146,22 @@ Copy the signing secret into `STRIPE_WEBHOOK_SECRET`, then
 `docker compose up -d` to apply it. For Apple Pay, verify `bcnstudent.com`
 under Settings → Payment methods → Apple Pay.
 
-## 7. Updating
+## 7. Telegram alerts (optional)
+
+1. In Telegram, message **@BotFather**, send `/newbot`, and follow the prompts.
+   It replies with the bot token (`123456789:AA…`) → `TELEGRAM_BOT_TOKEN`.
+2. Open a chat with your new bot and send it any message.
+3. Visit `https://api.telegram.org/bot<TOKEN>/getUpdates` in a browser; the
+   number under `"chat":{"id":…}` → `TELEGRAM_CHAT_ID`.
+4. `docker compose up -d`. You get one message per payment and one per
+   "Submit for review" — case references and amounts only, never names, since
+   Telegram is outside the EU and alerts appear on your lock screen.
+
+Alerts are best-effort: if Telegram is down, nothing fails and the case is in
+the dashboard as usual. Setting only one of the two variables, or a malformed
+token, stops the server at startup rather than failing silently.
+
+## 8. Updating
 
 ```bash
 cd /srv/bcnstudent
@@ -156,7 +171,7 @@ docker compose up -d --build
 
 Migrations apply automatically at startup, under an advisory lock.
 
-## 8. Backups
+## 9. Backups
 
 `deploy/backup.sh` dumps Postgres and archives the documents volume, keeping 30
 days (matching the retention promised in the privacy notice):
@@ -186,7 +201,7 @@ docker compose up -d
 The restored data is readable only with the **same** `DOCUMENT_MASTER_KEY`.
 Rehearse this once before launch.
 
-## 9. Day to day
+## 10. Day to day
 
 | Task | Command |
 |---|---|

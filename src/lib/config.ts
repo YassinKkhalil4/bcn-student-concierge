@@ -1,4 +1,5 @@
 import { secretFromEnv } from "@/lib/auth/hmac";
+import { TELEGRAM_TOKEN_FORMAT } from "@/lib/notify/telegram";
 
 /**
  * Production configuration check, run once at server start
@@ -33,6 +34,16 @@ export function assertProductionConfig(env: NodeJS.ProcessEnv = process.env): vo
   need("INVOICE_ISSUER_TAX_ID", "NIF on every factura");
   need("INVOICE_ISSUER_ADDRESS", "fiscal address on every factura");
 
+  // Telegram alerts are optional — but half-configured is always a mistake,
+  // and would fail silently: you would simply never be alerted.
+  const tgToken = env.TELEGRAM_BOT_TOKEN?.trim();
+  const tgChat = env.TELEGRAM_CHAT_ID?.trim();
+  if (Boolean(tgToken) !== Boolean(tgChat)) {
+    problems.push("TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID — set both, or neither");
+  } else if (tgToken && !TELEGRAM_TOKEN_FORMAT.test(tgToken)) {
+    problems.push("TELEGRAM_BOT_TOKEN — not a bot token (expected 123456789:AA… from @BotFather)");
+  }
+
   if (problems.length) {
     throw new Error(
       `Refusing to start: production configuration is incomplete.\n  - ${problems.join("\n  - ")}\n` +
@@ -41,6 +52,7 @@ export function assertProductionConfig(env: NodeJS.ProcessEnv = process.env): vo
   }
 
   // Optional, but worth saying out loud.
+  if (!tgToken) console.warn("[config] Telegram alerts are off: TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not set");
   if (!env.ADMIN_PASSWORD_HASH || !secretFromEnv("ADMIN_SESSION_SECRET")) {
     console.warn("[config] staff dashboard is locked: ADMIN_PASSWORD_HASH / ADMIN_SESSION_SECRET not set");
   }

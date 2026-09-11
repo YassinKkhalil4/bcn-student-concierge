@@ -67,3 +67,10 @@ export async function markDocumentsSubmitted(caseId: string): Promise<boolean> {
     .returning({ id: cases.id });
   return updated.length === 1;
 }
+
+/** Just the human reference — for notifications, which must carry nothing else. */
+export async function getCaseRef(caseId: string): Promise<string | null> {
+  const db = await getDb();
+  const [row] = await db.select({ ref: cases.ref }).from(cases).where(eq(cases.id, caseId)).limit(1);
+  return row?.ref ?? null;
+}

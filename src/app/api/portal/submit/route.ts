@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { portalCaseId } from "@/lib/portal/guard";
-import { markDocumentsSubmitted } from "@/lib/server/portal";
+import { getCaseRef, markDocumentsSubmitted } from "@/lib/server/portal";
 import { notifyDocumentsSubmitted } from "@/lib/notify/events";
 
 export const runtime = "nodejs";
@@ -16,7 +16,10 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!caseId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   // Notify staff only on the first submission, not on every click.
-  if (await markDocumentsSubmitted(caseId)) await notifyDocumentsSubmitted(caseId);
+  if (await markDocumentsSubmitted(caseId)) {
+    const ref = await getCaseRef(caseId);
+    if (ref) await notifyDocumentsSubmitted(ref);
+  }
   return NextResponse.redirect(new URL("/portal?submitted=1", process.env.PUBLIC_ORIGIN ?? request.url), {
     status: 303,
   });

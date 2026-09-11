@@ -78,7 +78,9 @@ describe("authorisation input", () => {
 
 const haveTemplate = existsSync(path.join(process.cwd(), "templates", "forms", AUTHORIZATION_TEMPLATE));
 
-describe.skipIf(!haveTemplate)("filling Barcelona's official authorisation", () => {
+// Each fill embeds the whole Noto Sans font; under a parallel full-suite run a
+// test doing two fills can pass 5 s. The limit is about load, not correctness.
+describe.skipIf(!haveTemplate)("filling Barcelona's official authorisation", { timeout: 20_000 }, () => {
   async function fieldsOf(input: object) {
     const bytes = await fillPadronAuthorization(intake, authorizationInputSchema.parse(input), { flatten: false });
     const form = (await PDFDocument.load(bytes)).getForm();

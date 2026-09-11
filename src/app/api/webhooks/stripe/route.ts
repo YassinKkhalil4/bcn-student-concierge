@@ -85,7 +85,13 @@ export async function POST(request: Request): Promise<NextResponse> {
           issuedAt: new Date(event.created * 1000),
         });
         // Created exactly once per payment, so staff are notified exactly once.
-        if (result.created) await notifyPaymentReceived(caseId);
+        if (result.created) {
+          await notifyPaymentReceived({
+            ref: record.ref,
+            totalCents: session.amount_total,
+            packageName: tier?.name.replace(/^The /, "") ?? record.tierId,
+          });
+        }
         break;
       }
 
