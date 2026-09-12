@@ -11,9 +11,10 @@ export const dynamic = "force-dynamic";
  * The Markdown view of a public page, reached two ways (src/middleware.ts):
  * `Accept: text/markdown` on the page itself, or its `.md` URL.
  *
- * It renders ONLY the pages on the public list. The page is taken from the
- * query, so this handler treats it as untrusted input and never falls through
- * to a path a student's data lives behind.
+ * The page and language arrive as request headers set by that rewrite — a
+ * rewrite's query string does not reach the handler. They are still treated as
+ * untrusted input: only pages on the public list are rendered, so this can
+ * never fall through to a path a student's data lives behind.
  */
 export async function GET(): Promise<Response> {
   const head = await headers();
