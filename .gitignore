@@ -13,7 +13,10 @@ next-env.d.ts
 .env.*.backup
 
 # Encrypted client data. Even encrypted, this never belongs in version control.
+# .data/ is the local development store; /data/ is the production bind mount
+# in docker-compose.yml.
 .data/
+/data/
 
 # Official government form templates are not redistributable; download them
 # per docs/FORMS.md. Calibration artifacts (-GRID, -PROOF, -ZOOM, -SAMPLE) are
