@@ -5,7 +5,7 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
+RUN npm install --no-audit --no-fund
 
 # ── 2. Build ────────────────────────────────────────────────────────────────
 FROM node:22-alpine AS build
