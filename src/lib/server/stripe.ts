@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { getTier, priceWithIva, type Tier } from "@/lib/pricing";
+import { getTier, tierPrice, type ServiceRoute, type Tier } from "@/lib/pricing";
 import type { BillingDetails } from "./invoices";
 import type { Locale } from "@/lib/db/schema";
 import { localizedPath } from "@/i18n/routing";
@@ -31,8 +31,11 @@ export function stripe(): Stripe {
  * reverse-charge for EU-resident payers. Until then, a flat 21% is correct for
  * a service supplied and consumed in Spain.
  */
-export function buildLineItems(tier: Tier): Stripe.Checkout.SessionCreateParams.LineItem[] {
-  const { baseCents, ivaCents } = priceWithIva(tier.basePriceCents);
+export function buildLineItems(
+  tier: Tier,
+  route: ServiceRoute,
+): Stripe.Checkout.SessionCreateParams.LineItem[] {
+  const { baseCents, ivaCents } = tierPrice(tier, route);
   return [
     {
       quantity: 1,
@@ -61,6 +64,11 @@ export function buildLineItems(tier: Tier): Stripe.Checkout.SessionCreateParams.
 
 export interface CheckoutParams {
   tierId: string;
+  /**
+   * EU/EEA/Swiss or not. Derived by the caller from the case's stored formId,
+   * never sent by the browser: the route decides the price.
+   */
+  route: ServiceRoute;
   caseId: string;
   customerEmail: string;
   origin: string;
@@ -90,13 +98,13 @@ export async function createCheckoutSession(
   return stripe().checkout.sessions.create({
     mode: "payment",
     payment_method_types: ["card"],
-    line_items: buildLineItems(tier),
+    line_items: buildLineItems(tier, params.route),
     customer_email: params.customerEmail,
     // The case id is the join key between Stripe and our records. It is an
     // opaque token, never an email or a name — Stripe metadata is visible to
     // everyone with dashboard access and should carry no personal data.
     client_reference_id: params.caseId,
-    metadata: { caseId: params.caseId, tierId: tier.id },
+    metadata: { caseId: params.caseId, tierId: tier.id, route: params.route },
     locale: STRIPE_LOCALES[params.locale],
     success_url: `${params.origin}${localizedPath(params.locale, "/intake/complete")}?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${params.origin}${localizedPath(params.locale, "/portal")}?checkout=cancelled`,

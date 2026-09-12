@@ -1,6 +1,6 @@
 import { translatorFor, type ServerTranslator } from "@/i18n/messages";
 import { localizedPath } from "@/i18n/routing";
-import { IVA_RATE, TIERS, formatEur, priceWithIva } from "@/lib/pricing";
+import { IVA_RATE, TIERS, formatEur, tierPrice, SERVICE_ROUTES } from "@/lib/pricing";
 import { siteOrigin, type PublicPage } from "./pages";
 
 /**
@@ -48,16 +48,19 @@ const lines = (...parts: Section[]): string =>
  * it is filled from the raw message: t() refuses a message with tags.
  */
 function priceList(template: string, tp: ServerTranslator, locale: string): string[] {
-  return TIERS.map((tier) => {
-    const p = priceWithIva(tier.basePriceCents);
-    const values: Record<string, string> = {
-      name: tp(`tiers.${tier.id}.name`),
-      base: formatEur(p.baseCents),
-      iva: formatEur(p.ivaCents),
-      total: formatEur(p.totalCents),
-    };
-    return `- ${inline(template.replace(/\{(\w+)\}/g, (m, key: string) => values[key] ?? m), locale)}`;
-  });
+  return TIERS.flatMap((tier) =>
+    SERVICE_ROUTES.map((route) => {
+      const p = tierPrice(tier, route);
+      const values: Record<string, string> = {
+        name: tp(`tiers.${tier.id}.name`),
+        route: tp(route === "eu" ? "card.routeEu" : "card.routeNonEu"),
+        base: formatEur(p.baseCents),
+        iva: formatEur(p.ivaCents),
+        total: formatEur(p.totalCents),
+      };
+      return `- ${inline(template.replace(/\{(\w+)\}/g, (m, key: string) => values[key] ?? m), locale)}`;
+    }),
+  );
 }
 
 async function homeDoc(locale: string): Promise<string> {
@@ -77,14 +80,32 @@ async function homeDoc(locale: string): Promise<string> {
     steps.map((s, i) => `${i + 1}. **${s.title}** — ${s.body}`).join("\n"),
     `## ${t("pricing.title")}`,
     TIERS.map((tier) => {
-      const p = priceWithIva(tier.basePriceCents);
-      return `- **${tp(`tiers.${tier.id}.name`)}** — ${formatEur(p.baseCents)} + ${formatEur(
-        p.ivaCents,
-      )} IVA = **${formatEur(p.totalCents)}**. ${tp(`tiers.${tier.id}.tagline`)}`;
+      const prices = SERVICE_ROUTES.map(
+        (route) => `${tp(route === "eu" ? "card.routeEu" : "card.routeNonEu")} ${formatEur(tierPrice(tier, route).totalCents)}`,
+      ).join(" · ");
+      return `- **${tp(`tiers.${tier.id}.name`)}** — ${prices}. ${tp(`tiers.${tier.id}.tagline`)}`;
     }),
     t("pricing.body"),
     `## ${t("faq.title")}`,
     faq.flatMap((item) => [`### ${item.q}`, item.a]),
+  );
+}
+
+/**
+ * Free triage. An agent answering "I arrived three weeks ago, what now?" should
+ * be able to quote this page: it is the one thing on the site that costs the
+ * reader nothing, and it is where a student in trouble should land.
+ */
+async function triageDoc(locale: string): Promise<string> {
+  const t = await translatorFor(locale, "triage");
+  const steps = t.raw("page.steps") as string[];
+
+  return lines(
+    `# ${t("page.title")}`,
+    t("page.intro"),
+    `## ${t("page.whatYouGet")}`,
+    steps.map((s) => `- ${s}`).join("\n"),
+    t("page.declineNote"),
   );
 }
 
@@ -96,12 +117,19 @@ async function pricingDoc(locale: string): Promise<string> {
     `# ${t("page.title")}`,
     t("page.intro", { rate: String(Math.round(IVA_RATE * 100)) }),
     TIERS.flatMap((tier) => {
-      const p = priceWithIva(tier.basePriceCents);
       const features = t.raw(`tiers.${tier.id}.features`) as string[];
       return [
-        `## ${t(`tiers.${tier.id}.name`)} — ${formatEur(p.totalCents)}`,
+        `## ${t(`tiers.${tier.id}.name`)}`,
         t(`tiers.${tier.id}.tagline`),
-        `${formatEur(p.baseCents)} + ${formatEur(p.ivaCents)} IVA (${Math.round(IVA_RATE * 100)}%) = **${formatEur(p.totalCents)}**`,
+        // One line per route: an agent quoting a single figure for this
+        // package would be quoting half the readers the wrong price.
+        SERVICE_ROUTES.map((route) => {
+          const p = tierPrice(tier, route);
+          const label = t(route === "eu" ? "card.routeEu" : "card.routeNonEu");
+          return `- **${label}** — ${formatEur(p.baseCents)} + ${formatEur(p.ivaCents)} IVA (${Math.round(
+            IVA_RATE * 100,
+          )}%) = **${formatEur(p.totalCents)}**`;
+        }).join("\n"),
         `**${t("card.bestFor")}** ${t(`tiers.${tier.id}.bestFor`)}`,
         features.map((f) => `- ${f}`).join("\n"),
       ];
@@ -141,6 +169,8 @@ async function legalDoc(locale: string, doc: "scope" | "privacy" | "terms"): Pro
 export async function renderPageMarkdown(page: PublicPage, locale: string): Promise<string | null> {
   const body = await (page === "/"
     ? homeDoc(locale)
+    : page === "/triage"
+    ? triageDoc(locale)
     : page === "/pricing"
       ? pricingDoc(locale)
       : page === "/legal"

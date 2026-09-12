@@ -1,0 +1,68 @@
+{
+  "page": {
+    "metaTitle": "Triage gratuit — où vous en êtes aujourd’hui",
+    "metaDescription": "Envoyez-nous votre cachet d’entrée, votre autorisation et votre attestation d’inscription. Nous vous disons quelle voie s’applique, combien de jours il vous reste et ce qui est encore récupérable. Sans frais ni engagement.",
+    "eyebrow": "Triage gratuit · le jour même",
+    "title": "Vous êtes ici depuis deux semaines. Le compte à rebours a commencé le jour de votre arrivée.",
+    "intro": "Les étudiants hors UE disposent normalement d’un mois à compter de l’entrée pour demander la TIE. Si vous êtes arrivé la première semaine de septembre, ce délai expire début octobre, et le rendez-vous est la partie que personne ne peut accélérer. Dites-nous où vous en êtes et nous vous dirons où vous vous situez.",
+    "whatYouGet": "Ce que vous recevez aujourd’hui",
+    "steps": [
+      "Quelle voie s’applique à vous — EX-17 ou EX-18 — lue sur votre propre autorisation, et non devinée d’après votre passeport",
+      "Combien de jours il vous reste, comptés depuis votre cachet d’entrée",
+      "Ce qui est encore récupérable, et ce qui doit se passer d’abord",
+      "Si vous avez vraiment besoin de nous. Sinon, nous vous le dirons"
+    ],
+    "declineNote": "Si votre délai est déjà expiré, si votre situation est périmée ou irrégulière, ou si vous faites face à un refus, cela exige une analyse juridique que nous ne sommes pas qualifiés pour fournir. Nous vous le dirons au triage et vous orienterons vers un colegiado abogado. Nous préférons perdre le travail plutôt que de vous facturer ce que nous ne pouvons pas résoudre."
+  },
+  "fields": {
+    "fullName": "Votre nom",
+    "email": "Adresse e-mail",
+    "nationality": "Nationalité",
+    "arrivedOn": "Date d’entrée en Espagne",
+    "arrivedOnHint": "La date de votre cachet d’entrée, pas celle du début des cours.",
+    "housing": "Où vous logez en ce moment",
+    "notes": "Tout ce que nous devrions savoir d’autre",
+    "gdprTriageConsent": "Consentement"
+  },
+  "housing": {
+    "own-lease": "Un appartement, avec le bail à mon nom",
+    "room-or-sublet": "Une chambre en colocation, ou une sous-location",
+    "university-residence": "Une résidence universitaire",
+    "hostel-or-airbnb": "Une auberge ou un Airbnb",
+    "staying-with-someone": "Chez de la famille ou un ami",
+    "not-yet-housed": "Toujours en recherche"
+  },
+  "clock": {
+    "open": "Avec cette date d’entrée, votre délai d’un mois expire le {date}, dans environ {days} jours. À titre indicatif : votre propre autorisation peut fixer une autre période, et c’est précisément pourquoi nous la lisons.",
+    "closed": "Avec cette date d’entrée, le délai ordinaire d’un mois a expiré il y a environ {days} jours. Envoyez-le quand même : dites-nous ci-dessous ce qui s’est passé et nous vous dirons honnêtement si c’est récupérable.",
+    "eu": "Avec un passeport de l’UE, de l’EEE ou suisse, il n’y a pas de délai d’un mois. L’obligation d’enregistrement commence à trois mois de résidence : vous avez plus de marge que vous ne le pensez probablement."
+  },
+  "uploads": {
+    "title": "Les trois documents",
+    "note": "Facultatifs, mais ce sont eux qui rendent la réponse exacte plutôt que générale. PDF, JPEG ou PNG, jusqu’à 10 Mo chacun. Chiffrés à l’arrivée et supprimés une fois votre demande traitée.",
+    "entry-stamp": "Votre cachet d’entrée, ou votre carte d’embarquement",
+    "authorisation": "Votre visa ou décision d’approbation",
+    "enrolment-letter": "Votre attestation d’inscription"
+  },
+  "form": {
+    "choose": "Choisissez une option",
+    "optional": "facultatif",
+    "consent": "J’accepte que BCN Student Concierge traite ce que j’ai saisi ici, ainsi que les documents que je joins, afin de répondre à cette demande. Rien de tout cela ne m’oblige à acheter quoi que ce soit.",
+    "submit": "Envoyer pour un triage gratuit",
+    "sending": "Envoi…",
+    "freeNote": "Sans frais, sans engagement, sans carte bancaire. Nous répondons le jour même.",
+    "failed": "Impossible d’envoyer votre demande. Veuillez réessayer."
+  },
+  "done": {
+    "title": "Nous l’avons bien reçue.",
+    "body": "Votre référence est {ref}. Nous répondrons aujourd’hui à l’adresse que vous nous avez donnée, avec la voie qui s’applique, les jours qu’il vous reste et ce qu’il faut faire en premier.",
+    "note": "Si vous n’avez pas joint les trois documents, envoyez-les en réponse à cet e-mail : plus nous pouvons lire, plus la réponse est précise."
+  },
+  "cta": {
+    "eyebrow": "Commencez ici",
+    "title": "Vous ne savez pas où vous en êtes ? Découvrez-le gratuitement.",
+    "body": "Envoyez-nous votre cachet d’entrée, votre autorisation et votre attestation d’inscription. Nous vous dirons quelle voie s’applique, combien de jours il vous reste et ce qui est encore récupérable. Sans frais, sans engagement, et si vous n’avez pas besoin de nous, nous vous le dirons.",
+    "button": "Obtenir le triage gratuit",
+    "note": "Le jour même. Quinze minutes de votre temps."
+  }
+}

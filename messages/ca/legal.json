@@ -125,7 +125,7 @@
     "metaDescription": "Termes i condicions per als serveis de tramitació administrativa de BCN Student Concierge.",
     "eyebrow": "Condicions",
     "title": "Condicions d’ús",
-    "priceLine": "{name} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
     "clauses": [
       {
         "heading": "1. Caràcter del servei",
@@ -137,7 +137,7 @@
         "heading": "2. Honoraris i IVA",
         "priceListAfter": 0,
         "paragraphs": [
-          "Els preus dels paquets són fixos i s’indiquen sense IVA; abans del pagament es mostren l’IVA del 21 % i l’import total:",
+          "Les tarifes dels paquets són tancades i s’indiquen sense IVA, mostrant el 21% i el total brut abans del pagament. Cada paquet té dues tarifes: una per a la via UE/EEE/Suïssa i una altra per a la via de fora de la UE, perquè són quantitats de feina diferents. Quina et correspon es deriva de la teva nacionalitat, es confirma al triatge abans que paguis i és la mateixa derivació que decideix si presentes un EX-18 o un EX-17:",
           "Les taxes de l’Administració —inclosa la taxa estatal del Modelo 790 Código 012 i les despeses d’expedició de la targeta— les fixen les autoritats espanyoles, les pagueu directament i no s’inclouen en cap paquet. Mai no recaptem taxes en nom de l’Administració."
         ]
       },
@@ -164,7 +164,8 @@
       {
         "heading": "6. Cancel·lacions i reemborsaments",
         "paragraphs": [
-          "Abans de començar la feina: reemborsament íntegre. Un cop començada la preparació, però abans de reservar les cites: reemborsament del 50 %. Un cop reservades les cites: sense reemborsament, perquè el servei ja s’ha prestat en l’essencial. Si no podem prestar el servei per motius que depenen de nosaltres, us reemborsarem l’import íntegre."
+          "Abans de començar la feina: reemborsament íntegre. Un cop iniciada la preparació però abans de reservar cites: reemborsament del 50%. Un cop obtingudes les cites: sense reemborsament, ja que el valor substancial s’ha lliurat. Si no podem prestar el servei per causes sota el nostre control, reps un reemborsament íntegre.",
+          "Al marge de l’anterior, i sigui quina sigui la fase en què es trobi la resta del teu expedient: cerquem cita al portal oficial durant un màxim de sis setmanes. Si no s’obre cap forat en aquest termini, reps el 50% de la tarifa i conserves tot el Ready File —impresos, còpies, Modelo 790 i revisió— per estar a punt el dia que n’aparegui un. La disponibilitat de cites no està sota el nostre control, i per això això es formula com a reemborsament i no com a garantia."
         ]
       },
       {

@@ -27,6 +27,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
 
 function Landing() {
   const t = useTranslations("home");
+  const tt = useTranslations("triage");
   const problems = t.raw("problems.items") as { problem: string; detail: string; solution: string }[];
   const steps = t.raw("process.steps") as { title: string; body: string }[];
   const faq = t.raw("faq.items") as { q: string; a: string }[];
@@ -44,7 +45,7 @@ function Landing() {
               {t("hero.body")}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="/intake" className="btn-primary">
+              <Link href="/triage" className="btn-primary">
                 {t("hero.primaryCta")}
               </Link>
               <Link href="/pricing" className="btn-secondary">
@@ -137,6 +138,30 @@ function Landing() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/*
+        ── Free triage ───────────────────────────────────────────────
+        Sits directly above the packages on purpose. It is the primary call to
+        action: it converts, it filters out the cases we should decline, and a
+        student who is out of time needs to reach it before a price list.
+      */}
+      <section className="border-t border-bone-line bg-olive/5 py-16 sm:py-20">
+        <div className="container-x">
+          <div className="max-w-2xl">
+            <p className="eyebrow">{tt("cta.eyebrow")}</p>
+            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+              {tt("cta.title")}
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-muted">{tt("cta.body")}</p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link href="/triage" className="btn-primary">
+                {tt("cta.button")}
+              </Link>
+              <span className="text-xs text-ink-soft">{tt("cta.note")}</span>
+            </div>
+          </div>
         </div>
       </section>
 

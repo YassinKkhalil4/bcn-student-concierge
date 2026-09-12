@@ -82,7 +82,7 @@
       },
       "not-in-name": {
         "title": "A room or sublet",
-        "detail": "The lease is in someone else's name, or I live with family or friends"
+        "detail": "The lease is in someone else’s name, or I live with family or friends"
       }
     },
     "residence": {
@@ -117,17 +117,17 @@
     "intro": "The person who signs is whoever holds the flat: the owner, or the main tenant whose name is on the lease. We fill in Barcelona’s official form with your details and theirs. We do not keep what you type here.",
     "fields": {
       "signerName": {
-        "label": "Signer's full name",
-        "hint": "Exactly as on the signer's ID."
+        "label": "Signer’s full name",
+        "hint": "Exactly as on the signer’s ID."
       },
       "signerId": {
-        "label": "Signer's DNI, NIE or passport number"
+        "label": "Signer’s DNI, NIE or passport number"
       },
       "ownerName": {
-        "label": "Owner's name (person or company)"
+        "label": "Owner’s name (person or company)"
       },
       "ownerTaxId": {
-        "label": "Owner's NIF"
+        "label": "Owner’s NIF"
       },
       "companyName": {
         "label": "Company name"

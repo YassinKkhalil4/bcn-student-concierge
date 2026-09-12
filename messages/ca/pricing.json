@@ -1,79 +1,119 @@
 {
   "tiers": {
-    "baseline": {
-      "name": "Administrative Baseline",
-      "shortName": "Administrative Baseline",
-      "tagline": "L’essencial legal, ben tramitat a la primera.",
-      "bestFor": "Estudiants en residències universitàries que necessiten algú que els gestioni la documentació.",
+    "ready-file": {
+      "name": "Ready File",
+      "shortName": "Ready File",
+      "tagline": "La paperassa, acabada i a les teves mans, en 48 hores.",
+      "bestFor": "Pots gestionar les teves pròpies cites; només necessites que l’expedient estigui bé.",
       "features": [
-        "Reserva de cita per al Padró (empadronament)",
-        "Reserva de cita amb la Policía Nacional per a la TIE / CUE",
-        "Generació dels formularis EX-17 o EX-18, ja emplenats i a punt per imprimir",
-        "Configuració del Modelo 790 Código 012 amb codi de barres",
-        "Preparació del «Ready File» revisat, en paper i en format digital"
+        "La teva via confirmada amb la teva pròpia autorització i el teu segell d’entrada",
+        "El teu EX-17 o EX-18, preemplenat, aplanat i a punt per imprimir",
+        "Modelo 790 Código 012 configurat per pagar en efectiu, amb una oficina concreta i el seu horari de caixa",
+        "El teu expedient de Padró, preparat per a l’ajuntament on vius realment",
+        "Si el pis no és al teu nom, el model d’autorització perquè el signi el propietari",
+        "Cites de Padró i TIE/CUE cercades i reservades al teu propi nom",
+        "Totes les còpies fetes, ordenades com les demana el taulell i revisades línia a línia"
       ]
     },
     "soft-landing": {
-      "name": "Digital Soft-Landing",
-      "shortName": "Digital Soft-Landing",
-      "tagline": "Els tràmits, i tot allò que fa la ciutat pràctica des del primer dia.",
-      "bestFor": "La majoria d’estudiants internacionals de primer any que arriben pel seu compte.",
+      "name": "Soft Landing",
+      "shortName": "Soft Landing",
+      "tagline": "La paperassa, més les targetes que ja hauries de portar a sobre.",
+      "bestFor": "La majoria d’estudiants que van arribar fa unes setmanes i encara compren bitllets senzills.",
       "features": [
-        "Guia per obrir un compte bancari a Espanya (de no resident a resident)",
-        "Alta a la targeta de transport T-mobilitat / T-jove",
-        "Guia per triar i activar una SIM digital / eSIM",
-        "Configuració del Carnet Jove i del carnet d’estudiant ISIC",
-        "Línia de suport exclusiva per WhatsApp durant la instal·lació"
+        "Una targeta T-mobilitat al teu nom amb 90 dies carregats: T-jove si tens menys de 30 anys",
+        "El teu Carnet Jove, sol·licitat, pagat i perseguit durant l’espera d’activació",
+        "La teva targeta ISIC, comprada i emesa amb el teu justificant de matrícula",
+        "Un compte bancari que rebi de debò diners de casa, o per què no te’n cal cap",
+        "SIM o eSIM ajustada al teu consum real, amb el parany de la renovació de 28 dies explicat",
+        "Una línia de WhatsApp durant 30 dies, en anglès, just quan sorgeixen els dubtes",
+        "Una línia oberta durant la teva cita: truca’ns des del taulell"
       ]
     },
-    "turnkey": {
-      "name": "Turnkey Relocation & Housing Audit",
-      "shortName": "Turnkey Relocation & Housing Audit",
-      "tagline": "Verifiquem el pis abans que transferiu la fiança.",
-      "bestFor": "Famílies que busquen habitatge privat des de l’estranger, sense haver-lo vist.",
+    "fixer": {
+      "name": "Fixer",
+      "shortName": "Fixer",
+      "tagline": "Tot l’anterior, i a més hi anem amb tu.",
+      "bestFor": "Estàs encallat amb el Padró, o encara has de signar un pis i vols que el llegim abans.",
       "features": [
-        "Cerca verificada d’allotjament basada en anuncis sotmesos a controls antifrau",
-        "Verificació de la titularitat al Registre de la Propietat (Nota Simple)",
-        "Revisió del contracte de lloguer amb verificació legal del límit màxim de la fiança",
-        "Guia per a la contractació dels serveis bàsics (aigua, electricitat, internet)",
-        "Seguiment de la documentació durant 90 dies, fins a la recollida de la TIE"
+        "Anem amb tu a l’ajuntament i traduïm",
+        "Desbloqueig del Padró: hostals, subarrendaments, un llogater que s’hi nega, el municipi equivocat",
+        "La teva targeta sanitària i un metge de capçalera que parli anglès, un cop resolt el Padró",
+        "Revisió del contracte el mateix dia, contrastada amb el límit legal de la fiança",
+        "Propietat verificada al registre: tenir les claus no demostra ser-ne el propietari",
+        "Informe de l’estat del pis en entrar-hi: cada desperfecte fotografiat, signat i enviat el mateix dia",
+        "Seguiment de 90 dies fins a la recollida, i informe final per a qui estigui pagant"
       ]
     }
   },
   "card": {
-    "mostChosen": "L’opció més popular",
+    "mostChosen": "La més triada",
     "plusIva": "+ IVA",
-    "ivaLine": "{iva} IVA (21 %) · <strong>{total} total</strong>",
-    "everythingIn": "Tot el que inclou {name}, i a més:",
-    "bestFor": "Ideal per a:",
-    "select": "Trieu {name}"
+    "routeEu": "UE / EEE / Suïssa",
+    "routeNonEu": "Fora de la UE",
+    "totalLine": "{total} en total",
+    "includesCards": "Inclou uns {amount} en targetes i transport, comprats per nosaltres i lliurats en mà. No són formularis ni codis de descompte: són les targetes reals, funcionant.",
+    "everythingIn": "Tot el de {name}, i a més:",
+    "bestFor": "Ideal si:",
+    "select": "Triar {name}"
   },
   "page": {
-    "metaTitle": "Serveis i preus",
-    "metaDescription": "Tres paquets de preu fix per a estudiants internacionals que arriben a Barcelona: Administrative Baseline, Digital Soft-Landing i Turnkey Relocation & Housing Audit.",
-    "eyebrow": "Serveis i tarifes",
-    "title": "Tarifes fixes per a un procediment sense termini de tramitació definit.",
-    "intro": "Tots els paquets s’indiquen sense IVA i es mostra l’import total, que inclou un {rate} % d’IVA, abans de fer el pagament. No cobrem per hores i cap paquet inclou comissions administratives.",
-    "govEyebrow": "Taxes administratives",
-    "govTitle": "L’únic pagament que no podem fer en nom vostre.",
-    "exclusionsEyebrow": "Transparència total",
-    "exclusionsTitle": "Què no està cobert per la nostra tarifa.",
-    "exclusions": [
+    "metaTitle": "Paquets i preus",
+    "metaDescription": "Tres paquets de preu tancat per a estudiants internacionals que ja són a Barcelona: Ready File, Soft Landing i Fixer. Dos preus per paquet: un per a la via UE i un altre per a la via de fora de la UE.",
+    "eyebrow": "Paquets i preus",
+    "title": "Preus tancats per a un procés sense terminis tancats.",
+    "intro": "Tots els paquets s’indiquen sense IVA i es mostren amb el total incloent-hi el {rate}% d’IVA abans de pagar. No facturem per hores i cap paquet no inclou taxes públiques.",
+    "routesEyebrow": "Per què dos preus",
+    "routesTitle": "La via UE és menys feina, així que en cobrem menys.",
+    "routesBody": "Sense empremtes, sense la taxa de 16,08 €, i quan es compleixen els requisits el certificat s’emet normalment a la mateixa cita. Els estudiants de fora de la UE necessiten l’EX-17, la cita biomètrica i, en algunes oficines, un viatge a part per recollir la targeta. Confirmem quina via et correspon al triatge, abans que paguis res.",
+    "govEyebrow": "Taxes públiques",
+    "govTitle": "L’únic pagament que no podem fer per tu.",
+    "honestEyebrow": "Abans de triar",
+    "honestTitle": "El que genera reclamacions, dit per endavant.",
+    "honest": [
       {
-        "item": "Taxa estatal del Modelo 790 Código 012",
-        "note": "La pagueu directament a l’Agència Tributària en un banc. L’import el fixa el Govern i varia segons el tipus de targeta."
+        "item": "El 790 arriba sense pagar, i ha de ser així",
+        "note": "És un imprès amb codi de barres que cal portar a una caixa o a un caixer, pagar i segellar. El pagament en línia exigeix un certificat digital espanyol que encara no tens. Nosaltres el configurem, l’imprimim i et diem exactament on portar-lo: el viatge és teu. Un imprès sense segellar acaba la cita."
       },
       {
-        "item": "Matrícula universitària, fiances i lloguer",
-        "note": "Mai no gestionem diners de clients per a tercers. Tots els pagaments van directament de vosaltres al propietari o a la institució."
+        "item": "Les nostres còpies són còpies impreses, no compulsades",
+        "note": "Imprimim a partir dels escanejos que puges. Mai no hem vist el teu passaport original i no podem compulsar res. Tu portes els originals; la carpeta porta el que els acompanya."
+      },
+      {
+        "item": "No podem fer que existeixi una cita",
+        "note": "Cerquem al portal oficial durant un màxim de sis setmanes. Si no s’obre cap forat en aquest termini, et tornem el 50% i conserves tot el Ready File —impresos, còpies, 790, revisió— per estar a punt el dia que n’aparegui un. Ningú no pot saltar-se legalment aquest pas, i qualsevol servei que et digui el contrari t’està venent una cosa que no té."
+      },
+      {
+        "item": "No anem a la cita biomètrica per tu",
+        "note": "Exigeix la teva presència, en persona, amb els originals. Nosaltres preparem, reservem, t’informem i continuem localitzables per telèfon. La compareixença és teva, al teu propi nom."
+      },
+      {
+        "item": "Els teus 90 dies comencen quan valides",
+        "note": "La finestra del T-jove corre des de la primera validació, no des de la compra. Però són 90 dies consecutius un cop comença, no 90 dies d’ús."
+      },
+      {
+        "item": "El T-jove és una regla d’edat, no d’estudiant",
+        "note": "Només per a menors de 30 anys. No cal carnet universitari ni Carnet Jove per tenir-hi dret. Si en tens 30 o més, carreguem una T-usual per a les zones que el teu trajecte necessita de debò i et tornem la diferència."
+      }
+    ],
+    "exclusionsEyebrow": "Transparència total",
+    "exclusionsTitle": "El que la nostra tarifa no cobreix.",
+    "exclusions": [
+      {
+        "item": "Modelo 790 Código 012 i emissió de targetes",
+        "note": "El pagues tu, directament, en un banc. L’import el fixa el Govern i varia segons el tipus de targeta."
+      },
+      {
+        "item": "Matrícula, lloguer i fiances",
+        "note": "Mai no gestionem fons de tercers. Tot va directament de tu al propietari o a la institució."
       },
       {
         "item": "Representació legal o recursos",
-        "note": "Queda fora del nostre abast. Si el vostre cas ho requereix, us ho direm i us recomanarem un advocat col·legiat."
+        "note": "Fora del nostre abast. Si el teu cas ho necessita, t’ho direm i et derivarem a un advocat col·legiat."
       },
       {
-        "item": "Serveis de traducció o d’apostilla",
-        "note": "Podem identificar quins documents requereixen una traducció jurada i referir-vos a un traductor jurat; els seus honoraris s’apliquen per separat."
+        "item": "Traducció jurada o postil·la",
+        "note": "Identifiquem el que ho necessita i et derivem a un traductor jurat; els seus honoraris són a part."
       }
     ]
   }

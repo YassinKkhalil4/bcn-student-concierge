@@ -16,6 +16,7 @@ export function SiteFooter() {
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-wider text-ink">{t("footer.services")}</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-ink-muted">
+              <li><Link href="/triage" className="hover:text-ink">{t("footer.triage")}</Link></li>
               <li><Link href="/pricing" className="hover:text-ink">{t("footer.packages")}</Link></li>
               <li><Link href="/intake" className="hover:text-ink">{t("footer.intake")}</Link></li>
               <li><Link href="/#how-it-works" className="hover:text-ink">{t("footer.process")}</Link></li>

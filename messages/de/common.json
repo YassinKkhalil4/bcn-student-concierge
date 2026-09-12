@@ -4,26 +4,28 @@
   "nav": {
     "main": "Hauptnavigation",
     "howItWorks": "So funktioniert es",
-    "pricing": "Leistungen & Preise",
+    "pricing": "Pakete & Preise",
     "faq": "FAQ",
     "myFile": "Meine Akte",
-    "beginIntake": "Jetzt starten",
-    "begin": "Starten"
+    "beginIntake": "Aufnahme starten",
+    "begin": "Starten",
+    "triage": "Kostenlose Ersteinschätzung"
   },
   "language": {
     "label": "Sprache"
   },
   "footer": {
-    "tagline": "Unabhängige administrative Unterstützung für internationale Studierende, die ihr Studium an privaten Hochschulen in Barcelona beginnen.",
+    "tagline": "Unabhängige Verwaltungsbegleitung für internationale Studierende in Barcelona. Kostenlose Ersteinschätzung am selben Tag — zuerst.",
     "services": "Dienstleistungen",
     "packages": "Pakete & Preise",
-    "intake": "Portal zur Kundenaufnahme",
+    "intake": "Studierendenportal",
     "process": "Ablauf",
     "legal": "Rechtliches",
     "terms": "Nutzungsbedingungen",
     "privacy": "Datenschutz & DSGVO",
     "scope": "Leistungsumfang",
-    "copyright": "© {year} BCN Student Concierge. Barcelona, Spanien."
+    "copyright": "© {year} BCN Student Concierge. Barcelona, Spanien.",
+    "triage": "Kostenlose Ersteinschätzung"
   },
   "disclaimer": {
     "footerLabel": "Leistungsumfang.",

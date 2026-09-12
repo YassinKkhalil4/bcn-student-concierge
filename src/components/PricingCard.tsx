@@ -1,11 +1,21 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { formatEur, priceWithIva, type Tier } from "@/lib/pricing";
+import { formatEur, tierPrice, SERVICE_ROUTES, type ServiceRoute, type Tier } from "@/lib/pricing";
 
+/**
+ * A package, priced on both routes.
+ *
+ * Both prices are always shown, because the public page cannot know the
+ * reader's nationality and guessing would quote half of them the wrong figure.
+ * Which one applies is settled at triage, before anyone pays.
+ */
 export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: boolean }) {
   const t = useTranslations("pricing");
-  const { baseCents, ivaCents, totalCents } = priceWithIva(tier.basePriceCents);
   const features = t.raw(`tiers.${tier.id}.features`) as string[];
+  const routeLabel: Record<ServiceRoute, string> = {
+    eu: t("card.routeEu"),
+    "non-eu": t("card.routeNonEu"),
+  };
 
   return (
     <div
@@ -23,24 +33,32 @@ export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: b
       <h3 className="font-display text-xl font-semibold text-ink">{t(`tiers.${tier.id}.name`)}</h3>
       <p className="mt-2 text-sm leading-relaxed text-ink-muted">{t(`tiers.${tier.id}.tagline`)}</p>
 
-      <div className="mt-6 border-y border-bone-line py-5">
-        <div className="flex items-baseline gap-1.5">
-          <span className="font-display text-4xl font-semibold text-ink">{formatEur(baseCents)}</span>
-          <span className="text-sm text-ink-soft">{t("card.plusIva")}</span>
-        </div>
-        {/*
-          Both figures are shown. Quoting only the ex-IVA price is the standard
-          way this category surprises parents at checkout; the total is what
-          actually leaves their card.
-        */}
-        <p className="mt-2 text-xs text-ink-soft">
-          {t.rich("card.ivaLine", {
-            iva: formatEur(ivaCents),
-            total: formatEur(totalCents),
-            strong: (chunks) => <span className="font-semibold text-ink-muted">{chunks}</span>,
-          })}
+      {/*
+        Two prices, one per route. Quoting only the ex-IVA figure is the standard
+        way this category surprises people at checkout, so each row carries the
+        gross total as well — that is what actually leaves the card.
+      */}
+      <dl className="mt-6 divide-y divide-bone-line border-y border-bone-line">
+        {SERVICE_ROUTES.map((route) => {
+          const { baseCents, totalCents } = tierPrice(tier, route);
+          return (
+            <div key={route} className="flex items-baseline justify-between gap-3 py-4">
+              <dt className="text-xs font-medium uppercase tracking-wider text-ink-soft">{routeLabel[route]}</dt>
+              <dd className="text-right">
+                <span className="font-display text-2xl font-semibold text-ink">{formatEur(baseCents)}</span>
+                <span className="ml-1 text-xs text-ink-soft">{t("card.plusIva")}</span>
+                <span className="block text-xs text-ink-soft">{t("card.totalLine", { total: formatEur(totalCents) })}</span>
+              </dd>
+            </div>
+          );
+        })}
+      </dl>
+
+      {tier.includedCardsCents !== undefined && (
+        <p className="mt-4 rounded-lg bg-olive/5 px-4 py-3 text-xs leading-relaxed text-ink-muted">
+          {t("card.includesCards", { amount: formatEur(tier.includedCardsCents) })}
         </p>
-      </div>
+      )}
 
       {tier.inherits && (
         <p className="mt-5 text-sm font-medium text-olive">

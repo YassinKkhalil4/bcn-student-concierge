@@ -36,8 +36,9 @@ const API = "https://api-free.deepl.com/v2";
 const CONTEXT =
   "Website of BCN Student Concierge, an administrative agency in Barcelona that helps international " +
   "university students with Spanish residency paperwork: city registration (Padrón), NIE, TIE card, " +
-  "EX-17 and EX-18 forms, police appointments. Readers are students and their parents. Clear, precise, " +
-  "polite, reassuring. Not legal advice.";
+  "EX-17 and EX-18 forms, police appointments. The reader IS THE STUDENT — already in Barcelona, " +
+  "a few weeks after arriving — not their parent. Address them directly. Clear, precise, direct, " +
+  "never patronising. Not legal advice.";
 
 /**
  * Package names are brand names — the same in every language, and the same as
@@ -67,10 +68,35 @@ const NAMESPACE_CONTEXT: Record<string, string> = {
  * addresses the public in the plural "vós" forms, and so do we. Italian gets
  * formal address from DeepL, but drifted between «Lei» and «voi» by section.
  */
-const REGISTER: Partial<Record<Target, string>> = {
+/**
+ * Register, per language and per namespace.
+ *
+ * The marketing pages (home, pricing, triage) address a student directly and
+ * informally, because that is how a service speaks to a nineteen-year-old in
+ * Spanish, Catalan, Italian and German — formal address there reads as a bank
+ * letter. French keeps «vous», which is what a service uses even with students.
+ *
+ * The transactional and legal pages (intake, portal, legal, guides, email) keep
+ * the formal register they were written in: an instruction attached to a
+ * government form, and a contract, are not the place to change voice.
+ */
+const MARKETING_NAMESPACES = new Set(["home", "pricing", "triage"]);
+
+const REGISTER_FORMAL: Partial<Record<Target, string>> = {
   ca: "Address the reader formally with the second-person plural (vós) forms: «Introduïu», «el vostre», «Pugeu».",
   it: "Address the reader consistently and only with the formal singular «Lei» (Suo, La, Le); never «voi» or «tu».",
 };
+
+const REGISTER_INFORMAL: Partial<Record<Target, string>> = {
+  es: "Address the student informally in the second person singular («tú»): «tienes», «tu cita».",
+  ca: "Address the student informally in the second person singular («tu»): «tens», «la teva cita». Never the «vós» forms.",
+  fr: "Keep the formal «vous»: a service addresses a student that way in French.",
+  it: "Address the student informally in the second person singular («tu»): «hai», «il tuo appuntamento». Never «Lei».",
+  de: "Address the student informally («du»): «du hast», «dein Termin». Never «Sie».",
+};
+
+const REGISTER = (ns: string): Partial<Record<Target, string>> =>
+  MARKETING_NAMESPACES.has(ns) ? REGISTER_INFORMAL : REGISTER_FORMAL;
 
 // ───────────────────────── catalogue plumbing ─────────────────────────
 
@@ -215,7 +241,7 @@ async function main() {
           const sections = new Map<string, string[]>();
           for (const k of todo) sections.set(sectionOf(k), [...(sections.get(sectionOf(k)) ?? []), k]);
           for (const [section, keys] of sections) {
-            const context = [CONTEXT, NAMESPACE_CONTEXT[ns], `Section: ${ns}.${section}.`, REGISTER[target]]
+            const context = [CONTEXT, NAMESPACE_CONTEXT[ns], `Section: ${ns}.${section}.`, REGISTER(ns)[target]]
               .filter(Boolean)
               .join(" ");
             for (let i = 0; i < keys.length; i += 40) {

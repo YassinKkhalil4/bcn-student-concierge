@@ -15,7 +15,7 @@
         "heading": "What we are not",
         "paragraphs": [
           "We are not a law firm (despacho de abogados) and hold no colegiación. We are not a registered gestoría administrativa. We are not agents, representatives or intermediaries of any Spanish public authority, and we are not affiliated with any university.",
-          "Spanish law reserves certain activities — legal representation, formal immigration advice, and acting before authorities on another person's behalf — to regulated professionals. Offering those services without that qualification is intrusismo profesional. We do not offer them, and this page exists so there is no ambiguity about it."
+          "Spanish law reserves certain activities — legal representation, formal immigration advice, and acting before authorities on another person’s behalf — to regulated professionals. Offering those services without that qualification is intrusismo profesional. We do not offer them, and this page exists so there is no ambiguity about it."
         ]
       },
       {
@@ -65,7 +65,7 @@
       {
         "heading": "What we collect, and why",
         "paragraphs": [
-          "Identity and civil-status data (passport number, NIE, names, gender, birth details, nationality, marital status, parents' given names), your Spanish address, contact details, and scans of your passport, university acceptance letter and lease.",
+          "Identity and civil-status data (passport number, NIE, names, gender, birth details, nationality, marital status, parents’ given names), your Spanish address, contact details, and scans of your passport, university acceptance letter and lease.",
           "Legal basis: performance of a contract with you (GDPR Art. 6(1)(b)). We collect this data because Spanish residency forms require it — not because we want it. We do not collect health data, biometric templates, or any special-category data under Art. 9 beyond what appears on the face of the documents you upload."
         ]
       },
@@ -81,15 +81,15 @@
         "heading": "How long we keep it — the 30-day rule",
         "paragraphs": [
           "Passport scans, uploaded documents and identity data are permanently deleted 30 days after your service completes. This runs as an automated job, not a manual promise: expired files are purged without anyone deciding to do it, and the deletion is irreversible.",
-          "Two things survive that purge, and only these: a record that the file existed and was deleted, and invoice data. Spanish commercial and tax law (Código de Comercio Art. 30; Ley General Tributaria) requires invoice records to be kept for several years, and that obligation overrides erasure requests for those specific records under GDPR Art. 17(3)(b). An invoice holds the payer's name, billing address and, for a business, its tax ID — stored encrypted — plus the amounts. It never includes your passport number or document scans.",
+          "Two things survive that purge, and only these: a record that the file existed and was deleted, and invoice data. Spanish commercial and tax law (Código de Comercio Art. 30; Ley General Tributaria) requires invoice records to be kept for several years, and that obligation overrides erasure requests for those specific records under GDPR Art. 17(3)(b). An invoice holds the payer’s name, billing address and, for a business, its tax ID — stored encrypted — plus the amounts. It never includes your passport number or document scans.",
           "You may request deletion earlier than 30 days at any time."
         ]
       },
       {
         "heading": "If someone authorises your address",
         "paragraphs": [
-          "When the flat is not in your name, the person who holds it (the owner or the main tenant) authorises your Padrón registration on the City of Barcelona's official form. You type the signer's name and ID number so we can fill in the form for you. We use those details once, to produce the PDF, and do not store them.",
-          "The signed form, a copy of the signer's ID and the lease that you then upload are needed by the city to register you. We hold them encrypted, like your own documents, use them only to prepare your Padrón file, and delete them with the rest of your file 30 days after your service completes. Please let the signer know you are sharing these documents with us for that purpose."
+          "When the flat is not in your name, the person who holds it (the owner or the main tenant) authorises your Padrón registration on the City of Barcelona’s official form. You type the signer’s name and ID number so we can fill in the form for you. We use those details once, to produce the PDF, and do not store them.",
+          "The signed form, a copy of the signer’s ID and the lease that you then upload are needed by the city to register you. We hold them encrypted, like your own documents, use them only to prepare your Padrón file, and delete them with the rest of your file 30 days after your service completes. Please let the signer know you are sharing these documents with us for that purpose."
         ]
       },
       {
@@ -125,7 +125,7 @@
     "metaDescription": "Contractual terms for BCN Student Concierge administrative facilitation services.",
     "eyebrow": "Terms",
     "title": "Terms of service",
-    "priceLine": "{name} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
     "clauses": [
       {
         "heading": "1. Nature of the service",
@@ -137,8 +137,8 @@
         "heading": "2. Fees and IVA",
         "priceListAfter": 0,
         "paragraphs": [
-          "Package fees are fixed and quoted exclusive of IVA, with the 21% and the gross total displayed before payment:",
-          "Government fees — including the Modelo 790 Código 012 state fee and card issuance costs — are set by the Spanish authorities, paid by you directly, and are not included in any package. We never collect fees on the government's behalf."
+          "Package fees are fixed and quoted exclusive of IVA, with the 21% and the gross total displayed before payment. Each package has two fees: one for the EU/EEA/Swiss route and one for the non-EU route, because they are different quantities of work. Which applies to you follows from your nationality, is confirmed at triage before you pay, and is the same derivation that decides whether you file an EX-18 or an EX-17:",
+          "Government fees — including the Modelo 790 Código 012 state fee and card issuance costs — are set by the Spanish authorities, paid by you directly, and are not included in any package. We never collect fees on the government’s behalf."
         ]
       },
       {
@@ -164,7 +164,8 @@
       {
         "heading": "6. Cancellation and refunds",
         "paragraphs": [
-          "Before we begin work: full refund. After preparation has begun but before appointments are booked: 50% refund. After appointments are secured: no refund, as the substantive value has been delivered. If we cannot deliver the service for reasons within our control, you receive a full refund."
+          "Before we begin work: full refund. After preparation has begun but before appointments are booked: 50% refund. Once appointments are secured: no refund, as the substantive value has been delivered. If we cannot deliver the service for reasons within our control, you receive a full refund.",
+          "Separately from the above, and whatever stage the rest of your file has reached: we search the official portal for an appointment for up to six weeks. If no slot opens in that window, you receive 50% of the fee back and keep the entire Ready File — forms, copies, Modelo 790 and audit — so that you are ready on the day one does open. Appointment availability is not within our control, which is why this is stated as a refund rather than a guarantee."
         ]
       },
       {
@@ -176,7 +177,7 @@
       {
         "heading": "8. Governing law",
         "paragraphs": [
-          "These terms are governed by Spanish law. Consumer disputes may be brought before the courts of the consumer's domicile, and you may use the Spanish consumer arbitration system (Sistema Arbitral de Consumo) or the EU Online Dispute Resolution platform."
+          "These terms are governed by Spanish law. Consumer disputes may be brought before the courts of the consumer’s domicile, and you may use the Spanish consumer arbitration system (Sistema Arbitral de Consumo) or the EU Online Dispute Resolution platform."
         ]
       }
     ]

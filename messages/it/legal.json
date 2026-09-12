@@ -125,7 +125,7 @@
     "metaDescription": "Condizioni contrattuali relative ai servizi di assistenza amministrativa offerti da BCN Student Concierge.",
     "eyebrow": "Condizioni",
     "title": "Condizioni di servizio",
-    "priceLine": "{name} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
     "clauses": [
       {
         "heading": "1. Natura del servizio",
@@ -137,7 +137,7 @@
         "heading": "2. Tariffe e IVA",
         "priceListAfter": 0,
         "paragraphs": [
-          "Le tariffe dei pacchetti sono fisse e indicate al netto dell’IVA, con l’IVA al 21% e l’importo lordo visualizzati prima del pagamento:",
+          "I compensi dei pacchetti sono fissi e indicati al netto dell’IVA, con il 21% e il totale lordo mostrati prima del pagamento. Ogni pacchetto ha due compensi: uno per il percorso UE/SEE/Svizzera e uno per quello extra-UE, perché sono quantità di lavoro diverse. Quale si applichi discende dalla tua nazionalità, viene confermato in fase di triage prima del pagamento ed è la stessa derivazione che decide se presenti un EX-18 o un EX-17:",
           "Le tasse amministrative — comprese la tassa statale Modelo 790 Código 012 e i costi di emissione delle carte — sono stabilite dalle autorità spagnole, pagate direttamente da Lei e non sono incluse in alcun pacchetto. Non riscuotiamo mai tasse per conto dello Stato."
         ]
       },
@@ -164,7 +164,8 @@
       {
         "heading": "6. Annullamenti e rimborsi",
         "paragraphs": [
-          "Prima di iniziare il lavoro: rimborso completo. Dopo l’avvio della preparazione ma prima della prenotazione degli appuntamenti: rimborso del 50%. Dopo la conferma degli appuntamenti: nessun rimborso, poiché il valore sostanziale è stato fornito. Qualora non fossimo in grado di fornire il servizio per motivi a noi imputabili, riceverà un rimborso completo."
+          "Prima dell’inizio del lavoro: rimborso integrale. Dopo l’avvio della preparazione ma prima della prenotazione degli appuntamenti: rimborso del 50%. Una volta ottenuti gli appuntamenti: nessun rimborso, poiché il valore sostanziale è stato consegnato. Se non possiamo erogare il servizio per cause sotto il nostro controllo, ricevi il rimborso integrale.",
+          "Indipendentemente da quanto sopra, e qualunque sia la fase raggiunta dal resto del tuo fascicolo: cerchiamo un appuntamento sul portale ufficiale per un massimo di sei settimane. Se in quel periodo non si apre alcuno slot, ricevi il 50% del compenso e conservi l’intero Ready File — moduli, copie, Modelo 790 e controllo — così da essere pronto il giorno in cui se ne aprirà uno. La disponibilità degli appuntamenti non è sotto il nostro controllo, ed è per questo che ciò è formulato come rimborso e non come garanzia."
         ]
       },
       {

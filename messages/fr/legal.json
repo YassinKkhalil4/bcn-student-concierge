@@ -125,7 +125,7 @@
     "metaDescription": "Conditions contractuelles relatives aux services d’assistance administrative proposés par BCN Student Concierge.",
     "eyebrow": "Conditions générales",
     "title": "Conditions générales d’utilisation",
-    "priceLine": "{name} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
     "clauses": [
       {
         "heading": "1. Nature du service",
@@ -137,7 +137,7 @@
         "heading": "2. Tarifs et IVA",
         "priceListAfter": 0,
         "paragraphs": [
-          "Les tarifs des forfaits sont fixes et indiqués hors IVA ; l’IVA de 21 % et le montant total sont affichés avant le paiement :",
+          "Les tarifs des formules sont fixes et indiqués hors IVA, avec les 21% et le total brut affichés avant le paiement. Chaque formule comporte deux tarifs : un pour la voie UE/EEE/Suisse et un pour la voie hors UE, parce qu’il s’agit de quantités de travail différentes. Celui qui s’applique découle de votre nationalité, est confirmé lors du triage avant tout paiement, et repose sur la même dérivation que celle qui décide si vous déposez un EX-18 ou un EX-17 :",
           "Les frais administratifs — y compris la redevance d’État « Modelo 790 Código 012 » et les frais de délivrance des cartes — sont fixés par les autorités espagnoles, à votre charge directement, et ne sont inclus dans aucun forfait. Nous ne percevons jamais de frais pour le compte de l’État."
         ]
       },
@@ -164,7 +164,8 @@
       {
         "heading": "6. Annulation et remboursements",
         "paragraphs": [
-          "Avant le début des prestations : remboursement intégral. Une fois la préparation engagée mais avant la prise de rendez-vous : remboursement à 50 %. Une fois les rendez-vous fixés : aucun remboursement, la prestation ayant été fournie. Si nous ne pouvons pas fournir le service pour des raisons qui relèvent de notre responsabilité, vous bénéficiez d’un remboursement intégral."
+          "Avant le début des travaux : remboursement intégral. Une fois la préparation entamée mais avant la réservation des rendez-vous : remboursement de 50%. Une fois les rendez-vous obtenus : pas de remboursement, la valeur substantielle ayant été livrée. Si nous ne pouvons pas fournir le service pour des raisons relevant de notre contrôle, vous êtes intégralement remboursé.",
+          "Indépendamment de ce qui précède, et quel que soit le stade atteint par le reste de votre dossier : nous cherchons un rendez-vous sur le portail officiel pendant six semaines au maximum. Si aucun créneau ne s’ouvre dans ce délai, vous recevez 50% des honoraires et conservez l’intégralité du Ready File — formulaires, copies, Modelo 790 et vérification — afin d’être prêt le jour où un créneau s’ouvrira. La disponibilité des rendez-vous ne relève pas de notre contrôle, ce pourquoi cela est formulé comme un remboursement et non comme une garantie."
         ]
       },
       {

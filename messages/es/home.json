@@ -1,96 +1,100 @@
 {
-  "metaTitle": "BCN Student Concierge — Llegadas sin complicaciones a Barcelona",
-  "metaDescription": "Servicio independiente de tramitación administrativa para estudiantes universitarios internacionales que llegan a Barcelona. Padrón, citas para el TIE/CUE y preparación de documentos.",
+  "metaTitle": "BCN Student Concierge — trámites de residencia, bien a la primera",
+  "metaDescription": "Para estudiantes internacionales que ya están en Barcelona. Padrón, citas de TIE y CUE, impresos EX-17 y EX-18, preparados y reservados. El triaje gratuito del mismo día te dice en qué situación estás antes de pagar nada.",
   "hero": {
-    "eyebrow": "Barcelona · Creada para familias internacionales",
-    "title": "Llegadas sin complicaciones y tramitación legal de la residencia para estudiantes universitarios internacionales en Barcelona.",
-    "body": "Su hijo o hija ha obtenido una plaza en una universidad de Barcelona. Lo único que se interpone entre él o ella y su instalación es una serie de trámites burocráticos españoles que no perdonan los más mínimos errores —y que se llevan a cabo íntegramente en español—. Nosotros nos encargamos de todos esos trámites, de forma correcta y a la primera.",
-    "primaryCta": "Empezar el alta segura",
-    "secondaryCta": "Comparar paquetes",
-    "note": "Tarifas fijas, con el IVA incluido en el presupuesto antes de realizar el pago. No se aplica facturación por horas."
+    "eyebrow": "Barcelona · Para estudiantes que ya están aquí",
+    "title": "Llevas dos semanas aquí. El reloj empezó el día que aterrizaste.",
+    "body": "Los estudiantes de fuera de la UE suelen tener un mes desde la entrada para solicitar la TIE. Si llegaste la primera semana de septiembre, esa ventana se cierra a principios de octubre, y la cita es la parte que nadie puede acelerar. Nosotros montamos el expediente para que, cuando se abra un hueco, nada de lo que lleves encima te devuelva a casa.",
+    "primaryCta": "Triaje gratuito",
+    "secondaryCta": "Ver los paquetes",
+    "note": "El triaje es gratuito y el mismo día. Los paquetes son de precio cerrado, con el IVA indicado antes de pagar."
   },
   "trust": {
-    "heading": "Acompañamos a estudiantes que llegan a",
-    "disclaimer": "Las universidades mencionadas son aquellas a las que asisten nuestros clientes. Somos un servicio independiente y no estamos afiliados a ninguna de las instituciones mencionadas, ni contamos con su respaldo, ni actuamos en nombre de ninguna de ellas."
+    "heading": "Los estudiantes con los que trabajamos estudian en",
+    "disclaimer": "Las universidades mencionadas son aquellas a las que asisten nuestros clientes. Somos un servicio independiente y no estamos afiliados, ni respaldados por, ni actuamos en nombre de ninguna institución de las citadas."
   },
   "problems": {
-    "eyebrow": "Lo que falla de verdad",
+    "eyebrow": "Lo que realmente sale mal",
     "title": "Cuatro puntos de fallo, y cómo eliminamos cada uno.",
-    "approach": "Nuestro enfoque — ",
+    "approach": "Lo que hacemos — ",
     "items": [
       {
-        "problem": "Las citas previas se agotan en segundos",
-        "detail": "Las citas para el Padrón y la Policía Nacional se publican de forma irregular y se agotan en cuestión de minutos a través de sistemas automatizados. Las familias que actualizan la página en español desde otra zona horaria rara vez consiguen una cita.",
-        "solution": "Supervisamos los plazos de apertura de citas en todos los distritos de Barcelona y reservamos la cita a nombre de su estudiante; a continuación, le enviamos la confirmación con las indicaciones y la lista exacta de documentos que debe llevar."
+        "problem": "Las citas previas desaparecen en segundos",
+        "detail": "Las citas de Padrón y de la Policía Nacional se liberan de forma irregular y las ocupan en minutos agentes automatizados. Refrescar un portal en español entre clase y clase no es una estrategia.",
+        "solution": "Vigilamos las ventanas de liberación en toda la provincia de Barcelona, no solo en la oficina que te viene bien, y reservamos a tu propio nombre. Recibes un itinerario con fecha: dirección, hora, qué llevar y qué te van a preguntar."
       },
       {
-        "problem": "Una casilla mal marcada invalida todo el expediente",
-        "detail": "Un formulario EX-17 en el que se haya rellenado el segundo apellido como «N/A», una sección de representación cumplimentada por un padre bienintencionado o un formulario impreso con el texto de los campos desplazado será rechazado en la ventanilla —y la próxima cita no estará disponible hasta dentro de varias semanas.",
-        "solution": "Los formularios se generan mediante un programa a partir de sus datos verificados, se ajustan para que nada se desplace al imprimirlos y se cotejan con el pasaporte antes de que el expediente salga de nuestras manos."
+        "problem": "Una casilla mal puesta anula todo el expediente",
+        "detail": "Un EX-17 con el segundo apellido puesto como «N/A», una sección de representante que alguien rellenó por ti, o un impreso impreso al 94% con el texto fuera de su casilla: rechazado en el mostrador, y la siguiente cita está a semanas.",
+        "solution": "Tu impreso se genera a partir de tus datos verificados, se aplana para que nada se desplace al imprimir y se contrasta con el escaneo de tu pasaporte. La sección 2 queda permanentemente en blanco, porque no somos tu representante."
       },
       {
-        "problem": "El formulario fiscal no se puede pagar en línea",
-        "detail": "El Modelo 790 Código 012 lleva un código de barras único y, para la mayoría de los estudiantes, debe abonarse en efectivo en la ventanilla de un banco español o en el escáner de un cajero automático. Es habitual que los estudiantes acudan a la comisaría con un formulario sin pagar.",
-        "solution": "Configuramos el formulario con código de barras para el pago en efectivo y ofrecemos instrucciones paso a paso para CaixaBank, BBVA y Santander, incluyendo qué sucursales aceptan pagos de personas que no son clientes."
+        "problem": "El impreso de la tasa no se puede pagar online",
+        "detail": "El Modelo 790 Código 012 lleva un código de barras único y, para la mayoría de estudiantes, hay que pagarlo en efectivo en una caja o en un cajero con lector. Mucha gente llega a la comisaría con el impreso sin pagar.",
+        "solution": "Lo configuramos para pago en efectivo, lo imprimimos en color al 100% y te indicamos una sucursal cerca de tu cita con su horario de caja: no todas admiten pagos de no clientes, y algunas solo por la mañana."
       },
       {
-        "problem": "El fraude en materia de vivienda se dirige a los estudiantes recién llegados",
-        "detail": "Los anuncios publicados desde el extranjero suelen corresponder a subalquileres ilegales, a viviendas que no pertenecen al supuesto «propietario» o a fianzas que superan el límite legal. Las fianzas transferidas antes de la llegada rara vez se recuperan.",
-        "solution": "En nuestro paquete Turnkey, obtenemos la Nota Simple del Registro de la Propiedad para confirmar quién es realmente el propietario del piso, y comprobamos que la fianza del contrato respeta el límite legal antes de que nadie transfiera dinero."
+        "problem": "El Padrón bloquea en silencio todo lo demás",
+        "detail": "En un hostal, un Airbnb o un subarriendo no registrado, ahora mismo no puedes empadronarte. Un casero que se niega, o un piso en Sant Cugat cuando dabas por hecho Barcelona, frena la tarjeta sanitaria y la TIE que vienen detrás.",
+        "solution": "En el Fixer vamos contigo al ayuntamiento y traducimos, preguntamos al consistorio por sus vías alternativas de verificación y gestionamos el municipio correcto. Lo que nunca hacemos es empadronarte en una dirección en la que no vives."
       }
     ]
   },
   "process": {
-    "eyebrow": "El proceso",
-    "title": "Cuatro etapas, desde la solicitud inicial hasta la recogida de la tarjeta.",
+    "eyebrow": "Cómo funciona",
+    "title": "Primero el triaje gratuito. Después, si nos quieres, cuatro fases.",
     "steps": [
       {
-        "title": "Admisión segura",
-        "body": "Su estudiante rellena el cuestionario cifrado y sube su pasaporte, la carta de matrícula y el contrato de alquiler. Los documentos se cifran por archivo con AES-256."
+        "title": "Triaje gratuito, el mismo día",
+        "body": "Envía tu sello de entrada, tu autorización y tu carta de matrícula. Te decimos qué vía te corresponde, cuántos días te quedan y qué sigue siendo recuperable. Sin coste y sin compromiso."
       },
       {
-        "title": "Preparación de la documentación",
-        "body": "Generamos el formulario adecuado —el EX-17 para estudiantes de fuera de la UE y el EX-18 para ciudadanos de la UE—, configuramos el Modelo 790 y preparamos un «Ready File» con toda la documentación ya revisada."
+        "title": "Alta segura",
+        "body": "Completas el cuestionario cifrado y subes tu pasaporte, tu carta de matrícula y tu contrato de alquiler. Cada documento se cifra con su propia clave."
       },
       {
-        "title": "Citas concertadas",
-        "body": "Reservamos las citas para el Padrón y la TIE/CUE y le entregamos un itinerario con las fechas: dónde debe acudir, qué debe llevar y qué le preguntarán."
+        "title": "Montaje del expediente",
+        "body": "Generamos el impreso correcto —EX-17 en la vía de fuera de la UE, EX-18 en la de la UE—, configuramos el Modelo 790 y montamos el Ready File. Mensajería a tu dirección o recogida, más un PDF para imprimir en casa en cuanto esté montado."
       },
       {
-        "title": "Adaptación y seguimiento",
-        "body": "La gestión de la banca, el transporte público y la conectividad se lleva a cabo durante la primera semana. Realizamos un seguimiento del expediente durante 90 días, hasta la recogida de la tarjeta."
+        "title": "Citas y seguimiento",
+        "body": "Buscamos y reservamos las citas de Padrón y TIE/CUE, te explicamos qué te van a preguntar y seguimos localizables mientras estás en el mostrador. Seguimos el expediente 90 días, hasta la recogida."
       }
     ]
   },
   "pricing": {
     "eyebrow": "Precios transparentes",
-    "title": "Tres paquetes. Tarifas fijas, indicadas con IVA incluido.",
-    "body": "Las tasas administrativas (Modelo 790, expedición de tarjetas) las abona usted directamente a las autoridades españolas y no están incluidas en nuestros honorarios.",
-    "cta": "Ver la comparación completa"
+    "title": "Tres paquetes. Dos precios cada uno, porque hay dos vías.",
+    "body": "La vía UE es menos trabajo y cuesta menos: sin huellas, sin la tasa de 16,08 €. Confirmamos cuál te corresponde en el triaje, antes de que pagues nada. Las tasas públicas las pagas tú, directamente, y nunca están incluidas en nuestra tarifa.",
+    "cta": "Ver la comparativa completa"
   },
   "faq": {
     "eyebrow": "Respuestas directas",
-    "title": "Las preguntas que los padres plantean en primer lugar.",
+    "title": "Lo que preguntan los estudiantes primero.",
     "items": [
       {
-        "q": "¿Son ustedes abogados o una gestoría?",
-        "a": "No. Somos un servicio independiente de facilitación administrativa. Preparamos los documentos a partir de la información que usted nos facilita, concertamos citas y le guiamos a lo largo del proceso. No le representamos ante ninguna autoridad y no ofrecemos asesoramiento jurídico. En caso de que un asunto requiera análisis jurídico, se lo indicaremos con claridad y le recomendaremos que consulte a un colegiado abogado."
+        "q": "¿Sois abogados o una gestoría?",
+        "a": "No. Somos un servicio independiente de acompañamiento administrativo. Preparamos documentos a partir de la información que nos das, reservamos citas y te guiamos por el proceso. No te representamos ante ninguna autoridad y no damos asesoramiento jurídico. Cuando un caso requiere análisis legal, lo decimos claramente y te derivamos a un colegiado abogado."
       },
       {
-        "q": "¿Tiene mi hijo o hija que acudir a las citas en persona?",
-        "a": "Sí. Las citas para la toma de datos biométricos requieren que el solicitante se presente personalmente con los documentos originales. Nosotros preparamos el expediente, reservamos la cita y les informamos detalladamente; sin embargo, la comparecencia debe realizarla el propio solicitante, en su propio nombre."
+        "q": "Creo que ya se me ha pasado el plazo. ¿Merece la pena preguntar?",
+        "a": "Sí, y mejor hoy que la semana que viene. El triaje es gratuito y te lo diremos con honestidad. Si tu plazo se ha cerrado, o estás en situación caducada o irregular, eso requiere un análisis jurídico que no estamos cualificados para dar: te lo diremos y te derivaremos, en lugar de cobrarte."
       },
       {
-        "q": "¿Qué ocurre después con las copias escaneadas del pasaporte?",
-        "a": "Se cifran en reposo con una clave única por archivo y se eliminan de forma permanente 30 días después de que finalice el servicio, mediante una tarea de retención automatizada. Puede solicitar su eliminación anticipada en cualquier momento."
+        "q": "¿Tengo que ir yo a la cita?",
+        "a": "Sí. Las citas biométricas exigen que comparezcas en persona con tus documentos originales. Nosotros preparamos el expediente, conseguimos el hueco y te explicamos todo, y puedes llamarnos desde el mostrador si te preguntan algo que no entiendes. La comparecencia es tuya, a tu propio nombre."
       },
       {
-        "q": "¿Pueden garantizar que se apruebe la tarjeta de residencia?",
-        "a": "No, y cualquier servicio que le garantice esto le está engañando. Las decisiones recaen exclusivamente en las autoridades españolas. Lo que sí controlamos es que el expediente esté completo, sea correcto y se presente a tiempo; ahí es donde, de hecho, se originan la mayoría de las denegaciones."
+        "q": "Pagan mis padres. ¿Pueden participar?",
+        "a": "Por supuesto. Pueden pagar a su propio nombre y recibir la factura, y en el Fixer elaboramos un informe final fechado: qué se presentó, qué está registrado, qué queda pendiente, tu fecha de recogida y los teléfonos para una urgencia. Lo que no haremos es rellenar la sección de representante legal de tu impreso: esa casilla queda en blanco, porque ni nosotros ni ellos somos tu representante."
       },
       {
-        "q": "¿Por qué se abona el Modelo 790 en efectivo?",
-        "a": "El proceso de la Agencia Tributaria española para este formulario se basa en un código de barras único que se lee en la ventanilla de un banco o en el escáner de un cajero automático. Sin un certificado digital español —del que no disponen los recién llegados—, no es posible realizar la liquidación en línea, por lo que el formulario está configurado para el pago «en efectivo»."
+        "q": "¿Qué pasa después con los escaneos de mi pasaporte?",
+        "a": "Se cifran en reposo con una clave única por archivo y se borran de forma permanente 30 días después de que termine tu servicio, mediante un proceso automático. Puedes pedir el borrado antes en cualquier momento."
+      },
+      {
+        "q": "¿Podéis garantizar que me aprueben la tarjeta?",
+        "a": "No, y cualquier servicio que lo garantice te está engañando. La decisión corresponde íntegramente a las autoridades españolas. Lo que sí controlamos es que el expediente esté completo, correcto y presentado a tiempo, que es donde se originan la mayoría de las denegaciones."
       }
     ]
   }

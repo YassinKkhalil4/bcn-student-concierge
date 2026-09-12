@@ -8,7 +8,7 @@
  */
 
 /** Pages offered to crawlers and agents, unprefixed (English URLs). */
-export const PUBLIC_PAGES = ["/", "/pricing", "/legal", "/privacy", "/terms"] as const;
+export const PUBLIC_PAGES = ["/", "/triage", "/pricing", "/legal", "/privacy", "/terms"] as const;
 export type PublicPage = (typeof PUBLIC_PAGES)[number];
 
 /** Never crawled, never rendered as Markdown, in any language. */

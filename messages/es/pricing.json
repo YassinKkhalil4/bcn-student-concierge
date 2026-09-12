@@ -1,79 +1,119 @@
 {
   "tiers": {
-    "baseline": {
-      "name": "Administrative Baseline",
-      "shortName": "Administrative Baseline",
-      "tagline": "Los aspectos legales esenciales, tramitados correctamente a la primera.",
-      "bestFor": "Estudiantes en residencias universitarias que necesitan que alguien se ocupe del papeleo.",
+    "ready-file": {
+      "name": "Ready File",
+      "shortName": "Ready File",
+      "tagline": "El papeleo, terminado y en tus manos, en 48 horas.",
+      "bestFor": "Puedes gestionar tus propias citas; solo necesitas que el expediente esté bien.",
       "features": [
-        "Concertación de citas para el Padrón (registro municipal)",
-        "Reserva de citas con la Policía Nacional para el TIE / CUE",
-        "Generación de los formularios EX-17 o EX-18, ya cumplimentados y listos para imprimir",
-        "Configuración del formulario fiscal con código de barras Modelo 790 Código 012",
-        "Preparación del «Ready File», revisado, en papel y en formato digital"
+        "Tu vía confirmada con tu propia autorización y tu sello de entrada",
+        "Tu EX-17 o EX-18, precumplimentado, aplanado y listo para imprimir",
+        "Modelo 790 Código 012 configurado para pago en efectivo, con una sucursal concreta y su horario de caja",
+        "Tu expediente de Padrón, preparado para el ayuntamiento en el que realmente vives",
+        "Si el piso no está a tu nombre, el modelo de autorización para que lo firme el propietario",
+        "Citas de Padrón y TIE/CUE buscadas y reservadas a tu propio nombre",
+        "Todas las copias hechas, ordenadas como las pide el mostrador y revisadas línea a línea"
       ]
     },
     "soft-landing": {
-      "name": "Digital Soft-Landing",
-      "shortName": "Digital Soft-Landing",
-      "tagline": "Los trámites, y todo lo que hace la ciudad práctica desde el primer día.",
-      "bestFor": "La mayoría de los estudiantes internacionales de primer año que llegan solos.",
+      "name": "Soft Landing",
+      "shortName": "Soft Landing",
+      "tagline": "El papeleo, más las tarjetas que ya deberías llevar encima.",
+      "bestFor": "La mayoría de estudiantes que llegaron hace unas semanas y siguen comprando billetes sencillos.",
       "features": [
-        "Guía para la apertura de una cuenta bancaria en España (de no residente a residente)",
-        "Inscripción en el abono de transporte T-mobilitat / T-jove",
-        "Guía para la selección y activación de tarjetas SIM digitales / eSIM",
-        "Configuración del Carnet Jove y de la tarjeta de estudiante ISIC",
-        "Línea de asistencia dedicada a través de WhatsApp durante el proceso de incorporación"
+        "Una tarjeta T-mobilitat a tu nombre con 90 días cargados: T-jove si tienes menos de 30",
+        "Tu Carnet Jove, solicitado, pagado y perseguido durante la espera de activación",
+        "Tu tarjeta ISIC, comprada y emitida con tu justificante de matrícula",
+        "Una cuenta bancaria que de verdad reciba dinero de casa, o por qué no te hace falta ninguna",
+        "SIM o eSIM ajustada a tu consumo real, con la trampa de la renovación de 28 días explicada",
+        "Una línea de WhatsApp durante 30 días, en inglés, justo cuando surgen las dudas",
+        "Una línea abierta durante tu cita: llámanos desde el mostrador"
       ]
     },
-    "turnkey": {
-      "name": "Turnkey Relocation & Housing Audit",
-      "shortName": "Turnkey Relocation & Housing Audit",
-      "tagline": "Comprobamos el piso antes de que usted realice la transferencia del depósito.",
-      "bestFor": "Familias que contratan una vivienda privada desde el extranjero, sin haberla visto previamente.",
+    "fixer": {
+      "name": "Fixer",
+      "shortName": "Fixer",
+      "tagline": "Todo lo anterior, y además vamos contigo.",
+      "bestFor": "Estás atascado con el Padrón, o aún vas a firmar un piso y quieres que lo leamos antes.",
       "features": [
-        "Búsqueda verificada de alojamientos a partir de anuncios sometidos a controles antifraude",
-        "Verificación de la titularidad en el Registro de la Propiedad (Nota Simple)",
-        "Revisión del contrato de alquiler con verificación legal del límite máximo de la fianza",
-        "Guía para la activación de los servicios públicos (agua, electricidad, Internet)",
-        "Seguimiento de la documentación durante 90 días hasta la recogida de la tarjeta TIE"
+        "Vamos contigo al ayuntamiento y traducimos",
+        "Desbloqueo del Padrón: hostales, subarriendos, un casero que se niega, el municipio equivocado",
+        "Tu tarjeta sanitaria y un médico de cabecera que hable inglés, una vez resuelto el Padrón",
+        "Revisión del contrato el mismo día, contrastada con el límite legal de la fianza",
+        "Propiedad verificada en el registro: tener las llaves no prueba ser el propietario",
+        "Informe del estado del piso al entrar: cada desperfecto fotografiado, firmado y enviado el mismo día",
+        "Seguimiento de 90 días hasta la recogida, e informe final para quien esté pagando"
       ]
     }
   },
   "card": {
-    "mostChosen": "El más elegido",
+    "mostChosen": "La más elegida",
     "plusIva": "+ IVA",
-    "ivaLine": "{iva} IVA (21 %) · <strong>{total} total</strong>",
-    "everythingIn": "Todo lo incluido en {name}, además de:",
-    "bestFor": "Ideal para:",
+    "routeEu": "UE / EEE / Suiza",
+    "routeNonEu": "Fuera de la UE",
+    "totalLine": "{total} en total",
+    "includesCards": "Incluye unos {amount} en tarjetas y transporte, comprados por nosotros y entregados en mano. No son formularios ni códigos de descuento: son las tarjetas reales, funcionando.",
+    "everythingIn": "Todo lo de {name}, y además:",
+    "bestFor": "Ideal si:",
     "select": "Elegir {name}"
   },
   "page": {
-    "metaTitle": "Servicios y tarifas",
-    "metaDescription": "Tres paquetes de tarifa fija para estudiantes internacionales que llegan a Barcelona: Administrative Baseline, Digital Soft-Landing y Turnkey Relocation & Housing Audit.",
-    "eyebrow": "Servicios y tarifas",
-    "title": "Tarifas fijas para un trámite sin plazo de tramitación definido.",
-    "intro": "Todos los paquetes se cotizan sin IVA y se muestran con su importe total, que incluye un {rate} % de IVA, antes de que realice el pago. No se factura por horas y ningún paquete incluye las tasas administrativas.",
-    "govEyebrow": "Tasas administrativas",
-    "govTitle": "El único pago que no podemos realizar en su nombre.",
-    "exclusionsEyebrow": "Total transparencia",
-    "exclusionsTitle": "Lo que no cubre nuestra tarifa.",
+    "metaTitle": "Paquetes y precios",
+    "metaDescription": "Tres paquetes de precio cerrado para estudiantes internacionales que ya están en Barcelona: Ready File, Soft Landing y Fixer. Dos precios por paquete: uno para la vía UE y otro para la vía de fuera de la UE.",
+    "eyebrow": "Paquetes y precios",
+    "title": "Precios cerrados para un proceso sin plazos cerrados.",
+    "intro": "Todos los paquetes se indican sin IVA y se muestran con su total incluyendo el {rate}% de IVA antes de pagar. No facturamos por horas y ningún paquete incluye tasas públicas.",
+    "routesEyebrow": "Por qué dos precios",
+    "routesTitle": "La vía UE es menos trabajo, así que cobramos menos por ella.",
+    "routesBody": "Sin huellas, sin la tasa de 16,08 €, y cuando se cumplen los requisitos el certificado se emite normalmente en la propia cita. Los estudiantes de fuera de la UE necesitan el EX-17, la cita biométrica y, en algunas oficinas, un viaje aparte para recoger la tarjeta. Confirmamos qué vía te corresponde en el triaje, antes de que pagues nada.",
+    "govEyebrow": "Tasas públicas",
+    "govTitle": "El único pago que no podemos hacer por ti.",
+    "honestEyebrow": "Antes de elegir",
+    "honestTitle": "Lo que genera reclamaciones, dicho por adelantado.",
+    "honest": [
+      {
+        "item": "El 790 llega sin pagar, y tiene que ser así",
+        "note": "Es un impreso con código de barras que hay que llevar a una caja o a un cajero, pagar y sellar. El pago online exige un certificado digital español que todavía no tienes. Nosotros lo configuramos, lo imprimimos y te decimos exactamente dónde llevarlo: el viaje es tuyo. Un impreso sin sellar termina la cita."
+      },
+      {
+        "item": "Nuestras copias son copias impresas, no compulsadas",
+        "note": "Imprimimos a partir de los escaneos que subes. Nunca hemos visto tu pasaporte original y no podemos compulsar nada. Tú llevas los originales; la carpeta lleva lo que los acompaña."
+      },
+      {
+        "item": "No podemos hacer que exista una cita",
+        "note": "Buscamos en el portal oficial durante un máximo de seis semanas. Si no se abre ningún hueco en ese plazo, te devolvemos el 50% y conservas todo el Ready File —impresos, copias, 790, revisión— para estar listo el día en que aparezca uno. Nadie puede saltarse legalmente este paso, y cualquier servicio que te diga lo contrario te está vendiendo algo que no tiene."
+      },
+      {
+        "item": "No acudimos a la cita biométrica por ti",
+        "note": "Exige tu presencia, en persona, con los originales. Nosotros preparamos, reservamos, te informamos y seguimos localizables por teléfono. La comparecencia es tuya, a tu propio nombre."
+      },
+      {
+        "item": "Tus 90 días empiezan cuando validas",
+        "note": "La ventana del T-jove corre desde la primera validación, no desde la compra. Pero son 90 días consecutivos una vez que empieza, no 90 días de uso."
+      },
+      {
+        "item": "El T-jove es una regla de edad, no de estudiante",
+        "note": "Solo para menores de 30. No hace falta carné universitario ni Carnet Jove para tener derecho. Si tienes 30 o más, cargamos una T-usual para las zonas que tu trayecto necesita de verdad y te devolvemos la diferencia."
+      }
+    ],
+    "exclusionsEyebrow": "Transparencia total",
+    "exclusionsTitle": "Lo que nuestra tarifa no cubre.",
     "exclusions": [
       {
-        "item": "Tasa estatal del Modelo 790 Código 012",
-        "note": "Se abona directamente a la Agencia Tributaria española en una entidad bancaria. El importe lo fija el Gobierno y varía según el tipo de tarjeta."
+        "item": "Modelo 790 Código 012 y emisión de tarjetas",
+        "note": "Lo pagas tú, directamente, en un banco. El importe lo fija el Gobierno y varía según el tipo de tarjeta."
       },
       {
-        "item": "Matrícula universitaria, fianzas y alquiler",
-        "note": "Nunca gestionamos fondos de clientes para terceros. Todos los pagos se realizan directamente de usted al arrendador o a la institución."
+        "item": "Matrícula, alquiler y fianzas",
+        "note": "Nunca manejamos fondos para terceros. Todo va directamente de ti al propietario o a la institución."
       },
       {
-        "item": "Representación jurídica o recursos",
-        "note": "Queda fuera de nuestro ámbito de actuación. Si su caso lo requiere, se lo indicaremos y le recomendaremos un colegiado abogado."
+        "item": "Representación legal o recursos",
+        "note": "Fuera de nuestro alcance. Si tu caso lo necesita, te lo diremos y te derivaremos a un colegiado abogado."
       },
       {
-        "item": "Servicios de traducción o apostilla",
-        "note": "Identificamos qué documentos requieren traducción jurada y podemos remitirle a un traductor jurado; sus honorarios se cobran por separado."
+        "item": "Traducción jurada o apostilla",
+        "note": "Identificamos lo que la necesita y te derivamos a un traductor jurado; sus honorarios son aparte."
       }
     ]
   }

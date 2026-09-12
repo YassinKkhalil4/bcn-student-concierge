@@ -1,96 +1,100 @@
 {
-  "metaTitle": "BCN Student Concierge — Une installation sans encombre à Barcelone",
-  "metaDescription": "Accompagnement administratif indépendant destiné aux étudiants universitaires internationaux arrivant à Barcelone. Padrón, rendez-vous pour la carte TIE/CUE et préparation des documents.",
+  "metaTitle": "BCN Student Concierge — les démarches de résidence, réussies du premier coup",
+  "metaDescription": "Pour les étudiants internationaux déjà à Barcelone. Padrón, rendez-vous TIE et CUE, formulaires EX-17 et EX-18, préparés et réservés. Le triage gratuit le jour même vous dit où vous en êtes avant tout paiement.",
   "hero": {
-    "eyebrow": "Barcelone · Créé pour les familles internationales",
-    "title": "Une arrivée sans encombre et une installation en toute légalité pour les étudiants universitaires internationaux à Barcelone.",
-    "body": "Votre enfant a obtenu une place dans une université de Barcelone. Seule une série de démarches administratives espagnoles, qui ne pardonne aucune petite erreur et se déroule entièrement en espagnol, l’empêche encore de s’installer. Nous nous chargeons de ces démarches, en les effectuant correctement dès la première fois.",
-    "primaryCta": "Commencer l’inscription sécurisée",
-    "secondaryCta": "Comparer les formules",
-    "note": "Tarifs fixes, IVA incluse, annoncés avant le paiement. Pas de facturation à l’heure."
+    "eyebrow": "Barcelone · Pour les étudiants déjà sur place",
+    "title": "Vous êtes ici depuis deux semaines. Le compte à rebours a commencé le jour de votre arrivée.",
+    "body": "Les étudiants hors UE disposent normalement d’un mois à compter de l’entrée pour demander la TIE. Si vous êtes arrivé la première semaine de septembre, ce délai expire début octobre, et le rendez-vous est la partie que personne ne peut accélérer. Nous montons le dossier pour que, le jour où un créneau s’ouvre, rien de ce que vous apportez ne vous renvoie chez vous.",
+    "primaryCta": "Triage gratuit",
+    "secondaryCta": "Voir les formules",
+    "note": "Le triage est gratuit et traité le jour même. Les formules sont à prix fixe, avec l’IVA indiquée avant paiement."
   },
   "trust": {
-    "heading": "Nous accompagnons des étudiants de",
-    "disclaimer": "Les universités citées sont celles que fréquentent nos clients. Nous sommes un service indépendant et ne sommes ni affiliés à, ni soutenus par, ni agissons pour le compte d’aucune des institutions mentionnées."
+    "heading": "Les étudiants que nous accompagnons étudient à",
+    "disclaimer": "Les universités citées sont celles que fréquentent nos clients. Nous sommes un service indépendant et ne sommes ni affiliés à, ni approuvés par, ni agissant pour le compte d’aucun établissement mentionné."
   },
   "problems": {
-    "eyebrow": "Ce qui pose réellement problème",
-    "title": "Quatre points de rupture, et comment nous éliminons chacun d’eux.",
-    "approach": "Notre approche — ",
+    "eyebrow": "Ce qui échoue vraiment",
+    "title": "Quatre points de rupture, et comment nous supprimons chacun.",
+    "approach": "Ce que nous faisons — ",
     "items": [
       {
         "problem": "Les créneaux de cita previa disparaissent en quelques secondes",
-        "detail": "Les rendez-vous du Padrón et de la Policía Nacional sont publiés de façon irrégulière et pris en quelques minutes par des robots. Les familles qui actualisent un portail en espagnol depuis un autre fuseau horaire en obtiennent rarement un.",
-        "solution": "Nous suivons les créneaux horaires disponibles dans tous les quartiers de Barcelone et prenons rendez-vous au nom de votre étudiant, puis nous vous envoyons la confirmation accompagnée des indications pour vous y rendre et de la liste précise des documents à apporter."
+        "detail": "Les rendez-vous Padrón et de la Policía Nacional sont mis en ligne de façon irrégulière et pris en quelques minutes par des agents automatisés. Rafraîchir un portail en espagnol entre deux cours n’est pas une stratégie.",
+        "solution": "Nous surveillons les fenêtres d’ouverture dans toute la province de Barcelone, et pas seulement au bureau qui vous arrange, et nous réservons à votre nom. Vous recevez un itinéraire daté : adresse, heure, ce qu’il faut apporter, ce qui vous sera demandé."
       },
       {
-        "problem": "Une seule case mal cochée invalide l’ensemble du dossier",
-        "detail": "Un formulaire EX-17 sur lequel un deuxième nom de famille a été indiqué par « N/A », une rubrique « représentant » remplie par un parent bien intentionné, ou un formulaire imprimé avec du texte décalé dans les champs sera refusé au guichet — et le prochain rendez-vous n’est prévu que dans plusieurs semaines.",
-        "solution": "Les formulaires sont générés par un programme à partir de vos données vérifiées, mis en page de manière à ce que rien ne se décale à l’impression, puis recoupés avec les informations figurant sur votre passeport avant que le dossier ne quitte nos locaux."
+        "problem": "Une case erronée annule tout le dossier",
+        "detail": "Un EX-17 avec le second nom de famille rempli par « N/A », une section représentant remplie par quelqu’un d’autre, ou un formulaire imprimé à 94% dont le texte sort de sa case : refusé au guichet, et le prochain rendez-vous est dans plusieurs semaines.",
+        "solution": "Votre formulaire est généré à partir de vos données vérifiées, aplati pour que rien ne bouge à l’impression, et recoupé avec le scan de votre passeport. La section 2 reste définitivement vide, parce que nous ne sommes pas votre représentant."
       },
       {
-        "problem": "Le formulaire fiscal ne peut pas être réglé en ligne",
-        "detail": "Le formulaire Modelo 790 Código 012 comporte un code-barres unique et, pour la plupart des étudiants, doit être réglé en espèces au guichet d’une banque espagnole ou à un distributeur automatique équipé d’un lecteur de code-barres. Il arrive fréquemment que des étudiants se présentent au commissariat avec un formulaire non réglé.",
-        "solution": "Nous configurons le formulaire muni d’un code-barres pour le paiement en espèces et fournissons des instructions étape par étape pour CaixaBank, BBVA et Santander — en précisant notamment quelles agences acceptent les paiements des non-clients."
+        "problem": "Le formulaire de taxe ne se paie pas en ligne",
+        "detail": "Le Modelo 790 Código 012 porte un code-barres unique et, pour la plupart des étudiants, doit être payé en espèces à un guichet ou à un automate équipé d’un lecteur. Beaucoup arrivent au commissariat avec un formulaire impayé.",
+        "solution": "Nous le configurons pour un paiement en espèces, l’imprimons en couleur à 100% et vous indiquons une agence proche de votre rendez-vous avec ses horaires de guichet : toutes n’acceptent pas les paiements de non-clients, et certaines uniquement le matin."
       },
       {
-        "problem": "La fraude au logement cible les étudiants nouvellement arrivés",
-        "detail": "Les annonces publiées depuis l’étranger concernent souvent des sous-locations illégales, des logements appartenant à une autre personne que le « propriétaire », ou des cautions supérieures au plafond légal. Les cautions versées par virement avant l’arrivée sont rarement récupérées.",
-        "solution": "Avec notre formule Turnkey, nous obtenons la Nota Simple auprès du registre foncier pour confirmer qui est réellement propriétaire de l’appartement, et nous vérifions que la caution prévue au contrat respecte le plafond légal avant tout virement."
+        "problem": "Le Padrón bloque discrètement tout le reste",
+        "detail": "Dans une auberge, un Airbnb ou une sous-location non déclarée, vous ne pouvez pas vous enregistrer aujourd’hui. Un propriétaire qui refuse, ou un logement à Sant Cugat alors que vous pensiez Barcelone, bloque la carte de santé et la TIE qui suivent.",
+        "solution": "Avec le Fixer, nous vous accompagnons à la mairie et traduisons, interrogeons la commune sur ses voies de vérification alternatives et traitons la bonne commune. Ce que nous ne faisons jamais, c’est vous enregistrer à une adresse où vous n’habitez pas."
       }
     ]
   },
   "process": {
-    "eyebrow": "La procédure",
-    "title": "Quatre étapes, de l’inscription à la remise de la carte.",
+    "eyebrow": "Comment ça marche",
+    "title": "Le triage gratuit d’abord. Ensuite, si vous nous voulez, quatre étapes.",
     "steps": [
       {
-        "title": "Inscription sécurisée",
-        "body": "Votre étudiant remplit le questionnaire chiffré et envoie son passeport, son certificat de scolarité (matrícula) et son bail. Chaque document est chiffré individuellement en AES-256."
+        "title": "Triage gratuit, le jour même",
+        "body": "Envoyez votre cachet d’entrée, votre autorisation et votre attestation d’inscription. Nous vous disons quelle voie s’applique, combien de jours il vous reste et ce qui est encore récupérable. Sans frais ni engagement."
       },
       {
-        "title": "Constitution du dossier",
-        "body": "Nous générons le bon formulaire — EX-17 pour les étudiants hors UE, EX-18 pour les ressortissants de l’UE —, configurons le Modelo 790 et constituons un « Ready File » pré-vérifié."
+        "title": "Dossier sécurisé",
+        "body": "Vous remplissez le questionnaire chiffré et déposez votre passeport, votre attestation d’inscription et votre bail. Chaque document est chiffré avec sa propre clé."
       },
       {
-        "title": "Rendez-vous pris",
-        "body": "Nous prenons rendez-vous pour le Padrón et la carte TIE/CUE et vous remettons un itinéraire daté : où vous devez vous rendre, ce que vous devez apporter, ce qui vous sera demandé."
+        "title": "Assemblage du dossier",
+        "body": "Nous générons le bon formulaire — EX-17 sur la voie hors UE, EX-18 sur la voie UE —, configurons le Modelo 790 et assemblons le Ready File. Livraison à votre adresse ou retrait, plus un PDF à imprimer chez vous dès l’assemblage terminé."
       },
       {
-        "title": "Installation et suivi",
-        "body": "Les démarches bancaires, les transports et la connexion Internet sont mis en place dès la première semaine. Nous assurons le suivi du dossier pendant 90 jours, jusqu’à la remise de la carte."
+        "title": "Rendez-vous, puis suivi",
+        "body": "Nous cherchons et réservons les rendez-vous Padrón et TIE/CUE, vous expliquons ce qui vous sera demandé et restons joignables pendant que vous êtes au guichet. Nous suivons le dossier pendant 90 jours, jusqu’au retrait."
       }
     ]
   },
   "pricing": {
-    "eyebrow": "Tarification transparente",
-    "title": "Trois formules. Tarifs fixes, IVA incluse.",
-    "body": "Les frais administratifs (Modelo 790, délivrance de cartes) sont à votre charge et doivent être réglés directement aux autorités espagnoles ; ils ne sont pas inclus dans nos honoraires.",
-    "cta": "Voir la comparaison complète"
+    "eyebrow": "Tarifs transparents",
+    "title": "Trois formules. Deux prix chacune, parce qu’il y a deux voies.",
+    "body": "La voie UE demande moins de travail et coûte moins cher : pas d’empreintes, pas de taxe de 16,08 €. Nous confirmons celle qui s’applique à vous lors du triage, avant tout paiement. Les taxes publiques sont payées par vous, directement, et ne sont jamais comprises dans nos honoraires.",
+    "cta": "Voir le comparatif complet"
   },
   "faq": {
-    "eyebrow": "Des réponses claires",
-    "title": "Les questions que les parents posent en premier lieu.",
+    "eyebrow": "Réponses directes",
+    "title": "Ce que les étudiants demandent en premier.",
     "items": [
       {
-        "q": "Êtes-vous des avocats ou une « gestoría » ?",
-        "a": "Non. Nous sommes un service indépendant d’aide administrative. Nous préparons les documents à partir des informations que vous nous fournissez, prenons des rendez-vous et vous guidons tout au long de la procédure. Nous ne vous représentons devant aucune autorité et ne fournissons pas de conseils juridiques. Lorsqu’un dossier nécessite une analyse juridique, nous vous l’indiquons clairement et vous recommandons de consulter un colegiado abogado."
+        "q": "Êtes-vous avocats ou une gestoría ?",
+        "a": "Non. Nous sommes un service indépendant d’accompagnement administratif. Nous préparons des documents à partir des informations que vous nous donnez, réservons des rendez-vous et vous guidons dans la procédure. Nous ne vous représentons devant aucune autorité et ne donnons aucun conseil juridique. Lorsqu’un dossier exige une analyse juridique, nous le disons clairement et vous orientons vers un colegiado abogado."
       },
       {
-        "q": "Mon enfant doit-il se présenter en personne à ces rendez-vous ?",
-        "a": "Oui. Les rendez-vous pour la prise des données biométriques exigent que le demandeur se présente en personne muni des documents originaux. Nous préparons le dossier, réservons le créneau horaire et leur fournissons des explications détaillées — mais c’est à eux de se présenter, en leur propre nom."
+        "q": "Je crois avoir déjà dépassé le délai. Cela vaut-il la peine de demander ?",
+        "a": "Oui, et plutôt aujourd’hui que la semaine prochaine. Le triage est gratuit et nous vous répondrons honnêtement. Si votre délai est expiré, ou si votre situation est périmée ou irrégulière, cela exige une analyse juridique que nous ne sommes pas qualifiés pour fournir : nous vous le dirons et vous orienterons, plutôt que de vous facturer."
       },
       {
-        "q": "Que deviennent les scans de passeport par la suite ?",
-        "a": "Ils sont chiffrés au repos à l’aide d’une clé unique par fichier et supprimés définitivement 30 jours après la fin de votre service, par une tâche de conservation automatisée. Vous pouvez demander une suppression anticipée à tout moment."
+        "q": "Dois-je me rendre moi-même au rendez-vous ?",
+        "a": "Oui. Les rendez-vous biométriques exigent votre présence en personne avec vos documents originaux. Nous préparons le dossier, obtenons le créneau et vous expliquons tout, et vous pouvez nous appeler depuis le guichet si l’on vous demande quelque chose que vous ne comprenez pas. La comparution est la vôtre, en votre nom."
       },
       {
-        "q": "Pouvez-vous garantir que la carte de séjour sera approuvée ?",
-        "a": "Non, et tout service qui vous garantit cela vous induit en erreur. Les décisions relèvent entièrement des autorités espagnoles. Ce que nous contrôlons, c’est que le dossier soit complet, correct et remis dans les délais — c’est d’ailleurs là que réside la cause principale des refus."
+        "q": "Ce sont mes parents qui paient. Peuvent-ils être associés ?",
+        "a": "Bien sûr. Ils peuvent payer en leur nom et recevoir la facture, et avec le Fixer nous produisons un rapport final daté : ce qui a été déposé, ce qui est enregistré, ce qui reste en attente, votre date de retrait et les numéros à appeler en cas d’urgence. Ce que nous ne ferons pas, c’est remplir la section du représentant légal de votre formulaire : cette case reste vide, parce que ni eux ni nous ne sommes votre représentant."
       },
       {
-        "q": "Pourquoi le Modelo 790 est-il payé en espèces ?",
-        "a": "La procédure mise en place par l’administration fiscale espagnole pour ce formulaire repose sur un code-barres unique lu au guichet d’une banque ou par le scanner d’un distributeur automatique. Sans certificat numérique espagnol — dont les nouveaux arrivants ne disposent pas —, le règlement en ligne n’est pas possible ; le formulaire est donc configuré pour un paiement « en efectivo »."
+        "q": "Que deviennent les scans de mon passeport ensuite ?",
+        "a": "Ils sont chiffrés au repos avec une clé unique par fichier et définitivement supprimés 30 jours après la fin de votre service, par une tâche automatique. Vous pouvez demander une suppression anticipée à tout moment."
+      },
+      {
+        "q": "Pouvez-vous garantir que la carte sera accordée ?",
+        "a": "Non, et tout service qui le garantit vous induit en erreur. La décision appartient entièrement aux autorités espagnoles. Ce que nous maîtrisons, c’est que le dossier soit complet, exact et déposé dans les temps — c’est là que naissent la plupart des refus."
       }
     ]
   }

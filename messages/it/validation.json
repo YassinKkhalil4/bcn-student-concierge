@@ -25,5 +25,7 @@
   "taxIdInvalid": "Quel NIF non è valido — lo confronti con quello riportato nel contratto di locazione",
   "companyBoth": "Inserisca sia la ragione sociale che il NIF dell’azienda, oppure lasci entrambi i campi vuoti",
   "companyTaxIdInvalid": "Il NIF (CIF) di tale società non è valido",
-  "cadastralRef": "Un riferimento catastale è composto da 20 lettere e cifre"
+  "cadastralRef": "Un riferimento catastale è composto da 20 lettere e cifre",
+  "entryDateFormat": "Scegli la data in cui sei entrato in Spagna",
+  "entryDateRange": "Quella data è nel futuro, o risale a più di un anno fa: controlla il tuo timbro d’ingresso"
 }
