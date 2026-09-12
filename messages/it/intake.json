@@ -47,14 +47,16 @@
       "hint": "Riportato sul Suo visto, se già assegnato. Lasci vuoto se non ne ha ancora uno."
     },
     "firstSurname": {
-      "label": "Primo cognome"
+      "label": "Primo cognome",
+      "hint": "Il Suo cognome, come riportato sul passaporto. Se ne possiede due, inserisca qui il primo."
     },
     "secondSurname": {
       "label": "Secondo cognome",
-      "hint": "Lasciare in bianco se sul passaporto figura un solo cognome. Non inserire mai “N/A”."
+      "hint": "Solo se sul passaporto è riportato un secondo cognome, come nel caso dei passaporti spagnoli e latinoamericani. In caso contrario, lasciare il campo vuoto — non inserire mai “N/A”."
     },
     "givenName": {
-      "label": "Nome/i"
+      "label": "Nome/i",
+      "hint": "Tutti i Suoi nomi di battesimo, esattamente come riportati sul passaporto."
     },
     "gender": {
       "label": "Sesso"

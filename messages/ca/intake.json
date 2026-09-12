@@ -47,14 +47,16 @@
       "hint": "Consta al vostre visat, si ja us l’han assignat. Deixeu-ho en blanc si encara no en teniu."
     },
     "firstSurname": {
-      "label": "Primer cognom"
+      "label": "Primer cognom",
+      "hint": "El vostre cognom, tal com figura al vostre passaport. Si en teniu dos, introduïu el primer aquí."
     },
     "secondSurname": {
       "label": "Segon cognom",
-      "hint": "Deixeu-ho en blanc si el passaport només mostra un cognom. No hi escriviu mai «N/A»."
+      "hint": "Només si el vostre passaport mostra un segon cognom, com passa als passaports espanyols i llatinoamericans. Si no, deixeu-ho en blanc: no hi escriviu mai «N/A»."
     },
     "givenName": {
-      "label": "Nom(s)"
+      "label": "Nom(s)",
+      "hint": "Tots els vostres noms de pila, exactament tal com apareixen al vostre passaport."
     },
     "gender": {
       "label": "Sexe"

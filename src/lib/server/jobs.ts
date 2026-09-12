@@ -1,5 +1,6 @@
 import { runMigrations, withAdvisoryLock } from "@/lib/db/client";
 import { assertProductionConfig } from "@/lib/config";
+import { missingTemplates, missingTemplatesMessage } from "@/lib/forms/templates";
 import { runMaintenance } from "./maintenance";
 
 /**
@@ -26,6 +27,12 @@ export async function startBackgroundJobs(): Promise<void> {
 
   // Fail fast and loudly, before serving a single request.
   if (production) assertProductionConfig();
+
+  // Official PDFs are mounted, not shipped in the image. Say so at boot: the
+  // alternative is finding out when a student presses Download on their form.
+  const missing = await missingTemplates();
+  if (missing.length) console.error(`[forms] ${missingTemplatesMessage(missing)}`);
+  else console.info("[forms] official templates present");
 
   if ((process.env.MIGRATE_ON_START ?? (production ? "true" : "false")) === "true") {
     // Awaited: Next waits for register() before serving, so no request ever

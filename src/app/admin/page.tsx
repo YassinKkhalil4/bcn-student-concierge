@@ -4,6 +4,7 @@ import { BUCKETS, countCasesByBucket, listCases, type CaseBucket } from "@/lib/s
 import type { DocumentKind } from "@/lib/db/schema";
 import { getTier } from "@/lib/pricing";
 import { countryDisplayName } from "@/lib/countries";
+import { missingTemplates, missingTemplatesMessage } from "@/lib/forms/templates";
 import {
   Badge,
   BUCKET_LABEL,
@@ -44,9 +45,10 @@ export default async function CasesPage({
     : "action";
   const q = (params.q ?? "").slice(0, 100);
 
-  const [counts, rows] = await Promise.all([
+  const [counts, rows, missingForms] = await Promise.all([
     countCasesByBucket(),
     listCases({ bucket, query: q, limit: LIMIT }),
+    missingTemplates(),
   ]);
 
   const href = (b: CaseBucket) =>
@@ -54,6 +56,14 @@ export default async function CasesPage({
 
   return (
     <div className="space-y-6">
+      {/* Without the official PDFs no form can be generated, and the first
+          sign of it would otherwise be a student's failed download. */}
+      {missingForms.length > 0 && (
+        <p role="alert" className="rounded-lg border border-terracotta/40 bg-terracotta/5 px-4 py-3 text-sm text-terracotta">
+          <strong className="font-semibold">Form templates missing.</strong>{" "}
+          {missingTemplatesMessage(missingForms)}
+        </p>
+      )}
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-display text-2xl font-semibold text-ink">Cases</h1>

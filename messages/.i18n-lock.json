@@ -166,9 +166,9 @@
     "intake.fields.nie.label": "14579b1470c36a56",
     "intake.fields.nie.hint": "cd02c19942f1bdb5",
     "intake.fields.firstSurname.label": "2933f235fd6abd06",
-    "intake.fields.secondSurname.label": "cb0ba71da7c4927b",
-    "intake.fields.secondSurname.hint": "aecc4637fcb0aeaf",
-    "intake.fields.givenName.label": "16e2023c5f257c14",
+    "intake.fields.secondSurname.label": "9f5adbb49ad750a2",
+    "intake.fields.secondSurname.hint": "eadbd8b7e5ed83f5",
+    "intake.fields.givenName.label": "8763da0cb2cc2302",
     "intake.fields.gender.label": "a04630ef8bc3da8c",
     "intake.fields.birthDate.label": "eb4c4e239122d42d",
     "intake.fields.birthDate.hint": "42142b654773a784",
@@ -546,7 +546,9 @@
     "validation.taxIdInvalid": "8bb5661efe0ab3c8",
     "validation.companyBoth": "d1af66764a7d55b5",
     "validation.companyTaxIdInvalid": "295249d785cbc4c9",
-    "validation.cadastralRef": "0d13dfd5da8a3cd5"
+    "validation.cadastralRef": "0d13dfd5da8a3cd5",
+    "intake.fields.firstSurname.hint": "86793985adc139c4",
+    "intake.fields.givenName.hint": "caaa5b70d4aa140c"
   },
   "ca": {
     "common.brand": "c137250adbaa1123",
@@ -715,9 +717,9 @@
     "intake.fields.nie.label": "75e882f65f42896d",
     "intake.fields.nie.hint": "b0553e4403dbbc05",
     "intake.fields.firstSurname.label": "691160c572920b6f",
-    "intake.fields.secondSurname.label": "0ec28fc9b1c5bd4a",
+    "intake.fields.secondSurname.label": "0c8f591c0da9e81b",
     "intake.fields.secondSurname.hint": "f450763b335a6792",
-    "intake.fields.givenName.label": "8163ed96cf618402",
+    "intake.fields.givenName.label": "c23c358f68011788",
     "intake.fields.gender.label": "bd26262a011a55af",
     "intake.fields.birthDate.label": "7561ed87c6158fcd",
     "intake.fields.birthDate.hint": "00065cd93a237bc5",
@@ -1095,7 +1097,9 @@
     "validation.taxIdInvalid": "1eb4ad8553792826",
     "validation.companyBoth": "b322d2228ba4858c",
     "validation.companyTaxIdInvalid": "03aef9c780fd2ff1",
-    "validation.cadastralRef": "b43236de578f5708"
+    "validation.cadastralRef": "b43236de578f5708",
+    "intake.fields.firstSurname.hint": "f8a4368772cc9997",
+    "intake.fields.givenName.hint": "4ddc0e06e8ff51d2"
   },
   "fr": {
     "common.brand": "dc05b1b8dbc7b48a",
@@ -1264,9 +1268,9 @@
     "intake.fields.nie.label": "14579b1470c36a56",
     "intake.fields.nie.hint": "cd02c19942f1bdb5",
     "intake.fields.firstSurname.label": "2933f235fd6abd06",
-    "intake.fields.secondSurname.label": "cb0ba71da7c4927b",
-    "intake.fields.secondSurname.hint": "aecc4637fcb0aeaf",
-    "intake.fields.givenName.label": "16e2023c5f257c14",
+    "intake.fields.secondSurname.label": "9f5adbb49ad750a2",
+    "intake.fields.secondSurname.hint": "eadbd8b7e5ed83f5",
+    "intake.fields.givenName.label": "8763da0cb2cc2302",
     "intake.fields.gender.label": "a04630ef8bc3da8c",
     "intake.fields.birthDate.label": "eb4c4e239122d42d",
     "intake.fields.birthDate.hint": "42142b654773a784",
@@ -1644,7 +1648,9 @@
     "validation.taxIdInvalid": "8bb5661efe0ab3c8",
     "validation.companyBoth": "d1af66764a7d55b5",
     "validation.companyTaxIdInvalid": "295249d785cbc4c9",
-    "validation.cadastralRef": "0d13dfd5da8a3cd5"
+    "validation.cadastralRef": "0d13dfd5da8a3cd5",
+    "intake.fields.firstSurname.hint": "86793985adc139c4",
+    "intake.fields.givenName.hint": "caaa5b70d4aa140c"
   },
   "it": {
     "common.brand": "dc05b1b8dbc7b48a",
@@ -1762,9 +1768,9 @@
     "intake.fields.nie.label": "14579b1470c36a56",
     "intake.fields.nie.hint": "cd02c19942f1bdb5",
     "intake.fields.firstSurname.label": "2933f235fd6abd06",
-    "intake.fields.secondSurname.label": "cb0ba71da7c4927b",
-    "intake.fields.secondSurname.hint": "aecc4637fcb0aeaf",
-    "intake.fields.givenName.label": "16e2023c5f257c14",
+    "intake.fields.secondSurname.label": "9f5adbb49ad750a2",
+    "intake.fields.secondSurname.hint": "eadbd8b7e5ed83f5",
+    "intake.fields.givenName.label": "8763da0cb2cc2302",
     "intake.fields.gender.label": "a04630ef8bc3da8c",
     "intake.fields.birthDate.label": "eb4c4e239122d42d",
     "intake.fields.birthDate.hint": "42142b654773a784",
@@ -2183,7 +2189,9 @@
     "legal.terms.clauses.6.heading": "cb3059d55fcef5b0",
     "legal.terms.clauses.6.paragraphs.0": "218a7083d878cb7e",
     "legal.terms.clauses.7.heading": "a1f79986f68c7883",
-    "legal.terms.clauses.7.paragraphs.0": "018258078c31de99"
+    "legal.terms.clauses.7.paragraphs.0": "018258078c31de99",
+    "intake.fields.firstSurname.hint": "86793985adc139c4",
+    "intake.fields.givenName.hint": "caaa5b70d4aa140c"
   },
   "de": {
     "common.brand": "dc05b1b8dbc7b48a",
@@ -2351,10 +2359,10 @@
     "intake.fields.passportNumber.label": "0b5cb6ac48b3b65c",
     "intake.fields.nie.label": "14579b1470c36a56",
     "intake.fields.nie.hint": "cd02c19942f1bdb5",
-    "intake.fields.firstSurname.label": "2933f235fd6abd06",
-    "intake.fields.secondSurname.label": "cb0ba71da7c4927b",
-    "intake.fields.secondSurname.hint": "aecc4637fcb0aeaf",
-    "intake.fields.givenName.label": "16e2023c5f257c14",
+    "intake.fields.firstSurname.label": "7b4888049459f04a",
+    "intake.fields.secondSurname.label": "9f5adbb49ad750a2",
+    "intake.fields.secondSurname.hint": "eadbd8b7e5ed83f5",
+    "intake.fields.givenName.label": "8763da0cb2cc2302",
     "intake.fields.gender.label": "a04630ef8bc3da8c",
     "intake.fields.birthDate.label": "eb4c4e239122d42d",
     "intake.fields.birthDate.hint": "42142b654773a784",
@@ -2732,6 +2740,8 @@
     "validation.taxIdInvalid": "8bb5661efe0ab3c8",
     "validation.companyBoth": "d1af66764a7d55b5",
     "validation.companyTaxIdInvalid": "295249d785cbc4c9",
-    "validation.cadastralRef": "0d13dfd5da8a3cd5"
+    "validation.cadastralRef": "0d13dfd5da8a3cd5",
+    "intake.fields.firstSurname.hint": "86793985adc139c4",
+    "intake.fields.givenName.hint": "caaa5b70d4aa140c"
   }
 }

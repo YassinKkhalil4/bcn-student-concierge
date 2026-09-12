@@ -47,14 +47,16 @@
       "hint": "Figura en su visado, si ya se le ha asignado. Déjelo en blanco si todavía no lo tiene."
     },
     "firstSurname": {
-      "label": "Primer apellido"
+      "label": "Primer apellido",
+      "hint": "Su apellido, tal y como figura en su pasaporte. Si tiene dos, introduzca aquí el primero."
     },
     "secondSurname": {
       "label": "Segundo apellido",
-      "hint": "Déjelo en blanco si en su pasaporte solo figura un apellido. No introduzca nunca «N/A»."
+      "hint": "Solo si su pasaporte incluye un segundo apellido, como ocurre con los pasaportes españoles y latinoamericanos. En caso contrario, déjelo en blanco; nunca introduzca «N/A»."
     },
     "givenName": {
-      "label": "Nombre(s)"
+      "label": "Nombre(s)",
+      "hint": "Todos sus nombres de pila, exactamente tal y como figuran en su pasaporte."
     },
     "gender": {
       "label": "Sexo"

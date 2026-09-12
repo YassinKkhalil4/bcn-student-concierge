@@ -8,12 +8,20 @@ import { enrolmentRequest } from "@/lib/request-templates";
 import { LocalizedCopyButton } from "@/components/LocalizedCopyButton";
 import { DocumentUpload } from "@/components/intake/DocumentUpload";
 
+/**
+ * Barcelona institutions our students attend, for the datalist. The field
+ * stays free text — this only saves typing, and the list is not exhaustive.
+ */
 const KNOWN_UNIVERSITIES = [
-  "EU Business School",
-  "Harbour.Space University",
-  "IESE Business School",
-  "ESADE",
   "Barcelona Technology School",
+  "ESADE Business School",
+  "ESEI International Business School Barcelona",
+  "EU Business School Barcelona",
+  "GBSB Global Business School",
+  "Geneva Business School (Barcelona Campus)",
+  "Harbour.Space Institute",
+  "IED Barcelona (European Institute of Design)",
+  "IESE Business School",
 ];
 
 /**
@@ -24,10 +32,11 @@ const KNOWN_UNIVERSITIES = [
  */
 export function EnrolmentWizard({
   person,
-  uploaded,
+  uploaded = [],
 }: {
   person: Pick<IntakeData, "identity" | "address">;
-  uploaded: readonly DocumentKind[];
+  /** Kinds already on file — omitted during intake, where nothing is yet. */
+  uploaded?: readonly DocumentKind[];
 }) {
   const t = useTranslations("portal.enrolment");
   const locale = useLocale();

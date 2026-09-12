@@ -9,8 +9,8 @@ import {
   fillPadronAuthorization,
   AuthorizationNotApplicableError,
   UnprintableCharactersError,
-  AUTHORIZATION_TEMPLATE,
 } from "../src/lib/forms/padron-authorization";
+import { AUTHORIZATION_TEMPLATE } from "../src/lib/forms/templates";
 import { academicYear, enrolmentRequest, residenceRequest, COLLECTIVE_AUTHORIZATION_URL } from "../src/lib/request-templates";
 
 const raw = {

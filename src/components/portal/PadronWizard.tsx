@@ -32,10 +32,11 @@ function initialPath(uploaded: readonly DocumentKind[]): Path | null {
  */
 export function PadronWizard({
   person,
-  uploaded,
+  uploaded = [],
 }: {
   person: Pick<IntakeData, "identity" | "address">;
-  uploaded: readonly DocumentKind[];
+  /** Kinds already on file — omitted during intake, where nothing is yet. */
+  uploaded?: readonly DocumentKind[];
 }) {
   const t = useTranslations("portal.padron");
   const [path, setPath] = useState<Path | null>(() => initialPath(uploaded));

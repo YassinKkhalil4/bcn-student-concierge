@@ -7,6 +7,7 @@ import { embedUnicodeFonts, unsupportedCharacters } from "@/lib/pdf/fonts";
 import { formatSpanishId, isValidPersonalId, isValidSpanishTaxId, isValidCif } from "@/lib/spanish-ids";
 import { TemplateNotFoundError } from "./pdf";
 import { vkey } from "@/lib/validation-keys";
+import { AUTHORIZATION_TEMPLATE, TEMPLATE_DIR, templatePath } from "./templates";
 
 /**
  * Barcelona's official "Autorització d'inscripció al Padró municipal
@@ -21,10 +22,7 @@ import { vkey } from "@/lib/validation-keys";
  * the form is generated on request, streamed back, and forgotten.
  */
 
-export const AUTHORIZATION_TEMPLATE = "Autoritzaciodomicili_cat.pdf";
 
-const TEMPLATE_DIR =
-  process.env.FORM_TEMPLATE_DIR ?? path.join(process.cwd(), "templates", "forms");
 
 /** Field name → what the printed form asks for there. */
 const FIELD = {
@@ -203,7 +201,7 @@ export async function fillPadronAuthorization(
 
   let bytes: Buffer;
   try {
-    bytes = await readFile(path.join(TEMPLATE_DIR, AUTHORIZATION_TEMPLATE));
+    bytes = await readFile(templatePath(AUTHORIZATION_TEMPLATE));
   } catch {
     throw new TemplateNotFoundError(
       `${AUTHORIZATION_TEMPLATE} is missing from ${TEMPLATE_DIR} — see docs/FORMS.md.`,

@@ -1,4 +1,8 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
+import path from "node:path";
+import { existsSync } from "node:fs";
+import { mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { buildFieldValues, selectForm, TEMPLATES } from "../src/lib/forms/field-map";
 import { COUNTRY_CODES, EU_EEA_CH, spanishFormName } from "../src/lib/countries";
 import { intakeSchema } from "../src/lib/schema";
@@ -179,5 +183,54 @@ describe("upload validation", () => {
     expect(sanitizeFilename("../../etc/passwd")).toBe("passwd");
     expect(sanitizeFilename("a/b/c/scan.pdf")).toBe("scan.pdf");
     expect(sanitizeFilename("shell$(rm -rf).pdf")).toBe("shell__rm_-rf_.pdf");
+  });
+});
+
+describe("template location", () => {
+  /**
+   * Regression: FORM_TEMPLATE_DIR is a relative path in .env.example, so it
+   * used to be read against the process's working directory. The same
+   * configuration then found the PDFs when the app was started from the
+   * project directory and reported "template not found" when it was not.
+   */
+  const load = async (dir?: string) => {
+    vi.resetModules();
+    const previous = process.env.FORM_TEMPLATE_DIR;
+    if (dir === undefined) delete process.env.FORM_TEMPLATE_DIR;
+    else process.env.FORM_TEMPLATE_DIR = dir;
+    try {
+      return await import("../src/lib/forms/templates");
+    } finally {
+      if (previous === undefined) delete process.env.FORM_TEMPLATE_DIR;
+      else process.env.FORM_TEMPLATE_DIR = previous;
+    }
+  };
+
+  it("resolves a relative FORM_TEMPLATE_DIR to an absolute path", async () => {
+    const { TEMPLATE_DIR } = await load("./templates/forms");
+    expect(path.isAbsolute(TEMPLATE_DIR)).toBe(true);
+    expect(TEMPLATE_DIR).toBe(path.join(process.cwd(), "templates", "forms"));
+  });
+
+  it("falls back to the project's templates/forms when unset", async () => {
+    const { TEMPLATE_DIR } = await load(undefined);
+    expect(TEMPLATE_DIR).toBe(path.join(process.cwd(), "templates", "forms"));
+  });
+
+  it("names every missing template, and the directory it looked in", async () => {
+    const empty = await mkdtemp(path.join(tmpdir(), "bcn-templates-"));
+    const { missingTemplates, missingTemplatesMessage, REQUIRED_TEMPLATES } = await load(empty);
+    const missing = await missingTemplates();
+    expect(missing).toEqual(REQUIRED_TEMPLATES);
+    expect(missingTemplatesMessage(missing)).toContain(empty);
+    expect(missingTemplatesMessage(missing)).toContain("EX-18-official.pdf");
+    await rm(empty, { recursive: true, force: true });
+  });
+
+  it("reports nothing missing when the official PDFs are in place", async () => {
+    const { missingTemplates } = await load(undefined);
+    // Skipped on a fresh clone: the official PDFs are not redistributable.
+    if (!existsSync(path.join(process.cwd(), "templates", "forms", "EX-18-official.pdf"))) return;
+    expect(await missingTemplates()).toEqual([]);
   });
 });

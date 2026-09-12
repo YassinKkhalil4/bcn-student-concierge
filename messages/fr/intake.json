@@ -47,14 +47,16 @@
       "hint": "Figure sur votre visa, s’il vous a déjà été attribué. Laissez vide si vous n’en avez pas encore."
     },
     "firstSurname": {
-      "label": "Premier nom de famille"
+      "label": "Premier nom de famille",
+      "hint": "Votre nom de famille, tel qu’il figure sur votre passeport. Si vous en avez deux, saisissez ici le premier."
     },
     "secondSurname": {
       "label": "Deuxième nom de famille",
-      "hint": "Laissez ce champ vide si votre passeport ne mentionne qu’un seul nom de famille. Ne saisissez jamais « N/A »."
+      "hint": "À remplir uniquement si votre passeport mentionne un deuxième nom de famille, comme c’est le cas pour les passeports espagnols et latino-américains. Dans le cas contraire, laissez ce champ vide — n’indiquez jamais « N/A »."
     },
     "givenName": {
-      "label": "Prénom(s)"
+      "label": "Prénom(s)",
+      "hint": "Tous vos prénoms, exactement tels qu’ils figurent sur votre passeport."
     },
     "gender": {
       "label": "Sexe"
