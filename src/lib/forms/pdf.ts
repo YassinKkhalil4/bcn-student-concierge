@@ -9,6 +9,7 @@ import {
   type FieldValues,
   type FormId,
 } from "./field-map";
+import { TEMPLATE_DIR, TEMPLATE_FILES, templatePath } from "./templates";
 import {
   FORM_LAYOUTS,
   isCalibrated,
@@ -33,15 +34,6 @@ import {
  *    guaranteed: there is no code path that could write to them.
  */
 
-const TEMPLATE_DIR =
-  process.env.FORM_TEMPLATE_DIR ?? path.join(process.cwd(), "templates", "forms");
-
-/** Official templates are suffixed to distinguish them from test fixtures. */
-const TEMPLATE_FILES: Record<FormId, string> = {
-  "EX-17": "EX-17-official.pdf",
-  "EX-18": "EX-18-official.pdf",
-};
-
 export class TemplateNotFoundError extends Error {}
 export class UncalibratedFormError extends Error {}
 export class FieldOverflowError extends Error {}
@@ -58,7 +50,7 @@ export interface FillResult {
 }
 
 async function loadTemplate(formId: FormId): Promise<PDFDocument> {
-  const file = path.join(TEMPLATE_DIR, TEMPLATE_FILES[formId]);
+  const file = templatePath(TEMPLATE_FILES[formId]);
   try {
     return await PDFDocument.load(await readFile(file), {
       throwOnInvalidObject: false,

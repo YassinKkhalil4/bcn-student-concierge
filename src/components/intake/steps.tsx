@@ -62,9 +62,9 @@ export function IdentityStep(props: StepProps) {
     <FieldGroup title={t("identity.title")} description={t("identity.description")}>
       <Field {...f("passportNumber")} autoComplete="off" maxLength={20} />
       <Field {...f("nie")} required={false} placeholder="X1234567L" maxLength={9} />
+      <Field {...f("givenName")} autoComplete="given-name" />
       <Field {...f("firstSurname")} autoComplete="family-name" />
       <Field {...f("secondSurname")} required={false} />
-      <Field {...f("givenName")} autoComplete="given-name" />
       <SelectField {...f("gender")} options={genders}
         hint={t("field.officialCodes", { codes: GENDERS.join(" / ") })} />
       <Field {...f("birthDate")} uppercase={false} placeholder={t("fields.birthDate.placeholder")}

@@ -11,6 +11,8 @@ import {
 } from "@/lib/schema";
 import { TIERS, getTier, priceWithIva, formatEur } from "@/lib/pricing";
 import { DocumentUpload } from "./DocumentUpload";
+import { PadronWizard } from "@/components/portal/PadronWizard";
+import { EnrolmentWizard } from "@/components/portal/EnrolmentWizard";
 import { Modelo790Notice } from "@/components/Modelo790Notice";
 import { Link } from "@/i18n/navigation";
 import {
@@ -53,7 +55,8 @@ const STEP_SCHEMAS = [identitySchema, familySchema, addressSchema, contactSchema
 
 export function IntakeWizard({ initialTier }: { initialTier: string }) {
   const t = useTranslations("intake");
-  const tp = useTranslations("pricing");
+  const tp = useTranslations("portal.file");
+  const tprice = useTranslations("pricing");
   const locale = useLocale();
   const [tierId, setTierId] = useState(() =>
     getTier(initialTier) ? initialTier : "soft-landing",
@@ -72,6 +75,18 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const tier = getTier(tierId) ?? TIERS[1]!;
+  /**
+   * The student's own data, for the wizards that build their Padrón and
+   * enrolment requests. Parsed from what they just submitted — the same
+   * schemas the server used — and never sent anywhere by those wizards.
+   */
+  const person = useMemo(() => {
+    const identity = identitySchema.safeParse(values);
+    const address = addressSchema.safeParse(values);
+    return identity.success && address.success
+      ? { identity: identity.data, address: address.data }
+      : null;
+  }, [values]);
   const price = useMemo(() => priceWithIva(tier.basePriceCents), [tier]);
 
   const set = (key: string) => (value: string) => {
@@ -281,8 +296,40 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                 })}
               </p>
 
-              <div className="mt-7">
-                <DocumentUpload />
+              {/* The same sections, and the same wizards, as the portal: a
+                  student who can get everything now should not have to come
+                  back for it. Section titles are shared with the portal so the
+                  two screens read identically. */}
+              <div className="mt-8 space-y-8">
+                <section>
+                  <h3 className="font-display text-lg font-semibold text-ink">{tp("passport")}</h3>
+                  <div className="mt-4">
+                    <DocumentUpload kinds={["passport"]} />
+                  </div>
+                </section>
+
+                {person && (
+                  <>
+                    <section>
+                      <h3 className="font-display text-lg font-semibold text-ink">{tp("enrolment")}</h3>
+                      <div className="mt-4">
+                        <EnrolmentWizard person={person} />
+                      </div>
+                    </section>
+
+                    <section>
+                      <h3 className="font-display text-lg font-semibold text-ink">{tp("padron")}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                        {tp("padronIntro", {
+                          address: `${person.address.streetName} ${person.address.buildingNumber}`,
+                        })}
+                      </p>
+                      <div className="mt-5">
+                        <PadronWizard person={person} />
+                      </div>
+                    </section>
+                  </>
+                )}
               </div>
 
               <div className="mt-8">
@@ -334,7 +381,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
         <div className="rounded-2xl border border-bone-line bg-white p-6">
           <p className="eyebrow">{t("summary.selected")}</p>
           <h2 className="mt-2.5 font-display text-lg font-semibold text-ink">
-            {tp(`tiers.${tier.id}.name`)}
+            {tprice(`tiers.${tier.id}.name`)}
           </h2>
 
           <dl className="mt-5 space-y-2 border-y border-bone-line py-4 text-sm">
@@ -367,7 +414,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
               >
                 {TIERS.map((option) => (
                   <option key={option.id} value={option.id}>
-                    {tp(`tiers.${option.id}.name`)}
+                    {tprice(`tiers.${option.id}.name`)}
                   </option>
                 ))}
               </select>

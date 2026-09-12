@@ -47,14 +47,16 @@
       "hint": "Steht auf Ihrem Visum, falls bereits zugeteilt. Leer lassen, wenn Sie noch keine haben."
     },
     "firstSurname": {
-      "label": "Erster Nachname"
+      "label": "Nachname",
+      "hint": "Ihr Nachname, wie er in Ihrem Reisepass steht. Falls Sie zwei Nachnamen haben, geben Sie hier den ersten ein."
     },
     "secondSurname": {
       "label": "Zweiter Nachname",
-      "hint": "Bitte lassen Sie das Feld leer, wenn in Ihrem Reisepass nur ein Nachname angegeben ist. Geben Sie niemals „N/A“ ein."
+      "hint": "Nur wenn in Ihrem Reisepass ein zweiter Familienname angegeben ist, wie es bei spanischen und lateinamerikanischen Reisepässen der Fall ist. Andernfalls lassen Sie das Feld leer – geben Sie niemals „N/A“ ein."
     },
     "givenName": {
-      "label": "Vorname(n)"
+      "label": "Vorname(n)",
+      "hint": "Alle Ihre Vornamen, genau wie in Ihrem Reisepass angegeben."
     },
     "gender": {
       "label": "Geschlecht"

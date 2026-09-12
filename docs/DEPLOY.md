@@ -92,6 +92,18 @@ scp EX-17-official.pdf EX-18-official.pdf Autoritzaciodomicili_cat.pdf \
     deploy@bcnstudent.com:/srv/bcnstudent/templates/forms/
 ```
 
+The filenames matter — they are what the app looks for. At every start the app
+logs which it found:
+
+```
+[forms] official templates present
+[forms] EX-18-official.pdf missing from /app/templates/forms — copy the official PDFs there (docs/FORMS.md).
+```
+
+A missing template does not stop the site, so payments and uploads keep
+working; the staff dashboard shows a banner, and form downloads return a
+"temporarily unavailable" error until the file is in place.
+
 Start:
 
 ```bash

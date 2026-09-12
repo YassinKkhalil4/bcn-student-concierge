@@ -47,14 +47,16 @@
       "hint": "On your visa, if issued. Leave blank if you do not have one yet."
     },
     "firstSurname": {
-      "label": "First surname"
+      "label": "Last name",
+      "hint": "Your family name, as in your passport. If you have two, enter the first one here."
     },
     "secondSurname": {
-      "label": "Second surname",
-      "hint": "Leave blank if your passport shows only one surname. Never enter “N/A”."
+      "label": "Second last name",
+      "hint": "Only if your passport shows a second family name, as Spanish and Latin American passports do. Leave blank otherwise — never enter “N/A”."
     },
     "givenName": {
-      "label": "Given name(s)"
+      "label": "First name(s)",
+      "hint": "All your given names, exactly as in your passport."
     },
     "gender": {
       "label": "Gender"

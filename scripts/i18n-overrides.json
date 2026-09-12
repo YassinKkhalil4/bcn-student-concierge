@@ -152,7 +152,7 @@
     "intake.contact.description": "Fem servir aquestes dades per confirmar les cites. Si ja el sabeu, indiqueu el número que l’estudiant farà servir a Espanya.",
     "intake.fields.nie.hint": "Consta al vostre visat, si ja us l’han assignat. Deixeu-ho en blanc si encara no en teniu.",
     "intake.fields.firstSurname.label": "Primer cognom",
-    "intake.fields.secondSurname.hint": "Deixeu-ho en blanc si el passaport només mostra un cognom. No hi escriviu mai «N/A».",
+    "intake.fields.secondSurname.hint": "Només si el vostre passaport mostra un segon cognom, com passa als passaports espanyols i llatinoamericans. Si no, deixeu-ho en blanc: no hi escriviu mai «N/A».",
     "intake.fields.gender.label": "Sexe",
     "intake.fields.birthDate.hint": "Primer el dia, com als formularis espanyols.",
     "intake.fields.motherFirstName.label": "Nom de la mare",
