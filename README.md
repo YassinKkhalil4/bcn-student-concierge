@@ -121,6 +121,21 @@ enforced in the schema and tested from both directions.
 **Prices come from the server-side tier table,** keyed by the tier stored on the
 case — never from the request body.
 
+**Crawlers and agents get the public pages, and only those.** `robots.txt`
+(RFC 9309) opens the marketing and legal pages, closes `/intake`, `/portal`,
+`/admin` and `/api` to every crawler, and carries Content Signals
+(`ai-train=no, search=yes, ai-input=yes` — a business decision, set in
+`src/app/robots.txt/route.ts`). The sitemap lists the same pages in all six
+languages with their `hreflang` alternates. Those pages also answer
+`Accept: text/markdown`, and have a `.md` address (`/pricing.md`,
+`/fr/privacy.md`), advertised with a `Link: …; rel="describedby"` header —
+an assistant reads clean Markdown instead of scraping HTML. The Markdown is
+generated from the same message catalogues and the same price table as the
+pages, so it cannot quote stale wording or a stale price, and every document
+carries the scope-of-service disclaimer. `src/lib/agents/pages.ts` is the one
+list of public pages, shared by all three, and `tests/agents.test.ts` fails if
+anything private reaches it.
+
 **Six languages, and only six:** English (main, unprefixed URLs), Spanish,
 Catalan, French, Italian and German (`/es`, `/ca`, `/fr`, `/it`, `/de`). The
 staff dashboard is English only. Catalogues are translated by

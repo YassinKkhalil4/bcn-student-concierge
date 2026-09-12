@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
 import { localizedPath, routing, splitLocale } from "@/i18n/routing";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin/session";
+import { isPublicPage, markdownPath, type PublicPage } from "@/lib/agents/pages";
 import { PORTAL_COOKIE, verifyPortalSession } from "@/lib/portal/session";
 
 /**
  * Middleware issues the per-request CSP nonce, routes public pages to their
- * language (next-intl), and is the first of two gates on both the staff
- * dashboard and the student portal.
+ * language (next-intl), answers agents that ask for Markdown, and is the first
+ * of two gates on both the staff dashboard and the student portal.
  *
  * Rate limiting is NOT here: middleware runs in the Edge sandbox, which cannot
  * reach Postgres. It is enforced in each route handler (src/lib/rate-limit.ts),
@@ -42,6 +43,28 @@ const PORTAL_PUBLIC = new Set([
   "/api/portal/verify",
   "/api/portal/logout",
 ]);
+
+/**
+ * Agents get the page as Markdown instead of HTML, either by asking for it
+ * (`Accept: text/markdown`) or through the page's `.md` URL. Only the public
+ * pages have one; nothing behind a session is ever rendered this way.
+ */
+function markdownRequest(
+  request: NextRequest,
+  unprefixed: string,
+): { page: PublicPage; negotiated: boolean } | null {
+  if (request.method !== "GET") return null;
+  const asked = (request.headers.get("accept") ?? "").includes("text/markdown");
+  const fromUrl = unprefixed.endsWith(".md")
+    ? unprefixed === "/index.md"
+      ? "/"
+      : unprefixed.slice(0, -3)
+    : null;
+  const page = fromUrl ?? unprefixed;
+  if (!isPublicPage(page)) return null;
+  if (fromUrl !== null) return { page, negotiated: false };
+  return asked ? { page, negotiated: true } : null;
+}
 
 function buildCsp(nonce: string, isDev: boolean): string {
   return [
@@ -119,6 +142,24 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   requestHeaders.set("x-nonce", nonce);
   requestHeaders.set("Content-Security-Policy", csp);
 
+  // ── Markdown for agents ──────────────────────────────────────────────
+  // Which page, and whether Accept asked for it, travel as request headers:
+  // a rewrite's query string does not survive to the handler.
+  const markdown = !admin && !api && !portal ? markdownRequest(request, unprefixed) : null;
+  if (markdown) {
+    requestHeaders.set("x-agent-markdown-path", markdown.page);
+    requestHeaders.set("x-agent-markdown-locale", locale);
+    // Next overwrites Vary with its own router list, so a negotiated response
+    // (same URL, HTML or Markdown depending on Accept) must not be stored by a
+    // shared cache. The .md URLs are distinct and stay cacheable.
+    if (markdown.negotiated) requestHeaders.set("x-agent-markdown-negotiated", "1");
+    const served = NextResponse.rewrite(new URL("/api/agent/markdown", request.nextUrl.origin), {
+      request: { headers: requestHeaders },
+    });
+    served.headers.set("Content-Security-Policy", csp);
+    return served;
+  }
+
   // Public pages go through next-intl, which rewrites "/pricing" to the "en"
   // route and handles "/fr/…". It copies the headers of the request it is
   // given into its rewrite, so it receives ours — nonce and CSP included.
@@ -129,10 +170,23 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
       : intl(new NextRequest(request, { headers: requestHeaders }));
   response.headers.set("Content-Security-Policy", csp);
   if (admin || portal) markPrivate(response);
+
+  // Tell agents the page has a machine-readable form (RFC 8288). Appended:
+  // next-intl already put the hreflang alternates in this header.
+  if (!admin && !api && !portal && isPublicPage(unprefixed)) {
+    const md = new URL(markdownPath(unprefixed), request.nextUrl.origin);
+    response.headers.append(
+      "Link",
+      `<${md}>; rel="describedby"; type="text/markdown", <${md}>; rel="alternate"; type="text/markdown"`,
+    );
+    response.headers.append("Vary", "Accept");
+  }
   return response;
 }
 
 export const config = {
   // Static assets carry no scripts and need neither a nonce nor the gate.
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  // robots.txt and sitemap.xml are skipped too: they have no language, and
+  // next-intl would otherwise route "/robots.txt" to "/en/robots.txt".
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|robots\\.txt|sitemap\\.xml).*)"],
 };
