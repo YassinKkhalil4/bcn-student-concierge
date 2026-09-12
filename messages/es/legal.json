@@ -162,20 +162,27 @@
         ]
       },
       {
-        "heading": "6. Cancelaciones y reembolsos",
+        "heading": "6. Citas, temporada alta y demoras",
         "paragraphs": [
-          "Antes de empezar el trabajo: reembolso íntegro. Una vez iniciada la preparación pero antes de reservar citas: reembolso del 50%. Una vez obtenidas las citas: sin reembolso, ya que el valor sustancial se ha entregado. Si no podemos prestar el servicio por causas bajo nuestro control, recibes un reembolso íntegro.",
-          "Al margen de lo anterior, y sea cual sea la fase en la que se encuentre el resto de tu expediente: buscamos cita en el portal oficial durante un máximo de seis semanas. Si no se abre ningún hueco en ese plazo, recibes el 50% de la tarifa y conservas todo el Ready File —impresos, copias, Modelo 790 y revisión— para estar listo el día en que aparezca uno. La disponibilidad de citas no está bajo nuestro control, y por eso esto se formula como reembolso y no como garantía."
+          "Los sistemas de cita previa de la Administración española se saturan durante los periodos de mayor llegada internacional, en particular septiembre y octubre: los huecos se liberan de forma irregular y se ocupan en cuestión de minutos. Nuestro plazo estándar para conseguir tu cita de Padrón o de extranjería es, por tanto, de hasta 30 días desde que envías tu alta.",
+          "Si no hay ningún hueco disponible antes de un plazo que te sea aplicable, emitimos un certificado formal que documenta nuestros intentos continuados de reservarla, con la fecha y la hora de cada uno. Las autoridades españolas suelen aceptar esta prueba de saturación del sistema como justificación válida de un registro tardío. Suelen no es siempre: la decisión corresponde a la oficina que tengas delante, y no podemos garantizar cómo la recibirá un funcionario concreto."
         ]
       },
       {
-        "heading": "7. Protección de datos",
+        "heading": "7. Cancelación y reembolsos",
+        "paragraphs": [
+          "Antes de empezar el trabajo: reembolso íntegro. Una vez iniciada la preparación pero antes de reservar citas: reembolso del 50%. Una vez obtenidas las citas: sin reembolso, ya que el valor sustancial se ha entregado. Si no podemos prestar el servicio por causas bajo nuestro control, recibes un reembolso íntegro.",
+          "Al margen de lo anterior, y sea cual sea la fase en la que se encuentre el resto de tu expediente: si nos resulta completamente imposible conseguirte una cita en un plazo de 30 días desde el envío de tu alta, tienes derecho a un reembolso del 50% de la tarifa del servicio. Es la mitad y no la totalidad porque la otra mitad se entregó el mismo día en que pagaste —el acceso al portal, tus impresos generados y el Modelo 790, la preparación documental y el soporte administrativo— y todo ello lo conservas, de modo que estés listo el día en que sí se abra un hueco. La disponibilidad de citas no está bajo nuestro control, y por eso esto se formula como reembolso y no como garantía."
+        ]
+      },
+      {
+        "heading": "8. Protección de datos",
         "paragraphs": [
           "El tratamiento de datos se rige por nuestro <privacyLink>aviso de privacidad</privacyLink>, incluida la eliminación automática de los documentos de identidad 30 días después de la finalización del servicio."
         ]
       },
       {
-        "heading": "8. Legislación aplicable",
+        "heading": "9. Legislación aplicable",
         "paragraphs": [
           "Las presentes condiciones se rigen por la legislación española. Los litigios en materia de consumo podrán someterse a los tribunales del domicilio del consumidor, y podrá recurrir al Sistema Arbitral de Consumo español o a la plataforma de resolución de litigios en línea de la UE."
         ]
