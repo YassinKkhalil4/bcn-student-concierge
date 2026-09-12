@@ -1,13 +1,21 @@
-# BCN Student Concierge — single-VPS deployment.
+# BCN Student Concierge — single-VPS deployment, behind a HOST Caddy.
 #
 #   cp .env.example .env    # then fill it in (see docs/DEPLOY.md)
 #   docker compose up -d --build
 #
 # Topology:
-#   internet ──443──▶ caddy ──▶ app ──▶ db
-# Only Caddy publishes ports. The app is reachable solely through Caddy, which
-# is what makes the client IP it forwards trustworthy for rate limiting, and
-# Postgres sits on an internal network with no route to or from the internet.
+#   internet ──443──▶ caddy (on the host) ──▶ 127.0.0.1:3005 ──▶ app ──▶ db
+#
+# TLS, certificates and HTTP/3 belong to the host's Caddy, which already
+# fronts other sites on this machine. This file therefore runs only the app
+# and its database.
+#
+# Two things the host Caddy MUST do, or the app is less safe than it looks
+# (deploy/Caddyfile is the reference config, docs/DEPLOY.md §3):
+#   - proxy to 127.0.0.1:3005, and
+#   - OVERWRITE X-Real-IP with the client address, dropping X-Forwarded-For.
+#     Rate limiting keys on that header. The app port is bound to loopback so
+#     the internet cannot reach it directly and forge one.
 
 name: bcnstudent
 
@@ -28,36 +36,53 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
     volumes:
       - pgdata:/var/lib/postgresql/data
-    networks: [backend]
+    # No ports: Postgres is reachable only from the app, over bcn_net. Never
+    # publish 5432 — the database holds every encrypted case.
+    networks: [bcn_net]
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U bcn -d bcn"]
       interval: 5s
       timeout: 5s
       retries: 12
+    security_opt: ["no-new-privileges:true"]
+    # Tune to the VPS. A limit reached means a killed container, so leave
+    # headroom: Postgres sizes its own caches from shared_buffers, not cgroups.
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1G
     logging: *logging
 
   app:
     build: .
     restart: unless-stopped
     init: true
-    env_file: .env
+    env_file:
+      - .env
     environment:
       NODE_ENV: production
       DATABASE_URL: postgres://bcn:${POSTGRES_PASSWORD}@db:5432/bcn
-      # Encrypted document bodies live on this volume (or set S3_BUCKET in .env).
+      # Encrypted document bodies live here (or set S3_BUCKET in .env).
       DATA_DIR: /data
       FORM_TEMPLATE_DIR: /app/templates/forms
       MIGRATE_ON_START: "true"
       MAINTENANCE_ENABLED: "true"
+    ports:
+      # Loopback only: the host's Caddy is the sole way in from the internet.
+      - "127.0.0.1:3005:3000"
     volumes:
-      - documents:/data
-      # Official EX-17 / EX-18 PDFs — placed on the server by hand (not redistributable).
+      # Encrypted uploads, on the host so they can be backed up with the rest
+      # of the deployment directory. Must be writable by the container user:
+      #   mkdir -p data && sudo chown -R 10001:10001 data
+      - ./data:/data
+      # Official EX-17 / EX-18 / Padrón PDFs — placed on the server by hand
+      # (not redistributable). Missing files are reported at startup.
       - ./templates/forms:/app/templates/forms:ro
     depends_on:
       db:
         condition: service_healthy
-    # backend: Postgres. frontend: Caddy, plus outbound internet for Stripe.
-    networks: [backend, frontend]
+    networks: [bcn_net]
     security_opt: ["no-new-privileges:true"]
     cap_drop: [ALL]
     healthcheck:
@@ -66,33 +91,17 @@ services:
       timeout: 5s
       start_period: 40s
       retries: 3
-    logging: *logging
-
-  caddy:
-    image: caddy:2-alpine
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
-    environment:
-      DOMAIN: ${DOMAIN:-bcnstudent.com}
-      ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env}
-    volumes:
-      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on: [app]
-    networks: [frontend]
+    # PDF generation (pdf-lib with embedded Unicode fonts) is the memory peak.
+    deploy:
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: 1G
     logging: *logging
 
 networks:
-  backend:
-    internal: true
-  frontend: {}
+  bcn_net:
+    driver: bridge
 
 volumes:
   pgdata:
-  documents:
-  caddy_data:
-  caddy_config:

@@ -184,11 +184,12 @@ under a key derived from the master key — an IP is personal data under GDPR,
 and a plain hash of an IPv4 address can be reversed by brute force. Counters
 older than two hours are deleted by the hourly maintenance job.
 
-**Where the client IP comes from.** Caddy overwrites `X-Real-IP` with the
-connecting socket's address and strips `X-Forwarded-For`; the app port is never
-published. The header can therefore only have come from Caddy. **Do not publish
-the app port** (`3000`) — if clients could reach the app directly, they could
-set `X-Real-IP` themselves and evade every limit.
+**Where the client IP comes from.** Caddy — on the host — overwrites
+`X-Real-IP` with the connecting socket's address and strips `X-Forwarded-For`;
+the app is published on loopback only (`127.0.0.1:3005`). The header can
+therefore only have come from Caddy. **Never bind the app to a public
+interface** — if clients could reach it directly, they could set `X-Real-IP`
+themselves and evade every limit.
 
 ### Failure mode
 

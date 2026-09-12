@@ -1,18 +1,21 @@
 # Deploying to a VPS
 
-BCN Student Concierge runs as three containers on one server:
+BCN Student Concierge runs as two containers behind a Caddy on the host:
 
 ```
-internet ──443──▶ caddy ──▶ app (Next.js) ──▶ db (Postgres 16)
-                  TLS 1.3                      internal network only
+internet ──443──▶ caddy (host) ──▶ 127.0.0.1:3005 ──▶ app (Next.js) ──▶ db (Postgres 16)
+                  TLS 1.3                             bcn_net bridge, no published port
 ```
 
-- **Caddy** terminates TLS (1.3 only), gets certificates for `bcnstudent.com`
-  automatically, and is the only container with published ports.
-- **app** runs migrations at startup and the 30-day retention purge hourly —
-  there is no cron to install for GDPR deletion.
-- **db** is on an internal network: reachable by the app, not by the internet.
-- Encrypted documents live on the `documents` volume; Postgres on `pgdata`.
+- **Caddy runs on the host**, not in Compose, so it can front this and other
+  sites on the same machine. It terminates TLS (1.3 only), gets certificates
+  automatically, and proxies to the app on loopback.
+- **app** publishes `127.0.0.1:3005` only — unreachable from the internet
+  except through the proxy. It runs migrations at startup and the 30-day
+  retention purge hourly: there is no cron to install for GDPR deletion.
+- **db** publishes nothing. It is reachable only by the app, over `bcn_net`.
+- Encrypted documents live in `./data` on the host; Postgres in the `pgdata`
+  volume. Both containers have CPU and memory limits (`deploy.resources`).
 
 ## 1. Server
 
@@ -42,8 +45,10 @@ apt install -y unattended-upgrades && dpkg-reconfigure -plow unattended-upgrades
 ```
 
 Note: Docker publishes ports by writing its own iptables rules, which bypass
-ufw. That is why the compose file publishes **only** Caddy's 80/443 — never add
-a `ports:` entry to `app` or `db`.
+ufw. That is why the app is published as `127.0.0.1:3005` — bound to loopback,
+Docker's rules cannot expose it. Never bind a container to `0.0.0.0`, and never
+give `db` a `ports:` entry at all. Only the host's Caddy listens publicly, on
+80 and 443.
 
 ## 2. DNS
 
@@ -65,13 +70,17 @@ cd /srv/bcnstudent
 
 cp .env.example .env
 chmod 600 .env
+
+# Encrypted uploads live here. 10001 is the uid the app runs as in the image;
+# without this the app cannot write a single document.
+mkdir -p data templates/forms
+sudo chown -R 10001:10001 data
 ```
 
 Fill in `.env`:
 
 | Variable | How |
 |---|---|
-| `ACME_EMAIL` | your email — Let's Encrypt expiry notices |
 | `POSTGRES_PASSWORD` | `openssl rand -base64 24` |
 | `DOCUMENT_MASTER_KEY` | `openssl rand -base64 32` — **also store it in your password manager**; losing it loses every record |
 | `ADMIN_SESSION_SECRET` | `openssl rand -base64 32` |
@@ -104,7 +113,7 @@ A missing template does not stop the site, so payments and uploads keep
 working; the staff dashboard shows a banner, and form downloads return a
 "temporarily unavailable" error until the file is in place.
 
-Start:
+Start the containers:
 
 ```bash
 docker compose up -d --build
@@ -118,6 +127,25 @@ Expect, within a minute:
 [jobs] retention maintenance every 60 min
 ```
 
+### The host's Caddy
+
+Compose no longer runs Caddy. Put the block from `deploy/Caddyfile` into the
+host's `/etc/caddy/Caddyfile` — substituting your domain and ACME email — and
+reload:
+
+```bash
+sudo caddy validate --config /etc/caddy/Caddyfile
+sudo systemctl reload caddy
+```
+
+Two lines in it are load-bearing:
+
+- `reverse_proxy 127.0.0.1:3005` — where Compose publishes the app.
+- `header_up X-Real-IP {remote_host}` with `header_up -X-Forwarded-For` —
+  the rate limiter keys on `X-Real-IP`, so a value the client sent must never
+  survive to the app. Set `TRUST_PROXY=true` in `.env` only because this line
+  is there.
+
 ## 4. Verify
 
 ```bash
@@ -125,8 +153,12 @@ Expect, within a minute:
 openssl s_client -tls1_3 -connect bcnstudent.com:443 </dev/null | grep Protocol
 openssl s_client -tls1_2 -connect bcnstudent.com:443 </dev/null   # must fail
 
-# The app is NOT reachable directly (run from another machine):
-curl -m 5 http://<server-ip>:3000     # must fail to connect
+# The app answers on loopback, on the host:
+curl -sI http://127.0.0.1:3005 | head -1
+
+# …and NOT from anywhere else (run from another machine):
+curl -m 5 http://<server-ip>:3005     # must fail to connect
+curl -m 5 http://<server-ip>:5432     # must fail to connect
 
 # Security headers present:
 curl -sI https://bcnstudent.com | grep -iE "strict-transport|content-security"
@@ -183,10 +215,39 @@ docker compose up -d --build
 
 Migrations apply automatically at startup, under an advisory lock.
 
+### Moving off the bundled Caddy (one time)
+
+Earlier versions ran Caddy as a third container and kept uploads in a Docker
+volume named `bcnstudent_documents`. If you are updating such a server, move
+the documents onto the host **before** starting the new compose file —
+otherwise the app comes up with an empty `./data` and every stored document
+looks lost (it is not: it is still in the old volume).
+
+```bash
+cd /srv/bcnstudent
+docker compose down
+
+mkdir -p data
+docker run --rm -v bcnstudent_documents:/from -v "$PWD/data":/to \
+  alpine sh -c 'cp -a /from/. /to/'
+sudo chown -R 10001:10001 data
+
+# Install the host proxy, then bring the two containers up.
+# Caddy, if it is not already on the host — it is not in Ubuntu's own
+# repositories: https://caddyserver.com/docs/install#debian-ubuntu-raspbian
+sudo cp deploy/Caddyfile /etc/caddy/Caddyfile   # edit domain + email first
+sudo systemctl reload caddy
+docker compose up -d --build
+```
+
+Check `ls data | wc -l` against the old count before deleting anything. Once
+the site is verified, `docker volume rm bcnstudent_documents bcnstudent_caddy_data
+bcnstudent_caddy_config` clears what is left behind.
+
 ## 9. Backups
 
-`deploy/backup.sh` dumps Postgres and archives the documents volume, keeping 30
-days (matching the retention promised in the privacy notice):
+`deploy/backup.sh` dumps Postgres and archives `./data` (the encrypted
+uploads), keeping 30 days (matching the retention promised in the privacy notice):
 
 ```bash
 sudo mkdir -p /var/backups/bcnstudent && sudo chown deploy: /var/backups/bcnstudent
@@ -205,8 +266,8 @@ crontab -e
 ```bash
 docker compose up -d db
 docker compose exec -T db pg_restore -U bcn -d bcn --clean --if-exists < db-<stamp>.dump
-docker run --rm -v bcnstudent_documents:/data -v "$PWD":/backup alpine \
-  sh -c "cd /data && tar xzf /backup/documents-<stamp>.tar.gz"
+tar xzf documents-<stamp>.tar.gz -C ./data
+sudo chown -R 10001:10001 data      # tar restores the archive's own ownership
 docker compose up -d
 ```
 

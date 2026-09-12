@@ -1,14 +1,23 @@
 # Reverse proxy and TLS termination for BCN Student Concierge.
-# Certificates are obtained and renewed automatically from Let's Encrypt.
+#
+# This runs on the HOST, not in a container: Caddy on this machine already
+# fronts other sites. Install it as a site block — either append this to
+# /etc/caddy/Caddyfile or drop it in as its own file and import it:
+#
+#   sudo cp deploy/Caddyfile /etc/caddy/sites/bcnstudent.caddy
+#   # in /etc/caddy/Caddyfile:  import sites/*.caddy
+#   sudo caddy validate --config /etc/caddy/Caddyfile
+#   sudo systemctl reload caddy
+#
+# Certificates are obtained and renewed automatically from Let's Encrypt; set
+# the account email once, globally, in /etc/caddy/Caddyfile:
+#
+#   { email you@example.com }
 
-{
-	email {$ACME_EMAIL}
-}
-
-{$DOMAIN}, www.{$DOMAIN} {
+bcnstudent.com, www.bcnstudent.com {
 	# One canonical host: www redirects to the apex.
-	@www host www.{$DOMAIN}
-	redir @www https://{$DOMAIN}{uri} permanent
+	@www host www.bcnstudent.com
+	redir @www https://bcnstudent.com{uri} permanent
 
 	# TLS 1.3 only. TLS 1.2 and older are refused outright. Every browser from
 	# roughly 2018 onward supports 1.3; the trade is a handful of very old
@@ -24,7 +33,8 @@
 		max_size 12MB
 	}
 
-	reverse_proxy app:3000 {
+	# The container publishes only on loopback (docker-compose.yml).
+	reverse_proxy 127.0.0.1:3005 {
 		# OVERWRITE, never append: the app's rate limiter keys on this header,
 		# so a value a client sent must never survive to reach it.
 		header_up X-Real-IP {remote_host}

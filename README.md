@@ -29,7 +29,8 @@ cp .env.example .env && chmod 600 .env   # fill it in
 docker compose up -d --build
 ```
 
-Caddy (TLS 1.3, automatic certificates) → Next.js → Postgres, on one VPS.
+A Caddy on the host (TLS 1.3, automatic certificates) → Next.js on
+`127.0.0.1:3005` → Postgres, on one VPS.
 Migrations and the 30-day retention purge run inside the app. Full runbook,
 hardening and backups: [docs/DEPLOY.md](docs/DEPLOY.md).
 

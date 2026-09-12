@@ -27,7 +27,10 @@ ENV NODE_ENV=production \
 
 # Unprivileged user. The app never needs root, and a compromise of the Node
 # process should not hand an attacker the container.
-RUN addgroup -S app && adduser -S -G app app \
+# Fixed uid/gid, not whatever the distro picks next: /data is a bind mount
+# from the host in production (docker-compose.yml), and the host directory has
+# to be chowned to exactly this id or the app cannot write a single upload.
+RUN addgroup -S -g 10001 app && adduser -S -u 10001 -G app app \
  && mkdir -p /data /app/templates/forms \
  && chown app:app /data
 

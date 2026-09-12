@@ -20,10 +20,9 @@ umask 077
 mkdir -p "$DEST"
 
 docker compose exec -T db pg_dump -U bcn -d bcn --format=custom > "$DEST/db-$STAMP.dump"
-docker run --rm \
-  -v bcnstudent_documents:/data:ro \
-  -v "$DEST":/backup \
-  alpine tar czf "/backup/documents-$STAMP.tar.gz" -C /data .
+# Encrypted uploads are a bind mount (./data) since the move to a host-level
+# proxy; no container is needed to read them.
+tar czf "$DEST/documents-$STAMP.tar.gz" -C "${DATA_DIR:-./data}" .
 
 find "$DEST" -type f \( -name 'db-*.dump' -o -name 'documents-*.tar.gz' \) -mtime +"$KEEP_DAYS" -delete
 echo "$(date -u +%FT%TZ) backup ok: db-$STAMP.dump documents-$STAMP.tar.gz"
