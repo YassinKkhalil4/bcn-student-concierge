@@ -63,8 +63,7 @@
     },
     "birthDate": {
       "label": "Fecha de nacimiento",
-      "hint": "Primero el día, tal y como se indica en los formularios españoles.",
-      "placeholder": "DD/MM/AAAA"
+      "hint": "Elija el día, el mes y el año tal como figuran en su pasaporte."
     },
     "birthCity": {
       "label": "Ciudad de nacimiento"
@@ -174,7 +173,9 @@
     "iva": "IVA (21 %)",
     "total": "Total",
     "change": "Modificar paquete",
-    "govFees": "Las tasas administrativas (Modelo 790, expedición de tarjetas) las abona usted directamente a las autoridades españolas y no están incluidas."
+    "govFees": "Las tasas administrativas (Modelo 790, expedición de tarjetas) las abona usted directamente a las autoridades españolas y no están incluidas.",
+    "route": "Ciudadanía",
+    "routePending": "El precio depende de su nacionalidad. Se fija en cuanto la elija en el primer paso."
   },
   "documents": {
     "slots": {
@@ -216,7 +217,8 @@
     "wrongType": "Solo se aceptan archivos PDF, JPEG y PNG. Por favor, vuelva a exportar el archivo.",
     "failed": "No se ha podido subir el archivo. Inténtelo de nuevo.",
     "network": "Error de red. Compruebe su conexión e inténtelo de nuevo.",
-    "footer": "PDF, JPEG o PNG, hasta {mb} MB cada uno. Cada archivo se cifra con su propia clave AES-256 en el momento de su recepción y se elimina de forma permanente 30 días después de que finalice el servicio."
+    "footer": "PDF, JPEG o PNG, hasta {mb} MB cada uno. Cada archivo se cifra con su propia clave AES-256 en el momento de su recepción y se elimina de forma permanente 30 días después de que finalice el servicio.",
+    "tooMany": "Demasiadas subidas en poco tiempo. Espere unos minutos y vuelva a intentarlo."
   },
   "complete": {
     "metaTitle": "Alta completada",
@@ -238,5 +240,24 @@
       }
     ],
     "home": "Volver a la página de inicio"
+  },
+  "date": {
+    "day": "Día",
+    "month": "Mes",
+    "year": "Año",
+    "months": {
+      "1": "Enero",
+      "2": "Febrero",
+      "3": "Marzo",
+      "4": "Abril",
+      "5": "Mayo",
+      "6": "Junio",
+      "7": "Julio",
+      "8": "Agosto",
+      "9": "Septiembre",
+      "10": "Octubre",
+      "11": "Noviembre",
+      "12": "Diciembre"
+    }
   }
 }

@@ -1,34 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { DocumentKind } from "@/lib/db/schema";
 import type { IntakeData } from "@/lib/schema";
 import { enrolmentRequest } from "@/lib/request-templates";
-import { LocalizedCopyButton } from "@/components/LocalizedCopyButton";
+import { UNIVERSITIES } from "@/lib/universities";
 import { DocumentUpload } from "@/components/intake/DocumentUpload";
+import { DraftEmailPanel } from "./DraftEmailPanel";
 
 /**
- * Barcelona institutions our students attend, for the datalist. The field
- * stays free text — this only saves typing, and the list is not exhaustive.
- */
-const KNOWN_UNIVERSITIES = [
-  "Barcelona Technology School",
-  "ESADE Business School",
-  "ESEI International Business School Barcelona",
-  "EU Business School Barcelona",
-  "GBSB Global Business School",
-  "Geneva Business School (Barcelona Campus)",
-  "Harbour.Space Institute",
-  "IED Barcelona (European Institute of Design)",
-  "IESE Business School",
-];
-
-/**
- * Enrolment certificate: the upload, plus "How do I get this?" — a Spanish
- * email to the university registry asking for a certificate in the form
- * Extranjería expects. University and programme are only used to fill the
- * email in the browser; they are not sent to our server.
+ * Enrolment certificate: the upload, plus "How do I get this?" — an email to
+ * the university registry, in English or Spanish, asking for a certificate in
+ * the form Extranjería expects. University and programme are only used to fill
+ * the email in the browser; they are not sent to our server.
  */
 export function EnrolmentWizard({
   person,
@@ -39,14 +24,8 @@ export function EnrolmentWizard({
   uploaded?: readonly DocumentKind[];
 }) {
   const t = useTranslations("portal.enrolment");
-  const locale = useLocale();
   const [university, setUniversity] = useState("");
   const [programme, setProgramme] = useState("");
-  const request = useMemo(
-    () => enrolmentRequest(person, { university, programme }),
-    [person, university, programme],
-  );
-  const mailto = `mailto:?subject=${encodeURIComponent(request.subject)}&body=${encodeURIComponent(request.body)}`;
 
   return (
     <div className="space-y-4">
@@ -61,14 +40,13 @@ export function EnrolmentWizard({
           <p className="text-sm leading-relaxed text-ink-muted">
             {t.rich("intro", { em: (chunks) => <em>{chunks}</em> })}
           </p>
-          {locale !== "es" && <p className="text-xs text-ink-soft">{t("spanishNote")}</p>}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="enr-university" className="field-label">{t("university")}</label>
               <input id="enr-university" list="enr-universities" value={university}
                 onChange={(e) => setUniversity(e.target.value)} className="field-input" />
               <datalist id="enr-universities">
-                {KNOWN_UNIVERSITIES.map((u) => <option key={u} value={u} />)}
+                {UNIVERSITIES.map((u) => <option key={u} value={u} />)}
               </datalist>
             </div>
             <div>
@@ -77,22 +55,11 @@ export function EnrolmentWizard({
                 onChange={(e) => setProgramme(e.target.value)} className="field-input" />
             </div>
           </div>
-          <div className="rounded-lg border border-bone-line">
-            <p className="border-b border-bone-line px-4 py-2 text-xs text-ink-muted">
-              <span className="font-medium text-ink">{t("subject")}</span>{" "}
-              <span lang="es">{request.subject}</span>
-            </p>
-            <pre lang="es" className="max-h-72 overflow-auto whitespace-pre-wrap px-4 py-3 font-sans text-sm leading-relaxed text-ink">
-              {request.body}
-            </pre>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <LocalizedCopyButton value={request.body} labelKey="copyMessage" />
-            <LocalizedCopyButton value={request.subject} labelKey="copySubject" />
-            <a href={mailto} className="rounded-md border border-bone-line px-2 py-1 text-xs font-medium text-ink-muted hover:bg-bone-warm">
-              {t("openEmail")}
-            </a>
-          </div>
+          <DraftEmailPanel
+            id="enr"
+            draft={(lang) => enrolmentRequest(person, { university, programme }, lang)}
+            toPlaceholder={t("toPlaceholder")}
+          />
         </div>
       </details>
     </div>

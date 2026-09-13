@@ -186,7 +186,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 
 export const config = {
   // Static assets carry no scripts and need neither a nonce nor the gate.
-  // robots.txt and sitemap.xml are skipped too: they have no language, and
-  // next-intl would otherwise route "/robots.txt" to "/en/robots.txt".
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|robots\\.txt|sitemap\\.xml).*)"],
+  // robots.txt, sitemap.xml and the site icon are skipped too: they have no
+  // language, and next-intl would otherwise route "/robots.txt" to "/en/robots.txt".
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|icon\\.svg|robots\\.txt|sitemap\\.xml).*)"],
 };

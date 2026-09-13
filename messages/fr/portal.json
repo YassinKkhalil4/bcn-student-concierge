@@ -87,10 +87,9 @@
     },
     "residence": {
       "intro": "Les résidences inscrivent leurs étudiants avec un formulaire municipal spécifique, l’<em>Autorització d’empadronament de domicili col·lectiu</em>. La résidence le remplit, le signe et <strong>y appose son cachet</strong> : sans cachet, il n’est pas accepté. Envoyez ce message à l’accueil :",
-      "subject": "Objet :",
       "openForm": "Ouvrir le formulaire officiel ↗",
       "uploadPrompt": "Quand la résidence vous le rend, envoyez-le ici :",
-      "spanishNote": "Le message est volontairement en espagnol : il s’adresse au personnel de la résidence à Barcelone."
+      "toPlaceholder": "reception@your-residence.com"
     },
     "lease": {
       "intro": "La mairie n’accepte votre bail que si ces trois conditions sont réunies. Vérifiez-les une à une :",
@@ -162,12 +161,10 @@
   "enrolment": {
     "howTo": "Comment l’obtenir ?",
     "intro": "Votre lettre d’admission ne suffit pas. Demandez au service des admissions ou de la scolarité de votre université un <em>certificado de matrícula</em>, tamponné et signé. Ce message demande exactement ce que recherche le service de l’immigration :",
-    "spanishNote": "Le message est volontairement rédigé en espagnol : il est destiné au service de votre université à Barcelone.",
     "university": "Votre université",
     "programme": "Votre programme",
     "programmePlaceholder": "Ex. : BBA International Business",
-    "subject": "Objet :",
-    "openEmail": "Ouvrir dans mon application de messagerie"
+    "toPlaceholder": "admissions@your-university.edu"
   },
   "tasa": {
     "missingNie": "Cette étape nécessite votre NIE, et nous ne l’avons pas encore. Nous vous informerons dès que vous pourrez effectuer cette démarche — rien à faire pour l’instant.",
@@ -178,5 +175,18 @@
     "print": "Téléchargez le formulaire et imprimez-le à l’échelle 100 % — n’utilisez jamais l’option « ajuster à la page », sinon le code-barres ne pourra pas être scanné.",
     "caption": "Que faut-il saisir sur le portail de la police ?",
     "labelsNote": "Les noms des champs sont en espagnol, car c’est ainsi qu’ils apparaissent sur le site web de la police."
+  },
+  "request": {
+    "language": "Langue du message",
+    "languages": {
+      "en": "English",
+      "es": "Español"
+    },
+    "to": "Destinataire (facultatif)",
+    "subject": "Objet :",
+    "openGmail": "Ouvrir dans Gmail ↗",
+    "openOutlook": "Ouvrir dans Outlook ↗",
+    "openEmail": "Ouvrir dans mon application de messagerie",
+    "fallback": "Si rien ne s’ouvre, copiez l’objet et le message dans un nouvel e-mail."
   }
 }

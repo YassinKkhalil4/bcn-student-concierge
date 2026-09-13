@@ -87,10 +87,9 @@
     },
     "residence": {
       "intro": "Wohnheime melden ihre Studierenden mit einem eigenen städtischen Formular an, der <em>Autorització d’empadronament de domicili col·lectiu</em>. Das Wohnheim füllt es aus, unterschreibt es und <strong>stempelt es ab</strong> – ohne Stempel wird es nicht angenommen. Senden Sie diese Nachricht an die Rezeption:",
-      "subject": "Betreff:",
       "openForm": "Offizielles Formular öffnen ↗",
       "uploadPrompt": "Sobald das Wohnheim es Ihnen zurückgibt, laden Sie es hier hoch:",
-      "spanishNote": "Die Nachricht ist bewusst auf Spanisch: Sie richtet sich an das Personal des Wohnheims."
+      "toPlaceholder": "reception@your-residence.com"
     },
     "lease": {
       "intro": "Die Stadt akzeptiert Ihren Mietvertrag nur, wenn alle drei Bedingungen erfüllt sind. Überprüfen Sie jede einzelne:",
@@ -162,12 +161,10 @@
   "enrolment": {
     "howTo": "Wie bekomme ich das?",
     "intro": "Ihre Zulassungsbescheinigung reicht nicht aus. Bitten Sie das Zulassungs- oder Studierendensekretariat Ihrer Universität um ein <em>Certificado de matrícula</em>, abgestempelt und unterschrieben. Diese Nachricht fragt genau nach dem, was die Ausländerbehörde prüft:",
-    "spanishNote": "Die Nachricht ist bewusst auf Spanisch: Sie richtet sich an das zuständige Büro Ihrer Universität in Barcelona.",
     "university": "Ihre Universität",
     "programme": "Ihr Studiengang",
     "programmePlaceholder": "z. B. BBA in International Business",
-    "subject": "Betreff:",
-    "openEmail": "In meiner E-Mail-App öffnen"
+    "toPlaceholder": "admissions@your-university.edu"
   },
   "tasa": {
     "missingNie": "Für diesen Schritt benötigen Sie Ihre NIE, über die wir jedoch noch nicht verfügen. Wir werden Sie informieren, sobald Sie diesen Schritt durchführen können – derzeit besteht noch kein Handlungsbedarf.",
@@ -178,5 +175,18 @@
     "print": "Laden Sie das Formular herunter und drucken Sie es im Maßstab 100 % aus – wählen Sie niemals „An Seite anpassen“, da der Barcode sonst nicht gescannt werden kann.",
     "caption": "Was Sie auf dem Polizeiportal eingeben müssen",
     "labelsNote": "Die Bezeichnungen der Felder sind auf Spanisch, da dies der Darstellung auf der Website der Polizei entspricht."
+  },
+  "request": {
+    "language": "Sprache der Nachricht",
+    "languages": {
+      "en": "English",
+      "es": "Español"
+    },
+    "to": "Empfänger (optional)",
+    "subject": "Betreff:",
+    "openGmail": "In Gmail öffnen ↗",
+    "openOutlook": "In Outlook öffnen ↗",
+    "openEmail": "In meiner E-Mail-App öffnen",
+    "fallback": "Wenn sich nichts öffnet, kopieren Sie Betreff und Nachricht in eine neue E-Mail."
   }
 }

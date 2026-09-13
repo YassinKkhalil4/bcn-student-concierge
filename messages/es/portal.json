@@ -87,10 +87,9 @@
     },
     "residence": {
       "intro": "Las residencias inscriben a sus estudiantes con un formulario municipal específico, la <em>Autorització d’empadronament de domicili col·lectiu</em>. La residencia lo rellena, lo firma y <strong>lo sella</strong>: sin el sello no se acepta. Envíe este mensaje a recepción:",
-      "subject": "Asunto:",
       "openForm": "Abrir el formulario oficial ↗",
       "uploadPrompt": "Cuando la residencia se lo devuelva, súbalo aquí:",
-      "spanishNote": "El mensaje está en español a propósito: está dirigido al personal de la oficina de residencia de Barcelona."
+      "toPlaceholder": "reception@your-residence.com"
     },
     "lease": {
       "intro": "El Ayuntamiento solo aceptará su contrato de alquiler si se cumplen estas tres condiciones. Compruebe cada una de ellas:",
@@ -162,12 +161,10 @@
   "enrolment": {
     "howTo": "¿Cómo lo consigo?",
     "intro": "Su carta de admisión no es suficiente. Solicite a la oficina de admisiones o al servicio de secretaría de su universidad un <em>certificado de matrícula</em>, sellado y firmado. Este mensaje indica exactamente lo que busca la oficina de inmigración:",
-    "spanishNote": "El mensaje está en español a propósito: va dirigido a la oficina de su universidad en Barcelona.",
     "university": "Su universidad",
     "programme": "Su programa",
     "programmePlaceholder": "p. ej., Grado en Relaciones Internacionales",
-    "subject": "Asunto:",
-    "openEmail": "Abrir en mi aplicación de correo electrónico"
+    "toPlaceholder": "admissions@your-university.edu"
   },
   "tasa": {
     "missingNie": "Para este paso se necesita su NIE, y aún no lo tenemos. Le informaremos en cuanto pueda realizarlo; por el momento, no hay nada que hacer.",
@@ -178,5 +175,18 @@
     "print": "Descargue el formulario e imprímalo a escala 100 %; nunca seleccione «ajustar a la página», ya que, de lo contrario, el código de barras no se podrá escanear.",
     "caption": "Qué debe introducir en el portal de la policía",
     "labelsNote": "Los nombres de los campos están en español porque así es como aparecen en la página web de la policía."
+  },
+  "request": {
+    "language": "Idioma del mensaje",
+    "languages": {
+      "en": "English",
+      "es": "Español"
+    },
+    "to": "Destinatario (opcional)",
+    "subject": "Asunto:",
+    "openGmail": "Abrir en Gmail ↗",
+    "openOutlook": "Abrir en Outlook ↗",
+    "openEmail": "Abrir en mi aplicación de correo electrónico",
+    "fallback": "Si no se abre nada, copie el asunto y el mensaje en un correo electrónico nuevo."
   }
 }

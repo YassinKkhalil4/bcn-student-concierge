@@ -63,8 +63,7 @@
     },
     "birthDate": {
       "label": "Geburtsdatum",
-      "hint": "Der Tag steht an erster Stelle, wie auf spanischen Formularen üblich.",
-      "placeholder": "TT/MM/JJJJ"
+      "hint": "Wählen Sie Tag, Monat und Jahr wie in Ihrem Reisepass angegeben."
     },
     "birthCity": {
       "label": "Geburtsort"
@@ -174,7 +173,9 @@
     "iva": "IVA (21 %)",
     "total": "Gesamt",
     "change": "Paket ändern",
-    "govFees": "Behördengebühren (Modelo 790, Kartenausstellung) zahlen Sie direkt an die spanischen Behörden; sie sind nicht enthalten."
+    "govFees": "Behördengebühren (Modelo 790, Kartenausstellung) zahlen Sie direkt an die spanischen Behörden; sie sind nicht enthalten.",
+    "route": "Staatsangehörigkeit",
+    "routePending": "Der Preis hängt von Ihrer Staatsangehörigkeit ab. Er steht fest, sobald Sie sie im ersten Schritt auswählen."
   },
   "documents": {
     "slots": {
@@ -216,7 +217,8 @@
     "wrongType": "Es werden ausschließlich PDF-, JPEG- und PNG-Dateien akzeptiert. Bitte exportieren Sie die Datei erneut.",
     "failed": "Der Upload ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
     "network": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
-    "footer": "PDF, JPEG oder PNG, jeweils bis zu {mb} MB. Jede Datei wird bei Erhalt mit einem eigenen AES-256-Schlüssel verschlüsselt und 30 Tage nach Abschluss Ihrer Dienstleistung endgültig gelöscht."
+    "footer": "PDF, JPEG oder PNG, jeweils bis zu {mb} MB. Jede Datei wird bei Erhalt mit einem eigenen AES-256-Schlüssel verschlüsselt und 30 Tage nach Abschluss Ihrer Dienstleistung endgültig gelöscht.",
+    "tooMany": "Zu viele Uploads in kurzer Zeit. Bitte warten Sie einige Minuten und versuchen Sie es erneut."
   },
   "complete": {
     "metaTitle": "Aufnahme abgeschlossen",
@@ -238,5 +240,24 @@
       }
     ],
     "home": "Zurück zur Startseite"
+  },
+  "date": {
+    "day": "Tag",
+    "month": "Monat",
+    "year": "Jahr",
+    "months": {
+      "1": "Januar",
+      "2": "Februar",
+      "3": "März",
+      "4": "April",
+      "5": "Mai",
+      "6": "Juni",
+      "7": "Juli",
+      "8": "August",
+      "9": "September",
+      "10": "Oktober",
+      "11": "November",
+      "12": "Dezember"
+    }
   }
 }

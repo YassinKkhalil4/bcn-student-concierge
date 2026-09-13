@@ -14,15 +14,17 @@ type Status =
   | { state: "done"; name: string; size: number }
   | { state: "error"; message: ErrorKey };
 
-type ErrorKey = "tooLarge" | "wrongType" | "failed" | "network" | "sessionExpired";
+type ErrorKey = "tooLarge" | "wrongType" | "tooMany" | "failed" | "network" | "sessionExpired";
 
 const MAX_MB = MAX_UPLOAD_BYTES / 1024 / 1024;
 
 /** The API's status codes are stable; its English error text is not shown. */
 function errorFor(status: number): ErrorKey {
-  if (status === 401) return "sessionExpired";
+  // 404: the case behind the session no longer exists — sign in again.
+  if (status === 401 || status === 404) return "sessionExpired";
   if (status === 413) return "tooLarge";
   if (status === 415) return "wrongType";
+  if (status === 429) return "tooMany";
   return "failed";
 }
 
@@ -65,7 +67,8 @@ export function DocumentUpload({
 
     try {
       const res = await fetch("/api/documents", { method: "POST", body });
-      const json = (await res.json()) as { originalName?: string };
+      // A proxy in front of the app can answer with an HTML error page.
+      const json = (await res.json().catch(() => ({}))) as { originalName?: string };
       if (!res.ok) {
         setStatuses((s) => ({
           ...s,

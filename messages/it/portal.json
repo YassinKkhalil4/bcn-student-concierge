@@ -87,10 +87,9 @@
     },
     "residence": {
       "intro": "Le residenze registrano i propri studenti con un apposito modulo comunale, l’<em>Autorització d’empadronament de domicili col·lectiu</em>. La residenza lo compila, lo firma e <strong>lo timbra</strong>: senza timbro non viene accettato. Invii questo messaggio alla reception:",
-      "subject": "Oggetto:",
       "openForm": "Apri il modulo ufficiale ↗",
       "uploadPrompt": "Quando la residenza glielo restituisce, lo carichi qui:",
-      "spanishNote": "Il messaggio è volutamente in spagnolo: è destinato al personale della residenza a Barcellona."
+      "toPlaceholder": "reception@your-residence.com"
     },
     "lease": {
       "intro": "Il Comune accetta il Suo contratto di locazione solo se tutte e tre le condizioni sono soddisfatte. Verifichi ciascuna di esse:",
@@ -162,12 +161,10 @@
   "enrolment": {
     "howTo": "Come posso ottenerlo?",
     "intro": "La Sua lettera di ammissione non basta. Richieda all’ufficio ammissioni o alla segreteria della Sua università un <em>certificado de matrícula</em>, timbrato e firmato. Questo messaggio chiede esattamente ciò che cerca l’ufficio immigrazione:",
-    "spanishNote": "Il messaggio è volutamente in spagnolo: è destinato all’ufficio della Sua università a Barcellona.",
     "university": "La Sua università",
     "programme": "Il Suo corso di studi",
     "programmePlaceholder": "ad es. BBA in International Business",
-    "subject": "Oggetto:",
-    "openEmail": "Apri nella mia app di posta elettronica"
+    "toPlaceholder": "admissions@your-university.edu"
   },
   "tasa": {
     "missingNie": "Questo passaggio richiede il Suo NIE, che al momento non è ancora disponibile. La informeremo non appena potrà procedere; per ora non è necessario fare nulla.",
@@ -178,5 +175,18 @@
     "print": "Scarichi il modulo e lo stampi in scala al 100% — non utilizzi mai l’opzione «adatta alla pagina», altrimenti il codice a barre non potrà essere scansionato.",
     "caption": "Cosa digitare sul portale della polizia",
     "labelsNote": "I nomi dei campi sono in spagnolo perché è così che appaiono sul sito web della polizia."
+  },
+  "request": {
+    "language": "Lingua del messaggio",
+    "languages": {
+      "en": "English",
+      "es": "Español"
+    },
+    "to": "Destinatario (facoltativo)",
+    "subject": "Oggetto:",
+    "openGmail": "Apri in Gmail ↗",
+    "openOutlook": "Apri in Outlook ↗",
+    "openEmail": "Apri nella mia app di posta elettronica",
+    "fallback": "Se non si apre nulla, copi l’oggetto e il messaggio in una nuova e-mail."
   }
 }
