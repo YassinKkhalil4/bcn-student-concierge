@@ -32,6 +32,8 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!caseId) {
     return NextResponse.json({ error: "Your session has expired. Please sign in again." }, { status: 401 });
   }
+  const perCase = await enforceRateLimit(request, "upload-case", `case:${caseId}`);
+  if (perCase) return perCase;
   const kind = String(form.get("kind") ?? "");
   const file = form.get("file");
 

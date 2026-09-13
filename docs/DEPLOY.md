@@ -141,10 +141,14 @@ sudo systemctl reload caddy
 Two lines in it are load-bearing:
 
 - `reverse_proxy 127.0.0.1:3005` — where Compose publishes the app.
-- `header_up X-Real-IP {remote_host}` with `header_up -X-Forwarded-For` —
-  the rate limiter keys on `X-Real-IP`, so a value the client sent must never
-  survive to the app. Set `TRUST_PROXY=true` in `.env` only because this line
-  is there.
+- The `X-Real-IP` lines, with `header_up -X-Forwarded-For` — the rate limiter
+  keys on `X-Real-IP`, so a value the client sent must never survive to the
+  app. Set `TRUST_PROXY=true` in `.env` only because these lines are there.
+  The site is behind Cloudflare, so for connections from Cloudflare's ranges
+  the address comes from `CF-Connecting-IP`; with `{remote_host}` alone, every
+  student would share a Cloudflare edge address — and one rate limit, which
+  shows up as failing intakes and uploads. Keep the `@cloudflare` ranges in
+  step with <https://www.cloudflare.com/ips/>.
 
 ## 4. Verify
 
