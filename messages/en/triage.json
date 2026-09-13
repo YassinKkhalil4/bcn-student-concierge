@@ -1,0 +1,68 @@
+{
+  "page": {
+    "metaTitle": "Free triage — where you stand today",
+    "metaDescription": "Send your entry stamp, your authorisation and your enrolment letter. We tell you which route applies, how many days you have left, and what is still recoverable. No charge, no obligation.",
+    "eyebrow": "Free triage · same day",
+    "title": "You’ve been here two weeks. The clock started the day you landed.",
+    "intro": "Non-EU students normally have one month from entry to apply for the TIE. If you landed in the first week of September, that window closes in early October — and the appointment is the part nobody can rush. Tell us where you are and we’ll tell you where you stand.",
+    "whatYouGet": "What you get back, today",
+    "steps": [
+      "Which route applies to you — EX-17 or EX-18 — read from your own authorisation, not guessed from your passport",
+      "How many days you have left, counted from your entry stamp",
+      "What is still recoverable, and what has to happen first",
+      "Whether you need us at all. If you don’t, we’ll say so"
+    ],
+    "declineNote": "If your window has already closed, or you’re on an expired or irregular status, or facing a refusal — that needs legal analysis we are not qualified to give. We’ll tell you at triage and point you to a colegiado abogado. We’d rather lose the work than take your money for something we cannot fix."
+  },
+  "fields": {
+    "fullName": "Your name",
+    "email": "Email",
+    "nationality": "Nationality",
+    "arrivedOn": "Date you entered Spain",
+    "arrivedOnHint": "The date on your entry stamp, not the date your course started.",
+    "housing": "Where you’re living right now",
+    "notes": "Anything else we should know",
+    "gdprTriageConsent": "Consent"
+  },
+  "housing": {
+    "own-lease": "A flat, with my name on the lease",
+    "room-or-sublet": "A room in a shared flat, or a sublet",
+    "university-residence": "A university residence",
+    "hostel-or-airbnb": "A hostel or an Airbnb",
+    "staying-with-someone": "Staying with family or a friend",
+    "not-yet-housed": "Still looking"
+  },
+  "clock": {
+    "open": "On this entry date, your one-month window closes on {date} — about {days} days from today. Indicative: your own authorisation can state a different period, which is why we read it.",
+    "closed": "On this entry date, the ordinary one-month window closed about {days} days ago. Send it anyway — tell us below what happened, and we’ll tell you honestly whether it’s recoverable.",
+    "eu": "On an EU, EEA or Swiss passport there is no one-month clock. The registration duty starts at three months’ residence, so you have more room than you probably think."
+  },
+  "uploads": {
+    "title": "The three documents",
+    "note": "Optional, but they’re what makes the answer exact rather than general. PDF, JPEG or PNG, up to 10 MB each. Encrypted on arrival and deleted once your enquiry is answered.",
+    "entry-stamp": "Your entry stamp, or boarding pass",
+    "authorisation": "Your visa or approval decision",
+    "enrolment-letter": "Your enrolment letter"
+  },
+  "form": {
+    "choose": "Choose one",
+    "optional": "optional",
+    "consent": "I agree that BCN Student Concierge may process what I’ve entered here, and any documents I attach, in order to answer this enquiry. Nothing here obliges me to buy anything.",
+    "submit": "Send for free triage",
+    "sending": "Sending…",
+    "freeNote": "No charge, no obligation, no card. We reply the same day.",
+    "failed": "Could not send your enquiry. Please try again."
+  },
+  "done": {
+    "title": "We’ve got it.",
+    "body": "Your reference is {ref}. We’ll reply to the email address you gave us today, with the route that applies, the days you have left, and what to do first.",
+    "note": "If you didn’t attach the three documents, send them as a reply to that email — the answer gets more exact the more we can read."
+  },
+  "cta": {
+    "eyebrow": "Start here",
+    "title": "Not sure where you stand? Find out for free.",
+    "body": "Send your entry stamp, your authorisation and your enrolment letter. We’ll tell you which route applies, how many days you have left, and what’s still recoverable. No charge, no obligation, and if you don’t need us we’ll say so.",
+    "button": "Get free triage",
+    "note": "Same day. Fifteen minutes of your time."
+  }
+}

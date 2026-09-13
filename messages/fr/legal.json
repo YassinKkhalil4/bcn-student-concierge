@@ -125,7 +125,7 @@
     "metaDescription": "Conditions contractuelles relatives aux services d’assistance administrative proposés par BCN Student Concierge.",
     "eyebrow": "Conditions générales",
     "title": "Conditions générales d’utilisation",
-    "priceLine": "{name} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
     "clauses": [
       {
         "heading": "1. Nature du service",
@@ -137,7 +137,7 @@
         "heading": "2. Tarifs et IVA",
         "priceListAfter": 0,
         "paragraphs": [
-          "Les tarifs des forfaits sont fixes et indiqués hors IVA ; l’IVA de 21 % et le montant total sont affichés avant le paiement :",
+          "Les tarifs des formules sont fixes et indiqués hors IVA, avec les 21% et le total brut affichés avant le paiement. Chaque formule comporte deux tarifs : un pour la voie UE/EEE/Suisse et un pour la voie hors UE, parce qu’il s’agit de quantités de travail différentes. Celui qui s’applique découle de votre nationalité, est confirmé lors du triage avant tout paiement, et repose sur la même dérivation que celle qui décide si vous déposez un EX-18 ou un EX-17 :",
           "Les frais administratifs — y compris la redevance d’État « Modelo 790 Código 012 » et les frais de délivrance des cartes — sont fixés par les autorités espagnoles, à votre charge directement, et ne sont inclus dans aucun forfait. Nous ne percevons jamais de frais pour le compte de l’État."
         ]
       },
@@ -162,19 +162,27 @@
         ]
       },
       {
-        "heading": "6. Annulation et remboursements",
+        "heading": "6. Rendez-vous, haute saison et délais",
         "paragraphs": [
-          "Avant le début des prestations : remboursement intégral. Une fois la préparation engagée mais avant la prise de rendez-vous : remboursement à 50 %. Une fois les rendez-vous fixés : aucun remboursement, la prestation ayant été fournie. Si nous ne pouvons pas fournir le service pour des raisons qui relèvent de notre responsabilité, vous bénéficiez d’un remboursement intégral."
+          "Les systèmes de rendez-vous de l’administration espagnole saturent pendant les périodes de forte arrivée internationale, en particulier septembre et octobre : les créneaux sont mis en ligne de façon irrégulière et pris en quelques minutes. Notre délai standard pour obtenir votre rendez-vous de Padrón ou d’immigration est donc de six semaines au maximum à compter de l’envoi de votre dossier.",
+          "Si aucun créneau n’est disponible avant une échéance qui vous concerne, nous délivrons un certificat formel documentant nos tentatives continues de réservation, avec la date et l’heure de chacune. Les autorités espagnoles acceptent couramment cette preuve de saturation du système comme justification valable d’un enregistrement tardif. Couramment ne veut pas dire toujours : la décision appartient au bureau qui vous reçoit, et nous ne pouvons garantir l’accueil que lui réservera un agent donné."
         ]
       },
       {
-        "heading": "7. Protection des données",
+        "heading": "7. Annulation et remboursements",
+        "paragraphs": [
+          "Avant le début des travaux : remboursement intégral. Une fois la préparation entamée mais avant la réservation des rendez-vous : remboursement de 50%. Une fois les rendez-vous obtenus : pas de remboursement, la valeur substantielle ayant été livrée. Si nous ne pouvons pas fournir le service pour des raisons relevant de notre contrôle, vous êtes intégralement remboursé.",
+          "Indépendamment de ce qui précède, et quel que soit le stade atteint par le reste de votre dossier : s’il nous est totalement impossible d’obtenir un rendez-vous dans les six semaines suivant l’envoi de votre dossier, vous avez droit à un remboursement de 50% des honoraires. La moitié et non la totalité, parce que l’autre moitié a été livrée le jour même de votre paiement — l’accès au portail, vos formulaires générés et le Modelo 790, la préparation documentaire et le soutien administratif — et vous conservez l’ensemble, afin d’être prêt le jour où un créneau s’ouvrira. La disponibilité des rendez-vous ne relève pas de notre contrôle, ce pourquoi cela est formulé comme un remboursement et non comme une garantie."
+        ]
+      },
+      {
+        "heading": "8. Protection des données",
         "paragraphs": [
           "Le traitement des données est régi par notre <privacyLink>politique de confidentialité</privacyLink>, y compris la suppression automatique des pièces d’identité 30 jours après la fin de la prestation."
         ]
       },
       {
-        "heading": "8. Droit applicable",
+        "heading": "9. Droit applicable",
         "paragraphs": [
           "Les présentes conditions sont régies par le droit espagnol. Les litiges de consommation peuvent être portés devant les tribunaux du lieu de résidence du consommateur, et vous pouvez recourir au système d’arbitrage de consommation espagnol (Sistema Arbitral de Consumo) ou à la plateforme de règlement en ligne des litiges de l’UE."
         ]

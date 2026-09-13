@@ -4,26 +4,28 @@
   "nav": {
     "main": "Principale",
     "howItWorks": "Come funziona",
-    "pricing": "Servizi e tariffe",
+    "pricing": "Pacchetti e prezzi",
     "faq": "Domande frequenti",
     "myFile": "La mia pratica",
-    "beginIntake": "Inizia la registrazione",
-    "begin": "Inizia"
+    "beginIntake": "Avvia la pratica",
+    "begin": "Inizia",
+    "triage": "Triage gratuito"
   },
   "language": {
     "label": "Lingua"
   },
   "footer": {
-    "tagline": "Assistenza amministrativa indipendente per gli studenti internazionali in arrivo nelle università private di Barcellona.",
+    "tagline": "Assistenza amministrativa indipendente per studenti internazionali a Barcellona. Triage gratuito in giornata, prima di tutto il resto.",
     "services": "Servizi",
     "packages": "Pacchetti e prezzi",
-    "intake": "Portale di registrazione dei clienti",
+    "intake": "Portale studenti",
     "process": "Procedura",
     "legal": "Informazioni legali",
     "terms": "Condizioni di servizio",
     "privacy": "Privacy e GDPR",
     "scope": "Ambito del servizio",
-    "copyright": "© {year} BCN Student Concierge. Barcellona, Spagna."
+    "copyright": "© {year} BCN Student Concierge. Barcellona, Spagna.",
+    "triage": "Triage gratuito"
   },
   "disclaimer": {
     "footerLabel": "Ambito del servizio.",

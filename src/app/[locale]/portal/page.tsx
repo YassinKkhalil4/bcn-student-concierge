@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { requirePortalCaseId } from "@/lib/portal/guard";
 import { getCase } from "@/lib/server/storage";
-import { getTier, priceWithIva, formatEur } from "@/lib/pricing";
+import { getTier, tierPrice, routeForForm, formatEur } from "@/lib/pricing";
 import { DocumentUpload } from "@/components/intake/DocumentUpload";
 import { PadronWizard } from "@/components/portal/PadronWizard";
 import { titleCase } from "@/lib/request-templates";
@@ -69,7 +69,7 @@ export default async function PortalPage({
 
   const tp = await getTranslations("pricing");
   const tier = getTier(record.tierId);
-  const price = tier ? priceWithIva(tier.basePriceCents) : null;
+  const price = tier ? tierPrice(tier, routeForForm(record.formId)) : null;
   const paid = record.paymentStatus === "paid";
   const uploadedKinds = [...new Set(record.documents.map((d) => d.kind))];
   // Only what the wizards need to fill templates: the student's own data,

@@ -4,26 +4,28 @@
   "nav": {
     "main": "Main",
     "howItWorks": "How it works",
-    "pricing": "Services & pricing",
+    "pricing": "Packages & pricing",
     "faq": "FAQ",
     "myFile": "My file",
-    "beginIntake": "Begin intake",
-    "begin": "Begin"
+    "beginIntake": "Start intake",
+    "begin": "Begin",
+    "triage": "Free triage"
   },
   "language": {
     "label": "Language"
   },
   "footer": {
-    "tagline": "Independent administrative facilitation for international students arriving at private universities in Barcelona.",
+    "tagline": "Independent administrative facilitation for international students in Barcelona. Free same-day triage before anything else.",
     "services": "Services",
     "packages": "Packages & pricing",
-    "intake": "Client intake portal",
+    "intake": "Student portal",
     "process": "Process",
     "legal": "Legal",
     "terms": "Terms of service",
     "privacy": "Privacy & GDPR",
     "scope": "Scope of service",
-    "copyright": "© {year} BCN Student Concierge. Barcelona, Spain."
+    "copyright": "© {year} BCN Student Concierge. Barcelona, Spain.",
+    "triage": "Free triage"
   },
   "disclaimer": {
     "footerLabel": "Scope of service.",
@@ -43,7 +45,7 @@
   },
   "modelo790": {
     "title": "Modelo 790 Código 012 — paid in cash, at a bank counter",
-    "intro": "The state fee for your residency card is not part of our fee and cannot be paid by card on our site. Spanish tax agency rules route this form through a barcode read at a physical bank: online settlement requires a Spanish digital certificate or a Spanish bank's own online banking, neither of which a newly-arrived student has.",
+    "intro": "The state fee for your residency card is not part of our fee and cannot be paid by card on our site. Spanish tax agency rules route this form through a barcode read at a physical bank: online settlement requires a Spanish digital certificate or a Spanish bank’s own online banking, neither of which a newly-arrived student has.",
     "steps": [
       "We generate your Modelo 790 Código 012 configured for cash payment (“en efectivo”), carrying the unique barcode the bank scanner reads.",
       "Print it in colour, single-sided, at 100% scale. Do not resize it — a rescaled barcode will not scan, and the form will be refused.",
@@ -52,6 +54,6 @@
     ],
     "branchesTitle": "Branches that accept this payment",
     "branchesNote": "Not every branch accepts tax payments from non-customers, and some accept them only during morning hours. We confirm a specific nearby branch and its counter hours with your appointment itinerary.",
-    "footnote": "The fee amount is set by the Spanish government and changes periodically; the figure printed on your form at the time of generation is the one that applies. We never collect this fee on the government's behalf."
+    "footnote": "The fee amount is set by the Spanish government and changes periodically; the figure printed on your form at the time of generation is the one that applies. We never collect this fee on the government’s behalf."
   }
 }

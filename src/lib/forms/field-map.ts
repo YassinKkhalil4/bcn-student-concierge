@@ -1,4 +1,5 @@
 import type { IntakeData } from "@/lib/schema";
+import type { ServiceRoute } from "@/lib/pricing";
 import { EU_EEA_CH, isCountryCode, spanishFormName } from "@/lib/countries";
 
 /**
@@ -82,6 +83,16 @@ export function selectForm(nationality: string): FormId {
   const v = nationality.trim().toUpperCase();
   if (isCountryCode(v)) return EU_EEA_CH.has(v) ? "EX-18" : "EX-17";
   return LEGACY_EU_NAMES.has(normalizeCountry(v)) ? "EX-18" : "EX-17";
+}
+
+/**
+ * The pricing route, from the same nationality that decides the form. EX-18
+ * (EU/EEA/Swiss) is the cheaper route; everyone else is on EX-17. Deriving both
+ * from one function is what stops a student being priced on one route and filed
+ * on the other.
+ */
+export function routeForNationality(nationality: string): ServiceRoute {
+  return selectForm(nationality) === "EX-18" ? "eu" : "non-eu";
 }
 
 /** Pre-picker free-text nationalities, English and Spanish spellings. */

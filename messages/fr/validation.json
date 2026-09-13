@@ -25,5 +25,7 @@
   "taxIdInvalid": "Ce NIF n’est pas valide — veuillez le vérifier par rapport au contrat de location",
   "companyBoth": "Indiquez à la fois le nom de l’entreprise et son NIF, ou laissez les deux champs vides",
   "companyTaxIdInvalid": "Le NIF (CIF) de cette entreprise n’est pas valide",
-  "cadastralRef": "Une référence cadastrale comporte 20 lettres et chiffres"
+  "cadastralRef": "Une référence cadastrale comporte 20 lettres et chiffres",
+  "entryDateFormat": "Choisissez la date de votre entrée en Espagne",
+  "entryDateRange": "Cette date est dans le futur, ou remonte à plus d’un an : vérifiez votre cachet d’entrée"
 }

@@ -25,5 +25,7 @@
   "taxIdInvalid": "Diese NIF ist ungültig – bitte vergleichen Sie sie mit dem Mietvertrag",
   "companyBoth": "Geben Sie sowohl den Namen des Unternehmens als auch dessen NIF an oder lassen Sie beide Felder leer",
   "companyTaxIdInvalid": "Die NIF (CIF) dieses Unternehmens ist ungültig",
-  "cadastralRef": "Eine Katasterreferenz besteht aus 20 Buchstaben und Ziffern"
+  "cadastralRef": "Eine Katasterreferenz besteht aus 20 Buchstaben und Ziffern",
+  "entryDateFormat": "Wähle das Datum deiner Einreise nach Spanien",
+  "entryDateRange": "Dieses Datum liegt in der Zukunft oder mehr als ein Jahr zurück — prüfe deinen Einreisestempel"
 }

@@ -1,79 +1,119 @@
 {
   "tiers": {
-    "baseline": {
-      "name": "Administrative Baseline",
-      "shortName": "Administrative Baseline",
-      "tagline": "Gli adempimenti legali essenziali, presentati correttamente sin dal primo tentativo.",
-      "bestFor": "Studenti che alloggiano in residenze universitarie e necessitano di assistenza per l’espletamento delle pratiche burocratiche.",
+    "ready-file": {
+      "name": "Ready File",
+      "shortName": "Ready File",
+      "tagline": "Le pratiche, finite e nelle tue mani, in 48 ore.",
+      "bestFor": "Puoi gestire da solo i tuoi appuntamenti: ti serve solo che il fascicolo sia giusto.",
       "features": [
-        "Prenotazione di appuntamenti per il Padrón (registrazione comunale)",
-        "Prenotazione degli appuntamenti con la Policía Nacional per la TIE / CUE",
-        "Generazione dei moduli EX-17 o EX-18, precompilati e pronti per la stampa",
-        "Configurazione del modulo fiscale con codice a barre Modelo 790 Código 012",
-        "Preparazione del «Ready File» già verificato, in formato cartaceo e digitale"
+        "Il tuo percorso confermato sulla tua stessa autorizzazione e sul tuo timbro d’ingresso",
+        "Il tuo EX-17 o EX-18, precompilato, appiattito e pronto da stampare",
+        "Modelo 790 Código 012 impostato per il pagamento in contanti, con una filiale precisa e i suoi orari di cassa",
+        "Il tuo fascicolo per il Padrón, preparato per il comune in cui vivi davvero",
+        "Se l’appartamento non è a tuo nome, il modulo di autorizzazione da far firmare al proprietario",
+        "Appuntamenti Padrón e TIE/CUE cercati e prenotati a tuo nome",
+        "Tutte le copie fatte, ordinate come le chiede lo sportello e controllate riga per riga"
       ]
     },
     "soft-landing": {
-      "name": "Digital Soft-Landing",
-      "shortName": "Digital Soft-Landing",
-      "tagline": "Le pratiche burocratiche, oltre a tutto ciò che rende la città vivibile.",
-      "bestFor": "La maggior parte degli studenti internazionali del primo anno che arrivano da soli.",
+      "name": "Soft Landing",
+      "shortName": "Soft Landing",
+      "tagline": "Le pratiche, più le tessere che dovresti già avere in tasca.",
+      "bestFor": "La maggior parte degli studenti arrivati poche settimane fa e che comprano ancora biglietti singoli.",
       "features": [
-        "Guida all’apertura di un conto corrente bancario in Spagna (da non residente a residente)",
-        "Registrazione dell’abbonamento ai mezzi pubblici T-mobilitat / T-jove",
-        "Guida alla scelta e all’attivazione di SIM digitali / eSIM",
-        "Configurazione della tessera Carnet Jove e della tessera studentesca ISIC",
-        "Linea di assistenza dedicata su WhatsApp durante la fase di inserimento"
+        "Una tessera T-mobilitat a tuo nome con 90 giorni caricati — T-jove se hai meno di 30 anni",
+        "Il tuo Carnet Jove, richiesto, pagato e sollecitato durante l’attesa di attivazione",
+        "La tua tessera ISIC, acquistata ed emessa con il tuo certificato di iscrizione",
+        "Un conto bancario che riceva davvero denaro da casa — o perché non te ne serve nessuno",
+        "SIM o eSIM scelta sul tuo consumo reale, con la trappola del rinnovo a 28 giorni spiegata",
+        "Una linea WhatsApp per 30 giorni, in inglese, proprio quando nascono i dubbi",
+        "Una linea aperta durante il tuo appuntamento: chiamaci dallo sportello"
       ]
     },
-    "turnkey": {
-      "name": "Turnkey Relocation & Housing Audit",
-      "shortName": "Turnkey Relocation & Housing Audit",
-      "tagline": "Verifichiamo l’appartamento prima che Lei effettui il bonifico della cauzione.",
-      "bestFor": "Famiglie che cercano un alloggio privato dall’estero, senza averlo mai visto di persona.",
+    "fixer": {
+      "name": "Fixer",
+      "shortName": "Fixer",
+      "tagline": "Tutto quanto sopra, e in più veniamo con te.",
+      "bestFor": "Sei bloccato sul Padrón, o devi ancora firmare per un appartamento e vuoi che lo leggiamo prima.",
       "features": [
-        "Ricerca verificata di alloggi tra annunci sottoposti a controllo antifrode",
-        "Verifica della titolarità presso il registro immobiliare (Nota Simple)",
-        "Revisione del contratto di locazione con verifica legale del limite massimo di cauzione",
-        "Guida all’attivazione delle utenze (acqua, elettricità, Internet)",
-        "Monitoraggio della pratica per 90 giorni fino al ritiro della tessera TIE"
+        "Veniamo con te in comune e traduciamo",
+        "Lo sblocco del Padrón: ostelli, subaffitti, un proprietario che rifiuta, il comune sbagliato",
+        "La tua tessera sanitaria e un medico di base che parla inglese, una volta ottenuto il Padrón",
+        "Revisione del contratto in giornata, confrontata con il tetto legale della caparra",
+        "Proprietà verificata al registro: avere le chiavi non dimostra di essere il proprietario",
+        "Verbale di stato dell’immobile all’ingresso: ogni difetto fotografato, firmato e inviato in giornata",
+        "Monitoraggio di 90 giorni fino al ritiro, e una relazione finale per chi sta pagando"
       ]
     }
   },
   "card": {
     "mostChosen": "Il più scelto",
     "plusIva": "+ IVA",
-    "ivaLine": "{iva} IVA (21%) · <strong>{total} totale</strong>",
-    "everythingIn": "Tutto quanto contenuto in {name}, oltre a:",
-    "bestFor": "Ideale per:",
+    "routeEu": "UE / SEE / Svizzera",
+    "routeNonEu": "Extra-UE",
+    "totalLine": "{total} in totale",
+    "includesCards": "Comprende circa {amount} di tessere e trasporti, acquistati da noi e consegnati a mano. Non moduli, non codici sconto — le tessere vere, funzionanti.",
+    "everythingIn": "Tutto quello di {name}, più:",
+    "bestFor": "Ideale se:",
     "select": "Scegli {name}"
   },
   "page": {
-    "metaTitle": "Servizi e Prezzi",
-    "metaDescription": "Tre pacchetti a tariffa fissa per gli studenti internazionali in arrivo a Barcellona: Administrative Baseline, Digital Soft-Landing e Turnkey Relocation & Housing Audit.",
-    "eyebrow": "Servizi e prezzi",
-    "title": "Tariffe fisse per un iter senza tempistiche prestabilite.",
-    "intro": "Ogni pacchetto è indicato al netto dell’IVA e viene visualizzato con l’importo totale comprensivo di {rate}% di IVA prima del pagamento. Nessun servizio viene fatturato a ore e nessun pacchetto include le tasse amministrative.",
-    "govEyebrow": "Tasse amministrative",
-    "govTitle": "L’unico pagamento che non possiamo effettuare al posto Suo.",
-    "exclusionsEyebrow": "Piena trasparenza",
-    "exclusionsTitle": "Cosa non è compreso nella nostra tariffa.",
-    "exclusions": [
+    "metaTitle": "Pacchetti e prezzi",
+    "metaDescription": "Tre pacchetti a prezzo fisso per studenti internazionali già a Barcellona: Ready File, Soft Landing e Fixer. Due prezzi per pacchetto: uno per il percorso UE, uno per quello extra-UE.",
+    "eyebrow": "Pacchetti e prezzi",
+    "title": "Prezzi fissi per una procedura senza tempi fissi.",
+    "intro": "Ogni pacchetto è indicato al netto dell’IVA e mostrato con il totale comprensivo del {rate}% di IVA prima del pagamento. Non fatturiamo a ore e nessun pacchetto comprende le tasse pubbliche.",
+    "routesEyebrow": "Perché due prezzi",
+    "routesTitle": "Il percorso UE è meno lavoro, quindi lo facciamo pagare meno.",
+    "routesBody": "Niente impronte, niente tassa da 16,08 € e, quando i requisiti sono soddisfatti, il certificato viene normalmente rilasciato già all’appuntamento. Gli studenti extra-UE hanno bisogno dell’EX-17, dell’appuntamento biometrico e, in alcuni uffici, di un viaggio separato per il ritiro. Confermiamo quale percorso ti riguarda in fase di triage, prima che tu paghi qualcosa.",
+    "govEyebrow": "Tasse pubbliche",
+    "govTitle": "L’unico pagamento che non possiamo fare al posto tuo.",
+    "honestEyebrow": "Prima di scegliere",
+    "honestTitle": "Ciò che genera reclami, detto in anticipo.",
+    "honest": [
       {
-        "item": "Tassa statale Modelo 790 Código 012",
-        "note": "Da versare direttamente all’agenzia delle entrate spagnola presso una banca. L’importo è fissato dal governo e varia a seconda del tipo di carta."
+        "item": "Il 790 arriva non pagato, e deve essere così",
+        "note": "È un modulo con codice a barre che va portato a uno sportello bancario o a un lettore, pagato e timbrato. Il pagamento online richiede un certificato digitale spagnolo che ancora non hai. Noi lo configuriamo, lo stampiamo e ti diciamo esattamente dove portarlo: il viaggio è tuo. Un modulo non timbrato chiude l’appuntamento."
       },
       {
-        "item": "Tasse universitarie, depositi cauzionali e affitto",
-        "note": "Non gestiamo mai fondi dei clienti per conto di terzi. Tutti i pagamenti vengono effettuati direttamente da voi al locatore o all’istituzione."
+        "item": "Le nostre copie sono copie stampate, non autenticate",
+        "note": "Stampiamo dalle scansioni che carichi. Non abbiamo mai visto il tuo passaporto originale e non possiamo autenticare nulla. Gli originali li porti tu; la cartella porta ciò che li accompagna."
+      },
+      {
+        "item": "Non possiamo far esistere un appuntamento",
+        "note": "Cerchiamo sul portale ufficiale per un massimo di sei settimane dal tuo invio. Settembre e ottobre sono il periodo peggiore: i sistemi della pubblica amministrazione si saturano e gli slot spariscono in pochi minuti. Se in quel periodo non se ne apre nessuno, ti restituiamo il 50% e conservi l’intero Ready File — moduli, copie, 790, controllo — così sei pronto il giorno in cui se ne aprirà uno. Se prima ti scade un termine, ti diamo un certificato datato di ogni tentativo fatto; gli uffici spagnoli lo accettano comunemente come giustificazione per registrarsi in ritardo, anche se nessun funzionario è obbligato a farlo. Nessuno può abbreviare legalmente questo passaggio, e qualsiasi servizio che ti dica il contrario ti sta vendendo qualcosa che non ha."
+      },
+      {
+        "item": "Non andiamo all’appuntamento biometrico al posto tuo",
+        "note": "Richiede te, di persona, con gli originali. Noi prepariamo, prenotiamo, ti istruiamo e restiamo raggiungibili al telefono. La comparizione è tua, a tuo nome."
+      },
+      {
+        "item": "I tuoi 90 giorni iniziano quando validi",
+        "note": "La finestra del T-jove decorre dalla prima validazione, non dall’acquisto. Ma sono 90 giorni consecutivi una volta partiti, non 90 giorni di utilizzo."
+      },
+      {
+        "item": "Il T-jove è una regola di età, non di studente",
+        "note": "Solo sotto i 30 anni. Non servono tessera universitaria né Carnet Jove per averne diritto. Dai 30 in su carichiamo una T-usual per le zone di cui il tuo tragitto ha davvero bisogno e ti restituiamo la differenza."
+      }
+    ],
+    "exclusionsEyebrow": "Trasparenza totale",
+    "exclusionsTitle": "Ciò che il nostro compenso non copre.",
+    "exclusions": [
+      {
+        "item": "Modelo 790 Código 012 ed emissione delle tessere",
+        "note": "Li paghi tu, direttamente, in banca. L’importo è fissato dal governo e varia a seconda del tipo di tessera."
+      },
+      {
+        "item": "Tasse universitarie, affitto e caparre",
+        "note": "Non gestiamo mai fondi per conto di terzi. Tutto va direttamente da te al proprietario o all’istituto."
       },
       {
         "item": "Rappresentanza legale o ricorsi",
-        "note": "Al di fuori della nostra competenza. Qualora il Suo caso lo richiedesse, glielo comunicheremo e Le consiglieremo un colegiado abogado."
+        "note": "Fuori dal nostro ambito. Se il tuo caso lo richiede, te lo diremo e ti indirizzeremo a un colegiado abogado."
       },
       {
-        "item": "Servizi di traduzione o di apostille",
-        "note": "Individuiamo quali documenti richiedono una traduzione giurata e possiamo indirizzarLa a un traductor jurado; il suo onorario è a parte."
+        "item": "Traduzione giurata o apostille",
+        "note": "Individuiamo ciò che ne ha bisogno e ti indirizziamo a un traductor jurado; il suo onorario è a parte."
       }
     ]
   }
