@@ -1,96 +1,100 @@
 {
-  "metaTitle": "BCN Student Concierge – Reibungsloser Start in Barcelona",
-  "metaDescription": "Unabhängige administrative Unterstützung für internationale Studierende, die nach Barcelona kommen. Padrón, TIE-/CUE-Termine und Vorbereitung von Unterlagen.",
+  "metaTitle": "BCN Student Concierge — Aufenthaltsformalitäten, gleich beim ersten Mal richtig",
+  "metaDescription": "Für internationale Studierende, die schon in Barcelona sind. Padrón, TIE- und CUE-Termine, EX-17- und EX-18-Formulare, vorbereitet und gebucht. Die kostenlose Ersteinschätzung am selben Tag sagt dir, wo du stehst, bevor du etwas bezahlst.",
   "hero": {
-    "eyebrow": "Barcelona · Für internationale Familien gegründet",
-    "title": "Reibungslose Ankunft und rechtmäßiger Aufenthalt für internationale Studierende in Barcelona.",
-    "body": "Ihr Kind hat einen Studienplatz an einer Universität in Barcelona erhalten. Was zwischen ihm und dem erfolgreichen Start in das neue Leben steht, ist eine Kette spanischer Verwaltungsabläufe, die selbst kleinste Fehler nicht verzeiht – und die vollständig auf Spanisch abgewickelt wird. Wir kümmern uns um diese Abläufe – korrekt und gleich beim ersten Mal.",
-    "primaryCta": "Sichere Aufnahme starten",
-    "secondaryCta": "Pakete vergleichen",
-    "note": "Feste Gebühren, die vor der Zahlung inklusive IVA angegeben werden. Keine Abrechnung nach Stunden."
+    "eyebrow": "Barcelona · Für alle, die schon hier sind",
+    "title": "Du bist seit zwei Wochen hier. Die Uhr läuft seit deiner Landung.",
+    "body": "Studierende von außerhalb der EU haben in der Regel einen Monat ab Einreise Zeit, die TIE zu beantragen. Wenn du in der ersten Septemberwoche angekommen bist, schließt sich dieses Fenster Anfang Oktober — und der Termin ist der Teil, den niemand beschleunigen kann. Wir bauen die Akte so, dass dich am Tag, an dem ein Platz frei wird, nichts davon wieder nach Hause schickt.",
+    "primaryCta": "Kostenlose Ersteinschätzung",
+    "secondaryCta": "Pakete ansehen",
+    "note": "Die Ersteinschätzung ist kostenlos und kommt am selben Tag. Die Pakete haben Festpreise, mit IVA vor der Zahlung ausgewiesen."
   },
   "trust": {
-    "heading": "Wir begleiten Studierende an",
-    "disclaimer": "Die genannten Universitäten sind diejenigen, die unsere Kunden besuchen. Wir sind ein unabhängiger Dienstleister und stehen in keiner Verbindung zu den aufgeführten Einrichtungen, werden von diesen nicht unterstützt und handeln nicht in deren Namen."
+    "heading": "Die Studierenden, mit denen wir arbeiten, studieren an",
+    "disclaimer": "Die genannten Hochschulen sind jene, die unsere Kundinnen und Kunden besuchen. Wir sind ein unabhängiger Dienst und weder mit einer der genannten Einrichtungen verbunden noch von ihr unterstützt, noch handeln wir in ihrem Auftrag."
   },
   "problems": {
     "eyebrow": "Was tatsächlich schiefgeht",
-    "title": "Vier Fehlerquellen – und wie wir jede einzelne beseitigen.",
-    "approach": "Unser Ansatz — ",
+    "title": "Vier Bruchstellen — und wie wir jede beseitigen.",
+    "approach": "Was wir tun — ",
     "items": [
       {
-        "problem": "Cita previa-Slots werden innerhalb von Sekunden ausgebucht",
-        "detail": "Termine für den Padrón und bei der Nationalpolizei werden in unregelmäßigen Abständen freigegeben und innerhalb weniger Minuten von automatisierten Systemen vergeben. Familien, die ein spanischsprachiges Portal aus einer anderen Zeitzone heraus aktualisieren, erhalten selten einen Termin.",
-        "solution": "Wir überwachen die Terminvergabe in den verschiedenen Stadtbezirken Barcelonas und vereinbaren den Termin im Namen Ihres Kindes; anschließend senden wir Ihnen die Bestätigung mit einer Wegbeschreibung und einer genauen Auflistung der mitzubringenden Unterlagen zu."
+        "problem": "Cita-previa-Termine sind in Sekunden weg",
+        "detail": "Termine für Padrón und Policía Nacional werden unregelmäßig freigegeben und binnen Minuten von automatisierten Bots belegt. Zwischen zwei Vorlesungen ein spanischsprachiges Portal neu zu laden ist keine Strategie.",
+        "solution": "Wir beobachten die Freigabefenster in der gesamten Provinz Barcelona, nicht nur bei der Behörde, die dir gerade passt, und buchen auf deinen eigenen Namen. Du bekommst einen datierten Ablaufplan: Adresse, Uhrzeit, was mitzunehmen ist, was gefragt wird."
       },
       {
-        "problem": "Ein einziges falsch ausgefülltes Feld macht den gesamten Antrag ungültig",
-        "detail": "Ein EX-17-Formular, bei dem unter dem zweiten Nachnamen „N/A“ eingetragen wurde, ein Abschnitt „Vertreter“, der von einem wohlmeinenden Elternteil ausgefüllt wurde, oder ein Formular, bei dem der Text in den Feldern verschoben ist, wird am Schalter abgelehnt – und der nächste Termin liegt erst in mehreren Wochen.",
-        "solution": "Die Formulare werden programmgesteuert aus Ihren verifizierten Daten erstellt, so abgeflacht, dass sich beim Drucken nichts verschiebt, und mit dem Reisepass abgeglichen, bevor die Akte unser Haus verlässt."
+        "problem": "Ein falsches Kästchen kippt die ganze Akte",
+        "detail": "Ein EX-17 mit «N/A» im zweiten Nachnamen, ein Vertretungsabschnitt, den jemand für dich ausgefüllt hat, oder ein bei 94% gedrucktes Formular, dessen Text aus dem Feld rutscht: am Schalter abgelehnt, und der nächste Termin ist Wochen entfernt.",
+        "solution": "Dein Formular entsteht aus deinen geprüften Daten, wird flachgerechnet, damit beim Druck nichts verrutscht, und gegen deinen Passscan abgeglichen. Abschnitt 2 bleibt dauerhaft leer, weil wir nicht deine Vertretung sind."
       },
       {
-        "problem": "Das Steuerformular kann nicht online bezahlt werden",
-        "detail": "Das Formular „Modelo 790 Código 012“ ist mit einem eindeutigen Barcode versehen und muss von den meisten Studierenden in bar am Schalter einer spanischen Bank oder an einem Geldautomaten mit Scanner bezahlt werden. Es kommt regelmäßig vor, dass Studierende mit einem noch nicht bezahlten Formular bei der Polizei erscheinen.",
-        "solution": "Wir richten das Formular mit Barcode für Barzahlungen ein und geben Schritt-für-Schritt-Anleitungen für die CaixaBank, BBVA und Santander – einschließlich der Angabe, welche Filialen Zahlungen von Nichtkunden akzeptieren."
+        "problem": "Das Gebührenformular lässt sich nicht online bezahlen",
+        "detail": "Das Modelo 790 Código 012 trägt einen eindeutigen Barcode und muss für die meisten Studierenden bar an einem Bankschalter oder an einem Automaten mit Leser bezahlt werden. Viele stehen mit einem unbezahlten Formular auf der Wache.",
+        "solution": "Wir richten es für Barzahlung ein, drucken es farbig bei 100% und nennen dir eine Filiale in der Nähe deines Termins samt Kassenzeiten: nicht jede nimmt Zahlungen von Nichtkunden an, und manche nur vormittags."
       },
       {
-        "problem": "Wohnungsbetrug zielt auf neu ankommende Studierende ab",
-        "detail": "Aus dem Ausland ausgeschriebene Angebote sind häufig illegal untervermietet, befinden sich im Besitz einer anderen Person als des „Vermieters“ oder sind an Kautionen gebunden, die über der gesetzlichen Obergrenze liegen. Vor der Ankunft überwiesene Kautionen werden selten zurückerstattet.",
-        "solution": "Im Rahmen unseres „Turnkey“-Pakets rufen wir die „Nota Simple“ aus dem Grundbuch ab, um zu überprüfen, wem die Wohnung tatsächlich gehört, und wir überprüfen die Höhe der Kaution im Vertrag auf Einhaltung der gesetzlichen Obergrenze, bevor eine Geldüberweisung erfolgt."
+        "problem": "Der Padrón blockiert lautlos alles Weitere",
+        "detail": "In einem Hostel, einem Airbnb oder einer nicht gemeldeten Untermiete kannst du dich derzeit nicht anmelden. Ein Vermieter, der sich weigert, oder eine Wohnung in Sant Cugat, obwohl du von Barcelona ausgingst, blockiert Gesundheitskarte und TIE gleich mit.",
+        "solution": "Mit dem Fixer gehen wir mit dir aufs Rathaus und übersetzen, fragen die Gemeinde nach ihren alternativen Nachweiswegen und kümmern uns um die richtige Gemeinde. Was wir nie tun: dich an einer Adresse anmelden, an der du nicht wohnst."
       }
     ]
   },
   "process": {
-    "eyebrow": "Der Ablauf",
-    "title": "Vier Schritte – von der Aufnahme bis zur Karte in der Hand.",
+    "eyebrow": "So läuft es",
+    "title": "Zuerst die kostenlose Ersteinschätzung. Danach, wenn du willst, vier Schritte.",
     "steps": [
       {
+        "title": "Kostenlose Ersteinschätzung, am selben Tag",
+        "body": "Schick deinen Einreisestempel, deine Genehmigung und deine Immatrikulationsbescheinigung. Wir sagen dir, welcher Weg gilt, wie viele Tage dir bleiben und was noch zu retten ist. Kostenlos und unverbindlich."
+      },
+      {
         "title": "Sichere Aufnahme",
-        "body": "Ihr Kind füllt den verschlüsselten Fragebogen aus und lädt Reisepass, Immatrikulationsbescheinigung und Mietvertrag hoch. Jedes Dokument wird einzeln mit AES-256 verschlüsselt."
+        "body": "Du füllst den verschlüsselten Fragebogen aus und lädst Pass, Immatrikulationsbescheinigung und Mietvertrag hoch. Jedes Dokument wird mit einem eigenen Schlüssel verschlüsselt."
       },
       {
-        "title": "Zusammenstellung der Unterlagen",
-        "body": "Wir erstellen das richtige Formular – EX-17 für Studierende aus Nicht-EU-Ländern, EX-18 für EU-Bürger –, füllen das Formular „Modelo 790“ aus und stellen eine vorab geprüfte „Ready File“-Unterlage zusammen."
+        "title": "Akte zusammenstellen",
+        "body": "Wir erzeugen das richtige Formular — EX-17 auf dem Nicht-EU-Weg, EX-18 auf dem EU-Weg —, richten das Modelo 790 ein und stellen die Ready File zusammen. Kurier an deine Adresse oder Abholung, dazu ein PDF zum Selbstausdrucken, sobald alles fertig ist."
       },
       {
-        "title": "Termine vereinbart",
-        "body": "Wir vereinbaren die Termine für den Padrón sowie die TIE/CUE-Karte und übermitteln Ihnen einen datierten Ablaufplan: wohin Sie gehen müssen, was Sie mitbringen müssen und welche Fragen gestellt werden."
-      },
-      {
-        "title": "Einleben & Nachverfolgung",
-        "body": "Bankangelegenheiten, öffentliche Verkehrsmittel und Internetanschluss werden in der ersten Woche eingerichtet. Wir verfolgen den Vorgang 90 Tage lang bis zur Abholung der Karte."
+        "title": "Termine, dann Nachverfolgung",
+        "body": "Wir suchen und buchen die Padrón- und TIE/CUE-Termine, erklären dir, was gefragt wird, und bleiben erreichbar, während du am Schalter stehst. Die Akte begleiten wir 90 Tage, bis zur Abholung."
       }
     ]
   },
   "pricing": {
-    "eyebrow": "Transparente Preisgestaltung",
-    "title": "Drei Pakete. Festpreise, inklusive IVA angegeben.",
-    "body": "Behördengebühren (Modelo 790, Kartenausstellung) zahlen Sie direkt an die spanischen Behörden; sie sind nicht in unserem Honorar enthalten.",
-    "cta": "Vollständigen Vergleich anzeigen"
+    "eyebrow": "Transparente Preise",
+    "title": "Drei Pakete. Je zwei Preise, weil es zwei Wege gibt.",
+    "body": "Der EU-Weg ist weniger Arbeit und kostet weniger: keine Fingerabdrücke, keine Gebühr von 16,08 €. Welcher für dich gilt, klären wir bei der Ersteinschätzung — bevor du etwas bezahlst. Staatliche Gebühren zahlst du direkt selbst; sie sind nie in unserem Honorar enthalten.",
+    "cta": "Vollständigen Vergleich ansehen"
   },
   "faq": {
     "eyebrow": "Klare Antworten",
-    "title": "Fragen, die Eltern als Erstes stellen.",
+    "title": "Was Studierende zuerst fragen.",
     "items": [
       {
-        "q": "Sind Sie Rechtsanwälte oder eine gestoría?",
-        "a": "Nein. Wir sind ein unabhängiger Dienstleister zur Unterstützung bei Verwaltungsangelegenheiten. Wir erstellen Dokumente auf der Grundlage der von Ihnen bereitgestellten Informationen, vereinbaren Termine und begleiten Sie durch den gesamten Prozess. Wir vertreten Sie nicht gegenüber Behörden und erteilen keine Rechtsberatung. Sollte ein Fall eine rechtliche Prüfung erfordern, werden wir Ihnen dies klar mitteilen und Ihnen empfehlen, einen colegiado abogado zu konsultieren."
+        "q": "Seid ihr Anwälte oder eine gestoría?",
+        "a": "Nein. Wir sind ein unabhängiger Dienst für Verwaltungsbegleitung. Wir bereiten Dokumente aus deinen Angaben vor, buchen Termine und führen dich durch das Verfahren. Wir vertreten dich vor keiner Behörde und geben keine Rechtsberatung. Wenn ein Fall juristische Prüfung braucht, sagen wir das deutlich und verweisen dich an einen colegiado abogado."
       },
       {
-        "q": "Muss mein Kind persönlich zu den Terminen erscheinen?",
-        "a": "Ja. Bei Terminen zur Erfassung biometrischer Daten muss der Antragsteller persönlich mit den Originaldokumenten erscheinen. Wir bereiten die Unterlagen vor, sichern den Termin und weisen die Antragsteller ausführlich ein – doch das Erscheinen erfolgt in eigenem Namen."
+        "q": "Ich glaube, meine Frist ist schon abgelaufen. Lohnt sich das Nachfragen?",
+        "a": "Ja — und lieber heute als nächste Woche. Die Ersteinschätzung ist kostenlos und wir antworten ehrlich. Ist deine Frist verstrichen oder dein Status abgelaufen bzw. irregulär, braucht das eine juristische Prüfung, für die wir nicht qualifiziert sind: dann sagen wir es und verweisen dich weiter, statt dir Geld abzunehmen."
       },
       {
-        "q": "Was geschieht anschließend mit den Pass-Scans?",
-        "a": "Die Daten werden im Ruhezustand mit einem eindeutigen Schlüssel pro Datei verschlüsselt und 30 Tage nach Abschluss Ihrer Dienstleistung durch einen automatisierten Löschvorgang endgültig gelöscht. Sie können jederzeit eine vorzeitige Löschung beantragen."
+        "q": "Muss ich selbst zum Termin?",
+        "a": "Ja. Biometrische Termine verlangen dein persönliches Erscheinen mit den Originaldokumenten. Wir bereiten die Akte vor, sichern den Platz und briefen dich, und du kannst uns vom Schalter aus anrufen, wenn du etwas nicht verstehst. Das Erscheinen ist deines, in deinem eigenen Namen."
       },
       {
-        "q": "Können Sie garantieren, dass die Aufenthaltskarte genehmigt wird?",
-        "a": "Nein, und jeder Dienstleister, der dies garantiert, führt Sie in die Irre. Die Entscheidungen liegen ausschließlich bei den spanischen Behörden. Was wir kontrollieren können, ist, dass die Unterlagen vollständig, korrekt und fristgerecht eingereicht werden – denn genau hier liegen die meisten Ablehnungen tatsächlich begründet."
+        "q": "Meine Eltern zahlen. Können sie eingebunden werden?",
+        "a": "Natürlich. Sie können auf ihren eigenen Namen zahlen und die Rechnung erhalten, und beim Fixer erstellen wir am Ende einen datierten Abschlussbericht: was eingereicht wurde, was registriert ist, was noch offen ist, dein Abholtermin und die Nummern für den Notfall. Was wir nicht tun: den Abschnitt zur gesetzlichen Vertretung auf deinem Formular ausfüllen — dieses Feld bleibt leer, weil weder sie noch wir deine Vertretung sind."
       },
       {
-        "q": "Warum wird das Formular „Modelo 790“ in bar bezahlt?",
-        "a": "Das Verfahren der spanischen Steuerbehörde für dieses Formular basiert auf einem eindeutigen Barcode, der am Bankschalter oder am Scanner eines Geldautomaten eingelesen wird. Ohne ein spanisches digitales Zertifikat – über das Neuankömmlinge nicht verfügen – ist eine Online-Abwicklung nicht möglich, weshalb das Formular für die Zahlung „en efectivo“ ausgelegt ist."
+        "q": "Was passiert danach mit meinen Passscans?",
+        "a": "Sie werden im Ruhezustand mit einem eigenen Schlüssel pro Datei verschlüsselt und 30 Tage nach Abschluss deines Auftrags durch einen automatischen Lauf endgültig gelöscht. Eine frühere Löschung kannst du jederzeit verlangen."
+      },
+      {
+        "q": "Könnt ihr garantieren, dass die Karte bewilligt wird?",
+        "a": "Nein — und jeder Dienst, der das garantiert, führt dich in die Irre. Die Entscheidung liegt allein bei den spanischen Behörden. Was wir steuern, ist eine vollständige, korrekte und fristgerecht eingereichte Akte — und genau dort entstehen die meisten Ablehnungen."
       }
     ]
   }

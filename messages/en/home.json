@@ -1,96 +1,100 @@
 {
-  "metaTitle": "BCN Student Concierge — Frictionless Arrivals in Barcelona",
-  "metaDescription": "Independent administrative facilitation for international university students arriving in Barcelona. Padrón, TIE/CUE appointments, and document preparation.",
+  "metaTitle": "BCN Student Concierge — Spanish residency paperwork, done right the first time",
+  "metaDescription": "For international students already in Barcelona. Padrón, TIE and CUE appointments, EX-17 and EX-18 forms, prepared and booked. Free same-day triage tells you where you stand before you pay anything.",
   "hero": {
-    "eyebrow": "Barcelona · Established for international families",
-    "title": "Frictionless arrivals and legal landing for international university students in Barcelona.",
-    "body": "Your child has a place at a Barcelona university. What stands between them and settling in is a chain of Spanish bureaucracy that is unforgiving of small errors — and conducted entirely in Spanish. We handle the chain, correctly, the first time.",
-    "primaryCta": "Begin secure intake",
-    "secondaryCta": "Compare packages",
-    "note": "Fixed fees, quoted with IVA before you pay. No hourly billing."
+    "eyebrow": "Barcelona · For students already here",
+    "title": "You’ve been here two weeks. The clock started the day you landed.",
+    "body": "Non-EU students normally have one month from entry to apply for the TIE. If you arrived in the first week of September, that window closes in early October — and the appointment is the part nobody can rush. We build the file so that when a slot opens, nothing on it sends you home again.",
+    "primaryCta": "Get free triage",
+    "secondaryCta": "See the packages",
+    "note": "Triage is free and same-day. Packages are fixed-fee, quoted with IVA before you pay."
   },
   "trust": {
-    "heading": "Supporting students arriving at",
+    "heading": "Students we work with study at",
     "disclaimer": "Universities named are those our clients attend. We are an independent service and are not affiliated with, endorsed by, or acting on behalf of any institution listed."
   },
   "problems": {
     "eyebrow": "What actually goes wrong",
     "title": "Four failure points, and how we remove each one.",
-    "approach": "Our approach — ",
+    "approach": "What we do — ",
     "items": [
       {
         "problem": "Cita previa slots vanish in seconds",
-        "detail": "Padrón and National Police appointments are released irregularly and taken within minutes by automated agents. Families refreshing a Spanish-language portal from another timezone rarely win one.",
-        "solution": "We monitor release windows across Barcelona's districts and secure the appointment in your student's name, then send the confirmation with directions and the exact documents to carry."
+        "detail": "Padrón and National Police appointments are released irregularly and taken within minutes by automated agents. Refreshing a Spanish-language portal between lectures is not a strategy.",
+        "solution": "We monitor release windows across the whole Barcelona province rather than only the convenient office, and book in your own name. You get a dated itinerary: address, time, what to carry, what will be asked."
       },
       {
         "problem": "One wrong box voids the whole file",
-        "detail": "An EX-17 with a second surname filled in as “N/A”, a representative section completed by a well-meaning parent, or a form printed with shifted field text is refused at the counter — and the next appointment is weeks away.",
-        "solution": "Forms are generated programmatically from your verified data, flattened so nothing shifts on print, and cross-checked against the passport before the file leaves our hands."
+        "detail": "An EX-17 with a second surname filled in as “N/A”, a representative section someone completed for you, or a form printed at 94% so the text sits outside its box — refused at the counter, and the next appointment is weeks away.",
+        "solution": "Your form is generated from your verified data, flattened so nothing shifts on print, and cross-checked against your passport scan. Section 2 stays permanently blank, because we are not your representative."
       },
       {
         "problem": "The tax form cannot be paid online",
-        "detail": "Modelo 790 Código 012 carries a unique barcode and, for most students, must be paid in cash at a Spanish bank counter or ATM scanner. Students routinely arrive at the police station with an unpaid form.",
-        "solution": "We configure the barcoded form for cash payment and give step-by-step instructions for CaixaBank, BBVA and Santander — including which branches accept non-customer payments."
+        "detail": "Modelo 790 Código 012 carries a unique barcode and, for most students, must be paid in cash at a bank counter or ATM scanner. Plenty of people arrive at the police station holding an unpaid one.",
+        "solution": "We configure it for cash, print it in colour at 100% scale, and name a branch near your appointment with its counter hours — not every branch takes tax payments from non-customers, and some only do it in the morning."
       },
       {
-        "problem": "Housing fraud targets arriving students",
-        "detail": "Listings advertised from abroad are frequently sublet illegally, owned by someone other than the “landlord”, or bound to deposits above the legal cap. Deposits wired before arrival are rarely recovered.",
-        "solution": "On our Turnkey tier we pull the Nota Simple from the property registry to confirm who actually owns the flat, and check the contract's deposit against the statutory limit before anyone transfers money."
+        "problem": "The padrón quietly blocks everything else",
+        "detail": "In a hostel, an Airbnb or an unregistered sublet you currently can’t register. A landlord who refuses, or a flat in Sant Cugat when you assumed Barcelona, stops the health card and the TIE behind it.",
+        "solution": "On The Fixer we come to the town hall and translate, ask the council about its alternative verification routes, and handle the right municipality. What we never do is register you at an address you don’t live at."
       }
     ]
   },
   "process": {
-    "eyebrow": "The process",
-    "title": "Four stages, from intake to collected card.",
+    "eyebrow": "How it works",
+    "title": "Free triage first. Then, if you want us, four stages.",
     "steps": [
       {
+        "title": "Free triage, same day",
+        "body": "Send your entry stamp, your authorisation and your enrolment letter. We tell you which route applies, how many days you have left, and what’s still recoverable. No charge, no obligation."
+      },
+      {
         "title": "Secure intake",
-        "body": "Your student completes the encrypted questionnaire and uploads their passport, matrícula letter and lease. Documents are encrypted per-file with AES-256."
+        "body": "You complete the encrypted questionnaire and upload your passport, enrolment letter and lease. Every document is encrypted with its own key."
       },
       {
         "title": "File assembly",
-        "body": "We generate the correct form — EX-17 for non-EU students, EX-18 for EU nationals — configure the Modelo 790, and assemble a pre-checked Ready File."
+        "body": "We generate the right form — EX-17 on the non-EU route, EX-18 on the EU one — configure the Modelo 790, and assemble the Ready File. Courier to you, or pickup, plus a print-at-home PDF the moment it’s assembled."
       },
       {
-        "title": "Appointments secured",
-        "body": "We book the Padrón and TIE/CUE appointments and deliver a dated itinerary: where to go, what to carry, what will be asked."
-      },
-      {
-        "title": "Settling in & tracking",
-        "body": "Banking, transit and connectivity are set up in the first week. We track the file for 90 days, through to card collection."
+        "title": "Appointments, then tracking",
+        "body": "We search and book the Padrón and TIE/CUE appointments, brief you on what will be asked, and stay reachable while you’re at the counter. We track the file for 90 days, through to collection."
       }
     ]
   },
   "pricing": {
     "eyebrow": "Transparent pricing",
-    "title": "Three packages. Fixed fees, stated with IVA.",
-    "body": "Government fees (Modelo 790, card issuance) are paid directly by you to the Spanish authorities and are not included in our fee.",
+    "title": "Three packages. Two prices each, because two routes.",
+    "body": "The EU route is less work and costs less: no fingerprints, no €16.08 tasa. We confirm which one applies to you at triage, before you pay anything. Government fees are paid by you, directly, and are never included in our fee.",
     "cta": "See full comparison"
   },
   "faq": {
     "eyebrow": "Straight answers",
-    "title": "Questions parents ask first.",
+    "title": "What students ask first.",
     "items": [
       {
         "q": "Are you lawyers or a gestoría?",
-        "a": "No. We are an independent administrative facilitation service. We prepare documents from information you provide, book appointments, and guide you through the process. We do not represent you before any authority and we do not give legal advice. Where a case needs legal analysis, we will tell you plainly and recommend you consult a colegiado abogado."
+        "a": "No. We are an independent administrative facilitation service. We prepare documents from information you give us, book appointments, and guide you through the process. We do not represent you before any authority and we do not give legal advice. Where a case needs legal analysis, we say so plainly and point you to a colegiado abogado."
       },
       {
-        "q": "Does my student have to attend appointments in person?",
-        "a": "Yes. Biometric appointments require the applicant to appear personally with original documents. We prepare the file, secure the slot and brief them thoroughly — but the appearance is theirs, in their own name."
+        "q": "I think I’ve already missed the deadline. Is it worth asking?",
+        "a": "Yes — ask today rather than next week. Triage is free and we will tell you honestly. If your window has closed, or you’re on an expired or irregular status, that needs legal analysis we are not qualified to give, and we will say so and point you elsewhere rather than take your money."
       },
       {
-        "q": "What happens to the passport scans afterwards?",
-        "a": "They are encrypted at rest with a unique key per file and permanently deleted 30 days after your service completes, by an automated retention job. You can request earlier deletion at any time."
+        "q": "Do I have to go to the appointment myself?",
+        "a": "Yes. Biometric appointments require you to appear personally with your original documents. We prepare the file, secure the slot and brief you thoroughly, and you can call us from the counter if you’re asked something you don’t understand. The appearance is yours, in your own name."
       },
       {
-        "q": "Can you guarantee the residency card is approved?",
-        "a": "No, and any service that guarantees this is misleading you. Decisions rest entirely with the Spanish authorities. What we control is that the file is complete, correct and submitted on time — which is where most rejections actually originate."
+        "q": "My parents are paying. Can they be involved?",
+        "a": "Of course. They can pay at checkout in their own name and receive the factura, and on The Fixer we produce a dated completion report at the end: what was filed, what’s registered, what’s still pending, your collection date, and the numbers to call in an emergency. What we won’t do is fill in the legal-representative section of your form — that box stays blank, because we are not your representative and neither are they."
       },
       {
-        "q": "Why is the Modelo 790 paid in cash?",
-        "a": "The Spanish tax agency's process for this form relies on a unique barcode read at a bank counter or ATM scanner. Without a Spanish digital certificate — which new arrivals do not have — online settlement is not available, so the form is configured for payment 'en efectivo'."
+        "q": "What happens to my passport scans afterwards?",
+        "a": "They are encrypted at rest with a unique key per file and permanently deleted 30 days after your service completes, by an automated job. You can ask for earlier deletion at any time."
+      },
+      {
+        "q": "Can you guarantee the card is approved?",
+        "a": "No, and any service that guarantees it is misleading you. The decision rests entirely with the Spanish authorities. What we control is that the file is complete, correct and submitted on time — which is where most rejections actually originate."
       }
     ]
   }

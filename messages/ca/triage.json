@@ -1,0 +1,68 @@
+{
+  "page": {
+    "metaTitle": "Triatge gratuït — en quina situació estàs avui",
+    "metaDescription": "Envia’ns el teu segell d’entrada, la teva autorització i la teva carta de matrícula. Et diem quina via et correspon, quants dies et queden i què encara es pot recuperar. Sense cost i sense compromís.",
+    "eyebrow": "Triatge gratuït · el mateix dia",
+    "title": "Fa dues setmanes que ets aquí. El rellotge va començar el dia que vas aterrar.",
+    "intro": "Els estudiants de fora de la UE solen tenir un mes des de l’entrada per sol·licitar la TIE. Si vas arribar la primera setmana de setembre, aquesta finestra es tanca a principis d’octubre, i la cita és la part que ningú no pot accelerar. Explica’ns on ets i et direm en quina situació et trobes.",
+    "whatYouGet": "El que reps avui mateix",
+    "steps": [
+      "Quina via et correspon —EX-17 o EX-18— llegida a la teva pròpia autorització, no deduïda del teu passaport",
+      "Quants dies et queden, comptats des del teu segell d’entrada",
+      "Què encara es pot recuperar i què ha de passar primer",
+      "Si realment ens necessites. Si no, t’ho direm"
+    ],
+    "declineNote": "Si el teu termini ja s’ha tancat, si estàs en situació caducada o irregular, o si t’enfrontes a una denegació, això requereix una anàlisi jurídica que no estem qualificats per donar. T’ho direm al triatge i et derivarem a un advocat col·legiat. Preferim perdre la feina abans que cobrar-te per una cosa que no podem resoldre."
+  },
+  "fields": {
+    "fullName": "El teu nom",
+    "email": "Correu electrònic",
+    "nationality": "Nacionalitat",
+    "arrivedOn": "Data d’entrada a Espanya",
+    "arrivedOnHint": "La data del teu segell d’entrada, no la de l’inici del curs.",
+    "housing": "On vius ara mateix",
+    "notes": "Qualsevol altra cosa que haguem de saber",
+    "gdprTriageConsent": "Consentiment"
+  },
+  "housing": {
+    "own-lease": "Un pis, amb el contracte al meu nom",
+    "room-or-sublet": "Una habitació en un pis compartit, o un subarrendament",
+    "university-residence": "Una residència universitària",
+    "hostel-or-airbnb": "Un hostal o un Airbnb",
+    "staying-with-someone": "A casa de familiars o d’un amic",
+    "not-yet-housed": "Encara buscant"
+  },
+  "clock": {
+    "open": "Amb aquesta data d’entrada, la teva finestra d’un mes es tanca el {date}, d’aquí a uns {days} dies. És orientatiu: la teva pròpia autorització pot fixar un termini diferent, i per això la llegim.",
+    "closed": "Amb aquesta data d’entrada, la finestra ordinària d’un mes es va tancar fa uns {days} dies. Envia-ho igualment: explica’ns a sota què va passar i et direm amb honestedat si es pot recuperar.",
+    "eu": "Amb passaport de la UE, de l’EEE o suís no hi ha rellotge d’un mes. El deure de registre comença als tres mesos de residència, així que tens més marge del que probablement creus."
+  },
+  "uploads": {
+    "title": "Els tres documents",
+    "note": "Opcionals, però són el que fa que la resposta sigui exacta en lloc de general. PDF, JPEG o PNG, fins a 10 MB cadascun. Es xifren en arribar i s’esborren un cop resposta la teva consulta.",
+    "entry-stamp": "El teu segell d’entrada, o la targeta d’embarcament",
+    "authorisation": "El teu visat o resolució d’aprovació",
+    "enrolment-letter": "La teva carta de matrícula"
+  },
+  "form": {
+    "choose": "Tria una opció",
+    "optional": "opcional",
+    "consent": "Accepto que BCN Student Concierge tracti el que he introduït aquí, i els documents que adjunti, per respondre aquesta consulta. Res d’això no m’obliga a contractar res.",
+    "submit": "Enviar per al triatge gratuït",
+    "sending": "Enviant…",
+    "freeNote": "Sense cost, sense compromís i sense targeta. Responem el mateix dia.",
+    "failed": "No hem pogut enviar la teva consulta. Torna-ho a provar."
+  },
+  "done": {
+    "title": "Ho hem rebut.",
+    "body": "La teva referència és {ref}. Et respondrem avui al correu que ens has donat, amb la via que et correspon, els dies que et queden i què fer primer.",
+    "note": "Si no vas adjuntar els tres documents, envia’ls responent aquell correu: com més puguem llegir, més exacta serà la resposta."
+  },
+  "cta": {
+    "eyebrow": "Comença aquí",
+    "title": "No saps en quina situació estàs? Descobreix-ho gratis.",
+    "body": "Envia’ns el teu segell d’entrada, la teva autorització i la teva carta de matrícula. Et direm quina via et correspon, quants dies et queden i què encara es pot recuperar. Sense cost, sense compromís i, si no ens necessites, t’ho direm.",
+    "button": "Vull el triatge gratuït",
+    "note": "El mateix dia. Quinze minuts del teu temps."
+  }
+}

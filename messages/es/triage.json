@@ -1,0 +1,68 @@
+{
+  "page": {
+    "metaTitle": "Triaje gratuito — en qué situación estás hoy",
+    "metaDescription": "Envíanos tu sello de entrada, tu autorización y tu carta de matrícula. Te decimos qué vía te corresponde, cuántos días te quedan y qué sigue siendo recuperable. Sin coste y sin compromiso.",
+    "eyebrow": "Triaje gratuito · el mismo día",
+    "title": "Llevas dos semanas aquí. El reloj empezó el día que aterrizaste.",
+    "intro": "Los estudiantes de fuera de la UE suelen tener un mes desde la entrada para solicitar la TIE. Si llegaste la primera semana de septiembre, esa ventana se cierra a principios de octubre, y la cita es la parte que nadie puede acelerar. Cuéntanos dónde estás y te decimos en qué situación te encuentras.",
+    "whatYouGet": "Lo que recibes hoy mismo",
+    "steps": [
+      "Qué vía te corresponde —EX-17 o EX-18— leída en tu propia autorización, no deducida de tu pasaporte",
+      "Cuántos días te quedan, contados desde tu sello de entrada",
+      "Qué sigue siendo recuperable y qué tiene que pasar primero",
+      "Si realmente nos necesitas. Si no, te lo diremos"
+    ],
+    "declineNote": "Si tu plazo ya se ha cerrado, si estás en situación caducada o irregular, o si te enfrentas a una denegación, eso requiere un análisis jurídico que no estamos cualificados para dar. Te lo diremos en el triaje y te derivaremos a un colegiado abogado. Preferimos perder el trabajo antes que cobrarte por algo que no podemos resolver."
+  },
+  "fields": {
+    "fullName": "Tu nombre",
+    "email": "Correo electrónico",
+    "nationality": "Nacionalidad",
+    "arrivedOn": "Fecha de entrada en España",
+    "arrivedOnHint": "La fecha de tu sello de entrada, no la del comienzo del curso.",
+    "housing": "Dónde vives ahora mismo",
+    "notes": "Cualquier otra cosa que debamos saber",
+    "gdprTriageConsent": "Consentimiento"
+  },
+  "housing": {
+    "own-lease": "Un piso, con el contrato a mi nombre",
+    "room-or-sublet": "Una habitación en un piso compartido, o un subarriendo",
+    "university-residence": "Una residencia universitaria",
+    "hostel-or-airbnb": "Un hostal o un Airbnb",
+    "staying-with-someone": "En casa de familiares o de un amigo",
+    "not-yet-housed": "Todavía buscando"
+  },
+  "clock": {
+    "open": "Con esta fecha de entrada, tu ventana de un mes se cierra el {date}, dentro de unos {days} días. Es orientativo: tu propia autorización puede fijar un plazo distinto, y por eso la leemos.",
+    "closed": "Con esta fecha de entrada, la ventana ordinaria de un mes se cerró hace unos {days} días. Envíalo igualmente: cuéntanos abajo qué pasó y te diremos con honestidad si es recuperable.",
+    "eu": "Con pasaporte de la UE, del EEE o suizo no hay reloj de un mes. El deber de registro empieza a los tres meses de residencia, así que tienes más margen del que probablemente crees."
+  },
+  "uploads": {
+    "title": "Los tres documentos",
+    "note": "Opcionales, pero son lo que hace que la respuesta sea exacta en lugar de general. PDF, JPEG o PNG, hasta 10 MB cada uno. Se cifran al llegar y se borran una vez respondida tu consulta.",
+    "entry-stamp": "Tu sello de entrada, o la tarjeta de embarque",
+    "authorisation": "Tu visado o resolución de aprobación",
+    "enrolment-letter": "Tu carta de matrícula"
+  },
+  "form": {
+    "choose": "Elige una opción",
+    "optional": "opcional",
+    "consent": "Acepto que BCN Student Concierge trate lo que he introducido aquí, y los documentos que adjunte, para responder a esta consulta. Nada de esto me obliga a contratar nada.",
+    "submit": "Enviar para triaje gratuito",
+    "sending": "Enviando…",
+    "freeNote": "Sin coste, sin compromiso y sin tarjeta. Respondemos el mismo día.",
+    "failed": "No hemos podido enviar tu consulta. Inténtalo de nuevo."
+  },
+  "done": {
+    "title": "Lo hemos recibido.",
+    "body": "Tu referencia es {ref}. Te responderemos hoy al correo que nos has dado, con la vía que te corresponde, los días que te quedan y qué hacer primero.",
+    "note": "Si no adjuntaste los tres documentos, envíalos respondiendo a ese correo: cuanto más podamos leer, más exacta será la respuesta."
+  },
+  "cta": {
+    "eyebrow": "Empieza aquí",
+    "title": "¿No sabes en qué situación estás? Averígualo gratis.",
+    "body": "Envíanos tu sello de entrada, tu autorización y tu carta de matrícula. Te diremos qué vía te corresponde, cuántos días te quedan y qué sigue siendo recuperable. Sin coste, sin compromiso y, si no nos necesitas, te lo diremos.",
+    "button": "Quiero el triaje gratuito",
+    "note": "El mismo día. Quince minutos de tu tiempo."
+  }
+}

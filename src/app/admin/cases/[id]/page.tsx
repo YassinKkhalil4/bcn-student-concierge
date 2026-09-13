@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/admin/guard";
 import { getCase, type StoredDocument } from "@/lib/server/storage";
 import type { DocumentKind, Locale } from "@/lib/db/schema";
-import { getTier, priceWithIva, formatEur } from "@/lib/pricing";
+import { getTier, tierPrice, routeForForm, formatEur } from "@/lib/pricing";
 import { buildTasa012 } from "@/lib/tasa012";
 import { countryDisplayName, spanishFormName } from "@/lib/countries";
 import { listInvoicesForCase } from "@/lib/server/invoices";
@@ -63,7 +63,7 @@ export default async function CasePage({
   const appointmentRows = await listAppointments(c.id);
 
   const tier = getTier(c.tierId);
-  const price = tier ? priceWithIva(tier.basePriceCents) : null;
+  const price = tier ? tierPrice(tier, routeForForm(c.formId)) : null;
   const i = c.intake;
   const name = i
     ? `${[i.identity.firstSurname, i.identity.secondSurname].filter(Boolean).join(" ")}, ${i.identity.givenName}`

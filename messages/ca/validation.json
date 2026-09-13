@@ -25,5 +25,7 @@
   "taxIdInvalid": "Aquest NIF no és vàlid: comproveu-lo amb el contracte de lloguer",
   "companyBoth": "Introduïu tant el nom de l’empresa com el seu NIF, o deixeu ambdós camps en blanc",
   "companyTaxIdInvalid": "El NIF (CIF) d’aquesta empresa és invàlid",
-  "cadastralRef": "Una referència cadastral consta de 20 lletres i xifres"
+  "cadastralRef": "Una referència cadastral consta de 20 lletres i xifres",
+  "entryDateFormat": "Tria la data en què vas entrar a Espanya",
+  "entryDateRange": "Aquesta data és al futur, o fa més d’un any: comprova el teu segell d’entrada"
 }

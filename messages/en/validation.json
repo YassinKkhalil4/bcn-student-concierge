@@ -20,10 +20,12 @@
   "signerIdFormat": "Enter the ID number as it appears on the document",
   "signerIdCheckLetter": "The last letter of that DNI/NIE does not match its number — please compare it with the card",
   "relation": "Choose how the signer is related to the flat",
-  "ownerNameForTenant": "The owner's name is required when the signer is the tenant (it is on the lease)",
-  "ownerTaxIdForTenant": "The owner's NIF is required when the signer is the tenant (it is on the lease)",
+  "ownerNameForTenant": "The owner’s name is required when the signer is the tenant (it is on the lease)",
+  "ownerTaxIdForTenant": "The owner’s NIF is required when the signer is the tenant (it is on the lease)",
   "taxIdInvalid": "That NIF is not valid — check it against the lease",
-  "companyBoth": "Give both the company's name and its NIF, or leave both empty",
+  "companyBoth": "Give both the company’s name and its NIF, or leave both empty",
   "companyTaxIdInvalid": "That company NIF (CIF) is not valid",
-  "cadastralRef": "A cadastral reference has 20 letters and digits"
+  "cadastralRef": "A cadastral reference has 20 letters and digits",
+  "entryDateFormat": "Choose the date you entered Spain",
+  "entryDateRange": "That date is in the future, or more than a year ago — check your entry stamp"
 }

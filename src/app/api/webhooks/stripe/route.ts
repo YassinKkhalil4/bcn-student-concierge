@@ -3,7 +3,7 @@ import type Stripe from "stripe";
 import { billingFromSession, constructWebhookEvent } from "@/lib/server/stripe";
 import { findCaseIdByPaymentIntent, getCase, updateCase } from "@/lib/server/storage";
 import { issueInvoiceForCheckout, issueRefundRectification } from "@/lib/server/invoices";
-import { getTier, priceWithIva } from "@/lib/pricing";
+import { getTier, tierPrice, routeForForm } from "@/lib/pricing";
 import { notifyPaymentReceived } from "@/lib/notify/events";
 
 export const runtime = "nodejs";
@@ -70,7 +70,10 @@ export async function POST(request: Request): Promise<NextResponse> {
           throw new Error(`Unexpected checkout amount for case ${record.ref}`);
         }
         const tier = getTier(record.tierId);
-        if (tier && session.amount_total !== priceWithIva(tier.basePriceCents).totalCents) {
+        // The expected amount depends on the EU / non-EU route, which is fixed
+        // by the case's own formId — the same derivation checkout priced from.
+        const route = routeForForm(record.formId);
+        if (tier && session.amount_total !== tierPrice(tier, route).totalCents) {
           // Invoice what was actually charged, but make the gap visible.
           console.warn(`[invoice] ${record.ref}: charged ${session.amount_total} differs from tier price`);
         }

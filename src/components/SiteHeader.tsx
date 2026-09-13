@@ -5,6 +5,7 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 export function SiteHeader() {
   const t = useTranslations("common");
   const nav = [
+    { href: "/triage", label: t("nav.triage") },
     { href: "/#how-it-works", label: t("nav.howItWorks") },
     { href: "/pricing", label: t("nav.pricing") },
     { href: "/#faq", label: t("nav.faq") },

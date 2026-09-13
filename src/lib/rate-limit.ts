@@ -24,6 +24,7 @@ import { pseudonymize } from "@/lib/crypto";
  */
 
 export type LimitScope =
+  | "triage"
   | "intake"
   | "upload"
   | "checkout"
@@ -43,7 +44,11 @@ interface Quota {
 const MINUTE = 60_000;
 
 export const QUOTAS: Record<LimitScope, Quota> = {
-  // A family completing one intake, plus retries after validation errors.
+  // Free triage is unauthenticated and carries file uploads, so it is the most
+  // abusable endpoint on the site. Tighter than intake: a genuine enquirer
+  // submits once, twice if a scan was rejected.
+  triage: { tokens: 3, windowMs: 60 * MINUTE },
+  // A student completing one intake, plus retries after validation errors.
   intake: { tokens: 5, windowMs: 60 * MINUTE },
   // Three document slots, allowing re-uploads of rejected scans.
   upload: { tokens: 20, windowMs: 60 * MINUTE },

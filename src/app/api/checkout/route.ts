@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { createCheckoutSession } from "@/lib/server/stripe";
 import { getCase, updateCase } from "@/lib/server/storage";
-import { getTier } from "@/lib/pricing";
+import { getTier, routeForForm } from "@/lib/pricing";
 import { portalCaseId } from "@/lib/portal/guard";
 
 export const runtime = "nodejs";
@@ -31,7 +31,12 @@ export async function POST(request: Request): Promise<NextResponse> {
   /**
    * The price comes from the server-side tier table keyed by the tier stored on
    * the case — never from the request body. A client-supplied amount is the
-   * classic e-commerce flaw: it lets anyone buy the €1,100 tier for €1.
+   * classic e-commerce flaw: it lets anyone buy the top tier for €1.
+   *
+   * The same applies to the EU / non-EU route, which is the second half of the
+   * price: it is derived from the formId the server itself computed from the
+   * student's nationality at intake, so a browser cannot ask for the cheaper
+   * EU price on a non-EU case.
    */
   const tier = getTier(record.tierId);
   if (!tier) {
@@ -50,6 +55,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   try {
     const session = await createCheckoutSession({
       tierId: tier.id,
+      route: routeForForm(record.formId),
       caseId: record.id,
       customerEmail: record.intake.contact.email,
       origin,

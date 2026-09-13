@@ -1,0 +1,68 @@
+{
+  "page": {
+    "metaTitle": "Triage gratuito — a che punto sei oggi",
+    "metaDescription": "Inviaci il tuo timbro d’ingresso, la tua autorizzazione e il tuo certificato di iscrizione. Ti diciamo quale percorso ti riguarda, quanti giorni ti restano e cosa è ancora recuperabile. Senza costi né impegno.",
+    "eyebrow": "Triage gratuito · in giornata",
+    "title": "Sei qui da due settimane. Il conto alla rovescia è partito il giorno in cui sei atterrato.",
+    "intro": "Gli studenti extra-UE hanno normalmente un mese dall’ingresso per richiedere la TIE. Se sei arrivato nella prima settimana di settembre, quella finestra si chiude a inizio ottobre, e l’appuntamento è la parte che nessuno può accelerare. Dicci a che punto sei e ti diremo qual è la tua situazione.",
+    "whatYouGet": "Cosa ricevi oggi stesso",
+    "steps": [
+      "Quale percorso ti riguarda — EX-17 o EX-18 — letto sulla tua stessa autorizzazione, non dedotto dal passaporto",
+      "Quanti giorni ti restano, contati dal tuo timbro d’ingresso",
+      "Cosa è ancora recuperabile e cosa deve succedere per primo",
+      "Se hai davvero bisogno di noi. In caso contrario, te lo diremo"
+    ],
+    "declineNote": "Se il tuo termine è già scaduto, se sei in una situazione scaduta o irregolare, o se stai affrontando un diniego, serve un’analisi legale che non siamo qualificati a fornire. Te lo diremo in fase di triage e ti indirizzeremo a un colegiado abogado. Preferiamo perdere il lavoro piuttosto che farci pagare per qualcosa che non possiamo risolvere."
+  },
+  "fields": {
+    "fullName": "Il tuo nome",
+    "email": "Email",
+    "nationality": "Nazionalità",
+    "arrivedOn": "Data di ingresso in Spagna",
+    "arrivedOnHint": "La data del tuo timbro d’ingresso, non quella di inizio del corso.",
+    "housing": "Dove vivi in questo momento",
+    "notes": "Qualsiasi altra cosa che dovremmo sapere",
+    "gdprTriageConsent": "Consenso"
+  },
+  "housing": {
+    "own-lease": "Un appartamento, con il contratto a mio nome",
+    "room-or-sublet": "Una stanza in un appartamento condiviso, o un subaffitto",
+    "university-residence": "Una residenza universitaria",
+    "hostel-or-airbnb": "Un ostello o un Airbnb",
+    "staying-with-someone": "Da parenti o da un amico",
+    "not-yet-housed": "Ancora in cerca"
+  },
+  "clock": {
+    "open": "Con questa data di ingresso, la tua finestra di un mese si chiude il {date}, tra circa {days} giorni. È indicativo: la tua autorizzazione può indicare un periodo diverso, ed è proprio per questo che la leggiamo.",
+    "closed": "Con questa data di ingresso, la finestra ordinaria di un mese si è chiusa circa {days} giorni fa. Inviacelo comunque: raccontaci qui sotto cosa è successo e ti diremo onestamente se è recuperabile.",
+    "eu": "Con un passaporto UE, SEE o svizzero non esiste alcun termine di un mese. L’obbligo di registrazione scatta dopo tre mesi di residenza, quindi hai più margine di quanto probabilmente pensi."
+  },
+  "uploads": {
+    "title": "I tre documenti",
+    "note": "Facoltativi, ma sono ciò che rende la risposta esatta anziché generica. PDF, JPEG o PNG, fino a 10 MB ciascuno. Cifrati all’arrivo ed eliminati una volta evasa la richiesta.",
+    "entry-stamp": "Il tuo timbro d’ingresso, o la carta d’imbarco",
+    "authorisation": "Il tuo visto o provvedimento di approvazione",
+    "enrolment-letter": "Il tuo certificato di iscrizione"
+  },
+  "form": {
+    "choose": "Scegli un’opzione",
+    "optional": "facoltativo",
+    "consent": "Acconsento a che BCN Student Concierge tratti quanto ho inserito qui, e i documenti che allego, per rispondere a questa richiesta. Nulla di tutto ciò mi obbliga ad acquistare alcunché.",
+    "submit": "Invia per il triage gratuito",
+    "sending": "Invio in corso…",
+    "freeNote": "Senza costi, senza impegno, senza carta. Rispondiamo in giornata.",
+    "failed": "Non è stato possibile inviare la tua richiesta. Riprova."
+  },
+  "done": {
+    "title": "L’abbiamo ricevuta.",
+    "body": "Il tuo riferimento è {ref}. Ti risponderemo oggi all’indirizzo che ci hai indicato, con il percorso che ti riguarda, i giorni che ti restano e cosa fare per primo.",
+    "note": "Se non hai allegato i tre documenti, inviali rispondendo a quella email: più riusciamo a leggere, più la risposta sarà precisa."
+  },
+  "cta": {
+    "eyebrow": "Inizia da qui",
+    "title": "Non sai a che punto sei? Scoprilo gratis.",
+    "body": "Inviaci il tuo timbro d’ingresso, la tua autorizzazione e il tuo certificato di iscrizione. Ti diremo quale percorso ti riguarda, quanti giorni ti restano e cosa è ancora recuperabile. Senza costi, senza impegno e, se non hai bisogno di noi, te lo diremo.",
+    "button": "Richiedi il triage gratuito",
+    "note": "In giornata. Quindici minuti del tuo tempo."
+  }
+}

@@ -4,26 +4,28 @@
   "nav": {
     "main": "Principal",
     "howItWorks": "Cómo funciona",
-    "pricing": "Servicios y tarifas",
+    "pricing": "Paquetes y precios",
     "faq": "Preguntas frecuentes",
     "myFile": "Mi expediente",
-    "beginIntake": "Empezar el alta",
-    "begin": "Empezar"
+    "beginIntake": "Iniciar el alta",
+    "begin": "Empezar",
+    "triage": "Triaje gratuito"
   },
   "language": {
     "label": "Idioma"
   },
   "footer": {
-    "tagline": "Servicio administrativo independiente de asistencia para estudiantes internacionales que llegan a universidades privadas de Barcelona.",
+    "tagline": "Acompañamiento administrativo independiente para estudiantes internacionales en Barcelona. Triaje gratuito el mismo día, antes que nada.",
     "services": "Servicios",
-    "packages": "Paquetes y tarifas",
-    "intake": "Portal de alta de clientes",
+    "packages": "Paquetes y precios",
+    "intake": "Portal del estudiante",
     "process": "Proceso",
     "legal": "Aviso legal",
     "terms": "Condiciones de uso",
     "privacy": "Privacidad y RGPD",
     "scope": "Alcance del servicio",
-    "copyright": "© {year} BCN Student Concierge. Barcelona, España."
+    "copyright": "© {year} BCN Student Concierge. Barcelona, España.",
+    "triage": "Triaje gratuito"
   },
   "disclaimer": {
     "footerLabel": "Alcance del servicio.",

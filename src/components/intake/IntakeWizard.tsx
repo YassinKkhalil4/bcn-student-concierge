@@ -9,7 +9,8 @@ import {
   addressSchema,
   contactSchema,
 } from "@/lib/schema";
-import { TIERS, getTier, priceWithIva, formatEur } from "@/lib/pricing";
+import { TIERS, getTier, tierPrice, formatEur, SERVICE_ROUTES, type ServiceRoute } from "@/lib/pricing";
+import { routeForNationality } from "@/lib/forms/field-map";
 import { DocumentUpload } from "./DocumentUpload";
 import { PadronWizard } from "@/components/portal/PadronWizard";
 import { EnrolmentWizard } from "@/components/portal/EnrolmentWizard";
@@ -87,7 +88,17 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
       ? { identity: identity.data, address: address.data }
       : null;
   }, [values]);
-  const price = useMemo(() => priceWithIva(tier.basePriceCents), [tier]);
+  /**
+   * EU/EEA/Swiss or not, from the nationality the student picks in step 1 —
+   * the same derivation the server uses for the price and for EX-17 vs EX-18.
+   * Null until they have chosen: the summary then shows both prices rather
+   * than guessing, because guessing would quote half of them the wrong fee.
+   */
+  const route = useMemo<ServiceRoute | null>(() => {
+    const n = values.nationality?.trim();
+    return n ? routeForNationality(n) : null;
+  }, [values.nationality]);
+  const price = useMemo(() => (route ? tierPrice(tier, route) : null), [tier, route]);
 
   const set = (key: string) => (value: string) => {
     setValues((v) => ({ ...v, [key]: value }));
@@ -336,17 +347,23 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                 <Modelo790Notice />
               </div>
 
-              <button
-                type="button"
-                onClick={() => void startCheckout()}
-                disabled={busy}
-                className="btn-primary mt-8 w-full"
-              >
-                {busy
-                  ? t("wizard.openingCheckout")
-                  : t("wizard.pay", { total: formatEur(price.totalCents) })}
-              </button>
-              <p className="mt-3 text-center text-xs text-ink-soft">{t("wizard.stripeNote")}</p>
+              {/* Reachable only after the case is created, so the nationality —
+                  and therefore the route and its price — is always known here. */}
+              {price && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => void startCheckout()}
+                    disabled={busy}
+                    className="btn-primary mt-8 w-full"
+                  >
+                    {busy
+                      ? t("wizard.openingCheckout")
+                      : t("wizard.pay", { total: formatEur(price.totalCents) })}
+                  </button>
+                  <p className="mt-3 text-center text-xs text-ink-soft">{t("wizard.stripeNote")}</p>
+                </>
+              )}
             </div>
           )}
 
@@ -384,20 +401,40 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
             {tprice(`tiers.${tier.id}.name`)}
           </h2>
 
-          <dl className="mt-5 space-y-2 border-y border-bone-line py-4 text-sm">
-            <div className="flex justify-between">
-              <dt className="text-ink-muted">{t("summary.serviceFee")}</dt>
-              <dd className="text-ink">{formatEur(price.baseCents)}</dd>
+          {price && route ? (
+            <dl className="mt-5 space-y-2 border-y border-bone-line py-4 text-sm">
+              <div className="flex justify-between">
+                <dt className="text-ink-muted">{t("summary.route")}</dt>
+                <dd className="text-ink">{tprice(route === "eu" ? "card.routeEu" : "card.routeNonEu")}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-ink-muted">{t("summary.serviceFee")}</dt>
+                <dd className="text-ink">{formatEur(price.baseCents)}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-ink-muted">{t("summary.iva")}</dt>
+                <dd className="text-ink">{formatEur(price.ivaCents)}</dd>
+              </div>
+              <div className="flex justify-between pt-1 font-semibold">
+                <dt className="text-ink">{t("summary.total")}</dt>
+                <dd className="text-ink">{formatEur(price.totalCents)}</dd>
+              </div>
+            </dl>
+          ) : (
+            <div className="mt-5 border-y border-bone-line py-4">
+              <dl className="space-y-2 text-sm">
+                {SERVICE_ROUTES.map((r) => (
+                  <div key={r} className="flex justify-between">
+                    <dt className="text-ink-muted">
+                      {tprice(r === "eu" ? "card.routeEu" : "card.routeNonEu")}
+                    </dt>
+                    <dd className="text-ink">{formatEur(tierPrice(tier, r).totalCents)}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-3 text-xs leading-relaxed text-ink-soft">{t("summary.routePending")}</p>
             </div>
-            <div className="flex justify-between">
-              <dt className="text-ink-muted">{t("summary.iva")}</dt>
-              <dd className="text-ink">{formatEur(price.ivaCents)}</dd>
-            </div>
-            <div className="flex justify-between pt-1 font-semibold">
-              <dt className="text-ink">{t("summary.total")}</dt>
-              <dd className="text-ink">{formatEur(price.totalCents)}</dd>
-            </div>
-          </dl>
+          )}
 
           {/* Package can only change before any data is entered, so the price
               shown at checkout is always the one the client reviewed. */}

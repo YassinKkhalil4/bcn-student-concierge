@@ -1,96 +1,100 @@
 {
-  "metaTitle": "BCN Student Concierge — Arrivi senza intoppi a Barcellona",
-  "metaDescription": "Servizio indipendente di assistenza amministrativa per studenti universitari internazionali in arrivo a Barcellona. Padrón, appuntamenti per il TIE/CUE e preparazione dei documenti.",
+  "metaTitle": "BCN Student Concierge — pratiche di residenza, giuste al primo colpo",
+  "metaDescription": "Per studenti internazionali già a Barcellona. Padrón, appuntamenti TIE e CUE, moduli EX-17 ed EX-18, preparati e prenotati. Il triage gratuito in giornata ti dice a che punto sei prima di pagare qualsiasi cosa.",
   "hero": {
-    "eyebrow": "Barcellona · Fondata per le famiglie internazionali",
-    "title": "Arrivi senza intoppi e regolarizzazione legale per gli studenti universitari internazionali a Barcellona.",
-    "body": "Suo figlio o Sua figlia ha ottenuto un posto in un’università di Barcellona. Tra lui o lei e una sistemazione serena c’è una catena di pratiche burocratiche spagnole che non perdona i piccoli errori, e tutto in spagnolo. Ci occupiamo noi di questa catena, correttamente e al primo tentativo.",
-    "primaryCta": "Inizia la registrazione sicura",
-    "secondaryCta": "Confrontare i pacchetti",
-    "note": "Tariffe fisse, indicate con l’IVA inclusa prima del pagamento. Nessuna fatturazione a ore."
+    "eyebrow": "Barcellona · Per chi è già qui",
+    "title": "Sei qui da due settimane. Il conto alla rovescia è partito il giorno in cui sei atterrato.",
+    "body": "Gli studenti extra-UE hanno normalmente un mese dall’ingresso per richiedere la TIE. Se sei arrivato nella prima settimana di settembre, quella finestra si chiude a inizio ottobre, e l’appuntamento è la parte che nessuno può accelerare. Noi costruiamo il fascicolo perché, quando si apre uno slot, nulla di ciò che porti ti rimandi a casa.",
+    "primaryCta": "Triage gratuito",
+    "secondaryCta": "Vedi i pacchetti",
+    "note": "Il triage è gratuito e in giornata. I pacchetti sono a prezzo fisso, con l’IVA indicata prima del pagamento."
   },
   "trust": {
-    "heading": "Assistiamo studenti in arrivo presso",
-    "disclaimer": "Le università citate sono quelle frequentate dai nostri clienti. Siamo un servizio indipendente e non siamo affiliati, né sostenuti, né agiamo per conto di alcuna delle istituzioni elencate."
+    "heading": "Gli studenti con cui lavoriamo studiano presso",
+    "disclaimer": "Le università citate sono quelle frequentate dai nostri clienti. Siamo un servizio indipendente e non siamo affiliati, né approvati, né agiamo per conto di alcun istituto elencato."
   },
   "problems": {
-    "eyebrow": "Cosa va effettivamente storto",
-    "title": "Quattro punti critici, e come li eliminiamo uno per uno.",
-    "approach": "Il nostro approccio — ",
+    "eyebrow": "Cosa va storto davvero",
+    "title": "Quattro punti di rottura, e come eliminiamo ciascuno.",
+    "approach": "Cosa facciamo — ",
     "items": [
       {
         "problem": "Gli slot della cita previa spariscono in pochi secondi",
-        "detail": "Gli appuntamenti per il Padrón e presso la Polizia Nazionale vengono resi disponibili a intervalli irregolari e prenotati in pochi minuti da sistemi automatizzati. Le famiglie che aggiornano la pagina di un portale in lingua spagnola da un altro fuso orario raramente riescono a ottenerne uno.",
-        "solution": "Monitoriamo le fasce orarie disponibili nei vari distretti di Barcellona e fissiamo l’appuntamento a nome del Suo studente, per poi inviare la conferma con le indicazioni stradali e l’elenco esatto dei documenti da portare con sé."
+        "detail": "Gli appuntamenti per il Padrón e per la Policía Nacional vengono rilasciati in modo irregolare e presi in pochi minuti da agenti automatizzati. Aggiornare un portale in spagnolo tra una lezione e l’altra non è una strategia.",
+        "solution": "Monitoriamo le finestre di rilascio in tutta la provincia di Barcellona, non solo nell’ufficio comodo per te, e prenotiamo a tuo nome. Ricevi un itinerario con data: indirizzo, orario, cosa portare, cosa ti chiederanno."
       },
       {
-        "problem": "Una casella sbagliata invalida l’intera pratica",
-        "detail": "Un modulo EX-17 in cui il secondo cognome è indicato come “N/A”, una sezione relativa al rappresentante compilata da un genitore ben intenzionato o un modulo stampato con il testo dei campi spostato vengono rifiutati allo sportello — e il prossimo appuntamento è tra diverse settimane.",
-        "solution": "I moduli vengono generati automaticamente sulla base dei Suoi dati verificati, ottimizzati in modo che nulla si sposti in fase di stampa e sottoposti a un controllo incrociato con il passaporto prima che il file lasci le nostre mani."
+        "problem": "Una casella sbagliata annulla l’intero fascicolo",
+        "detail": "Un EX-17 con il secondo cognome compilato come «N/A», una sezione del rappresentante riempita da qualcun altro, o un modulo stampato al 94% con il testo fuori dalla casella: respinto allo sportello, e il prossimo appuntamento è tra settimane.",
+        "solution": "Il tuo modulo è generato dai tuoi dati verificati, appiattito perché nulla si sposti in stampa e confrontato con la scansione del tuo passaporto. La sezione 2 resta permanentemente vuota, perché non siamo il tuo rappresentante."
       },
       {
-        "problem": "Il modulo fiscale non può essere pagato online",
-        "detail": "Il Modelo 790 Código 012 riporta un codice a barre univoco e, per la maggior parte degli studenti, deve essere pagato in contanti allo sportello di una banca spagnola o tramite lo scanner di un bancomat. È frequente che gli studenti si presentino alla stazione di polizia con un modulo non pagato.",
-        "solution": "Configuriamo il modulo con codice a barre per il pagamento in contanti e forniamo istruzioni dettagliate per CaixaBank, BBVA e Santander — specificando quali filiali accettano pagamenti da parte di soggetti non clienti."
+        "problem": "Il modulo della tassa non si paga online",
+        "detail": "Il Modelo 790 Código 012 ha un codice a barre univoco e, per la maggior parte degli studenti, va pagato in contanti a uno sportello bancario o a un lettore automatico. Molti arrivano in commissariato con il modulo non pagato.",
+        "solution": "Lo impostiamo per il pagamento in contanti, lo stampiamo a colori al 100% e ti indichiamo una filiale vicina al tuo appuntamento con i suoi orari di cassa: non tutte accettano pagamenti da non clienti, e alcune solo di mattina."
       },
       {
-        "problem": "Le frodi immobiliari prendono di mira gli studenti appena arrivati",
-        "detail": "Gli annunci pubblicati dall’estero sono spesso subaffitti illegali, di proprietà di qualcuno diverso dal «proprietario», oppure prevedono depositi cauzionali superiori al limite massimo previsto dalla legge. I depositi versati tramite bonifico prima dell’arrivo vengono raramente recuperati.",
-        "solution": "Con il nostro pacchetto Turnkey richiediamo la Nota Simple al registro immobiliare per verificare chi sia davvero il proprietario dell’appartamento, e controlliamo che la cauzione prevista dal contratto rispetti il limite di legge prima di qualsiasi bonifico."
+        "problem": "Il Padrón blocca in silenzio tutto il resto",
+        "detail": "In un ostello, un Airbnb o un subaffitto non registrato, adesso non puoi iscriverti. Un proprietario che rifiuta, o un appartamento a Sant Cugat quando davi per scontata Barcellona, blocca la tessera sanitaria e la TIE che vengono dopo.",
+        "solution": "Con il Fixer veniamo con te in comune e traduciamo, chiediamo all’amministrazione quali percorsi alternativi di verifica prevede e gestiamo il comune giusto. Quello che non facciamo mai è iscriverti a un indirizzo in cui non vivi."
       }
     ]
   },
   "process": {
-    "eyebrow": "La procedura",
-    "title": "Quattro fasi, dalla registrazione al ritiro della tessera.",
+    "eyebrow": "Come funziona",
+    "title": "Prima il triage gratuito. Poi, se ci vuoi, quattro fasi.",
     "steps": [
       {
-        "title": "Accoglienza sicura",
-        "body": "Lo studente compila il questionario crittografato e carica il proprio passaporto, la lettera di matrícula e il contratto di locazione. I documenti vengono crittografati singolarmente con AES-256."
+        "title": "Triage gratuito, in giornata",
+        "body": "Invia il tuo timbro d’ingresso, la tua autorizzazione e il tuo certificato di iscrizione. Ti diciamo quale percorso ti riguarda, quanti giorni ti restano e cosa è ancora recuperabile. Senza costi né impegno."
       },
       {
-        "title": "Preparazione della documentazione",
-        "body": "Generiamo il modulo corretto — EX-17 per gli studenti extracomunitari, EX-18 per i cittadini dell’UE — configuriamo il Modelo 790 e prepariamo un Ready File già verificato."
+        "title": "Registrazione sicura",
+        "body": "Compili il questionario cifrato e carichi il tuo passaporto, il tuo certificato di iscrizione e il tuo contratto d’affitto. Ogni documento è cifrato con una chiave propria."
       },
       {
-        "title": "Appuntamenti fissati",
-        "body": "Prenotiamo gli appuntamenti per il Padrón e la TIE/CUE e forniamo un itinerario dettagliato con le date: dove recarsi, cosa portare con sé, cosa verrà chiesto."
+        "title": "Montaggio del fascicolo",
+        "body": "Generiamo il modulo giusto — EX-17 sul percorso extra-UE, EX-18 su quello UE —, impostiamo il Modelo 790 e montiamo il Ready File. Corriere al tuo indirizzo o ritiro, più un PDF da stampare a casa appena il fascicolo è pronto."
       },
       {
-        "title": "Insediamento e monitoraggio",
-        "body": "Le operazioni relative a banca, trasporti e connettività vengono espletate nella prima settimana. Seguiamo l’iter per 90 giorni, fino al ritiro della tessera."
+        "title": "Appuntamenti e monitoraggio",
+        "body": "Cerchiamo e prenotiamo gli appuntamenti per il Padrón e la TIE/CUE, ti spieghiamo cosa ti verrà chiesto e restiamo raggiungibili mentre sei allo sportello. Seguiamo il fascicolo per 90 giorni, fino al ritiro."
       }
     ]
   },
   "pricing": {
     "eyebrow": "Prezzi trasparenti",
-    "title": "Tre pacchetti. Tariffe fisse, indicate con IVA inclusa.",
-    "body": "Le tasse amministrative (Modelo 790, rilascio della tessera) vengono pagate direttamente da voi alle autorità spagnole e non sono incluse nella nostra tariffa.",
+    "title": "Tre pacchetti. Due prezzi ciascuno, perché i percorsi sono due.",
+    "body": "Il percorso UE è meno lavoro e costa meno: niente impronte, niente tassa da 16,08 €. Confermiamo quale ti riguarda in fase di triage, prima che tu paghi qualcosa. Le tasse pubbliche le paghi tu, direttamente, e non sono mai comprese nel nostro compenso.",
     "cta": "Vedi il confronto completo"
   },
   "faq": {
     "eyebrow": "Risposte dirette",
-    "title": "Le domande che i genitori pongono per prime.",
+    "title": "Quello che gli studenti chiedono per primo.",
     "items": [
       {
         "q": "Siete avvocati o una gestoría?",
-        "a": "No. Siamo un servizio indipendente di assistenza amministrativa. Prepariamo i documenti sulla base delle informazioni da Lei fornite, fissiamo gli appuntamenti e La guidiamo lungo l’iter. Non La rappresentiamo dinanzi ad alcuna autorità e non forniamo consulenza legale. Qualora un caso richieda un’analisi giuridica, Glielo comunicheremo chiaramente e Le consiglieremo di consultare un colegiado abogado."
+        "a": "No. Siamo un servizio indipendente di assistenza amministrativa. Prepariamo documenti a partire dalle informazioni che ci fornisci, prenotiamo appuntamenti e ti guidiamo nella procedura. Non ti rappresentiamo davanti ad alcuna autorità e non forniamo consulenza legale. Quando un caso richiede un’analisi giuridica, lo diciamo chiaramente e ti indirizziamo a un colegiado abogado."
       },
       {
-        "q": "Il mio studente deve presentarsi di persona agli appuntamenti?",
-        "a": "Sì. Gli appuntamenti per il rilevamento dei dati biometrici richiedono che il richiedente si presenti di persona con i documenti originali. Noi prepariamo la pratica, prenotiamo l’appuntamento e forniamo loro istruzioni dettagliate — ma la presenza è a loro carico, a proprio nome."
+        "q": "Credo di aver già perso la scadenza. Vale la pena chiedere?",
+        "a": "Sì, e meglio oggi che la settimana prossima. Il triage è gratuito e ti risponderemo con onestà. Se il tuo termine è scaduto, o sei in una situazione scaduta o irregolare, serve un’analisi giuridica che non siamo qualificati a fornire: te lo diremo e ti indirizzeremo altrove, invece di farci pagare."
       },
       {
-        "q": "Cosa ne è delle scansioni del passaporto in seguito?",
-        "a": "I dati vengono crittografati in fase di archiviazione con una chiave univoca per ogni file e cancellati definitivamente 30 giorni dopo il completamento del servizio, tramite un processo di conservazione automatizzato. È possibile richiedere la cancellazione anticipata in qualsiasi momento."
+        "q": "Devo andare io all’appuntamento?",
+        "a": "Sì. Gli appuntamenti biometrici richiedono che ti presenti di persona con i documenti originali. Noi prepariamo il fascicolo, otteniamo lo slot e ti spieghiamo tutto, e puoi chiamarci dallo sportello se ti chiedono qualcosa che non capisci. La comparizione è tua, a tuo nome."
       },
       {
-        "q": "Potete garantire che la carta di soggiorno venga approvata?",
-        "a": "No, e qualsiasi servizio che lo garantisca la sta ingannando. Le decisioni spettano interamente alle autorità spagnole. Ciò che possiamo controllare è che la pratica sia completa, corretta e presentata in tempo — ed è proprio da qui che in realtà ha origine la maggior parte dei rifiuti."
+        "q": "Pagano i miei genitori. Possono essere coinvolti?",
+        "a": "Certo. Possono pagare a proprio nome e ricevere la fattura, e con il Fixer produciamo una relazione finale datata: cosa è stato depositato, cosa è registrato, cosa resta in sospeso, la tua data di ritiro e i numeri da chiamare in caso di urgenza. Quello che non faremo è compilare la sezione del rappresentante legale del tuo modulo: quella casella resta vuota, perché né noi né loro siamo il tuo rappresentante."
       },
       {
-        "q": "Perché il Modelo 790 viene pagato in contanti?",
-        "a": "La procedura dell’agenzia delle entrate spagnola per questo modulo si basa su un codice a barre univoco che viene letto allo sportello di una banca o tramite lo scanner di un bancomat. Senza un certificato digitale spagnolo — di cui i nuovi arrivati non dispongono — non è possibile effettuare il pagamento online, pertanto il modulo è configurato per il pagamento «en efectivo»."
+        "q": "Che fine fanno poi le scansioni del mio passaporto?",
+        "a": "Sono cifrate a riposo con una chiave univoca per file ed eliminate definitivamente 30 giorni dopo la conclusione del servizio, tramite una procedura automatica. Puoi chiederne la cancellazione anticipata in qualsiasi momento."
+      },
+      {
+        "q": "Potete garantire che la tessera venga approvata?",
+        "a": "No, e qualsiasi servizio che lo garantisca ti sta ingannando. La decisione spetta interamente alle autorità spagnole. Quello che controlliamo è che il fascicolo sia completo, corretto e presentato in tempo — ed è lì che nasce la maggior parte dei dinieghi."
       }
     ]
   }

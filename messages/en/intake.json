@@ -36,7 +36,7 @@
   },
   "contact": {
     "title": "Contact",
-    "description": "We use these for appointment confirmations. Give the number your student will actually carry in Spain if you already know it."
+    "description": "We use these for appointment confirmations. Give the number you will actually be carrying in Spain."
   },
   "fields": {
     "passportNumber": {
@@ -80,10 +80,10 @@
       "label": "Marital status"
     },
     "fatherFirstName": {
-      "label": "Father's first name"
+      "label": "Father’s first name"
     },
     "motherFirstName": {
-      "label": "Mother's first name"
+      "label": "Mother’s first name"
     },
     "streetName": {
       "label": "Street name",
@@ -204,7 +204,7 @@
       },
       "collective-authorization": {
         "label": "Authorisation from your residence",
-        "description": "Barcelona's form for collective homes, signed by the residence and stamped."
+        "description": "Barcelona’s form for collective homes, signed by the residence and stamped."
       }
     },
     "onFile": "✓ on file",

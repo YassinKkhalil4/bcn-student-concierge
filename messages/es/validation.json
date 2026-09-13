@@ -25,5 +25,7 @@
   "taxIdInvalid": "Ese NIF no es válido: compruébelo con el contrato de alquiler",
   "companyBoth": "Indique tanto el nombre de la empresa como su NIF, o deje ambos campos en blanco",
   "companyTaxIdInvalid": "El NIF (CIF) de dicha empresa no es válido",
-  "cadastralRef": "Una referencia catastral consta de 20 letras y dígitos"
+  "cadastralRef": "Una referencia catastral consta de 20 letras y dígitos",
+  "entryDateFormat": "Elige la fecha en que entraste en España",
+  "entryDateRange": "Esa fecha está en el futuro, o hace más de un año: comprueba tu sello de entrada"
 }

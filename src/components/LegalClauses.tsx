@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { TIERS, priceWithIva, formatEur } from "@/lib/pricing";
+import { TIERS, tierPrice, formatEur, SERVICE_ROUTES, type ServiceRoute } from "@/lib/pricing";
 import { Clause } from "./LegalPage";
 
 type LegalDoc = "scope" | "privacy" | "terms";
@@ -32,6 +32,13 @@ const TAGS = {
 export function LegalClauses({ doc }: { doc: LegalDoc }) {
   const t = useTranslations(`legal.${doc}`);
   const tp = useTranslations("pricing.tiers");
+  const tc = useTranslations("pricing.card");
+  // Each package is listed once per route: the two prices are two different
+  // contractual fees, and terms §2 must state both.
+  const routeLabel: Record<ServiceRoute, string> = {
+    eu: tc("routeEu"),
+    "non-eu": tc("routeNonEu"),
+  };
   const clauses = t.raw("clauses") as ClauseData[];
 
   return clauses.map((clause, i) => (
@@ -40,20 +47,23 @@ export function LegalClauses({ doc }: { doc: LegalDoc }) {
         <FragmentWithList key={j} showList={clause.priceListAfter === j}>
           <p>{t.rich(`clauses.${i}.paragraphs.${j}`, TAGS)}</p>
           <ul className="ml-5 list-disc space-y-1.5">
-            {TIERS.map((tier) => {
-              const p = priceWithIva(tier.basePriceCents);
-              return (
-                <li key={tier.id}>
-                  {t.rich("priceLine", {
-                    name: tp(`${tier.id}.name`),
-                    base: formatEur(p.baseCents),
-                    iva: formatEur(p.ivaCents),
-                    total: formatEur(p.totalCents),
-                    strong: (chunks) => <span className="font-medium text-ink">{chunks}</span>,
-                  })}
-                </li>
-              );
-            })}
+            {TIERS.flatMap((tier) =>
+              SERVICE_ROUTES.map((route) => {
+                const p = tierPrice(tier, route);
+                return (
+                  <li key={`${tier.id}:${route}`}>
+                    {t.rich("priceLine", {
+                      name: tp(`${tier.id}.name`),
+                      route: routeLabel[route],
+                      base: formatEur(p.baseCents),
+                      iva: formatEur(p.ivaCents),
+                      total: formatEur(p.totalCents),
+                      strong: (chunks) => <span className="font-medium text-ink">{chunks}</span>,
+                    })}
+                  </li>
+                );
+              }),
+            )}
           </ul>
         </FragmentWithList>
       ))}

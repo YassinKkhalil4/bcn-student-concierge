@@ -125,7 +125,7 @@
     "metaDescription": "Condiciones contractuales de los servicios de tramitación administrativa de BCN Student Concierge.",
     "eyebrow": "Condiciones",
     "title": "Condiciones de uso",
-    "priceLine": "{name} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
     "clauses": [
       {
         "heading": "1. Naturaleza del servicio",
@@ -137,7 +137,7 @@
         "heading": "2. Tarifas e IVA",
         "priceListAfter": 0,
         "paragraphs": [
-          "Las tarifas de los paquetes son fijas y se indican sin IVA, mostrando el 21 % y el importe bruto total antes del pago:",
+          "Las tarifas de los paquetes son cerradas y se indican sin IVA, mostrando el 21% y el total bruto antes del pago. Cada paquete tiene dos tarifas: una para la vía UE/EEE/Suiza y otra para la vía de fuera de la UE, porque son cantidades de trabajo distintas. Cuál te corresponde se deriva de tu nacionalidad, se confirma en el triaje antes de que pagues y es la misma derivación que decide si presentas un EX-18 o un EX-17:",
           "Las tasas administrativas —incluida la tasa estatal del Modelo 790 Código 012, y los gastos de emisión de tarjetas— las fijan las autoridades españolas, las abona usted directamente y no están incluidas en ningún paquete. Nunca recaudamos tasas en nombre de la Administración."
         ]
       },
@@ -162,19 +162,27 @@
         ]
       },
       {
-        "heading": "6. Cancelaciones y reembolsos",
+        "heading": "6. Citas, temporada alta y demoras",
         "paragraphs": [
-          "Antes de comenzar el trabajo: reembolso íntegro. Una vez iniciada la preparación, pero antes de concertar las citas: reembolso del 50 %. Una vez concertadas las citas: no hay reembolso, ya que se ha prestado el servicio en su esencia. Si no podemos prestar el servicio por motivos que están bajo nuestro control, se le reembolsará el importe íntegro."
+          "Los sistemas de cita previa de la Administración española se saturan durante los periodos de mayor llegada internacional, en particular septiembre y octubre: los huecos se liberan de forma irregular y se ocupan en cuestión de minutos. Nuestro plazo estándar para conseguir tu cita de Padrón o de extranjería es, por tanto, de hasta seis semanas desde que envías tu alta.",
+          "Si no hay ningún hueco disponible antes de un plazo que te sea aplicable, emitimos un certificado formal que documenta nuestros intentos continuados de reservarla, con la fecha y la hora de cada uno. Las autoridades españolas suelen aceptar esta prueba de saturación del sistema como justificación válida de un registro tardío. Suelen no es siempre: la decisión corresponde a la oficina que tengas delante, y no podemos garantizar cómo la recibirá un funcionario concreto."
         ]
       },
       {
-        "heading": "7. Protección de datos",
+        "heading": "7. Cancelación y reembolsos",
+        "paragraphs": [
+          "Antes de empezar el trabajo: reembolso íntegro. Una vez iniciada la preparación pero antes de reservar citas: reembolso del 50%. Una vez obtenidas las citas: sin reembolso, ya que el valor sustancial se ha entregado. Si no podemos prestar el servicio por causas bajo nuestro control, recibes un reembolso íntegro.",
+          "Al margen de lo anterior, y sea cual sea la fase en la que se encuentre el resto de tu expediente: si nos resulta completamente imposible conseguirte una cita en un plazo de seis semanas desde el envío de tu alta, tienes derecho a un reembolso del 50% de la tarifa del servicio. Es la mitad y no la totalidad porque la otra mitad se entregó el mismo día en que pagaste —el acceso al portal, tus impresos generados y el Modelo 790, la preparación documental y el soporte administrativo— y todo ello lo conservas, de modo que estés listo el día en que sí se abra un hueco. La disponibilidad de citas no está bajo nuestro control, y por eso esto se formula como reembolso y no como garantía."
+        ]
+      },
+      {
+        "heading": "8. Protección de datos",
         "paragraphs": [
           "El tratamiento de datos se rige por nuestro <privacyLink>aviso de privacidad</privacyLink>, incluida la eliminación automática de los documentos de identidad 30 días después de la finalización del servicio."
         ]
       },
       {
-        "heading": "8. Legislación aplicable",
+        "heading": "9. Legislación aplicable",
         "paragraphs": [
           "Las presentes condiciones se rigen por la legislación española. Los litigios en materia de consumo podrán someterse a los tribunales del domicilio del consumidor, y podrá recurrir al Sistema Arbitral de Consumo español o a la plataforma de resolución de litigios en línea de la UE."
         ]

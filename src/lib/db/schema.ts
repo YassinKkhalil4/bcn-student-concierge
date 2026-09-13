@@ -49,6 +49,15 @@ export const DOCUMENT_KINDS = [
   "collective-authorization", // student residence form, signed and stamped
 ] as const;
 export const INVOICE_SERIES = ["INV", "RECT"] as const;
+/** Free-triage enquiry lifecycle. `declined` is the "we told them no" outcome. */
+export const TRIAGE_STATUSES = ["new", "answered", "declined"] as const;
+export const SERVICE_ROUTES = ["eu", "non-eu"] as const;
+/** What a student can attach to a triage enquiry — nothing else is accepted. */
+export const TRIAGE_DOCUMENT_KINDS = [
+  "entry-stamp",
+  "authorisation",
+  "enrolment-letter",
+] as const;
 export const APPOINTMENT_KINDS = ["padron", "police"] as const;
 
 export type Stage = (typeof STAGES)[number];
@@ -56,6 +65,9 @@ export type PaymentStatus = (typeof PAYMENT_STATUSES)[number];
 export type DocumentKind = (typeof DOCUMENT_KINDS)[number];
 export type Locale = (typeof LOCALES)[number];
 export type InvoiceSeries = (typeof INVOICE_SERIES)[number];
+export type TriageStatus = (typeof TRIAGE_STATUSES)[number];
+export type ServiceRouteCode = (typeof SERVICE_ROUTES)[number];
+export type TriageDocumentKind = (typeof TRIAGE_DOCUMENT_KINDS)[number];
 export type AppointmentKind = (typeof APPOINTMENT_KINDS)[number];
 
 const inList = (values: readonly string[]) =>
@@ -325,7 +337,111 @@ export const invoices = pgTable(
   ],
 );
 
+/**
+ * Free triage — the same-day "where do you stand" enquiry that runs before any
+ * package is sold, and often instead of one.
+ *
+ * A triage enquiry is NOT a case: there is no paid engagement, no intake, and
+ * no government form. It is kept in its own table so that nothing here can be
+ * mistaken for a client file, and so the staff dashboard can show the queue
+ * without the two mixing.
+ *
+ * The same encryption rule applies as everywhere else: the enquirer's name,
+ * email and free-text situation are an AES-256-GCM envelope, never plaintext
+ * columns. Only the non-identifying triage facts — route, arrival date, the
+ * deadline we computed — are readable, because the queue is sorted on them.
+ */
+export const triageEnquiries = pgTable(
+  "triage_enquiries",
+  {
+    id: text("id").primaryKey(),
+    /** Human reference for staff and the reply email: "TRI-48120". */
+    ref: text("ref").notNull().unique(),
+    locale: text("locale", { enum: LOCALES }).notNull().default("en"),
+    /** HMAC of the email, as on cases: lookup without storing it readable. */
+    emailIndex: text("email_index"),
+    /** Derived server-side from nationality, never posted by the browser. */
+    route: text("route", { enum: SERVICE_ROUTES }).notNull(),
+    formId: text("form_id", { enum: FORM_IDS }).notNull(),
+    /**
+     * Date of entry into the Schengen area, as the student reports it. A date,
+     * not a timestamp: the clock the authorities run is in whole days.
+     */
+    arrivedOn: text("arrived_on").notNull(),
+    /**
+     * One month from entry for the non-EU route, computed at submission and
+     * frozen. Stored rather than derived on read so the queue can be ordered
+     * by urgency in SQL, and so a later change to the rule cannot silently
+     * rewrite what a student was already told.
+     */
+    deadlineOn: text("deadline_on"),
+    status: text("status", { enum: TRIAGE_STATUSES }).notNull().default("new"),
+    /** Name, email, nationality and the student's own description. AAD `triage:<id>`. */
+    enquiryEnvelope: jsonb("enquiry_envelope").$type<EncryptedPayload>(),
+    createdAt: tstz("created_at").notNull().defaultNow(),
+    answeredAt: tstz("answered_at"),
+    /** Set by the purge; an answered enquiry keeps only non-personal columns. */
+    purgedAt: tstz("purged_at"),
+  },
+  (t) => [
+    index("triage_created_at_idx").on(t.createdAt),
+    index("triage_status_idx").on(t.status),
+    index("triage_email_index_idx").on(t.emailIndex),
+    // The queue's own query: still open, soonest deadline first.
+    index("triage_deadline_idx").on(t.deadlineOn).where(sql`${t.status} = 'new'`),
+    check("triage_status_check", sql`${t.status} IN (${inList(TRIAGE_STATUSES)})`),
+    check("triage_route_check", sql`${t.route} IN (${inList(SERVICE_ROUTES)})`),
+    check("triage_form_id_check", sql`${t.formId} IN (${inList(FORM_IDS)})`),
+    check("triage_locale_check", sql`${t.locale} IN (${inList(LOCALES)})`),
+    check("triage_ref_format", sql`${t.ref} ~ '^TRI-[0-9]{5}$'`),
+    check("triage_arrived_on_format", sql`${t.arrivedOn} ~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'`),
+    check(
+      "triage_deadline_on_format",
+      sql`${t.deadlineOn} IS NULL OR ${t.deadlineOn} ~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'`,
+    ),
+    // A purged enquiry must not still hold personal data.
+    check(
+      "triage_purged_has_no_data",
+      sql`${t.purgedAt} IS NULL OR (${t.enquiryEnvelope} IS NULL AND ${t.emailIndex} IS NULL)`,
+    ),
+  ],
+);
+
+/**
+ * The three documents triage asks for. Same envelope-per-file design as
+ * case_documents, in its own table so a triage attachment can never be read
+ * through a case's document routes.
+ */
+export const triageDocuments = pgTable(
+  "triage_documents",
+  {
+    id: text("id").primaryKey(),
+    triageId: text("triage_id")
+      .notNull()
+      .references(() => triageEnquiries.id, { onDelete: "cascade" }),
+    kind: text("kind", { enum: TRIAGE_DOCUMENT_KINDS }).notNull(),
+    originalName: text("original_name").notNull(),
+    mimeType: text("mime_type").notNull(),
+    byteSize: integer("byte_size").notNull(),
+    blobKey: text("blob_key").notNull().unique(),
+    wrappedKey: text("wrapped_key").notNull(),
+    iv: text("iv").notNull(),
+    authTag: text("auth_tag").notNull(),
+    algorithm: text("algorithm").notNull(),
+    keyVersion: integer("key_version").notNull(),
+    uploadedAt: tstz("uploaded_at").notNull().defaultNow(),
+  },
+  (t) => [
+    index("triage_documents_triage_id_idx").on(t.triageId),
+    // One of each kind per enquiry: a re-upload replaces, never accumulates.
+    unique("triage_documents_kind_unique").on(t.triageId, t.kind),
+    check("triage_documents_kind_check", sql`${t.kind} IN (${inList(TRIAGE_DOCUMENT_KINDS)})`),
+  ],
+);
+
 export type CaseRow = typeof cases.$inferSelect;
 export type DocumentRow = typeof caseDocuments.$inferSelect;
 export type InvoiceRow = typeof invoices.$inferSelect;
 export type AppointmentRow = typeof appointments.$inferSelect;
+export type TriageRow = typeof triageEnquiries.$inferSelect;
+export type TriageDocumentRow = typeof triageDocuments.$inferSelect;

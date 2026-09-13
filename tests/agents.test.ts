@@ -6,7 +6,7 @@ import sitemap from "../src/app/sitemap";
 import { PRIVATE_PREFIXES, PUBLIC_PAGES, isPrivatePath, isPublicPage, markdownPath } from "../src/lib/agents/pages";
 import { renderPageMarkdown } from "../src/lib/agents/markdown";
 import { LOCALES, localizedPath } from "../src/i18n/routing";
-import { TIERS, formatEur, priceWithIva } from "../src/lib/pricing";
+import { TIERS, SERVICE_ROUTES, formatEur, tierPrice } from "../src/lib/pricing";
 
 /**
  * What automated readers see: robots.txt, the sitemap, and the Markdown
@@ -123,10 +123,14 @@ describe("Markdown for agents", () => {
 
   it("quotes the prices from the pricing table, not from prose", async () => {
     const md = (await renderPageMarkdown("/pricing", "en"))!;
+    // Both routes for every package: an agent that reads only one of them
+    // would quote half its readers the wrong price.
     for (const tier of TIERS) {
-      const p = priceWithIva(tier.basePriceCents);
-      expect(md, tier.id).toContain(formatEur(p.totalCents));
-      expect(md, tier.id).toContain(formatEur(p.ivaCents));
+      for (const route of SERVICE_ROUTES) {
+        const p = tierPrice(tier, route);
+        expect(md, `${tier.id} ${route}`).toContain(formatEur(p.totalCents));
+        expect(md, `${tier.id} ${route}`).toContain(formatEur(p.ivaCents));
+      }
     }
   });
 

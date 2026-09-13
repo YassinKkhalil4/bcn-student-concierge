@@ -1,4 +1,5 @@
 import { COUNTRY_CODES, isCountryCode, type CountryCode } from "./codes";
+import { COUNTRY_DISPLAY_NAMES } from "./display-names.generated";
 import { SPANISH_FORM_NAMES } from "./es-names.generated";
 
 /**
@@ -30,8 +31,22 @@ export function spanishFormName(value: string): string {
   return isCountryCode(v) ? SPANISH_FORM_NAMES[v] : v;
 }
 
-/** A country's name in the reader's language, from the platform's own data. */
+function isSiteLocale(locale: string): locale is keyof typeof COUNTRY_DISPLAY_NAMES {
+  return Object.hasOwn(COUNTRY_DISPLAY_NAMES, locale);
+}
+
+const DISPLAY_NAME_LOOKUP = new Map(
+  Object.entries(COUNTRY_DISPLAY_NAMES).map(([locale, rows]) => [locale, new Map<string, string>(rows)]),
+);
+
+/**
+ * A country's name in the reader's language. Site locales read the committed
+ * table, so the server and the browser agree (their ICU data does not);
+ * anything else falls back to the platform's own data.
+ */
 export function countryDisplayName(code: string, locale: string): string {
+  const pinned = DISPLAY_NAME_LOOKUP.get(locale)?.get(code);
+  if (pinned) return pinned;
   try {
     return new Intl.DisplayNames([locale], { type: "region" }).of(code) ?? code;
   } catch {
@@ -44,6 +59,12 @@ export function countryOptions(
   locale: string,
   exclude: readonly CountryCode[] = [],
 ): { value: CountryCode; label: string }[] {
+  if (isSiteLocale(locale)) {
+    // Already sorted at generation time — see scripts/generate-country-names.mts.
+    return COUNTRY_DISPLAY_NAMES[locale]
+      .filter(([value]) => !exclude.includes(value))
+      .map(([value, label]) => ({ value, label }));
+  }
   const collator = new Intl.Collator(locale);
   return COUNTRY_CODES.filter((c) => !exclude.includes(c))
     .map((value) => ({ value, label: countryDisplayName(value, locale) }))

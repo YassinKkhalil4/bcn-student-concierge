@@ -19,6 +19,7 @@
     "forms:grid": "tsx scripts/calibrate-form.mts",
     "forms:proof": "tsx scripts/calibrate-form.mts",
     "forms:zoom": "tsx scripts/zoom-form.mts",
+    "countries:generate": "tsx scripts/generate-country-names.mts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx scripts/db-migrate.mts",
     "db:studio": "drizzle-kit studio",

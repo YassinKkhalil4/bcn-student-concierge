@@ -4,7 +4,15 @@ import { existsSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { buildFieldValues, selectForm, TEMPLATES } from "../src/lib/forms/field-map";
-import { COUNTRY_CODES, EU_EEA_CH, spanishFormName } from "../src/lib/countries";
+import {
+  COUNTRY_CODES,
+  EU_EEA_CH,
+  countryDisplayName,
+  countryOptions,
+  spanishFormName,
+} from "../src/lib/countries";
+import { COUNTRY_DISPLAY_NAMES } from "../src/lib/countries/display-names.generated";
+import { LOCALES } from "../src/i18n/routing";
 import { intakeSchema } from "../src/lib/schema";
 import { validateUpload, sanitizeFilename } from "../src/lib/server/uploads";
 
@@ -88,6 +96,28 @@ describe("countries on the forms", () => {
 
   it("has a Spanish name for every code", () => {
     for (const code of COUNTRY_CODES) expect(spanishFormName(code), code).toMatch(/^[A-ZÁÉÍÓÚÜÑ .,'()-]+$/);
+  });
+
+  it("pins picker names so server and browser render the same list", () => {
+    // Node's ICU says "Hong Kong SAR China", Chromium's "Hong Kong": the
+    // committed table, not the runtime, must decide.
+    expect(countryDisplayName("HK", "en")).toBe(
+      COUNTRY_DISPLAY_NAMES.en.find(([code]) => code === "HK")![1],
+    );
+    for (const locale of LOCALES) {
+      const rows = COUNTRY_DISPLAY_NAMES[locale];
+      expect(new Set(rows.map(([code]) => code)), locale).toEqual(new Set(COUNTRY_CODES));
+      expect(rows, locale).toHaveLength(COUNTRY_CODES.length);
+      const options = countryOptions(locale, ["ES"]);
+      expect(options.map((o) => o.value), locale).toEqual(
+        rows.map(([code]) => code).filter((code) => code !== "ES"),
+      );
+    }
+  });
+
+  it("falls back to the platform for codes and locales outside the table", () => {
+    expect(countryDisplayName("utopia", "en")).toBe("utopia");
+    expect(countryDisplayName("GB", "pt")).toBe(new Intl.DisplayNames(["pt"], { type: "region" }).of("GB"));
   });
 
   it("keeps legacy free text as entered", () => {
