@@ -63,8 +63,7 @@
     },
     "birthDate": {
       "label": "Data de naixement",
-      "hint": "Primer el dia, com als formularis espanyols.",
-      "placeholder": "DD/MM/AAAA"
+      "hint": "Trieu el dia, el mes i l’any tal com figuren al vostre passaport."
     },
     "birthCity": {
       "label": "Ciutat de naixement"
@@ -174,7 +173,9 @@
     "iva": "IVA (21 %)",
     "total": "Total",
     "change": "Canvia de paquet",
-    "govFees": "Les taxes de l’Administració (Modelo 790, expedició de la targeta) les pagueu directament a les autoritats espanyoles i no hi estan incloses."
+    "govFees": "Les taxes de l’Administració (Modelo 790, expedició de la targeta) les pagueu directament a les autoritats espanyoles i no hi estan incloses.",
+    "route": "Ciutadania",
+    "routePending": "El preu depèn de la vostra nacionalitat. Es fixa tan bon punt la trieu al primer pas."
   },
   "documents": {
     "slots": {
@@ -216,7 +217,8 @@
     "wrongType": "Només s’accepten arxius PDF, JPEG i PNG. Si us plau, torneu a exportar l’arxiu.",
     "failed": "No s’ha pogut pujar el fitxer. Torneu-ho a provar.",
     "network": "Error de xarxa. Si us plau, comproveu la connexió i torneu-ho a provar.",
-    "footer": "PDF, JPEG o PNG, de fins a {mb} MB cadascun. Cada fitxer es xifra amb la seva pròpia clau AES-256 en rebre’l i s’elimina definitivament 30 dies després que finalitzi el servei."
+    "footer": "PDF, JPEG o PNG, de fins a {mb} MB cadascun. Cada fitxer es xifra amb la seva pròpia clau AES-256 en rebre’l i s’elimina definitivament 30 dies després que finalitzi el servei.",
+    "tooMany": "Massa pujades en poc temps. Espereu uns minuts i torneu-ho a provar."
   },
   "complete": {
     "metaTitle": "Alta completada",
@@ -238,5 +240,24 @@
       }
     ],
     "home": "Torna a la pàgina d’inici"
+  },
+  "date": {
+    "day": "Dia",
+    "month": "Mes",
+    "year": "Any",
+    "months": {
+      "1": "Gener",
+      "2": "Febrer",
+      "3": "Març",
+      "4": "Abril",
+      "5": "Maig",
+      "6": "Juny",
+      "7": "Juliol",
+      "8": "Agost",
+      "9": "Setembre",
+      "10": "Octubre",
+      "11": "Novembre",
+      "12": "Desembre"
+    }
   }
 }

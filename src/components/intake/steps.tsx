@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { GENDERS, MARITAL_STATUSES } from "@/lib/schema";
 import { Field, SelectField, FieldGroup } from "./Field";
+import { DateSelectField } from "./DateSelectField";
 import { ConsentBox } from "./ConsentBox";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
 import { countryOptions } from "@/lib/countries";
@@ -67,8 +68,7 @@ export function IdentityStep(props: StepProps) {
       <Field {...f("secondSurname")} required={false} />
       <SelectField {...f("gender")} options={genders}
         hint={t("field.officialCodes", { codes: GENDERS.join(" / ") })} />
-      <Field {...f("birthDate")} uppercase={false} placeholder={t("fields.birthDate.placeholder")}
-        inputMode="numeric" maxLength={10} />
+      <DateSelectField {...f("birthDate")} />
       <Field {...f("birthCity")} />
       <SelectField {...f("birthCountry")} options={birthCountries} />
       <SelectField {...f("nationality")} options={nationalities} />

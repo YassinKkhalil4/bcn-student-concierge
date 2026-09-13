@@ -27,6 +27,7 @@ export type LimitScope =
   | "triage"
   | "intake"
   | "upload"
+  | "upload-case"
   | "checkout"
   | "admin-login"
   | "portal-link"
@@ -50,8 +51,13 @@ export const QUOTAS: Record<LimitScope, Quota> = {
   triage: { tokens: 3, windowMs: 60 * MINUTE },
   // A student completing one intake, plus retries after validation errors.
   intake: { tokens: 5, windowMs: 60 * MINUTE },
-  // Three document slots, allowing re-uploads of rejected scans.
-  upload: { tokens: 20, windowMs: 60 * MINUTE },
+  // Uploads, per IP. Loose: students in one residence or on one campus network
+  // share an address, and every upload also needs a valid session — the real
+  // bound is per case, below.
+  upload: { tokens: 300, windowMs: 60 * MINUTE },
+  // Uploads, per case: every slot in the intake and portal wizards (up to
+  // seven), each replaced a few times over.
+  "upload-case": { tokens: 60, windowMs: 60 * MINUTE },
   // Checkout is retried on card failures; tight but not hostile.
   checkout: { tokens: 10, windowMs: 15 * MINUTE },
   // Guessing the one credential that unlocks every passport scan. The only
@@ -163,8 +169,10 @@ export function rateLimitHeaders(result: RateLimitResult): Record<string, string
 export async function enforceRateLimit(
   request: Request,
   scope: LimitScope,
+  /** Key to count against instead of the client IP, e.g. the signed-in case. */
+  identifier = clientIdentifier(request.headers),
 ): Promise<NextResponse | null> {
-  const result = await rateLimit(clientIdentifier(request.headers), scope);
+  const result = await rateLimit(identifier, scope);
   if (result.allowed) return null;
   return NextResponse.json(
     { error: "Too many requests. Please wait and try again." },

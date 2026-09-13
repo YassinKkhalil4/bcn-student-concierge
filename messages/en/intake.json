@@ -63,8 +63,7 @@
     },
     "birthDate": {
       "label": "Date of birth",
-      "hint": "Day first, as written on Spanish forms.",
-      "placeholder": "DD/MM/YYYY"
+      "hint": "Choose the day, month and year as shown in your passport."
     },
     "birthCity": {
       "label": "City of birth"
@@ -174,7 +173,9 @@
     "iva": "IVA (21%)",
     "total": "Total",
     "change": "Change package",
-    "govFees": "Government fees (Modelo 790, card issuance) are paid by you directly to the Spanish authorities and are not included."
+    "govFees": "Government fees (Modelo 790, card issuance) are paid by you directly to the Spanish authorities and are not included.",
+    "route": "Citizenship",
+    "routePending": "The price depends on your nationality. It is set as soon as you choose it in the first step."
   },
   "documents": {
     "slots": {
@@ -216,7 +217,8 @@
     "wrongType": "Only PDF, JPEG and PNG files are accepted. Please re-export the file.",
     "failed": "Upload failed. Please try again.",
     "network": "Network error. Check your connection and try again.",
-    "footer": "PDF, JPEG or PNG, up to {mb} MB each. Each file is encrypted with its own AES-256 key on receipt and permanently deleted 30 days after your service completes."
+    "footer": "PDF, JPEG or PNG, up to {mb} MB each. Each file is encrypted with its own AES-256 key on receipt and permanently deleted 30 days after your service completes.",
+    "tooMany": "Too many uploads in a short time. Please wait a few minutes and try again."
   },
   "complete": {
     "metaTitle": "Intake complete",
@@ -238,5 +240,24 @@
       }
     ],
     "home": "Return to homepage"
+  },
+  "date": {
+    "day": "Day",
+    "month": "Month",
+    "year": "Year",
+    "months": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    }
   }
 }

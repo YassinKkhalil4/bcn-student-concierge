@@ -42,6 +42,18 @@ describe("sliding-window limiter", () => {
     expect((await rateLimit("198.51.100.1", "upload", T0 + 1000)).allowed).toBe(true);
   });
 
+  it("budgets uploads per case, so students sharing a network do not share a quota", async () => {
+    const { tokens } = QUOTAS["upload-case"];
+    // Every slot in the intake and portal wizards, each replaced several times.
+    expect(tokens).toBeGreaterThanOrEqual(7 * 5);
+    for (let i = 0; i < tokens; i++) await rateLimit("case:first", "upload-case", T0 + 1000);
+    expect((await rateLimit("case:first", "upload-case", T0 + 1000)).allowed).toBe(false);
+    expect((await rateLimit("case:second", "upload-case", T0 + 1000)).allowed).toBe(true);
+    // Documents route: counted against the case as well as the address.
+    const route = readFileSync(path.join(process.cwd(), "src/app/api/documents/route.ts"), "utf8");
+    expect(route).toMatch(/enforceRateLimit\(request, "upload-case", `case:\$\{caseId\}`\)/);
+  });
+
   it("carries the previous window's weight across the boundary", async () => {
     // 5 hits late in window A. Just after the boundary, most of A still
     // overlaps the sliding window, so a burst must NOT get a fresh quota —

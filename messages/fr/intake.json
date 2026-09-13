@@ -63,8 +63,7 @@
     },
     "birthDate": {
       "label": "Date de naissance",
-      "hint": "Le jour en premier, comme indiqué sur les formulaires espagnols.",
-      "placeholder": "JJ/MM/AAAA"
+      "hint": "Choisissez le jour, le mois et l’année tels qu’ils figurent sur votre passeport."
     },
     "birthCity": {
       "label": "Ville de naissance"
@@ -174,7 +173,9 @@
     "iva": "IVA (21 %)",
     "total": "Total",
     "change": "Changer de formule",
-    "govFees": "Les frais administratifs (Modelo 790, délivrance de la carte) sont à votre charge et doivent être réglés directement auprès des autorités espagnoles ; ils ne sont pas inclus."
+    "govFees": "Les frais administratifs (Modelo 790, délivrance de la carte) sont à votre charge et doivent être réglés directement auprès des autorités espagnoles ; ils ne sont pas inclus.",
+    "route": "Citoyenneté",
+    "routePending": "Le prix dépend de votre nationalité. Il est fixé dès que vous la choisissez à la première étape."
   },
   "documents": {
     "slots": {
@@ -216,7 +217,8 @@
     "wrongType": "Seuls les fichiers PDF, JPEG et PNG sont acceptés. Veuillez réexporter le fichier.",
     "failed": "Échec de l’envoi. Veuillez réessayer.",
     "network": "Erreur réseau. Vérifiez votre connexion et réessayez.",
-    "footer": "PDF, JPEG ou PNG, jusqu’à {mb} Mo chacun. Chaque fichier est chiffré à l’aide de sa propre clé AES-256 dès sa réception et supprimé définitivement 30 jours après la fin de votre prestation."
+    "footer": "PDF, JPEG ou PNG, jusqu’à {mb} Mo chacun. Chaque fichier est chiffré à l’aide de sa propre clé AES-256 dès sa réception et supprimé définitivement 30 jours après la fin de votre prestation.",
+    "tooMany": "Trop d’envois en peu de temps. Veuillez patienter quelques minutes, puis réessayer."
   },
   "complete": {
     "metaTitle": "Inscription terminée",
@@ -238,5 +240,24 @@
       }
     ],
     "home": "Retour à la page d’accueil"
+  },
+  "date": {
+    "day": "Jour",
+    "month": "Mois",
+    "year": "Année",
+    "months": {
+      "1": "Janvier",
+      "2": "Février",
+      "3": "Mars",
+      "4": "Avril",
+      "5": "Mai",
+      "6": "Juin",
+      "7": "Juillet",
+      "8": "Août",
+      "9": "Septembre",
+      "10": "Octobre",
+      "11": "Novembre",
+      "12": "Décembre"
+    }
   }
 }
