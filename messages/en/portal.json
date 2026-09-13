@@ -87,10 +87,9 @@
     },
     "residence": {
       "intro": "Residences register their students with a special city form, the <em>Autorització d’empadronament de domicili col·lectiu</em>. The residence fills it in, signs it and <strong>stamps it</strong> — without the stamp it is not accepted. Send this message to reception:",
-      "subject": "Subject:",
       "openForm": "Open the official form ↗",
       "uploadPrompt": "When the residence gives it back, upload it here:",
-      "spanishNote": "The message is in Spanish on purpose: it is for the residence’s staff in Barcelona."
+      "toPlaceholder": "reception@your-residence.com"
     },
     "lease": {
       "intro": "The city accepts your lease only if all three are true. Check each one:",
@@ -162,12 +161,10 @@
   "enrolment": {
     "howTo": "How do I get this?",
     "intro": "Your acceptance letter is not enough. Ask your university’s admissions or registry office for a <em>certificado de matrícula</em>, stamped and signed. This message asks for exactly what the immigration office looks for:",
-    "spanishNote": "The message is in Spanish on purpose: it is for your university’s office in Barcelona.",
     "university": "Your university",
     "programme": "Your programme",
     "programmePlaceholder": "e.g. BBA in International Business",
-    "subject": "Subject:",
-    "openEmail": "Open in my email app"
+    "toPlaceholder": "admissions@your-university.edu"
   },
   "tasa": {
     "missingNie": "This step needs your NIE, and we do not have it yet. We will tell you as soon as you can do it — nothing to do for now.",
@@ -178,5 +175,18 @@
     "print": "Download the form and print it at 100% scale — never “fit to page”, or the barcode will not scan.",
     "caption": "What to type on the police portal",
     "labelsNote": "The box names are in Spanish because that is what the police website shows."
+  },
+  "request": {
+    "language": "Message language",
+    "languages": {
+      "en": "English",
+      "es": "Español"
+    },
+    "to": "Send to (optional)",
+    "subject": "Subject:",
+    "openGmail": "Open in Gmail ↗",
+    "openOutlook": "Open in Outlook ↗",
+    "openEmail": "Open in my email app",
+    "fallback": "If nothing opens, copy the subject and the message into a new email."
   }
 }

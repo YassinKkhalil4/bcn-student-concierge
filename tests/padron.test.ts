@@ -11,7 +11,7 @@ import {
   UnprintableCharactersError,
 } from "../src/lib/forms/padron-authorization";
 import { AUTHORIZATION_TEMPLATE } from "../src/lib/forms/templates";
-import { academicYear, enrolmentRequest, residenceRequest, COLLECTIVE_AUTHORIZATION_URL } from "../src/lib/request-templates";
+import { academicYear, composeLinks, enrolmentRequest, residenceRequest, COLLECTIVE_AUTHORIZATION_URL } from "../src/lib/request-templates";
 
 const raw = {
   tierId: "baseline",
@@ -152,24 +152,60 @@ describe.skipIf(!haveTemplate)("filling Barcelona's official authorisation", { t
   });
 });
 
-describe("Spanish request templates", () => {
-  it("asks the residence for the stamped collective-home form", () => {
-    const r = residenceRequest(intake);
-    expect(r.body).toContain("Autorització d'empadronament de domicili col·lectiu");
-    expect(r.body).toContain("sello");
-    expect(r.body).toContain(COLLECTIVE_AUTHORIZATION_URL);
-    expect(r.body).toContain("CHIDI OKONKWO ADEYEMI");
-    expect(r.body).toContain("NIE X1234567L");
-    expect(r.body).toMatch(/Chidi Okonkwo Adeyemi$/); // signed in title case
+describe("request templates", () => {
+  it("asks the residence for the stamped collective-home form, in Spanish or English", () => {
+    const es = residenceRequest(intake, "es");
+    expect(es.body).toContain("Autorització d'empadronament de domicili col·lectiu");
+    expect(es.body).toContain("sello");
+    expect(es.body).toContain(COLLECTIVE_AUTHORIZATION_URL);
+    expect(es.body).toContain("CHIDI OKONKWO ADEYEMI");
+    expect(es.body).toContain("NIE X1234567L");
+    expect(es.body).toMatch(/Chidi Okonkwo Adeyemi$/); // signed in title case
+
+    const en = residenceRequest(intake, "en");
+    // The form's own name stays as the city prints it.
+    expect(en.body).toContain("Autorització d'empadronament de domicili col·lectiu");
+    expect(en.body).toContain("stamped");
+    expect(en.body).toContain(COLLECTIVE_AUTHORIZATION_URL);
+    expect(en.body).toContain("Passport");
+    expect(en.body).not.toContain("Pasaporte");
+    expect(en.body).toMatch(/Chidi Okonkwo Adeyemi$/);
   });
 
   it("fills the enrolment email and leaves visible gaps when details are missing", () => {
-    const blank = enrolmentRequest(intake, {});
-    expect(blank.body).toContain("[universidad]");
-    const full = enrolmentRequest(intake, { university: "EU Business School", programme: "BBA", year: "2026/2027" });
-    expect(full.body).toContain("estudiante de BBA en EU Business School");
-    expect(full.body).toContain("curso académico 2026/2027");
-    expect(full.body).toContain("tiempo completo");
+    expect(enrolmentRequest(intake, {}, "es").body).toContain("[universidad]");
+    const es = enrolmentRequest(intake, { university: "EU Business School", programme: "BBA", year: "2026/2027" }, "es");
+    expect(es.body).toContain("estudiante de BBA en EU Business School");
+    expect(es.body).toContain("curso académico 2026/2027");
+    expect(es.body).toContain("tiempo completo");
+
+    expect(enrolmentRequest(intake, {}, "en").body).toContain("[university]");
+    const en = enrolmentRequest(intake, { university: "EU Business School", programme: "BBA", year: "2026/2027" }, "en");
+    expect(en.subject).toMatch(/^Certificate of enrolment/);
+    expect(en.body).toContain("the BBA programme at EU Business School");
+    expect(en.body).toContain("academic year 2026/2027");
+    expect(en.body).toContain("full-time");
+    // Still asks for what Extranjería needs, whatever the language of the email.
+    expect(en.body).toContain("certificado de matrícula");
+    expect(en.body).toContain("Spanish or Catalan");
+  });
+
+  it("opens the email in a mail app, Gmail or Outlook, with the recipient when given", () => {
+    const draft = { subject: "Certificate – Chidi", body: "Line one\nLine two & more" };
+    const blank = composeLinks(draft);
+    expect(blank.mailto).toMatch(/^mailto:\?subject=/);
+    expect(blank.gmail).not.toContain("to=");
+
+    const links = composeLinks({ ...draft, to: " admissions@school.edu " });
+    expect(links.mailto).toMatch(/^mailto:admissions@school\.edu\?subject=/);
+    expect(decodeURIComponent(links.mailto.split("body=")[1]!)).toBe(draft.body);
+    const gmail = new URL(links.gmail);
+    expect(gmail.searchParams.get("to")).toBe("admissions@school.edu");
+    expect(gmail.searchParams.get("su")).toBe(draft.subject);
+    expect(gmail.searchParams.get("body")).toBe(draft.body);
+    const outlook = new URL(links.outlook);
+    expect(outlook.searchParams.get("subject")).toBe(draft.subject);
+    expect(outlook.searchParams.get("body")).toBe(draft.body);
   });
 
   it("rolls the academic year over in August", () => {

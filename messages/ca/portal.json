@@ -87,10 +87,9 @@
     },
     "residence": {
       "intro": "Les residències empadronen els seus estudiants amb un formulari municipal específic, l’<em>Autorització d’empadronament de domicili col·lectiu</em>. La residència l’omple, el signa i <strong>el segella</strong>: sense el segell no s’accepta. Envieu aquest missatge a recepció:",
-      "subject": "Assumpte:",
       "openForm": "Obre el formulari oficial ↗",
       "uploadPrompt": "Quan la residència us el retorni, pugeu-lo aquí:",
-      "spanishNote": "El missatge és en castellà expressament: s’adreça al personal de la residència."
+      "toPlaceholder": "reception@your-residence.com"
     },
     "lease": {
       "intro": "L’Ajuntament només accepta el contracte si es compleixen totes tres condicions. Comproveu-les una per una:",
@@ -162,12 +161,10 @@
   "enrolment": {
     "howTo": "Com l’aconsegueixo?",
     "intro": "La carta d’admissió no és suficient. Demaneu a l’oficina d’admissions o a la secretaria de la vostra universitat un <em>certificado de matrícula</em> (certificat de matrícula), segellat i signat. Aquest missatge demana exactament el que busca l’oficina d’estrangeria:",
-    "spanishNote": "El missatge és en castellà expressament: s’adreça a l’oficina de la vostra universitat a Barcelona.",
     "university": "La vostra universitat",
     "programme": "El vostre programa",
     "programmePlaceholder": "p. ex., Grau en Relacions Internacionals",
-    "subject": "Assumpte:",
-    "openEmail": "Obre-ho a la meva aplicació de correu"
+    "toPlaceholder": "admissions@your-university.edu"
   },
   "tasa": {
     "missingNie": "Aquest pas necessita el vostre NIE, i encara no el tenim. Us avisarem tan bon punt el pugueu fer; de moment, no heu de fer res.",
@@ -178,5 +175,18 @@
     "print": "Descarregueu el formulari i imprimiu-lo a escala 100 %, mai amb «ajusta a la pàgina»: si no, el codi de barres no s’escanejarà.",
     "caption": "Què heu d’introduir al portal de la policia",
     "labelsNote": "Els noms dels camps són en castellà perquè és el que mostra el web de la policia."
+  },
+  "request": {
+    "language": "Llengua del missatge",
+    "languages": {
+      "en": "English",
+      "es": "Español"
+    },
+    "to": "Destinatari (opcional)",
+    "subject": "Assumpte:",
+    "openGmail": "Obre a Gmail ↗",
+    "openOutlook": "Obre a Outlook ↗",
+    "openEmail": "Obre-ho a la meva aplicació de correu",
+    "fallback": "Si no s’obre res, copieu l’assumpte i el missatge en un correu electrònic nou."
   }
 }

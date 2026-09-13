@@ -5,15 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { TIERS } from "@/lib/pricing";
 import { PricingCard } from "@/components/PricingCard";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
-
-// Proper names: never translated.
-const UNIVERSITIES = [
-  "EU Business School",
-  "Harbour.Space",
-  "IESE Business School",
-  "ESADE",
-  "Barcelona Technology School",
-];
+import { UNIVERSITIES } from "@/lib/universities";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const t = await getTranslations({ locale: (await params).locale, namespace: "home" });
