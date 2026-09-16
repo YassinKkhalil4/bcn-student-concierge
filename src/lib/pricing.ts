@@ -5,7 +5,7 @@
  * All prices are stored in cents and are the final amount the student pays:
  * nothing is added on top at checkout.
  *
- * TWO PRICES PER PACKAGE
+ * TWO PRICES PER PACKAGE (except The Fixer, which charges one)
  * The EU/EEA/Swiss route is less work than the non-EU one and is charged less:
  * no fingerprints, no Modelo 790 Código 012, and where the requirements are met
  * the certificate is normally issued at the appointment itself. A non-EU student
@@ -28,35 +28,35 @@ export interface Tier {
   /** Brand name — identical in every language, and on the invoice. */
   name: string;
   tagline: string;
-  /** Final price in euro cents, per route. Nothing is added at checkout. */
+  /**
+   * Final price in euro cents, per route. Nothing is added at checkout. A
+   * package may charge the same on both routes (The Fixer); its card then
+   * shows one figure.
+   */
   priceCents: Record<ServiceRoute, number>;
   /** Shown as "Everything in X, plus:" when set. */
   inherits?: TierId;
-  /**
-   * Cards and travel we buy and hand over (T-mobilitat + T-jove, Carnet Jove,
-   * ISIC), in cents. Shown so the fee reads against what is inside it.
-   */
-  includedCardsCents?: number;
-  features: string[];
-  bestFor: string;
+  /** The "Most chosen" package. */
   featured?: boolean;
+  /**
+   * Sold by application, not checkout: its card links to a waitlist
+   * application (through triage) instead of /intake.
+   */
+  waitlist?: boolean;
 }
 
+/**
+ * Features, taglines and card notes are copy and live in
+ * messages/<locale>/pricing.json, taken verbatim from the guide PDF
+ * (assets/guide/landing-in-barcelona.pdf, section 13). The PDF and this table
+ * must agree figure for figure; tests/pricing.test.ts pins the figures.
+ */
 export const TIERS: readonly Tier[] = [
   {
     id: "ready-file",
     name: "The Ready File",
     tagline: "The paperwork, finished and in your hands, in 48 hours.",
     priceCents: { eu: 30_000, "non-eu": 36_000 },
-    bestFor: "Students who can run their own appointments once the file is right.",
-    features: [
-      "Route confirmed against your own authorisation and entry stamp",
-      "EX-17 or EX-18 generated, flattened and print-ready",
-      "Modelo 790 Código 012 configured for cash, with a named branch",
-      "Padrón file prepared for the council you actually live in",
-      "Padrón and TIE/CUE appointments searched and booked in your name",
-      "Every copy made, collated, and audited against the official list",
-    ],
   },
   {
     id: "soft-landing",
@@ -64,34 +64,15 @@ export const TIERS: readonly Tier[] = [
     tagline: "The paperwork, plus the cards you should already be holding.",
     priceCents: { eu: 54_000, "non-eu": 60_000 },
     inherits: "ready-file",
-    includedCardsCents: 7_500,
     featured: true,
-    bestFor: "Most students who landed in the last few weeks.",
-    features: [
-      "T-mobilitat card in your name with 90 days loaded (T-jove under 30)",
-      "Carnet Jove applied for, paid, and chased through activation",
-      "ISIC card bought and issued against your enrolment evidence",
-      "A bank account that receives money from home — or why you need none",
-      "SIM or eSIM matched to real usage, 28-day renewal trap explained",
-      "A WhatsApp line for 30 days, and a live line during your appointment",
-    ],
   },
   {
     id: "fixer",
     name: "The Fixer",
     tagline: "Everything above, plus we turn up.",
-    priceCents: { eu: 96_000, "non-eu": 99_900 },
+    priceCents: { eu: 96_000, "non-eu": 96_000 },
     inherits: "soft-landing",
-    includedCardsCents: 7_500,
-    bestFor: "Students stuck on the padrón, or still signing for a flat.",
-    features: [
-      "We come to the town hall with you and translate",
-      "The padrón unlock: hostels, sublets, refusing landlords, wrong council",
-      "Health card and a local GP who speaks English, once the padrón is through",
-      "Same-day contract review before you sign, and registry ownership check",
-      "Move-in condition report, photographed and sent the same day",
-      "90-day tracking through to collection, and a completion report",
-    ],
+    waitlist: true,
   },
 ] as const;
 
@@ -126,6 +107,11 @@ export function isServiceRoute(value: unknown): value is ServiceRoute {
 /** The price a given student pays for a given package, in cents. */
 export function tierPriceCents(tier: Tier, route: ServiceRoute): number {
   return tier.priceCents[route];
+}
+
+/** True when a package charges the same on both routes. */
+export function hasSinglePrice(tier: Tier): boolean {
+  return tier.priceCents.eu === tier.priceCents["non-eu"];
 }
 
 export function formatEur(cents: number): string {

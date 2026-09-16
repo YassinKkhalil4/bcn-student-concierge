@@ -6,28 +6,77 @@
       "tagline": "La paperassa, acabada i a les teves mans, en 48 hores.",
       "bestFor": "Pots gestionar les teves pròpies cites; només necessites que l’expedient estigui bé.",
       "features": [
-        "La teva via confirmada amb la teva pròpia autorització i el teu segell d’entrada",
-        "El teu EX-17 o EX-18, preemplenat, aplanat i a punt per imprimir",
-        "Modelo 790 Código 012 configurat per pagar en efectiu, amb una oficina concreta i el seu horari de caixa",
-        "El teu expedient de Padró, preparat per a l’ajuntament on vius realment",
-        "Si el pis no és al teu nom, el model d’autorització perquè el signi el propietari",
-        "Cites de Padró i TIE/CUE cercades i reservades al teu propi nom",
-        "Totes les còpies fetes, ordenades com les demana el taulell i revisades línia a línia"
-      ]
+        {
+          "title": "Route confirmed against your own authorisation.",
+          "body": "We read your visa or approval decision and your entry stamp. <code>EX-18</code> or <code>EX-17</code>, and the exact date your window closes."
+        },
+        {
+          "title": "Your form, generated and print-ready.",
+          "body": "Pre-filled from your verified data, flattened so nothing shifts on print, cross-checked against your passport scan. Second surnames handled correctly. Section 2 — legal representative — left permanently blank, because we are not your representative. The DEHú electronic-notification box left unchecked."
+        },
+        {
+          "title": "Modelo 790 Código 012, configured for cash.",
+          "body": "Generated with the barcode the scanner reads, set for payment <em>en efectivo</em>, printed in colour at 100% scale. Plus a named branch near your appointment and its counter hours — not every branch takes tax payments from non-customers."
+        },
+        {
+          "title": "Your padrón file, for the right town hall.",
+          "body": "Prepared for the council of the municipality you actually live in, which is not always Barcelona."
+        },
+        {
+          "title": "If the flat isn’t in your name.",
+          "body": "We prepare the authorisation form for the owner or main tenant to sign, and tell you exactly what they need to provide alongside it."
+        },
+        {
+          "title": "Every copy, already made.",
+          "body": "Passport, authorisation, enrolment evidence, proof of entry, lease — copied to your office’s specification and collated in the order the counter works through them."
+        },
+        {
+          "title": "Appointments, searched and booked.",
+          "body": "Padrón and TIE/CUE, on the official portal, <strong>in your own name</strong>, across all Barcelona-province offices rather than only the convenient one. You get a dated itinerary: address, time, what to carry, what will be asked."
+        },
+        {
+          "title": "A completeness audit before you go.",
+          "body": "Checked line by line against the official list, including the name-match check that catches middle names present on one document and missing from another."
+        }
+      ],
+      "delivery": "<strong>How it reaches you:</strong> courier to your address, or pickup from us — plus the whole file as a print-at-home PDF the moment it’s assembled, so a delivery problem never costs you an appointment."
     },
     "soft-landing": {
       "name": "Soft Landing",
       "shortName": "Soft Landing",
       "tagline": "La paperassa, més les targetes que ja hauries de portar a sobre.",
       "bestFor": "La majoria d’estudiants que van arribar fa unes setmanes i encara compren bitllets senzills.",
+      "includes": "Includes roughly <strong>€75 of cards and travel</strong>, bought by us and handed to you. Not application forms, not discount codes — the actual cards, working.",
       "features": [
-        "Una targeta T-mobilitat al teu nom amb 90 dies carregats: T-jove si tens menys de 30 anys",
-        "El teu Carnet Jove, sol·licitat, pagat i perseguit durant l’espera d’activació",
-        "La teva targeta ISIC, comprada i emesa amb el teu justificant de matrícula",
-        "Un compte bancari que rebi de debò diners de casa, o per què no te’n cal cap",
-        "SIM o eSIM ajustada al teu consum real, amb el parany de la renovació de 28 dies explicat",
-        "Una línia de WhatsApp durant 30 dies, en anglès, just quan sorgeixen els dubtes",
-        "Una línia oberta durant la teva cita: truca’ns des del taulell"
+        {
+          "title": "A T-mobilitat card, in your name, with 90 days already loaded.",
+          "body": "Registered, Young profile assigned, personalised card issued, pass paid for. You tap and go. If you’ve spent the last fortnight buying single tickets, this is the line that pays for itself — ten single journeys cost more than a fifth of a 90-day pass.",
+          "extra": "Under 30 you get <strong>T-jove</strong>: unlimited travel, all seven fare zones, 90 consecutive days from first validation. Thirty or over, <strong>T-usual</strong> for the zones your commute actually needs, and the difference comes back to you."
+        },
+        {
+          "title": "Your Carnet Jove, activated.",
+          "body": "Applied for, paid for, and chased through the activation wait so it’s live rather than pending."
+        },
+        {
+          "title": "Your ISIC card.",
+          "body": "Bought and issued against your enrolment evidence."
+        },
+        {
+          "title": "A bank account that actually receives money from home.",
+          "body": "Including an honest assessment of whether you need a Spanish one at all — an IBAN from another EU member state shouldn’t be refused for a SEPA payment simply because it’s foreign, and for a lot of students that’s the end of the question."
+        },
+        {
+          "title": "SIM or eSIM sorted.",
+          "body": "Matched to your real usage, with the 28-day renewal trap explained before you commit to it. A 28-day cycle renews about thirteen times a year, not twelve."
+        },
+        {
+          "title": "A WhatsApp line for 30 days.",
+          "body": "Real answers, in English, through the window where questions actually come up."
+        },
+        {
+          "title": "A live line during your appointment.",
+          "body": "If you’re asked something you don’t understand, call us from the counter. You do the talking — we tell you what they want."
+        }
       ]
     },
     "fixer": {
@@ -35,32 +84,68 @@
       "shortName": "Fixer",
       "tagline": "Tot l’anterior, i a més hi anem amb tu.",
       "bestFor": "Estàs encallat amb el Padró, o encara has de signar un pis i vols que el llegim abans.",
+      "note": "By application. Two students per intake, because this is the tier we physically attend.",
+      "includes": "Includes the same <strong>~€75 of cards and travel</strong> as The Soft Landing.",
       "features": [
-        "Anem amb tu a l’ajuntament i traduïm",
-        "Desbloqueig del Padró: hostals, subarrendaments, un llogater que s’hi nega, el municipi equivocat",
-        "La teva targeta sanitària i un metge de capçalera que parli anglès, un cop resolt el Padró",
-        "Revisió del contracte el mateix dia, contrastada amb el límit legal de la fiança",
-        "Propietat verificada al registre: tenir les claus no demostra ser-ne el propietari",
-        "Informe de l’estat del pis en entrar-hi: cada desperfecte fotografiat, signat i enviat el mateix dia",
-        "Seguiment de 90 dies fins a la recollida, i informe final per a qui estigui pagant"
-      ]
+        {
+          "title": "We come to the town hall with you and translate.",
+          "body": "The padrón appointment, in person, with someone who speaks Catalan and Spanish standing next to you."
+        },
+        {
+          "title": "The padrón unlock.",
+          "body": "The step that quietly blocks everything else, and the one most people are stuck on:",
+          "details": [
+            "In a hostel, an Airbnb or an unregistered sublet you currently can’t register — there are routes, and nobody has told you about them",
+            "Landlord refusing? A refusal doesn’t make registration impossible. We ask the council about its alternative verification routes on your behalf",
+            "Wrong municipality? We identify it and handle that council instead"
+          ]
+        },
+        {
+          "title": "Your health card.",
+          "body": "Once the padrón is through, registration at your local primary care centre and your Catalan health card — plus an English-speaking GP identified within walking distance of where you actually live."
+        },
+        {
+          "title": "Same-day contract review, before you sign.",
+          "body": "If you’re still viewing flats and someone is pressuring you to commit on the spot, send us the contract and we’ll read it that day. Deposit checked against the statutory cap, cancellation terms, bills, and the address-registration clause that decides whether your padrón is possible at all."
+        },
+        {
+          "title": "Ownership verified at the registry.",
+          "body": "We pull the <em>Nota Simple</em> and confirm the person renting to you has the right to. Holding keys is not proof of ownership."
+        },
+        {
+          "title": "Move-in condition report.",
+          "body": "On handover day we photograph every existing defect, meter readings and appliance states into a timestamped, signed PDF, sent to the landlord the same day. Your deposit is one to two months’ rent. This is how you get it back."
+        },
+        {
+          "title": "90-day file tracking, through to collection",
+          "body": "— including the collection appointment, which some offices require separately, and which you should never book flights around until it’s confirmed."
+        },
+        {
+          "title": "A completion report for whoever’s paying.",
+          "body": "A dated PDF: what was filed, what’s registered, what’s still pending, your TIE collection date, and the numbers to call in an emergency."
+        }
+      ],
+      "never": "<strong>What we will never do is register you at an address you don’t live at.</strong> <warn>That’s a fraud problem attached to your immigration file, and it is not worth it to anyone.</warn>"
     }
   },
   "card": {
     "mostChosen": "La més triada",
+    "waitlist": "Waitlist — two slots",
     "routeEu": "UE / EEE / Suïssa",
     "routeNonEu": "Fora de la UE",
-    "includesCards": "Inclou uns {amount} en targetes i transport, comprats per nosaltres i lliurats en mà. No són formularis ni codis de descompte: són les targetes reals, funcionant.",
+    "bothRoutes": "Both routes",
     "everythingIn": "Tot el de {name}, i a més:",
     "bestFor": "Ideal si:",
-    "select": "Triar {name}"
+    "select": "Triar {name}",
+    "applyWaitlist": "Apply for the waitlist"
   },
   "page": {
     "metaTitle": "Paquets i preus",
     "metaDescription": "Tres paquets de preu tancat per a estudiants internacionals que ja són a Barcelona: Ready File, Soft Landing i Fixer. Dos preus per paquet: un per a la via UE i un altre per a la via de fora de la UE.",
     "eyebrow": "Paquets i preus",
     "title": "Preus tancats per a un procés sense terminis tancats.",
-    "intro": "Tots els paquets tenen un preu tancat, i el preu que veus és el que pagues. No facturem per hores i cap paquet no inclou taxes públiques.",
+    "intro": "Tots els paquets tenen un preu tancat, i el preu que veus és el que pagues.",
+    "feesNote": "No facturem per hores i cap paquet no inclou taxes públiques.",
     "routesEyebrow": "Per què dos preus",
     "routesTitle": "La via UE és menys feina, així que en cobrem menys.",
     "routesBody": "Sense empremtes, sense la taxa de 16,08 €, i quan es compleixen els requisits el certificat s’emet normalment a la mateixa cita. Els estudiants de fora de la UE necessiten l’EX-17, la cita biomètrica i, en algunes oficines, un viatge a part per recollir la targeta. Confirmem quina via et correspon al triatge, abans que paguis res.",

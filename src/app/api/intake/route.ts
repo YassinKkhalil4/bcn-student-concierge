@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { attributionFromRequest } from "@/lib/attribution";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { LOCALES, type Locale } from "@/lib/db/schema";
 import { PORTAL_COOKIE, createPortalSession, portalCookieOptions } from "@/lib/portal/session";
@@ -50,7 +51,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     : "en";
 
   try {
-    const record = await createCase(parsed.data, { locale });
+    const record = await createCase(parsed.data, { locale, attribution: attributionFromRequest(request) });
     // Sign the student straight into the file they just created, so uploads
     // and payment continue under their session. The response carries only the
     // human reference — the case id is a credential and stays in the cookie.

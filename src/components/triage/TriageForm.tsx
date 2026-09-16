@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { countryOptions } from "@/lib/countries";
 import { routeForNationality } from "@/lib/forms/field-map";
@@ -27,6 +28,10 @@ export function TriageForm() {
   const t = useTranslations("triage");
   const tv = useTranslations("validation");
   const locale = useLocale();
+  // The Fixer is sold by application: its "Apply for the waitlist" button
+  // lands here with ?apply=fixer, and the enquiry says so in the student's
+  // own words box, where staff read it. They can edit or delete it.
+  const applying = useSearchParams().get("apply") === "fixer";
 
   const [values, setValues] = useState({
     fullName: "",
@@ -34,7 +39,7 @@ export function TriageForm() {
     nationality: "",
     arrivedOn: "",
     housing: "",
-    notes: "",
+    notes: applying ? t("fixerApplication") : "",
   });
   const [files, setFiles] = useState<Record<string, File | null>>({});
   const [consent, setConsent] = useState(false);

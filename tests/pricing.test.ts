@@ -1,8 +1,11 @@
 import { describe, it, expect } from "vitest";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import {
   TIERS,
   SERVICE_ROUTES,
   tierPriceCents,
+  hasSinglePrice,
   formatEur,
   getTier,
   routeForForm,
@@ -15,7 +18,7 @@ describe("tier table", () => {
   it("matches the advertised final prices exactly, per route", () => {
     expect(getTier("ready-file")?.priceCents).toEqual({ eu: 30_000, "non-eu": 36_000 });
     expect(getTier("soft-landing")?.priceCents).toEqual({ eu: 54_000, "non-eu": 60_000 });
-    expect(getTier("fixer")?.priceCents).toEqual({ eu: 96_000, "non-eu": 99_900 });
+    expect(getTier("fixer")?.priceCents).toEqual({ eu: 96_000, "non-eu": 96_000 });
   });
 
   it("stores whole cents, never fractional currency", () => {
@@ -26,12 +29,18 @@ describe("tier table", () => {
     }
   });
 
-  it("prices the EU route below the non-EU one on every package", () => {
+  it("never charges more for the EU route, and only The Fixer charges one price", () => {
     // The EU route is less work — no fingerprints, no Modelo 790 — and the
     // table must never drift into charging more for it.
     for (const tier of TIERS) {
-      expect(tierPriceCents(tier, "eu"), tier.id).toBeLessThan(tierPriceCents(tier, "non-eu"));
+      expect(tierPriceCents(tier, "eu"), tier.id).toBeLessThanOrEqual(tierPriceCents(tier, "non-eu"));
+      expect(hasSinglePrice(tier), tier.id).toBe(tier.id === "fixer");
     }
+  });
+
+  it("sells The Fixer by waitlist only", () => {
+    expect(TIERS.filter((t) => t.waitlist).map((t) => t.id)).toEqual(["fixer"]);
+    expect(TIERS.filter((t) => t.featured).map((t) => t.id)).toEqual(["soft-landing"]);
   });
 
   it("declares the inheritance chain used by the 'everything in X' copy", () => {
@@ -57,10 +66,12 @@ describe("tier table", () => {
     expect(getTier("constructor")).toBeUndefined();
   });
 
-  it("states what the cards-and-travel tiers include", () => {
-    expect(getTier("ready-file")?.includedCardsCents).toBeUndefined();
-    expect(getTier("soft-landing")?.includedCardsCents).toBe(7_500);
-    expect(getTier("fixer")?.includedCardsCents).toBe(7_500);
+  it("never mentions tax in the package copy: prices are final", () => {
+    // Every language's pricing catalogue, which is all the pricing display renders.
+    for (const locale of ["en", "es", "ca", "fr", "it", "de"]) {
+      const text = readFileSync(path.join(process.cwd(), "messages", locale, "pricing.json"), "utf8");
+      expect(text, locale).not.toMatch(/\b(IVA|VAT|TVA|MwSt|IVA)\b/);
+    }
   });
 });
 
@@ -106,7 +117,8 @@ describe("Stripe line items", () => {
 
   it("charges the route's own price, not a single list price", () => {
     expect(buildLineItems(getTier("fixer")!, "eu")[0]!.price_data!.unit_amount).toBe(96_000);
-    expect(buildLineItems(getTier("fixer")!, "non-eu")[0]!.price_data!.unit_amount).toBe(99_900);
+    expect(buildLineItems(getTier("ready-file")!, "eu")[0]!.price_data!.unit_amount).toBe(30_000);
+    expect(buildLineItems(getTier("ready-file")!, "non-eu")[0]!.price_data!.unit_amount).toBe(36_000);
   });
 
   it("charges in euro", () => {

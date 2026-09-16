@@ -11,7 +11,7 @@
   },
   "trust": {
     "heading": "Built for students at",
-    "disclaimer": "Universities are named to show who the service is designed for. We are an independent service and are not affiliated with, endorsed by, or acting on behalf of any institution listed."
+    "disclaimer": "We are an independent service and are not affiliated with, endorsed by, or acting on behalf of any institution listed."
   },
   "problems": {
     "eyebrow": "What actually goes wrong",
@@ -64,7 +64,7 @@
   },
   "pricing": {
     "eyebrow": "Transparent pricing",
-    "title": "Three packages. Two prices each, because two routes.",
+    "title": "Three packages. Priced by route, because the routes are different work.",
     "body": "The EU route is less work and costs less: no fingerprints, no €16.08 tasa. We confirm which one applies to you at triage, before you pay anything. Government fees are paid by you, directly, and are never included in our fee.",
     "cta": "See full comparison"
   },

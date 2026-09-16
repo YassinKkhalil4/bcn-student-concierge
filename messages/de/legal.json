@@ -59,7 +59,7 @@
       {
         "heading": "Wer ist für Ihre Daten verantwortlich?",
         "paragraphs": [
-          "BCN Student Concierge (der „Verantwortliche“) legt fest, wie und zu welchem Zweck Ihre personenbezogenen Daten verarbeitet werden. Kontakt für alle datenschutzrechtlichen Angelegenheiten, einschließlich der Ausübung der nachstehend aufgeführten Rechte: <mail>privacy@bcnstudent.com</mail>."
+          "{controller} (der „Verantwortliche“) legt fest, wie und zu welchem Zweck Ihre personenbezogenen Daten verarbeitet werden. Kontakt für alle datenschutzrechtlichen Angelegenheiten, einschließlich der Ausübung der nachstehend aufgeführten Rechte: <mail>privacy@bcnstudent.com</mail>."
         ]
       },
       {
@@ -115,7 +115,7 @@
       {
         "heading": "Cookies",
         "paragraphs": [
-          "Diese Website setzt keine Werbe- oder Analyse-Cookies und verwendet keine Tracker von Drittanbietern. Die einzigen Cookies sind streng notwendige Cookies: ein Anmelde-Cookie, das Sie bis zu 24 Stunden lang in Ihrem Konto angemeldet hält, sowie die Cookies, die Stripe zur Betrugsprävention während des Bezahlvorgangs setzt. Es gibt kein Einwilligungsbanner, da es nichts gibt, dem Sie zustimmen müssten."
+          "This site sets no advertising cookies and runs no third-party trackers. It sets a sign-in cookie that keeps you in your file for up to 24 hours, and Stripe sets cookies for fraud prevention during checkout. Two more first-party cookies are set only if you follow a guide link or download our guide: bcn_src, which records the school link you came through, and bcn_guide, an anonymous download identifier. Each lasts 30 days, contains no name, email or other detail about you, and is used only to count how many guide readers go on to request triage."
         ]
       }
     ]

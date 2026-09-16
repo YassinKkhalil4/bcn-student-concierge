@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { attributionFromRequest } from "@/lib/attribution";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { LOCALES, TRIAGE_DOCUMENT_KINDS, type Locale, type TriageDocumentKind } from "@/lib/db/schema";
 import { triageSchema, daysUntil } from "@/lib/triage";
@@ -86,7 +87,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     : "en";
 
   try {
-    const record = await createTriage(parsed.data, { locale });
+    // Where they came from (a school's guide link, a guide download) travels in
+    // two first-party cookies, never in the form: see src/lib/attribution.ts.
+    const record = await createTriage(parsed.data, { locale, attribution: attributionFromRequest(request) });
 
     // Attachments are a convenience, not the enquiry: one that fails to store
     // must not lose the enquiry itself, which staff can still answer by asking

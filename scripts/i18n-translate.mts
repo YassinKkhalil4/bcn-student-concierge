@@ -55,6 +55,7 @@ const NAMESPACE_CONTEXT: Record<string, string> = {
   common: "Site header, footer and notices shown on every page.",
   home: "Marketing home page.",
   pricing: "Service packages and prices page.",
+  guide: "Download page for a free PDF guide for international students in Barcelona.",
   legal: "Legal pages (privacy notice, terms of service). Precise legal register.",
   intake: "A multi-step secure web form: field labels, hints, buttons, status and error messages.",
   portal: "The student's private file page after signing in: buttons, instructions, status messages.",
