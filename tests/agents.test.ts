@@ -6,7 +6,7 @@ import sitemap from "../src/app/sitemap";
 import { PRIVATE_PREFIXES, PUBLIC_PAGES, isPrivatePath, isPublicPage, markdownPath } from "../src/lib/agents/pages";
 import { renderPageMarkdown } from "../src/lib/agents/markdown";
 import { LOCALES, localizedPath } from "../src/i18n/routing";
-import { TIERS, SERVICE_ROUTES, formatEur, tierPrice } from "../src/lib/pricing";
+import { TIERS, SERVICE_ROUTES, formatEur, tierPriceCents } from "../src/lib/pricing";
 
 /**
  * What automated readers see: robots.txt, the sitemap, and the Markdown
@@ -127,9 +127,7 @@ describe("Markdown for agents", () => {
     // would quote half its readers the wrong price.
     for (const tier of TIERS) {
       for (const route of SERVICE_ROUTES) {
-        const p = tierPrice(tier, route);
-        expect(md, `${tier.id} ${route}`).toContain(formatEur(p.totalCents));
-        expect(md, `${tier.id} ${route}`).toContain(formatEur(p.ivaCents));
+        expect(md, `${tier.id} ${route}`).toContain(formatEur(tierPriceCents(tier, route)));
       }
     }
   });

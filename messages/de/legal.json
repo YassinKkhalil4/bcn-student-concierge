@@ -125,7 +125,7 @@
     "metaDescription": "Vertragsbedingungen für die Verwaltungsdienstleistungen von BCN Student Concierge.",
     "eyebrow": "Nutzungsbedingungen",
     "title": "Nutzungsbedingungen",
-    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — <strong>{price}</strong>",
     "clauses": [
       {
         "heading": "1. Art der Dienstleistung",
@@ -134,10 +134,10 @@
         ]
       },
       {
-        "heading": "2. Gebühren und IVA",
+        "heading": "2. Gebühren",
         "priceListAfter": 0,
         "paragraphs": [
-          "Die Paketpreise sind fest und werden ohne IVA angegeben; die 21% und der Bruttogesamtbetrag werden vor der Zahlung angezeigt. Jedes Paket hat zwei Preise: einen für den Weg EU/EWR/Schweiz und einen für den Nicht-EU-Weg, weil es unterschiedlich viel Arbeit ist. Welcher gilt, ergibt sich aus deiner Staatsangehörigkeit, wird vor der Zahlung bei der Ersteinschätzung bestätigt und beruht auf derselben Ableitung, die entscheidet, ob du einen EX-18 oder einen EX-17 einreichst:",
+          "Die Paketpreise sind fest und sind der Endpreis, den du zahlst: Beim Bezahlen kommt nichts hinzu. Jedes Paket hat zwei Preise: einen für den Weg EU/EWR/Schweiz und einen für den Nicht-EU-Weg, weil es unterschiedlich viel Arbeit ist. Welcher gilt, ergibt sich aus deiner Staatsangehörigkeit, wird vor der Zahlung bei der Ersteinschätzung bestätigt und beruht auf derselben Ableitung, die entscheidet, ob du einen EX-18 oder einen EX-17 einreichst:",
           "Behördengebühren – einschließlich der staatlichen Gebühr für das Modelo 790 Código 012 sowie der Kosten für die Kartenausstellung – werden von den spanischen Behörden festgelegt, sind von Ihnen direkt zu entrichten und in keinem Paket enthalten. Wir erheben niemals Gebühren im Auftrag der Behörden."
         ]
       },

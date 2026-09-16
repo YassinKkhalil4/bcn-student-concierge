@@ -2,7 +2,8 @@
  * Single source of truth for pricing. Every displayed figure and every Stripe
  * line item derives from here, so the site and the checkout can never drift.
  *
- * All base prices are stored in cents, EXCLUSIVE of IVA.
+ * All prices are stored in cents and are the final amount the student pays:
+ * nothing is added on top at checkout.
  *
  * TWO PRICES PER PACKAGE
  * The EU/EEA/Swiss route is less work than the non-EU one and is charged less:
@@ -17,8 +18,6 @@
  * case's price is always reproducible from the case itself.
  */
 
-export const IVA_RATE = 0.21;
-
 export const SERVICE_ROUTES = ["eu", "non-eu"] as const;
 export type ServiceRoute = (typeof SERVICE_ROUTES)[number];
 
@@ -29,13 +28,13 @@ export interface Tier {
   /** Brand name — identical in every language, and on the invoice. */
   name: string;
   tagline: string;
-  /** Base price in euro cents, excluding IVA, per route. */
-  basePriceCents: Record<ServiceRoute, number>;
+  /** Final price in euro cents, per route. Nothing is added at checkout. */
+  priceCents: Record<ServiceRoute, number>;
   /** Shown as "Everything in X, plus:" when set. */
   inherits?: TierId;
   /**
    * Cards and travel we buy and hand over (T-mobilitat + T-jove, Carnet Jove,
-   * ISIC), ex-IVA cents. Shown so the fee reads against what is inside it.
+   * ISIC), in cents. Shown so the fee reads against what is inside it.
    */
   includedCardsCents?: number;
   features: string[];
@@ -48,7 +47,7 @@ export const TIERS: readonly Tier[] = [
     id: "ready-file",
     name: "The Ready File",
     tagline: "The paperwork, finished and in your hands, in 48 hours.",
-    basePriceCents: { eu: 14_900, "non-eu": 19_900 },
+    priceCents: { eu: 30_000, "non-eu": 36_000 },
     bestFor: "Students who can run their own appointments once the file is right.",
     features: [
       "Route confirmed against your own authorisation and entry stamp",
@@ -63,7 +62,7 @@ export const TIERS: readonly Tier[] = [
     id: "soft-landing",
     name: "The Soft Landing",
     tagline: "The paperwork, plus the cards you should already be holding.",
-    basePriceCents: { eu: 32_900, "non-eu": 37_900 },
+    priceCents: { eu: 54_000, "non-eu": 60_000 },
     inherits: "ready-file",
     includedCardsCents: 7_500,
     featured: true,
@@ -81,7 +80,7 @@ export const TIERS: readonly Tier[] = [
     id: "fixer",
     name: "The Fixer",
     tagline: "Everything above, plus we turn up.",
-    basePriceCents: { eu: 69_900, "non-eu": 79_900 },
+    priceCents: { eu: 96_000, "non-eu": 99_900 },
     inherits: "soft-landing",
     includedCardsCents: 7_500,
     bestFor: "Students stuck on the padrón, or still signing for a flat.",
@@ -124,30 +123,9 @@ export function isServiceRoute(value: unknown): value is ServiceRoute {
   return value === "eu" || value === "non-eu";
 }
 
-/** The price a given student pays for a given package, ex-IVA, in cents. */
+/** The price a given student pays for a given package, in cents. */
 export function tierPriceCents(tier: Tier, route: ServiceRoute): number {
-  return tier.basePriceCents[route];
-}
-
-export interface PriceBreakdown {
-  baseCents: number;
-  ivaCents: number;
-  totalCents: number;
-}
-
-/**
- * IVA is computed on the integer cent base and rounded half-up to the cent,
- * matching how Stripe computes exclusive tax on a line item. Never compute
- * this in floating-point euros — 299 * 0.21 is not representable exactly.
- */
-export function priceWithIva(baseCents: number): PriceBreakdown {
-  const ivaCents = Math.round(baseCents * IVA_RATE);
-  return { baseCents, ivaCents, totalCents: baseCents + ivaCents };
-}
-
-/** The breakdown for a package on a route — what the card and the invoice show. */
-export function tierPrice(tier: Tier, route: ServiceRoute): PriceBreakdown {
-  return priceWithIva(tierPriceCents(tier, route));
+  return tier.priceCents[route];
 }
 
 export function formatEur(cents: number): string {

@@ -125,7 +125,7 @@
     "metaDescription": "Condiciones contractuales de los servicios de tramitación administrativa de BCN Student Concierge.",
     "eyebrow": "Condiciones",
     "title": "Condiciones de uso",
-    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — <strong>{price}</strong>",
     "clauses": [
       {
         "heading": "1. Naturaleza del servicio",
@@ -134,10 +134,10 @@
         ]
       },
       {
-        "heading": "2. Tarifas e IVA",
+        "heading": "2. Tarifas",
         "priceListAfter": 0,
         "paragraphs": [
-          "Las tarifas de los paquetes son cerradas y se indican sin IVA, mostrando el 21% y el total bruto antes del pago. Cada paquete tiene dos tarifas: una para la vía UE/EEE/Suiza y otra para la vía de fuera de la UE, porque son cantidades de trabajo distintas. Cuál te corresponde se deriva de tu nacionalidad, se confirma en el triaje antes de que pagues y es la misma derivación que decide si presentas un EX-18 o un EX-17:",
+          "Las tarifas de los paquetes son cerradas y son el precio final que pagas: no se añade nada al pagar. Cada paquete tiene dos tarifas: una para la vía UE/EEE/Suiza y otra para la vía de fuera de la UE, porque son cantidades de trabajo distintas. Cuál te corresponde se deriva de tu nacionalidad, se confirma en el triaje antes de que pagues y es la misma derivación que decide si presentas un EX-18 o un EX-17:",
           "Las tasas administrativas —incluida la tasa estatal del Modelo 790 Código 012, y los gastos de emisión de tarjetas— las fijan las autoridades españolas, las abona usted directamente y no están incluidas en ningún paquete. Nunca recaudamos tasas en nombre de la Administración."
         ]
       },

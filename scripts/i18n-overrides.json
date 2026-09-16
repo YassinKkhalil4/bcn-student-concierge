@@ -69,7 +69,7 @@
     "portal.tasa.payment": "En <em>Forma de pago</em>, seleccione <strong>{method}</strong>.",
     "home.hero.primaryCta": "Empezar el alta segura",
     "home.hero.secondaryCta": "Comparar paquetes",
-    "home.trust.heading": "Acompañamos a estudiantes que llegan a",
+    "home.trust.heading": "Pensado para estudiantes de",
     "home.problems.eyebrow": "Lo que falla de verdad",
     "home.problems.title": "Cuatro puntos de fallo, y cómo eliminamos cada uno.",
     "home.problems.items.0.problem": "Las citas previas se agotan en segundos",
@@ -118,7 +118,13 @@
     "portal.request.openEmail": "Abrir en mi aplicación de correo electrónico",
     "portal.request.fallback": "Si no se abre nada, copie el asunto y el mensaje en un correo electrónico nuevo.",
     "portal.enrolment.toPlaceholder": "admissions@your-university.edu",
-    "portal.padron.residence.toPlaceholder": "reception@your-residence.com"
+    "portal.padron.residence.toPlaceholder": "reception@your-residence.com",
+    "pricing.page.intro": "Todos los paquetes tienen un precio cerrado, y el precio que ves es el que pagas. No facturamos por horas y ningún paquete incluye tasas públicas.",
+    "home.hero.note": "El triaje es gratuito y el mismo día. Los paquetes son de precio cerrado: el precio que ves es el que pagas.",
+    "home.trust.disclaimer": "Las universidades se mencionan para indicar a quién va dirigido el servicio. Somos un servicio independiente y no estamos afiliados, ni respaldados por, ni actuamos en nombre de ninguna institución de las citadas.",
+    "legal.terms.clauses.1.heading": "2. Tarifas",
+    "legal.terms.clauses.1.paragraphs.0": "Las tarifas de los paquetes son cerradas y son el precio final que pagas: no se añade nada al pagar. Cada paquete tiene dos tarifas: una para la vía UE/EEE/Suiza y otra para la vía de fuera de la UE, porque son cantidades de trabajo distintas. Cuál te corresponde se deriva de tu nacionalidad, se confirma en el triaje antes de que pagues y es la misma derivación que decide si presentas un EX-18 o un EX-17:",
+    "portal.file.paymentTotal": "Total {total}."
   },
   "ca": {
     "common.nav.main": "Principal",
@@ -209,7 +215,6 @@
     "intake.wizard.openingCheckout": "S’està obrint el pagament segur…",
     "intake.wizard.pay": "Continua amb el pagament — {total}",
     "intake.wizard.stripeNote": "Targeta i Apple Pay, processats per Stripe. No veiem mai les dades de la vostra targeta.",
-    "intake.summary.serviceFee": "Preu del servei",
     "intake.summary.change": "Canvia de paquet",
     "intake.summary.govFees": "Les taxes de l’Administració (Modelo 790, expedició de la targeta) les pagueu directament a les autoritats espanyoles i no hi estan incloses.",
     "intake.documents.slots.passport.description": "La pàgina amb la zona de lectura mecànica. Si el visat és al passaport, afegiu-hi també aquesta pàgina.",
@@ -302,9 +307,9 @@
     "home.hero.body": "El vostre fill o filla té plaça en una universitat de Barcelona. Entre ell o ella i una instal·lació tranquil·la hi ha una cadena de tràmits burocràtics que no perdona els errors petits, i tot en castellà. Nosaltres ens n’encarreguem, correctament i a la primera.",
     "home.hero.primaryCta": "Comenceu l’alta segura",
     "home.hero.secondaryCta": "Compareu els paquets",
-    "home.hero.note": "Preus fixos, amb l’IVA indicat abans de pagar. Sense facturació per hores.",
-    "home.trust.heading": "Acompanyem estudiants que arriben a",
-    "home.trust.disclaimer": "Les universitats esmentades són les dels nostres clients. Som un servei independent: no hi estem afiliats, no en tenim l’aval i no actuem en nom de cap d’aquestes institucions.",
+    "home.hero.note": "El triatge és gratuït i el mateix dia. Els paquets són de preu tancat: el preu que veus és el que pagues.",
+    "home.trust.heading": "Pensat per a estudiants de",
+    "home.trust.disclaimer": "Les universitats s’esmenten per indicar a qui s’adreça el servei. Som un servei independent: no hi estem afiliats, no en tenim l’aval i no actuem en nom de cap d’aquestes institucions.",
     "home.problems.eyebrow": "Què falla de debò",
     "home.problems.title": "Quatre punts de fallada, i com eliminem cadascun.",
     "home.problems.items.0.problem": "Les cites prèvies s’esgoten en segons",
@@ -372,7 +377,7 @@
     "legal.privacy.clauses.5.paragraphs.1": "Les autoritats públiques només reben el que vosaltres mateixos els presenteu, en nom propi, a la vostra cita.",
     "legal.privacy.clauses.8.paragraphs.0": "Aquest lloc web no instal·la galetes publicitàries ni d’analítica, ni fa servir seguidors de tercers. Les úniques galetes són les estrictament necessàries: una galeta d’inici de sessió que us manté connectats un màxim de 24 hores, i les galetes que instal·la Stripe per prevenir el frau durant el pagament. No hi ha cap bàner de consentiment perquè no hi ha res a consentir.",
     "legal.terms.eyebrow": "Condicions",
-    "legal.terms.clauses.1.paragraphs.0": "Els preus dels paquets són fixos i s’indiquen sense IVA; abans del pagament es mostren l’IVA del 21 % i l’import total:",
+    "legal.terms.clauses.1.paragraphs.0": "Les tarifes dels paquets són tancades i són el preu final que pagues: no s’hi afegeix res en pagar. Cada paquet té dues tarifes: una per a la via UE/EEE/Suïssa i una altra per a la via de fora de la UE, perquè són quantitats de feina diferents. Quina et correspon es deriva de la teva nacionalitat, es confirma al triatge abans que paguis i és la mateixa derivació que decideix si presentes un EX-18 o un EX-17:",
     "legal.terms.clauses.1.paragraphs.1": "Les taxes de l’Administració —inclosa la taxa estatal del Modelo 790 Código 012 i les despeses d’expedició de la targeta— les fixen les autoritats espanyoles, les pagueu directament i no s’inclouen en cap paquet. Mai no recaptem taxes en nom de l’Administració.",
     "legal.terms.clauses.2.paragraphs.0": "Com a consumidor que ha subscrit un contracte a distància, disposeu de 14 dies per desistir-ne sense haver de donar cap motiu (Reial decret legislatiu 1/2007, art. 102). Si ens demaneu que comencem a treballar dins d’aquest termini i completem el servei, el dret de desistiment s’extingeix quan el servei s’ha prestat, i si desistiu a mig procés haureu de pagar la part proporcional de la feina ja feta. No començarem a treballar dins del termini de desistiment sense la vostra sol·licitud expressa.",
     "legal.terms.clauses.3.paragraphs.0": "Heu de proporcionar informació exacta i completa i documents autèntics, revisar tots els documents que us preparem abans de signar-los i assistir personalment a les cites amb els originals. La informació que ens doneu es converteix en una declaració que signeu en nom propi; no podem verificar originals que no hem vist mai.",
@@ -408,7 +413,10 @@
     "portal.request.openEmail": "Obre-ho a la meva aplicació de correu",
     "portal.request.fallback": "Si no s’obre res, copieu l’assumpte i el missatge en un correu electrònic nou.",
     "portal.enrolment.toPlaceholder": "admissions@your-university.edu",
-    "portal.padron.residence.toPlaceholder": "reception@your-residence.com"
+    "portal.padron.residence.toPlaceholder": "reception@your-residence.com",
+    "pricing.page.intro": "Tots els paquets tenen un preu tancat, i el preu que veus és el que pagues. No facturem per hores i cap paquet no inclou taxes públiques.",
+    "legal.terms.clauses.1.heading": "2. Honoraris",
+    "portal.file.paymentTotal": "Total {total}."
   },
   "fr": {
     "common.nav.main": "Principal",
@@ -500,8 +508,8 @@
     "portal.enrolment.programmePlaceholder": "Ex. : BBA International Business",
     "portal.tasa.payment": "Sous <em>Forma de pago</em>, choisissez <strong>{method}</strong>.",
     "home.hero.primaryCta": "Commencer l’inscription sécurisée",
-    "home.hero.note": "Tarifs fixes, IVA incluse, annoncés avant le paiement. Pas de facturation à l’heure.",
-    "home.trust.heading": "Nous accompagnons des étudiants de",
+    "home.hero.note": "Le triage est gratuit et traité le jour même. Les formules sont à prix fixe : le prix affiché est celui que vous payez.",
+    "home.trust.heading": "Conçu pour les étudiants de",
     "home.problems.title": "Quatre points de rupture, et comment nous éliminons chacun d’eux.",
     "home.problems.items.0.problem": "Les créneaux de cita previa disparaissent en quelques secondes",
     "home.problems.items.0.detail": "Les rendez-vous du Padrón et de la Policía Nacional sont publiés de façon irrégulière et pris en quelques minutes par des robots. Les familles qui actualisent un portail en espagnol depuis un autre fuseau horaire en obtiennent rarement un.",
@@ -529,7 +537,7 @@
     "legal.privacy.metaDescription": "Comment BCN Student Concierge collecte, chiffre, conserve et supprime les données à caractère personnel conformément au RGPD et à la LOPDGDD.",
     "legal.privacy.clauses.4.paragraphs.1": "Le formulaire signé, une copie de la pièce d’identité du signataire et le bail que vous envoyez ensuite sont nécessaires à la mairie pour vous inscrire. Nous les conservons chiffrés, comme vos propres documents, ne les utilisons que pour préparer votre dossier Padrón et les supprimons avec le reste de votre dossier 30 jours après la fin de la prestation. Veuillez informer le signataire que vous partagez ces documents avec nous à cette fin.",
     "legal.privacy.clauses.7.paragraphs.0": "En cas de violation susceptible de compromettre vos droits, nous en informons l’AEPD dans un délai de 72 heures et vous en informons directement sans retard injustifié. Nous vous indiquerons précisément quelles données ont été consultées, plutôt que de vous donner de vagues assurances.",
-    "legal.terms.clauses.1.paragraphs.0": "Les tarifs des forfaits sont fixes et indiqués hors IVA ; l’IVA de 21 % et le montant total sont affichés avant le paiement :",
+    "legal.terms.clauses.1.paragraphs.0": "Les tarifs des formules sont fixes et constituent le prix final que vous payez : rien n’est ajouté au moment du paiement. Chaque formule comporte deux tarifs : un pour la voie UE/EEE/Suisse et un pour la voie hors UE, parce qu’il s’agit de quantités de travail différentes. Celui qui s’applique découle de votre nationalité, est confirmé lors du triage avant tout paiement, et repose sur la même dérivation que celle qui décide si vous déposez un EX-18 ou un EX-17 :",
     "validation.required": "Champ obligatoire : {field}",
     "intake.summary.route": "Citoyenneté",
     "intake.summary.routePending": "Le prix dépend de votre nationalité. Il est fixé dès que vous la choisissez à la première étape.",
@@ -560,7 +568,11 @@
     "portal.request.openEmail": "Ouvrir dans mon application de messagerie",
     "portal.request.fallback": "Si rien ne s’ouvre, copiez l’objet et le message dans un nouvel e-mail.",
     "portal.enrolment.toPlaceholder": "admissions@your-university.edu",
-    "portal.padron.residence.toPlaceholder": "reception@your-residence.com"
+    "portal.padron.residence.toPlaceholder": "reception@your-residence.com",
+    "pricing.page.intro": "Chaque formule a un prix fixe, et le prix affiché est celui que vous payez. Rien n’est facturé à l’heure et aucune formule n’inclut les taxes publiques.",
+    "home.trust.disclaimer": "Les universités sont citées pour indiquer à qui s’adresse le service. Nous sommes un service indépendant et ne sommes ni affiliés à, ni approuvés par, ni agissant pour le compte d’aucun établissement mentionné.",
+    "legal.terms.clauses.1.heading": "2. Tarifs",
+    "portal.file.paymentTotal": "Total {total}."
   },
   "it": {
     "common.nav.myFile": "La mia pratica",
@@ -679,7 +691,7 @@
     "portal.tasa.payment": "Alla voce <em>Forma de pago</em>, selezioni <strong>{method}</strong>.",
     "home.hero.body": "Suo figlio o Sua figlia ha ottenuto un posto in un’università di Barcellona. Tra lui o lei e una sistemazione serena c’è una catena di pratiche burocratiche spagnole che non perdona i piccoli errori, e tutto in spagnolo. Ci occupiamo noi di questa catena, correttamente e al primo tentativo.",
     "home.hero.primaryCta": "Inizia la registrazione sicura",
-    "home.trust.heading": "Assistiamo studenti in arrivo presso",
+    "home.trust.heading": "Pensato per gli studenti di",
     "home.problems.title": "Quattro punti critici, e come li eliminiamo uno per uno.",
     "home.problems.items.0.problem": "Gli slot della cita previa spariscono in pochi secondi",
     "home.problems.items.1.problem": "Una casella sbagliata invalida l’intera pratica",
@@ -734,7 +746,13 @@
     "portal.request.openEmail": "Apri nella mia app di posta elettronica",
     "portal.request.fallback": "Se non si apre nulla, copi l’oggetto e il messaggio in una nuova e-mail.",
     "portal.enrolment.toPlaceholder": "admissions@your-university.edu",
-    "portal.padron.residence.toPlaceholder": "reception@your-residence.com"
+    "portal.padron.residence.toPlaceholder": "reception@your-residence.com",
+    "pricing.page.intro": "Ogni pacchetto ha un prezzo fisso, e il prezzo indicato è quello che paghi. Non fatturiamo a ore e nessun pacchetto comprende le tasse pubbliche.",
+    "home.hero.note": "Il triage è gratuito e in giornata. I pacchetti sono a prezzo fisso: il prezzo che vedi è quello che paghi.",
+    "home.trust.disclaimer": "Le università sono citate per indicare a chi è rivolto il servizio. Siamo un servizio indipendente e non siamo affiliati, né approvati, né agiamo per conto di alcun istituto elencato.",
+    "legal.terms.clauses.1.heading": "2. Tariffe",
+    "legal.terms.clauses.1.paragraphs.0": "I compensi dei pacchetti sono fissi e sono il prezzo finale che paghi: al pagamento non si aggiunge nulla. Ogni pacchetto ha due compensi: uno per il percorso UE/SEE/Svizzera e uno per quello extra-UE, perché sono quantità di lavoro diverse. Quale si applichi discende dalla tua nazionalità, viene confermato in fase di triage prima del pagamento ed è la stessa derivazione che decide se presenti un EX-18 o un EX-17:",
+    "portal.file.paymentTotal": "Totale {total}."
   },
   "de": {
     "common.nav.main": "Hauptnavigation",
@@ -828,7 +846,7 @@
     "portal.enrolment.intro": "Ihre Zulassungsbescheinigung reicht nicht aus. Bitten Sie das Zulassungs- oder Studierendensekretariat Ihrer Universität um ein <em>Certificado de matrícula</em>, abgestempelt und unterschrieben. Diese Nachricht fragt genau nach dem, was die Ausländerbehörde prüft:",
     "portal.tasa.payment": "Wählen Sie unter <em>Forma de pago</em> die Option <strong>{method}</strong>.",
     "home.hero.primaryCta": "Sichere Aufnahme starten",
-    "home.trust.heading": "Wir begleiten Studierende an",
+    "home.trust.heading": "Gemacht für Studierende an",
     "home.problems.title": "Vier Fehlerquellen – und wie wir jede einzelne beseitigen.",
     "home.problems.items.1.solution": "Die Formulare werden programmgesteuert aus Ihren verifizierten Daten erstellt, so abgeflacht, dass sich beim Drucken nichts verschiebt, und mit dem Reisepass abgeglichen, bevor die Akte unser Haus verlässt.",
     "home.process.title": "Vier Schritte – von der Aufnahme bis zur Karte in der Hand.",
@@ -877,6 +895,12 @@
     "portal.request.openEmail": "In meiner E-Mail-App öffnen",
     "portal.request.fallback": "Wenn sich nichts öffnet, kopieren Sie Betreff und Nachricht in eine neue E-Mail.",
     "portal.enrolment.toPlaceholder": "admissions@your-university.edu",
-    "portal.padron.residence.toPlaceholder": "reception@your-residence.com"
+    "portal.padron.residence.toPlaceholder": "reception@your-residence.com",
+    "pricing.page.intro": "Jedes Paket hat einen Festpreis, und der angezeigte Preis ist der Preis, den du zahlst. Nichts wird nach Stunden abgerechnet, und kein Paket enthält staatliche Gebühren.",
+    "home.hero.note": "Die Ersteinschätzung ist kostenlos und kommt am selben Tag. Die Pakete haben Festpreise: Der angezeigte Preis ist der Preis, den du zahlst.",
+    "home.trust.disclaimer": "Die Hochschulen werden genannt, um zu zeigen, für wen der Dienst gedacht ist. Wir sind ein unabhängiger Dienst und weder mit einer der genannten Einrichtungen verbunden noch von ihr unterstützt, noch handeln wir in ihrem Auftrag.",
+    "legal.terms.clauses.1.heading": "2. Gebühren",
+    "legal.terms.clauses.1.paragraphs.0": "Die Paketpreise sind fest und sind der Endpreis, den du zahlst: Beim Bezahlen kommt nichts hinzu. Jedes Paket hat zwei Preise: einen für den Weg EU/EWR/Schweiz und einen für den Nicht-EU-Weg, weil es unterschiedlich viel Arbeit ist. Welcher gilt, ergibt sich aus deiner Staatsangehörigkeit, wird vor der Zahlung bei der Ersteinschätzung bestätigt und beruht auf derselben Ableitung, die entscheidet, ob du einen EX-18 oder einen EX-17 einreichst:",
+    "portal.file.paymentTotal": "Gesamtbetrag {total}."
   }
 }

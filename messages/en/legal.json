@@ -125,7 +125,7 @@
     "metaDescription": "Contractual terms for BCN Student Concierge administrative facilitation services.",
     "eyebrow": "Terms",
     "title": "Terms of service",
-    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — <strong>{price}</strong>",
     "clauses": [
       {
         "heading": "1. Nature of the service",
@@ -134,10 +134,10 @@
         ]
       },
       {
-        "heading": "2. Fees and IVA",
+        "heading": "2. Fees",
         "priceListAfter": 0,
         "paragraphs": [
-          "Package fees are fixed and quoted exclusive of IVA, with the 21% and the gross total displayed before payment. Each package has two fees: one for the EU/EEA/Swiss route and one for the non-EU route, because they are different quantities of work. Which applies to you follows from your nationality, is confirmed at triage before you pay, and is the same derivation that decides whether you file an EX-18 or an EX-17:",
+          "Package fees are fixed and are the final price you pay: nothing is added at checkout. Each package has two fees: one for the EU/EEA/Swiss route and one for the non-EU route, because they are different quantities of work. Which applies to you follows from your nationality, is confirmed at triage before you pay, and is the same derivation that decides whether you file an EX-18 or an EX-17:",
           "Government fees — including the Modelo 790 Código 012 state fee and card issuance costs — are set by the Spanish authorities, paid by you directly, and are not included in any package. We never collect fees on the government’s behalf."
         ]
       },
