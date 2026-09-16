@@ -59,7 +59,7 @@
       {
         "heading": "Qui és el responsable del tractament de les dades?",
         "paragraphs": [
-          "BCN Student Concierge (el «responsable del tractament») determina com i per a què es tracten les vostres dades personals. Contacte per a qualsevol qüestió de protecció de dades, inclòs l’exercici dels drets que es detallen a continuació: <mail>privacy@bcnstudent.com</mail>."
+          "{controller} (el «responsable del tractament») determina com i per a què es tracten les vostres dades personals. Contacte per a qualsevol qüestió de protecció de dades, inclòs l’exercici dels drets que es detallen a continuació: <mail>privacy@bcnstudent.com</mail>."
         ]
       },
       {
@@ -115,7 +115,7 @@
       {
         "heading": "Cookies",
         "paragraphs": [
-          "Aquest lloc web no instal·la galetes publicitàries ni d’analítica, ni fa servir seguidors de tercers. Les úniques galetes són les estrictament necessàries: una galeta d’inici de sessió que us manté connectats un màxim de 24 hores, i les galetes que instal·la Stripe per prevenir el frau durant el pagament. No hi ha cap bàner de consentiment perquè no hi ha res a consentir."
+          "This site sets no advertising cookies and runs no third-party trackers. It sets a sign-in cookie that keeps you in your file for up to 24 hours, and Stripe sets cookies for fraud prevention during checkout. Two more first-party cookies are set only if you follow a guide link or download our guide: bcn_src, which records the school link you came through, and bcn_guide, an anonymous download identifier. Each lasts 30 days, contains no name, email or other detail about you, and is used only to count how many guide readers go on to request triage."
         ]
       }
     ]
@@ -125,7 +125,7 @@
     "metaDescription": "Termes i condicions per als serveis de tramitació administrativa de BCN Student Concierge.",
     "eyebrow": "Condicions",
     "title": "Condicions d’ús",
-    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — <strong>{price}</strong>",
     "clauses": [
       {
         "heading": "1. Caràcter del servei",
@@ -134,10 +134,10 @@
         ]
       },
       {
-        "heading": "2. Honoraris i IVA",
+        "heading": "2. Honoraris",
         "priceListAfter": 0,
         "paragraphs": [
-          "Les tarifes dels paquets són tancades i s’indiquen sense IVA, mostrant el 21% i el total brut abans del pagament. Cada paquet té dues tarifes: una per a la via UE/EEE/Suïssa i una altra per a la via de fora de la UE, perquè són quantitats de feina diferents. Quina et correspon es deriva de la teva nacionalitat, es confirma al triatge abans que paguis i és la mateixa derivació que decideix si presentes un EX-18 o un EX-17:",
+          "Les tarifes dels paquets són tancades i són el preu final que pagues: no s’hi afegeix res en pagar. Cada paquet té dues tarifes: una per a la via UE/EEE/Suïssa i una altra per a la via de fora de la UE, perquè són quantitats de feina diferents. Quina et correspon es deriva de la teva nacionalitat, es confirma al triatge abans que paguis i és la mateixa derivació que decideix si presentes un EX-18 o un EX-17:",
           "Les taxes de l’Administració —inclosa la taxa estatal del Modelo 790 Código 012 i les despeses d’expedició de la targeta— les fixen les autoritats espanyoles, les pagueu directament i no s’inclouen en cap paquet. Mai no recaptem taxes en nom de l’Administració."
         ]
       },

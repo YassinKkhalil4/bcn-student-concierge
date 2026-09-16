@@ -18,6 +18,7 @@
     "tagline": "Unabhängige Verwaltungsbegleitung für internationale Studierende in Barcelona. Kostenlose Ersteinschätzung am selben Tag — zuerst.",
     "services": "Dienstleistungen",
     "packages": "Pakete & Preise",
+    "guide": "Free guide (PDF)",
     "intake": "Studierendenportal",
     "process": "Ablauf",
     "legal": "Rechtliches",
@@ -25,7 +26,14 @@
     "privacy": "Datenschutz & DSGVO",
     "scope": "Leistungsumfang",
     "copyright": "© {year} BCN Student Concierge. Barcelona, Spanien.",
-    "triage": "Kostenlose Ersteinschätzung"
+    "triage": "Kostenlose Ersteinschätzung",
+    "provider": {
+      "heading": "Service provider",
+      "legalName": "Legal name",
+      "taxId": "NIF",
+      "registeredAddress": "Registered address",
+      "email": "Email"
+    }
   },
   "disclaimer": {
     "footerLabel": "Leistungsumfang.",

@@ -1,60 +1,46 @@
 import { describe, it, expect } from "vitest";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import {
   TIERS,
   SERVICE_ROUTES,
-  priceWithIva,
-  tierPrice,
   tierPriceCents,
+  hasSinglePrice,
   formatEur,
   getTier,
   routeForForm,
   isServiceRoute,
-  IVA_RATE,
 } from "../src/lib/pricing";
 import { routeForNationality } from "../src/lib/forms/field-map";
 import { buildLineItems } from "../src/lib/server/stripe";
 
-describe("IVA calculation", () => {
-  it("computes 21% on the advertised ex-IVA prices, on both routes", () => {
-    // The six figures published on the pricing page, to the cent.
-    expect(priceWithIva(14_900)).toEqual({ baseCents: 14_900, ivaCents: 3_129, totalCents: 18_029 });
-    expect(priceWithIva(19_900)).toEqual({ baseCents: 19_900, ivaCents: 4_179, totalCents: 24_079 });
-    expect(priceWithIva(32_900)).toEqual({ baseCents: 32_900, ivaCents: 6_909, totalCents: 39_809 });
-    expect(priceWithIva(37_900)).toEqual({ baseCents: 37_900, ivaCents: 7_959, totalCents: 45_859 });
-    expect(priceWithIva(69_900)).toEqual({ baseCents: 69_900, ivaCents: 14_679, totalCents: 84_579 });
-    expect(priceWithIva(79_900)).toEqual({ baseCents: 79_900, ivaCents: 16_779, totalCents: 96_679 });
+describe("tier table", () => {
+  it("matches the advertised final prices exactly, per route", () => {
+    expect(getTier("ready-file")?.priceCents).toEqual({ eu: 30_000, "non-eu": 36_000 });
+    expect(getTier("soft-landing")?.priceCents).toEqual({ eu: 54_000, "non-eu": 60_000 });
+    expect(getTier("fixer")?.priceCents).toEqual({ eu: 96_000, "non-eu": 96_000 });
   });
 
-  it("returns whole cents, never fractional currency", () => {
+  it("stores whole cents, never fractional currency", () => {
     for (const tier of TIERS) {
       for (const route of SERVICE_ROUTES) {
-        const p = tierPrice(tier, route);
-        expect(Number.isInteger(p.ivaCents)).toBe(true);
-        expect(Number.isInteger(p.totalCents)).toBe(true);
-        expect(p.baseCents + p.ivaCents).toBe(p.totalCents);
+        expect(Number.isInteger(tierPriceCents(tier, route)), `${tier.id} ${route}`).toBe(true);
       }
     }
   });
 
-  it("rounds half-up at the cent, matching Stripe's exclusive-tax behaviour", () => {
-    // 1.005 EUR base -> 21.105 cents IVA -> 21
-    expect(priceWithIva(101).ivaCents).toBe(21);
-  });
-});
-
-describe("tier table", () => {
-  it("matches the advertised ex-IVA prices exactly, per route", () => {
-    expect(getTier("ready-file")?.basePriceCents).toEqual({ eu: 14_900, "non-eu": 19_900 });
-    expect(getTier("soft-landing")?.basePriceCents).toEqual({ eu: 32_900, "non-eu": 37_900 });
-    expect(getTier("fixer")?.basePriceCents).toEqual({ eu: 69_900, "non-eu": 79_900 });
-  });
-
-  it("prices the EU route below the non-EU one on every package", () => {
+  it("never charges more for the EU route, and only The Fixer charges one price", () => {
     // The EU route is less work — no fingerprints, no Modelo 790 — and the
     // table must never drift into charging more for it.
     for (const tier of TIERS) {
-      expect(tierPriceCents(tier, "eu"), tier.id).toBeLessThan(tierPriceCents(tier, "non-eu"));
+      expect(tierPriceCents(tier, "eu"), tier.id).toBeLessThanOrEqual(tierPriceCents(tier, "non-eu"));
+      expect(hasSinglePrice(tier), tier.id).toBe(tier.id === "fixer");
     }
+  });
+
+  it("sells The Fixer by waitlist only", () => {
+    expect(TIERS.filter((t) => t.waitlist).map((t) => t.id)).toEqual(["fixer"]);
+    expect(TIERS.filter((t) => t.featured).map((t) => t.id)).toEqual(["soft-landing"]);
   });
 
   it("declares the inheritance chain used by the 'everything in X' copy", () => {
@@ -80,10 +66,12 @@ describe("tier table", () => {
     expect(getTier("constructor")).toBeUndefined();
   });
 
-  it("states what the cards-and-travel tiers include", () => {
-    expect(getTier("ready-file")?.includedCardsCents).toBeUndefined();
-    expect(getTier("soft-landing")?.includedCardsCents).toBe(7_500);
-    expect(getTier("fixer")?.includedCardsCents).toBe(7_500);
+  it("never mentions tax in the package copy: prices are final", () => {
+    // Every language's pricing catalogue, which is all the pricing display renders.
+    for (const locale of ["en", "es", "ca", "fr", "it", "de"]) {
+      const text = readFileSync(path.join(process.cwd(), "messages", locale, "pricing.json"), "utf8");
+      expect(text, locale).not.toMatch(/\b(IVA|VAT|TVA|MwSt|IVA)\b/);
+    }
   });
 });
 
@@ -117,34 +105,25 @@ describe("service route", () => {
 });
 
 describe("Stripe line items", () => {
-  it("states base and IVA as separate lines, as a Spanish invoice requires", () => {
-    const items = buildLineItems(getTier("fixer")!, "non-eu");
-    expect(items).toHaveLength(2);
-    expect(items[0]!.price_data!.unit_amount).toBe(79_900);
-    expect(items[1]!.price_data!.unit_amount).toBe(16_779);
-    expect(items[1]!.price_data!.product_data!.name).toMatch(/IVA/);
+  it("charges the published price as a single line, with nothing added on top", () => {
+    for (const tier of TIERS) {
+      for (const route of SERVICE_ROUTES) {
+        const items = buildLineItems(tier, route);
+        expect(items, `${tier.id} ${route}`).toHaveLength(1);
+        expect(items[0]!.price_data!.unit_amount, `${tier.id} ${route}`).toBe(tierPriceCents(tier, route));
+      }
+    }
   });
 
   it("charges the route's own price, not a single list price", () => {
-    expect(buildLineItems(getTier("fixer")!, "eu")[0]!.price_data!.unit_amount).toBe(69_900);
-    expect(buildLineItems(getTier("fixer")!, "non-eu")[0]!.price_data!.unit_amount).toBe(79_900);
+    expect(buildLineItems(getTier("fixer")!, "eu")[0]!.price_data!.unit_amount).toBe(96_000);
+    expect(buildLineItems(getTier("ready-file")!, "eu")[0]!.price_data!.unit_amount).toBe(30_000);
+    expect(buildLineItems(getTier("ready-file")!, "non-eu")[0]!.price_data!.unit_amount).toBe(36_000);
   });
 
   it("charges in euro", () => {
     for (const item of buildLineItems(getTier("ready-file")!, "eu")) {
       expect(item.price_data!.currency).toBe("eur");
-    }
-  });
-
-  it("sums to the total shown to the customer, on both routes", () => {
-    for (const tier of TIERS) {
-      for (const route of SERVICE_ROUTES) {
-        const total = buildLineItems(tier, route).reduce(
-          (sum, i) => sum + (i.price_data!.unit_amount ?? 0),
-          0,
-        );
-        expect(total, `${tier.id} ${route}`).toBe(tierPrice(tier, route).totalCents);
-      }
     }
   });
 });
@@ -154,11 +133,7 @@ describe("formatting", () => {
     // es-ES puts a narrow no-break space before the symbol; normalise the
     // whole no-break family to a plain space before asserting.
     const plain = (cents: number) => formatEur(cents).replace(/[\u00A0\u202F]/g, " ");
-    expect(plain(14_900)).toBe("149 €");
+    expect(plain(30_000)).toBe("300 €");
     expect(plain(18_029)).toBe("180,29 €");
-  });
-
-  it("uses the statutory Spanish rate", () => {
-    expect(IVA_RATE).toBe(0.21);
   });
 });

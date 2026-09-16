@@ -38,7 +38,7 @@
     "checkoutCancelled": "Il pagamento è stato annullato e non è stato addebitato nulla. Può pagare quando vuole.",
     "paymentTitle": "Pagamento in sospeso",
     "paymentBody": "Inizieremo a lavorare non appena il Suo pagamento sarà confermato.",
-    "paymentTotal": "Totale {total}, IVA inclusa.",
+    "paymentTotal": "Totale {total}.",
     "pay": "Paga {total}",
     "payNow": "Paga ora",
     "passport": "1. Passaporto",

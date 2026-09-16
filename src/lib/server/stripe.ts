@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { getTier, tierPrice, type ServiceRoute, type Tier } from "@/lib/pricing";
+import { getTier, tierPriceCents, type ServiceRoute, type Tier } from "@/lib/pricing";
 import type { BillingDetails } from "./invoices";
 import type { Locale } from "@/lib/db/schema";
 import { localizedPath } from "@/i18n/routing";
@@ -22,40 +22,22 @@ export function stripe(): Stripe {
 }
 
 /**
- * IVA is charged as an explicit, separately-stated line item rather than being
- * folded into the unit price. A Spanish invoice must show the taxable base and
- * the cuota separately, so the customer sees the same breakdown Stripe records.
- *
- * The alternative — Stripe Tax with `tax_behavior: "exclusive"` — is the better
- * long-term choice once the business registers for OSS/VIES, because it handles
- * reverse-charge for EU-resident payers. Until then, a flat 21% is correct for
- * a service supplied and consumed in Spain.
+ * One line item at the package's published price. The figure on the pricing
+ * page is the figure charged: nothing is added on top at checkout.
  */
 export function buildLineItems(
   tier: Tier,
   route: ServiceRoute,
 ): Stripe.Checkout.SessionCreateParams.LineItem[] {
-  const { baseCents, ivaCents } = tierPrice(tier, route);
   return [
     {
       quantity: 1,
       price_data: {
         currency: "eur",
-        unit_amount: baseCents,
+        unit_amount: tierPriceCents(tier, route),
         product_data: {
           name: tier.name,
           description: tier.tagline,
-        },
-      },
-    },
-    {
-      quantity: 1,
-      price_data: {
-        currency: "eur",
-        unit_amount: ivaCents,
-        product_data: {
-          name: "IVA (21%)",
-          description: `Statutory Spanish VAT on ${tier.name}`,
         },
       },
     },

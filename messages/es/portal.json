@@ -38,7 +38,7 @@
     "checkoutCancelled": "El pago se ha cancelado y no se ha cobrado nada. Puede pagar cuando esté listo.",
     "paymentTitle": "Pago pendiente",
     "paymentBody": "Comenzamos a trabajar tan pronto como se confirme su pago.",
-    "paymentTotal": "Total {total}, IVA incluido.",
+    "paymentTotal": "Total {total}.",
     "pay": "Pagar {total}",
     "payNow": "Pagar ahora",
     "passport": "1. Pasaporte",

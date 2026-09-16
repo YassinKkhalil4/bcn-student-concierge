@@ -38,7 +38,7 @@
     "checkoutCancelled": "Payment was cancelled, and nothing was charged. You can pay whenever you are ready.",
     "paymentTitle": "Payment outstanding",
     "paymentBody": "We start work as soon as your payment is confirmed.",
-    "paymentTotal": "Total {total}, IVA included.",
+    "paymentTotal": "Total {total}.",
     "pay": "Pay {total}",
     "payNow": "Pay now",
     "passport": "1. Passport",

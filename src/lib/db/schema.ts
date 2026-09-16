@@ -13,6 +13,7 @@ import {
   type AnyPgColumn,
 } from "drizzle-orm/pg-core";
 import type { EncryptedPayload } from "../crypto";
+import { GUIDE_SOURCES } from "../attribution";
 
 /**
  * Postgres schema for case metadata.
@@ -131,6 +132,10 @@ export const cases = pgTable(
     portalLoginAt: tstz("portal_login_at"),
     /** The student pressed "Submit for review": all their documents are in. */
     documentsSubmittedAt: tstz("documents_submitted_at"),
+    /** Guide link the student arrived through (?s=), if any. See lib/attribution.ts. */
+    source: text("source", { enum: GUIDE_SOURCES }),
+    /** Anonymous guide-download id, when they downloaded the guide first. */
+    guideVisitorId: text("guide_visitor_id"),
   },
   (t) => [
     index("cases_created_at_idx").on(t.createdAt),
@@ -155,6 +160,8 @@ export const cases = pgTable(
     ),
     check("cases_locale_check", sql`${t.locale} IN (${inList(LOCALES)})`),
     check("cases_ref_format", sql`${t.ref} ~ '^BCN-[0-9]{5}$'`),
+    check("cases_source_check", sql`${t.source} IS NULL OR ${t.source} IN (${inList(GUIDE_SOURCES)})`),
+    index("cases_guide_visitor_idx").on(t.guideVisitorId),
   ],
 );
 
@@ -382,6 +389,10 @@ export const triageEnquiries = pgTable(
     answeredAt: tstz("answered_at"),
     /** Set by the purge; an answered enquiry keeps only non-personal columns. */
     purgedAt: tstz("purged_at"),
+    /** Guide link the student arrived through (?s=), if any. See lib/attribution.ts. */
+    source: text("source", { enum: GUIDE_SOURCES }),
+    /** Anonymous guide-download id, when they downloaded the guide first. */
+    guideVisitorId: text("guide_visitor_id"),
   },
   (t) => [
     index("triage_created_at_idx").on(t.createdAt),
@@ -394,6 +405,8 @@ export const triageEnquiries = pgTable(
     check("triage_form_id_check", sql`${t.formId} IN (${inList(FORM_IDS)})`),
     check("triage_locale_check", sql`${t.locale} IN (${inList(LOCALES)})`),
     check("triage_ref_format", sql`${t.ref} ~ '^TRI-[0-9]{5}$'`),
+    check("triage_source_check", sql`${t.source} IS NULL OR ${t.source} IN (${inList(GUIDE_SOURCES)})`),
+    index("triage_guide_visitor_idx").on(t.guideVisitorId),
     check("triage_arrived_on_format", sql`${t.arrivedOn} ~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'`),
     check(
       "triage_deadline_on_format",
@@ -439,9 +452,35 @@ export const triageDocuments = pgTable(
   ],
 );
 
+/**
+ * One row per download of the guide PDF (/downloads/landing-in-barcelona.pdf).
+ *
+ * No personal data: no IP, no user agent — an anonymous id set in the
+ * downloader's browser, and the school link they came through. Triage
+ * enquiries and cases carry the same id, which is what turns download counts
+ * into a conversion rate per source.
+ */
+export const guideDownloads = pgTable(
+  "guide_downloads",
+  {
+    id: text("id").primaryKey(),
+    visitorId: text("visitor_id").notNull(),
+    source: text("source", { enum: GUIDE_SOURCES }),
+    locale: text("locale", { enum: LOCALES }),
+    downloadedAt: tstz("downloaded_at").notNull().defaultNow(),
+  },
+  (t) => [
+    index("guide_downloads_visitor_idx").on(t.visitorId),
+    index("guide_downloads_downloaded_at_idx").on(t.downloadedAt),
+    check("guide_downloads_source_check", sql`${t.source} IS NULL OR ${t.source} IN (${inList(GUIDE_SOURCES)})`),
+    check("guide_downloads_locale_check", sql`${t.locale} IS NULL OR ${t.locale} IN (${inList(LOCALES)})`),
+  ],
+);
+
 export type CaseRow = typeof cases.$inferSelect;
 export type DocumentRow = typeof caseDocuments.$inferSelect;
 export type InvoiceRow = typeof invoices.$inferSelect;
 export type AppointmentRow = typeof appointments.$inferSelect;
 export type TriageRow = typeof triageEnquiries.$inferSelect;
 export type TriageDocumentRow = typeof triageDocuments.$inferSelect;
+export type GuideDownloadRow = typeof guideDownloads.$inferSelect;

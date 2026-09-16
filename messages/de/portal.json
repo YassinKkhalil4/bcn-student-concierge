@@ -38,7 +38,7 @@
     "checkoutCancelled": "Die Zahlung wurde abgebrochen, es wurde nichts berechnet. Sie können jederzeit bezahlen.",
     "paymentTitle": "Ausstehende Zahlung",
     "paymentBody": "Wir beginnen mit der Bearbeitung, sobald Ihre Zahlung bestätigt ist.",
-    "paymentTotal": "Gesamtbetrag {total}, inkl. IVA.",
+    "paymentTotal": "Gesamtbetrag {total}.",
     "pay": "{total} bezahlen",
     "payNow": "Jetzt bezahlen",
     "passport": "1. Reisepass",

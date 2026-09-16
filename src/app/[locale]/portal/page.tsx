@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { requirePortalCaseId } from "@/lib/portal/guard";
 import { getCase } from "@/lib/server/storage";
-import { getTier, tierPrice, routeForForm, formatEur } from "@/lib/pricing";
+import { getTier, tierPriceCents, routeForForm, formatEur } from "@/lib/pricing";
 import { DocumentUpload } from "@/components/intake/DocumentUpload";
 import { PadronWizard } from "@/components/portal/PadronWizard";
 import { titleCase } from "@/lib/request-templates";
@@ -69,7 +69,7 @@ export default async function PortalPage({
 
   const tp = await getTranslations("pricing");
   const tier = getTier(record.tierId);
-  const price = tier ? tierPrice(tier, routeForForm(record.formId)) : null;
+  const price = tier ? tierPriceCents(tier, routeForForm(record.formId)) : null;
   const paid = record.paymentStatus === "paid";
   const uploadedKinds = [...new Set(record.documents.map((d) => d.kind))];
   // Only what the wizards need to fill templates: the student's own data,
@@ -113,10 +113,10 @@ export default async function PortalPage({
               <h2 className="font-display text-xl font-semibold text-ink">{t("paymentTitle")}</h2>
               <p className="mt-2 text-sm text-ink-muted">
                 {t("paymentBody")}
-                {price && <> {t("paymentTotal", { total: formatEur(price.totalCents) })}</>}
+                {price && <> {t("paymentTotal", { total: formatEur(price) })}</>}
               </p>
               <div className="mt-5">
-                <PayButton label={price ? t("pay", { total: formatEur(price.totalCents) }) : t("payNow")} />
+                <PayButton label={price ? t("pay", { total: formatEur(price) }) : t("payNow")} />
               </div>
             </section>
           )}

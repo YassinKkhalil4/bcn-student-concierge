@@ -59,7 +59,7 @@
       {
         "heading": "Chi è responsabile del trattamento dei Suoi dati",
         "paragraphs": [
-          "BCN Student Concierge (il «titolare del trattamento») determina le modalità e le finalità del trattamento dei Suoi dati personali. Referente per tutte le questioni relative alla protezione dei dati, compreso l’esercizio dei diritti di seguito indicati: <mail>privacy@bcnstudent.com</mail>."
+          "{controller} (il «titolare del trattamento») determina le modalità e le finalità del trattamento dei Suoi dati personali. Referente per tutte le questioni relative alla protezione dei dati, compreso l’esercizio dei diritti di seguito indicati: <mail>privacy@bcnstudent.com</mail>."
         ]
       },
       {
@@ -115,7 +115,7 @@
       {
         "heading": "Cookie",
         "paragraphs": [
-          "Questo sito non imposta cookie pubblicitari o di analisi e non utilizza tracker di terze parti. Gli unici cookie presenti sono quelli strettamente necessari: un cookie di accesso che mantiene l’utente connesso per un massimo di 24 ore e i cookie impostati da Stripe per la prevenzione delle frodi durante il checkout. Non è presente alcun banner di consenso poiché non vi è nulla a cui prestare consenso."
+          "This site sets no advertising cookies and runs no third-party trackers. It sets a sign-in cookie that keeps you in your file for up to 24 hours, and Stripe sets cookies for fraud prevention during checkout. Two more first-party cookies are set only if you follow a guide link or download our guide: bcn_src, which records the school link you came through, and bcn_guide, an anonymous download identifier. Each lasts 30 days, contains no name, email or other detail about you, and is used only to count how many guide readers go on to request triage."
         ]
       }
     ]
@@ -125,7 +125,7 @@
     "metaDescription": "Condizioni contrattuali relative ai servizi di assistenza amministrativa offerti da BCN Student Concierge.",
     "eyebrow": "Condizioni",
     "title": "Condizioni di servizio",
-    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — <strong>{price}</strong>",
     "clauses": [
       {
         "heading": "1. Natura del servizio",
@@ -134,10 +134,10 @@
         ]
       },
       {
-        "heading": "2. Tariffe e IVA",
+        "heading": "2. Tariffe",
         "priceListAfter": 0,
         "paragraphs": [
-          "I compensi dei pacchetti sono fissi e indicati al netto dell’IVA, con il 21% e il totale lordo mostrati prima del pagamento. Ogni pacchetto ha due compensi: uno per il percorso UE/SEE/Svizzera e uno per quello extra-UE, perché sono quantità di lavoro diverse. Quale si applichi discende dalla tua nazionalità, viene confermato in fase di triage prima del pagamento ed è la stessa derivazione che decide se presenti un EX-18 o un EX-17:",
+          "I compensi dei pacchetti sono fissi e sono il prezzo finale che paghi: al pagamento non si aggiunge nulla. Ogni pacchetto ha due compensi: uno per il percorso UE/SEE/Svizzera e uno per quello extra-UE, perché sono quantità di lavoro diverse. Quale si applichi discende dalla tua nazionalità, viene confermato in fase di triage prima del pagamento ed è la stessa derivazione che decide se presenti un EX-18 o un EX-17:",
           "Le tasse amministrative — comprese la tassa statale Modelo 790 Código 012 e i costi di emissione delle carte — sono stabilite dalle autorità spagnole, pagate direttamente da Lei e non sono incluse in alcun pacchetto. Non riscuotiamo mai tasse per conto dello Stato."
         ]
       },

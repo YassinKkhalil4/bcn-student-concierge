@@ -18,6 +18,7 @@
     "tagline": "Independent administrative facilitation for international students in Barcelona. Free same-day triage before anything else.",
     "services": "Services",
     "packages": "Packages & pricing",
+    "guide": "Free guide (PDF)",
     "intake": "Student portal",
     "process": "Process",
     "legal": "Legal",
@@ -25,7 +26,14 @@
     "privacy": "Privacy & GDPR",
     "scope": "Scope of service",
     "copyright": "© {year} BCN Student Concierge. Barcelona, Spain.",
-    "triage": "Free triage"
+    "triage": "Free triage",
+    "provider": {
+      "heading": "Service provider",
+      "legalName": "Legal name",
+      "taxId": "NIF",
+      "registeredAddress": "Registered address",
+      "email": "Email"
+    }
   },
   "disclaimer": {
     "footerLabel": "Scope of service.",

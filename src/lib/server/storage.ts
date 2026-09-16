@@ -1,6 +1,7 @@
 import { and, asc, eq, isNull, lte, sql } from "drizzle-orm";
 import { encryptDocument, decryptDocument, generateToken } from "@/lib/crypto";
 import type { EncryptedPayload } from "@/lib/crypto";
+import type { Attribution } from "@/lib/attribution";
 import type { IntakeData } from "@/lib/schema";
 import { selectForm, type FormId } from "@/lib/forms/field-map";
 import { getDb } from "@/lib/db/client";
@@ -121,7 +122,7 @@ function toRecord(row: CaseRow, docs: DocumentRow[]): CaseRecord {
 
 export async function createCase(
   intake: IntakeData,
-  options: { locale?: Locale } = {},
+  options: { locale?: Locale; attribution?: Attribution } = {},
 ): Promise<CaseRecord> {
   const db = await getDb();
   // The id is part of the AAD, so it must exist before the intake is sealed.
@@ -133,6 +134,8 @@ export async function createCase(
     locale: options.locale ?? "en",
     emailIndex: emailIndexFor(intake.contact.email),
     intakeEnvelope: sealIntake(id, intake),
+    source: options.attribution?.source ?? null,
+    guideVisitorId: options.attribution?.guideVisitorId ?? null,
   } as const;
 
   // The human reference is random, so it can collide with an existing one;

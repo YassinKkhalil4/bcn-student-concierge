@@ -7,11 +7,11 @@
     "body": "Non-EU students normally have one month from entry to apply for the TIE. If you arrived in the first week of September, that window closes in early October — and the appointment is the part nobody can rush. We build the file so that when a slot opens, nothing on it sends you home again.",
     "primaryCta": "Get free triage",
     "secondaryCta": "See the packages",
-    "note": "Triage is free and same-day. Packages are fixed-fee, quoted with IVA before you pay."
+    "note": "Triage is free and same-day. Packages are fixed-fee: the price you see is the price you pay."
   },
   "trust": {
-    "heading": "Students we work with study at",
-    "disclaimer": "Universities named are those our clients attend. We are an independent service and are not affiliated with, endorsed by, or acting on behalf of any institution listed."
+    "heading": "Built for students at",
+    "disclaimer": "We are an independent service and are not affiliated with, endorsed by, or acting on behalf of any institution listed."
   },
   "problems": {
     "eyebrow": "What actually goes wrong",
@@ -64,7 +64,7 @@
   },
   "pricing": {
     "eyebrow": "Transparent pricing",
-    "title": "Three packages. Two prices each, because two routes.",
+    "title": "Three packages. Priced by route, because the routes are different work.",
     "body": "The EU route is less work and costs less: no fingerprints, no €16.08 tasa. We confirm which one applies to you at triage, before you pay anything. Government fees are paid by you, directly, and are never included in our fee.",
     "cta": "See full comparison"
   },

@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { TIERS, tierPrice, formatEur, SERVICE_ROUTES, type ServiceRoute } from "@/lib/pricing";
+import { TIERS, tierPriceCents, formatEur, SERVICE_ROUTES, type ServiceRoute } from "@/lib/pricing";
+import { controllerName } from "@/lib/provider";
 import { Clause } from "./LegalPage";
 
 type LegalDoc = "scope" | "privacy" | "terms";
@@ -40,24 +41,23 @@ export function LegalClauses({ doc }: { doc: LegalDoc }) {
     "non-eu": tc("routeNonEu"),
   };
   const clauses = t.raw("clauses") as ClauseData[];
+  // The privacy notice names the legal entity as controller once it is known.
+  const controller = controllerName(useTranslations("common")("brand"));
 
   return clauses.map((clause, i) => (
     <Clause key={clause.heading} heading={clause.heading}>
       {clause.paragraphs.map((_, j) => (
         <FragmentWithList key={j} showList={clause.priceListAfter === j}>
-          <p>{t.rich(`clauses.${i}.paragraphs.${j}`, TAGS)}</p>
+          <p>{t.rich(`clauses.${i}.paragraphs.${j}`, { ...TAGS, controller })}</p>
           <ul className="ml-5 list-disc space-y-1.5">
             {TIERS.flatMap((tier) =>
               SERVICE_ROUTES.map((route) => {
-                const p = tierPrice(tier, route);
                 return (
                   <li key={`${tier.id}:${route}`}>
                     {t.rich("priceLine", {
                       name: tp(`${tier.id}.name`),
                       route: routeLabel[route],
-                      base: formatEur(p.baseCents),
-                      iva: formatEur(p.ivaCents),
-                      total: formatEur(p.totalCents),
+                      price: formatEur(tierPriceCents(tier, route)),
                       strong: (chunks) => <span className="font-medium text-ink">{chunks}</span>,
                     })}
                   </li>

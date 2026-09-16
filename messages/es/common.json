@@ -18,6 +18,7 @@
     "tagline": "Acompañamiento administrativo independiente para estudiantes internacionales en Barcelona. Triaje gratuito el mismo día, antes que nada.",
     "services": "Servicios",
     "packages": "Paquetes y precios",
+    "guide": "Free guide (PDF)",
     "intake": "Portal del estudiante",
     "process": "Proceso",
     "legal": "Aviso legal",
@@ -25,7 +26,14 @@
     "privacy": "Privacidad y RGPD",
     "scope": "Alcance del servicio",
     "copyright": "© {year} BCN Student Concierge. Barcelona, España.",
-    "triage": "Triaje gratuito"
+    "triage": "Triaje gratuito",
+    "provider": {
+      "heading": "Service provider",
+      "legalName": "Legal name",
+      "taxId": "NIF",
+      "registeredAddress": "Registered address",
+      "email": "Email"
+    }
   },
   "disclaimer": {
     "footerLabel": "Alcance del servicio.",

@@ -18,6 +18,7 @@
     "tagline": "Acompanyament administratiu independent per a estudiants internacionals a Barcelona. Triatge gratuït el mateix dia, abans que res.",
     "services": "Serveis",
     "packages": "Paquets i preus",
+    "guide": "Free guide (PDF)",
     "intake": "Portal de l’estudiant",
     "process": "Procés",
     "legal": "Legal",
@@ -25,7 +26,14 @@
     "privacy": "Privacitat i RGPD",
     "scope": "Abast del servei",
     "copyright": "© {year} BCN Student Concierge. Barcelona, Espanya.",
-    "triage": "Triatge gratuït"
+    "triage": "Triatge gratuït",
+    "provider": {
+      "heading": "Service provider",
+      "legalName": "Legal name",
+      "taxId": "NIF",
+      "registeredAddress": "Registered address",
+      "email": "Email"
+    }
   },
   "disclaimer": {
     "footerLabel": "Abast del servei.",

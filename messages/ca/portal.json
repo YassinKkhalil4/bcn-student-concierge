@@ -38,7 +38,7 @@
     "checkoutCancelled": "El pagament s’ha cancel·lat i no s’ha cobrat res. Podeu pagar quan vulgueu.",
     "paymentTitle": "Pagament pendent",
     "paymentBody": "Comencem a treballar tan bon punt es confirma el pagament.",
-    "paymentTotal": "Total {total}, inclòs l’IVA.",
+    "paymentTotal": "Total {total}.",
     "pay": "Paga {total}",
     "payNow": "Paga ara",
     "passport": "1. Passaport",

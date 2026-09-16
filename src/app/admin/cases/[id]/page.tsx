@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/admin/guard";
 import { getCase, type StoredDocument } from "@/lib/server/storage";
 import type { DocumentKind, Locale } from "@/lib/db/schema";
-import { getTier, tierPrice, routeForForm, formatEur } from "@/lib/pricing";
+import { getTier, tierPriceCents, routeForForm, formatEur } from "@/lib/pricing";
 import { buildTasa012 } from "@/lib/tasa012";
 import { countryDisplayName, spanishFormName } from "@/lib/countries";
 import { listInvoicesForCase } from "@/lib/server/invoices";
@@ -63,7 +63,7 @@ export default async function CasePage({
   const appointmentRows = await listAppointments(c.id);
 
   const tier = getTier(c.tierId);
-  const price = tier ? tierPrice(tier, routeForForm(c.formId)) : null;
+  const price = tier ? tierPriceCents(tier, routeForForm(c.formId)) : null;
   const i = c.intake;
   const name = i
     ? `${[i.identity.firstSurname, i.identity.secondSurname].filter(Boolean).join(" ")}, ${i.identity.givenName}`
@@ -211,7 +211,7 @@ export default async function CasePage({
               <Fields
                 rows={[
                   ["Package", tier?.name.replace(/^The /, "") ?? c.tierId],
-                  ["Total", price ? `${formatEur(price.totalCents)} (incl. IVA)` : ""],
+                  ["Total", price ? formatEur(price) : ""],
                   ["Status", <PaymentBadge key="s" status={c.paymentStatus} />],
                   ["Stripe", c.stripePaymentIntentId
                     ? <a key="st" href={`https://dashboard.stripe.com/payments/${c.stripePaymentIntentId}`} target="_blank" rel="noopener noreferrer" className="hover:underline">View payment ↗</a>
