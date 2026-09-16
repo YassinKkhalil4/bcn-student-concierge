@@ -125,7 +125,7 @@
     "metaDescription": "Conditions contractuelles relatives aux services d’assistance administrative proposés par BCN Student Concierge.",
     "eyebrow": "Conditions générales",
     "title": "Conditions générales d’utilisation",
-    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — <strong>{price}</strong>",
     "clauses": [
       {
         "heading": "1. Nature du service",
@@ -134,10 +134,10 @@
         ]
       },
       {
-        "heading": "2. Tarifs et IVA",
+        "heading": "2. Tarifs",
         "priceListAfter": 0,
         "paragraphs": [
-          "Les tarifs des formules sont fixes et indiqués hors IVA, avec les 21% et le total brut affichés avant le paiement. Chaque formule comporte deux tarifs : un pour la voie UE/EEE/Suisse et un pour la voie hors UE, parce qu’il s’agit de quantités de travail différentes. Celui qui s’applique découle de votre nationalité, est confirmé lors du triage avant tout paiement, et repose sur la même dérivation que celle qui décide si vous déposez un EX-18 ou un EX-17 :",
+          "Les tarifs des formules sont fixes et constituent le prix final que vous payez : rien n’est ajouté au moment du paiement. Chaque formule comporte deux tarifs : un pour la voie UE/EEE/Suisse et un pour la voie hors UE, parce qu’il s’agit de quantités de travail différentes. Celui qui s’applique découle de votre nationalité, est confirmé lors du triage avant tout paiement, et repose sur la même dérivation que celle qui décide si vous déposez un EX-18 ou un EX-17 :",
           "Les frais administratifs — y compris la redevance d’État « Modelo 790 Código 012 » et les frais de délivrance des cartes — sont fixés par les autorités espagnoles, à votre charge directement, et ne sont inclus dans aucun forfait. Nous ne percevons jamais de frais pour le compte de l’État."
         ]
       },

@@ -38,7 +38,7 @@
     "checkoutCancelled": "Le paiement a été annulé et aucun montant n’a été prélevé. Vous pouvez payer dès que vous le souhaitez.",
     "paymentTitle": "Paiement en attente",
     "paymentBody": "Nous commençons à travailler dès que votre paiement est confirmé.",
-    "paymentTotal": "Total {total}, IVA comprise.",
+    "paymentTotal": "Total {total}.",
     "pay": "Payer {total}",
     "payNow": "Payer maintenant",
     "passport": "1. Passeport",

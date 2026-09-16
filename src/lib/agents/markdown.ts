@@ -1,6 +1,6 @@
 import { translatorFor, type ServerTranslator } from "@/i18n/messages";
 import { localizedPath } from "@/i18n/routing";
-import { IVA_RATE, TIERS, formatEur, tierPrice, SERVICE_ROUTES } from "@/lib/pricing";
+import { TIERS, formatEur, tierPriceCents, SERVICE_ROUTES } from "@/lib/pricing";
 import { siteOrigin, type PublicPage } from "./pages";
 
 /**
@@ -50,13 +50,10 @@ const lines = (...parts: Section[]): string =>
 function priceList(template: string, tp: ServerTranslator, locale: string): string[] {
   return TIERS.flatMap((tier) =>
     SERVICE_ROUTES.map((route) => {
-      const p = tierPrice(tier, route);
       const values: Record<string, string> = {
         name: tp(`tiers.${tier.id}.name`),
         route: tp(route === "eu" ? "card.routeEu" : "card.routeNonEu"),
-        base: formatEur(p.baseCents),
-        iva: formatEur(p.ivaCents),
-        total: formatEur(p.totalCents),
+        price: formatEur(tierPriceCents(tier, route)),
       };
       return `- ${inline(template.replace(/\{(\w+)\}/g, (m, key: string) => values[key] ?? m), locale)}`;
     }),
@@ -81,7 +78,7 @@ async function homeDoc(locale: string): Promise<string> {
     `## ${t("pricing.title")}`,
     TIERS.map((tier) => {
       const prices = SERVICE_ROUTES.map(
-        (route) => `${tp(route === "eu" ? "card.routeEu" : "card.routeNonEu")} ${formatEur(tierPrice(tier, route).totalCents)}`,
+        (route) => `${tp(route === "eu" ? "card.routeEu" : "card.routeNonEu")} ${formatEur(tierPriceCents(tier, route))}`,
       ).join(" · ");
       return `- **${tp(`tiers.${tier.id}.name`)}** — ${prices}. ${tp(`tiers.${tier.id}.tagline`)}`;
     }),
@@ -115,7 +112,7 @@ async function pricingDoc(locale: string): Promise<string> {
 
   return lines(
     `# ${t("page.title")}`,
-    t("page.intro", { rate: String(Math.round(IVA_RATE * 100)) }),
+    t("page.intro"),
     TIERS.flatMap((tier) => {
       const features = t.raw(`tiers.${tier.id}.features`) as string[];
       return [
@@ -124,11 +121,8 @@ async function pricingDoc(locale: string): Promise<string> {
         // One line per route: an agent quoting a single figure for this
         // package would be quoting half the readers the wrong price.
         SERVICE_ROUTES.map((route) => {
-          const p = tierPrice(tier, route);
           const label = t(route === "eu" ? "card.routeEu" : "card.routeNonEu");
-          return `- **${label}** — ${formatEur(p.baseCents)} + ${formatEur(p.ivaCents)} IVA (${Math.round(
-            IVA_RATE * 100,
-          )}%) = **${formatEur(p.totalCents)}**`;
+          return `- **${label}** — **${formatEur(tierPriceCents(tier, route))}**`;
         }).join("\n"),
         `**${t("card.bestFor")}** ${t(`tiers.${tier.id}.bestFor`)}`,
         features.map((f) => `- ${f}`).join("\n"),

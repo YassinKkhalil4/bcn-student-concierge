@@ -125,7 +125,7 @@
     "metaDescription": "Condizioni contrattuali relative ai servizi di assistenza amministrativa offerti da BCN Student Concierge.",
     "eyebrow": "Condizioni",
     "title": "Condizioni di servizio",
-    "priceLine": "{name}, {route} — {base} + {iva} IVA = <strong>{total}</strong>",
+    "priceLine": "{name}, {route} — <strong>{price}</strong>",
     "clauses": [
       {
         "heading": "1. Natura del servizio",
@@ -134,10 +134,10 @@
         ]
       },
       {
-        "heading": "2. Tariffe e IVA",
+        "heading": "2. Tariffe",
         "priceListAfter": 0,
         "paragraphs": [
-          "I compensi dei pacchetti sono fissi e indicati al netto dell’IVA, con il 21% e il totale lordo mostrati prima del pagamento. Ogni pacchetto ha due compensi: uno per il percorso UE/SEE/Svizzera e uno per quello extra-UE, perché sono quantità di lavoro diverse. Quale si applichi discende dalla tua nazionalità, viene confermato in fase di triage prima del pagamento ed è la stessa derivazione che decide se presenti un EX-18 o un EX-17:",
+          "I compensi dei pacchetti sono fissi e sono il prezzo finale che paghi: al pagamento non si aggiunge nulla. Ogni pacchetto ha due compensi: uno per il percorso UE/SEE/Svizzera e uno per quello extra-UE, perché sono quantità di lavoro diverse. Quale si applichi discende dalla tua nazionalità, viene confermato in fase di triage prima del pagamento ed è la stessa derivazione che decide se presenti un EX-18 o un EX-17:",
           "Le tasse amministrative — comprese la tassa statale Modelo 790 Código 012 e i costi di emissione delle carte — sono stabilite dalle autorità spagnole, pagate direttamente da Lei e non sono incluse in alcun pacchetto. Non riscuotiamo mai tasse per conto dello Stato."
         ]
       },

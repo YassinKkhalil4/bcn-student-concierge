@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { formatEur, tierPrice, SERVICE_ROUTES, type ServiceRoute, type Tier } from "@/lib/pricing";
+import { formatEur, tierPriceCents, SERVICE_ROUTES, type ServiceRoute, type Tier } from "@/lib/pricing";
 
 /**
  * A package, priced on both routes.
@@ -33,25 +33,13 @@ export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: b
       <h3 className="font-display text-xl font-semibold text-ink">{t(`tiers.${tier.id}.name`)}</h3>
       <p className="mt-2 text-sm leading-relaxed text-ink-muted">{t(`tiers.${tier.id}.tagline`)}</p>
 
-      {/*
-        Two prices, one per route. Quoting only the ex-IVA figure is the standard
-        way this category surprises people at checkout, so each row carries the
-        gross total as well — that is what actually leaves the card.
-      */}
       <dl className="mt-6 divide-y divide-bone-line border-y border-bone-line">
-        {SERVICE_ROUTES.map((route) => {
-          const { baseCents, totalCents } = tierPrice(tier, route);
-          return (
-            <div key={route} className="flex items-baseline justify-between gap-3 py-4">
-              <dt className="text-xs font-medium uppercase tracking-wider text-ink-soft">{routeLabel[route]}</dt>
-              <dd className="text-right">
-                <span className="font-display text-2xl font-semibold text-ink">{formatEur(baseCents)}</span>
-                <span className="ml-1 text-xs text-ink-soft">{t("card.plusIva")}</span>
-                <span className="block text-xs text-ink-soft">{t("card.totalLine", { total: formatEur(totalCents) })}</span>
-              </dd>
-            </div>
-          );
-        })}
+        {SERVICE_ROUTES.map((route) => (
+          <div key={route} className="flex items-baseline justify-between gap-3 py-4">
+            <dt className="text-xs font-medium uppercase tracking-wider text-ink-soft">{routeLabel[route]}</dt>
+            <dd className="font-display text-2xl font-semibold text-ink">{formatEur(tierPriceCents(tier, route))}</dd>
+          </div>
+        ))}
       </dl>
 
       {tier.includedCardsCents !== undefined && (

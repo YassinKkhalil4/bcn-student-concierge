@@ -9,7 +9,7 @@ import {
   addressSchema,
   contactSchema,
 } from "@/lib/schema";
-import { TIERS, getTier, tierPrice, formatEur, SERVICE_ROUTES, type ServiceRoute } from "@/lib/pricing";
+import { TIERS, getTier, tierPriceCents, formatEur, SERVICE_ROUTES, type ServiceRoute } from "@/lib/pricing";
 import { routeForNationality } from "@/lib/forms/field-map";
 import { DocumentUpload } from "./DocumentUpload";
 import { PadronWizard } from "@/components/portal/PadronWizard";
@@ -98,7 +98,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
     const n = values.nationality?.trim();
     return n ? routeForNationality(n) : null;
   }, [values.nationality]);
-  const price = useMemo(() => (route ? tierPrice(tier, route) : null), [tier, route]);
+  const price = useMemo(() => (route ? tierPriceCents(tier, route) : null), [tier, route]);
 
   const set = (key: string) => (value: string) => {
     setValues((v) => ({ ...v, [key]: value }));
@@ -349,7 +349,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
 
               {/* Reachable only after the case is created, so the nationality —
                   and therefore the route and its price — is always known here. */}
-              {price && (
+              {price !== null && (
                 <>
                   <button
                     type="button"
@@ -359,7 +359,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                   >
                     {busy
                       ? t("wizard.openingCheckout")
-                      : t("wizard.pay", { total: formatEur(price.totalCents) })}
+                      : t("wizard.pay", { total: formatEur(price) })}
                   </button>
                   <p className="mt-3 text-center text-xs text-ink-soft">{t("wizard.stripeNote")}</p>
                 </>
@@ -401,23 +401,15 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
             {tprice(`tiers.${tier.id}.name`)}
           </h2>
 
-          {price && route ? (
+          {price !== null && route ? (
             <dl className="mt-5 space-y-2 border-y border-bone-line py-4 text-sm">
               <div className="flex justify-between">
                 <dt className="text-ink-muted">{t("summary.route")}</dt>
                 <dd className="text-ink">{tprice(route === "eu" ? "card.routeEu" : "card.routeNonEu")}</dd>
               </div>
-              <div className="flex justify-between">
-                <dt className="text-ink-muted">{t("summary.serviceFee")}</dt>
-                <dd className="text-ink">{formatEur(price.baseCents)}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-ink-muted">{t("summary.iva")}</dt>
-                <dd className="text-ink">{formatEur(price.ivaCents)}</dd>
-              </div>
               <div className="flex justify-between pt-1 font-semibold">
                 <dt className="text-ink">{t("summary.total")}</dt>
-                <dd className="text-ink">{formatEur(price.totalCents)}</dd>
+                <dd className="text-ink">{formatEur(price)}</dd>
               </div>
             </dl>
           ) : (
@@ -428,7 +420,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                     <dt className="text-ink-muted">
                       {tprice(r === "eu" ? "card.routeEu" : "card.routeNonEu")}
                     </dt>
-                    <dd className="text-ink">{formatEur(tierPrice(tier, r).totalCents)}</dd>
+                    <dd className="text-ink">{formatEur(tierPriceCents(tier, r))}</dd>
                   </div>
                 ))}
               </dl>

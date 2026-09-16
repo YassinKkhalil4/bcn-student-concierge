@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { TIERS, IVA_RATE } from "@/lib/pricing";
+import { TIERS } from "@/lib/pricing";
 import { PricingCard } from "@/components/PricingCard";
 import { Modelo790Notice } from "@/components/Modelo790Notice";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
@@ -31,7 +31,7 @@ function Pricing() {
             {t("title")}
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
-            {t("intro", { rate: Math.round(IVA_RATE * 100) })}
+            {t("intro")}
           </p>
         </div>
       </section>
