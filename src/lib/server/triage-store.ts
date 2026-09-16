@@ -13,6 +13,7 @@ import {
   type TriageStatus,
 } from "@/lib/db/schema";
 import { routeForNationality, selectForm } from "@/lib/forms/field-map";
+import type { Attribution } from "@/lib/attribution";
 import type { ServiceRoute } from "@/lib/pricing";
 import { deadlineFor, type TriageData } from "@/lib/triage";
 import { blobStore } from "./blob-store";
@@ -120,7 +121,7 @@ export function isValidTriageId(id: string): boolean {
  */
 export async function createTriage(
   data: TriageData,
-  options: { locale?: Locale } = {},
+  options: { locale?: Locale; attribution?: Attribution } = {},
 ): Promise<TriageRecord> {
   const db = await getDb();
   // The id is part of the AAD, so it must exist before the details are sealed.
@@ -133,6 +134,8 @@ export async function createTriage(
     formId: selectForm(data.nationality),
     arrivedOn: data.arrivedOn,
     deadlineOn: deadlineFor(route, data.arrivedOn),
+    source: options.attribution?.source ?? null,
+    guideVisitorId: options.attribution?.guideVisitorId ?? null,
     emailIndex: emailIndexFor(data.email),
     enquiryEnvelope: sealJson(
       {

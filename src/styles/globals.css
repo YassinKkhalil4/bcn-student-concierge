@@ -51,6 +51,16 @@
     @apply btn border border-bone-line bg-transparent text-ink hover:bg-bone-warm;
   }
 
+  /* The guide's corner: cut at 45°, never rounded. --chamfer sets the size. */
+  .chamfer {
+    clip-path: polygon(
+      0 0, 100% 0,
+      100% calc(100% - var(--chamfer, 12px)),
+      calc(100% - var(--chamfer, 12px)) 100%,
+      0 100%
+    );
+  }
+
   .field-label {
     @apply block text-sm font-medium text-ink;
   }

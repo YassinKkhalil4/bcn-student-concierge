@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
 import { localizedPath, routing, splitLocale } from "@/i18n/routing";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin/session";
+import { SOURCE_COOKIE, SOURCE_PARAM, attributionCookieOptions, parseSource } from "@/lib/attribution";
 import { isPublicPage, markdownPath, type PublicPage } from "@/lib/agents/pages";
 import { PORTAL_COOKIE, verifyPortalSession } from "@/lib/portal/session";
 
@@ -105,6 +106,8 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   // Public pages may carry a language prefix: "/fr/portal" is the portal too.
   const { locale, path: unprefixed } = splitLocale(pathname);
   const api = pathname.startsWith("/api/");
+  // Files served by a handler (the guide PDF): no language, no page chrome.
+  const download = pathname.startsWith("/downloads/");
   const portal = isPortalPath(api ? pathname : unprefixed);
 
   // ── Admin gate (first of two) ────────────────────────────────────────
@@ -145,7 +148,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   // ── Markdown for agents ──────────────────────────────────────────────
   // Which page, and whether Accept asked for it, travel as request headers:
   // a rewrite's query string does not survive to the handler.
-  const markdown = !admin && !api && !portal ? markdownRequest(request, unprefixed) : null;
+  const markdown = !admin && !api && !portal && !download ? markdownRequest(request, unprefixed) : null;
   if (markdown) {
     requestHeaders.set("x-agent-markdown-path", markdown.page);
     requestHeaders.set("x-agent-markdown-locale", locale);
@@ -165,15 +168,24 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   // given into its rewrite, so it receives ours — nonce and CSP included.
   // Staff pages and the API have no language and skip it.
   const response =
-    admin || api
+    admin || api || download
       ? NextResponse.next({ request: { headers: requestHeaders } })
       : intl(new NextRequest(request, { headers: requestHeaders }));
   response.headers.set("Content-Security-Policy", csp);
   if (admin || portal) markPrivate(response);
 
+  // ── Guide attribution ───────────────────────────────────────────────
+  // A school's link (/guide?s=esade) is remembered for 30 days, so the
+  // triage or intake it leads to can record where the reader came from.
+  // Last link wins. Unknown values are ignored. See src/lib/attribution.ts.
+  const source = !admin && !api && !download && request.method === "GET"
+    ? parseSource(request.nextUrl.searchParams.get(SOURCE_PARAM))
+    : null;
+  if (source) response.cookies.set(SOURCE_COOKIE, source, attributionCookieOptions);
+
   // Tell agents the page has a machine-readable form (RFC 8288). Appended:
   // next-intl already put the hreflang alternates in this header.
-  if (!admin && !api && !portal && isPublicPage(unprefixed)) {
+  if (!admin && !api && !portal && !download && isPublicPage(unprefixed)) {
     const md = new URL(markdownPath(unprefixed), request.nextUrl.origin);
     response.headers.append(
       "Link",

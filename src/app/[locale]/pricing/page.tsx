@@ -56,6 +56,7 @@ function Pricing() {
             <PricingCard key={tier.id} tier={tier} />
           ))}
         </div>
+        <p className="mt-8 text-sm text-ink-muted">{t("feesNote")}</p>
 
         <div className="mt-14 max-w-3xl rounded-2xl border border-bone-line bg-bone-warm p-7">
           <p className="eyebrow">{t("routesEyebrow")}</p>

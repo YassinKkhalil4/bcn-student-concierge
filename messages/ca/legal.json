@@ -59,7 +59,7 @@
       {
         "heading": "Qui és el responsable del tractament de les dades?",
         "paragraphs": [
-          "BCN Student Concierge (el «responsable del tractament») determina com i per a què es tracten les vostres dades personals. Contacte per a qualsevol qüestió de protecció de dades, inclòs l’exercici dels drets que es detallen a continuació: <mail>privacy@bcnstudent.com</mail>."
+          "{controller} (el «responsable del tractament») determina com i per a què es tracten les vostres dades personals. Contacte per a qualsevol qüestió de protecció de dades, inclòs l’exercici dels drets que es detallen a continuació: <mail>privacy@bcnstudent.com</mail>."
         ]
       },
       {
@@ -115,7 +115,7 @@
       {
         "heading": "Cookies",
         "paragraphs": [
-          "Aquest lloc web no instal·la galetes publicitàries ni d’analítica, ni fa servir seguidors de tercers. Les úniques galetes són les estrictament necessàries: una galeta d’inici de sessió que us manté connectats un màxim de 24 hores, i les galetes que instal·la Stripe per prevenir el frau durant el pagament. No hi ha cap bàner de consentiment perquè no hi ha res a consentir."
+          "This site sets no advertising cookies and runs no third-party trackers. It sets a sign-in cookie that keeps you in your file for up to 24 hours, and Stripe sets cookies for fraud prevention during checkout. Two more first-party cookies are set only if you follow a guide link or download our guide: bcn_src, which records the school link you came through, and bcn_guide, an anonymous download identifier. Each lasts 30 days, contains no name, email or other detail about you, and is used only to count how many guide readers go on to request triage."
         ]
       }
     ]

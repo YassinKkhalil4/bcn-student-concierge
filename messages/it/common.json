@@ -18,6 +18,7 @@
     "tagline": "Assistenza amministrativa indipendente per studenti internazionali a Barcellona. Triage gratuito in giornata, prima di tutto il resto.",
     "services": "Servizi",
     "packages": "Pacchetti e prezzi",
+    "guide": "Free guide (PDF)",
     "intake": "Portale studenti",
     "process": "Procedura",
     "legal": "Informazioni legali",
@@ -25,7 +26,14 @@
     "privacy": "Privacy e GDPR",
     "scope": "Ambito del servizio",
     "copyright": "© {year} BCN Student Concierge. Barcellona, Spagna.",
-    "triage": "Triage gratuito"
+    "triage": "Triage gratuito",
+    "provider": {
+      "heading": "Service provider",
+      "legalName": "Legal name",
+      "taxId": "NIF",
+      "registeredAddress": "Registered address",
+      "email": "Email"
+    }
   },
   "disclaimer": {
     "footerLabel": "Ambito del servizio.",

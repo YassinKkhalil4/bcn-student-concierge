@@ -11,6 +11,7 @@ export const NAMESPACES = [
   "common",
   "home",
   "pricing",
+  "guide",
   "triage",
   "legal",
   "intake",

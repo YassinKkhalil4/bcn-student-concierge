@@ -19,11 +19,14 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             <span className="text-xs font-medium uppercase tracking-wider text-ink-soft">Staff</span>
           </Link>
           {signedIn && (
-            <form action="/api/admin/logout" method="post">
-              <button type="submit" className="text-sm text-ink-muted hover:text-ink">
-                Sign out
-              </button>
-            </form>
+            <div className="flex items-center gap-5">
+              <Link href="/admin/guide" className="text-sm text-ink-muted hover:text-ink">Guide conversion</Link>
+              <form action="/api/admin/logout" method="post">
+                <button type="submit" className="text-sm text-ink-muted hover:text-ink">
+                  Sign out
+                </button>
+              </form>
+            </div>
           )}
         </div>
       </header>
