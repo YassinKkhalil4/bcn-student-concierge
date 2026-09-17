@@ -1,6 +1,6 @@
 # Backend hardening: defect fixes and route-handler test coverage
 
-Status: approved, ready for implementation plan
+Status: implemented (see docs/superpowers/plans/2026-09-17-backend-hardening.md)
 Date: 2026-09-17
 
 ## Context
