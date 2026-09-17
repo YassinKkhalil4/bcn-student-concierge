@@ -9,13 +9,15 @@
     "myFile": "La mia pratica",
     "beginIntake": "Avvia la pratica",
     "begin": "Inizia",
-    "triage": "Triage gratuito"
+    "triage": "Triage gratuito",
+    "ctaPrimary": "Controlla gratis la mia scadenza",
+    "ctaPrimaryShort": "Verifica gratis"
   },
   "language": {
     "label": "Lingua"
   },
   "footer": {
-    "tagline": "Assistenza amministrativa indipendente per studenti internazionali a Barcellona. Triage gratuito in giornata, prima di tutto il resto.",
+    "tagline": "Prepariamo le pratiche di residenza in Spagna che gli studenti internazionali a Barcellona non possono sbagliare: il TIE, il Padrón, i moduli, gli appuntamenti. Indipendenti, a prezzo fisso e sempre a tuo nome.",
     "services": "Servizi",
     "packages": "Pacchetti e prezzi",
     "guide": "Free guide (PDF)",

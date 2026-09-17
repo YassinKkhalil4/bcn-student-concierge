@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { SOURCE_PARAM, parseSource, type GuideSource } from "@/lib/attribution";
 import { GUIDE_FILENAME, GUIDE_FRAMING, GUIDE_PATH } from "@/lib/guide";
+import { alternatesFor } from "@/lib/seo";
 import cover from "../../../../assets/guide/cover.png";
 
 /*
@@ -23,8 +24,13 @@ const RED = "#C2263C";
 type Params = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const t = await getTranslations({ locale: (await params).locale, namespace: "guide" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "guide" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: alternatesFor("/guide", locale),
+  };
 }
 
 export default async function GuidePage({ params, searchParams }: Params) {

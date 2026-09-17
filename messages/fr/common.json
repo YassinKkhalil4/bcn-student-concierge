@@ -9,13 +9,15 @@
     "myFile": "Mon dossier",
     "beginIntake": "Commencer le dossier",
     "begin": "Commencer",
-    "triage": "Triage gratuit"
+    "triage": "Triage gratuit",
+    "ctaPrimary": "Vérifier mon délai gratuitement",
+    "ctaPrimaryShort": "Vérifier — gratuit"
   },
   "language": {
     "label": "Langue"
   },
   "footer": {
-    "tagline": "Accompagnement administratif indépendant pour les étudiants internationaux à Barcelone. Triage gratuit le jour même, avant toute chose.",
+    "tagline": "Nous préparons les démarches de résidence en Espagne que les étudiants internationaux à Barcelone ne peuvent pas rater : le TIE, le Padrón, les formulaires, les rendez-vous. Indépendants, à prix fixe, et toujours à votre nom.",
     "services": "Services",
     "packages": "Formules et tarifs",
     "guide": "Free guide (PDF)",

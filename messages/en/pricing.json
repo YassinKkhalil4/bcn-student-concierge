@@ -140,8 +140,8 @@
     "applyWaitlist": "Apply for the waitlist"
   },
   "page": {
-    "metaTitle": "Packages & Pricing",
-    "metaDescription": "Three fixed-fee packages for international students already in Barcelona: The Ready File, The Soft Landing, and The Fixer. The first two have one price for the EU route and one for the non-EU route; The Fixer is one price, by application.",
+    "metaTitle": "Packages & pricing: TIE, Padrón and appointments at a fixed fee",
+    "metaDescription": "Three fixed-fee packages for international students in Barcelona: The Ready File, The Soft Landing and The Fixer. One price for the EU route, one for the non-EU route, nothing added at checkout, and half your fee back if no appointment opens in six weeks.",
     "eyebrow": "Packages & pricing",
     "title": "Fixed fees for a process with no fixed timeline.",
     "intro": "Every package has a fixed price, and the price shown is the price you pay.",
@@ -198,6 +198,9 @@
         "item": "Sworn translation or apostille",
         "note": "We identify what needs it and refer you to a traductor jurado; their fee is separate."
       }
-    ]
+    ],
+    "guaranteeEyebrow": "If the slot never comes",
+    "guaranteeTitle": "Half back, and you keep the file.",
+    "guaranteeBody": "We search the official portal for up to six weeks from your submission. If nothing opens in that window you get 50% of your fee back and keep the entire Ready File (forms, copies, the Modelo 790, the audit), so you are ready the day a slot appears. You also get a dated certificate of every attempt we made. Nobody can shortcut this step legally, and any service that says otherwise is selling you something it does not have."
   }
 }

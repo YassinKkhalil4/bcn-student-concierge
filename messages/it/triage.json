@@ -1,10 +1,10 @@
 {
   "page": {
-    "metaTitle": "Triage gratuito — a che punto sei oggi",
-    "metaDescription": "Inviaci il tuo timbro d’ingresso, la tua autorizzazione e il tuo certificato di iscrizione. Ti diciamo quale percorso ti riguarda, quanti giorni ti restano e cosa è ancora recuperabile. Senza costi né impegno.",
+    "metaTitle": "Controllo gratuito della scadenza: TIE e Padrón per studenti a Barcellona",
+    "metaDescription": "Dicci la tua nazionalità e la data in cui sei entrato in Spagna e in giornata ti diciamo quale percorso ti riguarda (EX-17 o EX-18), quanti giorni ti restano e che cosa è ancora recuperabile. Senza costi, senza carta, senza impegno.",
     "eyebrow": "Triage gratuito · in giornata",
-    "title": "Sei qui da due settimane. Il conto alla rovescia è partito il giorno in cui sei atterrato.",
-    "intro": "Gli studenti extra-UE hanno normalmente un mese dall’ingresso per richiedere la TIE. Se sei arrivato nella prima settimana di settembre, quella finestra si chiude a inizio ottobre, e l’appuntamento è la parte che nessuno può accelerare. Dicci a che punto sei e ti diremo qual è la tua situazione.",
+    "title": "Dicci la tua data di ingresso. Ti diciamo quanti giorni ti restano.",
+    "intro": "Gli studenti extra UE hanno di norma un mese dall’ingresso per richiedere il TIE, e l’appuntamento è la parte che nessuno può accelerare. Manda i tre documenti e oggi stesso saprai quale percorso ti riguarda, che cosa è ancora recuperabile e se davvero hai bisogno di noi.",
     "whatYouGet": "Cosa ricevi oggi stesso",
     "steps": [
       "Quale percorso ti riguarda — EX-17 o EX-18 — letto sulla tua stessa autorizzazione, non dedotto dal passaporto",
@@ -56,13 +56,13 @@
   "done": {
     "title": "L’abbiamo ricevuta.",
     "body": "Il tuo riferimento è {ref}. Ti risponderemo oggi all’indirizzo che ci hai indicato, con il percorso che ti riguarda, i giorni che ti restano e cosa fare per primo.",
-    "note": "Se non hai allegato i tre documenti, inviali rispondendo a quella email: più riusciamo a leggere, più la risposta sarà precisa."
+    "note": "Se non hai allegato i tre documenti, mandali rispondendo a quella email. Più riusciamo a leggere, più la risposta è precisa. Nel frattempo, la guida gratuita copre l’intero processo dall’inizio alla fine."
   },
   "cta": {
     "eyebrow": "Inizia da qui",
     "title": "Non sai a che punto sei? Scoprilo gratis.",
     "body": "Inviaci il tuo timbro d’ingresso, la tua autorizzazione e il tuo certificato di iscrizione. Ti diremo quale percorso ti riguarda, quanti giorni ti restano e cosa è ancora recuperabile. Senza costi, senza impegno e, se non hai bisogno di noi, te lo diremo.",
-    "button": "Richiedi il triage gratuito",
+    "button": "Controlla gratis la mia scadenza",
     "note": "In giornata. Quindici minuti del tuo tempo."
   },
   "fixerApplication": "I’d like to apply for The Fixer waitlist."

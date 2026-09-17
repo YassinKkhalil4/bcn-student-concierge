@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
  * legal text is edited — a build timestamp would claim every page changed on
  * every deploy, which search engines learn to ignore.
  */
-const CONTENT_UPDATED = new Date("2026-09-16T00:00:00Z");
+const CONTENT_UPDATED = new Date("2026-09-17T00:00:00Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const origin = siteOrigin();

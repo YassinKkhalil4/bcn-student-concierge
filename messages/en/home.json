@@ -2,12 +2,21 @@
   "metaTitle": "BCN Student Concierge — Spanish residency paperwork, done right the first time",
   "metaDescription": "For international students already in Barcelona. Padrón, TIE and CUE appointments, EX-17 and EX-18 forms, prepared and booked. Free same-day triage tells you where you stand before you pay anything.",
   "hero": {
-    "eyebrow": "Barcelona · For students already here",
-    "title": "You’ve been here two weeks. The clock started the day you landed.",
-    "body": "Non-EU students normally have one month from entry to apply for the TIE. If you arrived in the first week of September, that window closes in early October — and the appointment is the part nobody can rush. We build the file so that when a slot opens, nothing on it sends you home again.",
-    "primaryCta": "Get free triage",
-    "secondaryCta": "See the packages",
-    "note": "Triage is free and same-day. Packages are fixed-fee: the price you see is the price you pay."
+    "eyebrow": "Barcelona · International students · EU and non-EU routes",
+    "title": "Your TIE, your Padrón, your appointments: prepared, booked, and right the first time.",
+    "body": "Non-EU students normally have one month from entry to apply for the TIE, and the appointment is the part nobody can rush. We read your authorisation, build the file, and book the slot in your own name, so that when one opens nothing on the paperwork sends you home again. Send us your entry date and we’ll tell you today how many days are left.",
+    "primaryCta": "Check my deadline for free",
+    "secondaryCta": "See packages and prices",
+    "note": "The check is free, same-day, and takes no card. After that the fees are fixed: the price you see is the price you pay."
+  },
+  "proof": {
+    "heading": "What you can hold us to",
+    "items": [
+      "One fixed fee, quoted before you pay. We bill nothing by the hour.",
+      "Every form filed in your own name. We never sign as your representative.",
+      "We encrypt each passport scan with its own key and delete it 30 days after your file closes.",
+      "No appointment in six weeks? Half your fee back, and the file is still yours."
+    ]
   },
   "trust": {
     "heading": "Built for students at",
@@ -77,6 +86,14 @@
         "a": "No. We are an independent administrative facilitation service. We prepare documents from information you give us, book appointments, and guide you through the process. We do not represent you before any authority and we do not give legal advice. Where a case needs legal analysis, we say so plainly and point you to a colegiado abogado."
       },
       {
+        "q": "What does it cost, and when do I pay?",
+        "a": "The price on the card is the whole price. We add nothing at checkout, bill nothing by the hour, and hide no government fee inside it. You pay once triage has confirmed which route applies to you. Before that you owe us nothing, and if we can’t help we say so instead of taking your money."
+      },
+      {
+        "q": "What if no appointment opens in time?",
+        "a": "We search the official portal for up to six weeks from your submission. If nothing opens in that window you get half your fee back and keep the entire Ready File (forms, copies, the Modelo 790, the audit), so you’re ready the day a slot appears. You also get a dated certificate of every attempt we made. Spanish offices commonly accept that as justification for registering late, though no official is obliged to."
+      },
+      {
         "q": "I think I’ve already missed the deadline. Is it worth asking?",
         "a": "Yes — ask today rather than next week. Triage is free and we will tell you honestly. If your window has closed, or you’re on an expired or irregular status, that needs legal analysis we are not qualified to give, and we will say so and point you elsewhere rather than take your money."
       },
@@ -97,5 +114,12 @@
         "a": "No, and any service that guarantees it is misleading you. The decision rests entirely with the Spanish authorities. What we control is that the file is complete, correct and submitted on time — which is where most rejections actually originate."
       }
     ]
+  },
+  "close": {
+    "eyebrow": "Two ways to start",
+    "title": "Start now, or ask first.",
+    "body": "Go straight to intake if you know which package you want: we start building the file today. If you are still working it out, the free check tells you which route applies and how many days you have, and costs nothing. Either way you learn where you stand before you spend anything.",
+    "primaryCta": "Check my deadline for free",
+    "secondaryCta": "Start my intake"
   }
 }

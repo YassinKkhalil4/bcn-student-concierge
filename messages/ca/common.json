@@ -9,13 +9,15 @@
     "myFile": "El meu expedient",
     "beginIntake": "Iniciar l’alta",
     "begin": "Comenceu",
-    "triage": "Triatge gratuït"
+    "triage": "Triatge gratuït",
+    "ctaPrimary": "Consultar el meu termini gratis",
+    "ctaPrimaryShort": "Consulta gratis"
   },
   "language": {
     "label": "Idioma"
   },
   "footer": {
-    "tagline": "Acompanyament administratiu independent per a estudiants internacionals a Barcelona. Triatge gratuït el mateix dia, abans que res.",
+    "tagline": "Preparem la paperassa de residència a Espanya que els estudiants internacionals a Barcelona no poden equivocar: el TIE, el Padró, els formularis, les cites. Independents, de preu tancat i sempre al teu nom.",
     "services": "Serveis",
     "packages": "Paquets i preus",
     "guide": "Free guide (PDF)",

@@ -4,10 +4,16 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { LegalPage } from "@/components/LegalPage";
 import { LegalClauses } from "@/components/LegalClauses";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
+import { alternatesFor } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const t = await getTranslations({ locale: (await params).locale, namespace: "legal.terms" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "legal.terms" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: alternatesFor("/terms", locale),
+  };
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

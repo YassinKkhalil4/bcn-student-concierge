@@ -1,10 +1,10 @@
 {
   "page": {
-    "metaTitle": "Free triage — where you stand today",
-    "metaDescription": "Send your entry stamp, your authorisation and your enrolment letter. We tell you which route applies, how many days you have left, and what is still recoverable. No charge, no obligation.",
+    "metaTitle": "Free deadline check: TIE and Padrón for Barcelona students",
+    "metaDescription": "Tell us your nationality and the date you entered Spain, and we’ll tell you the same day which route applies (EX-17 or EX-18), how many days are left on your window, and what is still recoverable. No charge, no card, no obligation.",
     "eyebrow": "Free triage · same day",
-    "title": "You’ve been here two weeks. The clock started the day you landed.",
-    "intro": "Non-EU students normally have one month from entry to apply for the TIE. If you landed in the first week of September, that window closes in early October — and the appointment is the part nobody can rush. Tell us where you are and we’ll tell you where you stand.",
+    "title": "Tell us your entry date. We’ll tell you how many days are left.",
+    "intro": "Non-EU students normally have one month from entry to apply for the TIE, and the appointment is the part nobody can rush. Send the three documents and today you’ll know which route applies, what is still recoverable, and whether you need us at all.",
     "whatYouGet": "What you get back, today",
     "steps": [
       "Which route applies to you — EX-17 or EX-18 — read from your own authorisation, not guessed from your passport",
@@ -56,13 +56,13 @@
   "done": {
     "title": "We’ve got it.",
     "body": "Your reference is {ref}. We’ll reply to the email address you gave us today, with the route that applies, the days you have left, and what to do first.",
-    "note": "If you didn’t attach the three documents, send them as a reply to that email — the answer gets more exact the more we can read."
+    "note": "If you didn’t attach the three documents, send them as a reply to that email. The answer gets more exact the more we can read. While you wait, the free guide covers the whole process end to end."
   },
   "cta": {
     "eyebrow": "Start here",
     "title": "Not sure where you stand? Find out for free.",
     "body": "Send your entry stamp, your authorisation and your enrolment letter. We’ll tell you which route applies, how many days you have left, and what’s still recoverable. No charge, no obligation, and if you don’t need us we’ll say so.",
-    "button": "Get free triage",
+    "button": "Check my deadline for free",
     "note": "Same day. Fifteen minutes of your time."
   },
   "fixerApplication": "I’d like to apply for The Fixer waitlist."

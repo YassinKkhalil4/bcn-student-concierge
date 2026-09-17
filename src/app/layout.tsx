@@ -14,12 +14,13 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.PUBLIC_ORIGIN ?? "https://bcnstudent.com"),
   title: {
-    default: "BCN Student Concierge — Frictionless Arrivals in Barcelona",
+    default: "BCN Student Concierge — Spanish residency paperwork for students in Barcelona",
     template: "%s · BCN Student Concierge",
   },
   description:
-    "Independent administrative facilitation for international university students " +
-    "arriving in Barcelona. Padrón, TIE/CUE appointments, and document preparation.",
+    "We prepare the Spanish residency paperwork international students in Barcelona have to " +
+    "get right — the TIE, the padrón, the EX-17 and EX-18 forms, and the appointments. " +
+    "Independent, fixed-fee, and always filed in your own name.",
   openGraph: {
     type: "website",
     locale: "en_GB",

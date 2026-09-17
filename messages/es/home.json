@@ -2,12 +2,21 @@
   "metaTitle": "BCN Student Concierge — trámites de residencia, bien a la primera",
   "metaDescription": "Para estudiantes internacionales que ya están en Barcelona. Padrón, citas de TIE y CUE, impresos EX-17 y EX-18, preparados y reservados. El triaje gratuito del mismo día te dice en qué situación estás antes de pagar nada.",
   "hero": {
-    "eyebrow": "Barcelona · Para estudiantes que ya están aquí",
-    "title": "Llevas dos semanas aquí. El reloj empezó el día que aterrizaste.",
-    "body": "Los estudiantes de fuera de la UE suelen tener un mes desde la entrada para solicitar la TIE. Si llegaste la primera semana de septiembre, esa ventana se cierra a principios de octubre, y la cita es la parte que nadie puede acelerar. Nosotros montamos el expediente para que, cuando se abra un hueco, nada de lo que lleves encima te devuelva a casa.",
-    "primaryCta": "Triaje gratuito",
-    "secondaryCta": "Ver los paquetes",
-    "note": "El triaje es gratuito y el mismo día. Los paquetes son de precio cerrado: el precio que ves es el que pagas."
+    "eyebrow": "Barcelona · Estudiantes internacionales · Vías UE y no UE",
+    "title": "Tu TIE, tu Padrón, tus citas: preparados, reservados y bien a la primera.",
+    "body": "Los estudiantes de fuera de la UE suelen tener un mes desde la entrada para solicitar el TIE, y la cita es la parte que nadie puede acelerar. Leemos tu autorización, montamos el expediente y reservamos la cita a tu nombre, para que cuando salga una no haya nada en los papeles que te mande de vuelta a casa. Mándanos tu fecha de entrada y hoy mismo te decimos cuántos días te quedan.",
+    "primaryCta": "Consultar mi plazo gratis",
+    "secondaryCta": "Ver paquetes y precios",
+    "note": "La consulta es gratuita, el mismo día y sin tarjeta. A partir de ahí los precios son cerrados: el precio que ves es el que pagas."
+  },
+  "proof": {
+    "heading": "Lo que puedes exigirnos",
+    "items": [
+      "Un precio cerrado, dicho antes de que pagues. No cobramos nada por horas.",
+      "Cada formulario se presenta a tu nombre. Nunca firmamos como representante tuyo.",
+      "Ciframos cada escaneo de tu pasaporte con su propia clave y lo borramos 30 días después de cerrar tu expediente.",
+      "¿Sin cita en seis semanas? Te devolvemos la mitad y el expediente sigue siendo tuyo."
+    ]
   },
   "trust": {
     "heading": "Pensado para estudiantes de",
@@ -77,6 +86,14 @@
         "a": "No. Somos un servicio independiente de acompañamiento administrativo. Preparamos documentos a partir de la información que nos das, reservamos citas y te guiamos por el proceso. No te representamos ante ninguna autoridad y no damos asesoramiento jurídico. Cuando un caso requiere análisis legal, lo decimos claramente y te derivamos a un colegiado abogado."
       },
       {
+        "q": "¿Cuánto cuesta y cuándo pago?",
+        "a": "El precio de la tarjeta es el precio entero. No añadimos nada al pagar, no cobramos por horas y no escondemos ninguna tasa pública dentro. Pagas cuando el triaje ha confirmado qué vía te corresponde. Antes de eso no nos debes nada, y si no podemos ayudarte lo decimos en lugar de cobrarte."
+      },
+      {
+        "q": "¿Y si no sale ninguna cita a tiempo?",
+        "a": "Buscamos en el portal oficial hasta seis semanas desde tu envío. Si en esa ventana no sale ninguna, te devolvemos la mitad del precio y te quedas con el Ready File entero (formularios, copias, el Modelo 790, la auditoría), así estás listo el día que aparezca una. También recibes un certificado fechado de cada intento que hicimos. Las oficinas españolas suelen aceptarlo como justificación para registrarse fuera de plazo, aunque ningún funcionario está obligado a hacerlo."
+      },
+      {
         "q": "Creo que ya se me ha pasado el plazo. ¿Merece la pena preguntar?",
         "a": "Sí, y mejor hoy que la semana que viene. El triaje es gratuito y te lo diremos con honestidad. Si tu plazo se ha cerrado, o estás en situación caducada o irregular, eso requiere un análisis jurídico que no estamos cualificados para dar: te lo diremos y te derivaremos, en lugar de cobrarte."
       },
@@ -97,5 +114,12 @@
         "a": "No, y cualquier servicio que lo garantice te está engañando. La decisión corresponde íntegramente a las autoridades españolas. Lo que sí controlamos es que el expediente esté completo, correcto y presentado a tiempo, que es donde se originan la mayoría de las denegaciones."
       }
     ]
+  },
+  "close": {
+    "eyebrow": "Dos maneras de empezar",
+    "title": "Empieza ya, o pregunta primero.",
+    "body": "Ve directo al alta si ya sabes qué paquete quieres: hoy mismo empezamos a montar el expediente. Si todavía lo estás pensando, la consulta gratuita te dice qué vía te corresponde y cuántos días tienes, y no cuesta nada. En cualquier caso sabrás dónde estás antes de gastar nada.",
+    "primaryCta": "Consultar mi plazo gratis",
+    "secondaryCta": "Iniciar mi alta"
   }
 }

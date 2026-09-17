@@ -3,10 +3,16 @@ import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { TriageForm } from "@/components/triage/TriageForm";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
+import { alternatesFor } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const t = await getTranslations({ locale: (await params).locale, namespace: "triage.page" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "triage.page" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: alternatesFor("/triage", locale),
+  };
 }
 
 export default async function TriagePage({ params }: { params: Promise<{ locale: string }> }) {

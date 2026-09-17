@@ -6,15 +6,49 @@ import { TIERS } from "@/lib/pricing";
 import { PricingCard } from "@/components/PricingCard";
 import { Modelo790Notice } from "@/components/Modelo790Notice";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
+import { JsonLd } from "@/components/JsonLd";
+import { alternatesFor } from "@/lib/seo";
+import { breadcrumbs, graph, organization, serviceOffers } from "@/lib/structured-data";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const t = await getTranslations({ locale: (await params).locale, namespace: "pricing.page" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "pricing.page" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: alternatesFor("/pricing", locale),
+  };
 }
 
 export default async function PricingPage({ params }: { params: Promise<{ locale: string }> }) {
-  setRequestLocale((await params).locale);
-  return <Pricing />;
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const tc = await getTranslations({ locale, namespace: "common" });
+  const tp = await getTranslations({ locale, namespace: "pricing" });
+  const th = await getTranslations({ locale, namespace: "home" });
+  const tierCopy = Object.fromEntries(
+    TIERS.map((tier) => [tier.id, { name: tp(`tiers.${tier.id}.name`), tagline: tp(`tiers.${tier.id}.tagline`) }]),
+  );
+
+  return (
+    <>
+      <JsonLd
+        json={graph(
+          organization(tc("brand"), th("metaDescription")),
+          serviceOffers(tierCopy, locale),
+          breadcrumbs(
+            [
+              { name: tc("brand"), page: "/" },
+              { name: tp("page.eyebrow"), page: "/pricing" },
+            ],
+            locale,
+          ),
+        )}
+      />
+      <Pricing />
+    </>
+  );
 }
 
 function Pricing() {
@@ -58,7 +92,20 @@ function Pricing() {
         </div>
         <p className="mt-8 text-sm text-ink-muted">{t("feesNote")}</p>
 
-        <div className="mt-14 max-w-3xl rounded-2xl border border-bone-line bg-bone-warm p-7">
+        {/*
+          The six-week refund was a paragraph inside the "before you choose"
+          list, three screens below the price cards — the strongest argument on
+          the page, filed where nobody reads it. It belongs beside the prices.
+        */}
+        <div className="mt-14 max-w-3xl rounded-2xl border border-olive-light/40 bg-olive/5 p-7">
+          <p className="eyebrow">{t("guaranteeEyebrow")}</p>
+          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink">
+            {t("guaranteeTitle")}
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-ink-muted">{t("guaranteeBody")}</p>
+        </div>
+
+        <div className="mt-8 max-w-3xl rounded-2xl border border-bone-line bg-bone-warm p-7">
           <p className="eyebrow">{t("routesEyebrow")}</p>
           <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink">
             {t("routesTitle")}

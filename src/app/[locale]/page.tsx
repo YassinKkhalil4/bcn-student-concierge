@@ -5,16 +5,51 @@ import { Link } from "@/i18n/navigation";
 import { TIERS } from "@/lib/pricing";
 import { PricingCard } from "@/components/PricingCard";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
+import { JsonLd } from "@/components/JsonLd";
 import { UNIVERSITIES } from "@/lib/universities";
+import { alternatesFor } from "@/lib/seo";
+import { faqPage, graph, organization, serviceOffers, website } from "@/lib/structured-data";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const t = await getTranslations({ locale: (await params).locale, namespace: "home" });
-  return { title: { absolute: t("metaTitle") }, description: t("metaDescription") };
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "home" });
+  return {
+    title: { absolute: t("metaTitle") },
+    description: t("metaDescription"),
+    alternates: alternatesFor("/", locale),
+  };
 }
 
 export default async function LandingPage({ params }: { params: Promise<{ locale: string }> }) {
-  setRequestLocale((await params).locale);
-  return <Landing />;
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  // Structured data, built from the same catalogues and the same tier table
+  // the page itself renders — so it cannot publish a price or an answer the
+  // page does not show. See src/lib/structured-data.ts.
+  const t = await getTranslations({ locale, namespace: "home" });
+  const tc = await getTranslations({ locale, namespace: "common" });
+  const tp = await getTranslations({ locale, namespace: "pricing" });
+  const tierCopy = Object.fromEntries(
+    TIERS.map((tier) => [
+      tier.id,
+      { name: tp(`tiers.${tier.id}.name`), tagline: tp(`tiers.${tier.id}.tagline`) },
+    ]),
+  );
+
+  return (
+    <>
+      <JsonLd
+        json={graph(
+          organization(tc("brand"), t("metaDescription")),
+          website(tc("brand"), locale),
+          serviceOffers(tierCopy, locale),
+          faqPage(t.raw("faq.items") as { q: string; a: string }[]),
+        )}
+      />
+      <Landing />
+    </>
+  );
 }
 
 function Landing() {
@@ -23,6 +58,7 @@ function Landing() {
   const problems = t.raw("problems.items") as { problem: string; detail: string; solution: string }[];
   const steps = t.raw("process.steps") as { title: string; body: string }[];
   const faq = t.raw("faq.items") as { q: string; a: string }[];
+  const proof = t.raw("proof.items") as string[];
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────── */}
@@ -48,6 +84,33 @@ function Landing() {
               {t("hero.note")}
             </p>
           </div>
+        </div>
+      </section>
+
+      {/*
+        ── What you can hold us to ───────────────────────────────────
+        The site has no testimonials, because there are none to quote. What it
+        does have is four commitments made elsewhere on the site — the fixed
+        fee, the student's own name on every form, per-file encryption with a
+        30-day deletion, and the six-week refund. Each was buried on a
+        secondary page. A high-ticket purchase from a stranger needs them where
+        the decision is made, which is here.
+      */}
+      <section className="border-b border-bone-line bg-white/50 py-9">
+        <div className="container-x">
+          <p className="text-center text-xs font-medium uppercase tracking-[0.16em] text-ink-soft">
+            {t("proof.heading")}
+          </p>
+          <ul className="mx-auto mt-6 grid max-w-5xl gap-x-10 gap-y-4 sm:grid-cols-2">
+            {proof.map((item) => (
+              <li key={item} className="flex gap-3 text-sm leading-relaxed text-ink-muted">
+                <svg aria-hidden="true" viewBox="0 0 20 20" className="mt-0.5 h-4 w-4 flex-none text-olive-light" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.8 6.8-6.8a1 1 0 0 1 1.4 0Z" clipRule="evenodd" />
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -215,6 +278,32 @@ function Landing() {
 
           <div className="mt-12 max-w-3xl">
             <LegalDisclaimer variant="prominent" />
+          </div>
+        </div>
+      </section>
+
+      {/*
+        ── Close ─────────────────────────────────────────────────────
+        The page used to end on the legal disclaimer, which is a dead end for a
+        reader whose objections have just been answered. Two doors, because the
+        homepage serves two people: one who has decided, and one who has not.
+      */}
+      <section className="border-t border-bone-line py-16 sm:py-20">
+        <div className="container-x">
+          <div className="max-w-2xl">
+            <p className="eyebrow">{t("close.eyebrow")}</p>
+            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+              {t("close.title")}
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-muted">{t("close.body")}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/triage" className="btn-primary">
+                {t("close.primaryCta")}
+              </Link>
+              <Link href="/intake" className="btn-secondary">
+                {t("close.secondaryCta")}
+              </Link>
+            </div>
           </div>
         </div>
       </section>
