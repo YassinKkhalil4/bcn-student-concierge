@@ -1,4 +1,4 @@
-import { and, asc, eq, gte, lt, sql } from "drizzle-orm";
+import { and, asc, eq, gte, inArray, lt, sql } from "drizzle-orm";
 import { generateToken, openJson, sealJson } from "@/lib/crypto";
 import { getDb } from "@/lib/db/client";
 import {
@@ -285,11 +285,19 @@ export async function listInvoicesForCase(caseId: string): Promise<InvoiceSummar
 
 async function hydrate(rows: InvoiceRow[]): Promise<Invoice[]> {
   const db = await getDb();
-  const originals = new Map<string, string>();
-  for (const id of new Set(rows.map((r) => r.rectifiesId).filter((x): x is string => Boolean(x)))) {
-    const [o] = await db.select({ number: invoices.number }).from(invoices).where(eq(invoices.id, id));
-    if (o) originals.set(id, o.number);
-  }
+  const ids = [...new Set(rows.map((r) => r.rectifiesId).filter((x): x is string => Boolean(x)))];
+  // One query for every original, not one per rectificativa: the gestor's
+  // annual export would otherwise make a round trip per refund.
+  const originals = new Map<string, string>(
+    ids.length
+      ? (
+          await db
+            .select({ id: invoices.id, number: invoices.number })
+            .from(invoices)
+            .where(inArray(invoices.id, ids))
+        ).map((o) => [o.id, o.number] as const)
+      : [],
+  );
   return rows.map((row) => ({
     ...toSummary(row),
     issuer: row.issuer,

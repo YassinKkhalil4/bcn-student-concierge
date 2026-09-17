@@ -41,9 +41,18 @@ const clearIssuer = () => {
   for (const k of Object.keys(ISSUER)) delete process.env[k];
 };
 
+let queryCount = 0;
+
 beforeAll(async () => {
   process.env.DOCUMENT_MASTER_KEY = randomBytes(32).toString("base64");
   ({ db, client } = await useTestDb());
+  // Count the statements the hydration path issues, so an N+1 is a test
+  // failure rather than something only visible under load.
+  const original = client.query.bind(client);
+  client.query = ((...args: Parameters<typeof original>) => {
+    queryCount++;
+    return original(...args);
+  }) as typeof client.query;
 });
 beforeEach(async () => {
   setIssuer();
@@ -260,6 +269,33 @@ describe("rectificativas", () => {
     });
     expect(r!.invoice.rectifiesId).toBe(invoice.id);
     expect(r!.invoice.totalCents).toBe(-65340);
+  });
+});
+
+describe("export hydration", () => {
+  it("resolves every rectificativa's original in one query, not one per row", async () => {
+    for (const n of [1, 2, 3]) {
+      const c = await createCase(intake);
+      await issueInvoiceForCheckout({
+        caseId: c.id, stripeSessionId: `cs_h${n}`, stripePaymentIntentId: `pi_h${n}`,
+        grossCents: 30000, description: `Sale ${n}`, billing: BILLING,
+        issuedAt: new Date("2026-04-01T10:00:00Z"),
+      });
+      await issueRefundRectification({
+        caseId: c.id, stripePaymentIntentId: `pi_h${n}`,
+        refundedTotalCents: 30000, issuedAt: new Date("2026-04-02T10:00:00Z"),
+      });
+    }
+
+    const before = queryCount;
+    const rows = await listInvoicesForExport(new Date("2026-01-01"), new Date("2027-01-01"));
+    const used = queryCount - before;
+
+    expect(rows).toHaveLength(6);
+    expect(rows.filter((r) => r.rectifiesNumber)).toHaveLength(3);
+    // One query for the rows and one for every original — not one per
+    // rectificativa, which is a round trip per refund on the annual export.
+    expect(used, `hydration used ${used} queries for 3 rectificativas`).toBeLessThanOrEqual(3);
   });
 });
 
