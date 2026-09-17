@@ -113,6 +113,8 @@ export interface IssueResult {
 export async function issueInvoiceForCheckout(input: {
   caseId: string;
   stripeSessionId: string;
+  /** Recorded so a later refund can correct THIS invoice, not the case's oldest. */
+  stripePaymentIntentId?: string | null;
   grossCents: number;
   description: string;
   billing: BillingDetails;
@@ -153,6 +155,7 @@ export async function issueInvoiceForCheckout(input: {
         issuer,
         billingEnvelope: sealJson(input.billing, billingAad(id)),
         stripeSessionId: input.stripeSessionId,
+        stripePaymentIntentId: input.stripePaymentIntentId ?? null,
       })
       .returning();
     return { invoice: toSummary(row!), created: true };
@@ -170,6 +173,8 @@ export async function issueInvoiceForCheckout(input: {
  */
 export async function issueRefundRectification(input: {
   caseId: string;
+  /** The refunded charge's PaymentIntent — picks which invoice to correct. */
+  stripePaymentIntentId?: string | null;
   refundedTotalCents: number;
   issuedAt: Date;
 }): Promise<IssueResult | null> {
@@ -179,12 +184,36 @@ export async function issueRefundRectification(input: {
   return db.transaction(async (tx) => {
     await lockCase(tx, input.caseId);
 
-    const [original] = await tx
-      .select()
-      .from(invoices)
-      .where(and(eq(invoices.caseId, input.caseId), eq(invoices.series, "INV")))
-      .orderBy(asc(invoices.issuedAt))
-      .limit(1);
+    // Correct the invoice for the payment ACTUALLY refunded. A case can hold
+    // more than one: a full refund leaves it no longer "paid", so it can
+    // legitimately be paid again. Correcting the oldest would put the wrong
+    // figures on a legal document, and cap the amount at the wrong base.
+    const [matched] = input.stripePaymentIntentId
+      ? await tx
+          .select()
+          .from(invoices)
+          .where(
+            and(
+              eq(invoices.caseId, input.caseId),
+              eq(invoices.series, "INV"),
+              eq(invoices.stripePaymentIntentId, input.stripePaymentIntentId),
+            ),
+          )
+          .limit(1)
+      : [];
+
+    // Invoices issued before the PaymentIntent was recorded have none, so fall
+    // back to the oldest — which is the right answer whenever there is one.
+    const [oldest] = matched
+      ? []
+      : await tx
+          .select()
+          .from(invoices)
+          .where(and(eq(invoices.caseId, input.caseId), eq(invoices.series, "INV")))
+          .orderBy(asc(invoices.issuedAt))
+          .limit(1);
+
+    const original = matched ?? oldest;
     if (!original) return null; // a refund before any invoice: nothing to correct
 
     const [{ rectified }] = (await tx
@@ -222,6 +251,26 @@ export async function issueRefundRectification(input: {
       .returning();
     return { invoice: toSummary(row!), created: true };
   });
+}
+
+/**
+ * The case an invoice for this PaymentIntent belongs to.
+ *
+ * cases.stripe_payment_intent_id is written only on the transition to paid, so
+ * it keeps the FIRST payment for ever. A case that paid twice (a full refund
+ * leaves it payable again) cannot be found from a later payment that way. The
+ * invoice records its own PaymentIntent, so this finds it.
+ */
+export async function findCaseIdByInvoicePaymentIntent(
+  paymentIntentId: string,
+): Promise<string | null> {
+  const db = await getDb();
+  const [row] = await db
+    .select({ caseId: invoices.caseId })
+    .from(invoices)
+    .where(and(eq(invoices.series, "INV"), eq(invoices.stripePaymentIntentId, paymentIntentId)))
+    .limit(1);
+  return row?.caseId ?? null;
 }
 
 export async function listInvoicesForCase(caseId: string): Promise<InvoiceSummary[]> {

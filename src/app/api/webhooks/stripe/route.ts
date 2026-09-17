@@ -2,7 +2,11 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { billingFromSession, constructWebhookEvent } from "@/lib/server/stripe";
 import { findCaseIdByPaymentIntent, getCase, updateCase } from "@/lib/server/storage";
-import { issueInvoiceForCheckout, issueRefundRectification } from "@/lib/server/invoices";
+import {
+  findCaseIdByInvoicePaymentIntent,
+  issueInvoiceForCheckout,
+  issueRefundRectification,
+} from "@/lib/server/invoices";
 import { getTier, tierPriceCents, routeForForm } from "@/lib/pricing";
 import { notifyPaymentReceived } from "@/lib/notify/events";
 
@@ -48,16 +52,20 @@ export async function POST(request: Request): Promise<NextResponse> {
         const record = await getCase(caseId);
         if (!record) break;
 
+        // Stored on both the case and the invoice, because `charge.refunded`
+        // carries the PaymentIntent id and nothing else that identifies the
+        // payment: the case uses it to find itself, the invoice to be the one
+        // a refund corrects.
+        const paymentIntentId =
+          typeof session.payment_intent === "string"
+            ? session.payment_intent
+            : (session.payment_intent?.id ?? null);
+
         if (record.paymentStatus !== "paid") {
           await updateCase(caseId, {
             paymentStatus: "paid",
             stripeSessionId: session.id,
-            // Stored so a later refund can be matched: `charge.refunded` carries
-            // the PaymentIntent id, not the Checkout Session's metadata.
-            stripePaymentIntentId:
-              typeof session.payment_intent === "string"
-                ? session.payment_intent
-                : (session.payment_intent?.id ?? null),
+            stripePaymentIntentId: paymentIntentId,
           });
         }
 
@@ -80,6 +88,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         const result = await issueInvoiceForCheckout({
           caseId,
           stripeSessionId: session.id,
+          stripePaymentIntentId: paymentIntentId,
           grossCents: session.amount_total,
           description: `Servicio de acompañamiento administrativo — ${tier?.name ?? record.tierId}`,
           billing: billingFromSession(session),
@@ -105,7 +114,13 @@ export async function POST(request: Request): Promise<NextResponse> {
             ? charge.payment_intent
             : charge.payment_intent?.id;
         if (!paymentIntentId) break;
-        const caseId = await findCaseIdByPaymentIntent(paymentIntentId);
+        // The case row records only the FIRST payment, so a refund of a later
+        // one is not found that way; the invoice carries its own PaymentIntent
+        // and is the fallback. Without it such a refund is silently dropped
+        // and no rectificativa is ever issued.
+        const caseId =
+          (await findCaseIdByPaymentIntent(paymentIntentId)) ??
+          (await findCaseIdByInvoicePaymentIntent(paymentIntentId));
         if (!caseId) break;
 
         // `refunded` is true only for a FULL refund. A partial refund (e.g. a
@@ -116,6 +131,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         // rectification covers only what is not rectified yet.
         await issueRefundRectification({
           caseId,
+          stripePaymentIntentId: paymentIntentId,
           refundedTotalCents: charge.amount_refunded,
           issuedAt: new Date(event.created * 1000),
         });

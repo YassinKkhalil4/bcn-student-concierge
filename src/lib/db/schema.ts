@@ -318,10 +318,20 @@ export const invoices = pgTable(
     /** Payer's name, tax ID and address — encrypted, AAD `invoice:<id>`. */
     billingEnvelope: jsonb("billing_envelope").$type<EncryptedPayload>().notNull(),
     stripeSessionId: text("stripe_session_id"),
+    /**
+     * The PaymentIntent this invoice was paid by. A refund arrives as
+     * `charge.refunded` carrying the PaymentIntent, and this is what lets the
+     * rectificativa correct the invoice for THAT payment — a case can hold
+     * more than one invoice once a refund frees it to be paid again.
+     */
+    stripePaymentIntentId: text("stripe_payment_intent_id"),
     createdAt: tstz("created_at").notNull().defaultNow(),
   },
   (t) => [
     unique("invoices_series_year_sequence_unique").on(t.series, t.year, t.sequence),
+    index("invoices_payment_intent_idx")
+      .on(t.stripePaymentIntentId)
+      .where(sql`${t.stripePaymentIntentId} IS NOT NULL`),
     // One invoice per paid Checkout Session: the backstop behind the webhook's
     // own idempotency check.
     uniqueIndex("invoices_session_unique")
