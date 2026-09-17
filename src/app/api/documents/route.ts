@@ -21,19 +21,24 @@ export async function POST(request: Request): Promise<NextResponse> {
   const limited = await enforceRateLimit(request, "upload");
   if (limited) return limited;
 
-  const form = await request.formData().catch(() => null);
-  if (!form) {
-    return NextResponse.json({ error: "Expected multipart form data" }, { status: 400 });
-  }
-
   // The case comes from the signed session, never from the form: a student can
   // only ever add documents to their own file.
+  //
+  // Checked BEFORE the body is touched. formData() buffers the entire
+  // multipart payload, so an anonymous caller must be turned away before it
+  // costs us that memory — the gate is worth nothing if it runs second.
   const caseId = await portalCaseId();
   if (!caseId) {
     return NextResponse.json({ error: "Your session has expired. Please sign in again." }, { status: 401 });
   }
   const perCase = await enforceRateLimit(request, "upload-case", `case:${caseId}`);
   if (perCase) return perCase;
+
+  const form = await request.formData().catch(() => null);
+  if (!form) {
+    return NextResponse.json({ error: "Expected multipart form data" }, { status: 400 });
+  }
+
   const kind = String(form.get("kind") ?? "");
   const file = form.get("file");
 
@@ -47,8 +52,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "File too large" }, { status: 413 });
   }
 
-  // Confirm the case exists before reading the body, so an attacker cannot use
-  // this endpoint to burn server memory against arbitrary ids.
+  // The case must still exist and not be purged: a session outlives neither.
   const record = await getCase(caseId);
   if (!record || record.purgedAt) {
     // Same response for "no such case" and "purged" — distinguishing them
