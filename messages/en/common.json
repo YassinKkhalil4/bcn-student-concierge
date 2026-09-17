@@ -9,13 +9,15 @@
     "myFile": "My file",
     "beginIntake": "Start intake",
     "begin": "Begin",
-    "triage": "Free triage"
+    "triage": "Free triage",
+    "ctaPrimary": "Check my deadline for free",
+    "ctaPrimaryShort": "Free check"
   },
   "language": {
     "label": "Language"
   },
   "footer": {
-    "tagline": "Independent administrative facilitation for international students in Barcelona. Free same-day triage before anything else.",
+    "tagline": "We prepare the Spanish residency paperwork international students in Barcelona have to get right: the TIE, the Padrón, the forms, the appointments. Independent, fixed-fee, and always in your own name.",
     "services": "Services",
     "packages": "Packages & pricing",
     "guide": "Free guide (PDF)",

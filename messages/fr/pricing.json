@@ -140,8 +140,8 @@
     "applyWaitlist": "Apply for the waitlist"
   },
   "page": {
-    "metaTitle": "Formules et tarifs",
-    "metaDescription": "Trois formules à prix fixe pour les étudiants internationaux déjà à Barcelone : Ready File, Soft Landing et Fixer. Deux prix par formule : un pour la voie UE, un pour la voie hors UE.",
+    "metaTitle": "Formules et tarifs : TIE, Padrón et rendez-vous à prix fixe",
+    "metaDescription": "Trois formules à prix fixe pour les étudiants internationaux à Barcelone : Ready File, Soft Landing et Fixer. Un prix pour le parcours UE, un pour le parcours hors UE, rien d’ajouté au paiement, et la moitié de vos honoraires remboursée si aucun rendez-vous ne se libère en six semaines.",
     "eyebrow": "Formules et tarifs",
     "title": "Des prix fixes pour une procédure sans délai fixe.",
     "intro": "Chaque formule a un prix fixe, et le prix affiché est celui que vous payez.",
@@ -198,6 +198,9 @@
         "item": "Traduction assermentée ou apostille",
         "note": "Nous identifions ce qui en a besoin et vous orientons vers un traductor jurado ; ses honoraires sont distincts."
       }
-    ]
+    ],
+    "guaranteeEyebrow": "Si le créneau n’arrive jamais",
+    "guaranteeTitle": "La moitié remboursée, et le dossier reste le vôtre.",
+    "guaranteeBody": "Nous cherchons sur le portail officiel pendant six semaines au maximum à compter de votre envoi. Si rien ne se libère dans cette fenêtre, 50% de vos honoraires vous sont remboursés et vous gardez l’intégralité du Ready File (formulaires, copies, le Modelo 790, l’audit) pour être prêt le jour où un créneau apparaît. Vous recevez aussi un certificat daté de chaque tentative faite. Personne ne peut raccourcir cette étape légalement, et tout service qui prétend le contraire vous vend quelque chose qu’il n’a pas."
   }
 }

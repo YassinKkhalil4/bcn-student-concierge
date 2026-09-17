@@ -4,11 +4,19 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function SiteHeader() {
   const t = useTranslations("common");
+  /**
+   * The header's one button used to be "Start intake" — the most expensive,
+   * highest-commitment step on the site, offered to a visitor who has read
+   * nothing yet. On a phone it was the only button there was. Every other part
+   * of the page architecture says the free check comes first, so the button
+   * now says that, and intake keeps a text link for the people who have
+   * already decided.
+   */
   const nav = [
-    { href: "/triage", label: t("nav.triage") },
     { href: "/#how-it-works", label: t("nav.howItWorks") },
     { href: "/pricing", label: t("nav.pricing") },
     { href: "/#faq", label: t("nav.faq") },
+    { href: "/intake", label: t("nav.beginIntake") },
     { href: "/portal", label: t("nav.myFile") },
   ];
 
@@ -28,15 +36,15 @@ export function SiteHeader() {
             </Link>
           ))}
           <LanguageSwitcher />
-          <Link href="/intake" className="btn-primary">
-            {t("nav.beginIntake")}
+          <Link href="/triage" className="btn-primary">
+            {t("nav.ctaPrimary")}
           </Link>
         </nav>
 
         <div className="flex items-center gap-2 md:hidden">
           <LanguageSwitcher />
-          <Link href="/intake" className="btn-primary">
-            {t("nav.begin")}
+          <Link href="/triage" className="btn-primary">
+            {t("nav.ctaPrimaryShort")}
           </Link>
         </div>
       </div>

@@ -2,12 +2,21 @@
   "metaTitle": "BCN Student Concierge — pratiche di residenza, giuste al primo colpo",
   "metaDescription": "Per studenti internazionali già a Barcellona. Padrón, appuntamenti TIE e CUE, moduli EX-17 ed EX-18, preparati e prenotati. Il triage gratuito in giornata ti dice a che punto sei prima di pagare qualsiasi cosa.",
   "hero": {
-    "eyebrow": "Barcellona · Per chi è già qui",
-    "title": "Sei qui da due settimane. Il conto alla rovescia è partito il giorno in cui sei atterrato.",
-    "body": "Gli studenti extra-UE hanno normalmente un mese dall’ingresso per richiedere la TIE. Se sei arrivato nella prima settimana di settembre, quella finestra si chiude a inizio ottobre, e l’appuntamento è la parte che nessuno può accelerare. Noi costruiamo il fascicolo perché, quando si apre uno slot, nulla di ciò che porti ti rimandi a casa.",
-    "primaryCta": "Triage gratuito",
-    "secondaryCta": "Vedi i pacchetti",
-    "note": "Il triage è gratuito e in giornata. I pacchetti sono a prezzo fisso: il prezzo che vedi è quello che paghi."
+    "eyebrow": "Barcellona · Studenti internazionali · Percorsi UE ed extra UE",
+    "title": "Il tuo TIE, il tuo Padrón, i tuoi appuntamenti: preparati, prenotati e giusti al primo colpo.",
+    "body": "Gli studenti extra UE hanno di norma un mese dall’ingresso per richiedere il TIE, e l’appuntamento è la parte che nessuno può accelerare. Leggiamo la tua autorizzazione, prepariamo la pratica e prenotiamo l’appuntamento a tuo nome, così quando se ne libera uno non c’è nulla nei documenti che ti rimandi a casa. Mandaci la tua data di ingresso e oggi stesso ti diciamo quanti giorni ti restano.",
+    "primaryCta": "Controlla gratis la mia scadenza",
+    "secondaryCta": "Vedi pacchetti e prezzi",
+    "note": "Il controllo è gratuito, in giornata e senza carta. Da lì in poi i prezzi sono fissi: il prezzo che vedi è quello che paghi."
+  },
+  "proof": {
+    "heading": "Quello che puoi pretendere da noi",
+    "items": [
+      "Un prezzo fisso, detto prima che tu paghi. Non fatturiamo nulla a ore.",
+      "Ogni modulo è presentato a tuo nome. Non firmiamo mai come tuo rappresentante.",
+      "Cifriamo ogni scansione del passaporto con una chiave propria e la cancelliamo 30 giorni dopo la chiusura della pratica.",
+      "Nessun appuntamento in sei settimane? Ti rimborsiamo metà e la pratica resta tua."
+    ]
   },
   "trust": {
     "heading": "Pensato per gli studenti di",
@@ -77,6 +86,14 @@
         "a": "No. Siamo un servizio indipendente di assistenza amministrativa. Prepariamo documenti a partire dalle informazioni che ci fornisci, prenotiamo appuntamenti e ti guidiamo nella procedura. Non ti rappresentiamo davanti ad alcuna autorità e non forniamo consulenza legale. Quando un caso richiede un’analisi giuridica, lo diciamo chiaramente e ti indirizziamo a un colegiado abogado."
       },
       {
+        "q": "Quanto costa e quando pago?",
+        "a": "Il prezzo sulla scheda è il prezzo intero. Non aggiungiamo nulla al pagamento, non fatturiamo a ore e non ci nascondiamo dentro nessuna tassa pubblica. Paghi quando il triage ha confermato quale percorso ti riguarda. Prima di allora non ci devi nulla, e se non possiamo aiutarti lo diciamo invece di prendere i tuoi soldi."
+      },
+      {
+        "q": "E se non si libera nessun appuntamento in tempo?",
+        "a": "Cerchiamo sul portale ufficiale fino a sei settimane dal tuo invio. Se in quella finestra non se ne libera nessuno, ti rimborsiamo metà del prezzo e tieni l’intero Ready File (moduli, copie, il Modelo 790, la verifica), così sei pronto il giorno in cui ne compare uno. Ricevi anche un certificato datato di ogni tentativo fatto. Gli uffici spagnoli di solito lo accettano come giustificazione per registrarsi in ritardo, anche se nessun funzionario è obbligato a farlo."
+      },
+      {
         "q": "Credo di aver già perso la scadenza. Vale la pena chiedere?",
         "a": "Sì, e meglio oggi che la settimana prossima. Il triage è gratuito e ti risponderemo con onestà. Se il tuo termine è scaduto, o sei in una situazione scaduta o irregolare, serve un’analisi giuridica che non siamo qualificati a fornire: te lo diremo e ti indirizzeremo altrove, invece di farci pagare."
       },
@@ -97,5 +114,12 @@
         "a": "No, e qualsiasi servizio che lo garantisca ti sta ingannando. La decisione spetta interamente alle autorità spagnole. Quello che controlliamo è che il fascicolo sia completo, corretto e presentato in tempo — ed è lì che nasce la maggior parte dei dinieghi."
       }
     ]
+  },
+  "close": {
+    "eyebrow": "Due modi per iniziare",
+    "title": "Inizia subito, oppure chiedi prima.",
+    "body": "Vai dritto alla pratica se sai quale pacchetto vuoi: oggi stesso iniziamo a costruirla. Se ci stai ancora ragionando, il controllo gratuito ti dice quale percorso ti riguarda e quanti giorni hai, e non costa nulla. In ogni caso saprai a che punto sei prima di spendere qualcosa.",
+    "primaryCta": "Controlla gratis la mia scadenza",
+    "secondaryCta": "Avvia la mia pratica"
   }
 }

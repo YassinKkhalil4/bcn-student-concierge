@@ -9,13 +9,15 @@
     "myFile": "Meine Akte",
     "beginIntake": "Aufnahme starten",
     "begin": "Starten",
-    "triage": "Kostenlose Ersteinschätzung"
+    "triage": "Kostenlose Ersteinschätzung",
+    "ctaPrimary": "Meine Frist kostenlos prüfen",
+    "ctaPrimaryShort": "Gratis prüfen"
   },
   "language": {
     "label": "Sprache"
   },
   "footer": {
-    "tagline": "Unabhängige Verwaltungsbegleitung für internationale Studierende in Barcelona. Kostenlose Ersteinschätzung am selben Tag — zuerst.",
+    "tagline": "Wir bereiten die spanischen Aufenthaltsunterlagen vor, bei denen internationale Studierende in Barcelona keinen Fehler machen dürfen: den TIE, den Padrón, die Formulare, die Termine. Unabhängig, zum Festpreis und immer auf deinen Namen.",
     "services": "Dienstleistungen",
     "packages": "Pakete & Preise",
     "guide": "Free guide (PDF)",

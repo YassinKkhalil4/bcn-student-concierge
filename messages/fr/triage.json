@@ -1,10 +1,10 @@
 {
   "page": {
-    "metaTitle": "Triage gratuit — où vous en êtes aujourd’hui",
-    "metaDescription": "Envoyez-nous votre cachet d’entrée, votre autorisation et votre attestation d’inscription. Nous vous disons quelle voie s’applique, combien de jours il vous reste et ce qui est encore récupérable. Sans frais ni engagement.",
+    "metaTitle": "Vérification gratuite de votre délai : TIE et Padrón pour les étudiants à Barcelone",
+    "metaDescription": "Indiquez-nous votre nationalité et la date de votre entrée en Espagne : le jour même, nous vous dirons quel parcours s’applique (EX-17 ou EX-18), combien de jours il reste sur votre délai, et ce qui est encore rattrapable. Sans frais, sans carte, sans engagement.",
     "eyebrow": "Triage gratuit · le jour même",
-    "title": "Vous êtes ici depuis deux semaines. Le compte à rebours a commencé le jour de votre arrivée.",
-    "intro": "Les étudiants hors UE disposent normalement d’un mois à compter de l’entrée pour demander la TIE. Si vous êtes arrivé la première semaine de septembre, ce délai expire début octobre, et le rendez-vous est la partie que personne ne peut accélérer. Dites-nous où vous en êtes et nous vous dirons où vous vous situez.",
+    "title": "Donnez-nous votre date d’entrée. Nous vous dirons combien de jours il vous reste.",
+    "intro": "Les étudiants hors UE disposent normalement d’un mois à compter de l’entrée pour demander le TIE, et le rendez-vous est la partie que personne ne peut accélérer. Envoyez les trois documents : aujourd’hui vous saurez quel parcours s’applique, ce qui est encore rattrapable, et si vous avez vraiment besoin de nous.",
     "whatYouGet": "Ce que vous recevez aujourd’hui",
     "steps": [
       "Quelle voie s’applique à vous — EX-17 ou EX-18 — lue sur votre propre autorisation, et non devinée d’après votre passeport",
@@ -56,13 +56,13 @@
   "done": {
     "title": "Nous l’avons bien reçue.",
     "body": "Votre référence est {ref}. Nous répondrons aujourd’hui à l’adresse que vous nous avez donnée, avec la voie qui s’applique, les jours qu’il vous reste et ce qu’il faut faire en premier.",
-    "note": "Si vous n’avez pas joint les trois documents, envoyez-les en réponse à cet e-mail : plus nous pouvons lire, plus la réponse est précise."
+    "note": "Si vous n’avez pas joint les trois documents, envoyez-les en réponse à cet e-mail. Plus nous pouvons lire, plus la réponse est précise. En attendant, le guide gratuit couvre tout le processus de bout en bout."
   },
   "cta": {
     "eyebrow": "Commencez ici",
     "title": "Vous ne savez pas où vous en êtes ? Découvrez-le gratuitement.",
     "body": "Envoyez-nous votre cachet d’entrée, votre autorisation et votre attestation d’inscription. Nous vous dirons quelle voie s’applique, combien de jours il vous reste et ce qui est encore récupérable. Sans frais, sans engagement, et si vous n’avez pas besoin de nous, nous vous le dirons.",
-    "button": "Obtenir le triage gratuit",
+    "button": "Vérifier mon délai gratuitement",
     "note": "Le jour même. Quinze minutes de votre temps."
   },
   "fixerApplication": "I’d like to apply for The Fixer waitlist."

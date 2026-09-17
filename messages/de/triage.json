@@ -1,10 +1,10 @@
 {
   "page": {
-    "metaTitle": "Kostenlose Ersteinschätzung — wo du heute stehst",
-    "metaDescription": "Schick uns deinen Einreisestempel, deine Genehmigung und deine Immatrikulationsbescheinigung. Wir sagen dir, welcher Weg für dich gilt, wie viele Tage dir bleiben und was noch zu retten ist. Kostenlos und unverbindlich.",
+    "metaTitle": "Kostenlose Fristprüfung: TIE und Padrón für Studierende in Barcelona",
+    "metaDescription": "Sag uns deine Staatsangehörigkeit und das Datum deiner Einreise nach Spanien. Noch am selben Tag sagen wir dir, welcher Weg gilt (EX-17 oder EX-18), wie viele Tage dir bleiben und was sich noch retten lässt. Kostenlos, ohne Karte, ohne Verpflichtung.",
     "eyebrow": "Kostenlose Ersteinschätzung · am selben Tag",
-    "title": "Du bist seit zwei Wochen hier. Die Uhr läuft seit deiner Landung.",
-    "intro": "Studierende von außerhalb der EU haben in der Regel einen Monat ab Einreise Zeit, die TIE zu beantragen. Wenn du in der ersten Septemberwoche angekommen bist, schließt sich dieses Fenster Anfang Oktober — und der Termin ist der Teil, den niemand beschleunigen kann. Sag uns, wo du stehst, und wir sagen dir, wie es um dich steht.",
+    "title": "Sag uns dein Einreisedatum. Wir sagen dir, wie viele Tage dir bleiben.",
+    "intro": "Studierende von außerhalb der EU haben ab der Einreise in der Regel einen Monat Zeit, den TIE zu beantragen, und der Termin ist der Teil, den niemand beschleunigen kann. Schick die drei Dokumente, und noch heute weißt du, welcher Weg gilt, was sich noch retten lässt und ob du uns überhaupt brauchst.",
     "whatYouGet": "Was du noch heute bekommst",
     "steps": [
       "Welcher Weg für dich gilt — EX-17 oder EX-18 — abgelesen an deiner eigenen Genehmigung, nicht aus dem Pass erraten",
@@ -56,13 +56,13 @@
   "done": {
     "title": "Angekommen.",
     "body": "Deine Referenz lautet {ref}. Wir antworten dir noch heute an die angegebene E-Mail-Adresse — mit dem Weg, der für dich gilt, den verbleibenden Tagen und dem ersten Schritt.",
-    "note": "Falls du die drei Dokumente nicht angehängt hast, schick sie als Antwort auf diese E-Mail: je mehr wir lesen können, desto genauer die Antwort."
+    "note": "Wenn du die drei Dokumente nicht angehängt hast, schick sie als Antwort auf diese E-Mail. Je mehr wir lesen können, desto genauer die Antwort. In der Zwischenzeit deckt der kostenlose Leitfaden den ganzen Ablauf von Anfang bis Ende ab."
   },
   "cta": {
     "eyebrow": "Hier anfangen",
     "title": "Du weißt nicht, wo du stehst? Finde es kostenlos heraus.",
     "body": "Schick uns deinen Einreisestempel, deine Genehmigung und deine Immatrikulationsbescheinigung. Wir sagen dir, welcher Weg für dich gilt, wie viele Tage dir bleiben und was noch zu retten ist. Kostenlos, unverbindlich — und wenn du uns nicht brauchst, sagen wir das.",
-    "button": "Kostenlose Ersteinschätzung",
+    "button": "Meine Frist kostenlos prüfen",
     "note": "Am selben Tag. Fünfzehn Minuten deiner Zeit."
   },
   "fixerApplication": "I’d like to apply for The Fixer waitlist."

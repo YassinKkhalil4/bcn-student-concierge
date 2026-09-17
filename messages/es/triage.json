@@ -1,10 +1,10 @@
 {
   "page": {
-    "metaTitle": "Triaje gratuito — en qué situación estás hoy",
-    "metaDescription": "Envíanos tu sello de entrada, tu autorización y tu carta de matrícula. Te decimos qué vía te corresponde, cuántos días te quedan y qué sigue siendo recuperable. Sin coste y sin compromiso.",
+    "metaTitle": "Consulta gratuita de plazos: TIE y Padrón para estudiantes en Barcelona",
+    "metaDescription": "Dinos tu nacionalidad y la fecha en que entraste en España y el mismo día te decimos qué vía te corresponde (EX-17 o EX-18), cuántos días te quedan de plazo y qué se puede recuperar todavía. Sin coste, sin tarjeta y sin compromiso.",
     "eyebrow": "Triaje gratuito · el mismo día",
-    "title": "Llevas dos semanas aquí. El reloj empezó el día que aterrizaste.",
-    "intro": "Los estudiantes de fuera de la UE suelen tener un mes desde la entrada para solicitar la TIE. Si llegaste la primera semana de septiembre, esa ventana se cierra a principios de octubre, y la cita es la parte que nadie puede acelerar. Cuéntanos dónde estás y te decimos en qué situación te encuentras.",
+    "title": "Dinos tu fecha de entrada. Te decimos cuántos días te quedan.",
+    "intro": "Los estudiantes de fuera de la UE suelen tener un mes desde la entrada para solicitar el TIE, y la cita es la parte que nadie puede acelerar. Manda los tres documentos y hoy mismo sabrás qué vía te corresponde, qué se puede recuperar todavía y si de verdad nos necesitas.",
     "whatYouGet": "Lo que recibes hoy mismo",
     "steps": [
       "Qué vía te corresponde —EX-17 o EX-18— leída en tu propia autorización, no deducida de tu pasaporte",
@@ -56,13 +56,13 @@
   "done": {
     "title": "Lo hemos recibido.",
     "body": "Tu referencia es {ref}. Te responderemos hoy al correo que nos has dado, con la vía que te corresponde, los días que te quedan y qué hacer primero.",
-    "note": "Si no adjuntaste los tres documentos, envíalos respondiendo a ese correo: cuanto más podamos leer, más exacta será la respuesta."
+    "note": "Si no adjuntaste los tres documentos, mándalos respondiendo a ese correo. Cuanto más podamos leer, más exacta será la respuesta. Mientras esperas, la guía gratuita cubre todo el proceso de principio a fin."
   },
   "cta": {
     "eyebrow": "Empieza aquí",
     "title": "¿No sabes en qué situación estás? Averígualo gratis.",
     "body": "Envíanos tu sello de entrada, tu autorización y tu carta de matrícula. Te diremos qué vía te corresponde, cuántos días te quedan y qué sigue siendo recuperable. Sin coste, sin compromiso y, si no nos necesitas, te lo diremos.",
-    "button": "Quiero el triaje gratuito",
+    "button": "Consultar mi plazo gratis",
     "note": "El mismo día. Quince minutos de tu tiempo."
   },
   "fixerApplication": "I’d like to apply for The Fixer waitlist."

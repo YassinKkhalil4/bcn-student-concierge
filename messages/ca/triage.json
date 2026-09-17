@@ -1,10 +1,10 @@
 {
   "page": {
-    "metaTitle": "Triatge gratuït — en quina situació estàs avui",
-    "metaDescription": "Envia’ns el teu segell d’entrada, la teva autorització i la teva carta de matrícula. Et diem quina via et correspon, quants dies et queden i què encara es pot recuperar. Sense cost i sense compromís.",
+    "metaTitle": "Consulta gratuïta de terminis: TIE i Padró per a estudiants a Barcelona",
+    "metaDescription": "Digues-nos la teva nacionalitat i la data en què vas entrar a Espanya i el mateix dia et diem quina via et correspon (EX-17 o EX-18), quants dies et queden de termini i què es pot recuperar encara. Sense cost, sense targeta i sense compromís.",
     "eyebrow": "Triatge gratuït · el mateix dia",
-    "title": "Fa dues setmanes que ets aquí. El rellotge va començar el dia que vas aterrar.",
-    "intro": "Els estudiants de fora de la UE solen tenir un mes des de l’entrada per sol·licitar la TIE. Si vas arribar la primera setmana de setembre, aquesta finestra es tanca a principis d’octubre, i la cita és la part que ningú no pot accelerar. Explica’ns on ets i et direm en quina situació et trobes.",
+    "title": "Digues-nos la teva data d’entrada. Et diem quants dies et queden.",
+    "intro": "Els estudiants de fora de la UE solen tenir un mes des de l’entrada per sol·licitar el TIE, i la cita és la part que ningú pot accelerar. Envia els tres documents i avui mateix sabràs quina via et correspon, què es pot recuperar encara i si de debò ens necessites.",
     "whatYouGet": "El que reps avui mateix",
     "steps": [
       "Quina via et correspon —EX-17 o EX-18— llegida a la teva pròpia autorització, no deduïda del teu passaport",
@@ -56,13 +56,13 @@
   "done": {
     "title": "Ho hem rebut.",
     "body": "La teva referència és {ref}. Et respondrem avui al correu que ens has donat, amb la via que et correspon, els dies que et queden i què fer primer.",
-    "note": "Si no vas adjuntar els tres documents, envia’ls responent aquell correu: com més puguem llegir, més exacta serà la resposta."
+    "note": "Si no vas adjuntar els tres documents, envia’ls responent a aquell correu. Com més puguem llegir, més exacta serà la resposta. Mentre esperes, la guia gratuïta cobreix tot el procés de principi a fi."
   },
   "cta": {
     "eyebrow": "Comença aquí",
     "title": "No saps en quina situació estàs? Descobreix-ho gratis.",
     "body": "Envia’ns el teu segell d’entrada, la teva autorització i la teva carta de matrícula. Et direm quina via et correspon, quants dies et queden i què encara es pot recuperar. Sense cost, sense compromís i, si no ens necessites, t’ho direm.",
-    "button": "Vull el triatge gratuït",
+    "button": "Consultar el meu termini gratis",
     "note": "El mateix dia. Quinze minuts del teu temps."
   },
   "fixerApplication": "I’d like to apply for The Fixer waitlist."

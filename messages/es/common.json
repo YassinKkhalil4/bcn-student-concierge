@@ -9,13 +9,15 @@
     "myFile": "Mi expediente",
     "beginIntake": "Iniciar el alta",
     "begin": "Empezar",
-    "triage": "Triaje gratuito"
+    "triage": "Triaje gratuito",
+    "ctaPrimary": "Consultar mi plazo gratis",
+    "ctaPrimaryShort": "Consulta gratis"
   },
   "language": {
     "label": "Idioma"
   },
   "footer": {
-    "tagline": "Acompañamiento administrativo independiente para estudiantes internacionales en Barcelona. Triaje gratuito el mismo día, antes que nada.",
+    "tagline": "Preparamos el papeleo de residencia en España que los estudiantes internacionales en Barcelona no pueden equivocar: el TIE, el Padrón, los formularios, las citas. Independientes, de precio cerrado y siempre a tu nombre.",
     "services": "Servicios",
     "packages": "Paquetes y precios",
     "guide": "Free guide (PDF)",
