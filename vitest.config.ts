@@ -15,6 +15,16 @@ export default defineConfig({
     include: ["tests/**/*.test.ts"],
     hookTimeout: 30_000,
     testTimeout: 30_000,
+    // next-intl must go through Vite's transform so the "next/navigation"
+    // alias below applies; as an external dep Node resolves it raw and fails.
+    server: { deps: { inline: ["next-intl"] } },
   },
-  resolve: { alias: { "@": path.resolve(import.meta.dirname, "./src") } },
+  resolve: {
+    alias: {
+      "@": path.resolve(import.meta.dirname, "./src"),
+      // next-intl's client navigation imports "next/navigation" without an
+      // extension, which Node's ESM resolver rejects outside the Next runtime.
+      "next/navigation": path.resolve(import.meta.dirname, "./node_modules/next/navigation.js"),
+    },
+  },
 });
