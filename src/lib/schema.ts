@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { isCountryCode } from "./countries/codes";
 import { isValidNie } from "./spanish-ids";
+import { getTier } from "./pricing";
 import { vkey } from "./validation-keys";
 
 /**
@@ -175,20 +176,33 @@ export const consentSchema = z.object({
    * can never be inferred from a default.
    */
   gdprDataProcessing: z.literal(true, {
-    message: vkey("consentProcessing"),
+    errorMap: () => ({ message: vkey("consentProcessing") }),
   }),
   gdprSensitiveDocuments: z.literal(true, {
-    message: vkey("consentDocuments"),
+    errorMap: () => ({ message: vkey("consentDocuments") }),
   }),
   disclaimerAcknowledged: z.literal(true, {
-    message: vkey("consentDisclaimer"),
+    errorMap: () => ({ message: vkey("consentDisclaimer") }),
   }),
   /** Genuinely optional — must not block submission. */
   marketingOptIn: z.boolean().default(false),
 });
 
+/**
+ * The package the student chose.
+ *
+ * The ids live in src/lib/pricing.ts, which is the single source of truth, and
+ * `getTier` also resolves the ids used in links sent out before the packages
+ * were renamed. Parsing through it means a stale link still opens the right
+ * package, and what reaches the database is always the canonical id.
+ */
+export const tierIdSchema = z
+  .string()
+  .refine((value) => getTier(value) !== undefined, vkey("chooseFromList"))
+  .transform((value) => getTier(value)!.id);
+
 export const intakeSchema = z.object({
-  tierId: z.enum(["baseline", "soft-landing", "turnkey"]),
+  tierId: tierIdSchema,
   identity: identitySchema,
   family: familySchema,
   address: addressSchema,

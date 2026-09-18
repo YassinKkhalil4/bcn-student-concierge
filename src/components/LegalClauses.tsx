@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { TIERS, tierPriceCents, formatEur, SERVICE_ROUTES, type ServiceRoute } from "@/lib/pricing";
@@ -47,12 +47,18 @@ export function LegalClauses({ doc }: { doc: LegalDoc }) {
   return clauses.map((clause, i) => (
     <Clause key={clause.heading} heading={clause.heading}>
       {clause.paragraphs.map((_, j) => (
-        <FragmentWithList key={j} showList={clause.priceListAfter === j}>
+        /*
+          The price list is BUILT only where the clause asks for it, not built
+          and then hidden. `priceLine` exists in the terms only, so rendering it
+          for every paragraph of the privacy notice and the scope page raised a
+          MISSING_MESSAGE on each one — errors on pages that were fine.
+        */
+        <Fragment key={j}>
           <p>{t.rich(`clauses.${i}.paragraphs.${j}`, { ...TAGS, controller })}</p>
-          <ul className="ml-5 list-disc space-y-1.5">
-            {TIERS.flatMap((tier) =>
-              SERVICE_ROUTES.map((route) => {
-                return (
+          {clause.priceListAfter === j && (
+            <ul className="ml-5 list-disc space-y-1.5">
+              {TIERS.flatMap((tier) =>
+                SERVICE_ROUTES.map((route) => (
                   <li key={`${tier.id}:${route}`}>
                     {t.rich("priceLine", {
                       name: tp(`${tier.id}.name`),
@@ -61,22 +67,12 @@ export function LegalClauses({ doc }: { doc: LegalDoc }) {
                       strong: (chunks) => <span className="font-medium text-ink">{chunks}</span>,
                     })}
                   </li>
-                );
-              }),
-            )}
-          </ul>
-        </FragmentWithList>
+                )),
+              )}
+            </ul>
+          )}
+        </Fragment>
       ))}
     </Clause>
   ));
-}
-
-/** The paragraph, and the price list only where the clause asks for it. */
-function FragmentWithList({ showList, children }: { showList: boolean; children: [ReactNode, ReactNode] }) {
-  return (
-    <>
-      {children[0]}
-      {showList && children[1]}
-    </>
-  );
 }
