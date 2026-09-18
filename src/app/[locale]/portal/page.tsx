@@ -47,8 +47,8 @@ export default async function PortalPage({
     // database that was reset). Not "closed" — just a stale sign-in.
     return (
       <div className="container-x py-16">
-        <h1 className="font-display text-3xl font-semibold text-ink">{t("notFoundTitle")}</h1>
-        <p className="mt-3 max-w-xl text-sm text-ink-muted">{t("notFoundBody")}</p>
+        <h1 className="text-display-lg text-ink">{t("notFoundTitle")}</h1>
+        <p className="prose-lede measure mt-5">{t("notFoundBody")}</p>
         <SignOut locale={locale} label={t("signOut")} />
       </div>
     );
@@ -57,8 +57,8 @@ export default async function PortalPage({
   if (!record.intake) {
     return (
       <div className="container-x py-16">
-        <h1 className="font-display text-3xl font-semibold text-ink">{t("closedTitle")}</h1>
-        <p className="mt-3 max-w-xl text-sm text-ink-muted">{t("closedBody")}</p>
+        <h1 className="text-display-lg text-ink">{t("closedTitle")}</h1>
+        <p className="prose-lede measure mt-5">{t("closedBody")}</p>
         <div className="mt-6 max-w-md">
           <InvoiceList invoices={invoices} hrefBase="/api/portal/invoices" copy={invoiceCopy} locale={locale} />
         </div>
@@ -80,38 +80,46 @@ export default async function PortalPage({
   const padron = appts.find((a) => a.kind === "padron");
 
   return (
-    <div className="container-x py-12 sm:py-16">
-      <div className="flex flex-wrap items-start justify-between gap-4">
+    <div className="container-x py-12 sm:py-16 lg:py-20">
+      <div className="flex flex-wrap items-start justify-between gap-6 border-t-3 border-accent pt-8">
         <div>
-          <p className="eyebrow">{t("eyebrow")}</p>
-          <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink">
+          <p className="font-sans text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-accent-deep">
+            {t("eyebrow")}
+          </p>
+          <h1 className="mt-4 text-display-lg text-ink">
             {t("greeting", { name: titleCase(record.intake.identity.givenName.split(" ")[0]!) })}
           </h1>
-          <p className="mt-2 text-sm text-ink-muted">
-            {t("reference")} <span className="font-mono font-medium text-ink">{record.ref}</span>
-            {tier && <> · {tp(`tiers.${tier.id}.name`)}</>} · {record.formId}
-          </p>
+          {/* The reference, the package and the form code, set in the mono
+              face: these are the three things a student is asked to quote. */}
+          <dl className="mt-5 flex flex-wrap items-baseline gap-x-8 gap-y-2 font-mono text-sm">
+            <div className="flex gap-2">
+              <dt className="text-ink-soft">{t("reference")}</dt>
+              <dd className="font-medium text-ink">{record.ref}</dd>
+            </div>
+            {tier && <dd className="text-ink-muted">{tp(`tiers.${tier.id}.name`)}</dd>}
+            <dd className="text-ink-muted">{record.formId}</dd>
+          </dl>
         </div>
         <SignOut locale={locale} label={t("signOut")} />
       </div>
 
       {submitted && (
-        <p role="status" className="mt-8 rounded-lg bg-olive/10 px-4 py-3 text-sm text-olive">
+        <p role="status" className="mt-8 border-l-2 border-ink bg-paper-dim px-4 py-3 text-sm font-medium text-ink">
           {t("submitted")}
         </p>
       )}
       {checkout === "cancelled" && !paid && (
-        <p role="status" className="mt-8 rounded-lg bg-bone-warm px-4 py-3 text-sm text-ink-muted">
+        <p role="status" className="mt-8 border-l-2 border-paper-edge bg-paper-dim px-4 py-3 text-sm text-ink-muted">
           {t("checkoutCancelled")}
         </p>
       )}
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+      <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12">
         <div className="space-y-8">
           {!paid && record.paymentStatus === "pending" && (
-            <section className="rounded-2xl border border-terracotta/30 bg-white p-6">
-              <h2 className="font-display text-xl font-semibold text-ink">{t("paymentTitle")}</h2>
-              <p className="mt-2 text-sm text-ink-muted">
+            <section className="border border-paper-edge border-t-3 border-t-accent bg-white p-6 sm:p-7">
+              <h2 className="text-display-md text-ink">{t("paymentTitle")}</h2>
+              <p className="prose-body mt-3">
                 {t("paymentBody")}
                 {price && <> {t("paymentTotal", { total: formatEur(price) })}</>}
               </p>
@@ -121,23 +129,23 @@ export default async function PortalPage({
             </section>
           )}
 
-          <section className="rounded-2xl border border-bone-line bg-white p-6">
-            <h2 className="font-display text-xl font-semibold text-ink">{t("passport")}</h2>
+          <section className="panel">
+            <h2 className="text-display-md text-ink">{t("passport")}</h2>
             <div className="mt-4">
               <DocumentUpload kinds={["passport"]} uploaded={uploadedKinds} />
             </div>
           </section>
 
-          <section className="rounded-2xl border border-bone-line bg-white p-6">
-            <h2 className="font-display text-xl font-semibold text-ink">{t("enrolment")}</h2>
+          <section className="panel">
+            <h2 className="text-display-md text-ink">{t("enrolment")}</h2>
             <div className="mt-4">
               <EnrolmentWizard person={person} uploaded={uploadedKinds} />
             </div>
           </section>
 
-          <section className="rounded-2xl border border-bone-line bg-white p-6">
-            <h2 className="font-display text-xl font-semibold text-ink">{t("padron")}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+          <section className="panel">
+            <h2 className="text-display-md text-ink">{t("padron")}</h2>
+            <p className="prose-body mt-3">
               {t("padronIntro", {
                 address: `${record.intake.address.streetName} ${record.intake.address.buildingNumber}`,
               })}
@@ -148,9 +156,9 @@ export default async function PortalPage({
           </section>
 
           {paid && (
-            <section className="rounded-2xl border border-bone-line bg-white p-6">
-              <h2 className="font-display text-xl font-semibold text-ink">{t("tasaTitle")}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{t("tasaIntro")}</p>
+            <section className="panel">
+              <h2 className="text-display-md text-ink">{t("tasaTitle")}</h2>
+              <p className="prose-body mt-3">{t("tasaIntro")}</p>
               <div className="mt-5">
                 <TasaGuide summary={buildTasa012(record.intake, record.formId)} />
               </div>
@@ -160,40 +168,40 @@ export default async function PortalPage({
 
         <aside className="space-y-6">
           {(police || padron) && (
-            <section className="rounded-2xl border border-olive/40 bg-white p-6">
-              <h2 className="text-sm font-semibold text-ink">{t("appointments")}</h2>
+            <section className="panel">
+              <h2 className="font-sans text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-ink-soft">{t("appointments")}</h2>
               {[police, padron].filter(Boolean).map((a) => {
                 const when = formatMadrid(a!.scheduledAt, locale === "en" ? "en-GB" : locale);
                 return (
                   <div key={a!.kind} className="mt-4">
-                    <p className="text-xs font-medium uppercase tracking-wide text-ink-soft">
+                    <p className="font-sans text-[0.625rem] font-bold uppercase tracking-[0.16em] text-ink-soft">
                       {a!.kind === "police" ? t("police") : t("padronAppointment")}
                     </p>
-                    <p className="mt-1 text-sm font-semibold text-ink">{when.date}, {when.time}</p>
-                    <p className="text-sm text-ink-muted">{a!.officeName}</p>
-                    <p className="text-sm text-ink-muted">{a!.officeAddress}</p>
-                    {a!.nearestMetro && <p className="text-sm text-ink-muted">{t("metro", { metro: a!.nearestMetro })}</p>}
+                    <p className="mt-1.5 font-mono text-sm font-medium text-ink">{when.date}, {when.time}</p>
+                    <p className="font-sans text-sm text-ink-muted">{a!.officeName}</p>
+                    <p className="font-sans text-sm text-ink-muted">{a!.officeAddress}</p>
+                    {a!.nearestMetro && <p className="font-sans text-sm text-ink-muted">{t("metro", { metro: a!.nearestMetro })}</p>}
                   </div>
                 );
               })}
               {police && (
                 <div className="mt-5 flex flex-col gap-2">
-                  <a href="/api/portal/appointment-sheet" className="btn-primary w-full !py-2.5">
+                  <a href="/api/portal/appointment-sheet" className="btn-primary w-full !px-4 !py-2.5">
                     {t("sheet")}
                   </a>
-                  <a href="/api/portal/form" className="btn-secondary w-full !py-2.5">
+                  <a href="/api/portal/form" className="btn-secondary w-full !px-4 !py-2.5">
                     {t("myForm", { form: record.formId })}
                   </a>
                 </div>
               )}
             </section>
           )}
-          <section className="rounded-2xl border border-bone-line bg-white p-6">
-            <h2 className="text-sm font-semibold text-ink">{t("invoices")}</h2>
+          <section className="panel">
+            <h2 className="font-sans text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-ink-soft">{t("invoices")}</h2>
             <InvoiceList invoices={invoices} hrefBase="/api/portal/invoices" copy={invoiceCopy} locale={locale} />
           </section>
-          <section className="rounded-2xl border border-bone-line bg-white p-6">
-            <h2 className="text-sm font-semibold text-ink">{t("reviewTitle")}</h2>
+          <section className="panel">
+            <h2 className="font-sans text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-ink-soft">{t("reviewTitle")}</h2>
             {record.documentsSubmittedAt ? (
               <p className="mt-2 text-sm text-ink-muted">
                 {t("reviewDone", {

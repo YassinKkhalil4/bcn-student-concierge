@@ -48,8 +48,8 @@ export function PadronWizard({
         <div className="mt-3 grid gap-2 sm:grid-cols-3">
           {PATHS.map((p) => (
             <label key={p}
-              className={`flex cursor-pointer flex-col rounded-xl border p-4 text-sm transition-colors ${
-                path === p ? "border-olive bg-olive/[0.04]" : "border-bone-line bg-white hover:bg-bone-warm/50"
+              className={`flex cursor-pointer flex-col border p-4 text-sm transition-colors ${
+                path === p ? "border-ink bg-paper-dim" : "border-paper-line bg-white hover:bg-paper-dim"
               }`}>
               <span className="flex items-center gap-2 font-medium text-ink">
                 <input type="radio" name="padron-path" value={p} checked={path === p}
@@ -82,7 +82,7 @@ function ResidencePath({ person, uploaded }: { person: Pick<IntakeData, "identit
         toPlaceholder={t("toPlaceholder")}
         actions={
           <a href={COLLECTIVE_AUTHORIZATION_URL} target="_blank" rel="noopener noreferrer"
-            className="rounded-md border border-bone-line px-2 py-1 text-xs font-medium text-ink-muted hover:bg-bone-warm">
+            className="border border-paper-line px-2 py-1 text-xs font-medium text-ink-muted hover:bg-paper-dim">
             {t("openForm")}
           </a>
         }
@@ -104,7 +104,7 @@ function OwnLeasePath({ uploaded, onNotMine }: { uploaded: readonly DocumentKind
       <p className="text-sm leading-relaxed text-ink-muted">{t("intro")}</p>
       <div className="space-y-2">
         {(["inMyName", "longEnough", "language"] as const).map((key) => (
-          <label key={key} className="flex cursor-pointer items-start gap-3 rounded-lg border border-bone-line bg-white p-3 text-sm text-ink">
+          <label key={key} className="flex cursor-pointer items-start gap-3 border border-paper-line bg-white p-3 text-sm text-ink">
             <input type="checkbox" checked={checks[key]} onChange={() => toggle(key)} className="mt-0.5" />
             {t(key)}
           </label>
@@ -116,7 +116,7 @@ function OwnLeasePath({ uploaded, onNotMine }: { uploaded: readonly DocumentKind
           {!checks.inMyName && (
             <li>
               {t.rich("notMine", { strong })}{" "}
-              <button type="button" onClick={onNotMine} className="font-medium text-olive underline">
+              <button type="button" onClick={onNotMine} className="font-medium text-accent-deep underline">
                 {t("switch")}
               </button>
             </li>
@@ -146,7 +146,7 @@ function NotInNamePath({ uploaded }: { uploaded: readonly DocumentKind[] }) {
     <div className="space-y-5">
       <p className="text-sm leading-relaxed text-ink-muted">{t.rich("intro", { em })}</p>
       <AuthorizationForm />
-      <div className="rounded-xl border border-bone-line bg-white p-5">
+      <div className="border border-paper-line bg-white p-5">
         <h4 className="text-sm font-semibold text-ink">{t("signTitle")}</h4>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-ink-muted">
           <li>{t.rich("signByHand", { strong })}</li>

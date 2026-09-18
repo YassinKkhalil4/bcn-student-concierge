@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 function Document() {
   const t = useTranslations("legal.scope");
   return (
-    <LegalPage eyebrow={t("eyebrow")} title={t("title")} updated="2026-09-10">
+    <LegalPage label={t("eyebrow")} title={t("title")} updated="2026-09-10">
       <LegalDisclaimer variant="prominent" />
       <LegalClauses doc="scope" />
     </LegalPage>

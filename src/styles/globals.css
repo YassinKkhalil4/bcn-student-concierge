@@ -2,10 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * ONE SHAPE RULE, and it is the only one on the site:
+ *
+ *   Primary actions and the brand mark carry the 45° chamfer.
+ *   Everything else is square, and hairline rules do the grouping.
+ *
+ * There are no rounded corners anywhere. The chamfer is the guide's corner —
+ * it is on the cover, on the download button, and now on every button that
+ * commits a student to something. Because it is the only shape event on the
+ * page, it reads as a mark rather than as decoration.
+ */
+
 @layer base {
   :root {
-    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    /* Set by next/font in src/app/layout.tsx. The fallbacks here are only for
+       the first paint; nothing renders in a system serif any more. */
+    --font-sans: "Archivo", system-ui, -apple-system, sans-serif;
+    --font-serif: "Source Serif 4", Georgia, serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+    /* Focus indicator. Crimson clears 3:1 on paper but only 2.85:1 on navy, so
+       the dark field overrides it below rather than shipping a ring nobody with
+       low vision can find. */
+    --focus: theme("colors.accent.DEFAULT");
+    --focus-offset: theme("colors.paper.DEFAULT");
   }
 
   html {
@@ -14,18 +35,40 @@
   }
 
   body {
-    @apply bg-bone text-ink antialiased;
+    @apply bg-paper font-sans text-ink antialiased;
     font-feature-settings: "kern", "liga";
+  }
+
+  /* Tabular figures everywhere a number is compared to another number: prices
+     down a column, dates in a list, a case reference beside its label. */
+  .font-mono,
+  code,
+  kbd,
+  samp {
+    font-variant-numeric: tabular-nums;
   }
 
   /* Visible focus for keyboard users; suppressed for mouse clicks. */
   :focus-visible {
-    @apply outline-none ring-2 ring-olive ring-offset-2 ring-offset-bone;
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* The dark field. Applied to a section, it re-points every foreground token
+     and the focus ring at their legible-on-navy counterparts. */
+  .on-ink {
+    @apply bg-ink text-onink;
+    --focus: theme("colors.accent.bright");
+    --focus-offset: theme("colors.ink.DEFAULT");
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       transition-duration: 0.01ms !important;
     }
@@ -34,48 +77,155 @@
 
 @layer components {
   .container-x {
-    @apply mx-auto w-full max-w-content px-6 sm:px-8;
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-12;
   }
 
-  .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.18em] text-olive-light;
+  /* Vertical rhythm. Three steps, used in this order down a page so the eye
+     gets a rest between the dense parts. */
+  .section {
+    @apply py-20 sm:py-28 lg:py-32;
   }
+  .section-tight {
+    @apply py-14 sm:py-16;
+  }
+  .section-band {
+    @apply py-16 sm:py-20;
+  }
+
+  /* Prose measure. Long copy never runs wider than this, whatever the grid. */
+  .measure {
+    @apply max-w-measure;
+  }
+
+  /* Reading type: the serif, 16px and up only. Below that it is set in
+     Archivo, because a 13px serif label is a legibility tax with no payoff. */
+  .prose-lede {
+    @apply font-serif text-lede text-ink-muted;
+  }
+  .prose-body {
+    @apply font-serif text-read text-ink-muted;
+  }
+
+  /*
+    The label rule. Replaces the old `.eyebrow`, which had multiplied to one
+    per section and turned every heading into the same three-part chord. This
+    one is rationed: see the section-header comments in the pages.
+  */
+  .rule-label {
+    @apply flex items-center gap-3 font-sans text-[0.6875rem] font-bold
+           uppercase tracking-[0.2em] text-accent-deep;
+  }
+  .rule-label::before {
+    content: "";
+    @apply inline-block h-px w-8 flex-none bg-accent;
+  }
+  .on-ink .rule-label {
+    @apply text-accent-bright;
+  }
+
+  /* ── Controls ─────────────────────────────────────────────────────────── */
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3
-           text-sm font-semibold transition-colors disabled:cursor-not-allowed
-           disabled:opacity-50;
-  }
-  .btn-primary { @apply btn bg-olive text-bone hover:bg-olive-deep; }
-  .btn-secondary {
-    @apply btn border border-bone-line bg-transparent text-ink hover:bg-bone-warm;
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-center
+           font-sans text-sm font-bold tracking-tight transition-colors
+           disabled:cursor-not-allowed disabled:opacity-50;
   }
 
-  /* The guide's corner: cut at 45°, never rounded. --chamfer sets the size. */
+  /*
+    Primary: chamfered, so the clip-path eats any outline drawn outside it.
+    The focus ring is therefore drawn INSIDE the button with an inset shadow,
+    which survives the clip. Without this, keyboard focus on the site's most
+    important control was invisible.
+  */
+  .btn-primary {
+    @apply btn chamfer bg-accent text-paper hover:bg-accent-deep;
+    --chamfer: 10px;
+  }
+  .btn-primary:focus-visible {
+    outline: none;
+    box-shadow:
+      inset 0 0 0 2px var(--focus-offset),
+      inset 0 0 0 4px theme("colors.ink.DEFAULT");
+  }
+  .on-ink .btn-primary:focus-visible {
+    box-shadow:
+      inset 0 0 0 2px theme("colors.ink.DEFAULT"),
+      inset 0 0 0 4px theme("colors.paper.DEFAULT");
+  }
+
+  /* Secondary: square, so the chamfer stays a signal and not a texture. */
+  .btn-secondary {
+    @apply btn border border-ink/25 bg-transparent text-ink
+           hover:border-ink hover:bg-ink hover:text-paper;
+  }
+  .on-ink .btn-secondary {
+    @apply border-onink/30 text-onink hover:border-onink hover:bg-onink hover:text-ink;
+  }
+
+  /* Text action: for the third-priority link that should not look like a button. */
+  .btn-quiet {
+    @apply inline-flex items-center gap-2 font-sans text-sm font-semibold text-ink
+           underline decoration-accent decoration-2 underline-offset-[6px]
+           transition-colors hover:text-accent-deep;
+  }
+
+  /* The guide's corner. --chamfer sets the size; the cut is always bottom-right. */
   .chamfer {
     clip-path: polygon(
-      0 0, 100% 0,
+      0 0,
+      100% 0,
       100% calc(100% - var(--chamfer, 12px)),
       calc(100% - var(--chamfer, 12px)) 100%,
       0 100%
     );
   }
 
+  /* ── Forms ────────────────────────────────────────────────────────────── */
+
   .field-label {
-    @apply block text-sm font-medium text-ink;
+    @apply block font-sans text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-ink;
   }
 
   /* text-transform: uppercase is presentational only. The authoritative
      uppercase conversion happens in the zod schema on the server — CSS here
      just stops the input looking different from what will be filed. */
   .field-input {
-    @apply mt-1.5 w-full rounded-lg border border-bone-line bg-white px-3.5 py-2.5
-           text-sm text-ink placeholder:text-ink-soft focus:border-olive
-           focus:outline-none focus:ring-1 focus:ring-olive;
+    @apply mt-2 block w-full border border-paper-edge bg-white px-3.5 py-2.5
+           font-sans text-[0.9375rem] text-ink transition-colors
+           placeholder:text-ink-soft hover:border-ink/40
+           focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
   }
-  .field-input-upper { @apply field-input uppercase placeholder:normal-case; }
+  .field-input-upper {
+    @apply field-input uppercase placeholder:normal-case;
+  }
+  select.field-input {
+    @apply cursor-pointer;
+  }
 
+  .field-hint {
+    @apply mt-2 font-sans text-xs leading-relaxed text-ink-soft;
+  }
+
+  /* Errors are the accent at its darkest, with a weight change and a rule, so
+     the message does not rely on hue alone. */
   .field-error {
-    @apply mt-1.5 text-xs font-medium text-terracotta;
+    @apply mt-2 border-l-2 border-accent pl-2.5 font-sans text-xs font-semibold text-accent-deep;
+  }
+
+  /* ── Surfaces ─────────────────────────────────────────────────────────── */
+
+  /*
+    A panel is a square white plate with a hairline. It is used only where a
+    thing is genuinely separable from the page — an upload, an invoice list, a
+    step of a wizard. Grouping that is merely visual uses a rule instead.
+  */
+  .panel {
+    @apply border border-paper-line bg-white p-6 sm:p-7;
+  }
+  .panel-accent {
+    @apply border-l-2 border-l-accent border-y-paper-line border-r-paper-line bg-white p-6 sm:p-7;
+  }
+  .panel-quiet {
+    @apply border border-paper-line bg-paper-dim p-5 sm:p-6;
   }
 }

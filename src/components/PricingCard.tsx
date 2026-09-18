@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { CheckMark, ArrowMark } from "@/components/icons";
 import {
   TIERS,
   formatEur,
@@ -25,7 +26,7 @@ export const PRICING_TAGS = {
   strong: (chunks: ReactNode) => <strong className="font-semibold text-ink">{chunks}</strong>,
   em: (chunks: ReactNode) => <em>{chunks}</em>,
   code: (chunks: ReactNode) => <code className="font-mono text-[0.92em]">{chunks}</code>,
-  warn: (chunks: ReactNode) => <span className="text-terracotta">{chunks}</span>,
+  warn: (chunks: ReactNode) => <span className="text-accent-deep">{chunks}</span>,
 };
 
 /**
@@ -39,12 +40,19 @@ export const PRICING_TAGS = {
  * `compact` (the home page) lists only each feature's heading; the full text
  * is on /pricing. The figures are the same component either way, so the two
  * pages cannot disagree.
+ *
+ * SHAPE: this is a column in a ruled spread, not a floating card. The box,
+ * the shadow and the radius were carrying no information — the prices are what
+ * distinguish these three, and columns let the price rows line up across the
+ * spread so they can actually be read against each other. The chosen package
+ * is marked by ground and weight instead of by elevation.
  */
 export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: boolean }) {
   const t = useTranslations("pricing");
   const key = (k: string) => `tiers.${tier.id}.${k}`;
   const features = t.raw(key("features")) as Feature[];
-  const number = String(TIERS.findIndex((x) => x.id === tier.id) + 1).padStart(2, "0");
+  const index = TIERS.findIndex((x) => x.id === tier.id);
+  const number = String(index + 1).padStart(2, "0");
   const routeLabel: Record<ServiceRoute, string> = {
     eu: t("card.routeEu"),
     "non-eu": t("card.routeNonEu"),
@@ -54,35 +62,47 @@ export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: b
   return (
     <div
       className={[
-        "relative flex flex-col rounded-2xl border p-7 transition-shadow",
-        tier.featured ? "border-olive bg-white shadow-lg shadow-olive/5" : "border-bone-line bg-white/60 hover:shadow-md",
+        "relative flex flex-col px-0 py-8 lg:px-8 lg:py-10",
+        // Hairlines between columns on the spread; stacked rules on mobile.
+        "border-b border-paper-line lg:border-b-0 lg:border-r lg:last:border-r-0",
+        // The featured column is marked by its ground and a crimson cap rule,
+        // never by a drop shadow.
+        tier.featured ? "bg-paper-dim lg:-mt-px lg:border-t-3 lg:border-t-accent" : "",
       ].join(" ")}
     >
-      {badge && (
-        <span
-          className={[
-            "absolute -top-3 left-7 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider",
-            tier.waitlist ? "border border-terracotta/40 bg-bone text-terracotta" : "bg-olive text-bone",
-          ].join(" ")}
-        >
-          {badge}
-        </span>
-      )}
+      <div className="flex items-baseline justify-between gap-4">
+        <p className="font-mono text-sm font-medium text-accent">{number}</p>
+        {badge && (
+          <p
+            className={[
+              "font-sans text-[0.625rem] font-bold uppercase tracking-[0.16em]",
+              tier.waitlist ? "text-ink-soft" : "text-accent-deep",
+            ].join(" ")}
+          >
+            {badge}
+          </p>
+        )}
+      </div>
 
-      <p className="font-mono text-xs font-semibold text-ink-soft">{number}</p>
-      <h3 className="mt-1 font-display text-xl font-semibold text-ink">{t(key("name"))}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{t(key("tagline"))}</p>
+      <h3 className="mt-4 text-display-md text-ink">{t(key("name"))}</h3>
+      <p className="prose-body mt-3">{t(key("tagline"))}</p>
       {t.has(key("note")) && (
-        <p className="mt-3 text-sm italic leading-relaxed text-terracotta">{t(key("note"))}</p>
+        <p className="mt-4 border-l-2 border-accent pl-3.5 font-sans text-sm leading-relaxed text-accent-deep">
+          {t(key("note"))}
+        </p>
       )}
 
-      <dl className="mt-6 divide-y divide-bone-line border-y border-bone-line">
+      {/* Tabular figures, so the euro amounts align down the spread. */}
+      <dl className="mt-7 border-t-2 border-ink">
         {(hasSinglePrice(tier) ? [null] : SERVICE_ROUTES).map((route) => (
-          <div key={route ?? "both"} className="flex items-baseline justify-between gap-3 py-4">
-            <dt className="text-xs font-medium uppercase tracking-wider text-ink-soft">
+          <div
+            key={route ?? "both"}
+            className="flex items-baseline justify-between gap-3 border-b border-paper-line py-3.5"
+          >
+            <dt className="font-sans text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-ink-soft">
               {route ? routeLabel[route] : t("card.bothRoutes")}
             </dt>
-            <dd className="font-display text-2xl font-semibold text-ink">
+            <dd className="font-sans text-2xl font-extrabold tabular-nums tracking-tight text-ink">
               {formatEur(tierPriceCents(tier, route ?? "eu"))}
             </dd>
           </div>
@@ -90,23 +110,21 @@ export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: b
       </dl>
 
       {t.has(key("includes")) && (
-        <p className="mt-4 rounded-lg bg-olive/5 px-4 py-3 text-xs leading-relaxed text-ink-muted">
+        <p className="mt-5 border-l-2 border-paper-edge pl-3.5 font-sans text-xs leading-relaxed text-ink-muted">
           {t.rich(key("includes"), PRICING_TAGS)}
         </p>
       )}
 
       {tier.inherits && (
-        <p className="mt-5 text-sm font-medium text-olive">
+        <p className="mt-6 font-sans text-sm font-bold text-ink">
           {t("card.everythingIn", { name: t(`tiers.${tier.inherits}.name`) })}
         </p>
       )}
 
-      <ul className={`mt-4 space-y-3 ${tier.inherits ? "" : "mt-5"}`}>
+      <ul className={`space-y-3.5 ${tier.inherits ? "mt-4" : "mt-6"}`}>
         {features.map((feature, i) => (
-          <li key={feature.title} className="flex gap-3 text-sm leading-relaxed text-ink-muted">
-            <svg aria-hidden="true" viewBox="0 0 20 20" className="mt-0.5 h-4 w-4 flex-none text-olive-light" fill="currentColor">
-              <path fillRule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.8 6.8-6.8a1 1 0 0 1 1.4 0Z" clipRule="evenodd" />
-            </svg>
+          <li key={feature.title} className="flex gap-3 font-sans text-sm leading-relaxed text-ink-muted">
+            <CheckMark className="mt-1 h-3.5 w-3.5 flex-none text-accent" />
             <div className="min-w-0">
               {compact ? (
                 <span>{feature.title.replace(/\.$/, "")}</span>
@@ -119,20 +137,20 @@ export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: b
       </ul>
 
       {!compact && t.has(key("never")) && (
-        <p className="mt-5 text-sm leading-relaxed text-ink">{t.rich(key("never"), PRICING_TAGS)}</p>
+        <p className="mt-6 font-sans text-sm leading-relaxed text-ink">{t.rich(key("never"), PRICING_TAGS)}</p>
       )}
       {!compact && t.has(key("delivery")) && (
-        <p className="mt-5 text-sm leading-relaxed text-ink-muted">{t.rich(key("delivery"), PRICING_TAGS)}</p>
+        <p className="prose-body mt-6">{t.rich(key("delivery"), PRICING_TAGS)}</p>
       )}
 
       {!compact && (
-        <p className="mt-6 rounded-lg bg-bone-warm px-4 py-3 text-xs leading-relaxed text-ink-muted">
-          <span className="font-semibold text-ink">{t("card.bestFor")} </span>
+        <p className="mt-7 border-t border-paper-line pt-5 font-sans text-xs leading-relaxed text-ink-muted">
+          <span className="font-bold uppercase tracking-[0.12em] text-ink">{t("card.bestFor")} </span>
           {t(key("bestFor"))}
         </p>
       )}
 
-      <div className="mt-auto pt-7">
+      <div className="mt-auto pt-8">
         {tier.waitlist ? (
           // By application: the waitlist goes through triage, never checkout.
           <Link href={{ pathname: "/triage", query: { apply: tier.id } }} className="btn-secondary w-full">
@@ -160,10 +178,10 @@ function FeatureText({ t, base, feature }: { t: Translator; base: string; featur
       {t.rich(`${base}.body`, PRICING_TAGS)}
       {feature.extra !== undefined && <span className="mt-2 block">{t.rich(`${base}.extra`, PRICING_TAGS)}</span>}
       {feature.details && (
-        <ul className="mt-2 space-y-1.5">
+        <ul className="mt-2.5 space-y-1.5">
           {feature.details.map((detail, j) => (
-            <li key={detail} className="flex gap-2">
-              <span aria-hidden="true" className="text-terracotta">→</span>
+            <li key={detail} className="flex gap-2.5">
+              <ArrowMark className="mt-1 h-3 w-3 flex-none text-accent" />
               <span>{t(`${base}.details.${j}`)}</span>
             </li>
           ))}

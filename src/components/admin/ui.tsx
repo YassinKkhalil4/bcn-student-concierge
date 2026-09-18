@@ -28,18 +28,18 @@ export const BUCKET_LABEL: Record<CaseBucket, string> = {
 type Tone = "neutral" | "good" | "warn" | "alert" | "info" | "muted";
 
 const TONES: Record<Tone, string> = {
-  neutral: "bg-bone-warm text-ink-muted ring-bone-line",
-  good: "bg-olive/10 text-olive ring-olive/20",
-  warn: "bg-amber-50 text-amber-800 ring-amber-200",
-  alert: "bg-terracotta/10 text-terracotta ring-terracotta/25",
+  neutral: "bg-paper-dim text-ink-muted ring-paper-line",
+  good: "bg-accent-tint text-accent-deep ring-accent/20",
+  warn: "bg-paper-dim text-ink ring-paper-edge",
+  alert: "bg-accent-tint text-accent-deep ring-accent/30",
   info: "bg-sky-50 text-sky-800 ring-sky-200",
-  muted: "bg-transparent text-ink-soft ring-bone-line",
+  muted: "bg-transparent text-ink-soft ring-paper-line",
 };
 
 export function Badge({ tone = "neutral", children }: { tone?: Tone; children: ReactNode }) {
   return (
     <span
-      className={`inline-flex items-center whitespace-nowrap rounded-md px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${TONES[tone]}`}
+      className={`inline-flex items-center whitespace-nowrap px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${TONES[tone]}`}
     >
       {children}
     </span>
@@ -69,9 +69,9 @@ export function Card({
   className?: string;
 }) {
   return (
-    <section className={`rounded-xl border border-bone-line bg-white ${className}`}>
+    <section className={`border border-paper-line bg-white ${className}`}>
       {title && (
-        <header className="flex items-center justify-between gap-3 border-b border-bone-line px-5 py-3">
+        <header className="flex items-center justify-between gap-3 border-b border-paper-line px-5 py-3">
           <h2 className="text-sm font-semibold text-ink">{title}</h2>
           {action}
         </header>

@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { TIERS } from "@/lib/pricing";
 import { PricingCard } from "@/components/PricingCard";
+import { PageHeader } from "@/components/PageHeader";
 import { Modelo790Notice } from "@/components/Modelo790Notice";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
 import { JsonLd } from "@/components/JsonLd";
@@ -51,6 +52,19 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
   );
 }
 
+/**
+ * The price list.
+ *
+ * Three label rules on this page, no more: the cover, the honest notes, and
+ * what is not included. The guarantee, the routes note and the government-fee
+ * section used to carry one each, which turned six different arguments into
+ * six identical-looking blocks.
+ *
+ * The two long note lists are deliberately NOT the same component. "What we
+ * are honest about" is a ruled two-column register a reader works down; "not
+ * included" is a set of short blocks they scan. Making both a divided
+ * definition list is what made the bottom half of this page unreadable.
+ */
 function Pricing() {
   const t = useTranslations("pricing.page");
   const tt = useTranslations("triage");
@@ -58,25 +72,15 @@ function Pricing() {
   const honest = t.raw("honest") as { item: string; note: string }[];
   return (
     <>
-      <section className="border-b border-bone-line bg-bone-warm">
-        <div className="container-x py-16 sm:py-20">
-          <p className="eyebrow">{t("eyebrow")}</p>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
-            {t("intro")}
-          </p>
-        </div>
-      </section>
+      <PageHeader label={t("eyebrow")} title={t("title")} intro={t("intro")} />
 
       {/* Triage before the price list: someone out of time should not have to
           pick a package to find out where they stand. */}
-      <section className="border-b border-bone-line bg-olive/5">
-        <div className="container-x flex flex-wrap items-center justify-between gap-6 py-8">
+      <section className="border-b border-paper-line bg-paper-dim">
+        <div className="container-x flex flex-wrap items-center justify-between gap-6 py-7">
           <div className="max-w-xl">
-            <h2 className="font-display text-xl font-semibold text-ink">{tt("cta.title")}</h2>
-            <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">{tt("cta.note")}</p>
+            <h2 className="text-display-sm text-ink">{tt("cta.title")}</h2>
+            <p className="prose-body mt-2">{tt("cta.note")}</p>
           </div>
           <Link href="/triage" className="btn-primary">
             {tt("cta.button")}
@@ -84,84 +88,87 @@ function Pricing() {
         </div>
       </section>
 
-      <section className="container-x py-16 sm:py-20">
-        <div className="grid gap-6 lg:grid-cols-3">
-          {TIERS.map((tier) => (
-            <PricingCard key={tier.id} tier={tier} />
-          ))}
-        </div>
-        <p className="mt-8 text-sm text-ink-muted">{t("feesNote")}</p>
+      {/* The spread. Columns divided by hairlines so the price rows line up
+          across all three and can be read against each other. */}
+      <section className="section-band">
+        <div className="container-x">
+          <div className="grid border-t-2 border-ink lg:grid-cols-3">
+            {TIERS.map((tier) => (
+              <PricingCard key={tier.id} tier={tier} />
+            ))}
+          </div>
+          <p className="prose-body measure mt-8">{t("feesNote")}</p>
 
-        {/*
-          The six-week refund was a paragraph inside the "before you choose"
-          list, three screens below the price cards — the strongest argument on
-          the page, filed where nobody reads it. It belongs beside the prices.
-        */}
-        <div className="mt-14 max-w-3xl rounded-2xl border border-olive-light/40 bg-olive/5 p-7">
-          <p className="eyebrow">{t("guaranteeEyebrow")}</p>
-          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink">
-            {t("guaranteeTitle")}
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-ink-muted">{t("guaranteeBody")}</p>
-        </div>
-
-        <div className="mt-8 max-w-3xl rounded-2xl border border-bone-line bg-bone-warm p-7">
-          <p className="eyebrow">{t("routesEyebrow")}</p>
-          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink">
-            {t("routesTitle")}
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-ink-muted">{t("routesBody")}</p>
+          {/*
+            The six-week refund was a paragraph inside the "before you choose"
+            list, three screens below the price cards — the strongest argument
+            on the page, filed where nobody reads it. It belongs beside the
+            prices, and it is the only block here allowed a crimson cap rule.
+          */}
+          <div className="mt-16 grid gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-16">
+            <div className="border-t-3 border-accent bg-white p-7 sm:p-8">
+              <h2 className="text-display-md text-ink">{t("guaranteeTitle")}</h2>
+              <p className="prose-body mt-4">{t("guaranteeBody")}</p>
+            </div>
+            <div className="border-t border-paper-edge pt-7">
+              <h2 className="text-display-sm text-ink">{t("routesTitle")}</h2>
+              <p className="prose-body mt-3">{t("routesBody")}</p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* The notes that prevent complaints, stated before purchase rather than
-          discovered at a bank counter. */}
-      <section className="border-t border-bone-line py-16 sm:py-20">
+          discovered at a bank counter. A register: term on the left, the plain
+          truth about it on the right. */}
+      <section className="border-t border-paper-line section">
         <div className="container-x">
-          <div className="max-w-2xl">
-            <p className="eyebrow">{t("honestEyebrow")}</p>
-            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink">
-              {t("honestTitle")}
-            </h2>
+          <div className="max-w-3xl">
+            <p className="rule-label">{t("honestEyebrow")}</p>
+            <h2 className="mt-5 text-display-lg text-ink">{t("honestTitle")}</h2>
           </div>
-          <dl className="mt-10 max-w-3xl divide-y divide-bone-line border-y border-bone-line">
+          <dl className="mt-12 max-w-4xl border-t-2 border-ink">
             {honest.map((row) => (
-              <div key={row.item} className="grid gap-2 py-5 sm:grid-cols-3 sm:gap-6">
-                <dt className="font-medium text-ink">{row.item}</dt>
-                <dd className="text-sm leading-relaxed text-ink-muted sm:col-span-2">{row.note}</dd>
+              <div
+                key={row.item}
+                className="grid gap-2 border-b border-paper-line py-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] sm:gap-10"
+              >
+                <dt className="font-sans text-sm font-bold tracking-tight text-ink">{row.item}</dt>
+                <dd className="prose-body">{row.note}</dd>
               </div>
             ))}
           </dl>
         </div>
       </section>
 
-      <section className="border-y border-bone-line bg-bone-warm py-16 sm:py-20">
+      <section className="border-y border-paper-line bg-paper-dim section">
         <div className="container-x">
-          <div className="max-w-2xl">
-            <p className="eyebrow">{t("govEyebrow")}</p>
-            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink">{t("govTitle")}</h2>
-          </div>
+          <h2 className="max-w-2xl text-display-lg text-ink">{t("govTitle")}</h2>
           <div className="mt-10 max-w-3xl">
             <Modelo790Notice />
           </div>
         </div>
       </section>
 
-      <section className="container-x py-16 sm:py-20">
-        <div className="max-w-2xl">
-          <p className="eyebrow">{t("exclusionsEyebrow")}</p>
-          <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink">{t("exclusionsTitle")}</h2>
-        </div>
-        <dl className="mt-10 max-w-3xl divide-y divide-bone-line border-y border-bone-line">
-          {exclusions.map((row) => (
-            <div key={row.item} className="grid gap-2 py-5 sm:grid-cols-3 sm:gap-6">
-              <dt className="font-medium text-ink">{row.item}</dt>
-              <dd className="text-sm leading-relaxed text-ink-muted sm:col-span-2">{row.note}</dd>
-            </div>
-          ))}
-        </dl>
-        <div className="mt-12 max-w-3xl">
-          <LegalDisclaimer variant="prominent" />
+      {/* Not included. Short blocks, scanned rather than read — a second
+          divided register here would put the reader to sleep. */}
+      <section className="section">
+        <div className="container-x">
+          <div className="max-w-3xl">
+            <p className="rule-label">{t("exclusionsEyebrow")}</p>
+            <h2 className="mt-5 text-display-lg text-ink">{t("exclusionsTitle")}</h2>
+          </div>
+          <div className="mt-12 grid gap-x-12 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {exclusions.map((row) => (
+              <div key={row.item} className="border-t border-paper-edge pt-5">
+                <h3 className="font-sans text-sm font-bold tracking-tight text-ink">{row.item}</h3>
+                <p className="prose-body mt-2.5">{row.note}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-16 max-w-4xl">
+            <LegalDisclaimer variant="prominent" />
+          </div>
         </div>
       </section>
     </>

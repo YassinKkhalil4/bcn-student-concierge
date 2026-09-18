@@ -16,6 +16,7 @@ import { PadronWizard } from "@/components/portal/PadronWizard";
 import { EnrolmentWizard } from "@/components/portal/EnrolmentWizard";
 import { Modelo790Notice } from "@/components/Modelo790Notice";
 import { Link } from "@/i18n/navigation";
+import { TickMark } from "@/components/icons";
 import {
   IdentityStep,
   FamilyStep,
@@ -250,24 +251,40 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   const stepProps = { values, errors, set };
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
+    <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-14">
       <div>
-        <nav aria-label={t("steps.progress")} className="mb-9">
-          <ol className="flex flex-wrap gap-2 text-xs">
+        {/*
+          A progress register, not a row of pills. Each step is a column under
+          its own rule: ink once done, crimson for where you are, hairline for
+          what is still ahead. It reads as a position in a document rather than
+          as a set of buttons, and it survives six languages because each label
+          wraps under its own rule instead of reflowing the whole row.
+        */}
+        <nav aria-label={t("steps.progress")} className="mb-10">
+          <ol className="grid grid-cols-3 gap-x-4 gap-y-5 sm:grid-cols-6">
             {STEPS.map((s, i) => (
-              <li key={s}>
+              <li
+                key={s}
+                aria-current={i === step ? "step" : undefined}
+                className={[
+                  "border-t-2 pt-2.5",
+                  i < step ? "border-ink" : i === step ? "border-accent" : "border-paper-edge",
+                ].join(" ")}
+              >
                 <span
-                  aria-current={i === step ? "step" : undefined}
                   className={[
-                    "rounded-full px-3 py-1.5 font-medium",
-                    i === step
-                      ? "bg-olive text-bone"
-                      : i < step
-                        ? "bg-olive/10 text-olive"
-                        : "bg-bone-warm text-ink-soft",
+                    "flex h-3 items-center font-mono text-[0.6875rem] font-medium",
+                    i < step ? "text-ink" : i === step ? "text-accent" : "text-ink-soft",
                   ].join(" ")}
                 >
-                  {i < step ? "✓ " : ""}
+                  {i < step ? <TickMark className="h-3 w-3" /> : String(i + 1).padStart(2, "0")}
+                </span>
+                <span
+                  className={[
+                    "mt-1.5 block font-sans text-[0.6875rem] font-bold uppercase leading-tight tracking-[0.08em]",
+                    i <= step ? "text-ink" : "text-ink-soft",
+                  ].join(" ")}
+                >
                   {t(`steps.${s}`)}
                 </span>
               </li>
@@ -275,7 +292,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
           </ol>
         </nav>
 
-        <div className="rounded-2xl border border-bone-line bg-white p-7 sm:p-9">
+        <div className="border border-paper-edge border-t-3 border-t-ink bg-white p-6 sm:p-9">
           {step === 0 && <IdentityStep {...stepProps} />}
           {step === 1 && <FamilyStep {...stepProps} />}
           {step === 2 && <AddressStep {...stepProps} />}
@@ -286,21 +303,19 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
 
           {step === 5 && caseRef && (
             <div>
-              <h2 className="font-display text-xl font-semibold text-ink">
-                {t("wizard.uploadTitle")}
-              </h2>
+              <h2 className="text-display-md text-ink">{t("wizard.uploadTitle")}</h2>
               <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                 {t.rich("wizard.uploadIntro", {
                   ref: caseRef,
                   code: (chunks) => (
-                    <code className="rounded bg-bone-warm px-1.5 py-0.5 text-xs">{chunks}</code>
+                    <code className="bg-paper-dim px-1.5 py-0.5 text-xs">{chunks}</code>
                   ),
                 })}
               </p>
               <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                 {t.rich("wizard.uploadLater", {
                   link: (chunks) => (
-                    <Link href="/portal" className="font-medium text-olive underline">
+                    <Link href="/portal" className="font-medium text-accent-deep underline">
                       {chunks}
                     </Link>
                   ),
@@ -313,7 +328,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                   two screens read identically. */}
               <div className="mt-8 space-y-8">
                 <section>
-                  <h3 className="font-display text-lg font-semibold text-ink">{tp("passport")}</h3>
+                  <h3 className="text-display-sm text-ink">{tp("passport")}</h3>
                   <div className="mt-4">
                     <DocumentUpload kinds={["passport"]} />
                   </div>
@@ -322,14 +337,14 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                 {person && (
                   <>
                     <section>
-                      <h3 className="font-display text-lg font-semibold text-ink">{tp("enrolment")}</h3>
+                      <h3 className="text-display-sm text-ink">{tp("enrolment")}</h3>
                       <div className="mt-4">
                         <EnrolmentWizard person={person} />
                       </div>
                     </section>
 
                     <section>
-                      <h3 className="font-display text-lg font-semibold text-ink">{tp("padron")}</h3>
+                      <h3 className="text-display-sm text-ink">{tp("padron")}</h3>
                       <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                         {tp("padronIntro", {
                           address: `${person.address.streetName} ${person.address.buildingNumber}`,
@@ -361,7 +376,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                       ? t("wizard.openingCheckout")
                       : t("wizard.pay", { total: formatEur(price) })}
                   </button>
-                  <p className="mt-3 text-center text-xs text-ink-soft">{t("wizard.stripeNote")}</p>
+                  <p className="mt-4 text-center font-sans text-xs text-ink-soft">{t("wizard.stripeNote")}</p>
                 </>
               )}
             </div>
@@ -370,14 +385,14 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
           {submitError && (
             <p
               role="alert"
-              className="mt-6 rounded-lg bg-terracotta/5 px-4 py-3 text-sm font-medium text-terracotta"
+              className="mt-6 border-l-2 border-accent bg-accent-tint px-4 py-3 text-sm font-medium text-accent-deep"
             >
               {submitError}
             </p>
           )}
 
           {step < 5 && (
-            <div className="mt-9 flex items-center justify-between border-t border-bone-line pt-6">
+            <div className="mt-10 flex items-center justify-between gap-4 border-t border-paper-line pt-6">
               <button
                 type="button"
                 onClick={() => setStep((s) => Math.max(0, s - 1))}
@@ -395,14 +410,14 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
       </div>
 
       <aside className="lg:sticky lg:top-24 lg:self-start">
-        <div className="rounded-2xl border border-bone-line bg-white p-6">
-          <p className="eyebrow">{t("summary.selected")}</p>
-          <h2 className="mt-2.5 font-display text-lg font-semibold text-ink">
+        <div className="border border-paper-edge border-t-3 border-t-accent bg-white p-6">
+          <p className="font-sans text-[0.625rem] font-bold uppercase tracking-[0.2em] text-ink-soft">{t("summary.selected")}</p>
+          <h2 className="mt-3 text-display-sm text-ink">
             {tprice(`tiers.${tier.id}.name`)}
           </h2>
 
           {price !== null && route ? (
-            <dl className="mt-5 space-y-2 border-y border-bone-line py-4 text-sm">
+            <dl className="mt-5 space-y-2 border-y border-paper-line py-4 text-sm">
               <div className="flex justify-between">
                 <dt className="text-ink-muted">{t("summary.route")}</dt>
                 <dd className="text-ink">{tprice(route === "eu" ? "card.routeEu" : "card.routeNonEu")}</dd>
@@ -413,7 +428,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
               </div>
             </dl>
           ) : (
-            <div className="mt-5 border-y border-bone-line py-4">
+            <div className="mt-5 border-y border-paper-line py-4">
               <dl className="space-y-2 text-sm">
                 {SERVICE_ROUTES.map((r) => (
                   <div key={r} className="flex justify-between">

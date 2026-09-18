@@ -15,7 +15,7 @@ interface ClauseData {
 }
 
 const link = (href: string) => (chunks: ReactNode) => (
-  <Link href={href} className="text-olive underline">{chunks}</Link>
+  <Link href={href} className="text-accent-deep underline">{chunks}</Link>
 );
 
 /** Tags the legal texts may use; anything else in a message is a bug. */
@@ -25,7 +25,7 @@ const TAGS = {
   privacyLink: link("/privacy"),
   termsLink: link("/terms"),
   mail: (chunks: ReactNode) => (
-    <a href="mailto:privacy@bcnstudent.com" className="text-olive underline">{chunks}</a>
+    <a href="mailto:privacy@bcnstudent.com" className="text-accent-deep underline">{chunks}</a>
   ),
 };
 

@@ -23,12 +23,12 @@ export default async function LoginPage({
 
   return (
     <div className="mx-auto mt-16 max-w-sm">
-      <div className="rounded-xl border border-bone-line bg-white p-7">
-        <h1 className="font-display text-xl font-semibold text-ink">Staff sign in</h1>
+      <div className="border border-paper-line bg-white p-7">
+        <h1 className="font-sans text-xl font-semibold text-ink">Staff sign in</h1>
         <p className="mt-1.5 text-sm text-ink-muted">Access to client files and identity documents.</p>
 
         {message && (
-          <p role="alert" className="mt-5 rounded-lg bg-terracotta/5 px-3 py-2 text-sm font-medium text-terracotta">
+          <p role="alert" className="mt-5 bg-accent-tint px-3 py-2 text-sm font-medium text-accent-deep">
             {message}
           </p>
         )}

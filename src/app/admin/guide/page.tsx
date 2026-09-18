@@ -33,7 +33,7 @@ export default async function GuideConversionPage({
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-semibold text-ink">Guide: download → triage</h1>
+          <h1 className="font-sans text-2xl font-semibold text-ink">Guide: download → triage</h1>
           <p className="mt-1 text-sm text-ink-muted">
             {total.downloaders} downloaders, {total.triaged} sent triage
             {total.downloaders ? ` (${pct(total.triaged / total.downloaders)})` : ""}. Each browser is counted once,
@@ -46,7 +46,7 @@ export default async function GuideConversionPage({
               key={p}
               href={`/admin/guide?period=${p}`}
               aria-current={p === period ? "page" : undefined}
-              className={`rounded-full px-3 py-1 ${p === period ? "bg-olive text-bone" : "text-ink-muted hover:text-ink"}`}
+              className={`px-3 py-1 ${p === period ? "bg-ink text-paper" : "text-ink-muted hover:text-ink"}`}
             >
               {p === "all" ? "All time" : `${p} days`}
             </a>
@@ -54,9 +54,9 @@ export default async function GuideConversionPage({
         </nav>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-bone-line bg-white">
+      <div className="overflow-x-auto border border-paper-line bg-white">
         <table className="w-full min-w-[640px] text-sm">
-          <thead className="border-b border-bone-line bg-bone-warm/50 text-left text-xs font-medium uppercase tracking-wide text-ink-soft">
+          <thead className="border-b border-paper-line bg-paper-dim text-left text-xs font-medium uppercase tracking-wide text-ink-soft">
             <tr>
               <th scope="col" className="px-4 py-2.5">Source (?s=)</th>
               <th scope="col" className="px-4 py-2.5 text-right">Downloaders</th>
@@ -67,7 +67,7 @@ export default async function GuideConversionPage({
               <th scope="col" className="px-4 py-2.5 text-right">Downloads</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-bone-line tabular-nums">
+          <tbody className="divide-y divide-paper-line tabular-nums">
             {rows.length === 0 && (
               <tr>
                 <td colSpan={7} className="px-4 py-12 text-center text-ink-soft">No downloads in this period.</td>

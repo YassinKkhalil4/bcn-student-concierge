@@ -11,7 +11,7 @@ import {
 import { LocalizedCopyButton } from "@/components/LocalizedCopyButton";
 
 const ACTION =
-  "rounded-md border border-bone-line px-2 py-1 text-xs font-medium text-ink-muted hover:bg-bone-warm";
+  "border border-paper-line px-2 py-1 text-xs font-medium text-ink-muted hover:bg-paper-dim";
 
 /**
  * A ready-to-send email, in the language the recipient reads. English by
@@ -43,11 +43,11 @@ export function DraftEmailPanel({
       <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
         <fieldset>
           <legend className="field-label">{t("language")}</legend>
-          <div className="inline-flex rounded-lg border border-bone-line bg-white p-0.5">
+          <div className="inline-flex border border-paper-line bg-white p-0.5">
             {REQUEST_LANGUAGES.map((l) => (
               <label key={l}
-                className={`cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-                  lang === l ? "bg-olive text-bone" : "text-ink-muted hover:bg-bone-warm"
+                className={`cursor-pointer px-3 py-1.5 text-xs font-medium transition-colors ${
+                  lang === l ? "bg-ink text-paper" : "text-ink-muted hover:bg-paper-dim"
                 }`}>
                 <input type="radio" name={`${id}-lang`} value={l} checked={lang === l}
                   onChange={() => setLang(l)} className="sr-only" />
@@ -63,8 +63,8 @@ export function DraftEmailPanel({
         </div>
       </div>
 
-      <div className="rounded-lg border border-bone-line bg-white">
-        <p className="border-b border-bone-line px-4 py-2 text-xs text-ink-muted">
+      <div className="border border-paper-line bg-white">
+        <p className="border-b border-paper-line px-4 py-2 text-xs text-ink-muted">
           <span className="font-medium text-ink">{t("subject")}</span>{" "}
           <span lang={lang}>{email.subject}</span>
         </p>

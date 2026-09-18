@@ -22,13 +22,13 @@ export function TasaGuide({ summary }: { summary: Tasa012Summary }) {
   return (
     <div className="space-y-5">
       {missingNie ? (
-        <p className="rounded-lg bg-amber-50 px-4 py-3 text-sm text-amber-900">{t("missingNie")}</p>
+        <p className="bg-paper-dim px-4 py-3 text-sm text-ink">{t("missingNie")}</p>
       ) : (
         <>
           <ol className="list-decimal space-y-2 pl-5 text-sm leading-relaxed text-ink-muted">
             <li>
               {t("open")}{" "}
-              <a href={summary.url} target="_blank" rel="noopener noreferrer" className="font-medium text-olive underline">
+              <a href={summary.url} target="_blank" rel="noopener noreferrer" className="font-medium text-accent-deep underline">
                 sede.policia.gob.es ↗
               </a>
             </li>
@@ -40,7 +40,7 @@ export function TasaGuide({ summary }: { summary: Tasa012Summary }) {
 
           <table className="w-full text-sm">
             <caption className="sr-only">{t("caption")}</caption>
-            <tbody className="divide-y divide-bone-line">
+            <tbody className="divide-y divide-paper-line">
               {summary.fields.filter((f) => f.value).map((f) => (
                 <tr key={f.label}>
                   <th scope="row" lang="es" className="w-2/5 py-2 pr-3 text-left font-normal text-ink-soft">{f.label}</th>
@@ -54,16 +54,16 @@ export function TasaGuide({ summary }: { summary: Tasa012Summary }) {
         </>
       )}
 
-      <details className="group rounded-xl border border-olive/30 bg-olive/[0.03]">
-        <summary className="cursor-pointer list-none px-5 py-3.5 text-sm font-semibold text-olive">
+      <details className="group border border-paper-edge bg-paper-dim">
+        <summary className="cursor-pointer list-none px-5 py-3.5 text-sm font-semibold text-accent-deep">
           {tg("atm.summary")}{" "}
           <span className="font-normal group-open:hidden">▸</span>
           <span className="hidden font-normal group-open:inline">▾</span>
         </summary>
-        <ol className="space-y-4 border-t border-olive/20 px-5 py-4">
+        <ol className="space-y-4 border-t border-paper-line px-5 py-4">
           {caixabankAtmSteps(tg.raw, summary.feeFormatted).map((step, i) => (
             <li key={step.title} className="flex gap-4">
-              <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-olive text-xs font-semibold text-bone">
+              <span className="flex h-7 w-7 flex-none items-center justify-center bg-ink text-xs font-semibold text-paper">
                 {i + 1}
               </span>
               <div>
@@ -72,7 +72,7 @@ export function TasaGuide({ summary }: { summary: Tasa012Summary }) {
               </div>
             </li>
           ))}
-          <li className="rounded-lg bg-white px-4 py-3 text-xs leading-relaxed text-ink-muted">{tg("atm.fallback")}</li>
+          <li className="bg-white px-4 py-3 text-xs leading-relaxed text-ink-muted">{tg("atm.fallback")}</li>
         </ol>
       </details>
     </div>
