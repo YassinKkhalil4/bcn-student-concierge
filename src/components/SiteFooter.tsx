@@ -33,7 +33,7 @@ export function SiteFooter() {
             <FooterLink href="/triage">{t("footer.triage")}</FooterLink>
             <FooterLink href="/pricing">{t("footer.packages")}</FooterLink>
             <FooterLink href="/guide">{t("footer.guide")}</FooterLink>
-            <FooterLink href="/intake">{t("footer.intake")}</FooterLink>
+            <FooterLink href="/portal">{t("footer.intake")}</FooterLink>
             <FooterLink href="/#how-it-works">{t("footer.process")}</FooterLink>
           </FooterColumn>
 

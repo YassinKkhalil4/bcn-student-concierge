@@ -66,7 +66,9 @@ export const triageSchema = z.object({
    * One consent, not intake's three: triage processes a name, an email and
    * three document images to answer a question, and nothing else.
    */
-  gdprTriageConsent: z.literal(true, { message: vkey("consentProcessing") }),
+  gdprTriageConsent: z.literal(true, {
+    errorMap: () => ({ message: vkey("consentProcessing") }),
+  }),
 });
 
 export type TriageData = z.infer<typeof triageSchema>;

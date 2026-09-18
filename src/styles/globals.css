@@ -37,6 +37,15 @@
   body {
     @apply bg-paper font-sans text-ink antialiased;
     font-feature-settings: "kern", "liga";
+    /* Six languages share these layouts, and a German compound
+       ("Immatrikulationsbescheinigung") is wider than a 320px phone, which was
+       pushing the triage form into a horizontal scroll. `anywhere`, not
+       `break-word`: only `anywhere` lets the box itself get narrower, which is
+       the part that keeps the page from overflowing. A word is still broken
+       only when it genuinely cannot fit. Deliberately NOT `hyphens: auto`:
+       it would hyphenate the display headings and the tracked labels too,
+       which costs more than the rare hard break it would tidy up. */
+    overflow-wrap: anywhere;
   }
 
   /* Tabular figures everywhere a number is compared to another number: prices
