@@ -20,11 +20,11 @@ export function AppointmentsCard({
   return (
     <Card title="Appointments">
       <div id="appointments" className="space-y-5">
-        {error && <p role="alert" className="rounded bg-terracotta/5 px-2 py-1.5 text-xs text-terracotta">{error}</p>}
+        {error && <p role="alert" className="bg-accent-tint px-2 py-1.5 text-xs text-accent-deep">{error}</p>}
         {(["police", "padron"] as const).map((kind) => {
           const a = appointments.find((x) => x.kind === kind);
           return (
-            <div key={kind} className="border-b border-bone-line pb-4 last:border-0 last:pb-0">
+            <div key={kind} className="border-b border-paper-line pb-4 last:border-0 last:pb-0">
               <p className="text-xs font-semibold uppercase tracking-wide text-ink-soft">{LABEL[kind]}</p>
               {a ? (
                 <>
@@ -33,10 +33,10 @@ export function AppointmentsCard({
                   </p>
                   <p className="text-xs text-ink-muted">{a.officeName}, {a.officeAddress}</p>
                   <p className="text-xs text-ink-muted">
-                    Metro: {a.nearestMetro ?? <span className="text-amber-800">not recorded — add it for the sheet</span>}
+                    Metro: {a.nearestMetro ?? <span className="text-ink">not recorded — add it for the sheet</span>}
                   </p>
                   <details className="mt-2">
-                    <summary className="cursor-pointer text-xs font-medium text-olive">Edit</summary>
+                    <summary className="cursor-pointer text-xs font-medium text-accent-deep">Edit</summary>
                     <div className="mt-3">
                       <AppointmentForm caseId={caseId} kind={kind} presets={OFFICE_PRESETS} action={saveAppointmentAction}
                         defaults={{
@@ -47,14 +47,14 @@ export function AppointmentsCard({
                       <form action={removeAppointmentAction} className="mt-2">
                         <input type="hidden" name="caseId" value={caseId} />
                         <input type="hidden" name="kind" value={kind} />
-                        <button type="submit" className="text-xs text-terracotta hover:underline">Remove appointment</button>
+                        <button type="submit" className="text-xs text-accent-deep hover:underline">Remove appointment</button>
                       </form>
                     </div>
                   </details>
                 </>
               ) : (
                 <details className="mt-1.5">
-                  <summary className="cursor-pointer text-xs font-medium text-olive">Record appointment</summary>
+                  <summary className="cursor-pointer text-xs font-medium text-accent-deep">Record appointment</summary>
                   <div className="mt-3">
                     <AppointmentForm caseId={caseId} kind={kind} presets={OFFICE_PRESETS} action={saveAppointmentAction} />
                   </div>

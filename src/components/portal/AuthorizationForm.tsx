@@ -96,7 +96,7 @@ export function AuthorizationForm() {
       const blob = await res.blob();
       const name =
         /filename="([^"]+)"/.exec(res.headers.get("Content-Disposition") ?? "")?.[1] ??
-        "Autoritzacio-padro.pdf";
+    "Autoritzacio-padro.pdf";
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -111,7 +111,7 @@ export function AuthorizationForm() {
   }
 
   return (
-    <div className="rounded-xl border border-bone-line bg-bone-warm/40 p-5">
+    <div className="border border-paper-line bg-paper-dim p-5">
       <h4 className="text-sm font-semibold text-ink">{t("title")}</h4>
       <p className="mt-1.5 text-xs leading-relaxed text-ink-muted">{t("intro")}</p>
 
@@ -124,7 +124,7 @@ export function AuthorizationForm() {
         <legend className="field-label">{t("relationLegend")}</legend>
         <div className="mt-2 grid gap-2 sm:grid-cols-3">
           {(["owner", "tenant", "usufruct"] as const).map((value) => (
-            <label key={value} className={`flex cursor-pointer items-start gap-2 rounded-lg border p-3 text-sm ${relation === value ? "border-olive bg-white" : "border-bone-line bg-white/60"}`}>
+            <label key={value} className={`flex cursor-pointer items-start gap-2 border p-3 text-sm ${relation === value ? "border-ink bg-white" : "border-paper-line bg-white/60"}`}>
               <input type="radio" name="relation" value={value} checked={relation === value}
                 onChange={() => setRelation(value)} className="mt-0.5" />
               <span>{t(`relations.${value}`)}</span>
@@ -139,7 +139,7 @@ export function AuthorizationForm() {
       </fieldset>
 
       {relation === "tenant" && (
-        <div className="mt-5 rounded-lg border border-bone-line bg-white p-4">
+        <div className="mt-5 border border-paper-line bg-white p-4">
           <p className="text-xs leading-relaxed text-ink-muted">{t("tenantNote")}</p>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
             <Field {...field("ownerName")} />
@@ -173,12 +173,12 @@ export function AuthorizationForm() {
         {status === "busy" ? t("preparing") : t("download")}
       </button>
       {status === "done" && (
-        <p role="status" className="mt-3 text-sm text-olive">
+        <p role="status" className="mt-3 text-sm font-medium text-ink">
           {t("done")}
         </p>
       )}
       {message && status === "error" && (
-        <p role="alert" className="mt-3 text-sm text-terracotta">{message}</p>
+        <p role="alert" className="mt-3 border-l-2 border-accent pl-3 font-sans text-sm font-semibold text-accent-deep">{message}</p>
       )}
     </div>
   );

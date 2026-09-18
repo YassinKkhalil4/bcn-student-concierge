@@ -126,16 +126,18 @@ export function TriageForm() {
 
   if (ref) {
     return (
-      <div className="rounded-2xl border border-olive bg-white p-8">
-        <h2 className="font-display text-2xl font-semibold text-ink">{t("done.title")}</h2>
-        <p className="mt-3 text-sm leading-relaxed text-ink-muted">{t("done.body", { ref })}</p>
-        <p className="mt-4 text-xs leading-relaxed text-ink-soft">{t("done.note")}</p>
+      <div className="border border-paper-edge border-t-3 border-t-ink bg-white p-8 sm:p-10">
+        <h2 className="text-display-md text-ink">{t("done.title")}</h2>
+        <p className="prose-body mt-4">{t("done.body", { ref })}</p>
+        <p className="mt-5 border-t border-paper-line pt-5 font-sans text-xs leading-relaxed text-ink-soft">
+          {t("done.note")}
+        </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={(e) => void submit(e)} noValidate className="rounded-2xl border border-bone-line bg-white p-7">
+    <form onSubmit={(e) => void submit(e)} noValidate className="border border-paper-edge border-t-3 border-t-accent bg-white p-6 sm:p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <TextInput
           name="fullName"
@@ -184,7 +186,7 @@ export function TriageForm() {
             className="field-input"
             aria-invalid={errors.arrivedOn ? true : undefined}
           />
-          <p className="mt-1.5 text-xs text-ink-soft">{t("fields.arrivedOnHint")}</p>
+          <p className="field-hint">{t("fields.arrivedOnHint")}</p>
           <FieldError id="arrivedOn-error" message={errors.arrivedOn} />
         </div>
       </div>
@@ -192,8 +194,8 @@ export function TriageForm() {
       {clock && (
         <p
           className={[
-            "mt-5 rounded-lg px-4 py-3 text-sm leading-relaxed",
-            clock.days !== null && clock.days < 0 ? "bg-red-50 text-red-900" : "bg-olive/5 text-ink-muted",
+            "mt-5 px-4 py-3 text-sm leading-relaxed",
+            clock.days !== null && clock.days < 0 ? "border-l-2 border-accent bg-accent-tint font-medium text-accent-deep" : "bg-paper-dim text-ink-muted",
           ].join(" ")}
         >
           {clock.deadline === null
@@ -241,11 +243,11 @@ export function TriageForm() {
 
       <fieldset className="mt-7">
         <legend className="field-label">{t("uploads.title")}</legend>
-        <p className="mt-1 text-xs leading-relaxed text-ink-soft">{t("uploads.note")}</p>
+        <p className="field-hint">{t("uploads.note")}</p>
         <div className="mt-4 space-y-3">
           {TRIAGE_DOCUMENT_KINDS.map((kind) => (
-            <div key={kind} className="rounded-lg border border-bone-line px-4 py-3">
-              <label htmlFor={kind} className="block text-sm font-medium text-ink">
+            <div key={kind} className="border border-paper-line bg-paper px-4 py-3.5">
+              <label htmlFor={kind} className="field-label">
                 {t(`uploads.${kind}`)}
               </label>
               <input
@@ -254,7 +256,7 @@ export function TriageForm() {
                 type="file"
                 accept="application/pdf,image/jpeg,image/png"
                 onChange={(e) => setFiles((f) => ({ ...f, [kind]: e.target.files?.[0] ?? null }))}
-                className="mt-2 block w-full text-sm text-ink-muted file:mr-3 file:rounded-md file:border-0 file:bg-bone-warm file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-ink"
+                className="mt-2 block w-full text-sm text-ink-muted file:mr-3 file:border-0 file:bg-paper-dim file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-ink"
               />
             </div>
           ))}
@@ -272,7 +274,7 @@ export function TriageForm() {
               return rest;
             });
           }}
-          className="mt-1 h-4 w-4 flex-none accent-olive"
+          className="mt-1 h-4 w-4 flex-none accent-accent"
         />
         <span>{t("form.consent")}</span>
       </label>
@@ -281,10 +283,10 @@ export function TriageForm() {
       <button type="submit" disabled={busy} className="btn-primary mt-7 w-full">
         {busy ? t("form.sending") : t("form.submit")}
       </button>
-      <p className="mt-3 text-center text-xs text-ink-soft">{t("form.freeNote")}</p>
+      <p className="mt-4 text-center font-sans text-xs text-ink-soft">{t("form.freeNote")}</p>
 
       {submitError && (
-        <p role="alert" className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-900">
+        <p role="alert" className="mt-4 border-l-2 border-accent bg-accent-tint px-4 py-3 text-sm font-medium text-accent-deep">
           {submitError}
         </p>
       )}
@@ -295,7 +297,7 @@ export function TriageForm() {
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} role="alert" className="mt-1.5 text-xs text-red-700">
+    <p id={id} role="alert" className="field-error">
       {message}
     </p>
   );

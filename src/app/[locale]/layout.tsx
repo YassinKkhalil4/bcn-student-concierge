@@ -45,8 +45,8 @@ export default async function LocaleLayout({
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4
-                   focus:z-50 focus:rounded-lg focus:bg-olive focus:px-4 focus:py-2
-                   focus:text-sm focus:text-bone"
+                   focus:z-50 focus:bg-ink focus:px-4 focus:py-2
+                   focus:text-sm focus:text-paper"
       >
         {t("skipToContent")}
       </a>

@@ -137,7 +137,7 @@ export function FieldGroup({
 }) {
   return (
     <fieldset className="border-0 p-0">
-      <legend className="font-display text-xl font-semibold text-ink">{title}</legend>
+      <legend className="text-display-md text-ink">{title}</legend>
       {description && (
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted">
           {description}

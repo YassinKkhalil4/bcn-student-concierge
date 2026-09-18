@@ -32,7 +32,7 @@ export function CopyButton({
       type="button"
       onClick={() => void copy()}
       disabled={!value}
-      className={`rounded-md border border-bone-line bg-white px-2 py-1 text-xs font-medium text-ink-muted transition-colors hover:bg-bone-warm hover:text-ink disabled:opacity-40 ${className}`}
+      className={`border border-paper-edge bg-white px-2.5 py-1.5 font-sans text-[0.6875rem] font-bold uppercase tracking-[0.08em] text-ink-muted transition-colors hover:border-ink hover:bg-ink hover:text-paper disabled:opacity-40 ${className}`}
     >
       <span aria-live="polite">
         {state === "copied" ? copiedLabel : state === "failed" ? failedLabel : label}

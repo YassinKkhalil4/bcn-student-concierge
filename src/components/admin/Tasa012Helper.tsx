@@ -16,8 +16,8 @@ export function Tasa012Helper({ summary }: { summary: Tasa012Summary }) {
   return (
     <div className="space-y-4">
       {blocked && (
-        <div role="alert" className="rounded-lg border border-terracotta/30 bg-terracotta/5 px-4 py-3">
-          <p className="text-sm font-semibold text-terracotta">Resolve before sending</p>
+        <div role="alert" className="border border-accent/30 bg-accent-tint px-4 py-3">
+          <p className="text-sm font-semibold text-accent-deep">Resolve before sending</p>
           <ul className="mt-1 list-disc pl-5 text-sm text-ink-muted">
             {summary.warnings.map((w) => (
               <li key={w}>{w}</li>
@@ -32,11 +32,11 @@ export function Tasa012Helper({ summary }: { summary: Tasa012Summary }) {
         </Stat>
         <Stat label="Route">{summary.formId}</Stat>
         <Stat label="Forma de pago">
-          <span className="font-semibold text-olive">{summary.paymentMethod}</span>
+          <span className="font-semibold text-accent-deep">{summary.paymentMethod}</span>
         </Stat>
       </div>
 
-      <div className="rounded-lg bg-bone-warm px-4 py-3">
+      <div className="bg-paper-dim px-4 py-3">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className="text-xs font-medium uppercase tracking-wide text-ink-soft">
@@ -50,21 +50,21 @@ export function Tasa012Helper({ summary }: { summary: Tasa012Summary }) {
 
       <table className="w-full text-sm">
         <caption className="sr-only">Values to enter on the Tasa 012 portal</caption>
-        <tbody className="divide-y divide-bone-line">
+        <tbody className="divide-y divide-paper-line">
           {summary.fields.map((f) => (
             <tr key={f.label} className="align-top">
               <th scope="row" className="w-2/5 py-2 pr-3 text-left font-normal text-ink-soft">
                 {f.label}
-                {f.required && <span className="text-terracotta"> *</span>}
+                {f.required && <span className="text-accent-deep"> *</span>}
               </th>
               <td className="py-2 pr-3 font-mono text-[13px] text-ink">
                 {f.value ||
                   (f.required ? (
-                    <span className="font-sans font-medium text-terracotta">Missing — required</span>
+                    <span className="font-sans font-medium text-accent-deep">Missing — required</span>
                   ) : (
                     <span className="font-sans text-ink-soft">leave blank</span>
                   ))}
-                {f.review && <p className="mt-1 font-sans text-xs text-amber-800">⚠ {f.review}</p>}
+                {f.review && <p className="mt-1 font-sans text-xs text-ink">⚠ {f.review}</p>}
               </td>
               <td className="w-16 py-1.5 text-right">
                 {f.value && <CopyButton value={f.value} />}
@@ -77,30 +77,30 @@ export function Tasa012Helper({ summary }: { summary: Tasa012Summary }) {
       <p className="text-xs leading-relaxed text-ink-soft">
         The fee shown is the configured amount. The portal displays the live amount on
         the selected trámite and is authoritative — update{" "}
-        <code className="rounded bg-bone-warm px-1">src/lib/tasa012.ts</code> if they differ.
+        <code className="bg-paper-dim px-1">src/lib/tasa012.ts</code> if they differ.
       </p>
 
-      <div className="flex flex-wrap items-center gap-2 border-t border-bone-line pt-4">
+      <div className="flex flex-wrap items-center gap-2 border-t border-paper-line pt-4">
         <CopyButton
           value={summary.studentMessage}
           label="Copy instructions for student"
-          className="!bg-olive !px-3 !py-2 !text-bone hover:!bg-olive-deep"
+          className="!bg-ink !px-3 !py-2 !text-paper hover:!bg-ink-deep"
         />
         <a
           href={summary.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-md border border-bone-line px-3 py-2 text-xs font-medium text-ink hover:bg-bone-warm"
+          className="border border-paper-line px-3 py-2 text-xs font-medium text-ink hover:bg-paper-dim"
         >
           Open official portal ↗
         </a>
       </div>
 
-      <details className="rounded-lg border border-bone-line">
+      <details className="border border-paper-line">
         <summary className="cursor-pointer px-4 py-2 text-xs font-medium text-ink-muted">
           Preview message
         </summary>
-        <pre className="max-h-80 overflow-auto whitespace-pre-wrap border-t border-bone-line px-4 py-3 text-xs leading-relaxed text-ink">
+        <pre className="max-h-80 overflow-auto whitespace-pre-wrap border-t border-paper-line px-4 py-3 text-xs leading-relaxed text-ink">
           {summary.studentMessage}
         </pre>
       </details>
@@ -110,7 +110,7 @@ export function Tasa012Helper({ summary }: { summary: Tasa012Summary }) {
 
 function Stat({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-lg border border-bone-line px-3 py-2">
+    <div className="border border-paper-line px-3 py-2">
       <p className="text-xs text-ink-soft">{label}</p>
       <div className="mt-0.5 text-sm text-ink">{children}</div>
     </div>

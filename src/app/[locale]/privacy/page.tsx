@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 function Document() {
   const t = useTranslations("legal.privacy");
   return (
-    <LegalPage eyebrow={t("eyebrow")} title={t("title")} updated="2026-09-16">
+    <LegalPage label={t("eyebrow")} title={t("title")} updated="2026-09-16">
 
       <LegalClauses doc="privacy" />
     </LegalPage>

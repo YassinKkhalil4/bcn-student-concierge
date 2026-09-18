@@ -32,7 +32,7 @@ export function InvoiceList({
   }
   const date = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric", timeZone: "Europe/Madrid" });
   return (
-    <ul className="mt-3 divide-y divide-bone-line text-sm">
+    <ul className="mt-3 divide-y divide-paper-line text-sm">
       {invoices.map((inv) => (
         <li key={inv.id} className="flex items-center justify-between gap-3 py-2.5">
           <div>
@@ -44,7 +44,7 @@ export function InvoiceList({
               {date.format(new Date(inv.issuedAt))} · {MONEY.format(inv.totalCents / 100)}
             </p>
           </div>
-          <a href={`${hrefBase}/${inv.id}`} className="rounded-md border border-bone-line px-2.5 py-1.5 text-xs font-medium text-ink hover:bg-bone-warm">
+          <a href={`${hrefBase}/${inv.id}`} className="border border-paper-line px-2.5 py-1.5 text-xs font-medium text-ink hover:bg-paper-dim">
             {copy.pdf}
           </a>
         </li>

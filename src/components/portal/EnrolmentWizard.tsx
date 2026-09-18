@@ -31,12 +31,12 @@ export function EnrolmentWizard({
     <div className="space-y-4">
       <DocumentUpload kinds={["acceptance-letter"]} uploaded={uploaded} />
 
-      <details className="group rounded-xl border border-bone-line bg-white">
-        <summary className="cursor-pointer list-none px-5 py-3 text-sm font-medium text-olive">
+      <details className="group border border-paper-line bg-white">
+        <summary className="cursor-pointer list-none px-5 py-3 text-sm font-medium text-accent-deep">
           <span className="group-open:hidden">{t("howTo")} ▸</span>
           <span className="hidden group-open:inline">{t("howTo")} ▾</span>
         </summary>
-        <div className="space-y-4 border-t border-bone-line px-5 py-4">
+        <div className="space-y-4 border-t border-paper-line px-5 py-4">
           <p className="text-sm leading-relaxed text-ink-muted">
             {t.rich("intro", { em: (chunks) => <em>{chunks}</em> })}
           </p>

@@ -31,8 +31,12 @@ export function ConsentBox({
   return (
     <div
       className={[
-        "rounded-xl border p-5",
-        error ? "border-terracotta/40 bg-terracotta/[0.03]" : "border-bone-line bg-white",
+        "border p-5 transition-colors",
+        error
+          ? "border-accent border-l-2 bg-accent-tint"
+          : checked
+            ? "border-paper-edge bg-white"
+            : "border-paper-line bg-white",
       ].join(" ")}
     >
       <label className="flex cursor-pointer gap-3.5">
@@ -42,10 +46,10 @@ export function ConsentBox({
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
           aria-describedby={`${name}-body`}
-          className="mt-0.5 h-4 w-4 flex-none rounded border-bone-line text-olive focus:ring-olive"
+          className="mt-0.5 h-4 w-4 flex-none accent-accent"
         />
         <span>
-          <span className="block text-sm font-medium text-ink">
+          <span className="block font-sans text-sm font-bold tracking-tight text-ink">
             {label}
             {optional && (
               <span className="ml-2 text-xs font-normal text-ink-soft">{t("optional")}</span>
@@ -53,7 +57,7 @@ export function ConsentBox({
           </span>
           <span
             id={`${name}-body`}
-            className="mt-1.5 block text-xs leading-relaxed text-ink-muted"
+            className="mt-2 block font-sans text-xs leading-relaxed text-ink-muted"
           >
             {body}
           </span>

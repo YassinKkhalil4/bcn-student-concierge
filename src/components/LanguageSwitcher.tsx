@@ -37,7 +37,7 @@ export function LanguageSwitcher() {
         value={locale}
         disabled={pending}
         onChange={(e) => change(e.target.value as SiteLocale)}
-        className="cursor-pointer appearance-none rounded-full border border-bone-line bg-transparent py-1.5 pl-3 pr-7 text-sm text-ink-muted hover:text-ink focus:border-olive"
+        className="cursor-pointer appearance-none border border-paper-line bg-transparent py-2 pl-3 pr-7 font-sans text-[0.8125rem] font-semibold tracking-tight text-ink-muted transition-colors hover:border-paper-edge hover:text-ink focus:border-accent"
       >
         {LOCALES.map((l) => (
           <option key={l} value={l} lang={l}>
@@ -45,7 +45,7 @@ export function LanguageSwitcher() {
           </option>
         ))}
       </select>
-      <span aria-hidden="true" className="pointer-events-none absolute right-2.5 text-[10px] text-ink-soft">▾</span>
+      <span aria-hidden="true" className="pointer-events-none absolute right-2.5 text-[9px] text-ink-soft">▾</span>
     </label>
   );
 }

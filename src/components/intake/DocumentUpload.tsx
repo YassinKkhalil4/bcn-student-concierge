@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { useTranslations } from "next-intl";
+import { TickMark } from "@/components/icons";
 import { MAX_UPLOAD_BYTES } from "@/lib/server/uploads";
 import type { DocumentKind } from "@/lib/db/schema";
 
@@ -105,22 +106,22 @@ export function DocumentUpload({
         return (
           <div
             key={kind}
-            className="rounded-xl border border-bone-line bg-white p-5"
+            className="border border-paper-line bg-white p-5 transition-colors hover:border-paper-edge"
           >
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="max-w-lg">
-                <p className="text-sm font-medium text-ink">
+                <p className="font-sans text-sm font-bold tracking-tight text-ink">
                   {slot.label}
                   {onFile && status.state !== "done" && (
-                    <span className="ml-2 text-xs font-medium text-olive">{t("onFile")}</span>
+                    <span className="ml-2.5 font-mono text-[0.6875rem] font-medium uppercase tracking-wide text-ink-soft">{t("onFile")}</span>
                   )}
                 </p>
-                <p className="mt-1.5 text-xs leading-relaxed text-ink-muted">
+                <p className="mt-2 font-sans text-xs leading-relaxed text-ink-muted">
                   {slot.description}
                 </p>
               </div>
 
-              <label className="btn-secondary cursor-pointer text-xs">
+              <label className="btn-secondary cursor-pointer !px-5 !py-2.5 !text-xs">
                 {onFile ? t("replace") : t("choose")}
                 <input
                   ref={(el) => {
@@ -139,15 +140,16 @@ export function DocumentUpload({
 
             <div aria-live="polite" className="mt-3">
               {status.state === "uploading" && (
-                <p className="text-xs text-ink-soft">{t("uploading")}</p>
+                <p className="font-sans text-xs text-ink-soft">{t("uploading")}</p>
               )}
               {status.state === "done" && (
-                <p className="text-xs font-medium text-olive">
+                <p className="flex items-center gap-2 font-sans text-xs font-semibold text-ink">
+                  <TickMark className="h-3 w-3 flex-none" />
                   {t("done", { name: status.name })}
                 </p>
               )}
               {status.state === "error" && (
-                <p role="alert" className="text-xs font-medium text-terracotta">
+                <p role="alert" className="border-l-2 border-accent pl-2.5 font-sans text-xs font-semibold text-accent-deep">
                   {status.message === "sessionExpired"
                     ? tw("sessionExpired")
                     : t(status.message, { mb: MAX_MB })}
@@ -158,7 +160,7 @@ export function DocumentUpload({
         );
       })}
 
-      <p className="text-xs leading-relaxed text-ink-soft">{t("footer", { mb: MAX_MB })}</p>
+      <p className="font-sans text-xs leading-relaxed text-ink-soft">{t("footer", { mb: MAX_MB })}</p>
     </div>
   );
 }

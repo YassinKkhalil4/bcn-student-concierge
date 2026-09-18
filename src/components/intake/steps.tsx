@@ -147,7 +147,7 @@ export function ConsentStep({
   const t = useTranslations("intake.consent");
   return (
     <div>
-      <h2 className="font-display text-xl font-semibold text-ink">{t("title")}</h2>
+      <h2 className="text-display-md text-ink">{t("title")}</h2>
       <p className="mt-2 text-sm leading-relaxed text-ink-muted">{t("intro")}</p>
 
       <div className="mt-7 space-y-4">
