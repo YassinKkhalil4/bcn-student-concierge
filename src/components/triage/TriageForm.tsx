@@ -286,7 +286,7 @@ export function TriageForm() {
       <p className="mt-4 text-center font-sans text-xs text-ink-soft">{t("form.freeNote")}</p>
 
       {submitError && (
-        <p role="alert" className="mt-4 border-l-2 border-accent bg-accent-tint px-4 py-3 text-sm font-medium text-accent-deep">
+        <p role="alert" className="enter-alert mt-4 border-l-2 border-accent bg-accent-tint px-4 py-3 text-sm font-medium text-accent-deep">
           {submitError}
         </p>
       )}
