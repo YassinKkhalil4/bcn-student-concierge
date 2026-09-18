@@ -33,7 +33,7 @@ export function PayButton({ label }: { label: string }) {
         {busy ? t("opening") : label}
       </button>
       {error && (
-        <p role="alert" className="mt-3 border-l-2 border-accent pl-3 font-sans text-sm font-semibold text-accent-deep">
+        <p role="alert" className="enter-alert mt-3 border-l-2 border-accent pl-3 font-sans text-sm font-semibold text-accent-deep">
           {error}
         </p>
       )}
