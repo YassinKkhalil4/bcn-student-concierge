@@ -16,6 +16,17 @@ import type { Config } from "tailwindcss";
  */
 export default {
   content: ["./src/**/*.{ts,tsx}"],
+  /**
+   * `hover:` compiles to `@media (hover: hover)`, so it applies only where a
+   * pointer can actually hover.
+   *
+   * Without this, a tap on a phone leaves :hover latched on the element until
+   * something else is tapped — and .btn-secondary's hover is a full inversion
+   * from transparent to solid ink. Every secondary button a student touched
+   * stayed inverted behind them, which reads as "still loading" on the one
+   * screen where they are waiting to find out whether their file went through.
+   */
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       colors: {
@@ -40,6 +51,22 @@ export default {
           deep: "#9C1B2F", // hover, and small text that needs AAA on paper
           bright: "#EE6479", // the ONLY accent legible on ink — 5.28:1
           tint: "#F8EDEE", // alert and note grounds on paper
+        },
+        /**
+         * The boundary of an interactive control.
+         *
+         * Separate from `paper.edge` because the two rules answer different
+         * standards. `paper.edge` divides blocks of text and is allowed to be
+         * quiet; a control's own outline is held to WCAG 1.4.11's 3:1, because
+         * for an empty input the border IS the control — there is no label
+         * inside it to identify what the box is. `paper.edge` gave 1.68:1 on
+         * white, so every input on the site failed that.
+         *
+         * 3.60:1 on white, 3.45:1 on paper, 3.16:1 on the dim band — the three
+         * grounds an input is ever drawn on.
+         */
+        field: {
+          line: "#8F8674",
         },
         /** Foregrounds for the dark field. */
         onink: {

@@ -51,7 +51,8 @@
     "submit": "Enviar per al triatge gratuït",
     "sending": "Enviant…",
     "freeNote": "Sense cost, sense compromís i sense targeta. Responem el mateix dia.",
-    "failed": "No hem pogut enviar la teva consulta. Torna-ho a provar."
+    "failed": "No hem pogut enviar la teva consulta. Torna-ho a provar.",
+    "errorSummary": "Revisa aquestes respostes abans d’enviar"
   },
   "done": {
     "title": "Ho hem rebut.",

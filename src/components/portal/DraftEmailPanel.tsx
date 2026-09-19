@@ -10,9 +10,6 @@ import {
 } from "@/lib/request-templates";
 import { LocalizedCopyButton } from "@/components/LocalizedCopyButton";
 
-const ACTION =
-  "border border-paper-line px-2 py-1 text-xs font-medium text-ink-muted hover:bg-paper-dim";
-
 /**
  * A ready-to-send email, in the language the recipient reads. English by
  * default — most of the business schools our students attend work in English —
@@ -46,7 +43,11 @@ export function DraftEmailPanel({
           <div className="inline-flex border border-paper-line bg-white p-0.5">
             {REQUEST_LANGUAGES.map((l) => (
               <label key={l}
-                className={`cursor-pointer px-3 py-1.5 text-xs font-medium transition-colors ${
+                /* Same sr-only-input problem as the upload button; the ring is
+                   inset here so it does not collide with the next segment. */
+                className={`focus-ring-within [--focus-ring-offset:-2px] flex cursor-pointer items-center px-3 py-1.5
+                  text-xs font-medium transition-colors
+                  [@media(pointer:coarse)]:min-h-[40px] [@media(pointer:coarse)]:px-4 ${
                   lang === l ? "bg-ink text-paper" : "text-ink-muted hover:bg-paper-dim"
                 }`}>
                 <input type="radio" name={`${id}-lang`} value={l} checked={lang === l}
@@ -68,7 +69,15 @@ export function DraftEmailPanel({
           <span className="font-medium text-ink">{t("subject")}</span>{" "}
           <span lang={lang}>{email.subject}</span>
         </p>
-        <pre lang={lang} className="max-h-72 overflow-auto whitespace-pre-wrap px-4 py-3 font-sans text-sm leading-relaxed text-ink">
+        {/* tabIndex: a scroll container with no focusable child cannot be
+            scrolled by keyboard in Chrome or Safari (Firefox does it for you). */}
+        <pre
+          lang={lang}
+          tabIndex={0}
+          role="region"
+          aria-label={t("body")}
+          className="max-h-72 overflow-auto whitespace-pre-wrap px-4 py-3 font-sans text-sm leading-relaxed text-ink"
+        >
           {email.body}
         </pre>
       </div>
@@ -76,13 +85,13 @@ export function DraftEmailPanel({
       <div className="flex flex-wrap gap-2">
         <LocalizedCopyButton value={email.body} labelKey="copyMessage" />
         <LocalizedCopyButton value={email.subject} labelKey="copySubject" />
-        <a href={links.gmail} target="_blank" rel="noopener noreferrer" className={ACTION}>
+        <a href={links.gmail} target="_blank" rel="noopener noreferrer" className="btn-mini">
           {t("openGmail")}
         </a>
-        <a href={links.outlook} target="_blank" rel="noopener noreferrer" className={ACTION}>
+        <a href={links.outlook} target="_blank" rel="noopener noreferrer" className="btn-mini">
           {t("openOutlook")}
         </a>
-        <a href={links.mailto} className={ACTION}>
+        <a href={links.mailto} className="btn-mini">
           {t("openEmail")}
         </a>
         {actions}

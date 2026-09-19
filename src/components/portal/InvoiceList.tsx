@@ -44,7 +44,7 @@ export function InvoiceList({
               {date.format(new Date(inv.issuedAt))} · {MONEY.format(inv.totalCents / 100)}
             </p>
           </div>
-          <a href={`${hrefBase}/${inv.id}`} className="border border-paper-line px-2.5 py-1.5 text-xs font-medium text-ink hover:bg-paper-dim">
+          <a href={`${hrefBase}/${inv.id}`} className="btn-mini flex-none">
             {copy.pdf}
           </a>
         </li>

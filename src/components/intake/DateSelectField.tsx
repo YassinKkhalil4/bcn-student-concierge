@@ -65,7 +65,7 @@ export function DateSelectField({
     onChange(day && month && year ? `${pad(Number(day))}/${pad(Number(month))}/${year}` : "");
   }
 
-  const describedBy = [error ? errorId : null, hint ? hintId : null].filter(Boolean).join(" ") || undefined;
+  const describedBy = [error ? errorId : null, hint && !error ? hintId : null].filter(Boolean).join(" ") || undefined;
   const select = (field: "day" | "month" | "year", options: { value: string; label: string }[]) => (
     <div>
       <label htmlFor={`${name}-${field}`} className="sr-only">
@@ -91,9 +91,18 @@ export function DateSelectField({
   );
 
   return (
-    <fieldset className="min-w-0 border-0 p-0">
+    // id + tabIndex: the error summary's "Date of birth" link lands on the
+    // group so a screen reader reads the legend, rather than dropping the
+    // reader into an unexplained list of numbers.
+    <fieldset id={name} tabIndex={-1} className="min-w-0 border-0 p-0 focus:outline-none">
       <legend className="field-label">{label}</legend>
-      <div className="grid grid-cols-[4.75rem_minmax(0,1fr)_6.25rem] gap-2">
+      {/*
+        Proportional, not fixed. The columns were 4.75rem and 6.25rem, which at
+        200% browser text is a 368px floor on a 320px phone — the three lists
+        could not get narrower than the screen. The ratios keep the month list
+        the widest, which is the reason the sizes differed in the first place.
+      */}
+      <div className="grid grid-cols-[minmax(0,0.8fr)_minmax(0,1.5fr)_minmax(0,1fr)] gap-2">
         {select("day", Array.from({ length: dayCount }, (_, i) => ({ value: String(i + 1), label: String(i + 1) })))}
         {select("month", MONTHS.map((m) => ({ value: String(m), label: t(`months.${m}`) })))}
         {select("year", years.map((y) => ({ value: String(y), label: String(y) })))}
@@ -104,7 +113,7 @@ export function DateSelectField({
         </p>
       )}
       {error && (
-        <p id={errorId} role="alert" className="field-error">
+        <p id={errorId} className="field-error">
           {error}
         </p>
       )}

@@ -81,8 +81,7 @@ function ResidencePath({ person, uploaded }: { person: Pick<IntakeData, "identit
         draft={(lang) => residenceRequest(person, lang)}
         toPlaceholder={t("toPlaceholder")}
         actions={
-          <a href={COLLECTIVE_AUTHORIZATION_URL} target="_blank" rel="noopener noreferrer"
-            className="border border-paper-line px-2 py-1 text-xs font-medium text-ink-muted hover:bg-paper-dim">
+          <a href={COLLECTIVE_AUTHORIZATION_URL} target="_blank" rel="noopener noreferrer" className="btn-mini">
             {t("openForm")}
           </a>
         }

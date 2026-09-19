@@ -17,6 +17,7 @@ import { EnrolmentWizard } from "@/components/portal/EnrolmentWizard";
 import { Modelo790Notice } from "@/components/Modelo790Notice";
 import { Link } from "@/i18n/navigation";
 import { TickMark } from "@/components/icons";
+import { ErrorSummary, type SummarisedError } from "@/components/ErrorSummary";
 import {
   IdentityStep,
   FamilyStep,
@@ -59,6 +60,8 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   const t = useTranslations("intake");
   const tp = useTranslations("portal.file");
   const tprice = useTranslations("pricing");
+  const tfields = useTranslations("intake.fields");
+  const tconsent = useTranslations("intake.consent");
   const locale = useLocale();
   const [tierId, setTierId] = useState(() =>
     getTier(initialTier) ? initialTier : "soft-landing",
@@ -75,6 +78,8 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   const [caseRef, setCaseRef] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  /** Bumped on every rejected step, so the summary re-announces each time. */
+  const [attempt, setAttempt] = useState(0);
 
   const tier = getTier(tierId) ?? TIERS[1]!;
   /**
@@ -100,6 +105,25 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
     return n ? routeForNationality(n) : null;
   }, [values.nationality]);
   const price = useMemo(() => (route ? tierPriceCents(tier, route) : null), [tier, route]);
+
+  /**
+   * A step's errors are keyed by field name, and those names live in two
+   * different places: the four data steps read `intake.fields.<name>.label`,
+   * the consent step reads `intake.consent.<name>.label`. One lookup so the
+   * summary can be built from `errors` alone, whichever step raised them.
+   */
+  function labelFor(key: string): string {
+    return tconsent.has(`${key}.label`) ? tconsent(`${key}.label`) : tfields(`${key}.label`);
+  }
+
+  /**
+   * `collectErrors` fills this in schema order, which is the order the fields
+   * are rendered in, so working down the summary works down the step.
+   */
+  const summary: SummarisedError[] = Object.keys(errors).map((key) => ({
+    id: key,
+    label: labelFor(key),
+  }));
 
   const set = (key: string) => (value: string) => {
     setValues((v) => ({ ...v, [key]: value }));
@@ -191,6 +215,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
             if (key && !mapped[key]) mapped[key] = issue.message;
           }
           setErrors(mapped);
+          setAttempt((n) => n + 1);
           setSubmitError(t("wizard.fixEarlier"));
           return;
         }
@@ -240,7 +265,10 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   }
 
   function next() {
-    if (!validateStep(step)) return;
+    if (!validateStep(step)) {
+      setAttempt((n) => n + 1);
+      return;
+    }
     if (step === 4) {
       void submitIntake();
       return;
@@ -251,23 +279,38 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   const stepProps = { values, errors, set };
 
   return (
+    // `min-w-0` on both columns below. A grid item's automatic minimum size is
+    // its min-content, so one fixed-width thing anywhere inside — a date row
+    // built from rem columns, a select as wide as its longest option — holds
+    // the whole column open and takes the page with it. At 200% browser text
+    // these two measured 528px wide inside a 240px track.
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-14">
-      <div>
+      <div className="min-w-0">
         {/*
           A progress register, not a row of pills. Each step is a column under
           its own rule: ink once done, crimson for where you are, hairline for
           what is still ahead. It reads as a position in a document rather than
           as a set of buttons, and it survives six languages because each label
           wraps under its own rule instead of reflowing the whole row.
+
+          Each item carries `min-w-0` because a grid item's default
+          `min-width: auto` stops its track shrinking below the item's longest
+          word — at 200% browser text "ADRESSE IN SPANIEN" and "DOKUMENTE" held
+          the three columns open to 568px inside a 320px phone. Released, the
+          labels wrap under their own rules, which is what the register was
+          drawn to do in the first place.
         */}
         <nav aria-label={t("steps.progress")} className="mb-10">
-          <ol className="grid grid-cols-3 gap-x-4 gap-y-5 sm:grid-cols-6">
+          {/* Two columns below 400px: at three, a 320px phone gave each German
+              label ~93px and "PERSONENSTAND" broke mid-word. Two columns fit
+              it whole. */}
+          <ol className="grid grid-cols-2 gap-x-4 gap-y-5 min-[400px]:grid-cols-3 sm:grid-cols-6">
             {STEPS.map((s, i) => (
               <li
                 key={s}
                 aria-current={i === step ? "step" : undefined}
                 className={[
-                  "border-t-2 pt-2.5",
+                  "min-w-0 border-t-2 pt-2.5",
                   i < step ? "border-ink" : i === step ? "border-accent" : "border-paper-edge",
                 ].join(" ")}
               >
@@ -293,6 +336,8 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
         </nav>
 
         <div className="border border-paper-edge border-t-3 border-t-ink bg-white p-6 sm:p-9">
+          <ErrorSummary title={t("wizard.errorSummary")} errors={summary} attempt={attempt} />
+
           {step === 0 && <IdentityStep {...stepProps} />}
           {step === 1 && <FamilyStep {...stepProps} />}
           {step === 2 && <AddressStep {...stepProps} />}
@@ -391,8 +436,11 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
             </p>
           )}
 
+          {/* The step footer wraps: at 200% browser text "Zurück" and "Weiter"
+              side by side are wider than a 320px phone, and a step's only way
+              forward should not be the thing that pushes the page sideways. */}
           {step < 5 && (
-            <div className="mt-10 flex items-center justify-between gap-4 border-t border-paper-line pt-6">
+            <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-paper-line pt-6">
               <button
                 type="button"
                 onClick={() => setStep((s) => Math.max(0, s - 1))}
@@ -409,7 +457,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
         </div>
       </div>
 
-      <aside className="lg:sticky lg:top-24 lg:self-start">
+      <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
         <div className="border border-paper-edge border-t-3 border-t-accent bg-white p-6">
           <p className="font-sans text-[0.625rem] font-bold uppercase tracking-[0.2em] text-ink-soft">{t("summary.selected")}</p>
           <h2 className="mt-3 text-display-sm text-ink">

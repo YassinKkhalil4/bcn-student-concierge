@@ -25,14 +25,26 @@ export const BUCKET_LABEL: Record<CaseBucket, string> = {
   all: "All",
 };
 
-type Tone = "neutral" | "good" | "warn" | "alert" | "info" | "muted";
+/**
+ * Badge tones, and the whole set of them.
+ *
+ * `info` used to be drawn from Tailwind's stock blue palette: the only colour
+ * anywhere in the application that came from outside the token system.
+ * tailwind.config.ts states the rule it broke in as many words:
+ * one hue, three jobs, no second accent anywhere. It is now the one tone drawn
+ * with a hard ink hairline on white, which reads as "in hand" beside the quiet
+ * grounds either side of it and costs the palette nothing.
+ *
+ * `alert` went with it: it was `good` with a slightly darker ring and no
+ * caller, which is two ways to say one thing.
+ */
+type Tone = "neutral" | "good" | "warn" | "info" | "muted";
 
 const TONES: Record<Tone, string> = {
   neutral: "bg-paper-dim text-ink-muted ring-paper-line",
-  good: "bg-accent-tint text-accent-deep ring-accent/20",
+  good: "bg-accent-tint text-accent-deep ring-accent/30",
   warn: "bg-paper-dim text-ink ring-paper-edge",
-  alert: "bg-accent-tint text-accent-deep ring-accent/30",
-  info: "bg-sky-50 text-sky-800 ring-sky-200",
+  info: "bg-white text-ink ring-ink",
   muted: "bg-transparent text-ink-soft ring-paper-line",
 };
 

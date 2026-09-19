@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { NextIntlClientProvider, useTranslations } from "next-intl";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { CLIENT_NAMESPACES, pick } from "@/i18n/messages";
 import { TriageForm } from "@/components/triage/TriageForm";
 import { PageHeader } from "@/components/PageHeader";
 import { CheckMark } from "@/components/icons";
@@ -18,8 +19,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function TriagePage({ params }: { params: Promise<{ locale: string }> }) {
-  setRequestLocale((await params).locale);
-  return <Triage />;
+  const { locale } = await params;
+  setRequestLocale(locale);
+  // TriageForm is the only client component below here, and it reads `triage`
+  // and `validation`. The rest of the page is server-rendered.
+  return (
+    <NextIntlClientProvider locale={locale} messages={pick(await getMessages(), CLIENT_NAMESPACES.triage)}>
+      <Triage />
+    </NextIntlClientProvider>
+  );
 }
 
 /**

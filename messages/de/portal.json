@@ -184,6 +184,7 @@
     },
     "to": "Empfänger (optional)",
     "subject": "Betreff:",
+    "body": "Nachricht",
     "openGmail": "In Gmail öffnen ↗",
     "openOutlook": "In Outlook öffnen ↗",
     "openEmail": "In meiner E-Mail-App öffnen",

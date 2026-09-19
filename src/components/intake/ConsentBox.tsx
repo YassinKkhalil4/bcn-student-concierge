@@ -41,11 +41,13 @@ export function ConsentBox({
     >
       <label className="flex cursor-pointer gap-3.5">
         <input
+          id={name}
           type="checkbox"
           name={name}
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
-          aria-describedby={`${name}-body`}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? `${name}-body ${name}-error` : `${name}-body`}
           className="mt-0.5 h-4 w-4 flex-none accent-accent"
         />
         <span>
@@ -64,7 +66,7 @@ export function ConsentBox({
         </span>
       </label>
       {error && (
-        <p role="alert" className="field-error ml-8">
+        <p id={`${name}-error`} className="field-error ml-8">
           {error}
         </p>
       )}

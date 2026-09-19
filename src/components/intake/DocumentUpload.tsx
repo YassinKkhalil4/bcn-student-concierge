@@ -121,7 +121,11 @@ export function DocumentUpload({
                 </p>
               </div>
 
-              <label className="btn-secondary cursor-pointer !px-5 !py-2.5 !text-xs">
+              {/* The <input> inside is sr-only, so the browser draws its focus ring on a
+                  1x1px clipped box. `focus-ring-within` puts it on the label instead —
+                  without it this control is reachable by keyboard but invisible while
+                  focused, which is most of the way to not being reachable at all. */}
+              <label className="btn-secondary focus-ring-within cursor-pointer !px-5 !py-2.5 !text-xs">
                 {onFile ? t("replace") : t("choose")}
                 <input
                   ref={(el) => {

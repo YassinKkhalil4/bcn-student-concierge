@@ -51,7 +51,8 @@
     "submit": "Invia per il triage gratuito",
     "sending": "Invio in corso…",
     "freeNote": "Senza costi, senza impegno, senza carta. Rispondiamo in giornata.",
-    "failed": "Non è stato possibile inviare la tua richiesta. Riprova."
+    "failed": "Non è stato possibile inviare la tua richiesta. Riprova.",
+    "errorSummary": "Controlla queste risposte prima di inviare"
   },
   "done": {
     "title": "L’abbiamo ricevuta.",

@@ -51,7 +51,8 @@
     "submit": "Envoyer pour un triage gratuit",
     "sending": "Envoi…",
     "freeNote": "Sans frais, sans engagement, sans carte bancaire. Nous répondons le jour même.",
-    "failed": "Impossible d’envoyer votre demande. Veuillez réessayer."
+    "failed": "Impossible d’envoyer votre demande. Veuillez réessayer.",
+    "errorSummary": "Vérifiez ces réponses avant d’envoyer"
   },
   "done": {
     "title": "Nous l’avons bien reçue.",

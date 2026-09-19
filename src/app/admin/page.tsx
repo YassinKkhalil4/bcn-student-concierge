@@ -108,7 +108,7 @@ export default async function CasesPage({
               <span
                 className={`px-1.5 text-xs tabular-nums ${
                   b === "action" && counts.action > 0
-                    ? "bg-accent text-white"
+                    ? "bg-accent text-paper"
                     : "bg-paper-dim text-ink-soft"
                 }`}
               >
@@ -119,7 +119,7 @@ export default async function CasesPage({
         })}
       </nav>
 
-      <div className="overflow-x-auto border border-paper-line bg-white">
+      <div tabIndex={0} role="region" aria-label="Cases" className="overflow-x-auto border border-paper-line bg-white">
         <table className="w-full min-w-[860px] text-sm">
           <thead className="border-b border-paper-line bg-paper-dim text-left text-xs font-medium uppercase tracking-wide text-ink-soft">
             <tr>

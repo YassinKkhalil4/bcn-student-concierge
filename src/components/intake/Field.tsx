@@ -57,7 +57,7 @@ export function Field({
         inputMode={inputMode}
         aria-invalid={error ? true : undefined}
         aria-describedby={
-          [error ? errorId : null, hint ? hintId : null].filter(Boolean).join(" ") ||
+          [error ? errorId : null, hint && !error ? hintId : null].filter(Boolean).join(" ") ||
           undefined
         }
         className={uppercase ? "field-input-upper" : "field-input"}
@@ -68,7 +68,7 @@ export function Field({
         </p>
       )}
       {error && (
-        <p id={errorId} role="alert" className="field-error">
+        <p id={errorId} className="field-error">
           {error}
         </p>
       )}
@@ -95,6 +95,7 @@ export function SelectField({
 }) {
   const t = useTranslations("intake.field");
   const errorId = `${name}-error`;
+  const hintId = `${name}-hint`;
   return (
     <div>
       <label htmlFor={name} className="field-label">
@@ -106,7 +107,9 @@ export function SelectField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={error ? true : undefined}
-        aria-describedby={error ? errorId : undefined}
+        aria-describedby={
+          [error ? errorId : null, hint && !error ? hintId : null].filter(Boolean).join(" ") || undefined
+        }
         className="field-input"
       >
         <option value="">{t("select")}</option>
@@ -116,9 +119,9 @@ export function SelectField({
           </option>
         ))}
       </select>
-      {hint && !error && <p className="mt-1.5 text-xs text-ink-soft">{hint}</p>}
+      {hint && !error && <p id={hintId} className="mt-1.5 text-xs text-ink-soft">{hint}</p>}
       {error && (
-        <p id={errorId} role="alert" className="field-error">
+        <p id={errorId} className="field-error">
           {error}
         </p>
       )}

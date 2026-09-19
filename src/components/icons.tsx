@@ -1,5 +1,5 @@
 /**
- * The site's four marks.
+ * The site's marks.
  *
  * The same check glyph had been pasted by hand into the home page, the pricing
  * card and the triage page, in three slightly different sizes, so a change to
@@ -56,6 +56,42 @@ export function TickMark({ className }: MarkProps) {
   return (
     <svg {...base} className={className} strokeWidth={2.5}>
       <path d="M4 10.5 8 14.5 16 5.5" />
+    </svg>
+  );
+}
+
+/**
+ * The header's disclosure, below `xl`. Three rules rather than the usual
+ * bars-with-round-caps: the whole site groups with hairlines, so the mark that
+ * opens the index is made of the same rules the index is ruled with.
+ */
+export function MenuMark({ className }: MarkProps) {
+  return (
+    <svg {...base} className={className} strokeLinecap="butt">
+      <path d="M3 5.5h14M3 10h14M3 14.5h14" />
+    </svg>
+  );
+}
+
+/** The same disclosure, open. */
+export function CloseMark({ className }: MarkProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M5 5l10 10M15 5 5 15" />
+    </svg>
+  );
+}
+
+/**
+ * The select's own arrow. Native `appearance` is off on those controls so the
+ * arrow can be the site's, drawn at the same stroke as every other mark —
+ * before this it was a `▾` character, which meant the one piece of chrome on
+ * the language control was set in whatever font the visitor happened to have.
+ */
+export function ChevronMark({ className }: MarkProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="m5 8 5 5 5-5" />
     </svg>
   );
 }

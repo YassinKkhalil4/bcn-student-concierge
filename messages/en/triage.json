@@ -51,7 +51,8 @@
     "submit": "Send for free triage",
     "sending": "Sending…",
     "freeNote": "No charge, no obligation, no card. We reply the same day.",
-    "failed": "Could not send your enquiry. Please try again."
+    "failed": "Could not send your enquiry. Please try again.",
+    "errorSummary": "Check these answers before sending"
   },
   "done": {
     "title": "We’ve got it.",
