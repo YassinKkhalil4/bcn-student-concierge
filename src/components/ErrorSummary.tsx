@@ -55,11 +55,16 @@ export function ErrorSummary({
 
   if (errors.length === 0) return null;
 
+  // `enter-alert` is the site's vocabulary for exactly this: a block React
+  // renders into existence next to content that was already there. 2px and
+  // 160ms — enough to say where it came from, not enough to delay reading it,
+  // which matters more here than anywhere, since this block exists to be read
+  // immediately.
   return (
     <div
       ref={ref}
       tabIndex={-1}
-      className="mb-7 border border-accent/40 border-t-3 border-t-accent bg-accent-tint p-5 sm:p-6"
+      className="enter-alert mb-7 border border-accent/40 border-t-3 border-t-accent bg-accent-tint p-5 sm:p-6"
     >
       <h2 className="font-sans text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-accent-deep">
         {title}

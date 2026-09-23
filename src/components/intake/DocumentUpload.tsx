@@ -144,16 +144,27 @@ export function DocumentUpload({
 
             <div aria-live="polite" className="mt-3">
               {status.state === "uploading" && (
-                <p className="font-sans text-xs text-ink-soft">{t("uploading")}</p>
+                <>
+                  <p className="font-sans text-xs text-ink-soft">{t("uploading")}</p>
+                  {/*
+                    The bar is decoration on top of the text, not instead of it:
+                    the line above is what a screen reader announces and what
+                    survives reduced motion, so it stays. `aria-hidden` keeps
+                    the bar out of the announcement entirely — an indeterminate
+                    progressbar role would only add noise to a live region that
+                    already said the useful thing.
+                  */}
+                  <div aria-hidden="true" className="progress-indeterminate mt-2.5" />
+                </>
               )}
               {status.state === "done" && (
                 <p className="flex items-center gap-2 font-sans text-xs font-semibold text-ink">
-                  <TickMark className="h-3 w-3 flex-none" />
+                  <TickMark className="enter-tick-pop h-3 w-3 flex-none" />
                   {t("done", { name: status.name })}
                 </p>
               )}
               {status.state === "error" && (
-                <p role="alert" className="border-l-2 border-accent pl-2.5 font-sans text-xs font-semibold text-accent-deep">
+                <p role="alert" className="enter-alert border-l-2 border-accent pl-2.5 font-sans text-xs font-semibold text-accent-deep">
                   {status.message === "sessionExpired"
                     ? tw("sessionExpired")
                     : t(status.message, { mb: MAX_MB })}

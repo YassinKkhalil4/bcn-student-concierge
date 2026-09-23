@@ -27,11 +27,30 @@
        low vision can find. */
     --focus: theme("colors.accent.DEFAULT");
     --focus-offset: theme("colors.paper.DEFAULT");
+
+    /*
+      MOTION VOCABULARY. Two curves, and nothing else is used anywhere.
+
+      The browser's built-in `ease-out` is too weak to read as deliberate at
+      the durations below — it looks like a slow color change rather than a
+      decision. These are the standard strong curves; they are not tuned by
+      hand and must not be approximated with a lookalike bezier.
+
+      Everything on this site animates `transform` and `opacity` only (the two
+      the compositor can do without layout or paint), under 300ms, with the one
+      documented exception of the accordion height below.
+    */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Lets `height: auto` be a transition endpoint, which is what makes the
+       accordion below animate at all. Nothing else on the site transitions a
+       height, so enabling it globally has no other effect. */
+    interpolate-size: allow-keywords;
   }
 
   body {
@@ -93,6 +112,18 @@
     --focus-offset: theme("colors.ink.DEFAULT");
   }
 
+  /*
+    Reduced motion collapses every transition to its settled state.
+
+    This is a blanket rule, which is only safe because of a constraint every
+    animation on this site keeps: the settled state is the correct state. No
+    element starts at `opacity: 0` and relies on an animation to become
+    visible, and no `forwards` fill hides anything. Kill every duration here
+    and the interface still shows exactly what it should — instantly.
+
+    The one animation that does NOT survive being frozen is the indeterminate
+    upload bar, whose whole content is its movement. It opts out below.
+  */
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -156,10 +187,46 @@
 
   /* ── Controls ─────────────────────────────────────────────────────────── */
 
+  /*
+    Press feedback. Every control on the site had hover and focus but no
+    `:active`, so the one moment that commits a student to a paid action — the
+    click itself — gave nothing back.
+
+    0.98, not the 0.95 that reads well in a demo: these are wide buttons, often
+    full-width, and the scale is a percentage of the width. 120ms because press
+    feedback has to arrive inside the press, not after it.
+
+    Deliberately not gated behind `@media (hover: hover)`: `:active` is a real
+    press on a touchscreen, and this is where it matters most — a phone gives
+    no cursor and no hover state, so the press is the only confirmation there
+    is that the tap landed.
+
+    `:not(:disabled)` keeps a submitting button from shrinking under a second
+    click that will be ignored anyway.
+  */
+  .press {
+    /* The ratio is a variable rather than a literal so that a wider control
+       can retune it without a second `:active` rule competing with this one.
+       `scale` is a percentage of the element's own width: at a constant ratio
+       a full-width button travels three times as far as a small one, which is
+       a press on one and a lurch on the other. */
+    --press-scale: 0.97;
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease,
+      transform 120ms var(--ease-out);
+  }
+  .press:active:not(:disabled) {
+    transform: scale(var(--press-scale));
+  }
+
   .btn {
-    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-center
-           font-sans text-sm font-bold tracking-tight transition-colors
+    @apply press inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-center
+           font-sans text-sm font-bold tracking-tight
            disabled:cursor-not-allowed disabled:opacity-50;
+    /* Buttons here are wide, and often `w-full`. */
+    --press-scale: 0.98;
     /*
       `break-word`, not the `anywhere` the body uses. The difference is the one
       that matters here: `anywhere` lets the BOX shrink narrower than its
@@ -225,11 +292,22 @@
     .btn-secondary does, because it is the same button at a smaller size.
   */
   .btn-mini {
-    @apply inline-flex items-center justify-center gap-1.5 border border-paper-edge
+    @apply press inline-flex items-center justify-center gap-1.5 border border-paper-edge
            bg-white px-3 py-2 text-center font-sans text-xs font-medium text-ink
-           transition-colors hover:border-ink hover:bg-ink hover:text-paper
+           hover:border-ink hover:bg-ink hover:text-paper
            disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-paper-edge
            disabled:hover:bg-white disabled:hover:text-ink;
+    /*
+      `press`, not `transition-colors`: this control used to be three
+      hand-rolled variants, one of which (CopyButton) had already been given
+      press feedback. Folding them together would have silently dropped it from
+      that one, so the class carries it for all of them instead — the copy
+      buttons, the invoice PDF links, the two "open the official form" links.
+
+      No `--press-scale` override: the default 0.97 is drawn for a control this
+      size. `.btn` raises it to 0.98 because those are often full-width, and at
+      a constant ratio a wide button travels three times as far.
+    */
   }
 
   /* The guide's corner. --chamfer sets the size; the cut is always bottom-right. */
@@ -241,6 +319,139 @@
       calc(100% - var(--chamfer, 12px)) 100%,
       0 100%
     );
+  }
+
+  /* ── Disclosure ───────────────────────────────────────────────────────── */
+
+  /*
+    The six <details> on the site — the FAQ, the enrolment and tasa guides, the
+    authorisation form's small print — already rotated their `+` 45° on open
+    and then let the panel underneath snap. Half an animation reads worse than
+    none, because the eye is told to follow something and then loses it.
+
+    Height is the one property animated anywhere on this site that costs
+    layout, and it is animated here because there is no transform equivalent:
+    a scaled panel would distort its own text. 220ms keeps that cost small.
+
+    `allow-discrete` is what keeps the content painted on the way OUT — without
+    it `content-visibility` flips to `hidden` on frame one and the panel
+    vanishes instead of closing. Where `::details-content` is unsupported the
+    disclosure simply snaps, exactly as it does today; nothing is hidden by a
+    style the browser did not understand.
+  */
+  details::details-content {
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    transition:
+      height 220ms var(--ease-out),
+      opacity 220ms var(--ease-out),
+      content-visibility 220ms var(--ease-out);
+    transition-behavior: allow-discrete;
+  }
+  details[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+
+  /*
+    The header's index is the one disclosure that overlays the page instead of
+    pushing it, and the accordion above cannot describe it.
+
+    Its panel is absolutely positioned, so it contributes nothing to
+    `::details-content`'s height — which stays 0 open or shut. `overflow:
+    hidden` on a zero-height box then clips the panel's own ground away and the
+    hero reads straight through the navigation. There is no height here for a
+    height animation to animate: the panel is either over the page or it is
+    not.
+
+    The transition goes too. `content-visibility` is transitioned above with
+    `allow-discrete`, and on an absolutely-positioned child that combination
+    paints the panel before the compositor has its ground down: for the length
+    of the transition the hero reads straight through the navigation. Measured
+    here, then confirmed by forcing a repaint, which cleared it.
+
+    So this one disclosure simply appears. That is the honest description of
+    something that arrives on top of the page rather than unfolding within it,
+    and it is what the panel did before the accordion existed.
+  */
+  .disclosure-overlay::details-content {
+    height: auto;
+    overflow: visible;
+    opacity: 1;
+    transition: none;
+  }
+
+  /* ── Entrances ────────────────────────────────────────────────────────── */
+
+  /*
+    For anything React renders into existence next to content that was already
+    there: a validation message, an alert block, a step of a wizard.
+
+    `@starting-style` gives the element a state to come FROM, so the browser
+    animates a mount that would otherwise be a teleport. No JS, no mount flag,
+    no library — and if the browser does not support it the element simply
+    appears, which is today's behaviour.
+
+    Every rule here settles at `opacity: 1` / no transform, so an element that
+    never animates is still fully visible. That is the invariant the blanket
+    reduced-motion rule above depends on.
+  */
+
+  /* Errors and alerts. 2px, not 8px: an error must be readable the instant it
+     lands, so the motion is only enough to say where it came from. 160ms is
+     under the time it takes to move the eye there. */
+  .enter-alert {
+    transition:
+      opacity 160ms var(--ease-out),
+      transform 160ms var(--ease-out);
+  }
+
+  /*
+    A wizard step arriving in the panel the last one just left. Direction is
+    carried on the element so back and forward are distinguishable — content
+    that always enters from the same side tells the student nothing about
+    which way they are travelling through the form.
+
+    Entry only. An exit animation on a form step would add its own duration to
+    every Continue click, and the student is trying to get through this, not
+    watch it.
+  */
+  .enter-step {
+    transition:
+      opacity 200ms var(--ease-out),
+      transform 200ms var(--ease-out);
+  }
+
+  /* A tick landing in the progress register as a step is completed. */
+  .enter-tick {
+    transition:
+      opacity 220ms var(--ease-out),
+      transform 220ms var(--ease-out);
+  }
+
+  /* The states each of the above comes FROM. Kept together, and written at
+     matching specificity — a `@starting-style` rule the settled rule outranks
+     is silently ignored. */
+  @starting-style {
+    .enter-alert {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    /* Forward: the new step arrives from the right, the way the eye is
+       already travelling. Back: from the left, retracing. */
+    .enter-step[data-dir="forward"] {
+      opacity: 0;
+      transform: translateX(8px);
+    }
+    .enter-step[data-dir="back"] {
+      opacity: 0;
+      transform: translateX(-8px);
+    }
+    .enter-tick {
+      opacity: 0;
+      transform: scale(0.6);
+    }
   }
 
   /* ── Forms ────────────────────────────────────────────────────────────── */
@@ -278,8 +489,88 @@
 
   /* Errors are the accent at its darkest, with a weight change and a rule, so
      the message does not rely on hue alone. */
+  /* `enter-alert` here rather than on each of the five call sites: an error
+     message is the same event wherever it appears, and the class is the one
+     place all of them already share. */
   .field-error {
-    @apply mt-2 border-l-2 border-accent pl-2.5 font-sans text-xs font-semibold text-accent-deep;
+    @apply enter-alert mt-2 border-l-2 border-accent pl-2.5 font-sans text-xs font-semibold text-accent-deep;
+  }
+
+  /* ── Upload ───────────────────────────────────────────────────────────── */
+
+  /*
+    An upload is the only place on the site where the interface goes away for
+    seconds at a time, on a connection the student does not control, holding a
+    scan of their passport. "Uploading…" in grey text was the entire signal.
+
+    A CSS animation rather than anything driven by JavaScript, deliberately: a
+    multi-megabyte upload is exactly when the main thread is worst, and a
+    compositor animation keeps moving when `requestAnimationFrame` would be
+    dropping frames. Indeterminate, because the fetch gives us no progress
+    events to be honest with — a bar that claimed a percentage would be lying.
+
+    `linear`, because constant motion is the one case where an eased curve
+    reads as a stutter.
+  */
+  .progress-indeterminate {
+    @apply relative h-px overflow-hidden bg-paper-line;
+  }
+  .progress-indeterminate::after {
+    content: "";
+    @apply absolute inset-0 bg-accent;
+    transform-origin: left;
+    animation: sweep 1100ms linear infinite;
+  }
+
+  @keyframes sweep {
+    from {
+      transform: translateX(-100%) scaleX(0.4);
+    }
+    to {
+      transform: translateX(250%) scaleX(0.4);
+    }
+  }
+
+  /*
+    The one animation whose meaning IS its movement, so it cannot be frozen
+    like the rest. Reduced motion gets a static bar instead of a swept one —
+    still visibly a thing in progress, just not travelling.
+  */
+  @media (prefers-reduced-motion: reduce) {
+    .progress-indeterminate::after {
+      animation-name: none;
+      transform: none;
+      opacity: 0.45;
+    }
+  }
+
+  /*
+    The confirmation tick, and the only bounce anywhere on this site.
+
+    Justified by how rarely it is seen and how much it is worth when it is: a
+    student who has been fighting a phone camera and a 10MB limit to get their
+    passport uploaded. The overshoot is 6% and it is over in 260ms.
+
+    Keyframes rather than a transition because a transition cannot overshoot,
+    and nothing here fires twice in quick succession — an upload finishes once.
+  */
+  .enter-tick-pop {
+    animation: tick-pop 260ms var(--ease-out) both;
+  }
+
+  @keyframes tick-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.7);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   /* ── Surfaces ─────────────────────────────────────────────────────────── */

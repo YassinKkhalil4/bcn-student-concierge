@@ -62,7 +62,14 @@ export function PadronWizard({
         </div>
       </fieldset>
 
-      <div className="mt-6">
+      {/*
+        Same entrance as a wizard step, for the same reason: choosing a path
+        replaces this whole panel, and without a bridge the answer to "how do
+        you live?" arrives as a teleport. Keyed by path so each choice is a
+        fresh element and `@starting-style` applies. Always "forward" — the
+        three paths are siblings, not a sequence, so there is no back.
+      */}
+      <div key={path ?? "none"} data-dir="forward" className="enter-step mt-6">
         {path === "residence" && <ResidencePath person={person} uploaded={uploaded} />}
         {path === "own-lease" && <OwnLeasePath uploaded={uploaded} onNotMine={() => setPath("not-in-name")} />}
         {path === "not-in-name" && <NotInNamePath uploaded={uploaded} />}

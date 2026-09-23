@@ -132,7 +132,7 @@ function MobileNav({
   const t = useTranslations("common");
 
   return (
-    <details className="group xl:hidden">
+    <details className="disclosure-overlay group xl:hidden">
       <summary
         className="flex min-h-[44px] cursor-pointer list-none items-center gap-2.5 border
                    border-paper-edge px-3 text-ink transition-colors
