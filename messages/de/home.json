@@ -2,12 +2,21 @@
   "metaTitle": "BCN Student Concierge — Aufenthaltsformalitäten, gleich beim ersten Mal richtig",
   "metaDescription": "Für internationale Studierende, die schon in Barcelona sind. Padrón, TIE- und CUE-Termine, EX-17- und EX-18-Formulare, vorbereitet und gebucht. Die kostenlose Ersteinschätzung am selben Tag sagt dir, wo du stehst, bevor du etwas bezahlst.",
   "hero": {
-    "eyebrow": "Barcelona · Für alle, die schon hier sind",
-    "title": "Du bist seit zwei Wochen hier. Die Uhr läuft seit deiner Landung.",
-    "body": "Studierende von außerhalb der EU haben in der Regel einen Monat ab Einreise Zeit, die TIE zu beantragen. Wenn du in der ersten Septemberwoche angekommen bist, schließt sich dieses Fenster Anfang Oktober — und der Termin ist der Teil, den niemand beschleunigen kann. Wir bauen die Akte so, dass dich am Tag, an dem ein Platz frei wird, nichts davon wieder nach Hause schickt.",
-    "primaryCta": "Kostenlose Ersteinschätzung",
-    "secondaryCta": "Pakete ansehen",
-    "note": "Die Ersteinschätzung ist kostenlos und kommt am selben Tag. Die Pakete haben Festpreise: Der angezeigte Preis ist der Preis, den du zahlst."
+    "eyebrow": "Barcelona · Internationale Studierende · EU- und Nicht-EU-Weg",
+    "title": "Dein TIE, dein Padrón, deine Termine: vorbereitet, gebucht und gleich beim ersten Mal richtig.",
+    "body": "Studierende von außerhalb der EU haben ab der Einreise in der Regel einen Monat Zeit, den TIE zu beantragen, und der Termin ist der Teil, den niemand beschleunigen kann. Wir lesen deine Genehmigung, bauen die Akte auf und buchen den Termin auf deinen Namen — damit dich, wenn einer frei wird, nichts in den Unterlagen wieder nach Hause schickt. Schick uns dein Einreisedatum und wir sagen dir noch heute, wie viele Tage dir bleiben.",
+    "primaryCta": "Meine Frist kostenlos prüfen",
+    "secondaryCta": "Pakete und Preise ansehen",
+    "note": "Die Prüfung ist kostenlos, kommt am selben Tag und braucht keine Karte. Danach sind die Preise fest: Der angezeigte Preis ist der Preis, den du zahlst."
+  },
+  "proof": {
+    "heading": "Worauf du uns festnageln kannst",
+    "items": [
+      "Ein Festpreis, genannt bevor du zahlst. Wir rechnen nichts nach Stunden ab.",
+      "Jedes Formular läuft auf deinen Namen. Wir unterschreiben nie als deine Vertretung.",
+      "Wir verschlüsseln jeden Passscan mit einem eigenen Schlüssel und löschen ihn 30 Tage nach Abschluss deiner Akte.",
+      "Kein Termin in sechs Wochen? Die Hälfte kommt zurück, und die Akte bleibt deine."
+    ]
   },
   "trust": {
     "heading": "Gemacht für Studierende an",
@@ -77,6 +86,14 @@
         "a": "Nein. Wir sind ein unabhängiger Dienst für Verwaltungsbegleitung. Wir bereiten Dokumente aus deinen Angaben vor, buchen Termine und führen dich durch das Verfahren. Wir vertreten dich vor keiner Behörde und geben keine Rechtsberatung. Wenn ein Fall juristische Prüfung braucht, sagen wir das deutlich und verweisen dich an einen colegiado abogado."
       },
       {
+        "q": "Was kostet es, und wann zahle ich?",
+        "a": "Der Preis auf der Karte ist der ganze Preis. Wir schlagen beim Bezahlen nichts drauf, rechnen nichts nach Stunden ab und verstecken keine staatliche Gebühr darin. Du zahlst, sobald die Ersteinschätzung bestätigt hat, welcher Weg für dich gilt. Davor schuldest du uns nichts, und wenn wir nicht helfen können, sagen wir das, statt dein Geld zu nehmen."
+      },
+      {
+        "q": "Und wenn rechtzeitig kein Termin frei wird?",
+        "a": "Wir suchen bis zu sechs Wochen ab deiner Übermittlung im offiziellen Portal. Wird in diesem Fenster keiner frei, bekommst du die Hälfte zurück und behältst die komplette Ready File (Formulare, Kopien, den Modelo 790, die Prüfung), damit du an dem Tag bereit bist, an dem ein Termin auftaucht. Dazu bekommst du eine datierte Bescheinigung über jeden Versuch. Spanische Ämter akzeptieren das üblicherweise als Begründung für eine verspätete Anmeldung, verpflichtet ist dazu aber niemand."
+      },
+      {
         "q": "Ich glaube, meine Frist ist schon abgelaufen. Lohnt sich das Nachfragen?",
         "a": "Ja — und lieber heute als nächste Woche. Die Ersteinschätzung ist kostenlos und wir antworten ehrlich. Ist deine Frist verstrichen oder dein Status abgelaufen bzw. irregulär, braucht das eine juristische Prüfung, für die wir nicht qualifiziert sind: dann sagen wir es und verweisen dich weiter, statt dir Geld abzunehmen."
       },
@@ -97,5 +114,12 @@
         "a": "Nein — und jeder Dienst, der das garantiert, führt dich in die Irre. Die Entscheidung liegt allein bei den spanischen Behörden. Was wir steuern, ist eine vollständige, korrekte und fristgerecht eingereichte Akte — und genau dort entstehen die meisten Ablehnungen."
       }
     ]
+  },
+  "close": {
+    "eyebrow": "Zwei Wege anzufangen",
+    "title": "Jetzt anfangen, oder erst fragen.",
+    "body": "Geh direkt zur Aufnahme, wenn du weißt, welches Paket du willst: wir beginnen noch heute mit der Akte. Wenn du noch überlegst, sagt dir die kostenlose Prüfung, welcher Weg gilt und wie viele Tage dir bleiben, und sie kostet nichts. So oder so weißt du, wo du stehst, bevor du etwas ausgibst.",
+    "primaryCta": "Meine Frist kostenlos prüfen",
+    "secondaryCta": "Meine Aufnahme starten"
   }
 }

@@ -17,23 +17,29 @@ export function LegalDisclaimer({ variant = "inline" }: { variant?: Variant }) {
   const t = useTranslations("common.disclaimer");
   const body = t("body");
 
+  // The footer is the site's dark field, so this variant is written for navy.
   if (variant === "footer") {
     return (
-      <p className="max-w-4xl text-xs leading-relaxed text-ink-soft">
-        <span className="font-semibold text-ink-muted">{t("footerLabel")} </span>
+      <p className="max-w-4xl font-sans text-xs leading-relaxed text-onink-soft">
+        <span className="font-bold uppercase tracking-[0.1em] text-onink-muted">{t("footerLabel")} </span>
         {body}
       </p>
     );
   }
 
+  // Squared plate with a crimson cap rule. This is the only place on a paper
+  // page where the accent is allowed to frame a whole block, because it is the
+  // one block a reader must not skim past.
   if (variant === "prominent") {
     return (
-      <aside role="note" className="rounded-xl border border-terracotta/25 bg-terracotta/[0.04] p-5">
-        <p className="text-xs font-semibold uppercase tracking-wider text-terracotta">{t("prominentLabel")}</p>
-        <p className="mt-2.5 text-sm leading-relaxed text-ink-muted">{body}</p>
+      <aside role="note" className="border border-paper-edge border-t-3 border-t-accent bg-white p-6 sm:p-7">
+        <p className="font-sans text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-accent-deep">
+          {t("prominentLabel")}
+        </p>
+        <p className="prose-body mt-4">{body}</p>
       </aside>
     );
   }
 
-  return <p className="text-sm leading-relaxed text-ink-muted">{body}</p>;
+  return <p className="prose-body">{body}</p>;
 }

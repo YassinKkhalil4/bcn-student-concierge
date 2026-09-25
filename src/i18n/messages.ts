@@ -24,6 +24,46 @@ export type Namespace = (typeof NAMESPACES)[number];
 
 export type Messages = Record<Namespace, AbstractIntlMessages>;
 
+/**
+ * Which catalogues each surface's CLIENT components read.
+ *
+ * The provider in [locale]/layout.tsx used to hand every client the whole
+ * catalogue — 68 kB of JSON, 24 kB gzipped, serialised into the HTML of every
+ * page in each of six languages. The home page's only client components are
+ * the language switcher and a one-line <html lang> effect, so roughly 95% of
+ * that never had a reader: `legal` (14 kB) and `home` (8.5 kB) are used
+ * exclusively by server components and were shipped to the browser anyway.
+ *
+ * It matters more here than the number suggests. These are students who have
+ * just landed, usually on a foreign SIM, often looking this up on data they
+ * are paying roaming rates for.
+ *
+ * A route must list every namespace its client tree reads, including the ones
+ * its children read — a missing one is a runtime error, not a fallback.
+ * tests/i18n.test.ts fails if a client component starts using a namespace no
+ * route provides.
+ */
+export const CLIENT_NAMESPACES = {
+  /** The header and footer, on every page. */
+  chrome: ["common"],
+  /** TriageForm. */
+  triage: ["common", "triage", "validation"],
+  /** IntakeWizard, and every uploader and request-builder it embeds. */
+  intake: ["common", "intake", "pricing", "portal", "validation"],
+  /** The student's file: the same uploaders, plus the Tasa 012 guide. */
+  portal: ["common", "guides", "intake", "portal", "pricing", "validation"],
+} as const satisfies Record<string, readonly Namespace[]>;
+
+/** The named catalogues only — what a route hands its NextIntlClientProvider. */
+export function pick<T extends Record<string, unknown>>(
+  messages: T,
+  namespaces: readonly Namespace[],
+): Partial<T> {
+  return Object.fromEntries(
+    namespaces.map((ns) => [ns, messages[ns as keyof T]]),
+  ) as Partial<T>;
+}
+
 export async function loadMessages(locale: string): Promise<Messages> {
   const l = (routing.locales as readonly string[]).includes(locale) ? locale : routing.defaultLocale;
   const entries = await Promise.all(

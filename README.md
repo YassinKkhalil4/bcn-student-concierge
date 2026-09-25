@@ -53,6 +53,8 @@ hardening and backups: [docs/DEPLOY.md](docs/DEPLOY.md).
 | `npm run i18n:translate` | Translate new or changed English strings with DeepL (needs `DEEPL_API_KEY` in `.env.local`) |
 | `npm run i18n:check` | Validate every catalogue without calling DeepL |
 
+Search strategy, the page/query map and the content gap: **[docs/SEO.md](docs/SEO.md)**.
+
 ## Architecture
 
 ```

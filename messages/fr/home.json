@@ -2,12 +2,21 @@
   "metaTitle": "BCN Student Concierge — les démarches de résidence, réussies du premier coup",
   "metaDescription": "Pour les étudiants internationaux déjà à Barcelone. Padrón, rendez-vous TIE et CUE, formulaires EX-17 et EX-18, préparés et réservés. Le triage gratuit le jour même vous dit où vous en êtes avant tout paiement.",
   "hero": {
-    "eyebrow": "Barcelone · Pour les étudiants déjà sur place",
-    "title": "Vous êtes ici depuis deux semaines. Le compte à rebours a commencé le jour de votre arrivée.",
-    "body": "Les étudiants hors UE disposent normalement d’un mois à compter de l’entrée pour demander la TIE. Si vous êtes arrivé la première semaine de septembre, ce délai expire début octobre, et le rendez-vous est la partie que personne ne peut accélérer. Nous montons le dossier pour que, le jour où un créneau s’ouvre, rien de ce que vous apportez ne vous renvoie chez vous.",
-    "primaryCta": "Triage gratuit",
-    "secondaryCta": "Voir les formules",
-    "note": "Le triage est gratuit et traité le jour même. Les formules sont à prix fixe : le prix affiché est celui que vous payez."
+    "eyebrow": "Barcelone · Étudiants internationaux · Parcours UE et hors UE",
+    "title": "Votre TIE, votre Padrón, vos rendez-vous : préparés, réservés, et justes du premier coup.",
+    "body": "Les étudiants hors UE disposent normalement d’un mois à compter de l’entrée pour demander le TIE, et le rendez-vous est la partie que personne ne peut accélérer. Nous lisons votre autorisation, constituons le dossier et réservons le créneau à votre nom, pour que le jour où il s’en libère un, rien dans les papiers ne vous renvoie chez vous. Envoyez-nous votre date d’entrée : nous vous dirons aujourd’hui combien de jours il vous reste.",
+    "primaryCta": "Vérifier mon délai gratuitement",
+    "secondaryCta": "Voir les formules et les prix",
+    "note": "La vérification est gratuite, le jour même, sans carte bancaire. Ensuite les tarifs sont fixes : le prix affiché est celui que vous payez."
+  },
+  "proof": {
+    "heading": "Ce que vous pouvez exiger de nous",
+    "items": [
+      "Un tarif fixe, annoncé avant tout paiement. Nous ne facturons rien à l’heure.",
+      "Chaque formulaire est déposé à votre nom. Nous ne signons jamais comme votre représentant.",
+      "Nous chiffrons chaque scan de passeport avec sa propre clé et le supprimons 30 jours après la clôture de votre dossier.",
+      "Pas de rendez-vous en six semaines ? La moitié de vos honoraires vous est remboursée, et le dossier reste le vôtre."
+    ]
   },
   "trust": {
     "heading": "Conçu pour les étudiants de",
@@ -77,6 +86,14 @@
         "a": "Non. Nous sommes un service indépendant d’accompagnement administratif. Nous préparons des documents à partir des informations que vous nous donnez, réservons des rendez-vous et vous guidons dans la procédure. Nous ne vous représentons devant aucune autorité et ne donnons aucun conseil juridique. Lorsqu’un dossier exige une analyse juridique, nous le disons clairement et vous orientons vers un colegiado abogado."
       },
       {
+        "q": "Combien ça coûte, et quand est-ce que je paie ?",
+        "a": "Le prix indiqué sur la carte est le prix complet. Nous n’ajoutons rien au paiement, ne facturons rien à l’heure et n’y cachons aucune taxe publique. Vous payez une fois que le triage a confirmé quel parcours vous concerne. Avant cela vous ne nous devez rien, et si nous ne pouvons pas vous aider nous le disons au lieu de prendre votre argent."
+      },
+      {
+        "q": "Et si aucun rendez-vous ne se libère à temps ?",
+        "a": "Nous cherchons sur le portail officiel pendant six semaines au maximum à compter de votre envoi. Si rien ne se libère dans cette fenêtre, la moitié de vos honoraires vous est remboursée et vous gardez l’intégralité du Ready File (formulaires, copies, le Modelo 790, l’audit) pour être prêt le jour où un créneau apparaît. Vous recevez aussi un certificat daté de chaque tentative faite. Les administrations espagnoles l’acceptent couramment comme justification d’une inscription tardive, sans qu’aucun agent y soit tenu."
+      },
+      {
         "q": "Je crois avoir déjà dépassé le délai. Cela vaut-il la peine de demander ?",
         "a": "Oui, et plutôt aujourd’hui que la semaine prochaine. Le triage est gratuit et nous vous répondrons honnêtement. Si votre délai est expiré, ou si votre situation est périmée ou irrégulière, cela exige une analyse juridique que nous ne sommes pas qualifiés pour fournir : nous vous le dirons et vous orienterons, plutôt que de vous facturer."
       },
@@ -97,5 +114,12 @@
         "a": "Non, et tout service qui le garantit vous induit en erreur. La décision appartient entièrement aux autorités espagnoles. Ce que nous maîtrisons, c’est que le dossier soit complet, exact et déposé dans les temps — c’est là que naissent la plupart des refus."
       }
     ]
+  },
+  "close": {
+    "eyebrow": "Deux façons de commencer",
+    "title": "Commencez maintenant, ou demandez d’abord.",
+    "body": "Allez directement au dossier si vous savez quelle formule vous voulez : nous commençons à le constituer dès aujourd’hui. Si vous hésitez encore, la vérification gratuite vous dit quel parcours s’applique et combien de jours il vous reste, et ne coûte rien. Dans les deux cas, vous saurez où vous en êtes avant de dépenser quoi que ce soit.",
+    "primaryCta": "Vérifier mon délai gratuitement",
+    "secondaryCta": "Commencer mon dossier"
   }
 }

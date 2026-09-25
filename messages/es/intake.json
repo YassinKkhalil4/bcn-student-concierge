@@ -154,6 +154,7 @@
     "saving": "Guardando…",
     "submit": "Enviar y continuar",
     "fixEarlier": "Algunas respuestas deben corregirse; compruebe los pasos anteriores.",
+    "errorSummary": "Revisa estas respuestas antes de continuar",
     "submitFailed": "No hemos podido guardar su envío. Por favor, inténtelo de nuevo.",
     "networkRetry": "Error de red. Sus respuestas siguen aquí; por favor, vuelva a intentarlo.",
     "checkoutFailed": "No se ha podido abrir la página de pago. Inténtelo de nuevo.",

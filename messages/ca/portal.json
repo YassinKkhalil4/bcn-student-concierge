@@ -184,6 +184,7 @@
     },
     "to": "Destinatari (opcional)",
     "subject": "Assumpte:",
+    "body": "Missatge",
     "openGmail": "Obre a Gmail ↗",
     "openOutlook": "Obre a Outlook ↗",
     "openEmail": "Obre-ho a la meva aplicació de correu",

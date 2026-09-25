@@ -140,8 +140,8 @@
     "applyWaitlist": "Apply for the waitlist"
   },
   "page": {
-    "metaTitle": "Paquets i preus",
-    "metaDescription": "Tres paquets de preu tancat per a estudiants internacionals que ja són a Barcelona: Ready File, Soft Landing i Fixer. Dos preus per paquet: un per a la via UE i un altre per a la via de fora de la UE.",
+    "metaTitle": "Paquets i preus: TIE, Padró i cites a preu tancat",
+    "metaDescription": "Tres paquets de preu tancat per a estudiants internacionals a Barcelona: Ready File, Soft Landing i Fixer. Un preu per a la via UE i un altre per a la via no UE, sense afegits en pagar, i la meitat de tornada si en sis setmanes no surt cap cita.",
     "eyebrow": "Paquets i preus",
     "title": "Preus tancats per a un procés sense terminis tancats.",
     "intro": "Tots els paquets tenen un preu tancat, i el preu que veus és el que pagues.",
@@ -198,6 +198,9 @@
         "item": "Traducció jurada o postil·la",
         "note": "Identifiquem el que ho necessita i et derivem a un traductor jurat; els seus honoraris són a part."
       }
-    ]
+    ],
+    "guaranteeEyebrow": "Si la cita no arriba mai",
+    "guaranteeTitle": "La meitat de tornada, i l’expedient és teu.",
+    "guaranteeBody": "Busquem al portal oficial fins a sis setmanes des del teu enviament. Si en aquesta finestra no en surt cap, et tornem el 50% del preu i et quedes amb el Ready File sencer (formularis, còpies, el Modelo 790, l’auditoria), així estàs a punt el dia que n’aparegui una. També reps un certificat datat de cada intent que vam fer. Ningú no pot escurçar aquest pas legalment, i qualsevol servei que digui el contrari et ven una cosa que no té."
   }
 }

@@ -11,11 +11,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const signedIn = await isAdmin();
 
   return (
-    <div className="min-h-screen bg-bone-warm/60">
-      <header className="border-b border-bone-line bg-white">
+    <div className="min-h-screen bg-paper-dim">
+      <header className="border-b border-paper-line bg-white">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
           <Link href="/admin" className="flex items-baseline gap-2">
-            <span className="font-display text-base font-semibold text-ink">BCN Student Concierge</span>
+            <span className="font-sans text-base font-semibold text-ink">BCN Student Concierge</span>
             <span className="text-xs font-medium uppercase tracking-wider text-ink-soft">Staff</span>
           </Link>
           {signedIn && (

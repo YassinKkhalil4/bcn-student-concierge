@@ -25,21 +25,33 @@ export const BUCKET_LABEL: Record<CaseBucket, string> = {
   all: "All",
 };
 
-type Tone = "neutral" | "good" | "warn" | "alert" | "info" | "muted";
+/**
+ * Badge tones, and the whole set of them.
+ *
+ * `info` used to be drawn from Tailwind's stock blue palette: the only colour
+ * anywhere in the application that came from outside the token system.
+ * tailwind.config.ts states the rule it broke in as many words:
+ * one hue, three jobs, no second accent anywhere. It is now the one tone drawn
+ * with a hard ink hairline on white, which reads as "in hand" beside the quiet
+ * grounds either side of it and costs the palette nothing.
+ *
+ * `alert` went with it: it was `good` with a slightly darker ring and no
+ * caller, which is two ways to say one thing.
+ */
+type Tone = "neutral" | "good" | "warn" | "info" | "muted";
 
 const TONES: Record<Tone, string> = {
-  neutral: "bg-bone-warm text-ink-muted ring-bone-line",
-  good: "bg-olive/10 text-olive ring-olive/20",
-  warn: "bg-amber-50 text-amber-800 ring-amber-200",
-  alert: "bg-terracotta/10 text-terracotta ring-terracotta/25",
-  info: "bg-sky-50 text-sky-800 ring-sky-200",
-  muted: "bg-transparent text-ink-soft ring-bone-line",
+  neutral: "bg-paper-dim text-ink-muted ring-paper-line",
+  good: "bg-accent-tint text-accent-deep ring-accent/30",
+  warn: "bg-paper-dim text-ink ring-paper-edge",
+  info: "bg-white text-ink ring-ink",
+  muted: "bg-transparent text-ink-soft ring-paper-line",
 };
 
 export function Badge({ tone = "neutral", children }: { tone?: Tone; children: ReactNode }) {
   return (
     <span
-      className={`inline-flex items-center whitespace-nowrap rounded-md px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${TONES[tone]}`}
+      className={`inline-flex items-center whitespace-nowrap px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${TONES[tone]}`}
     >
       {children}
     </span>
@@ -69,9 +81,9 @@ export function Card({
   className?: string;
 }) {
   return (
-    <section className={`rounded-xl border border-bone-line bg-white ${className}`}>
+    <section className={`border border-paper-line bg-white ${className}`}>
       {title && (
-        <header className="flex items-center justify-between gap-3 border-b border-bone-line px-5 py-3">
+        <header className="flex items-center justify-between gap-3 border-b border-paper-line px-5 py-3">
           <h2 className="text-sm font-semibold text-ink">{title}</h2>
           {action}
         </header>

@@ -154,6 +154,7 @@
     "saving": "Enregistrement en cours…",
     "submit": "Valider et continuer",
     "fixEarlier": "Certaines réponses doivent être corrigées — veuillez vérifier les étapes précédentes.",
+    "errorSummary": "Vérifiez ces réponses avant de continuer",
     "submitFailed": "Nous n’avons pas pu enregistrer votre soumission. Veuillez réessayer.",
     "networkRetry": "Erreur réseau. Vos réponses sont toujours enregistrées — veuillez réessayer.",
     "checkoutFailed": "Impossible d’ouvrir la page de paiement. Veuillez réessayer.",

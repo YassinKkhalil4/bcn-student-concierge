@@ -154,6 +154,7 @@
     "saving": "S’està desant…",
     "submit": "Envia i continua",
     "fixEarlier": "Algunes respostes s’han de corregir; si us plau, reviseu els passos anteriors.",
+    "errorSummary": "Revisa aquestes respostes abans de continuar",
     "submitFailed": "No hem pogut desar la vostra sol·licitud. Torneu-ho a provar.",
     "networkRetry": "Error de xarxa. Les vostres respostes encara són aquí; si us plau, torneu-ho a provar.",
     "checkoutFailed": "No s’ha pogut obrir la pàgina de pagament. Torneu-ho a provar.",

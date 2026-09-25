@@ -184,6 +184,7 @@
     },
     "to": "Send to (optional)",
     "subject": "Subject:",
+    "body": "Message",
     "openGmail": "Open in Gmail ↗",
     "openOutlook": "Open in Outlook ↗",
     "openEmail": "Open in my email app",

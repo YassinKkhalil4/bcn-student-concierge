@@ -68,11 +68,17 @@ async function homeDoc(locale: string): Promise<string> {
   const problems = t.raw("problems.items") as { problem: string; detail: string; solution: string }[];
   const steps = t.raw("process.steps") as { title: string; body: string }[];
   const faq = t.raw("faq.items") as { q: string; a: string }[];
+  const proof = t.raw("proof.items") as string[];
 
   return lines(
     `# ${t("hero.title")}`,
     t("hero.body"),
     t("hero.note"),
+    // The four commitments, in the machine-readable copy as well: an assistant
+    // asked "is this service any good?" should be able to quote the refund and
+    // the fixed fee rather than infer them from marketing prose.
+    `## ${t("proof.heading")}`,
+    proof.map((item) => `- ${item}`),
     `## ${t("problems.title")}`,
     problems.flatMap((p) => [`### ${p.problem}`, p.detail, `**${t("problems.approach").trim()}** ${p.solution}`]),
     `## ${t("process.title")}`,

@@ -41,9 +41,18 @@ const clearIssuer = () => {
   for (const k of Object.keys(ISSUER)) delete process.env[k];
 };
 
+let queryCount = 0;
+
 beforeAll(async () => {
   process.env.DOCUMENT_MASTER_KEY = randomBytes(32).toString("base64");
   ({ db, client } = await useTestDb());
+  // Count the statements the hydration path issues, so an N+1 is a test
+  // failure rather than something only visible under load.
+  const original = client.query.bind(client);
+  client.query = ((...args: Parameters<typeof original>) => {
+    queryCount++;
+    return original(...args);
+  }) as typeof client.query;
 });
 beforeEach(async () => {
   setIssuer();
@@ -218,6 +227,76 @@ describe("rectificativas", () => {
     const a = await createCase(intake);
     expect(await issueRefundRectification({ caseId: a.id, refundedTotalCents: 100, issuedAt: new Date() })).toBeNull();
   });
+
+  it("rectifies the invoice for the payment actually refunded, not the oldest", async () => {
+    // A case can hold two invoices: a full refund leaves it no longer "paid",
+    // so it can legitimately be paid again. Correcting the oldest would put
+    // the wrong figures — and the wrong cap — on a legal document.
+    const a = await createCase(intake);
+    const first = await issueInvoiceForCheckout({
+      caseId: a.id, stripeSessionId: "cs_first", stripePaymentIntentId: "pi_first",
+      grossCents: 30000, description: "First engagement", billing: BILLING,
+      issuedAt: new Date("2026-03-01T10:00:00Z"),
+    });
+    const second = await issueInvoiceForCheckout({
+      caseId: a.id, stripeSessionId: "cs_second", stripePaymentIntentId: "pi_second",
+      grossCents: 65340, description: "Second engagement", billing: BILLING,
+      issuedAt: new Date("2026-05-01T10:00:00Z"),
+    });
+
+    // The SECOND payment is refunded in full.
+    const rect = await issueRefundRectification({
+      caseId: a.id, stripePaymentIntentId: "pi_second",
+      refundedTotalCents: 65340, issuedAt: new Date("2026-06-01T10:00:00Z"),
+    });
+
+    expect(rect).not.toBeNull();
+    expect(rect!.invoice.rectifiesId).toBe(second.invoice.id);
+    expect(rect!.invoice.rectifiesId).not.toBe(first.invoice.id);
+    // The second invoice's full amount, not capped at the first invoice's total.
+    expect(rect!.invoice.totalCents).toBe(-65340);
+    expect(rect!.invoice.reason).toBe("Devolución total");
+  });
+
+  it("still rectifies the only invoice when no payment intent was recorded", async () => {
+    // Every invoice issued before the column existed has none. The fallback
+    // must keep those working exactly as before.
+    const a = await createCase(intake);
+    const { invoice } = await issue(a.id, "cs_legacy");
+    const r = await issueRefundRectification({
+      caseId: a.id, stripePaymentIntentId: "pi_unknown_to_us",
+      refundedTotalCents: 65340, issuedAt: new Date("2026-09-20T10:00:00Z"),
+    });
+    expect(r!.invoice.rectifiesId).toBe(invoice.id);
+    expect(r!.invoice.totalCents).toBe(-65340);
+  });
+});
+
+describe("export hydration", () => {
+  it("resolves every rectificativa's original in one query, not one per row", async () => {
+    for (const n of [1, 2, 3]) {
+      const c = await createCase(intake);
+      await issueInvoiceForCheckout({
+        caseId: c.id, stripeSessionId: `cs_h${n}`, stripePaymentIntentId: `pi_h${n}`,
+        grossCents: 30000, description: `Sale ${n}`, billing: BILLING,
+        issuedAt: new Date("2026-04-01T10:00:00Z"),
+      });
+      await issueRefundRectification({
+        caseId: c.id, stripePaymentIntentId: `pi_h${n}`,
+        refundedTotalCents: 30000, issuedAt: new Date("2026-04-02T10:00:00Z"),
+      });
+    }
+
+    const before = queryCount;
+    const rows = await listInvoicesForExport(new Date("2026-01-01"), new Date("2027-01-01"));
+    const used = queryCount - before;
+
+    expect(rows).toHaveLength(6);
+    expect(rows.filter((r) => r.rectifiesNumber)).toHaveLength(3);
+    // One query for the rows and one for every original — not one per
+    // rectificativa, which is a round trip per refund on the annual export.
+    expect(used, `hydration used ${used} queries for 3 rectificativas`).toBeLessThanOrEqual(3);
+  });
 });
 
 describe("CSV export", () => {
@@ -371,6 +450,38 @@ describe("Stripe webhook (end to end, signed events)", () => {
     const all = await listInvoicesForCase(c.id);
     expect(all.map((i) => i.number)).toEqual(["INV-2026-0001", `RECT-${new Date().getFullYear()}-0001`]);
     expect((await getCase(c.id))!.paymentStatus).toBe("refunded");
+  });
+
+  it("rectifies a refund of the second payment when a case has paid twice", async () => {
+    // cases.stripe_payment_intent_id is only written on the transition to
+    // paid, so it keeps the FIRST payment for ever. A refund of a later
+    // payment therefore finds no case by that route, and without the invoice
+    // carrying its own PaymentIntent the refund is silently dropped — no
+    // rectificativa, and the books are wrong.
+    const c = await createCase(intake);
+    await deliver(paid(c.id));
+    const second = paid(c.id);
+    await deliver({
+      ...second,
+      id: "evt_second",
+      data: { object: { ...second.data.object, id: "cs_live_2", payment_intent: "pi_2" } },
+    });
+    const sold = await listInvoicesForCase(c.id);
+    expect(sold.map((i) => i.number)).toEqual(["INV-2026-0001", "INV-2026-0002"]);
+
+    // Refund the SECOND payment (pi_2), which the case row does not point at.
+    const refund = {
+      id: "evt_refund_second", type: "charge.refunded", created: Math.floor(Date.now() / 1000),
+      data: { object: { id: "ch_2", object: "charge", payment_intent: "pi_2", refunded: true, amount_refunded: 65340 } },
+    };
+    expect((await deliver(refund)).status).toBe(200);
+
+    const all = await listInvoicesForCase(c.id);
+    const rect = all.find((i) => i.series === "RECT");
+    expect(rect, "no rectificativa issued for the refunded payment").toBeDefined();
+    // It must correct the SECOND invoice — the one pi_2 paid for.
+    expect(rect!.rectifiesId).toBe(sold[1]!.id);
+    expect(rect!.totalCents).toBe(-65340);
   });
 
   it("rejects an unsigned delivery", async () => {

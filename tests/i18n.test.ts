@@ -4,7 +4,7 @@ import path from "node:path";
 import { IntlMessageFormat } from "intl-messageformat";
 import { LOCALES } from "../src/i18n/routing";
 import { LOCALES as DB_LOCALES } from "../src/lib/db/schema";
-import { NAMESPACES } from "../src/i18n/messages";
+import { CLIENT_NAMESPACES, NAMESPACES } from "../src/i18n/messages";
 import { problems, type Target } from "../src/i18n/protection";
 
 /**
@@ -128,5 +128,50 @@ describe("staff dashboard", () => {
       walk(path.join(ROOT, dir));
     }
     expect(offenders).toEqual([]);
+  });
+});
+
+describe("client message payload", () => {
+  /**
+   * Each route hands its NextIntlClientProvider only the catalogues its client
+   * tree reads (src/i18n/messages.ts, CLIENT_NAMESPACES) rather than all eleven,
+   * which is what stops the 14 kB legal catalogue shipping to the browser on a
+   * page that never reads it. A namespace a client component reads but no route
+   * provides is a runtime error in that component, not a fallback — so this
+   * fails the build instead.
+   */
+  it("provides every namespace a client component reads", () => {
+    const used = new Map<string, string[]>();
+    const walk = (dir: string) => {
+      for (const entry of readdirSync(dir)) {
+        const full = path.join(dir, entry);
+        if (statSync(full).isDirectory()) {
+          walk(full);
+          continue;
+        }
+        if (!/\.tsx?$/.test(entry)) continue;
+        const source = readFileSync(full, "utf8");
+        if (!source.includes('"use client"')) continue;
+        for (const m of source.matchAll(/useTranslations\("([^".]+)/g)) {
+          const ns = m[1]!;
+          used.set(ns, [...(used.get(ns) ?? []), path.relative(ROOT, full)]);
+        }
+      }
+    };
+    walk(path.join(ROOT, "src", "components"));
+    walk(path.join(ROOT, "src", "app"));
+
+    const provided = new Set<string>(Object.values(CLIENT_NAMESPACES).flat());
+    expect(used.size).toBeGreaterThan(3);
+    for (const [ns, files] of used) {
+      expect(provided.has(ns), `${ns} — read by ${files.join(", ")}`).toBe(true);
+    }
+  });
+
+  it("names only real namespaces", () => {
+    const real = new Set<string>(NAMESPACES);
+    for (const ns of new Set<string>(Object.values(CLIENT_NAMESPACES).flat())) {
+      expect(real.has(ns), ns).toBe(true);
+    }
   });
 });

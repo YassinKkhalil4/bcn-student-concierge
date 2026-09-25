@@ -140,8 +140,8 @@
     "applyWaitlist": "Apply for the waitlist"
   },
   "page": {
-    "metaTitle": "Paquetes y precios",
-    "metaDescription": "Tres paquetes de precio cerrado para estudiantes internacionales que ya están en Barcelona: Ready File, Soft Landing y Fixer. Dos precios por paquete: uno para la vía UE y otro para la vía de fuera de la UE.",
+    "metaTitle": "Paquetes y precios: TIE, Padrón y citas a precio cerrado",
+    "metaDescription": "Tres paquetes de precio cerrado para estudiantes internacionales en Barcelona: Ready File, Soft Landing y Fixer. Un precio para la vía UE y otro para la vía no UE, sin añadidos al pagar, y la mitad de vuelta si en seis semanas no sale ninguna cita.",
     "eyebrow": "Paquetes y precios",
     "title": "Precios cerrados para un proceso sin plazos cerrados.",
     "intro": "Todos los paquetes tienen un precio cerrado, y el precio que ves es el que pagas.",
@@ -198,6 +198,9 @@
         "item": "Traducción jurada o apostilla",
         "note": "Identificamos lo que la necesita y te derivamos a un traductor jurado; sus honorarios son aparte."
       }
-    ]
+    ],
+    "guaranteeEyebrow": "Si la cita no llega nunca",
+    "guaranteeTitle": "La mitad de vuelta, y el expediente es tuyo.",
+    "guaranteeBody": "Buscamos en el portal oficial hasta seis semanas desde tu envío. Si en esa ventana no sale ninguna, te devolvemos el 50% del precio y te quedas con el Ready File entero (formularios, copias, el Modelo 790, la auditoría), así estás listo el día que aparezca una. También recibes un certificado fechado de cada intento que hicimos. Nadie puede acortar este paso legalmente, y cualquier servicio que diga lo contrario te está vendiendo algo que no tiene."
   }
 }

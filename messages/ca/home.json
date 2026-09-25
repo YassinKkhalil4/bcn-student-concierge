@@ -2,12 +2,21 @@
   "metaTitle": "BCN Student Concierge — tràmits de residència, bé a la primera",
   "metaDescription": "Per a estudiants internacionals que ja són a Barcelona. Padró, cites de TIE i CUE, impresos EX-17 i EX-18, preparats i reservats. El triatge gratuït del mateix dia et diu en quina situació estàs abans de pagar res.",
   "hero": {
-    "eyebrow": "Barcelona · Per a estudiants que ja hi són",
-    "title": "Fa dues setmanes que ets aquí. El rellotge va començar el dia que vas aterrar.",
-    "body": "Els estudiants de fora de la UE solen tenir un mes des de l’entrada per sol·licitar la TIE. Si vas arribar la primera setmana de setembre, aquesta finestra es tanca a principis d’octubre, i la cita és la part que ningú no pot accelerar. Nosaltres muntem l’expedient perquè, quan s’obri un forat, res del que portis no et torni a casa.",
-    "primaryCta": "Triatge gratuït",
-    "secondaryCta": "Veure els paquets",
-    "note": "El triatge és gratuït i el mateix dia. Els paquets són de preu tancat: el preu que veus és el que pagues."
+    "eyebrow": "Barcelona · Estudiants internacionals · Vies UE i no UE",
+    "title": "El teu TIE, el teu Padró, les teves cites: preparats, reservats i bé a la primera.",
+    "body": "Els estudiants de fora de la UE solen tenir un mes des de l’entrada per sol·licitar el TIE, i la cita és la part que ningú pot accelerar. Llegim la teva autorització, muntem l’expedient i reservem la cita al teu nom, perquè quan en surti una no hi hagi res als papers que et faci tornar a casa. Envia’ns la teva data d’entrada i avui mateix et diem quants dies et queden.",
+    "primaryCta": "Consultar el meu termini gratis",
+    "secondaryCta": "Veure paquets i preus",
+    "note": "La consulta és gratuïta, el mateix dia i sense targeta. A partir d’aquí els preus són tancats: el preu que veus és el que pagues."
+  },
+  "proof": {
+    "heading": "El que ens pots exigir",
+    "items": [
+      "Un preu tancat, dit abans que paguis. No cobrem res per hores.",
+      "Cada formulari es presenta al teu nom. Mai no signem com a representant teu.",
+      "Xifrem cada escaneig del teu passaport amb la seva pròpia clau i l’esborrem 30 dies després de tancar el teu expedient.",
+      "Sense cita en sis setmanes? Et tornem la meitat i l’expedient continua sent teu."
+    ]
   },
   "trust": {
     "heading": "Pensat per a estudiants de",
@@ -77,6 +86,14 @@
         "a": "No. Som un servei independent d’acompanyament administratiu. Preparem documents a partir de la informació que ens dónes, reservem cites i et guiem pel procés. No et representem davant cap autoritat i no donem assessorament jurídic. Quan un cas requereix anàlisi legal, ho diem clarament i et derivem a un advocat col·legiat."
       },
       {
+        "q": "Quant costa i quan pago?",
+        "a": "El preu de la targeta és el preu sencer. No hi afegim res en pagar, no cobrem per hores i no hi amaguem cap taxa pública. Pagues quan el triatge ha confirmat quina via et correspon. Abans d’això no ens deus res, i si no et podem ajudar ho diem en comptes de cobrar-te."
+      },
+      {
+        "q": "I si no surt cap cita a temps?",
+        "a": "Busquem al portal oficial fins a sis setmanes des del teu enviament. Si en aquesta finestra no en surt cap, et tornem la meitat del preu i et quedes amb el Ready File sencer (formularis, còpies, el Modelo 790, l’auditoria), així estàs a punt el dia que n’aparegui una. També reps un certificat datat de cada intent que vam fer. Les oficines espanyoles solen acceptar-lo com a justificació per registrar-se fora de termini, tot i que cap funcionari no hi està obligat."
+      },
+      {
         "q": "Crec que ja se m’ha passat el termini. Val la pena preguntar?",
         "a": "Sí, i millor avui que la setmana vinent. El triatge és gratuït i t’ho direm amb honestedat. Si el teu termini s’ha tancat, o estàs en situació caducada o irregular, això requereix una anàlisi jurídica que no estem qualificats per donar: t’ho direm i et derivarem, en lloc de cobrar-te."
       },
@@ -97,5 +114,12 @@
         "a": "No, i qualsevol servei que ho garanteixi t’està enganyant. La decisió correspon íntegrament a les autoritats espanyoles. El que sí que controlem és que l’expedient estigui complet, correcte i presentat a temps, que és on s’originen la majoria de les denegacions."
       }
     ]
+  },
+  "close": {
+    "eyebrow": "Dues maneres de començar",
+    "title": "Comença ja, o pregunta primer.",
+    "body": "Ves directe a l’alta si ja saps quin paquet vols: avui mateix comencem a muntar l’expedient. Si encara hi estàs donant voltes, la consulta gratuïta et diu quina via et correspon i quants dies tens, i no costa res. En tots dos casos sabràs on ets abans de gastar res.",
+    "primaryCta": "Consultar el meu termini gratis",
+    "secondaryCta": "Iniciar la meva alta"
   }
 }

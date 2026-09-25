@@ -4,11 +4,11 @@
   "framing": {
     "already-here": {
       "eyebrow": "Free guide · for students already in Barcelona",
-      "lead": "You’ve been here two weeks. The clock started the day you landed."
+      "lead": "El rellotge va començar el dia que vas aterrar. Això és tot el que abasta."
     },
     "arriving": {
       "eyebrow": "Free guide · for students arriving in Barcelona",
-      "lead": "Read it before you fly. The clock starts the day you land."
+      "lead": "Llegeix-la abans de volar. El rellotge comença el dia que aterres."
     }
   },
   "coverAlt": "Cover of Landing in Barcelona, the International Student Starter Guide 2026/27: “You have 30 days. Nobody told you the queue is longer.”",

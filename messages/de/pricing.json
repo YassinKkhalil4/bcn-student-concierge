@@ -140,8 +140,8 @@
     "applyWaitlist": "Apply for the waitlist"
   },
   "page": {
-    "metaTitle": "Pakete & Preise",
-    "metaDescription": "Drei Festpreispakete für internationale Studierende, die schon in Barcelona sind: Ready File, Soft Landing und Fixer. Zwei Preise pro Paket — einer für den EU-Weg, einer für den Nicht-EU-Weg.",
+    "metaTitle": "Pakete und Preise: TIE, Padrón und Termine zum Festpreis",
+    "metaDescription": "Drei Pakete zum Festpreis für internationale Studierende in Barcelona: Ready File, Soft Landing und Fixer. Ein Preis für den EU-Weg, einer für den Nicht-EU-Weg, beim Bezahlen kommt nichts obendrauf, und die Hälfte zurück, wenn in sechs Wochen kein Termin frei wird.",
     "eyebrow": "Pakete & Preise",
     "title": "Feste Preise für ein Verfahren ohne feste Fristen.",
     "intro": "Jedes Paket hat einen Festpreis, und der angezeigte Preis ist der Preis, den du zahlst.",
@@ -198,6 +198,9 @@
         "item": "Beglaubigte Übersetzung oder Apostille",
         "note": "Wir erkennen, was sie braucht, und verweisen dich an einen traductor jurado; dessen Honorar ist separat."
       }
-    ]
+    ],
+    "guaranteeEyebrow": "Wenn der Termin nie kommt",
+    "guaranteeTitle": "Die Hälfte zurück, und die Akte bleibt deine.",
+    "guaranteeBody": "Wir suchen bis zu sechs Wochen ab deiner Übermittlung im offiziellen Portal. Wird in diesem Fenster keiner frei, bekommst du 50% zurück und behältst die komplette Ready File (Formulare, Kopien, den Modelo 790, die Prüfung), damit du an dem Tag bereit bist, an dem ein Termin auftaucht. Dazu bekommst du eine datierte Bescheinigung über jeden Versuch. Diesen Schritt kann niemand legal abkürzen, und jeder Dienst, der etwas anderes behauptet, verkauft dir etwas, das er nicht hat."
   }
 }

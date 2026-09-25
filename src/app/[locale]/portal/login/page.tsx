@@ -32,16 +32,20 @@ export default async function PortalLoginPage({
 
   return (
     <div className="container-x py-16 sm:py-24">
-      <div className="mx-auto max-w-md">
-        <p className="eyebrow">{t("eyebrow")}</p>
-        <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink">{t("title")}</h1>
-        <p className="mt-3 text-sm leading-relaxed text-ink-muted">{t("intro")}</p>
+      <div className="mx-auto max-w-md border border-paper-edge border-t-3 border-t-accent bg-white p-7 sm:p-9">
+        <p className="font-sans text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-accent-deep">
+          {t("eyebrow")}
+        </p>
+        <h1 className="mt-4 text-display-md text-ink">{t("title")}</h1>
+        <p className="prose-body mt-3">{t("intro")}</p>
 
         {message && (
           <p
             role={message.tone === "err" ? "alert" : "status"}
-            className={`mt-6 rounded-lg px-4 py-3 text-sm ${
-              message.tone === "ok" ? "bg-olive/10 text-olive" : "bg-terracotta/5 text-terracotta"
+            className={`mt-6 border-l-2 px-4 py-3 text-sm font-medium ${
+              message.tone === "ok"
+                ? "border-ink bg-paper-dim text-ink"
+                : "border-accent bg-accent-tint text-accent-deep"
             }`}
           >
             {message.text}

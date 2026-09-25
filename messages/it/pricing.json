@@ -140,8 +140,8 @@
     "applyWaitlist": "Apply for the waitlist"
   },
   "page": {
-    "metaTitle": "Pacchetti e prezzi",
-    "metaDescription": "Tre pacchetti a prezzo fisso per studenti internazionali già a Barcellona: Ready File, Soft Landing e Fixer. Due prezzi per pacchetto: uno per il percorso UE, uno per quello extra-UE.",
+    "metaTitle": "Pacchetti e prezzi: TIE, Padrón e appuntamenti a prezzo fisso",
+    "metaDescription": "Tre pacchetti a prezzo fisso per studenti internazionali a Barcellona: Ready File, Soft Landing e Fixer. Un prezzo per il percorso UE e uno per il percorso extra UE, niente di aggiunto al pagamento e metà rimborsata se in sei settimane non si libera nessun appuntamento.",
     "eyebrow": "Pacchetti e prezzi",
     "title": "Prezzi fissi per una procedura senza tempi fissi.",
     "intro": "Ogni pacchetto ha un prezzo fisso, e il prezzo indicato è quello che paghi.",
@@ -198,6 +198,9 @@
         "item": "Traduzione giurata o apostille",
         "note": "Individuiamo ciò che ne ha bisogno e ti indirizziamo a un traductor jurado; il suo onorario è a parte."
       }
-    ]
+    ],
+    "guaranteeEyebrow": "Se l’appuntamento non arriva mai",
+    "guaranteeTitle": "Metà rimborsata, e la pratica resta tua.",
+    "guaranteeBody": "Cerchiamo sul portale ufficiale fino a sei settimane dal tuo invio. Se in quella finestra non se ne libera nessuno, ti rimborsiamo il 50% del prezzo e tieni l’intero Ready File (moduli, copie, il Modelo 790, la verifica), così sei pronto il giorno in cui ne compare uno. Ricevi anche un certificato datato di ogni tentativo fatto. Nessuno può accorciare legalmente questo passaggio, e qualsiasi servizio che dica il contrario ti sta vendendo qualcosa che non ha."
   }
 }

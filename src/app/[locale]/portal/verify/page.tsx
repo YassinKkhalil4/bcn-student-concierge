@@ -33,7 +33,7 @@ export default async function PortalVerifyPage({
       <div className="mx-auto max-w-md text-center">
         {link ? (
           <>
-            <h1 className="font-display text-3xl font-semibold tracking-tight text-ink">{t("title")}</h1>
+            <h1 className="text-display-md text-ink">{t("title")}</h1>
             <p className="mt-3 text-sm text-ink-muted">{t("once")}</p>
             <form action="/api/portal/verify" method="post" className="mt-8">
               <input type="hidden" name="token" value={token} />
@@ -43,7 +43,7 @@ export default async function PortalVerifyPage({
           </>
         ) : (
           <>
-            <h1 className="font-display text-3xl font-semibold tracking-tight text-ink">{t("expiredTitle")}</h1>
+            <h1 className="text-display-md text-ink">{t("expiredTitle")}</h1>
             <p className="mt-3 text-sm text-ink-muted">{t("expiredBody")}</p>
             <Link href="/portal/login" className="btn-primary mt-8 w-full">
               {t("newLink")}

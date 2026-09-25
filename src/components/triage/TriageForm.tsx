@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { countryOptions } from "@/lib/countries";
 import { routeForNationality } from "@/lib/forms/field-map";
 import { translateIssue } from "@/lib/validation-keys";
+import { ErrorSummary, type SummarisedError } from "@/components/ErrorSummary";
 import {
   HOUSING_SITUATIONS,
   TRIAGE_DOCUMENT_KINDS,
@@ -15,6 +16,21 @@ import {
 } from "@/lib/triage";
 
 type Errors = Record<string, string>;
+
+/**
+ * The order the fields appear on screen. The error summary walks this rather
+ * than whatever order zod reported its issues in, so working down the list
+ * works down the form.
+ */
+const FIELD_ORDER = [
+  "fullName",
+  "email",
+  "nationality",
+  "arrivedOn",
+  "housing",
+  "notes",
+  "gdprTriageConsent",
+] as const;
 
 /**
  * The free-triage form.
@@ -47,6 +63,8 @@ export function TriageForm() {
   const [busy, setBusy] = useState(false);
   const [ref, setRef] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  /** Bumped on every rejected submit, so the summary re-announces each time. */
+  const [attempt, setAttempt] = useState(0);
 
   // Spain is excluded: a Spanish national needs neither route.
   const nationalities = useMemo(() => countryOptions(locale, ["ES"]), [locale]);
@@ -63,6 +81,15 @@ export function TriageForm() {
     if (!deadline) return { route, deadline: null, days: null };
     return { route, deadline, days: daysUntil(deadline) };
   }, [values.nationality, values.arrivedOn]);
+
+  /**
+   * In rendered order, not in the order zod happened to report them: a summary
+   * that jumps around the form is harder to work through than no summary.
+   */
+  const summary: SummarisedError[] = FIELD_ORDER.filter((key) => errors[key]).map((key) => ({
+    id: key,
+    label: t(`fields.${key}`),
+  }));
 
   const set = (key: string) => (value: string) => {
     setValues((v) => ({ ...v, [key]: value }));
@@ -85,6 +112,7 @@ export function TriageForm() {
         next[path] ??= translateIssue(issue.message, t(`fields.${path}`), tv);
       }
       setErrors(next);
+      setAttempt((n) => n + 1);
       return;
     }
 
@@ -112,6 +140,7 @@ export function TriageForm() {
             next[issue.path] ??= translateIssue(issue.message, t(`fields.${issue.path}`), tv);
           }
           setErrors(next);
+          setAttempt((n) => n + 1);
         }
         setSubmitError(data.error ?? t("form.failed"));
         return;
@@ -126,16 +155,20 @@ export function TriageForm() {
 
   if (ref) {
     return (
-      <div className="rounded-2xl border border-olive bg-white p-8">
-        <h2 className="font-display text-2xl font-semibold text-ink">{t("done.title")}</h2>
-        <p className="mt-3 text-sm leading-relaxed text-ink-muted">{t("done.body", { ref })}</p>
-        <p className="mt-4 text-xs leading-relaxed text-ink-soft">{t("done.note")}</p>
+      <div className="border border-paper-edge border-t-3 border-t-ink bg-white p-8 sm:p-10">
+        <h2 className="text-display-md text-ink">{t("done.title")}</h2>
+        <p className="prose-body mt-4">{t("done.body", { ref })}</p>
+        <p className="mt-5 border-t border-paper-line pt-5 font-sans text-xs leading-relaxed text-ink-soft">
+          {t("done.note")}
+        </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={(e) => void submit(e)} noValidate className="rounded-2xl border border-bone-line bg-white p-7">
+    <form onSubmit={(e) => void submit(e)} noValidate className="border border-paper-edge border-t-3 border-t-accent bg-white p-6 sm:p-8">
+      <ErrorSummary title={t("form.errorSummary")} errors={summary} attempt={attempt} />
+
       <div className="grid gap-5 sm:grid-cols-2">
         <TextInput
           name="fullName"
@@ -155,23 +188,15 @@ export function TriageForm() {
           autoComplete="email"
         />
 
-        <div>
-          <label htmlFor="nationality" className="field-label">{t("fields.nationality")}</label>
-          <select
-            id="nationality"
-            name="nationality"
-            value={values.nationality}
-            onChange={(e) => set("nationality")(e.target.value)}
-            className="field-input"
-            aria-invalid={errors.nationality ? true : undefined}
-          >
-            <option value="">{t("form.choose")}</option>
-            {nationalities.map((c) => (
-              <option key={c.value} value={c.value}>{c.label}</option>
-            ))}
-          </select>
-          <FieldError id="nationality-error" message={errors.nationality} />
-        </div>
+        <SelectInput
+          name="nationality"
+          label={t("fields.nationality")}
+          value={values.nationality}
+          onChange={set("nationality")}
+          error={errors.nationality}
+          placeholder={t("form.choose")}
+          options={nationalities}
+        />
 
         <div>
           <label htmlFor="arrivedOn" className="field-label">{t("fields.arrivedOn")}</label>
@@ -183,43 +208,46 @@ export function TriageForm() {
             onChange={(e) => set("arrivedOn")(e.target.value)}
             className="field-input"
             aria-invalid={errors.arrivedOn ? true : undefined}
+            aria-describedby={describedBy("arrivedOn", errors.arrivedOn, true)}
           />
-          <p className="mt-1.5 text-xs text-ink-soft">{t("fields.arrivedOnHint")}</p>
+          <p id="arrivedOn-hint" className="field-hint">{t("fields.arrivedOnHint")}</p>
           <FieldError id="arrivedOn-error" message={errors.arrivedOn} />
         </div>
       </div>
 
-      {clock && (
-        <p
-          className={[
-            "mt-5 rounded-lg px-4 py-3 text-sm leading-relaxed",
-            clock.days !== null && clock.days < 0 ? "bg-red-50 text-red-900" : "bg-olive/5 text-ink-muted",
-          ].join(" ")}
-        >
-          {clock.deadline === null
-            ? t("clock.eu")
-            : clock.days !== null && clock.days < 0
-              ? t("clock.closed", { days: Math.abs(clock.days) })
-              : t("clock.open", { days: clock.days ?? 0, date: clock.deadline })}
-        </p>
-      )}
+      {/*
+        The wrapper is always in the DOM, empty until there is something to say.
+        A live region that is inserted at the same moment as its content is not
+        reliably announced — and this sentence, "you have 11 days left", is the
+        entire output of the free check and the reason the page exists.
+      */}
+      <div aria-live="polite" className="empty:hidden">
+        {clock && (
+          <p
+            className={[
+              "mt-5 px-4 py-3 text-sm leading-relaxed",
+              clock.days !== null && clock.days < 0 ? "border-l-2 border-accent bg-accent-tint font-medium text-accent-deep" : "bg-paper-dim text-ink-muted",
+            ].join(" ")}
+          >
+            {clock.deadline === null
+              ? t("clock.eu")
+              : clock.days !== null && clock.days < 0
+                ? t("clock.closed", { days: Math.abs(clock.days) })
+                : t("clock.open", { days: clock.days ?? 0, date: clock.deadline })}
+          </p>
+        )}
+      </div>
 
       <div className="mt-5">
-        <label htmlFor="housing" className="field-label">{t("fields.housing")}</label>
-        <select
-          id="housing"
+        <SelectInput
           name="housing"
+          label={t("fields.housing")}
           value={values.housing}
-          onChange={(e) => set("housing")(e.target.value)}
-          className="field-input"
-          aria-invalid={errors.housing ? true : undefined}
-        >
-          <option value="">{t("form.choose")}</option>
-          {HOUSING_SITUATIONS.map((h) => (
-            <option key={h} value={h}>{t(`housing.${h}`)}</option>
-          ))}
-        </select>
-        <FieldError id="housing-error" message={errors.housing} />
+          onChange={set("housing")}
+          error={errors.housing}
+          placeholder={t("form.choose")}
+          options={HOUSING_SITUATIONS.map((h) => ({ value: h, label: t(`housing.${h}`) }))}
+        />
       </div>
 
       <div className="mt-5">
@@ -235,17 +263,19 @@ export function TriageForm() {
           onChange={(e) => set("notes")(e.target.value)}
           className="field-input"
           maxLength={2000}
+          aria-invalid={errors.notes ? true : undefined}
+          aria-describedby={describedBy("notes", errors.notes, false)}
         />
         <FieldError id="notes-error" message={errors.notes} />
       </div>
 
       <fieldset className="mt-7">
         <legend className="field-label">{t("uploads.title")}</legend>
-        <p className="mt-1 text-xs leading-relaxed text-ink-soft">{t("uploads.note")}</p>
+        <p className="field-hint">{t("uploads.note")}</p>
         <div className="mt-4 space-y-3">
           {TRIAGE_DOCUMENT_KINDS.map((kind) => (
-            <div key={kind} className="rounded-lg border border-bone-line px-4 py-3">
-              <label htmlFor={kind} className="block text-sm font-medium text-ink">
+            <div key={kind} className="border border-paper-line bg-paper px-4 py-3.5">
+              <label htmlFor={kind} className="field-label">
                 {t(`uploads.${kind}`)}
               </label>
               <input
@@ -254,7 +284,7 @@ export function TriageForm() {
                 type="file"
                 accept="application/pdf,image/jpeg,image/png"
                 onChange={(e) => setFiles((f) => ({ ...f, [kind]: e.target.files?.[0] ?? null }))}
-                className="mt-2 block w-full text-sm text-ink-muted file:mr-3 file:rounded-md file:border-0 file:bg-bone-warm file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-ink"
+                className="mt-2 block w-full text-sm text-ink-muted file:mr-3 file:border-0 file:bg-paper-dim file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-ink"
               />
             </div>
           ))}
@@ -263,8 +293,11 @@ export function TriageForm() {
 
       <label className="mt-7 flex gap-3 text-sm leading-relaxed text-ink-muted">
         <input
+          id="gdprTriageConsent"
           type="checkbox"
           checked={consent}
+          aria-invalid={errors.gdprTriageConsent ? true : undefined}
+          aria-describedby={errors.gdprTriageConsent ? "gdprTriageConsent-error" : undefined}
           onChange={(e) => {
             setConsent(e.target.checked);
             setErrors((err) => {
@@ -272,19 +305,19 @@ export function TriageForm() {
               return rest;
             });
           }}
-          className="mt-1 h-4 w-4 flex-none accent-olive"
+          className="mt-1 h-4 w-4 flex-none accent-accent"
         />
         <span>{t("form.consent")}</span>
       </label>
-      <FieldError id="consent-error" message={errors.gdprTriageConsent} />
+      <FieldError id="gdprTriageConsent-error" message={errors.gdprTriageConsent} />
 
       <button type="submit" disabled={busy} className="btn-primary mt-7 w-full">
         {busy ? t("form.sending") : t("form.submit")}
       </button>
-      <p className="mt-3 text-center text-xs text-ink-soft">{t("form.freeNote")}</p>
+      <p className="mt-4 text-center font-sans text-xs text-ink-soft">{t("form.freeNote")}</p>
 
       {submitError && (
-        <p role="alert" className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-900">
+        <p role="alert" className="enter-alert mt-4 border-l-2 border-accent bg-accent-tint px-4 py-3 text-sm font-medium text-accent-deep">
           {submitError}
         </p>
       )}
@@ -292,12 +325,61 @@ export function TriageForm() {
   );
 }
 
+/**
+ * No `role="alert"`. Six of these used to announce simultaneously the moment a
+ * submit was rejected; ErrorSummary is the one announcement now, and these are
+ * what it points at.
+ */
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} role="alert" className="mt-1.5 text-xs text-red-700">
+    <p id={id} className="field-error">
       {message}
     </p>
+  );
+}
+
+/** The hint and the error a control points at, whichever of them exist. */
+function describedBy(name: string, error: string | undefined, hint: boolean): string | undefined {
+  return [hint ? `${name}-hint` : null, error ? `${name}-error` : null].filter(Boolean).join(" ") || undefined;
+}
+
+function SelectInput({
+  name,
+  label,
+  value,
+  onChange,
+  options,
+  placeholder,
+  error,
+}: {
+  name: string;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: readonly { value: string; label: string }[];
+  placeholder: string;
+  error?: string;
+}) {
+  return (
+    <div>
+      <label htmlFor={name} className="field-label">{label}</label>
+      <select
+        id={name}
+        name={name}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="field-input"
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? `${name}-error` : undefined}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>{option.label}</option>
+        ))}
+      </select>
+      <FieldError id={`${name}-error`} message={error} />
+    </div>
   );
 }
 

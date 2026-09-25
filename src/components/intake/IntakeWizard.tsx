@@ -16,6 +16,8 @@ import { PadronWizard } from "@/components/portal/PadronWizard";
 import { EnrolmentWizard } from "@/components/portal/EnrolmentWizard";
 import { Modelo790Notice } from "@/components/Modelo790Notice";
 import { Link } from "@/i18n/navigation";
+import { TickMark } from "@/components/icons";
+import { ErrorSummary, type SummarisedError } from "@/components/ErrorSummary";
 import {
   IdentityStep,
   FamilyStep,
@@ -58,11 +60,20 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   const t = useTranslations("intake");
   const tp = useTranslations("portal.file");
   const tprice = useTranslations("pricing");
+  const tfields = useTranslations("intake.fields");
+  const tconsent = useTranslations("intake.consent");
   const locale = useLocale();
   const [tierId, setTierId] = useState(() =>
     getTier(initialTier) ? initialTier : "soft-landing",
   );
   const [step, setStep] = useState(0);
+  /**
+   * Which way the student is travelling through the form. Read only by CSS
+   * (`.enter-step[data-dir]`), so a step entering after Continue arrives from
+   * the right and one entering after Back arrives from the left. A panel that
+   * always entered from the same side would say nothing about direction.
+   */
+  const [dir, setDir] = useState<"forward" | "back">("forward");
   const [values, setValues] = useState<Values>(INITIAL_VALUES);
   const [consent, setConsent] = useState<ConsentState>({
     gdprDataProcessing: false,
@@ -74,6 +85,8 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   const [caseRef, setCaseRef] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  /** Bumped on every rejected step, so the summary re-announces each time. */
+  const [attempt, setAttempt] = useState(0);
 
   const tier = getTier(tierId) ?? TIERS[1]!;
   /**
@@ -99,6 +112,25 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
     return n ? routeForNationality(n) : null;
   }, [values.nationality]);
   const price = useMemo(() => (route ? tierPriceCents(tier, route) : null), [tier, route]);
+
+  /**
+   * A step's errors are keyed by field name, and those names live in two
+   * different places: the four data steps read `intake.fields.<name>.label`,
+   * the consent step reads `intake.consent.<name>.label`. One lookup so the
+   * summary can be built from `errors` alone, whichever step raised them.
+   */
+  function labelFor(key: string): string {
+    return tconsent.has(`${key}.label`) ? tconsent(`${key}.label`) : tfields(`${key}.label`);
+  }
+
+  /**
+   * `collectErrors` fills this in schema order, which is the order the fields
+   * are rendered in, so working down the summary works down the step.
+   */
+  const summary: SummarisedError[] = Object.keys(errors).map((key) => ({
+    id: key,
+    label: labelFor(key),
+  }));
 
   const set = (key: string) => (value: string) => {
     setValues((v) => ({ ...v, [key]: value }));
@@ -190,6 +222,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
             if (key && !mapped[key]) mapped[key] = issue.message;
           }
           setErrors(mapped);
+          setAttempt((n) => n + 1);
           setSubmitError(t("wizard.fixEarlier"));
           return;
         }
@@ -198,6 +231,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
       }
 
       setCaseRef(json.ref ?? null);
+      setDir("forward");
       setStep(5);
     } catch {
       setSubmitError(t("wizard.networkRetry"));
@@ -239,35 +273,81 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
   }
 
   function next() {
-    if (!validateStep(step)) return;
+    if (!validateStep(step)) {
+      setAttempt((n) => n + 1);
+      return;
+    }
     if (step === 4) {
       void submitIntake();
       return;
     }
+    setDir("forward");
     setStep((s) => Math.min(s + 1, STEPS.length - 1));
   }
 
   const stepProps = { values, errors, set };
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
-      <div>
-        <nav aria-label={t("steps.progress")} className="mb-9">
-          <ol className="flex flex-wrap gap-2 text-xs">
+    // `min-w-0` on both columns below. A grid item's automatic minimum size is
+    // its min-content, so one fixed-width thing anywhere inside — a date row
+    // built from rem columns, a select as wide as its longest option — holds
+    // the whole column open and takes the page with it. At 200% browser text
+    // these two measured 528px wide inside a 240px track.
+    <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-14">
+      <div className="min-w-0">
+        {/*
+          A progress register, not a row of pills. Each step is a column under
+          its own rule: ink once done, crimson for where you are, hairline for
+          what is still ahead. It reads as a position in a document rather than
+          as a set of buttons, and it survives six languages because each label
+          wraps under its own rule instead of reflowing the whole row.
+
+          Each item carries `min-w-0` because a grid item's default
+          `min-width: auto` stops its track shrinking below the item's longest
+          word — at 200% browser text "ADRESSE IN SPANIEN" and "DOKUMENTE" held
+          the three columns open to 568px inside a 320px phone. Released, the
+          labels wrap under their own rules, which is what the register was
+          drawn to do in the first place.
+        */}
+        <nav aria-label={t("steps.progress")} className="mb-10">
+          {/* Two columns below 400px: at three, a 320px phone gave each German
+              label ~93px and "PERSONENSTAND" broke mid-word. Two columns fit
+              it whole. */}
+          <ol className="grid grid-cols-2 gap-x-4 gap-y-5 min-[400px]:grid-cols-3 sm:grid-cols-6">
             {STEPS.map((s, i) => (
-              <li key={s}>
+              <li
+                key={s}
+                aria-current={i === step ? "step" : undefined}
+                className={[
+                  // 300ms, longer than anything else in the flow: this rule
+                  // travelling from hairline to crimson to ink is the only
+                  // record a student has of progress through six steps, and it
+                  // is worth the extra beat. Colour only — the register must
+                  // not move, or the panel below appears to jump with it.
+                  "min-w-0 border-t-2 pt-2.5 [transition:border-color_300ms_var(--ease-out)]",
+                  i < step ? "border-ink" : i === step ? "border-accent" : "border-paper-edge",
+                ].join(" ")}
+              >
                 <span
-                  aria-current={i === step ? "step" : undefined}
                   className={[
-                    "rounded-full px-3 py-1.5 font-medium",
-                    i === step
-                      ? "bg-olive text-bone"
-                      : i < step
-                        ? "bg-olive/10 text-olive"
-                        : "bg-bone-warm text-ink-soft",
+                    "flex h-3 items-center font-mono text-[0.6875rem] font-medium",
+                    "[transition:color_300ms_var(--ease-out)]",
+                    i < step ? "text-ink" : i === step ? "text-accent" : "text-ink-soft",
                   ].join(" ")}
                 >
-                  {i < step ? "✓ " : ""}
+                  {i < step ? (
+                    <TickMark className="enter-tick h-3 w-3" />
+                  ) : (
+                    String(i + 1).padStart(2, "0")
+                  )}
+                </span>
+                <span
+                  className={[
+                    "mt-1.5 block font-sans text-[0.6875rem] font-bold uppercase leading-tight tracking-[0.08em]",
+                    "[transition:color_300ms_var(--ease-out)]",
+                    i <= step ? "text-ink" : "text-ink-soft",
+                  ].join(" ")}
+                >
                   {t(`steps.${s}`)}
                 </span>
               </li>
@@ -275,112 +355,135 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
           </ol>
         </nav>
 
-        <div className="rounded-2xl border border-bone-line bg-white p-7 sm:p-9">
-          {step === 0 && <IdentityStep {...stepProps} />}
-          {step === 1 && <FamilyStep {...stepProps} />}
-          {step === 2 && <AddressStep {...stepProps} />}
-          {step === 3 && <ContactStep {...stepProps} />}
-          {step === 4 && (
-            <ConsentStep consent={consent} setConsent={setConsent} errors={errors} />
-          )}
+        <div className="border border-paper-edge border-t-3 border-t-ink bg-white p-6 sm:p-9">
+          {/* Above the sliding wrapper, and outside it, for the reason the
+              wrapper's own note gives: the summary is the wizard's furniture,
+              not the step's. It must not travel with the panel it is telling
+              the student to go back and fix. */}
+          <ErrorSummary title={t("wizard.errorSummary")} errors={summary} attempt={attempt} />
 
-          {step === 5 && caseRef && (
-            <div>
-              <h2 className="font-display text-xl font-semibold text-ink">
-                {t("wizard.uploadTitle")}
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                {t.rich("wizard.uploadIntro", {
-                  ref: caseRef,
-                  code: (chunks) => (
-                    <code className="rounded bg-bone-warm px-1.5 py-0.5 text-xs">{chunks}</code>
-                  ),
-                })}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                {t.rich("wizard.uploadLater", {
-                  link: (chunks) => (
-                    <Link href="/portal" className="font-medium text-olive underline">
-                      {chunks}
-                    </Link>
-                  ),
-                })}
-              </p>
+          {/*
+            `key={step}` is what makes the entrance work: a changed key gives
+            React a brand-new element, and `@starting-style` only applies to an
+            element the browser has just seen for the first time. React already
+            unmounted the outgoing step here — the key changes which DOM node
+            the incoming one lands in, not how many times it renders.
 
-              {/* The same sections, and the same wizards, as the portal: a
-                  student who can get everything now should not have to come
-                  back for it. Section titles are shared with the portal so the
-                  two screens read identically. */}
-              <div className="mt-8 space-y-8">
-                <section>
-                  <h3 className="font-display text-lg font-semibold text-ink">{tp("passport")}</h3>
-                  <div className="mt-4">
-                    <DocumentUpload kinds={["passport"]} />
-                  </div>
-                </section>
+            The wrapper stops at the step content. The error below it and the
+            Back/Continue row are fixed furniture: they belong to the wizard,
+            not to the step, and sliding them would be a lie about what moved.
+          */}
+          <div key={step} data-dir={dir} className="enter-step">
+            {step === 0 && <IdentityStep {...stepProps} />}
+            {step === 1 && <FamilyStep {...stepProps} />}
+            {step === 2 && <AddressStep {...stepProps} />}
+            {step === 3 && <ContactStep {...stepProps} />}
+            {step === 4 && (
+              <ConsentStep consent={consent} setConsent={setConsent} errors={errors} />
+            )}
 
-                {person && (
+            {step === 5 && caseRef && (
+              <div>
+                <h2 className="text-display-md text-ink">{t("wizard.uploadTitle")}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                  {t.rich("wizard.uploadIntro", {
+                    ref: caseRef,
+                    code: (chunks) => (
+                      <code className="bg-paper-dim px-1.5 py-0.5 text-xs">{chunks}</code>
+                    ),
+                  })}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                  {t.rich("wizard.uploadLater", {
+                    link: (chunks) => (
+                      <Link href="/portal" className="font-medium text-accent-deep underline">
+                        {chunks}
+                      </Link>
+                    ),
+                  })}
+                </p>
+
+                {/* The same sections, and the same wizards, as the portal: a
+                    student who can get everything now should not have to come
+                    back for it. Section titles are shared with the portal so the
+                    two screens read identically. */}
+                <div className="mt-8 space-y-8">
+                  <section>
+                    <h3 className="text-display-sm text-ink">{tp("passport")}</h3>
+                    <div className="mt-4">
+                      <DocumentUpload kinds={["passport"]} />
+                    </div>
+                  </section>
+
+                  {person && (
+                    <>
+                      <section>
+                        <h3 className="text-display-sm text-ink">{tp("enrolment")}</h3>
+                        <div className="mt-4">
+                          <EnrolmentWizard person={person} />
+                        </div>
+                      </section>
+
+                      <section>
+                        <h3 className="text-display-sm text-ink">{tp("padron")}</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                          {tp("padronIntro", {
+                            address: `${person.address.streetName} ${person.address.buildingNumber}`,
+                          })}
+                        </p>
+                        <div className="mt-5">
+                          <PadronWizard person={person} />
+                        </div>
+                      </section>
+                    </>
+                  )}
+                </div>
+
+                <div className="mt-8">
+                  <Modelo790Notice />
+                </div>
+
+                {/* Reachable only after the case is created, so the nationality —
+                    and therefore the route and its price — is always known here. */}
+                {price !== null && (
                   <>
-                    <section>
-                      <h3 className="font-display text-lg font-semibold text-ink">{tp("enrolment")}</h3>
-                      <div className="mt-4">
-                        <EnrolmentWizard person={person} />
-                      </div>
-                    </section>
-
-                    <section>
-                      <h3 className="font-display text-lg font-semibold text-ink">{tp("padron")}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                        {tp("padronIntro", {
-                          address: `${person.address.streetName} ${person.address.buildingNumber}`,
-                        })}
-                      </p>
-                      <div className="mt-5">
-                        <PadronWizard person={person} />
-                      </div>
-                    </section>
+                    <button
+                      type="button"
+                      onClick={() => void startCheckout()}
+                      disabled={busy}
+                      className="btn-primary mt-8 w-full"
+                    >
+                      {busy
+                        ? t("wizard.openingCheckout")
+                        : t("wizard.pay", { total: formatEur(price) })}
+                    </button>
+                    <p className="mt-4 text-center font-sans text-xs text-ink-soft">{t("wizard.stripeNote")}</p>
                   </>
                 )}
               </div>
-
-              <div className="mt-8">
-                <Modelo790Notice />
-              </div>
-
-              {/* Reachable only after the case is created, so the nationality —
-                  and therefore the route and its price — is always known here. */}
-              {price !== null && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => void startCheckout()}
-                    disabled={busy}
-                    className="btn-primary mt-8 w-full"
-                  >
-                    {busy
-                      ? t("wizard.openingCheckout")
-                      : t("wizard.pay", { total: formatEur(price) })}
-                  </button>
-                  <p className="mt-3 text-center text-xs text-ink-soft">{t("wizard.stripeNote")}</p>
-                </>
-              )}
-            </div>
-          )}
+            )}
+          </div>
 
           {submitError && (
             <p
               role="alert"
-              className="mt-6 rounded-lg bg-terracotta/5 px-4 py-3 text-sm font-medium text-terracotta"
+              className="enter-alert mt-6 border-l-2 border-accent bg-accent-tint px-4 py-3 text-sm font-medium text-accent-deep"
             >
               {submitError}
             </p>
           )}
 
+          {/* The step footer wraps: at 200% browser text "Zurück" and "Weiter"
+              side by side are wider than a 320px phone, and a step's only way
+              forward should not be the thing that pushes the page sideways. */}
           {step < 5 && (
-            <div className="mt-9 flex items-center justify-between border-t border-bone-line pt-6">
+            <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-paper-line pt-6">
               <button
                 type="button"
-                onClick={() => setStep((s) => Math.max(0, s - 1))}
+                onClick={() => {
+                  setDir("back");
+                  setStep((s) => Math.max(0, s - 1));
+                }}
                 disabled={step === 0 || busy}
                 className="btn-secondary"
               >
@@ -394,15 +497,15 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
         </div>
       </div>
 
-      <aside className="lg:sticky lg:top-24 lg:self-start">
-        <div className="rounded-2xl border border-bone-line bg-white p-6">
-          <p className="eyebrow">{t("summary.selected")}</p>
-          <h2 className="mt-2.5 font-display text-lg font-semibold text-ink">
+      <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
+        <div className="border border-paper-edge border-t-3 border-t-accent bg-white p-6">
+          <p className="font-sans text-[0.625rem] font-bold uppercase tracking-[0.2em] text-ink-soft">{t("summary.selected")}</p>
+          <h2 className="mt-3 text-display-sm text-ink">
             {tprice(`tiers.${tier.id}.name`)}
           </h2>
 
           {price !== null && route ? (
-            <dl className="mt-5 space-y-2 border-y border-bone-line py-4 text-sm">
+            <dl className="mt-5 space-y-2 border-y border-paper-line py-4 text-sm">
               <div className="flex justify-between">
                 <dt className="text-ink-muted">{t("summary.route")}</dt>
                 <dd className="text-ink">{tprice(route === "eu" ? "card.routeEu" : "card.routeNonEu")}</dd>
@@ -413,7 +516,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
               </div>
             </dl>
           ) : (
-            <div className="mt-5 border-y border-bone-line py-4">
+            <div className="mt-5 border-y border-paper-line py-4">
               <dl className="space-y-2 text-sm">
                 {SERVICE_ROUTES.map((r) => (
                   <div key={r} className="flex justify-between">

@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import { tierIdSchema } from "../src/lib/schema";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import {
@@ -135,5 +136,35 @@ describe("formatting", () => {
     const plain = (cents: number) => formatEur(cents).replace(/[\u00A0\u202F]/g, " ");
     expect(plain(30_000)).toBe("300 €");
     expect(plain(18_029)).toBe("180,29 €");
+  });
+});
+
+/*
+  The intake schema once carried its own hand-written list of package ids. It
+  fell behind this table when the packages were renamed, and the effect was
+  silent: the pricing page happily linked to /intake?tier=ready-file, the wizard
+  collected every answer, and the submission was refused at the last step with
+  "some answers need correcting" — pointing the student at fields that were all
+  valid. The Ready File could not be bought at all. These tests fail if the two
+  ever drift apart again.
+*/
+describe("the intake schema accepts exactly the packages on sale", () => {
+  it("accepts every package in this table", () => {
+    for (const tier of TIERS) {
+      const parsed = tierIdSchema.safeParse(tier.id);
+      expect(parsed.success, `${tier.id} must be a valid tierId`).toBe(true);
+      expect(parsed.success && parsed.data).toBe(tier.id);
+    }
+  });
+
+  it("still accepts the ids used in links sent out before the rename", () => {
+    expect(tierIdSchema.parse("baseline")).toBe("ready-file");
+    expect(tierIdSchema.parse("turnkey")).toBe("fixer");
+  });
+
+  it("refuses anything that is not a package", () => {
+    for (const value of ["", "gold", "__proto__", "constructor"]) {
+      expect(tierIdSchema.safeParse(value).success, `${value} must be refused`).toBe(false);
+    }
   });
 });

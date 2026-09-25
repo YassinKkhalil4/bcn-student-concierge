@@ -154,6 +154,7 @@
     "saving": "Saving…",
     "submit": "Submit and continue",
     "fixEarlier": "Some answers need correcting — check the earlier steps.",
+    "errorSummary": "Check these answers before continuing",
     "submitFailed": "We could not save your submission. Please try again.",
     "networkRetry": "Network error. Your answers are still here — please retry.",
     "checkoutFailed": "Could not open checkout. Please try again.",

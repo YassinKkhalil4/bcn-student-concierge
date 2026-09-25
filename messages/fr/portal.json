@@ -184,6 +184,7 @@
     },
     "to": "Destinataire (facultatif)",
     "subject": "Objet :",
+    "body": "Message",
     "openGmail": "Ouvrir dans Gmail ↗",
     "openOutlook": "Ouvrir dans Outlook ↗",
     "openEmail": "Ouvrir dans mon application de messagerie",

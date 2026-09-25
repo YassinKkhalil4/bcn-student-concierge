@@ -77,7 +77,7 @@ export default async function CasePage({
       <div>
         <Link href="/admin" className="text-sm text-ink-muted hover:text-ink">← All cases</Link>
         <div className="mt-2 flex flex-wrap items-center gap-3">
-          <h1 className="font-display text-2xl font-semibold text-ink">{name}</h1>
+          <h1 className="font-sans text-2xl font-semibold text-ink">{name}</h1>
           <Badge>{c.formId}</Badge>
           <PaymentBadge status={c.paymentStatus} />
           <StageBadge stage={c.stage} purged={Boolean(c.purgedAt)} />
@@ -147,7 +147,7 @@ export default async function CasePage({
             </div>
 
             <Card title="Documents">
-              <ul className="divide-y divide-bone-line">
+              <ul className="divide-y divide-paper-line">
                 {DOC_SLOTS.map((slot) => {
                   const docs = c.documents.filter((d) => d.kind === slot.kind);
                   return (
@@ -155,7 +155,7 @@ export default async function CasePage({
                       <div>
                         <p className="text-sm font-medium text-ink">{slot.name}</p>
                         {docs.length === 0 && (
-                          <p className={`text-xs ${slot.required ? "text-terracotta" : "text-ink-soft"}`}>
+                          <p className={`text-xs ${slot.required ? "text-accent-deep" : "text-ink-soft"}`}>
                             {slot.required ? "Missing — required" : "Not provided"}
                           </p>
                         )}
@@ -180,7 +180,7 @@ export default async function CasePage({
                 Stage: <strong className="text-ink">{c.stage === "in_progress" ? "In progress" : c.stage === "new" ? "New" : "Completed"}</strong>
               </p>
               {c.paymentStatus !== "paid" && c.stage === "new" && (
-                <p className="mt-2 text-xs text-amber-800">Payment not received yet.</p>
+                <p className="mt-2 text-xs text-ink">Payment not received yet.</p>
               )}
               <div className="mt-4 flex flex-col gap-2">
                 {c.stage === "new" && <StageButton id={c.id} stage="in_progress" label="Start work" primary />}
@@ -233,7 +233,7 @@ export default async function CasePage({
               </Card>
             )}
 
-            <Card title="Erase personal data" className="border-terracotta/30">
+            <Card title="Erase personal data" className="border-accent/30">
               <form action={eraseNow} id="erase" className="space-y-3">
                 <input type="hidden" name="caseId" value={c.id} />
                 <p className="text-xs leading-relaxed text-ink-muted">
@@ -244,8 +244,8 @@ export default async function CasePage({
                   <input type="checkbox" name="confirm" value="yes" required className="mt-0.5" />
                   I understand this cannot be undone.
                 </label>
-                {error === "confirm" && <p role="alert" className="text-xs text-terracotta">Tick the box to confirm.</p>}
-                <button type="submit" className="w-full rounded-full border border-terracotta/50 px-4 py-2 text-sm font-semibold text-terracotta hover:bg-terracotta/5">
+                {error === "confirm" && <p role="alert" className="text-xs text-accent-deep">Tick the box to confirm.</p>}
+                <button type="submit" className="w-full border border-accent/50 px-4 py-2 text-sm font-semibold text-accent-deep hover:bg-accent-tint">
                   Erase now
                 </button>
               </form>
@@ -271,7 +271,7 @@ function DocLink({ caseId, doc, n }: { caseId: string; doc: StoredDocument; n: n
   return (
     <a
       href={`/api/admin/cases/${caseId}/documents/${doc.id}`}
-      className="inline-flex items-center gap-2 rounded-md border border-bone-line px-2.5 py-1.5 text-xs font-medium text-ink hover:bg-bone-warm"
+      className="inline-flex items-center gap-2 border border-paper-line px-2.5 py-1.5 text-xs font-medium text-ink hover:bg-paper-dim"
     >
       Download{n ? ` #${n}` : ""}
       <span className="font-normal text-ink-soft">
