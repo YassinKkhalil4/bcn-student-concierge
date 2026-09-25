@@ -51,7 +51,8 @@
     "submit": "Zur kostenlosen Ersteinschätzung senden",
     "sending": "Wird gesendet…",
     "freeNote": "Kostenlos, unverbindlich, ohne Karte. Wir antworten am selben Tag.",
-    "failed": "Deine Anfrage konnte nicht gesendet werden. Bitte versuche es erneut."
+    "failed": "Deine Anfrage konnte nicht gesendet werden. Bitte versuche es erneut.",
+    "errorSummary": "Prüfen Sie diese Angaben vor dem Senden"
   },
   "done": {
     "title": "Angekommen.",

@@ -82,6 +82,28 @@
     outline-offset: 2px;
   }
 
+  /*
+    A control whose real <input> is visually hidden inside it — the file picker
+    dressed as a button, the segmented language radios. The browser draws the
+    focus ring on the input, which `sr-only` has clipped to 1×1px, so keyboard
+    focus on those two controls was drawn but invisible. The ring has to be
+    drawn on the wrapper instead.
+
+    `:has()` so the ring appears only for keyboard focus, matching every other
+    control on the site; `:focus-within` is the fallback where it is missing,
+    and shows the ring on click too, which is the harmless direction to err in.
+  */
+  .focus-ring-within:has(:focus-visible) {
+    outline: 2px solid var(--focus);
+    outline-offset: var(--focus-ring-offset, 2px);
+  }
+  @supports not selector(:has(*)) {
+    .focus-ring-within:focus-within {
+      outline: 2px solid var(--focus);
+      outline-offset: var(--focus-ring-offset, 2px);
+    }
+  }
+
   /* The dark field. Applied to a section, it re-points every foreground token
      and the focus ring at their legible-on-navy counterparts. */
   .on-ink {
@@ -205,6 +227,22 @@
            disabled:cursor-not-allowed disabled:opacity-50;
     /* Buttons here are wide, and often `w-full`. */
     --press-scale: 0.98;
+    /*
+      `break-word`, not the `anywhere` the body uses. The difference is the one
+      that matters here: `anywhere` lets the BOX shrink narrower than its
+      longest word, and at 200% browser text that turned the header's "Free
+      check" into "Free / chec / k". `break-word` still breaks a word that
+      genuinely cannot fit — a German compound on a narrow button — but never
+      below the width of that word, so a two-word label wraps at its space.
+
+      `max-width` is what lets that promise hold. A .btn is inline-flex, so it
+      sizes shrink-to-fit and will happily grow past its container to fit one
+      long word — which is how German "Vollständigen Vergleich ansehen" pushed
+      a 320px page out to 328px. Capped at the container, the word breaks
+      instead of the page.
+    */
+    overflow-wrap: break-word;
+    max-width: 100%;
   }
 
   /*
@@ -243,6 +281,33 @@
     @apply inline-flex items-center gap-2 font-sans text-sm font-semibold text-ink
            underline decoration-accent decoration-2 underline-offset-[6px]
            transition-colors hover:text-accent-deep;
+  }
+
+  /*
+    The dense action that sits beside a value: copy this, download that, open
+    the official form. There were three near-identical versions of this control
+    — `px-2 py-1`, `px-2.5 py-1.5`, `px-3 py-2`, two of them in caps and one
+    not — so a change to any one of them reached none of the others. Square and
+    hairlined like the rest of the family; it inverts on hover exactly as
+    .btn-secondary does, because it is the same button at a smaller size.
+  */
+  .btn-mini {
+    @apply press inline-flex items-center justify-center gap-1.5 border border-paper-edge
+           bg-white px-3 py-2 text-center font-sans text-xs font-medium text-ink
+           hover:border-ink hover:bg-ink hover:text-paper
+           disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-paper-edge
+           disabled:hover:bg-white disabled:hover:text-ink;
+    /*
+      `press`, not `transition-colors`: this control used to be three
+      hand-rolled variants, one of which (CopyButton) had already been given
+      press feedback. Folding them together would have silently dropped it from
+      that one, so the class carries it for all of them instead — the copy
+      buttons, the invoice PDF links, the two "open the official form" links.
+
+      No `--press-scale` override: the default 0.97 is drawn for a control this
+      size. `.btn` raises it to 0.98 because those are often full-width, and at
+      a constant ratio a wide button travels three times as far.
+    */
   }
 
   /* The guide's corner. --chamfer sets the size; the cut is always bottom-right. */
@@ -287,6 +352,34 @@
   details[open]::details-content {
     height: auto;
     opacity: 1;
+  }
+
+  /*
+    The header's index is the one disclosure that overlays the page instead of
+    pushing it, and the accordion above cannot describe it.
+
+    Its panel is absolutely positioned, so it contributes nothing to
+    `::details-content`'s height — which stays 0 open or shut. `overflow:
+    hidden` on a zero-height box then clips the panel's own ground away and the
+    hero reads straight through the navigation. There is no height here for a
+    height animation to animate: the panel is either over the page or it is
+    not.
+
+    The transition goes too. `content-visibility` is transitioned above with
+    `allow-discrete`, and on an absolutely-positioned child that combination
+    paints the panel before the compositor has its ground down: for the length
+    of the transition the hero reads straight through the navigation. Measured
+    here, then confirmed by forcing a repaint, which cleared it.
+
+    So this one disclosure simply appears. That is the honest description of
+    something that arrives on top of the page rather than unfolding within it,
+    and it is what the panel did before the accordion existed.
+  */
+  .disclosure-overlay::details-content {
+    height: auto;
+    overflow: visible;
+    opacity: 1;
+    transition: none;
   }
 
   /* ── Entrances ────────────────────────────────────────────────────────── */
@@ -370,10 +463,17 @@
   /* text-transform: uppercase is presentational only. The authoritative
      uppercase conversion happens in the zod schema on the server — CSS here
      just stops the input looking different from what will be filed. */
+  /*
+    The border is `field-line`, not `paper-edge`: an empty input has nothing
+    inside it to say what it is, so its outline is the control, and WCAG 1.4.11
+    holds that to 3:1. `paper-edge` on white is 1.68:1. Hover goes to `ink-soft`
+    (5.40:1) rather than the old `ink/40` (2.45:1), which was below the floor
+    even in its active state.
+  */
   .field-input {
-    @apply mt-2 block w-full border border-paper-edge bg-white px-3.5 py-2.5
+    @apply mt-2 block w-full border border-field-line bg-white px-3.5 py-2.5
            font-sans text-[0.9375rem] text-ink transition-colors
-           placeholder:text-ink-soft hover:border-ink/40
+           placeholder:text-ink-soft hover:border-ink-soft
            focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
   }
   .field-input-upper {
@@ -488,5 +588,70 @@
   }
   .panel-quiet {
     @apply border border-paper-line bg-paper-dim p-5 sm:p-6;
+  }
+}
+
+/*
+  ── Touch ───────────────────────────────────────────────────────────────
+  A finger is a property of the POINTER, not of the viewport. A 13" laptop
+  with a touchscreen and a phone held in landscape are the same finger at
+  opposite widths, so none of this is keyed to a breakpoint: `pointer: coarse`
+  is the only thing that actually answers the question being asked.
+
+  44px is the floor Apple and Android both publish. The controls below were
+  measured at 28–38px — passable with a mouse, a guess with a thumb — and
+  several of them sit on the portal, which is where a student who has already
+  paid does the work on their phone.
+
+  Padding is left alone and the minimum is applied as a height, so a control
+  whose caller overrides `py-*` (the header's CTA, the portal's sheet buttons)
+  still clears the floor. `.btn` itself is only an @apply source — no element
+  carries the class — so the variants are named individually.
+*/
+@media (pointer: coarse) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-mini,
+  .field-input {
+    min-height: 44px;
+  }
+}
+
+/*
+  ── Forced colours ──────────────────────────────────────────────────────
+  Windows High Contrast and the browser's own forced-colours modes replace the
+  page's palette with the user's own, and the spec forces `box-shadow: none`
+  while doing it.
+
+  .btn-primary's focus ring is an INSET box-shadow — the only way to draw a
+  ring inside a clip-path, which is what the chamfer needs. Under forced
+  colours that shadow is stripped, and because the rule also sets
+  `outline: none`, the site's most important control had no focus indicator at
+  all. Dropping the chamfer here lets an ordinary outline do the job; the shape
+  is brand, and brand is the thing these modes are entitled to discard.
+
+  `currentColor` on the marks keeps them visible: their `fill` is `none` and
+  their stroke follows the forced text colour, but the brand square is a
+  background, and backgrounds are forced flat.
+*/
+@media (forced-colors: active) {
+  .btn-primary {
+    clip-path: none;
+  }
+  .btn-primary:focus-visible,
+  .on-ink .btn-primary:focus-visible {
+    box-shadow: none;
+    outline: 3px solid CanvasText;
+    outline-offset: 2px;
+  }
+  .chamfer {
+    clip-path: none;
+    border: 1px solid CanvasText;
+  }
+  /* The accent rules that carry meaning — an error's left rule, a section cap —
+     are backgrounds and borders, so they survive only if they are borders. */
+  .field-error,
+  .panel-accent {
+    border-inline-start-color: CanvasText;
   }
 }

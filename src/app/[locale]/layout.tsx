@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { CLIENT_NAMESPACES, pick } from "@/i18n/messages";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { DocumentLang } from "@/components/DocumentLang";
@@ -40,7 +41,14 @@ export default async function LocaleLayout({
   const t = await getTranslations("common");
 
   return (
-    <NextIntlClientProvider messages={await getMessages()}>
+    /*
+      Only the catalogue the header and footer read. Each page that hosts a
+      heavier client tree opens its own provider with the namespaces it needs —
+      see CLIENT_NAMESPACES. Before this every page shipped all eleven
+      catalogues to the browser, including the 14 kB legal one, which no client
+      component has ever read.
+    */
+    <NextIntlClientProvider messages={pick(await getMessages(), CLIENT_NAMESPACES.chrome)}>
       <DocumentLang />
       <a
         href="#main"

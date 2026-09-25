@@ -68,7 +68,11 @@ function FooterColumn({ title, children }: { title: string; children: React.Reac
       <h2 className="font-sans text-[0.625rem] font-bold uppercase tracking-[0.2em] text-onink-soft">
         {title}
       </h2>
-      <ul className="mt-5 space-y-3">{children}</ul>
+      {/* Was `space-y-3` around 16px-tall inline links: a 28px pitch made of
+          12px of gap and a target too small to aim at. The height now belongs
+          to the link instead of to the gap, so the column reads at the same
+          density and every row is something a thumb can hit. */}
+      <ul className="mt-4 space-y-0.5">{children}</ul>
     </div>
   );
 }
@@ -78,7 +82,9 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
     <li>
       <Link
         href={href}
-        className="font-sans text-sm font-medium text-onink-muted transition-colors hover:text-onink"
+        className="inline-flex min-h-[32px] items-center py-1 font-sans text-sm font-medium
+                   text-onink-muted transition-colors hover:text-onink
+                   [@media(pointer:coarse)]:min-h-[44px]"
       >
         {children}
       </Link>

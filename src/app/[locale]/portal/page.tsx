@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
+import { getFormatter, getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { CLIENT_NAMESPACES, pick } from "@/i18n/messages";
 import { requirePortalCaseId } from "@/lib/portal/guard";
 import { getCase } from "@/lib/server/storage";
 import { getTier, tierPriceCents, routeForForm, formatEur } from "@/lib/pricing";
@@ -32,30 +34,37 @@ export default async function PortalPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const caseId = await requirePortalCaseId();
-  const [record, invoices, { submitted, checkout }, t, ti, format] = await Promise.all([
+  const [record, invoices, { submitted, checkout }, t, ti, format, messages] = await Promise.all([
     getCase(caseId),
     listInvoicesForCase(caseId),
     searchParams,
     getTranslations("portal.file"),
     getTranslations("portal.invoices"),
     getFormatter(),
+    getMessages(),
   ]);
+  /** Every branch below returns client components, so one wrapper for all of them. */
+  const withMessages = (children: React.ReactNode) => (
+    <NextIntlClientProvider locale={locale} messages={pick(messages, CLIENT_NAMESPACES.portal)}>
+      {children}
+    </NextIntlClientProvider>
+  );
   const invoiceCopy = { empty: ti("empty"), refund: ti("refund"), pdf: ti("pdf") };
 
   if (!record) {
     // A validly signed session whose case does not exist (e.g. a development
     // database that was reset). Not "closed" — just a stale sign-in.
-    return (
+    return withMessages(
       <div className="container-x py-16">
         <h1 className="text-display-lg text-ink">{t("notFoundTitle")}</h1>
         <p className="prose-lede measure mt-5">{t("notFoundBody")}</p>
         <SignOut locale={locale} label={t("signOut")} />
-      </div>
+      </div>,
     );
   }
 
   if (!record.intake) {
-    return (
+    return withMessages(
       <div className="container-x py-16">
         <h1 className="text-display-lg text-ink">{t("closedTitle")}</h1>
         <p className="prose-lede measure mt-5">{t("closedBody")}</p>
@@ -63,7 +72,7 @@ export default async function PortalPage({
           <InvoiceList invoices={invoices} hrefBase="/api/portal/invoices" copy={invoiceCopy} locale={locale} />
         </div>
         <div className="mt-6"><SignOut locale={locale} label={t("signOut")} /></div>
-      </div>
+      </div>,
     );
   }
 
@@ -79,7 +88,7 @@ export default async function PortalPage({
   const police = appts.find((a) => a.kind === "police");
   const padron = appts.find((a) => a.kind === "padron");
 
-  return (
+  return withMessages(
     <div className="container-x py-12 sm:py-16 lg:py-20">
       <div className="flex flex-wrap items-start justify-between gap-6 border-t-3 border-accent pt-8">
         <div>
@@ -225,7 +234,7 @@ export default async function PortalPage({
           </section>
         </aside>
       </div>
-    </div>
+    </div>,
   );
 }
 

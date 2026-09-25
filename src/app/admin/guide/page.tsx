@@ -54,7 +54,7 @@ export default async function GuideConversionPage({
         </nav>
       </div>
 
-      <div className="overflow-x-auto border border-paper-line bg-white">
+      <div tabIndex={0} role="region" aria-label="Guide downloads" className="overflow-x-auto border border-paper-line bg-white">
         <table className="w-full min-w-[640px] text-sm">
           <thead className="border-b border-paper-line bg-paper-dim text-left text-xs font-medium uppercase tracking-wide text-ink-soft">
             <tr>

@@ -32,7 +32,7 @@ export function CopyButton({
       type="button"
       onClick={() => void copy()}
       disabled={!value}
-      className={`press border border-paper-edge bg-white px-2.5 py-1.5 font-sans text-[0.6875rem] font-bold uppercase tracking-[0.08em] text-ink-muted hover:border-ink hover:bg-ink hover:text-paper disabled:opacity-40 ${className}`}
+      className={`btn-mini ${className}`}
     >
       <span aria-live="polite">
         {state === "copied" ? copiedLabel : state === "failed" ? failedLabel : label}

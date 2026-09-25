@@ -154,6 +154,7 @@
     "saving": "Salvataggio in corso…",
     "submit": "Invia e prosegui",
     "fixEarlier": "Alcune risposte devono essere corrette: si prega di ricontrollare i passaggi precedenti.",
+    "errorSummary": "Controlla queste risposte prima di continuare",
     "submitFailed": "Non è stato possibile salvare i dati inviati. La preghiamo di riprovare.",
     "networkRetry": "Errore di rete. Le Sue risposte sono ancora presenti: la preghiamo di riprovare.",
     "checkoutFailed": "Impossibile aprire la pagina di pagamento. Riprovi.",

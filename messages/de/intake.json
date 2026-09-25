@@ -154,6 +154,7 @@
     "saving": "Wird gespeichert…",
     "submit": "Absenden und fortfahren",
     "fixEarlier": "Einige Antworten müssen korrigiert werden – überprüfen Sie bitte die vorherigen Schritte.",
+    "errorSummary": "Prüfen Sie diese Angaben, bevor Sie fortfahren",
     "submitFailed": "Wir konnten Ihre Eingabe nicht speichern. Bitte versuchen Sie es erneut.",
     "networkRetry": "Netzwerkfehler. Ihre Antworten sind noch vorhanden – bitte versuchen Sie es erneut.",
     "checkoutFailed": "Der Bezahlvorgang konnte nicht geöffnet werden. Bitte versuchen Sie es erneut.",

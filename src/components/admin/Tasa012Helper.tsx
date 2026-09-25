@@ -90,7 +90,7 @@ export function Tasa012Helper({ summary }: { summary: Tasa012Summary }) {
           href={summary.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="border border-paper-line px-3 py-2 text-xs font-medium text-ink hover:bg-paper-dim"
+          className="btn-mini"
         >
           Open official portal ↗
         </a>
@@ -100,7 +100,12 @@ export function Tasa012Helper({ summary }: { summary: Tasa012Summary }) {
         <summary className="cursor-pointer px-4 py-2 text-xs font-medium text-ink-muted">
           Preview message
         </summary>
-        <pre className="max-h-80 overflow-auto whitespace-pre-wrap border-t border-paper-line px-4 py-3 text-xs leading-relaxed text-ink">
+        <pre
+          tabIndex={0}
+          role="region"
+          aria-label="Instructions for the student"
+          className="max-h-80 overflow-auto whitespace-pre-wrap border-t border-paper-line px-4 py-3 text-xs leading-relaxed text-ink"
+        >
           {summary.studentMessage}
         </pre>
       </details>

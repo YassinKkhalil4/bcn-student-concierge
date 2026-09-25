@@ -51,7 +51,8 @@
     "submit": "Enviar para triaje gratuito",
     "sending": "Enviando…",
     "freeNote": "Sin coste, sin compromiso y sin tarjeta. Respondemos el mismo día.",
-    "failed": "No hemos podido enviar tu consulta. Inténtalo de nuevo."
+    "failed": "No hemos podido enviar tu consulta. Inténtalo de nuevo.",
+    "errorSummary": "Revisa estas respuestas antes de enviar"
   },
   "done": {
     "title": "Lo hemos recibido.",
