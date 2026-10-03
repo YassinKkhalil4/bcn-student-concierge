@@ -157,24 +157,21 @@
     "errorSummary": "Revisa aquestes respostes abans de continuar",
     "submitFailed": "No hem pogut desar la vostra sol·licitud. Torneu-ho a provar.",
     "networkRetry": "Error de xarxa. Les vostres respostes encara són aquí; si us plau, torneu-ho a provar.",
-    "checkoutFailed": "No s’ha pogut obrir la pàgina de pagament. Torneu-ho a provar.",
-    "checkoutNetwork": "Error de xarxa en obrir la pàgina de pagament.",
     "sessionExpired": "La vostra sessió ha expirat. Torneu a iniciar la sessió.",
     "alreadyPaid": "Aquest expedient ja està pagat.",
     "uploadTitle": "Pugeu els vostres documents",
     "uploadIntro": "El vostre expedient ja està obert. Referència <code>{ref}</code>. Pugeu ara el que tingueu i després continueu amb el pagament.",
     "uploadLater": "Us falta alguna cosa, com ara un document per al Padró que us ha de donar el propietari? És normal. Pagueu ara i pugeu-lo més tard des del <link>vostre expedient</link>: podeu iniciar la sessió quan vulgueu amb el correu electrònic que ens vau donar.",
-    "openingCheckout": "S’està obrint el pagament segur…",
-    "pay": "Continua amb el pagament — {total}",
     "stripeNote": "Targeta i Apple Pay, processats per Stripe. No veiem mai les dades de la vostra targeta."
   },
   "summary": {
     "selected": "Paquet seleccionat",
-    "total": "Total",
+    "total": "Preu del paquet, sense IVA",
     "change": "Canvia de paquet",
     "govFees": "Les taxes de l’Administració (Modelo 790, expedició de la targeta) les pagueu directament a les autoritats espanyoles i no hi estan incloses.",
     "route": "Ciutadania",
-    "routePending": "El preu depèn de la vostra nacionalitat. Es fixa tan bon punt la trieu al primer pas."
+    "routePending": "El preu depèn de la vostra nacionalitat. Es fixa tan bon punt la trieu al primer pas.",
+    "ivaNote": "En pagar s’afegeix el {rate} % d’IVA, i allà també podeu marcar complements opcionals."
   },
   "documents": {
     "slots": {

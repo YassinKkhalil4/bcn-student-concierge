@@ -38,9 +38,6 @@
     "checkoutCancelled": "El pagament s’ha cancel·lat i no s’ha cobrat res. Podeu pagar quan vulgueu.",
     "paymentTitle": "Pagament pendent",
     "paymentBody": "Comencem a treballar tan bon punt es confirma el pagament.",
-    "paymentTotal": "Total {total}.",
-    "pay": "Paga {total}",
-    "payNow": "Paga ara",
     "passport": "1. Passaport",
     "enrolment": "2. Matrícula universitària",
     "padron": "3. Justificant de domicili per al Padró",
@@ -67,7 +64,14 @@
   "pay": {
     "opening": "S’està obrint el pagament segur…",
     "failed": "No s’ha pogut obrir la pàgina de pagament. Torneu-ho a provar.",
-    "network": "Error de xarxa. Torneu-ho a provar."
+    "network": "Error de xarxa. Torneu-ho a provar.",
+    "addonsTitle": "Complements opcionals",
+    "addonsHint": "Marqueu els que vulgueu. Cadascun s’entrega en digital i s’afegeix a aquest pagament.",
+    "iva": "IVA ({rate} %)",
+    "total": "Total a pagar",
+    "button": "Paga {total}",
+    "expired": "La vostra sessió ha expirat. Torneu a iniciar la sessió.",
+    "paid": "Aquest expedient ja està pagat."
   },
   "padron": {
     "question": "On viviu?",

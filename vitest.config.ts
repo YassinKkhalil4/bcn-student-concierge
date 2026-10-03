@@ -2,6 +2,10 @@ import { defineConfig } from "vitest/config";
 import path from "node:path";
 
 export default defineConfig({
+  // tsconfig says "jsx": "preserve" (Next compiles the JSX); without this the
+  // test transform falls back to the classic runtime and a component that does
+  // not import React fails with "React is not defined".
+  esbuild: { jsx: "automatic" },
   // Database-backed suites migrate a fresh PGlite in beforeAll; under a full
   // parallel run that can take longer than the 10 s default.
   //

@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
-import { billingFromSession, constructWebhookEvent } from "@/lib/server/stripe";
+import { addonsFromSession, billingFromSession, constructWebhookEvent } from "@/lib/server/stripe";
 import { findCaseIdByPaymentIntent, getCase, updateCase } from "@/lib/server/storage";
 import {
   findCaseIdByInvoicePaymentIntent,
   issueInvoiceForCheckout,
   issueRefundRectification,
 } from "@/lib/server/invoices";
-import { getTier, tierPriceCents, routeForForm } from "@/lib/pricing";
+import { getTier, totalCents, routeForForm } from "@/lib/pricing";
 import { notifyPaymentReceived } from "@/lib/notify/events";
 
 export const runtime = "nodejs";
@@ -61,8 +61,13 @@ export async function POST(request: Request): Promise<NextResponse> {
             ? session.payment_intent
             : (session.payment_intent?.id ?? null);
 
+        // What was bought, from the session itself: the case row holds whatever
+        // the latest checkout attempt asked for, which need not be this one.
+        const addons = addonsFromSession(session) ?? [];
+
         if (record.paymentStatus !== "paid") {
           await updateCase(caseId, {
+            addonIds: addons.map((a) => a.id),
             paymentStatus: "paid",
             stripeSessionId: session.id,
             stripePaymentIntentId: paymentIntentId,
@@ -81,7 +86,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         // The expected amount depends on the EU / non-EU route, which is fixed
         // by the case's own formId — the same derivation checkout priced from.
         const route = routeForForm(record.formId);
-        if (tier && session.amount_total !== tierPriceCents(tier, route)) {
+        if (tier && session.amount_total !== totalCents(tier, route, addons).grossCents) {
           // Invoice what was actually charged, but make the gap visible.
           console.warn(`[invoice] ${record.ref}: charged ${session.amount_total} differs from tier price`);
         }
@@ -90,7 +95,10 @@ export async function POST(request: Request): Promise<NextResponse> {
           stripeSessionId: session.id,
           stripePaymentIntentId: paymentIntentId,
           grossCents: session.amount_total,
-          description: `Servicio de acompañamiento administrativo — ${tier?.name ?? record.tierId}`,
+          description: [
+            `Servicio de acompañamiento administrativo — ${tier?.name ?? record.tierId}`,
+            ...addons.map((a) => a.name),
+          ].join(" + "),
           billing: billingFromSession(session),
           // When Stripe recorded the payment, not when this delivery arrived:
           // a retry hours later must not move the invoice date.
@@ -101,7 +109,7 @@ export async function POST(request: Request): Promise<NextResponse> {
           await notifyPaymentReceived({
             ref: record.ref,
             totalCents: session.amount_total,
-            packageName: tier?.name.replace(/^The /, "") ?? record.tierId,
+            packageName: [tier?.name.replace(/^The /, "") ?? record.tierId, ...addons.map((a) => a.name)].join(" + "),
           });
         }
         break;

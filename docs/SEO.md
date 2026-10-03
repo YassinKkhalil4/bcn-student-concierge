@@ -45,7 +45,8 @@ and a disagreement makes Google drop the pair.
 `ProfessionalService` for the business, `WebSite`, `Service` carrying one
 `Offer` per package per route, `FAQPage` for the home page questions, and
 `BreadcrumbList` on pricing. Offer prices come from `TIERS`, so a price change
-in `src/lib/pricing.ts` moves the published price with it. Provider fields
+in `src/lib/pricing.ts` moves the published price with it. Prices are ex-IVA, and
+each Offer says so with `valueAddedTaxIncluded: false`. Provider fields
 (legal name, NIF, address) appear once `src/lib/provider.ts` has them, and not
 before, on the same reasoning as the footer: a made-up NIF in machine-readable
 form is worse than none.

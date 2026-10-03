@@ -246,7 +246,7 @@ function Landing() {
             <p className="prose-lede measure mt-6">{t("pricing.body")}</p>
           </div>
 
-          <div className="mt-16 grid border-t-2 border-ink lg:grid-cols-3">
+          <div className="mt-16 grid border-t-2 border-ink lg:grid-cols-2">
             {TIERS.map((tier) => (
               <PricingCard key={tier.id} tier={tier} compact />
             ))}

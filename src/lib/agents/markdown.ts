@@ -1,6 +1,6 @@
 import { translatorFor, type ServerTranslator } from "@/i18n/messages";
 import { localizedPath } from "@/i18n/routing";
-import { TIERS, formatEur, hasSinglePrice, tierPriceCents, SERVICE_ROUTES } from "@/lib/pricing";
+import { ADDONS, TIERS, formatEur, hasSinglePrice, tierPriceCents, SERVICE_ROUTES } from "@/lib/pricing";
 import { GUIDE_FRAMING, GUIDE_PATH } from "@/lib/guide";
 import { controllerName } from "@/lib/provider";
 import { siteOrigin, type PublicPage } from "./pages";
@@ -86,7 +86,8 @@ async function homeDoc(locale: string): Promise<string> {
     `## ${t("pricing.title")}`,
     TIERS.map((tier) => {
       const prices = SERVICE_ROUTES.map(
-        (route) => `${tp(route === "eu" ? "card.routeEu" : "card.routeNonEu")} ${formatEur(tierPriceCents(tier, route))}`,
+        (route) =>
+          `${tp(route === "eu" ? "card.routeEu" : "card.routeNonEu")} ${formatEur(tierPriceCents(tier, route))} ${tp("card.exIva")}`,
       ).join(" · ");
       return `- **${tp(`tiers.${tier.id}.name`)}** — ${prices}. ${tp(`tiers.${tier.id}.tagline`)}`;
     }),
@@ -150,9 +151,8 @@ async function pricingDoc(locale: string): Promise<string> {
         // package would be quoting half the readers the wrong price.
         (hasSinglePrice(tier) ? [null] : SERVICE_ROUTES).map((route) => {
           const label = route ? t(route === "eu" ? "card.routeEu" : "card.routeNonEu") : t("card.bothRoutes");
-          return `- **${label}** — **${formatEur(tierPriceCents(tier, route ?? "eu"))}**`;
+          return `- **${label}** — **${formatEur(tierPriceCents(tier, route ?? "eu"))}** ${t("card.exIva")}`;
         }).join("\n"),
-        tier.waitlist ? `**${t("card.waitlist")}**` : "",
         optional("includes"),
         tier.inherits ? t("card.everythingIn", { name: t(`tiers.${tier.inherits}.name`) }) : "",
         features
@@ -171,6 +171,13 @@ async function pricingDoc(locale: string): Promise<string> {
         `**${t("card.bestFor")}** ${t(k("bestFor"))}`,
       ];
     }),
+    // The extras: one price on both routes, ticked at checkout.
+    `## ${t("addons.title")}`,
+    t("addons.intro"),
+    ADDONS.map(
+      (a) =>
+        `- **${t(`addons.items.${a.id}.name`)}** — **${formatEur(a.priceCents)}** ${t("card.exIva")}. ${t(`addons.items.${a.id}.what`)} ${t(`addons.items.${a.id}.delivery`)}`,
+    ),
     t("page.feesNote"),
     `## ${t("page.govTitle")}`,
     `## ${t("page.exclusionsTitle")}`,

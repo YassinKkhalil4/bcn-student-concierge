@@ -4,18 +4,18 @@
   "hero": {
     "eyebrow": "Barcelona · Estudiants internacionals · Vies UE i no UE",
     "title": "El teu TIE, el teu Padró, les teves cites: preparats, reservats i bé a la primera.",
-    "body": "Els estudiants de fora de la UE solen tenir un mes des de l’entrada per sol·licitar el TIE, i la cita és la part que ningú pot accelerar. Llegim la teva autorització, muntem l’expedient i reservem la cita al teu nom, perquè quan en surti una no hi hagi res als papers que et faci tornar a casa. Envia’ns la teva data d’entrada i avui mateix et diem quants dies et queden.",
+    "body": "Els estudiants de fora de la UE solen tenir un mes des de l’entrada per sol·licitar el TIE, i la cita és la part que ningú pot accelerar. Llegim la teva autorització, muntem l’expedient i —amb The Soft Landing— reservem la cita al teu nom, perquè quan en surti una no hi hagi res als papers que et faci tornar a casa. Envia’ns la teva data d’entrada i avui mateix et diem quants dies et queden.",
     "primaryCta": "Consultar el meu termini gratis",
     "secondaryCta": "Veure paquets i preus",
-    "note": "La consulta és gratuïta, el mateix dia i sense targeta. A partir d’aquí els preus són tancats: el preu que veus és el que pagues."
+    "note": "La consulta és gratuïta, el mateix dia i sense targeta. A partir d’aquí els preus són tancats: el preu que veus és el preu sense IVA, i veus el total abans de pagar."
   },
   "proof": {
     "heading": "El que ens pots exigir",
     "items": [
-      "Un preu tancat, dit abans que paguis. No cobrem res per hores.",
+      "Un preu tancat, dit abans que paguis i mostrat sense IVA. No cobrem res per hores.",
       "Cada formulari es presenta al teu nom. Mai no signem com a representant teu.",
       "Xifrem cada escaneig del teu passaport amb la seva pròpia clau i l’esborrem 30 dies després de tancar el teu expedient.",
-      "Sense cita en sis setmanes? Et tornem la meitat i l’expedient continua sent teu."
+      "A The Soft Landing: sense cita en sis setmanes? Et tornem la meitat i l’expedient continua sent teu."
     ]
   },
   "trust": {
@@ -45,7 +45,7 @@
       {
         "problem": "El Padró bloqueja en silenci tota la resta",
         "detail": "En un hostal, un Airbnb o un subarrendament no registrat, ara mateix no et pots empadronar. Un llogater que s’hi nega, o un pis a Sant Cugat quan donaves per fet Barcelona, atura la targeta sanitària i la TIE que vénen després.",
-        "solution": "Al Fixer anem amb tu a l’ajuntament i traduïm, preguntem al consistori per les seves vies alternatives de verificació i gestionem el municipi correcte. El que no fem mai és empadronar-te en una adreça on no vius."
+        "solution": "Preparem el formulari del propietari per al municipi correcte, et diem què més demana l’ajuntament i quines vies d’empadronament existeixen per al teu tipus d’habitatge. El que no fem mai és empadronar-te en una adreça on no vius."
       }
     ]
   },
@@ -63,18 +63,18 @@
       },
       {
         "title": "Muntatge de l’expedient",
-        "body": "Generem l’imprès correcte —EX-17 a la via de fora de la UE, EX-18 a la de la UE—, configurem el Modelo 790 i muntem el Ready File. Missatgeria a la teva adreça o recollida, més un PDF per imprimir a casa tan bon punt estigui muntat."
+        "body": "Generem l’imprès correcte —EX-17 a la via de fora de la UE, EX-18 a la de la UE—, configurem el Modelo 790 i muntem el Ready File. Reps l’expedient sencer en un PDF per imprimir a casa tan bon punt estigui muntat."
       },
       {
         "title": "Cites i seguiment",
-        "body": "Cerquem i reservem les cites de Padró i TIE/CUE, t’expliquem què et preguntaran i continuem localitzables mentre ets al taulell. Seguim l’expedient 90 dies, fins a la recollida."
+        "body": "Amb The Soft Landing cerquem i reservem les cites de Padró i TIE/CUE, t’expliquem què et preguntaran i continuem localitzables mentre ets al taulell. Amb The Ready File les reserves tu, amb la nostra guia pas a pas."
       }
     ]
   },
   "pricing": {
     "eyebrow": "Preus transparents",
-    "title": "Tres paquets. Dos preus cadascun, perquè hi ha dues vies.",
-    "body": "La via UE és menys feina i costa menys: sense empremtes, sense la taxa de 16,08 €. Confirmem quina et correspon al triatge, abans que paguis res. Les taxes públiques les pagues tu, directament, i mai no estan incloses en la nostra tarifa.",
+    "title": "Dos paquets. Dos preus cadascun, perquè hi ha dues vies.",
+    "body": "La via UE és menys feina i costa menys: sense empremtes, sense la taxa de 16,08 €. Confirmem quina et correspon al triatge, abans que paguis res. Els preus no inclouen l’IVA, que s’afegeix en pagar, i allà pots marcar complements opcionals: un abonament T-jove, el Carnet Jove, ISIC o una eSIM. Les taxes públiques les pagues tu, directament, i mai no estan incloses en la nostra tarifa.",
     "cta": "Veure la comparativa completa"
   },
   "faq": {
@@ -87,11 +87,11 @@
       },
       {
         "q": "Quant costa i quan pago?",
-        "a": "El preu de la targeta és el preu sencer. No hi afegim res en pagar, no cobrem per hores i no hi amaguem cap taxa pública. Pagues quan el triatge ha confirmat quina via et correspon. Abans d’això no ens deus res, i si no et podem ajudar ho diem en comptes de cobrar-te."
+        "a": "El preu de la targeta és la tarifa sencera, sense IVA. En pagar hi afegim el 21 % d’IVA i els complements opcionals que marquis, i et mostrem el total abans de pagar. No cobrem per hores i no hi amaguem cap taxa pública. Pagues quan el triatge ha confirmat quina via et correspon. Abans d’això no ens deus res, i si no et podem ajudar ho diem en comptes de cobrar-te."
       },
       {
         "q": "I si no surt cap cita a temps?",
-        "a": "Busquem al portal oficial fins a sis setmanes des del teu enviament. Si en aquesta finestra no en surt cap, et tornem la meitat del preu i et quedes amb el Ready File sencer (formularis, còpies, el Modelo 790, l’auditoria), així estàs a punt el dia que n’aparegui una. També reps un certificat datat de cada intent que vam fer. Les oficines espanyoles solen acceptar-lo com a justificació per registrar-se fora de termini, tot i que cap funcionari no hi està obligat."
+        "a": "A The Soft Landing cerquem al portal oficial fins a sis setmanes des del teu enviament. Si en aquesta finestra no en surt cap, et tornem la meitat del preu i et quedes amb el Ready File sencer (formularis, el Modelo 790, l’auditoria), així estàs a punt el dia que n’aparegui una. També reps un certificat datat de cada intent que vam fer. Les oficines espanyoles solen acceptar-lo com a justificació per registrar-se fora de termini, tot i que cap funcionari no hi està obligat."
       },
       {
         "q": "Crec que ja se m’ha passat el termini. Val la pena preguntar?",
@@ -99,11 +99,11 @@
       },
       {
         "q": "He d’anar jo a la cita?",
-        "a": "Sí. Les cites biomètriques exigeixen que hi compareguis en persona amb els teus documents originals. Nosaltres preparem l’expedient, aconseguim el forat i t’ho expliquem tot, i pots trucar-nos des del taulell si et pregunten alguna cosa que no entens. La compareixença és teva, al teu propi nom."
+        "a": "Sí. Les cites biomètriques exigeixen que hi compareguis en persona amb els teus documents originals. Nosaltres preparem l’expedient; amb The Soft Landing a més aconseguim el forat i t’ho expliquem tot, i pots trucar-nos des del taulell si et pregunten alguna cosa que no entens. La compareixença és teva, al teu propi nom."
       },
       {
         "q": "Ho paguen els meus pares. Poden participar-hi?",
-        "a": "És clar. Poden pagar al seu propi nom i rebre la factura, i al Fixer elaborem un informe final datat: què es va presentar, què està registrat, què queda pendent, la teva data de recollida i els telèfons per a una urgència. El que no farem és omplir la secció de representant legal del teu imprès: aquella casella queda en blanc, perquè ni nosaltres ni ells no som el teu representant."
+        "a": "És clar. Poden pagar al seu propi nom i rebre la factura. El que no farem és omplir la secció de representant legal del teu imprès: aquella casella queda en blanc, perquè ni nosaltres ni ells no som el teu representant."
       },
       {
         "q": "Què passa després amb els escanejos del meu passaport?",

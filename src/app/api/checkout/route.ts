@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { createCheckoutSession } from "@/lib/server/stripe";
 import { getCase, updateCase } from "@/lib/server/storage";
-import { getTier, routeForForm } from "@/lib/pricing";
+import { getTier, resolveAddons, routeForForm } from "@/lib/pricing";
 import { portalCaseId } from "@/lib/portal/guard";
 
 export const runtime = "nodejs";
@@ -43,6 +43,21 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "Invalid service tier" }, { status: 400 });
   }
 
+  // Optional extras: ids only. Each is checked against the server table, and a
+  // single unknown id refuses the whole request — a tampered list must not be
+  // quietly shortened and charged. No body at all means no add-ons.
+  let requested: unknown = [];
+  try {
+    const body = (await request.json()) as { addons?: unknown } | null;
+    requested = body?.addons ?? [];
+  } catch {
+    // Empty or non-JSON body: no add-ons.
+  }
+  const addons = resolveAddons(requested);
+  if (!addons) {
+    return NextResponse.json({ error: "Invalid add-on" }, { status: 400 });
+  }
+
   // Build the return URL from a configured origin, not from the Host or Origin
   // header, which an attacker controls and could use to redirect the customer
   // to a lookalike confirmation page after a real payment.
@@ -56,12 +71,13 @@ export async function POST(request: Request): Promise<NextResponse> {
     const session = await createCheckoutSession({
       tierId: tier.id,
       route: routeForForm(record.formId),
+      addons,
       caseId: record.id,
       customerEmail: record.intake.contact.email,
       origin,
       locale: record.locale,
     });
-    await updateCase(record.id, { stripeSessionId: session.id });
+    await updateCase(record.id, { stripeSessionId: session.id, addonIds: addons.map((a) => a.id) });
     return NextResponse.json({ url: session.url }, { status: 200 });
   } catch (error) {
     console.error("[checkout] session creation failed", error);

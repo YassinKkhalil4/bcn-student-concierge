@@ -3,7 +3,7 @@
     "ready-file": {
       "name": "Ready File",
       "shortName": "Ready File",
-      "tagline": "Die Unterlagen, fertig und in deiner Hand, in 48 Stunden.",
+      "tagline": "Alle Formulare ausgefüllt, geprüft und druckfertig. Die Termine buchst du selbst.",
       "bestFor": "Du kannst deine Termine selbst wahrnehmen — die Akte muss nur stimmen.",
       "features": [
         {
@@ -27,47 +27,25 @@
           "body": "We prepare the authorisation form for the owner or main tenant to sign, and tell you exactly what they need to provide alongside it."
         },
         {
-          "title": "Every copy, already made.",
-          "body": "Passport, authorisation, enrolment evidence, proof of entry, lease — copied to your office’s specification and collated in the order the counter works through them."
-        },
-        {
-          "title": "Appointments, searched and booked.",
-          "body": "Padrón and TIE/CUE, on the official portal, <strong>in your own name</strong>, across all Barcelona-province offices rather than only the convenient one. You get a dated itinerary: address, time, what to carry, what will be asked."
-        },
-        {
           "title": "A completeness audit before you go.",
           "body": "Checked line by line against the official list, including the name-match check that catches middle names present on one document and missing from another."
+        },
+        {
+          "title": "A step-by-step booking guide.",
+          "body": "How to book Padrón and TIE/CUE on the official portal yourself: which offices to try, when slots tend to open, what to carry and what you will be asked."
         }
       ],
-      "delivery": "<strong>How it reaches you:</strong> courier to your address, or pickup from us — plus the whole file as a print-at-home PDF the moment it’s assembled, so a delivery problem never costs you an appointment."
+      "delivery": "<strong>How it reaches you:</strong> the whole file as a print-at-home PDF, the moment it’s assembled."
     },
     "soft-landing": {
       "name": "Soft Landing",
       "shortName": "Soft Landing",
-      "tagline": "Die Unterlagen, plus die Karten, die du längst haben solltest.",
-      "bestFor": "Die meisten, die vor ein paar Wochen gelandet sind und noch Einzelfahrscheine kaufen.",
-      "includes": "Includes roughly <strong>€75 of cards and travel</strong>, bought by us and handed to you. Not application forms, not discount codes — the actual cards, working.",
+      "tagline": "Die Ready File, dazu suchen wir deinen Termin und bleiben für dich am Telefon.",
+      "bestFor": "Die meisten Studierenden, die in den letzten Wochen angekommen sind und nicht allein gegen das Buchungssystem kämpfen wollen.",
       "features": [
         {
-          "title": "A T-mobilitat card, in your name, with 90 days already loaded.",
-          "body": "Registered, Young profile assigned, personalised card issued, pass paid for. You tap and go. If you’ve spent the last fortnight buying single tickets, this is the line that pays for itself — ten single journeys cost more than a fifth of a 90-day pass.",
-          "extra": "Under 30 you get <strong>T-jove</strong>: unlimited travel, all seven fare zones, 90 consecutive days from first validation. Thirty or over, <strong>T-usual</strong> for the zones your commute actually needs, and the difference comes back to you."
-        },
-        {
-          "title": "Your Carnet Jove, activated.",
-          "body": "Applied for, paid for, and chased through the activation wait so it’s live rather than pending."
-        },
-        {
-          "title": "Your ISIC card.",
-          "body": "Bought and issued against your enrolment evidence."
-        },
-        {
-          "title": "A bank account that actually receives money from home.",
-          "body": "Including an honest assessment of whether you need a Spanish one at all — an IBAN from another EU member state shouldn’t be refused for a SEPA payment simply because it’s foreign, and for a lot of students that’s the end of the question."
-        },
-        {
-          "title": "SIM or eSIM sorted.",
-          "body": "Matched to your real usage, with the 28-day renewal trap explained before you commit to it. A 28-day cycle renews about thirteen times a year, not twelve."
+          "title": "Appointments, searched and booked.",
+          "body": "Padrón and TIE/CUE, on the official portal, <strong>in your own name</strong>, across all Barcelona-province offices rather than only the convenient one. You get a dated itinerary: address, time, what to carry, what will be asked."
         },
         {
           "title": "A WhatsApp line for 30 days.",
@@ -76,76 +54,31 @@
         {
           "title": "A live line during your appointment.",
           "body": "If you’re asked something you don’t understand, call us from the counter. You do the talking — we tell you what they want."
+        },
+        {
+          "title": "Bank and transit setup guides.",
+          "body": "Step-by-step guides to opening a bank account that actually receives money from home, including an honest check of whether you need a Spanish one at all, and to getting onto the city’s transit system. The T-jove pass itself is an add-on."
         }
       ]
-    },
-    "fixer": {
-      "name": "Fixer",
-      "shortName": "Fixer",
-      "tagline": "Alles oben Genannte — und wir kommen mit.",
-      "bestFor": "Du hängst beim Padrón fest oder willst einen Mietvertrag erst lesen lassen, bevor du unterschreibst.",
-      "note": "By application. Two students per intake, because this is the tier we physically attend.",
-      "includes": "Includes the same <strong>~€75 of cards and travel</strong> as The Soft Landing.",
-      "features": [
-        {
-          "title": "We come to the town hall with you and translate.",
-          "body": "The padrón appointment, in person, with someone who speaks Catalan and Spanish standing next to you."
-        },
-        {
-          "title": "The padrón unlock.",
-          "body": "The step that quietly blocks everything else, and the one most people are stuck on:",
-          "details": [
-            "In a hostel, an Airbnb or an unregistered sublet you currently can’t register — there are routes, and nobody has told you about them",
-            "Landlord refusing? A refusal doesn’t make registration impossible. We ask the council about its alternative verification routes on your behalf",
-            "Wrong municipality? We identify it and handle that council instead"
-          ]
-        },
-        {
-          "title": "Your health card.",
-          "body": "Once the padrón is through, registration at your local primary care centre and your Catalan health card — plus an English-speaking GP identified within walking distance of where you actually live."
-        },
-        {
-          "title": "Same-day contract review, before you sign.",
-          "body": "If you’re still viewing flats and someone is pressuring you to commit on the spot, send us the contract and we’ll read it that day. Deposit checked against the statutory cap, cancellation terms, bills, and the address-registration clause that decides whether your padrón is possible at all."
-        },
-        {
-          "title": "Ownership verified at the registry.",
-          "body": "We pull the <em>Nota Simple</em> and confirm the person renting to you has the right to. Holding keys is not proof of ownership."
-        },
-        {
-          "title": "Move-in condition report.",
-          "body": "On handover day we photograph every existing defect, meter readings and appliance states into a timestamped, signed PDF, sent to the landlord the same day. Your deposit is one to two months’ rent. This is how you get it back."
-        },
-        {
-          "title": "90-day file tracking, through to collection",
-          "body": "— including the collection appointment, which some offices require separately, and which you should never book flights around until it’s confirmed."
-        },
-        {
-          "title": "A completion report for whoever’s paying.",
-          "body": "A dated PDF: what was filed, what’s registered, what’s still pending, your TIE collection date, and the numbers to call in an emergency."
-        }
-      ],
-      "never": "<strong>What we will never do is register you at an address you don’t live at.</strong> <warn>That’s a fraud problem attached to your immigration file, and it is not worth it to anyone.</warn>"
     }
   },
   "card": {
     "mostChosen": "Am häufigsten gewählt",
-    "waitlist": "Waitlist — two slots",
     "routeEu": "EU / EWR / Schweiz",
     "routeNonEu": "Nicht-EU",
     "bothRoutes": "Both routes",
     "everythingIn": "Alles aus {name}, plus:",
     "bestFor": "Passt, wenn:",
     "select": "{name} wählen",
-    "applyWaitlist": "Apply for the waitlist"
+    "exIva": "zzgl. IVA"
   },
   "page": {
     "metaTitle": "Pakete und Preise: TIE, Padrón und Termine zum Festpreis",
-    "metaDescription": "Drei Pakete zum Festpreis für internationale Studierende in Barcelona: Ready File, Soft Landing und Fixer. Ein Preis für den EU-Weg, einer für den Nicht-EU-Weg, beim Bezahlen kommt nichts obendrauf, und die Hälfte zurück, wenn in sechs Wochen kein Termin frei wird.",
+    "metaDescription": "Zwei Pakete zum Festpreis für internationale Studierende in Barcelona: Ready File und Soft Landing. Ein Preis für den EU-Weg, einer für den Nicht-EU-Weg, zuzüglich IVA, mit optionalen Extras, und die Hälfte des Paketpreises zurück, wenn in sechs Wochen kein Termin frei wird.",
     "eyebrow": "Pakete & Preise",
     "title": "Feste Preise für ein Verfahren ohne feste Fristen.",
-    "intro": "Jedes Paket hat einen Festpreis, und der angezeigte Preis ist der Preis, den du zahlst.",
-    "feesNote": "Nichts wird nach Stunden abgerechnet, und kein Paket enthält staatliche Gebühren.",
+    "intro": "Jedes Paket hat einen Festpreis. Die Preise verstehen sich zuzüglich IVA: Beim Bezahlen kommen 21 % IVA hinzu, und du siehst den Gesamtbetrag, bevor du zahlst.",
+    "feesNote": "Nichts wird nach Stunden abgerechnet, die Preise verstehen sich zuzüglich IVA, und kein Paket enthält staatliche Gebühren.",
     "routesEyebrow": "Warum zwei Preise",
     "routesTitle": "Der EU-Weg ist weniger Arbeit, also kostet er weniger.",
     "routesBody": "Keine Fingerabdrücke, keine Gebühr von 16,08 €, und wenn die Voraussetzungen erfüllt sind, wird die Bescheinigung in der Regel direkt beim Termin ausgestellt. Nicht-EU-Studierende brauchen den EX-17, den biometrischen Termin und in manchen Behörden einen separaten Weg zur Abholung. Welcher Weg für dich gilt, klären wir bei der Ersteinschätzung — bevor du etwas bezahlst.",
@@ -164,11 +97,11 @@
       },
       {
         "item": "Wir können keinen Termin herbeizaubern",
-        "note": "Wir suchen bis zu sechs Wochen ab deinem Absenden im offiziellen Portal. September und Oktober sind das Schlimmste: die Behördensysteme sind überlastet und Plätze sind binnen Minuten weg. Öffnet sich in diesem Zeitraum keiner, bekommst du 50% zurück und behältst die gesamte Ready File — Formulare, Kopien, 790, Prüfung — damit du bereit bist, sobald einer frei wird. Verstreicht dir vorher eine Frist, bekommst du eine datierte Bescheinigung über jeden unternommenen Versuch; spanische Behörden akzeptieren das üblicherweise als Rechtfertigung für eine verspätete Anmeldung, verpflichtet ist dazu aber kein Sachbearbeiter. Diesen Schritt kann niemand legal abkürzen, und jeder Dienst, der dir etwas anderes erzählt, verkauft dir etwas, das er nicht hat."
+        "note": "Bei The Soft Landing suchen wir bis zu sechs Wochen ab deinem Absenden im offiziellen Portal. September und Oktober sind das Schlimmste: die Behördensysteme sind überlastet und Plätze sind binnen Minuten weg. Öffnet sich in diesem Zeitraum keiner, bekommst du 50% des Paketpreises zurück und behältst die gesamte Ready File — Formulare, 790, Prüfung —, damit du an dem Tag bereit bist, an dem einer frei wird. Verstreicht vorher eine Frist von dir, bekommst du eine datierte Bescheinigung über jeden Versuch; spanische Ämter akzeptieren sie üblicherweise als Begründung für eine verspätete Anmeldung, verpflichtet ist dazu aber kein Beamter. Mit The Ready File buchst du die Termine selbst, mit unserer Anleitung. Diesen Schritt kann niemand legal abkürzen, und jeder Dienst, der dir etwas anderes erzählt, verkauft dir etwas, das er nicht hat."
       },
       {
         "item": "Zum biometrischen Termin gehen wir nicht für dich",
-        "note": "Er verlangt dich, persönlich, mit den Originalen. Wir bereiten vor, buchen, briefen dich und bleiben telefonisch erreichbar. Das Erscheinen ist deines, in deinem eigenen Namen."
+        "note": "Er verlangt dich, persönlich, mit den Originalen. Wir bereiten dich vor und erklären dir alles, und bei The Soft Landing buchen wir den Termin außerdem und bleiben telefonisch erreichbar. Das Erscheinen ist deines, in deinem eigenen Namen."
       },
       {
         "item": "Deine 90 Tage beginnen beim ersten Entwerten",
@@ -176,7 +109,7 @@
       },
       {
         "item": "T-jove ist eine Altersregel, keine Studierendenregel",
-        "note": "Nur unter 30. Weder Studierendenausweis noch Carnet Jove sind dafür nötig. Ab 30 laden wir eine T-usual für die Zonen, die dein Weg wirklich braucht, und die Differenz bekommst du zurück."
+        "note": "Nur unter 30. Weder Studierendenausweis noch Carnet Jove sind dafür nötig. Ab 30 hakst du dieses Extra nicht an: Richtig ist eine T-usual für die Zonen, die dein Weg braucht, und wir sagen dir, welche."
       }
     ],
     "exclusionsEyebrow": "Volle Transparenz",
@@ -201,6 +134,33 @@
     ],
     "guaranteeEyebrow": "Wenn der Termin nie kommt",
     "guaranteeTitle": "Die Hälfte zurück, und die Akte bleibt deine.",
-    "guaranteeBody": "Wir suchen bis zu sechs Wochen ab deiner Übermittlung im offiziellen Portal. Wird in diesem Fenster keiner frei, bekommst du 50% zurück und behältst die komplette Ready File (Formulare, Kopien, den Modelo 790, die Prüfung), damit du an dem Tag bereit bist, an dem ein Termin auftaucht. Dazu bekommst du eine datierte Bescheinigung über jeden Versuch. Diesen Schritt kann niemand legal abkürzen, und jeder Dienst, der etwas anderes behauptet, verkauft dir etwas, das er nicht hat."
+    "guaranteeBody": "Bei The Soft Landing suchen wir bis zu sechs Wochen ab deiner Übermittlung im offiziellen Portal. Wird in diesem Fenster keiner frei, bekommst du 50% des Paketpreises zurück und behältst die komplette Ready File (Formulare, den Modelo 790, die Prüfung), damit du an dem Tag bereit bist, an dem ein Termin auftaucht. Dazu bekommst du eine datierte Bescheinigung über jeden Versuch. Diesen Schritt kann niemand legal abkürzen, und jeder Dienst, der etwas anderes behauptet, verkauft dir etwas, das er nicht hat."
+  },
+  "addons": {
+    "eyebrow": "Optionale Extras",
+    "title": "Füge beim Bezahlen hinzu, was du brauchst.",
+    "intro": "Hake sie beim Bezahlen an, zusätzlich zu einem der beiden Pakete. Alles wird digital geliefert, daher richten wir es vor deiner Ankunft aus der Ferne ein. Die Preise verstehen sich zuzüglich IVA.",
+    "items": {
+      "t-jove": {
+        "name": "T-jove-Nahverkehrsticket (90 Tage)",
+        "what": "Wir legen dein T-mobilitat-Konto an, prüfen deinen Ausweis und laden ein unbegrenztes 90-Tage-Jugendticket.",
+        "delivery": "Virtuelle Karte in deiner mobilen T-mobilitat-Wallet oder per Post an deine Wohnung."
+      },
+      "carnet-jove": {
+        "name": "Aktivierung der Carnet Jove",
+        "what": "Die offizielle katalanische Jugendkarte: Antrag, Gebührenzahlung und digitale Aktivierung für Ermäßigungen in der Stadt und auf Reisen.",
+        "delivery": "Digitale Kartenzugangsdaten per E-Mail oder in deine mobile Wallet."
+      },
+      "isic": {
+        "name": "ISIC, digitaler Studierendenausweis",
+        "what": "Der Internationale Studierendenausweis, ausgestellt auf Grundlage deines Zulassungs- oder Immatrikulationsschreibens.",
+        "delivery": "Digitaler Code für die ISIC-App und Verifizierungslink."
+      },
+      "esim": {
+        "name": "Spanische eSIM einrichten (+34-Nummer)",
+        "what": "Eine spanische Telefonnummer mit 50–100 GB Datenvolumen, einsatzbereit vor deiner Ankunft.",
+        "delivery": "Sofort verfügbarer QR-Code per E-Mail oder WhatsApp."
+      }
+    }
   }
 }

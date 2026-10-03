@@ -128,12 +128,11 @@ export default async function PortalPage({
           {!paid && record.paymentStatus === "pending" && (
             <section className="border border-paper-edge border-t-3 border-t-accent bg-white p-6 sm:p-7">
               <h2 className="text-display-md text-ink">{t("paymentTitle")}</h2>
-              <p className="prose-body mt-3">
-                {t("paymentBody")}
-                {price && <> {t("paymentTotal", { total: formatEur(price) })}</>}
-              </p>
+              <p className="prose-body mt-3">{t("paymentBody")}</p>
               <div className="mt-5">
-                <PayButton label={price ? t("pay", { total: formatEur(price) }) : t("payNow")} />
+                {tier && price !== null && (
+                  <PayButton packageName={tp(`tiers.${tier.id}.name`)} packageCents={price} />
+                )}
               </div>
             </section>
           )}

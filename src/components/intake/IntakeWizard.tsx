@@ -14,6 +14,7 @@ import { routeForNationality } from "@/lib/forms/field-map";
 import { DocumentUpload } from "./DocumentUpload";
 import { PadronWizard } from "@/components/portal/PadronWizard";
 import { EnrolmentWizard } from "@/components/portal/EnrolmentWizard";
+import { PayButton } from "@/components/portal/PayButton";
 import { Modelo790Notice } from "@/components/Modelo790Notice";
 import { Link } from "@/i18n/navigation";
 import { TickMark } from "@/components/icons";
@@ -240,38 +241,6 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
     }
   }
 
-  async function startCheckout(): Promise<void> {
-    if (!caseRef) return;
-    setBusy(true);
-    setSubmitError(null);
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        // No body: the server takes the case from the signed session cookie
-        // it set when the intake was submitted.
-      });
-      const json = (await res.json()) as { url?: string };
-      if (json.url) {
-        window.location.href = json.url;
-        return;
-      }
-      setSubmitError(
-        t(
-          res.status === 401
-            ? "wizard.sessionExpired"
-            : res.status === 409
-              ? "wizard.alreadyPaid"
-              : "wizard.checkoutFailed",
-        ),
-      );
-    } catch {
-      setSubmitError(t("wizard.checkoutNetwork"));
-    } finally {
-      setBusy(false);
-    }
-  }
-
   function next() {
     if (!validateStep(step)) {
       setAttempt((n) => n + 1);
@@ -446,19 +415,10 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                 {/* Reachable only after the case is created, so the nationality —
                     and therefore the route and its price — is always known here. */}
                 {price !== null && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => void startCheckout()}
-                      disabled={busy}
-                      className="btn-primary mt-8 w-full"
-                    >
-                      {busy
-                        ? t("wizard.openingCheckout")
-                        : t("wizard.pay", { total: formatEur(price) })}
-                    </button>
+                  <div className="mt-8">
+                    <PayButton packageName={tprice(`tiers.${tier.id}.name`)} packageCents={price} />
                     <p className="mt-4 text-center font-sans text-xs text-ink-soft">{t("wizard.stripeNote")}</p>
-                  </>
+                  </div>
                 )}
               </div>
             )}
@@ -514,6 +474,7 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                 <dt className="text-ink">{t("summary.total")}</dt>
                 <dd className="text-ink">{formatEur(price)}</dd>
               </div>
+              <p className="pt-1 text-xs leading-relaxed text-ink-soft">{t("summary.ivaNote")}</p>
             </dl>
           ) : (
             <div className="mt-5 border-y border-paper-line py-4">
@@ -523,7 +484,9 @@ export function IntakeWizard({ initialTier }: { initialTier: string }) {
                     <dt className="text-ink-muted">
                       {tprice(r === "eu" ? "card.routeEu" : "card.routeNonEu")}
                     </dt>
-                    <dd className="text-ink">{formatEur(tierPriceCents(tier, r))}</dd>
+                    <dd className="text-ink">
+                      {formatEur(tierPriceCents(tier, r))} <span className="text-xs text-ink-soft">{tprice("card.exIva")}</span>
+                    </dd>
                   </div>
                 ))}
               </dl>
