@@ -55,6 +55,8 @@ export interface CaseRecord {
   ref: string;
   locale: Locale;
   tierId: string;
+  /** Optional extras bought at checkout; ids from ADDON_IDS. */
+  addonIds: string[];
   formId: FormId;
   stage: Stage;
   paymentStatus: PaymentStatus;
@@ -103,6 +105,7 @@ function toRecord(row: CaseRow, docs: DocumentRow[]): CaseRecord {
     ref: row.ref,
     locale: row.locale,
     tierId: row.tierId,
+    addonIds: row.addonIds,
     formId: row.formId,
     stage: row.stage,
     paymentStatus: row.paymentStatus,
@@ -181,6 +184,7 @@ export async function getCase(id: string): Promise<CaseRecord | null> {
 
 /** Fields callers may change. Intake and documents have their own paths. */
 export interface CasePatch {
+  addonIds?: string[];
   paymentStatus?: PaymentStatus;
   stripeSessionId?: string | null;
   stripePaymentIntentId?: string | null;

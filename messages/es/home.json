@@ -4,18 +4,18 @@
   "hero": {
     "eyebrow": "Barcelona · Estudiantes internacionales · Vías UE y no UE",
     "title": "Tu TIE, tu Padrón, tus citas: preparados, reservados y bien a la primera.",
-    "body": "Los estudiantes de fuera de la UE suelen tener un mes desde la entrada para solicitar el TIE, y la cita es la parte que nadie puede acelerar. Leemos tu autorización, montamos el expediente y reservamos la cita a tu nombre, para que cuando salga una no haya nada en los papeles que te mande de vuelta a casa. Mándanos tu fecha de entrada y hoy mismo te decimos cuántos días te quedan.",
+    "body": "Los estudiantes de fuera de la UE suelen tener un mes desde la entrada para solicitar el TIE, y la cita es la parte que nadie puede acelerar. Leemos tu autorización, montamos el expediente y —con The Soft Landing— reservamos la cita a tu nombre, para que cuando salga una no haya nada en los papeles que te mande de vuelta a casa. Mándanos tu fecha de entrada y hoy mismo te decimos cuántos días te quedan.",
     "primaryCta": "Consultar mi plazo gratis",
     "secondaryCta": "Ver paquetes y precios",
-    "note": "La consulta es gratuita, el mismo día y sin tarjeta. A partir de ahí los precios son cerrados: el precio que ves es el que pagas."
+    "note": "La consulta es gratuita, el mismo día y sin tarjeta. A partir de ahí los precios son cerrados: el precio que ves es el precio sin IVA, y ves el total antes de pagar."
   },
   "proof": {
     "heading": "Lo que puedes exigirnos",
     "items": [
-      "Un precio cerrado, dicho antes de que pagues. No cobramos nada por horas.",
+      "Un precio cerrado, dicho antes de que pagues y mostrado sin IVA. No cobramos nada por horas.",
       "Cada formulario se presenta a tu nombre. Nunca firmamos como representante tuyo.",
       "Ciframos cada escaneo de tu pasaporte con su propia clave y lo borramos 30 días después de cerrar tu expediente.",
-      "¿Sin cita en seis semanas? Te devolvemos la mitad y el expediente sigue siendo tuyo."
+      "En The Soft Landing: ¿sin cita en seis semanas? Te devolvemos la mitad y el expediente sigue siendo tuyo."
     ]
   },
   "trust": {
@@ -45,7 +45,7 @@
       {
         "problem": "El Padrón bloquea en silencio todo lo demás",
         "detail": "En un hostal, un Airbnb o un subarriendo no registrado, ahora mismo no puedes empadronarte. Un casero que se niega, o un piso en Sant Cugat cuando dabas por hecho Barcelona, frena la tarjeta sanitaria y la TIE que vienen detrás.",
-        "solution": "En el Fixer vamos contigo al ayuntamiento y traducimos, preguntamos al consistorio por sus vías alternativas de verificación y gestionamos el municipio correcto. Lo que nunca hacemos es empadronarte en una dirección en la que no vives."
+        "solution": "Preparamos el formulario del propietario para el municipio correcto, te decimos qué más pide el ayuntamiento y qué vías de empadronamiento existen para tu tipo de vivienda. Lo que nunca hacemos es empadronarte en una dirección en la que no vives."
       }
     ]
   },
@@ -63,18 +63,18 @@
       },
       {
         "title": "Montaje del expediente",
-        "body": "Generamos el impreso correcto —EX-17 en la vía de fuera de la UE, EX-18 en la de la UE—, configuramos el Modelo 790 y montamos el Ready File. Mensajería a tu dirección o recogida, más un PDF para imprimir en casa en cuanto esté montado."
+        "body": "Generamos el impreso correcto —EX-17 en la vía de fuera de la UE, EX-18 en la de la UE—, configuramos el Modelo 790 y montamos el Ready File. Recibes el expediente entero en un PDF para imprimir en casa en cuanto está montado."
       },
       {
         "title": "Citas y seguimiento",
-        "body": "Buscamos y reservamos las citas de Padrón y TIE/CUE, te explicamos qué te van a preguntar y seguimos localizables mientras estás en el mostrador. Seguimos el expediente 90 días, hasta la recogida."
+        "body": "Con The Soft Landing buscamos y reservamos las citas de Padrón y TIE/CUE, te explicamos qué te van a preguntar y seguimos localizables mientras estás en el mostrador. Con The Ready File las reservas tú, con nuestra guía paso a paso."
       }
     ]
   },
   "pricing": {
     "eyebrow": "Precios transparentes",
-    "title": "Tres paquetes. Dos precios cada uno, porque hay dos vías.",
-    "body": "La vía UE es menos trabajo y cuesta menos: sin huellas, sin la tasa de 16,08 €. Confirmamos cuál te corresponde en el triaje, antes de que pagues nada. Las tasas públicas las pagas tú, directamente, y nunca están incluidas en nuestra tarifa.",
+    "title": "Dos paquetes. Dos precios cada uno, porque hay dos vías.",
+    "body": "La vía UE es menos trabajo y cuesta menos: sin huellas, sin la tasa de 16,08 €. Confirmamos cuál te corresponde en el triaje, antes de que pagues nada. Los precios no incluyen IVA, que se añade al pagar, y ahí puedes marcar complementos opcionales: un abono T-jove, el Carnet Jove, ISIC o una eSIM. Las tasas públicas las pagas tú, directamente, y nunca están incluidas en nuestra tarifa.",
     "cta": "Ver la comparativa completa"
   },
   "faq": {
@@ -87,11 +87,11 @@
       },
       {
         "q": "¿Cuánto cuesta y cuándo pago?",
-        "a": "El precio de la tarjeta es el precio entero. No añadimos nada al pagar, no cobramos por horas y no escondemos ninguna tasa pública dentro. Pagas cuando el triaje ha confirmado qué vía te corresponde. Antes de eso no nos debes nada, y si no podemos ayudarte lo decimos en lugar de cobrarte."
+        "a": "El precio de la tarjeta es la tarifa entera, sin IVA. Al pagar añadimos el 21 % de IVA y los complementos opcionales que marques, y te mostramos el total antes de pagar. No cobramos por horas y no escondemos ninguna tasa pública dentro. Pagas cuando el triaje ha confirmado qué vía te corresponde. Antes de eso no nos debes nada, y si no podemos ayudarte lo decimos en lugar de cobrarte."
       },
       {
         "q": "¿Y si no sale ninguna cita a tiempo?",
-        "a": "Buscamos en el portal oficial hasta seis semanas desde tu envío. Si en esa ventana no sale ninguna, te devolvemos la mitad del precio y te quedas con el Ready File entero (formularios, copias, el Modelo 790, la auditoría), así estás listo el día que aparezca una. También recibes un certificado fechado de cada intento que hicimos. Las oficinas españolas suelen aceptarlo como justificación para registrarse fuera de plazo, aunque ningún funcionario está obligado a hacerlo."
+        "a": "En The Soft Landing buscamos en el portal oficial hasta seis semanas desde tu envío. Si en esa ventana no sale ninguna, te devolvemos la mitad del precio y te quedas con el Ready File entero (formularios, el Modelo 790, la auditoría), así estás listo el día que aparezca una. También recibes un certificado fechado de cada intento que hicimos. Las oficinas españolas suelen aceptarlo como justificación para registrarse fuera de plazo, aunque ningún funcionario está obligado a hacerlo."
       },
       {
         "q": "Creo que ya se me ha pasado el plazo. ¿Merece la pena preguntar?",
@@ -99,11 +99,11 @@
       },
       {
         "q": "¿Tengo que ir yo a la cita?",
-        "a": "Sí. Las citas biométricas exigen que comparezcas en persona con tus documentos originales. Nosotros preparamos el expediente, conseguimos el hueco y te explicamos todo, y puedes llamarnos desde el mostrador si te preguntan algo que no entiendes. La comparecencia es tuya, a tu propio nombre."
+        "a": "Sí. Las citas biométricas exigen que comparezcas en persona con tus documentos originales. Nosotros preparamos el expediente; con The Soft Landing además conseguimos el hueco y te explicamos todo, y puedes llamarnos desde el mostrador si te preguntan algo que no entiendes. La comparecencia es tuya, a tu propio nombre."
       },
       {
         "q": "Pagan mis padres. ¿Pueden participar?",
-        "a": "Por supuesto. Pueden pagar a su propio nombre y recibir la factura, y en el Fixer elaboramos un informe final fechado: qué se presentó, qué está registrado, qué queda pendiente, tu fecha de recogida y los teléfonos para una urgencia. Lo que no haremos es rellenar la sección de representante legal de tu impreso: esa casilla queda en blanco, porque ni nosotros ni ellos somos tu representante."
+        "a": "Por supuesto. Pueden pagar a su propio nombre y recibir la factura. Lo que no haremos es rellenar la sección de representante legal de tu impreso: esa casilla queda en blanco, porque ni nosotros ni ellos somos tu representante."
       },
       {
         "q": "¿Qué pasa después con los escaneos de mi pasaporte?",

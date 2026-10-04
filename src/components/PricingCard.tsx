@@ -30,7 +30,7 @@ export const PRICING_TAGS = {
 };
 
 /**
- * A package, priced on both routes.
+ * A package, priced on both routes (ex-IVA).
  *
  * Both prices are always shown, because the public page cannot know the
  * reader's nationality and guessing would quote half of them the wrong figure.
@@ -43,7 +43,7 @@ export const PRICING_TAGS = {
  *
  * SHAPE: this is a column in a ruled spread, not a floating card. The box,
  * the shadow and the radius were carrying no information — the prices are what
- * distinguish these three, and columns let the price rows line up across the
+ * distinguish these, and columns let the price rows line up across the
  * spread so they can actually be read against each other. The chosen package
  * is marked by ground and weight instead of by elevation.
  */
@@ -57,7 +57,7 @@ export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: b
     eu: t("card.routeEu"),
     "non-eu": t("card.routeNonEu"),
   };
-  const badge = tier.waitlist ? t("card.waitlist") : tier.featured ? t("card.mostChosen") : null;
+  const badge = tier.featured ? t("card.mostChosen") : null;
 
   return (
     <div
@@ -73,14 +73,7 @@ export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: b
       <div className="flex items-baseline justify-between gap-4">
         <p className="font-mono text-sm font-medium text-accent">{number}</p>
         {badge && (
-          <p
-            className={[
-              "font-sans text-[0.625rem] font-bold uppercase tracking-[0.16em]",
-              tier.waitlist ? "text-ink-soft" : "text-accent-deep",
-            ].join(" ")}
-          >
-            {badge}
-          </p>
+          <p className="font-sans text-[0.625rem] font-bold uppercase tracking-[0.16em] text-accent-deep">{badge}</p>
         )}
       </div>
 
@@ -102,8 +95,12 @@ export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: b
             <dt className="font-sans text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-ink-soft">
               {route ? routeLabel[route] : t("card.bothRoutes")}
             </dt>
-            <dd className="font-sans text-2xl font-extrabold tabular-nums tracking-tight text-ink">
-              {formatEur(tierPriceCents(tier, route ?? "eu"))}
+            <dd className="text-right">
+              <span className="font-sans text-2xl font-extrabold tabular-nums tracking-tight text-ink">
+                {formatEur(tierPriceCents(tier, route ?? "eu"))}
+              </span>
+              {/* Every price on the site is ex-IVA; IVA is added at checkout. */}
+              <span className="ml-1.5 font-sans text-[0.6875rem] font-semibold text-ink-soft">{t("card.exIva")}</span>
             </dd>
           </div>
         ))}
@@ -151,19 +148,12 @@ export function PricingCard({ tier, compact = false }: { tier: Tier; compact?: b
       )}
 
       <div className="mt-auto pt-8">
-        {tier.waitlist ? (
-          // By application: the waitlist goes through triage, never checkout.
-          <Link href={{ pathname: "/triage", query: { apply: tier.id } }} className="btn-secondary w-full">
-            {t("card.applyWaitlist")}
-          </Link>
-        ) : (
-          <Link
-            href={{ pathname: "/intake", query: { tier: tier.id } }}
-            className={tier.featured ? "btn-primary w-full" : "btn-secondary w-full"}
-          >
-            {t("card.select", { name: t(key("shortName")) })}
-          </Link>
-        )}
+        <Link
+          href={{ pathname: "/intake", query: { tier: tier.id } }}
+          className={tier.featured ? "btn-primary w-full" : "btn-secondary w-full"}
+        >
+          {t("card.select", { name: t(key("shortName")) })}
+        </Link>
       </div>
     </div>
   );

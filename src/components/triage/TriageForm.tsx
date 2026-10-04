@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { countryOptions } from "@/lib/countries";
 import { routeForNationality } from "@/lib/forms/field-map";
@@ -44,18 +43,13 @@ export function TriageForm() {
   const t = useTranslations("triage");
   const tv = useTranslations("validation");
   const locale = useLocale();
-  // The Fixer is sold by application: its "Apply for the waitlist" button
-  // lands here with ?apply=fixer, and the enquiry says so in the student's
-  // own words box, where staff read it. They can edit or delete it.
-  const applying = useSearchParams().get("apply") === "fixer";
-
   const [values, setValues] = useState({
     fullName: "",
     email: "",
     nationality: "",
     arrivedOn: "",
     housing: "",
-    notes: applying ? t("fixerApplication") : "",
+    notes: "",
   });
   const [files, setFiles] = useState<Record<string, File | null>>({});
   const [consent, setConsent] = useState(false);
@@ -155,7 +149,7 @@ export function TriageForm() {
 
   if (ref) {
     return (
-      <div className="border border-paper-edge border-t-3 border-t-ink bg-white p-8 sm:p-10">
+      <div className="enter-panel border border-paper-edge border-t-3 border-t-ink bg-white p-8 sm:p-10">
         <h2 className="text-display-md text-ink">{t("done.title")}</h2>
         <p className="prose-body mt-4">{t("done.body", { ref })}</p>
         <p className="mt-5 border-t border-paper-line pt-5 font-sans text-xs leading-relaxed text-ink-soft">
@@ -333,7 +327,7 @@ export function TriageForm() {
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} className="field-error">
+    <p id={id} className="field-error enter-alert">
       {message}
     </p>
   );

@@ -1,5 +1,15 @@
 import Stripe from "stripe";
-import { getTier, tierPriceCents, type ServiceRoute, type Tier } from "@/lib/pricing";
+import {
+  getTier,
+  ivaCents,
+  resolveAddons,
+  tierPriceCents,
+  totalCents,
+  IVA_RATE_BP,
+  type Addon,
+  type ServiceRoute,
+  type Tier,
+} from "@/lib/pricing";
 import type { BillingDetails } from "./invoices";
 import type { Locale } from "@/lib/db/schema";
 import { localizedPath } from "@/i18n/routing";
@@ -22,25 +32,33 @@ export function stripe(): Stripe {
 }
 
 /**
- * One line item at the package's published price. The figure on the pricing
- * page is the figure charged: nothing is added on top at checkout.
+ * The package, each add-on, and IVA as its own line. The prices on the site are
+ * ex-IVA, so the amount Stripe collects is base + 21 %; showing IVA as a line
+ * of its own means the payer sees the tax before they pay it, and the factura
+ * we issue from the total splits back into the same base and IVA.
  */
 export function buildLineItems(
   tier: Tier,
   route: ServiceRoute,
+  addons: readonly Addon[] = [],
 ): Stripe.Checkout.SessionCreateParams.LineItem[] {
-  return [
-    {
-      quantity: 1,
-      price_data: {
-        currency: "eur",
-        unit_amount: tierPriceCents(tier, route),
-        product_data: {
-          name: tier.name,
-          description: tier.tagline,
-        },
-      },
+  const line = (
+    name: string,
+    unitAmount: number,
+    description?: string,
+  ): Stripe.Checkout.SessionCreateParams.LineItem => ({
+    quantity: 1,
+    price_data: {
+      currency: "eur",
+      unit_amount: unitAmount,
+      product_data: { name, ...(description ? { description } : {}) },
     },
+  });
+  const { baseCents } = totalCents(tier, route, addons);
+  return [
+    line(tier.name, tierPriceCents(tier, route), tier.tagline),
+    ...addons.map((a) => line(a.name, a.priceCents)),
+    line(`IVA (${IVA_RATE_BP / 100} %)`, ivaCents(baseCents)),
   ];
 }
 
@@ -51,6 +69,8 @@ export interface CheckoutParams {
    * never sent by the browser: the route decides the price.
    */
   route: ServiceRoute;
+  /** Optional extras, already validated against the server table. */
+  addons?: readonly Addon[];
   caseId: string;
   customerEmail: string;
   origin: string;
@@ -76,17 +96,24 @@ export async function createCheckoutSession(
 ): Promise<Stripe.Checkout.Session> {
   const tier = getTier(params.tierId);
   if (!tier) throw new Error(`Unknown tier: ${params.tierId}`);
+  const addons = params.addons ?? [];
 
   return stripe().checkout.sessions.create({
     mode: "payment",
     payment_method_types: ["card"],
-    line_items: buildLineItems(tier, params.route),
+    line_items: buildLineItems(tier, params.route, addons),
     customer_email: params.customerEmail,
     // The case id is the join key between Stripe and our records. It is an
     // opaque token, never an email or a name — Stripe metadata is visible to
     // everyone with dashboard access and should carry no personal data.
     client_reference_id: params.caseId,
-    metadata: { caseId: params.caseId, tierId: tier.id, route: params.route },
+    metadata: {
+      caseId: params.caseId,
+      tierId: tier.id,
+      route: params.route,
+      // Ids only, in catalogue order. The webhook re-prices from these.
+      ...(addons.length ? { addons: addons.map((a) => a.id).join(",") } : {}),
+    },
     locale: STRIPE_LOCALES[params.locale],
     success_url: `${params.origin}${localizedPath(params.locale, "/intake/complete")}?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${params.origin}${localizedPath(params.locale, "/portal")}?checkout=cancelled`,
@@ -99,6 +126,12 @@ export async function createCheckoutSession(
     // Spanish correlative numbering; a Stripe invoice as well would mean two
     // invoices, differently numbered, for one sale.
   });
+}
+
+/** The add-ons a Checkout Session was created with, or null if its metadata was altered. */
+export function addonsFromSession(session: Stripe.Checkout.Session): Addon[] | null {
+  const raw = session.metadata?.addons;
+  return resolveAddons(raw ? raw.split(",") : []);
 }
 
 /**

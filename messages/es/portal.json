@@ -38,9 +38,6 @@
     "checkoutCancelled": "El pago se ha cancelado y no se ha cobrado nada. Puede pagar cuando esté listo.",
     "paymentTitle": "Pago pendiente",
     "paymentBody": "Comenzamos a trabajar tan pronto como se confirme su pago.",
-    "paymentTotal": "Total {total}.",
-    "pay": "Pagar {total}",
-    "payNow": "Pagar ahora",
     "passport": "1. Pasaporte",
     "enrolment": "2. Matrícula universitaria",
     "padron": "3. Justificante de domicilio para el Padrón",
@@ -67,7 +64,14 @@
   "pay": {
     "opening": "Iniciando el proceso de pago seguro…",
     "failed": "No se ha podido abrir la página de pago. Inténtelo de nuevo.",
-    "network": "Error de red. Inténtelo de nuevo."
+    "network": "Error de red. Inténtelo de nuevo.",
+    "addonsTitle": "Complementos opcionales",
+    "addonsHint": "Marque los que desee. Cada uno se entrega en digital y se añade a este pago.",
+    "iva": "IVA ({rate} %)",
+    "total": "Total a pagar",
+    "button": "Pagar {total}",
+    "expired": "Su sesión ha caducado. Por favor, vuelva a iniciar sesión.",
+    "paid": "Este expediente ya está pagado."
   },
   "padron": {
     "question": "¿Dónde reside?",

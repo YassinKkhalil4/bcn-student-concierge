@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { TIERS } from "@/lib/pricing";
+import { ADDONS, TIERS, formatEur } from "@/lib/pricing";
 import { PricingCard } from "@/components/PricingCard";
 import { PageHeader } from "@/components/PageHeader";
 import { Modelo790Notice } from "@/components/Modelo790Notice";
@@ -68,6 +68,8 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
 function Pricing() {
   const t = useTranslations("pricing.page");
   const tt = useTranslations("triage");
+  const ta = useTranslations("pricing.addons");
+  const tcard = useTranslations("pricing.card");
   const exclusions = t.raw("exclusions") as { item: string; note: string }[];
   const honest = t.raw("honest") as { item: string; note: string }[];
   return (
@@ -92,12 +94,47 @@ function Pricing() {
           across all three and can be read against each other. */}
       <section className="section-band">
         <div className="container-x">
-          <div className="grid border-t-2 border-ink lg:grid-cols-3">
+          <div className="grid border-t-2 border-ink lg:grid-cols-2">
             {TIERS.map((tier) => (
               <PricingCard key={tier.id} tier={tier} />
             ))}
           </div>
           <p className="prose-body measure mt-8">{t("feesNote")}</p>
+
+          {/* The extras. A priced register, not cards: name and price on one
+              line so the four can be read against each other, then what is
+              delivered and how it arrives. Ticked at checkout. */}
+          <div className="mt-16">
+            <p className="rule-label">{ta("eyebrow")}</p>
+            <h2 className="mt-5 text-display-md text-ink">{ta("title")}</h2>
+            <p className="prose-body measure mt-4">{ta("intro")}</p>
+            <dl className="mt-8 border-t-2 border-ink">
+              {ADDONS.map((addon) => (
+                <div
+                  key={addon.id}
+                  className="grid gap-x-10 gap-y-2 border-b border-paper-line py-5 sm:grid-cols-[minmax(0,1fr)_auto]"
+                >
+                  <div className="min-w-0">
+                    <dt className="font-sans text-sm font-bold tracking-tight text-ink">
+                      {ta(`items.${addon.id}.name`)}
+                    </dt>
+                    <dd className="prose-body mt-1.5">{ta(`items.${addon.id}.what`)}</dd>
+                    <dd className="mt-1 font-sans text-xs leading-relaxed text-ink-muted">
+                      {ta(`items.${addon.id}.delivery`)}
+                    </dd>
+                  </div>
+                  <dd className="sm:text-right">
+                    <span className="font-sans text-xl font-extrabold tabular-nums tracking-tight text-ink">
+                      {formatEur(addon.priceCents)}
+                    </span>
+                    <span className="ml-1.5 font-sans text-[0.6875rem] font-semibold text-ink-soft">
+                      {tcard("exIva")}
+                    </span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
 
           {/*
             The six-week refund was a paragraph inside the "before you choose"

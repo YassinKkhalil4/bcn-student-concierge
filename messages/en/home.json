@@ -4,18 +4,18 @@
   "hero": {
     "eyebrow": "Barcelona · International students · EU and non-EU routes",
     "title": "Your TIE, your Padrón, your appointments: prepared, booked, and right the first time.",
-    "body": "Non-EU students normally have one month from entry to apply for the TIE, and the appointment is the part nobody can rush. We read your authorisation, build the file, and book the slot in your own name, so that when one opens nothing on the paperwork sends you home again. Send us your entry date and we’ll tell you today how many days are left.",
+    "body": "Non-EU students normally have one month from entry to apply for the TIE, and the appointment is the part nobody can rush. We read your authorisation, build the file, and — with The Soft Landing — book the slot in your own name, so that when one opens nothing on the paperwork sends you home again. Send us your entry date and we’ll tell you today how many days are left.",
     "primaryCta": "Check my deadline for free",
     "secondaryCta": "See packages and prices",
-    "note": "The check is free, same-day, and takes no card. After that the fees are fixed: the price you see is the price you pay."
+    "note": "The check is free, same-day, and takes no card. After that the fees are fixed: the price you see is the price before IVA, and you see the total before you pay."
   },
   "proof": {
     "heading": "What you can hold us to",
     "items": [
-      "One fixed fee, quoted before you pay. We bill nothing by the hour.",
+      "One fixed fee, quoted before you pay and shown excluding IVA. We bill nothing by the hour.",
       "Every form filed in your own name. We never sign as your representative.",
       "We encrypt each passport scan with its own key and delete it 30 days after your file closes.",
-      "No appointment in six weeks? Half your fee back, and the file is still yours."
+      "On The Soft Landing: no appointment in six weeks? Half your fee back, and the file is still yours."
     ]
   },
   "trust": {
@@ -45,7 +45,7 @@
       {
         "problem": "The padrón quietly blocks everything else",
         "detail": "In a hostel, an Airbnb or an unregistered sublet you currently can’t register. A landlord who refuses, or a flat in Sant Cugat when you assumed Barcelona, stops the health card and the TIE behind it.",
-        "solution": "On The Fixer we come to the town hall and translate, ask the council about its alternative verification routes, and handle the right municipality. What we never do is register you at an address you don’t live at."
+        "solution": "We prepare the landlord form for the right municipality, tell you what the council needs alongside it, and which registration routes exist for your kind of housing. What we never do is register you at an address you don’t live at."
       }
     ]
   },
@@ -63,18 +63,18 @@
       },
       {
         "title": "File assembly",
-        "body": "We generate the right form — EX-17 on the non-EU route, EX-18 on the EU one — configure the Modelo 790, and assemble the Ready File. Courier to you, or pickup, plus a print-at-home PDF the moment it’s assembled."
+        "body": "We generate the right form — EX-17 on the non-EU route, EX-18 on the EU one — configure the Modelo 790, and assemble the Ready File. You get the whole file as a print-at-home PDF the moment it’s assembled."
       },
       {
         "title": "Appointments, then tracking",
-        "body": "We search and book the Padrón and TIE/CUE appointments, brief you on what will be asked, and stay reachable while you’re at the counter. We track the file for 90 days, through to collection."
+        "body": "On The Soft Landing we search and book the Padrón and TIE/CUE appointments, brief you on what will be asked, and stay reachable while you’re at the counter. On The Ready File you book them yourself, with our step-by-step guide."
       }
     ]
   },
   "pricing": {
     "eyebrow": "Transparent pricing",
-    "title": "Three packages. Priced by route, because the routes are different work.",
-    "body": "The EU route is less work and costs less: no fingerprints, no €16.08 tasa. We confirm which one applies to you at triage, before you pay anything. Government fees are paid by you, directly, and are never included in our fee.",
+    "title": "Two packages. Priced by route, because the routes are different work.",
+    "body": "The EU route is less work and costs less: no fingerprints, no €16.08 tasa. We confirm which one applies to you at triage, before you pay anything. Prices exclude IVA, which is added at checkout, where you can tick optional add-ons: a T-jove pass, Carnet Jove, ISIC or an eSIM. Government fees are paid by you, directly, and are never included in our fee.",
     "cta": "See full comparison"
   },
   "faq": {
@@ -87,11 +87,11 @@
       },
       {
         "q": "What does it cost, and when do I pay?",
-        "a": "The price on the card is the whole price. We add nothing at checkout, bill nothing by the hour, and hide no government fee inside it. You pay once triage has confirmed which route applies to you. Before that you owe us nothing, and if we can’t help we say so instead of taking your money."
+        "a": "The price on the card is the whole fee, before IVA. At checkout we add 21 % IVA and any optional add-ons you tick, and show you the total before you pay. We bill nothing by the hour and hide no government fee inside it. You pay once triage has confirmed which route applies to you. Before that you owe us nothing, and if we can’t help we say so instead of taking your money."
       },
       {
         "q": "What if no appointment opens in time?",
-        "a": "We search the official portal for up to six weeks from your submission. If nothing opens in that window you get half your fee back and keep the entire Ready File (forms, copies, the Modelo 790, the audit), so you’re ready the day a slot appears. You also get a dated certificate of every attempt we made. Spanish offices commonly accept that as justification for registering late, though no official is obliged to."
+        "a": "On The Soft Landing, we search the official portal for up to six weeks from your submission. If nothing opens in that window you get half your fee back and keep the entire Ready File (forms, the Modelo 790, the audit), so you’re ready the day a slot appears. You also get a dated certificate of every attempt we made. Spanish offices commonly accept that as justification for registering late, though no official is obliged to."
       },
       {
         "q": "I think I’ve already missed the deadline. Is it worth asking?",
@@ -99,11 +99,11 @@
       },
       {
         "q": "Do I have to go to the appointment myself?",
-        "a": "Yes. Biometric appointments require you to appear personally with your original documents. We prepare the file, secure the slot and brief you thoroughly, and you can call us from the counter if you’re asked something you don’t understand. The appearance is yours, in your own name."
+        "a": "Yes. Biometric appointments require you to appear personally with your original documents. We prepare the file; on The Soft Landing we also secure the slot and brief you thoroughly, and you can call us from the counter if you’re asked something you don’t understand. The appearance is yours, in your own name."
       },
       {
         "q": "My parents are paying. Can they be involved?",
-        "a": "Of course. They can pay at checkout in their own name and receive the factura, and on The Fixer we produce a dated completion report at the end: what was filed, what’s registered, what’s still pending, your collection date, and the numbers to call in an emergency. What we won’t do is fill in the legal-representative section of your form — that box stays blank, because we are not your representative and neither are they."
+        "a": "Of course. They can pay at checkout in their own name and receive the factura. What we won’t do is fill in the legal-representative section of your form — that box stays blank, because we are not your representative and neither are they."
       },
       {
         "q": "What happens to my passport scans afterwards?",

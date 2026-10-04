@@ -157,24 +157,21 @@
     "errorSummary": "Check these answers before continuing",
     "submitFailed": "We could not save your submission. Please try again.",
     "networkRetry": "Network error. Your answers are still here — please retry.",
-    "checkoutFailed": "Could not open checkout. Please try again.",
-    "checkoutNetwork": "Network error opening checkout.",
     "sessionExpired": "Your session has expired. Please sign in again.",
     "alreadyPaid": "This file is already paid.",
     "uploadTitle": "Upload your documents",
     "uploadIntro": "Your file is open. Reference <code>{ref}</code>. Upload what you have now, then continue to payment.",
     "uploadLater": "Missing something, like a Padrón document from your landlord? That is normal. Pay now and upload it later from <link>your file</link>: sign in any time with the email you gave us.",
-    "openingCheckout": "Opening secure checkout…",
-    "pay": "Continue to payment — {total}",
     "stripeNote": "Card and Apple Pay, processed by Stripe. We never see your card details."
   },
   "summary": {
     "selected": "Selected package",
-    "total": "Total",
+    "total": "Package price, excl. IVA",
     "change": "Change package",
     "govFees": "Government fees (Modelo 790, card issuance) are paid by you directly to the Spanish authorities and are not included.",
     "route": "Citizenship",
-    "routePending": "The price depends on your nationality. It is set as soon as you choose it in the first step."
+    "routePending": "The price depends on your nationality. It is set as soon as you choose it in the first step.",
+    "ivaNote": "{rate} % IVA is added at checkout, where you can also tick optional add-ons."
   },
   "documents": {
     "slots": {

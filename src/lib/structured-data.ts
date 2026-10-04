@@ -103,6 +103,13 @@ export function serviceOffers(names: Record<string, { name: string; tagline: str
           description: copy?.tagline,
           price: (tier.priceCents[route] / 100).toFixed(2),
           priceCurrency: "EUR",
+          // The site's prices are ex-IVA; IVA is added at checkout.
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: (tier.priceCents[route] / 100).toFixed(2),
+            priceCurrency: "EUR",
+            valueAddedTaxIncluded: false,
+          },
           url,
           category: route === "eu" ? "EU/EEA/Swiss route" : "Non-EU route",
           availability: "https://schema.org/InStock",
