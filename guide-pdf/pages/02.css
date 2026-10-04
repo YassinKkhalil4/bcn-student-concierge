@@ -1,0 +1,6 @@
+body{margin:0}
+.toc{display:grid;grid-template-columns:34px minmax(0,1fr) 92px 26px;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid var(--line)}
+.toc .n{font:700 12.5px 'JetBrains Mono',monospace;color:var(--red)}
+.toc .p{font:700 12.5px 'JetBrains Mono',monospace;text-align:right}
+.toc .chip{justify-self:start}
+.ph{font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.08em;color:var(--mute);text-transform:uppercase;margin:14px 0 2px;padding-bottom:6px;border-bottom:1.5px solid var(--ink)}

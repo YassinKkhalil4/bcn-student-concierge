@@ -1,0 +1,5 @@
+body{margin:0}
+.card p{font-size:14px}
+.cr{display:grid;grid-template-columns:210px 76px minmax(0,1fr) 78px;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.blk{display:flex;gap:3px}.blk i{width:12px;height:12px;border-radius:2px;background:var(--ink)}
+table.t td.r{font-family:'JetBrains Mono',monospace;font-size:13px;white-space:nowrap}

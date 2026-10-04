@@ -1,0 +1,6 @@
+body{margin:0}
+.wr{display:grid;grid-template-columns:130px minmax(0,1fr) 70px;gap:12px;align-items:center;padding:6px 0}
+.st{display:flex;height:24px;border-radius:6px;overflow:hidden;gap:2px}
+.st span{display:flex;align-items:center;justify-content:center;color:#fff;font:700 12px 'JetBrains Mono',monospace}
+.d{background:var(--eu)}.s{background:var(--amberc)}.a{background:var(--red)}
+.card p{font-size:14px}

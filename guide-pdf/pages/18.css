@@ -1,0 +1,11 @@
+body{margin:0}
+.pk{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+.pk td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:middle;line-height:1.3}
+.pk td.c{text-align:center;width:128px;font:700 15px/1 'Archivo',sans-serif}
+.pk td.c.hi{background:#FDF3F4}
+.y{color:var(--teal)}.n{color:#B8B0A2}
+.pk tr.gh td{font:700 10.5px/1.2 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--red);padding-top:12px;border-bottom:1.5px solid var(--ink)}
+.tierh{vertical-align:bottom;padding:0 6px 10px;text-align:center}
+.tierh b{display:block;font:800 15px/1.15 'Archivo',sans-serif}
+.price{font:800 19px/1 'Archivo',sans-serif;margin-top:6px}
+.price small{display:block;font:700 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.06em;color:var(--mute);margin-top:3px}
