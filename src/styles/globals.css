@@ -423,6 +423,20 @@
       transform 200ms var(--ease-out);
   }
 
+  /*
+    The triage form giving way to the reference number that replaces it. The
+    most generous beat in the system, and the only one that earns it: a student
+    sees this once, at the end of the one form they came here to fill in. 6px
+    and 240ms against the alert's 2px and 160ms — enough to read as an arrival
+    rather than a swap, still well inside the 300ms the rest of the site keeps
+    to.
+  */
+  .enter-panel {
+    transition:
+      opacity 240ms var(--ease-out),
+      transform 240ms var(--ease-out);
+  }
+
   /* A tick landing in the progress register as a step is completed. */
   .enter-tick {
     transition:
@@ -447,6 +461,10 @@
     .enter-step[data-dir="back"] {
       opacity: 0;
       transform: translateX(-8px);
+    }
+    .enter-panel {
+      opacity: 0;
+      transform: translateY(6px);
     }
     .enter-tick {
       opacity: 0;

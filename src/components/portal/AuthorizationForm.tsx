@@ -132,7 +132,7 @@ export function AuthorizationForm() {
           ))}
         </div>
         {errors.relation && (
-          <p role="alert" className="field-error">
+          <p role="alert" className="field-error enter-alert">
             {translateIssue(errors.relation, t("relationLegend"), tv)}
           </p>
         )}

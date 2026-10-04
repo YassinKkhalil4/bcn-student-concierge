@@ -66,7 +66,7 @@ export function ConsentBox({
         </span>
       </label>
       {error && (
-        <p id={`${name}-error`} className="field-error ml-8">
+        <p id={`${name}-error`} className="field-error enter-alert ml-8">
           {error}
         </p>
       )}

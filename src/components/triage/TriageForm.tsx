@@ -149,7 +149,7 @@ export function TriageForm() {
 
   if (ref) {
     return (
-      <div className="border border-paper-edge border-t-3 border-t-ink bg-white p-8 sm:p-10">
+      <div className="enter-panel border border-paper-edge border-t-3 border-t-ink bg-white p-8 sm:p-10">
         <h2 className="text-display-md text-ink">{t("done.title")}</h2>
         <p className="prose-body mt-4">{t("done.body", { ref })}</p>
         <p className="mt-5 border-t border-paper-line pt-5 font-sans text-xs leading-relaxed text-ink-soft">
@@ -327,7 +327,7 @@ export function TriageForm() {
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} className="field-error">
+    <p id={id} className="field-error enter-alert">
       {message}
     </p>
   );
