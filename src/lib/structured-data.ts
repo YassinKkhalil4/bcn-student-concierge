@@ -159,8 +159,8 @@ export function guideArticle(c: {
   description: string;
   keyFacts: string[];
   sources: { label: string; url?: string }[];
-}, edition: string): Json {
-  const url = `${siteOrigin()}/guide/${c.slug}`;
+}, edition: string, locale = "en"): Json {
+  const url = `${siteOrigin()}${localizedPath(locale, `/guide/${c.slug}`)}`;
   return compact({
     "@type": "Article",
     "@id": `${url}#article`,
@@ -169,13 +169,13 @@ export function guideArticle(c: {
     abstract: c.keyFacts.join(" "),
     url,
     mainEntityOfPage: url,
-    inLanguage: "en",
+    inLanguage: locale,
     isAccessibleForFree: true,
     datePublished: edition,
     dateModified: edition,
     author: { "@id": ORG_ID() },
     publisher: { "@id": ORG_ID() },
-    isPartOf: { "@id": `${siteOrigin()}/guide#guide` },
+    isPartOf: { "@id": `${siteOrigin()}${localizedPath(locale, "/guide")}#guide` },
     citation: c.sources.filter((s) => s.url).map((s) => ({ "@type": "CreativeWork", name: s.label, url: s.url })),
   });
 }
@@ -187,19 +187,20 @@ export function guideCollection(
   description: string,
   pdfUrl: string,
   edition: string,
+  locale = "en",
 ): Json {
-  const url = `${siteOrigin()}/guide`;
+  const url = `${siteOrigin()}${localizedPath(locale, "/guide")}`;
   return {
     "@type": ["CollectionPage", "Book"],
     "@id": `${url}#guide`,
     name,
     description,
     url,
-    inLanguage: "en",
+    inLanguage: locale,
     isAccessibleForFree: true,
     dateModified: edition,
     publisher: { "@id": ORG_ID() },
-    hasPart: chapters.map((c) => ({ "@type": "Article", name: c.title, url: `${siteOrigin()}/guide/${c.slug}` })),
+    hasPart: chapters.map((c) => ({ "@type": "Article", name: c.title, url: `${siteOrigin()}${localizedPath(locale, `/guide/${c.slug}`)}` })),
     encoding: { "@type": "MediaObject", encodingFormat: "application/pdf", contentUrl: pdfUrl },
   };
 }

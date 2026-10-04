@@ -1,9 +1,10 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { parseInline } from "@/lib/guide/text";
 
 /**
  * A guide string as React nodes. Built from parsed tokens, never injected as
- * HTML, so no string in the content can add markup of its own.
+ * HTML, so no string in the content can add markup of its own. Links go through
+ * the locale-aware Link, so a reader in Spanish stays in Spanish.
  */
 export function Inline({ text }: { text: string }) {
   return (

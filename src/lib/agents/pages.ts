@@ -9,9 +9,21 @@ import { CHAPTERS, chapterPath } from "@/lib/guide/chapters";
  * carries personal data and is closed to crawlers.
  */
 
+/** The guide's chapters, read online at /guide/<slug>, in every language. */
+export const GUIDE_CHAPTER_PATHS: readonly string[] = CHAPTERS.map((c) => chapterPath(c.slug));
+
 /** Pages offered to crawlers and agents, unprefixed (English URLs). */
-export const PUBLIC_PAGES = ["/", "/guide", "/triage", "/pricing", "/legal", "/privacy", "/terms"] as const;
-export type PublicPage = (typeof PUBLIC_PAGES)[number];
+export const PUBLIC_PAGES: readonly string[] = [
+  "/",
+  "/guide",
+  ...GUIDE_CHAPTER_PATHS,
+  "/triage",
+  "/pricing",
+  "/legal",
+  "/privacy",
+  "/terms",
+];
+export type PublicPage = string;
 
 /** Never crawled, never rendered as Markdown, in any language. */
 export const PRIVATE_PREFIXES = ["/intake", "/portal", "/admin", "/api"] as const;
@@ -20,21 +32,7 @@ export function isPublicPage(path: string): path is PublicPage {
   return (PUBLIC_PAGES as readonly string[]).includes(path);
 }
 
-/**
- * The guide's chapters, read online at /guide/<slug>. A separate list from
- * PUBLIC_PAGES on purpose: those are published in six languages, the chapters
- * in English only, and the sitemap, the alternates and the middleware must not
- * mix the two.
- */
-export const GUIDE_CHAPTER_PATHS: readonly string[] = CHAPTERS.map((c) => chapterPath(c.slug));
-export type GuideChapterPath = string;
-
-export function isGuideChapterPath(path: string): boolean {
-  return GUIDE_CHAPTER_PATHS.includes(path);
-}
-
-/** Anything an agent may be offered as Markdown. */
-export const isAgentPage = (path: string): boolean => isPublicPage(path) || isGuideChapterPath(path);
+export const isGuideChapterPath = (path: string): boolean => GUIDE_CHAPTER_PATHS.includes(path);
 
 export function isPrivatePath(path: string): boolean {
   return PRIVATE_PREFIXES.some((p) => path === p || path.startsWith(`${p}/`));

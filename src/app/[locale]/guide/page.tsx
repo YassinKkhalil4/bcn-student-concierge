@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import NextLink from "next/link";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -13,7 +12,8 @@ import { CHAPTERS, chapterPath } from "@/lib/guide/chapters";
 import { GUIDE_EDITION } from "@/lib/guide";
 import { siteOrigin } from "@/lib/agents/pages";
 import { breadcrumbs, graph, guideCollection, organization, website } from "@/lib/structured-data";
-import cover from "../../../../assets/guide/cover.png";
+import { coverFor } from "@/lib/guide/covers";
+import { localizeChapter } from "@/lib/guide/i18n";
 
 /*
  * This page used to declare its own three typefaces and its own navy and red
@@ -46,7 +46,7 @@ export default async function GuidePage({ params, searchParams }: Params) {
         json={graph(
           organization(tc("brand"), t("metaDescription")),
           website(tc("brand"), locale),
-          guideCollection(CHAPTERS, t("metaTitle"), t("metaDescription"), `${siteOrigin()}${GUIDE_PATH}`, GUIDE_EDITION),
+          guideCollection(CHAPTERS.map((c) => localizeChapter(c, locale)), t("metaTitle"), t("metaDescription"), `${siteOrigin()}${GUIDE_PATH}?l=${locale}`, GUIDE_EDITION, locale),
           breadcrumbs([{ name: tc("brand"), page: "/" }, { name: t("metaTitle"), page: "/guide" }], locale),
         )}
       />
@@ -84,7 +84,7 @@ function Guide({ locale, source }: { locale: string; source: GuideSource | null 
         <div className="container-x grid items-center gap-8 py-8 sm:gap-10 sm:py-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:py-20">
           {/* 1 — the cover, page 1 of the PDF itself */}
           <Image
-            src={cover}
+            src={coverFor(locale)}
             alt={t("coverAlt")}
             priority
             // Served as the file itself: a 115 KB PNG gains nothing from the
@@ -102,13 +102,13 @@ function Guide({ locale, source }: { locale: string; source: GuideSource | null 
 
             {/* 3 — read it here: the one dominant action on the page */}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-              <NextLink
+              <Link
                 href={chapterPath(CHAPTERS[0]!.slug)}
                 className="btn-primary w-full !px-8 !py-4 !text-base sm:w-auto"
               >
                 {t("readOnline")}
                 <ArrowMark className="h-5 w-5 flex-none" />
-              </NextLink>
+              </Link>
               <a href={downloadHref} download={GUIDE_FILENAME} className="btn-secondary w-full !px-6 !py-4 !text-base sm:w-auto">
                 <DownloadMark className="h-5 w-5 flex-none" />
                 {t("download")}
@@ -127,19 +127,18 @@ function Guide({ locale, source }: { locale: string; source: GuideSource | null 
         <h2 className="max-w-2xl text-display-lg text-ink">{t("chaptersTitle")}</h2>
         <p className="prose-body mt-3 max-w-2xl">{t("chaptersNote")}</p>
         <ol className="mt-10 grid border-t-2 border-ink sm:grid-cols-2 sm:gap-x-14">
-          {CHAPTERS.map((chapter) => (
+          {CHAPTERS.map((raw) => localizeChapter(raw, locale)).map((chapter) => (
             <li key={chapter.slug} className="border-b border-paper-line">
-              <NextLink href={chapterPath(chapter.slug)} className="flex gap-5 py-4 hover:bg-paper-dim">
+              <Link href={chapterPath(chapter.slug)} className="flex gap-5 py-4 hover:bg-paper-dim">
                 <span className="w-8 flex-none pt-0.5 font-mono text-sm font-medium text-accent">{chapter.number}</span>
                 <span className="min-w-0">
                   <span className="block font-sans text-sm font-bold tracking-tight text-ink">{chapter.navTitle}</span>
                   <span className="prose-body mt-1 block">{chapter.description}</span>
                 </span>
-              </NextLink>
+              </Link>
             </li>
           ))}
         </ol>
-        <p className="mt-4 text-sm text-ink-soft">{t("pdfOnlyNote")}</p>
 
         {/* 5 — the edition */}
         <p className="mt-7 font-mono text-xs text-ink-soft">{t("edition")}</p>

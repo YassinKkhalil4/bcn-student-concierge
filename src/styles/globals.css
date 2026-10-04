@@ -673,3 +673,33 @@
     border-inline-start-color: CanvasText;
   }
 }
+
+/*
+ * The guide's chart palette. Route A is blue and Route B is purple everywhere
+ * in the guide, so a reader who learns the colours on the route map can read
+ * every later chart without a legend. These sit beside the site's tokens, not
+ * in place of them: the page, the type and the corners are still the site's.
+ */
+:root {
+  --g-eu: #1d58a3;
+  --g-eu-bg: #e6eef8;
+  --g-non: #683b98;
+  --g-non-bg: #efe8f6;
+  --g-teal: #0a6e5e;
+  --g-teal-2: #119080;
+  --g-teal-bg: #e2f2ee;
+  --g-amber: #9a5a00;
+  --g-amber-2: #c27a0e;
+  --g-amber-bg: #fbf0dd;
+  --g-red: #c0233a;
+  --g-red-bg: #fbe9ea;
+  --g-sand: #f2ece1;
+  --g-track: #efe9de;
+  --g-grey: #8f887a;
+}
+.g-hatch {
+  background: repeating-linear-gradient(135deg, #5a6275 0 5px, #8d94a5 5px 10px);
+}
+.g-hatch-red {
+  background: repeating-linear-gradient(135deg, #f3c9ce 0 5px, #c0233a 5px 10px);
+}

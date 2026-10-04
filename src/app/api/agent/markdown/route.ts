@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { isSiteLocale, routing } from "@/i18n/routing";
-import { isAgentPage } from "@/lib/agents/pages";
+import { isPublicPage } from "@/lib/agents/pages";
 import { renderPageMarkdown } from "@/lib/agents/markdown";
 
 export const runtime = "nodejs";
@@ -22,7 +22,7 @@ export async function GET(): Promise<Response> {
   const requested = head.get("x-agent-markdown-locale") ?? routing.defaultLocale;
   const locale = isSiteLocale(requested) ? requested : routing.defaultLocale;
 
-  if (!isAgentPage(page)) {
+  if (!isPublicPage(page)) {
     return NextResponse.json({ error: "No Markdown for this page" }, { status: 404 });
   }
 

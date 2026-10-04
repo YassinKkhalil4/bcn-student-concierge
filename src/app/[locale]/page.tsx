@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
-import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { CHAPTERS } from "@/lib/guide/chapters";
 import { GUIDE_PATH } from "@/lib/guide";
 import { ArrowMark, DownloadMark } from "@/components/icons";
-import cover from "../../../assets/guide/cover.png";
+import { coverFor } from "@/lib/guide/covers";
 import { TIERS } from "@/lib/pricing";
 import { PricingCard } from "@/components/PricingCard";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
@@ -71,6 +70,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
  * made the page read as a template. The remaining headings carry themselves.
  */
 function Landing() {
+  const locale = useLocale();
   const t = useTranslations("home");
   const tt = useTranslations("triage");
   const problems = t.raw("problems.items") as { problem: string; detail: string; solution: string }[];
@@ -112,7 +112,7 @@ function Landing() {
         <div className="container-x grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-[minmax(0,3fr)_minmax(0,8fr)] lg:gap-14">
           <Link href="/guide" aria-hidden tabIndex={-1} className="hidden lg:block">
             <Image
-              src={cover}
+              src={coverFor(locale)}
               alt=""
               unoptimized
               className="chamfer w-full max-w-[220px] shadow-xl shadow-ink-deep/30 [--chamfer:14px]"
@@ -125,11 +125,11 @@ function Landing() {
             </h2>
             <p className="prose-lede measure mt-4">{t("guideBand.body", { count: CHAPTERS.length })}</p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-              <NextLink href="/guide/pick-your-route" className="btn-primary">
+              <Link href="/guide/pick-your-route" className="btn-primary">
                 {t("guideBand.read")}
                 <ArrowMark className="h-5 w-5 flex-none" />
-              </NextLink>
-              <a href={GUIDE_PATH} download className="btn-secondary">
+              </Link>
+              <a href={`${GUIDE_PATH}?l=${locale}`} download className="btn-secondary">
                 <DownloadMark className="h-5 w-5 flex-none" />
                 {t("guideBand.download")}
               </a>

@@ -1,10 +1,10 @@
 import type { Chapter } from "./types";
-import { euRegistration, gettingYourTie, appointmentWontCome } from "./chapters/part-2";
-import { costsBankSim, healthInsurance, registerPadron } from "./chapters/part-3";
-import { adminDaySurvival, howMuchAdmin, workingWhileStudying } from "./chapters/part-4";
 import { firstWeek, nieTiePadron, pickYourRoute, theClock } from "./chapters/part-1";
+import { appointmentWontCome, euRegistration, gettingYourTie, registerPadron } from "./chapters/part-2";
+import { costsBankSim, healthInsurance, workingWhileStudying } from "./chapters/part-3";
+import { adminDaySurvival, honestNotes, howMuchAdmin, packagesAndPricing } from "./chapters/part-4";
 
-/** Reading order. The URL of each chapter is /guide/<slug>, in English only. */
+/** Reading order, in English. Each chapter lives at /guide/<slug> (and /<locale>/guide/<slug>). */
 export const CHAPTERS: readonly Chapter[] = [
   pickYourRoute,
   theClock,
@@ -19,6 +19,8 @@ export const CHAPTERS: readonly Chapter[] = [
   workingWhileStudying,
   adminDaySurvival,
   howMuchAdmin,
+  packagesAndPricing,
+  honestNotes,
 ];
 
 export function getChapter(slug: string): Chapter | undefined {

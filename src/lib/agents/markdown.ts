@@ -5,7 +5,8 @@ import { GUIDE_FRAMING, GUIDE_PATH } from "@/lib/guide";
 import { controllerName } from "@/lib/provider";
 import { chapterIndex, chapterBody } from "@/lib/guide/markdown";
 import { getChapter } from "@/lib/guide/chapters";
-import { isGuideChapterPath, isPublicPage, siteOrigin, type PublicPage } from "./pages";
+import { localizeChapter } from "@/lib/guide/i18n";
+import { isGuideChapterPath, isPublicPage, siteOrigin } from "./pages";
 
 /**
  * The public pages as Markdown, for agents that would otherwise scrape HTML.
@@ -120,17 +121,14 @@ async function triageDoc(locale: string): Promise<string> {
 /** The free guide: what it covers, and the file's stable address. */
 async function guideDoc(locale: string): Promise<string> {
   const t = await translatorFor(locale, "guide");
-  const sections = t.raw("sections") as { number: string; title: string; detail?: string }[];
 
   return lines(
     `# ${t("title")}`,
     t(`framing.${GUIDE_FRAMING}.lead`),
     t("subtitle"),
-    `## Read it online`,
-    chapterIndex(siteOrigin()),
-    `[${t("download")}](${siteOrigin()}${GUIDE_PATH})`,
-    `## ${t("insideTitle")}`,
-    sections.map((s) => `- **${s.number}** ${s.title}${s.detail ? ` — ${s.detail}` : ""}`).join("\n"),
+    `## ${t("chaptersTitle")}`,
+    chapterIndex(siteOrigin(), locale),
+    `[${t("download")}](${siteOrigin()}${GUIDE_PATH}?l=${locale})`,
     t("edition"),
     `[${t("triage")}](${siteOrigin()}${localizedPath(locale, "/triage")})`,
   );
@@ -217,7 +215,7 @@ async function legalDoc(locale: string, doc: "scope" | "privacy" | "terms"): Pro
 
 /** The Markdown for one public page, or null if the page is not offered. */
 export async function renderPageMarkdown(page: string, locale: string): Promise<string | null> {
-  if (isGuideChapterPath(page)) return renderChapterMarkdown(page);
+  if (isGuideChapterPath(page)) return renderChapterMarkdown(page, locale);
   if (!isPublicPage(page)) return null;
   const body = await (page === "/"
     ? homeDoc(locale)
@@ -248,16 +246,28 @@ export async function renderPageMarkdown(page: string, locale: string): Promise<
   )}\n`;
 }
 
-/** A guide chapter. English only: the chapters are not translated. */
-async function renderChapterMarkdown(path: string): Promise<string | null> {
+/** A guide chapter, in the reader's language. */
+async function renderChapterMarkdown(path: string, locale: string): Promise<string | null> {
   const chapter = getChapter(path.replace("/guide/", ""));
   if (!chapter) return null;
-  const common = await translatorFor("en", "common");
+  const common = await translatorFor(locale, "common");
+  const g = await translatorFor(locale, "guide");
   const origin = siteOrigin();
+  const ui = {
+    intro: g("reader.mdIntro"),
+    webPage: g("reader.webPage"),
+    pdf: g("reader.pdf"),
+    shortAnswer: g("reader.shortAnswer"),
+    faq: g("reader.faq"),
+    sources: g("reader.sources"),
+    prev: g("reader.prev"),
+    next: g("reader.next"),
+  };
   return `${lines(
-    chapterBody(chapter, origin),
+    chapterBody(localizeChapter(chapter, locale), origin, locale, ui),
     "---",
     `**${common("disclaimer.prominentLabel")}** ${common("disclaimer.body")}`,
-    `${common("brand")} · ${origin}${path}`,
+    locale === "en" ? "" : common("legalPage.translationNotice"),
+    `${common("brand")} · ${origin}${localizedPath(locale, path)}`,
   )}\n`;
 }

@@ -13,6 +13,10 @@ export const GUIDE_PATH = "/downloads/landing-in-barcelona.pdf";
 /** The name the file is saved under, whatever the URL is. */
 export const GUIDE_FILENAME = "Landing-in-Barcelona-2026.pdf";
 
+/** The same file in the visitor's language: assets/guide/landing-in-barcelona.<locale>.pdf. */
+export const guideFilename = (locale: string | null): string =>
+  !locale || locale === "en" ? GUIDE_FILENAME : GUIDE_FILENAME.replace(".pdf", `-${locale}.pdf`);
+
 /**
  * Who the page is talking to. The guide's own voice ("You've been here two
  * weeks. The clock started the day you landed.") is for students already in

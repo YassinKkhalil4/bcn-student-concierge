@@ -14,7 +14,7 @@ export type Inline =
   | { t: "em"; v: string }
   | { t: "link"; v: string; href: string };
 
-const TOKEN = /\*\*(.+?)\*\*|\*(.+?)\*|\[([^\]]+)\]\((\/guide\/[a-z0-9-]+)\)/g;
+const TOKEN = /\*\*(.+?)\*\*|\*(.+?)\*|\[([^\]]+)\]\((\/(?:guide\/[a-z0-9-]+|guide|triage|pricing))\)/g;
 
 export function parseInline(text: string): Inline[] {
   const out: Inline[] = [];

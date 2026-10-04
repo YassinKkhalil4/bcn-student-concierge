@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { LOCALES, localizedPath } from "@/i18n/routing";
-import { GUIDE_CHAPTER_PATHS, PUBLIC_PAGES, siteOrigin } from "@/lib/agents/pages";
+import { PUBLIC_PAGES, siteOrigin } from "@/lib/agents/pages";
 
 export const dynamic = "force-dynamic";
 
@@ -23,20 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const origin = siteOrigin();
   const url = (locale: string, page: string) => `${origin}${localizedPath(locale, page)}`;
 
-  // Chapters exist in English only: one entry each, no alternates.
-  const chapters = GUIDE_CHAPTER_PATHS.map((path) => ({
-    url: url("en", path),
-    lastModified: CONTENT_UPDATED,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
-
-  return [...PUBLIC_PAGES.flatMap((page) =>
+  return PUBLIC_PAGES.flatMap((page) =>
     LOCALES.map((locale) => ({
       url: url(locale, page),
       lastModified: CONTENT_UPDATED,
       changeFrequency: "monthly" as const,
-      priority: page === "/" ? 1 : 0.8,
+      priority: page === "/" ? 1 : page.startsWith("/guide/") ? 0.7 : 0.8,
       alternates: {
         languages: Object.fromEntries([
           ...LOCALES.map((l) => [l, url(l, page)]),
@@ -44,5 +36,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ]),
       },
     })),
-  ), ...chapters];
+  );
 }

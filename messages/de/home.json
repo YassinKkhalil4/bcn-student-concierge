@@ -125,9 +125,9 @@
   "guideBand": {
     "eyebrow": "Gratis-Ratgeber",
     "title": "Lies den Ratgeber hier. Ohne Download, ohne E-Mail.",
-    "body": "Landing in Barcelona besteht aus {count} kurzen Kapiteln zu TIE, EU-Anmeldebescheinigung, Padrón, Krankenversicherung und deinen ersten 30 Tagen. Öffne jedes Kapitel im Browser oder behalte das PDF.",
+    "body": "Landing in Barcelona besteht aus {count} kurzen Kapiteln zu TIE, EU-Anmeldebescheinigung, Padrón, Krankenversicherung, Kosten und deinen ersten 30 Tagen. Öffne jedes Kapitel im Browser oder behalte das PDF.",
     "read": "Online lesen",
     "download": "PDF herunterladen",
-    "note": "Die Kapitel sind auf Englisch."
+    "note": "Kostenlos, ohne E-Mail, in allen sechs Sprachen dieser Website."
   }
 }

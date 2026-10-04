@@ -11,7 +11,7 @@ import {
 } from "@/lib/attribution";
 import { generateToken } from "@/lib/crypto";
 import { LOCALES, type Locale } from "@/lib/db/schema";
-import { GUIDE_FILENAME } from "@/lib/guide";
+import { guideFilename } from "@/lib/guide";
 import { recordGuideDownload } from "@/lib/server/guide-analytics";
 
 export const runtime = "nodejs";
@@ -25,13 +25,28 @@ export const dynamic = "force-dynamic";
  * through — and the browser is given the anonymous download id that later
  * lets a triage enquiry be attributed to it (src/lib/attribution.ts).
  */
-const FILE = path.join(process.cwd(), "assets", "guide", "landing-in-barcelona.pdf");
+const DIR = path.join(process.cwd(), "assets", "guide");
+const fileFor = (locale: string | null) =>
+  path.join(DIR, !locale || locale === "en" ? "landing-in-barcelona.pdf" : `landing-in-barcelona.${locale}.pdf`);
 
-let cached: Promise<Buffer> | null = null;
-const pdf = () => (cached ??= readFile(FILE).catch((error) => {
-  cached = null;
-  throw error;
-}));
+const cached = new Map<string, Promise<Buffer>>();
+const pdf = (locale: string | null) => {
+  const key = locale ?? "en";
+  let p = cached.get(key);
+  if (!p) {
+    // A language without its own file gets the English one, never a 404.
+    p = readFile(fileFor(locale)).catch(() => readFile(fileFor(null)));
+    p.catch(() => cached.delete(key));
+    cached.set(key, p);
+  }
+  return p;
+};
+
+/** `?l=` is only ever one of the site's languages. */
+const localeOf = (request: NextRequest): Locale | null => {
+  const requested = request.nextUrl.searchParams.get("l");
+  return (LOCALES as readonly string[]).includes(requested ?? "") ? (requested as Locale) : null;
+};
 
 /** Link unfurlers, crawlers and prefetches are not readers. */
 function isAutomated(request: NextRequest): boolean {
@@ -41,11 +56,11 @@ function isAutomated(request: NextRequest): boolean {
   return !ua || /bot|crawl|spider|slurp|preview|facebookexternalhit|whatsapp|curl|wget|python|headless/i.test(ua);
 }
 
-function headers(size: number): HeadersInit {
+function headers(size: number, locale: string | null): HeadersInit {
   return {
     "Content-Type": "application/pdf",
     "Content-Length": String(size),
-    "Content-Disposition": `attachment; filename="${GUIDE_FILENAME}"`,
+    "Content-Disposition": `attachment; filename="${guideFilename(locale)}"`,
     // Every download must reach this handler to be counted, so no shared
     // cache may answer for it.
     "Cache-Control": "private, no-store",
@@ -53,9 +68,10 @@ function headers(size: number): HeadersInit {
 }
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
+  const locale = localeOf(request);
   let body: Buffer;
   try {
-    body = await pdf();
+    body = await pdf(locale);
   } catch (error) {
     console.error("[guide] PDF missing", error);
     return NextResponse.json({ error: "Guide unavailable" }, { status: 503 });
@@ -65,9 +81,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   // The link's own ?s= wins: a forwarded link carries the school that sent it.
   const source = parseSource(request.nextUrl.searchParams.get(SOURCE_PARAM)) ?? known.source;
   const visitorId = known.guideVisitorId ?? generateToken();
-  const requested = request.nextUrl.searchParams.get("l");
-  const locale = (LOCALES as readonly string[]).includes(requested ?? "") ? (requested as Locale) : null;
-
   if (!isAutomated(request)) {
     // Analytics must never cost a reader the file.
     await recordGuideDownload({ visitorId, source, locale }).catch((error) =>
@@ -75,16 +88,17 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  const response = new NextResponse(new Uint8Array(body), { status: 200, headers: headers(body.length) });
+  const response = new NextResponse(new Uint8Array(body), { status: 200, headers: headers(body.length, locale) });
   response.cookies.set(GUIDE_VISITOR_COOKIE, visitorId, attributionCookieOptions);
   if (source) response.cookies.set(SOURCE_COOKIE, source, attributionCookieOptions);
   return response;
 }
 
-export async function HEAD(): Promise<NextResponse> {
+export async function HEAD(request: NextRequest): Promise<NextResponse> {
+  const locale = localeOf(request);
   try {
-    const body = await pdf();
-    return new NextResponse(null, { status: 200, headers: headers(body.length) });
+    const body = await pdf(locale);
+    return new NextResponse(null, { status: 200, headers: headers(body.length, locale) });
   } catch {
     return new NextResponse(null, { status: 503 });
   }

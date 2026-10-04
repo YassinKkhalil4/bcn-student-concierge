@@ -1,102 +1,43 @@
 {
-  "metaTitle": "Free guide: Landing in Barcelona 2026/27",
-  "metaDescription": "Landing in Barcelona, the student survival guide to Spanish paperwork 2026/27. Read all of it online or download the 20-page PDF: TIE, EU registration certificate, padrón, health cover, costs. Free, no email.",
+  "metaTitle": "Gratis-Ratgeber: Landing in Barcelona 2026/27",
+  "metaDescription": "Landing in Barcelona, der Überlebensratgeber für Studierende im spanischen Papierkrieg 2026/27. Lies alle 15 Abschnitte online oder lade das 20-seitige PDF herunter: TIE, EU-Anmeldebescheinigung, Padrón, Krankenversicherung, Kosten. Kostenlos, ohne E-Mail.",
   "framing": {
     "already-here": {
-      "eyebrow": "Free guide · for students already in Barcelona",
+      "eyebrow": "Gratis-Ratgeber · für Studierende, die schon in Barcelona sind",
       "lead": "Die Uhr läuft seit deiner Landung. Das hier ist alles, was darauf steht."
     },
     "arriving": {
-      "eyebrow": "Free guide · for students arriving in Barcelona",
+      "eyebrow": "Gratis-Ratgeber · für Studierende, die nach Barcelona kommen",
       "lead": "Lies ihn vor dem Abflug. Die Uhr läuft ab dem Tag deiner Landung."
     }
   },
-  "coverAlt": "Cover of Landing in Barcelona, the student survival guide to Spanish paperwork 2026/27: “You have 30 days. Nobody told you the queue is longer.”",
-  "title": "The guide we wish someone had handed us",
-  "subtitle": "20 pages on the paperwork nobody explains: which route is yours, the 30-day clock, the padrón, and what to do when the appointment won’t come. Free, no email required.",
-  "download": "Download the PDF (20 pages, 6.6 MB)",
-  "insideTitle": "What’s inside",
-  "sections": [
-    {
-      "number": "01",
-      "title": "Pick your route",
-      "detail": "EU or non-EU decides everything"
-    },
-    {
-      "number": "02",
-      "title": "The clock",
-      "detail": "what’s due when, to scale"
-    },
-    {
-      "number": "03",
-      "title": "Your first week",
-      "detail": "eight things before any paperwork"
-    },
-    {
-      "number": "04",
-      "title": "Four words people mix up",
-      "detail": "NIE, TIE, padrón, expediente"
-    },
-    {
-      "number": "05",
-      "title": "Getting your TIE",
-      "detail": "five steps, the photo spec, five traps"
-    },
-    {
-      "number": "06",
-      "title": "EU registration certificate",
-      "detail": "EX-18, €12, no fingerprints"
-    },
-    {
-      "number": "07",
-      "title": "The appointment won’t come in time",
-      "detail": "what to keep"
-    },
-    {
-      "number": "08",
-      "title": "Registering your address",
-      "detail": "the padrón and difficult landlords"
-    },
-    {
-      "number": "09",
-      "title": "Health cover",
-      "detail": "does yours still qualify?"
-    },
-    {
-      "number": "10",
-      "title": "Money, bank and SIM",
-      "detail": "what the admin costs"
-    },
-    {
-      "number": "11",
-      "title": "Working while you study",
-      "detail": "30 hours, plus dates for your calendar"
-    },
-    {
-      "number": "12",
-      "title": "Admin-day survival",
-      "detail": "screenshot this page"
-    },
-    {
-      "number": "13",
-      "title": "Do it yourself, or hand it over?",
-      "detail": "counted, not editorialised"
-    },
-    {
-      "number": "14",
-      "title": "Three ways we can help",
-      "detail": "prices by route"
-    },
-    {
-      "number": "15",
-      "title": "The honest notes",
-      "detail": "what goes wrong, what’s never in the fee"
-    }
-  ],
-  "edition": "Edition 2026/27 · checked 10 September 2026 · next review 15 January 2027",
-  "triage": "Read it and still not sure where you stand? Free triage, same day →",
-  "readOnline": "Read it online, free",
-  "chaptersTitle": "Read it here, chapter by chapter",
-  "chaptersNote": "The chapters are in English. The PDF has the same text.",
-  "pdfOnlyNote": "Sections 14 and 15, on what our paid service includes, are in the PDF only."
+  "coverAlt": "Titelseite von Landing in Barcelona, dem Überlebensratgeber für Studierende im spanischen Papierkrieg 2026/27: „Du hast 30 Tage. Niemand hat dir gesagt, dass die Schlange länger ist.“",
+  "title": "Der Ratgeber, den uns damals jemand hätte geben sollen",
+  "subtitle": "20 Seiten zum Papierkram, den niemand erklärt: welcher Weg deiner ist, die 30-Tage-Uhr, das Padrón und was zu tun ist, wenn der Termin nicht kommt. Kostenlos, ohne E-Mail.",
+  "download": "PDF herunterladen (20 Seiten, 1,3 MB)",
+  "edition": "Ausgabe 2026/27 · geprüft am 10. September 2026 · nächste Überprüfung am 15. Januar 2027",
+  "triage": "Gelesen und immer noch unsicher, wo du stehst? Kostenlose Ersteinschätzung, am selben Tag →",
+  "readOnline": "Online lesen, kostenlos",
+  "chaptersTitle": "Hier lesen, Kapitel für Kapitel",
+  "chaptersNote": "Derselbe Ratgeber wie das PDF, ein Abschnitt pro Seite, mit den Grafiken.",
+  "reader": {
+    "contents": "Kapitel des Ratgebers",
+    "shortAnswer": "Die kurze Antwort",
+    "faq": "Häufige Fragen",
+    "sources": "Offizielle Quellen",
+    "edition": "Ausgabe vom {date}. Regeln und Gebühren ändern sich: Prüfe die offizielle Seite, bevor du zahlst oder reist. Dieser Ratgeber ist eine allgemeine Information, keine Rechtsberatung.",
+    "prev": "Zurück",
+    "next": "Weiter",
+    "finished": "Fertig?",
+    "triageCta": "Prüfe, wo dein Papierkram steht",
+    "pdfLink": "Lieber das PDF? Lade es herunter",
+    "breadcrumb": "Gratis-Ratgeber",
+    "callKey": "Merken",
+    "callNote": "Gut zu wissen",
+    "callWarning": "Achtung",
+    "callTip": "Gute Nachricht",
+    "mdIntro": "Kapitel {number} des kostenlosen Ratgebers „Landing in Barcelona“.",
+    "webPage": "Webseite",
+    "pdf": "PDF"
+  }
 }

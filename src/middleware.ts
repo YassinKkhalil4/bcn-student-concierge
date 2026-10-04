@@ -3,7 +3,7 @@ import createIntlMiddleware from "next-intl/middleware";
 import { localizedPath, routing, splitLocale } from "@/i18n/routing";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin/session";
 import { SOURCE_COOKIE, SOURCE_PARAM, attributionCookieOptions, parseSource } from "@/lib/attribution";
-import { isAgentPage, isGuideChapterPath, markdownPath } from "@/lib/agents/pages";
+import { isPublicPage, markdownPath } from "@/lib/agents/pages";
 import { PORTAL_COOKIE, verifyPortalSession } from "@/lib/portal/session";
 
 /**
@@ -62,7 +62,7 @@ function markdownRequest(
       : unprefixed.slice(0, -3)
     : null;
   const page = fromUrl ?? unprefixed;
-  if (!isAgentPage(page)) return null;
+  if (!isPublicPage(page)) return null;
   if (fromUrl !== null) return { page, negotiated: false };
   return asked ? { page, negotiated: true } : null;
 }
@@ -109,17 +109,6 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   // Files served by a handler (the guide PDF): no language, no page chrome.
   const download = pathname.startsWith("/downloads/");
   const portal = isPortalPath(api ? pathname : unprefixed);
-
-  // ── Guide chapters are English only ────────────────────────────────
-  // "/fr/guide/getting-your-tie" has no French text to show. Send the reader to
-  // the one real URL rather than serve English under a French address, which
-  // would also be a duplicate of the canonical page.
-  if (locale !== "en" && request.method === "GET" && !admin && !api) {
-    const bare = unprefixed.endsWith(".md") ? unprefixed.slice(0, -3) : unprefixed;
-    if (isGuideChapterPath(bare)) {
-      return NextResponse.redirect(new URL(unprefixed, request.url), 308);
-    }
-  }
 
   // ── Admin gate (first of two) ────────────────────────────────────────
   // Every admin handler verifies the session again itself; this gate is not
@@ -196,7 +185,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 
   // Tell agents the page has a machine-readable form (RFC 8288). Appended:
   // next-intl already put the hreflang alternates in this header.
-  if (!admin && !api && !portal && !download && isAgentPage(unprefixed)) {
+  if (!admin && !api && !portal && !download && isPublicPage(unprefixed)) {
     const md = new URL(markdownPath(unprefixed), request.nextUrl.origin);
     response.headers.append(
       "Link",

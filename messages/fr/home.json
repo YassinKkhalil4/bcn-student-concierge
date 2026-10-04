@@ -125,9 +125,9 @@
   "guideBand": {
     "eyebrow": "Guide gratuit",
     "title": "Lisez le guide ici. Sans téléchargement, sans e-mail.",
-    "body": "Landing in Barcelona, ce sont {count} chapitres courts sur la TIE, le certificat d’enregistrement des citoyens de l’UE, le padrón, la couverture santé et vos 30 premiers jours. Ouvrez n’importe quel chapitre dans votre navigateur, ou gardez le PDF.",
+    "body": "Landing in Barcelona, ce sont {count} chapitres courts sur la TIE, le certificat d’enregistrement des citoyens de l’UE, le padrón, la couverture santé, les coûts et vos 30 premiers jours. Ouvrez n’importe quel chapitre dans votre navigateur, ou gardez le PDF.",
     "read": "Lire en ligne",
     "download": "Télécharger le PDF",
-    "note": "Les chapitres sont en anglais."
+    "note": "Gratuit, sans e-mail, dans les six langues de ce site."
   }
 }

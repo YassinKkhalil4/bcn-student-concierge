@@ -125,9 +125,9 @@
   "guideBand": {
     "eyebrow": "Free guide",
     "title": "Read the guide here. No download, no email.",
-    "body": "Landing in Barcelona is {count} short chapters on the TIE, the EU registration certificate, the padrón, health cover and your first 30 days. Open any chapter in your browser, or keep the PDF.",
+    "body": "Landing in Barcelona is {count} short chapters on the TIE, the EU registration certificate, the padrón, health cover, costs and your first 30 days. Open any chapter in your browser, or keep the PDF.",
     "read": "Read it online",
     "download": "Download the PDF",
-    "note": "The chapters are in English."
+    "note": "Free, no email, in all six languages of this site."
   }
 }
