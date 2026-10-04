@@ -127,7 +127,7 @@ case — never from the request body.
 **Crawlers and agents get the public pages, and only those.** `robots.txt`
 (RFC 9309) opens the marketing and legal pages, closes `/intake`, `/portal`,
 `/admin` and `/api` to every crawler, and carries Content Signals
-(`ai-train=no, search=yes, ai-input=yes` — a business decision, set in
+(`ai-train=yes, search=yes, ai-input=yes` — a business decision, set in
 `src/app/robots.txt/route.ts`). The sitemap lists the same pages in all six
 languages with their `hreflang` alternates. Those pages also answer
 `Accept: text/markdown`, and have a `.md` address (`/pricing.md`,

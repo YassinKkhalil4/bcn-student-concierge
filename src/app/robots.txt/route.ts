@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
  *   - The marketing and legal pages are open to everyone, including AI
  *     assistants that answer questions and cite sources. Students find this
  *     service by asking exactly those questions.
- *   - Bulk collection for model training is declined.
+ *   - Bulk collection for model training is allowed on those same pages.
  *   - Everything holding personal data — intake, portal, dashboard, API — is
  *     closed to every crawler. robots.txt is only a request, so those paths
  *     are also behind sessions and carry X-Robots-Tag: noindex.
@@ -29,7 +29,7 @@ const ANSWER_ENGINES = [
   "Applebot",
 ];
 
-/** Crawlers that collect pages for model training. Declined. */
+/** Crawlers that collect pages for model training. Welcome on public pages. */
 const TRAINING_CRAWLERS = [
   "GPTBot",
   "ClaudeBot",
@@ -47,11 +47,11 @@ const TRAINING_CRAWLERS = [
 ];
 
 /**
- * ai-train=no   — do not use this content to train or fine-tune a model.
+ * ai-train=yes  — this content may be used to train or fine-tune a model.
  * ai-input=yes  — using a page to answer someone's question is fine.
  * search=yes    — ordinary search indexing is fine.
  */
-const CONTENT_SIGNAL = "ai-train=no, search=yes, ai-input=yes";
+const CONTENT_SIGNAL = "ai-train=yes, search=yes, ai-input=yes";
 
 function group(agents: string[], lines: string[]): string {
   return [...agents.map((a) => `User-agent: ${a}`), ...lines].join("\n");
@@ -77,8 +77,12 @@ export function GET(): Response {
       ...disallowPrivate,
     ]),
     "",
-    "# Bulk collection for model training: no.",
-    group(TRAINING_CRAWLERS, [`Content-Signal: ${CONTENT_SIGNAL}`, "Disallow: /"]),
+    "# Collection for model training: welcome on public pages.",
+    group(TRAINING_CRAWLERS, [
+      `Content-Signal: ${CONTENT_SIGNAL}`,
+      "Allow: /",
+      ...disallowPrivate,
+    ]),
     "",
     `Sitemap: ${siteOrigin()}/sitemap.xml`,
     "",
