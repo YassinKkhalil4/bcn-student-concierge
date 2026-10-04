@@ -256,7 +256,7 @@ uploads), keeping 30 days (matching the retention promised in the privacy notice
 ```bash
 sudo mkdir -p /var/backups/bcnstudent && sudo chown deploy: /var/backups/bcnstudent
 crontab -e
-# 30 2 * * *  /srv/bcnstudent/deploy/backup.sh >> /var/log/bcnstudent-backup.log 2>&1
+# 30 2 * * *  /var/www/bcnstudent/bcn-student-concierge/deploy/backup.sh >> /var/log/bcnstudent-backup.log 2>&1
 ```
 
 - Copy the backup directory **off the server** too (e.g. `restic` or `rclone`
@@ -269,7 +269,7 @@ crontab -e
 
 ```bash
 docker compose up -d db
-docker compose exec -T db pg_restore -U bcn -d bcn --clean --if-exists < db-<stamp>.dump
+docker compose exec -T postgres pg_restore -U app -d app --clean --if-exists < db-<stamp>.dump
 tar xzf documents-<stamp>.tar.gz -C ./data
 sudo chown -R 10001:10001 data      # tar restores the archive's own ownership
 docker compose up -d

@@ -2,7 +2,7 @@
 # Nightly backup of the database and the encrypted document volume.
 #
 #   crontab -e
-#   30 2 * * *  /srv/bcnstudent/deploy/backup.sh >> /var/log/bcnstudent-backup.log 2>&1
+#   30 2 * * *  /var/www/bcnstudent/bcn-student-concierge/deploy/backup.sh >> /var/log/bcnstudent-backup.log 2>&1
 #
 # Both artifacts contain only ciphertext for personal data — PROVIDED the .env
 # file (which holds the master key) is never copied alongside them. This script
@@ -19,7 +19,7 @@ STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 umask 077
 mkdir -p "$DEST"
 
-docker compose exec -T db pg_dump -U bcn -d bcn --format=custom > "$DEST/db-$STAMP.dump"
+docker compose exec -T postgres pg_dump -U app -d app --format=custom > "$DEST/db-$STAMP.dump"
 # Encrypted uploads are a bind mount (./data) since the move to a host-level
 # proxy; no container is needed to read them.
 tar czf "$DEST/documents-$STAMP.tar.gz" -C "${DATA_DIR:-./data}" .

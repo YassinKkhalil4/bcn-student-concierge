@@ -3,6 +3,7 @@ services:
     build:
       context: .
       target: runner
+    restart: unless-stopped
     ports:
       - "127.0.0.1:3005:3000"
     environment:
@@ -11,6 +12,7 @@ services:
       - .env
     volumes:
       - ./data:/data
+      - ./templates/forms:/app/templates/forms:ro
     networks:
       - bcn_net
     deploy:
@@ -21,6 +23,7 @@ services:
 
   postgres:
     image: postgres:16-alpine
+    restart: unless-stopped
     environment:
       - POSTGRES_USER=app
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
