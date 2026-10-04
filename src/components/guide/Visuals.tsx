@@ -79,7 +79,7 @@ export function Swimlanes({ block }: { block: Of<"swimlanes"> }) {
     <div className="space-y-4">
       {block.lanes.map((lane) => {
         const n = lane.stops.length;
-        const track = lane.tone === "all" ? "bg-[#b5ae9f]" : TONE[lane.tone].solid;
+        const track = lane.tone === "all" ? "bg-[var(--g-rail)]" : TONE[lane.tone].solid;
         const ring = lane.tone === "all" ? "border-[var(--g-grey)]" : lane.tone === "eu" ? "border-[var(--g-eu)]" : "border-[var(--g-non)]";
         return (
           <section key={lane.chip} className={`${cardBox} px-4 py-4 sm:px-5`}>
@@ -102,7 +102,7 @@ export function Swimlanes({ block }: { block: Of<"swimlanes"> }) {
                 </li>
               ))}
               {lane.wait && (
-                <li className="g-hatch mt-2 px-2 py-1 font-mono text-[0.6875rem] font-bold text-white">{lane.wait.label}</li>
+                <li className="g-hatch mt-2 px-2 py-1 font-mono text-[0.6875rem] font-bold text-onink">{lane.wait.label}</li>
               )}
             </ol>
 
@@ -306,7 +306,7 @@ export function Terms({ block }: { block: Of<"terms"> }) {
 
 const OWNER: Record<Owner, { box: string; dot: string }> = {
   you: { box: "border-t-[var(--g-teal)] bg-[var(--g-teal-bg)]", dot: "bg-[var(--g-teal)]" },
-  nobody: { box: "border-t-[#5a6275] bg-[#ececf0]", dot: "g-hatch" },
+  nobody: { box: "border-t-[var(--g-slate)] bg-[var(--g-nobody-bg)]", dot: "g-hatch" },
   office: { box: "border-t-[var(--g-amber-2)] bg-[var(--g-amber-bg)]", dot: "bg-[var(--g-amber-2)]" },
 };
 
@@ -368,8 +368,8 @@ export function Kit({ block }: { block: Of<"kit"> }) {
         <div className="mt-3 flex gap-4">
           <div className="flex h-28 w-[5.5rem] flex-none items-end justify-center overflow-hidden border-2 border-ink bg-white" aria-hidden>
             <svg viewBox="0 0 60 80" className="h-full w-full">
-              <ellipse cx="30" cy="30" rx="12" ry="14" fill="#d8d0c2" />
-              <path d="M6 80c0-18 10-26 24-26s24 8 24 26z" fill="#d8d0c2" />
+              <ellipse cx="30" cy="30" rx="12" ry="14" fill="var(--g-skin)" />
+              <path d="M6 80c0-18 10-26 24-26s24 8 24 26z" fill="var(--g-skin)" />
             </svg>
           </div>
           <div>
@@ -394,13 +394,13 @@ export function Kit({ block }: { block: Of<"kit"> }) {
 // ── Strips on a shared scale ──────────────────────────────────────────────
 
 const SEG: Record<string, string> = {
-  red: "bg-[var(--g-red)] text-white",
-  teal: "bg-[var(--g-teal)] text-white",
-  ink: "bg-ink text-white",
+  red: "bg-[var(--g-red)] text-onink",
+  teal: "bg-[var(--g-teal)] text-onink",
+  ink: "bg-ink text-onink",
   purple: "bg-[var(--g-non-bg)] text-[var(--g-non)] border border-dashed border-[var(--g-non)]",
   amber: "bg-transparent text-[var(--g-amber)] border border-dashed border-[var(--g-amber-2)]",
   grey: "bg-[var(--g-track)] text-ink-muted",
-  gap: "g-hatch-red text-white",
+  gap: "g-hatch-red text-onink",
 };
 
 export function Strips({ block }: { block: Of<"strips"> }) {
@@ -459,7 +459,7 @@ export function Flow({ block }: { block: Of<"flow"> }) {
             {i < block.steps.length - 1 && (
               <span aria-hidden className="absolute left-5 top-10 hidden h-[calc(100%-1rem)] border-l-2 border-dashed border-ink max-sm:block sm:left-[calc(50%+1.6rem)] sm:top-5 sm:h-0 sm:w-[calc(100%-3.2rem)] sm:border-l-0 sm:border-t-2" />
             )}
-            <span className={`relative flex h-10 w-10 flex-none items-center justify-center rounded-full text-white ${i === 2 ? "bg-[var(--g-teal)]" : i === 3 ? "bg-[var(--g-amber-2)]" : "bg-ink"}`} aria-hidden>
+            <span className={`relative flex h-10 w-10 flex-none items-center justify-center rounded-full text-onink ${i === 2 ? "bg-[var(--g-teal)]" : i === 3 ? "bg-[var(--g-amber-2)]" : "bg-ink"}`} aria-hidden>
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d={FLOW_ICON[s.icon]} />
               </svg>
@@ -505,7 +505,7 @@ export function CostBars({ block }: { block: Of<"costbars"> }) {
                 <>
                   <div className="absolute inset-y-0 left-0 bg-ink" style={{ width: `${(r.min / scale) * 100}%` }} />
                   {r.max > r.min && (
-                    <div className="absolute inset-y-0 bg-[#a9aec0]" style={{ left: `${(r.min / scale) * 100}%`, width: `${((r.max - r.min) / scale) * 100}%` }} />
+                    <div className="absolute inset-y-0 bg-[var(--g-bar-grey)]" style={{ left: `${(r.min / scale) * 100}%`, width: `${((r.max - r.min) / scale) * 100}%` }} />
                   )}
                 </>
               )}
@@ -524,7 +524,7 @@ export function CostBars({ block }: { block: Of<"costbars"> }) {
       </div>
       <ul className="mt-3 flex gap-4 text-xs font-bold text-ink">
         <li className="inline-flex items-center gap-1.5"><i className="h-2.5 w-3.5 bg-ink" />{block.legend[0]}</li>
-        <li className="inline-flex items-center gap-1.5"><i className="h-2.5 w-3.5 bg-[#a9aec0]" />{block.legend[1]}</li>
+        <li className="inline-flex items-center gap-1.5"><i className="h-2.5 w-3.5 bg-[var(--g-bar-grey)]" />{block.legend[1]}</li>
       </ul>
       <p className="mt-3 text-sm text-ink-soft">{block.note}</p>
     </section>
@@ -581,7 +581,7 @@ export function Workload({ block }: { block: Of<"workload"> }) {
               {parts.map(({ key, cls }) => {
                 const n = r[key];
                 return n ? (
-                  <span key={key} className={`flex items-center justify-center font-mono text-[0.6875rem] font-bold text-white ${cls}`} style={{ flexGrow: n, flexBasis: 0 }}>
+                  <span key={key} className={`flex items-center justify-center font-mono text-[0.6875rem] font-bold text-onink ${cls}`} style={{ flexGrow: n, flexBasis: 0 }}>
                     {n}
                   </span>
                 ) : null;
@@ -612,7 +612,7 @@ export function StatCards({ block }: { block: Of<"statcards"> }) {
           <div className="mt-2 font-sans text-lg font-bold leading-tight text-ink">{s.unit}</div>
           {s.ruler && (
             <div className="mt-3 space-y-1.5" aria-hidden>
-              <div className="flex items-center gap-2 text-xs text-ink-soft"><span className="w-16 shrink-0">{s.ruler.oldLabel}</span><i className="h-2 bg-[#cfc8ba]" style={{ width: "40%" }} /><b className="font-mono text-ink">{s.ruler.old}</b></div>
+              <div className="flex items-center gap-2 text-xs text-ink-soft"><span className="w-16 shrink-0">{s.ruler.oldLabel}</span><i className="h-2 bg-[var(--g-old)]" style={{ width: "40%" }} /><b className="font-mono text-ink">{s.ruler.old}</b></div>
               <div className="flex items-center gap-2 text-xs text-ink-soft"><span className="w-16 shrink-0">{s.ruler.nowLabel}</span><i className="h-2 bg-[var(--g-teal)]" style={{ width: "60%" }} /><b className="font-mono text-ink">{s.ruler.now}</b></div>
             </div>
           )}
@@ -634,7 +634,7 @@ export function Numbers({ block }: { block: Of<"numbers"> }) {
       <dl className="mt-3 divide-y divide-ink-line border-t border-ink-line">
         {block.rows.map((r) => (
           <div key={r.n} className="grid grid-cols-[4.5rem_1fr] items-center gap-3 py-2.5">
-            <dt className={`${mono} text-3xl font-extrabold leading-none tracking-tight text-white`}>{r.n}</dt>
+            <dt className={`${mono} text-3xl font-extrabold leading-none tracking-tight text-onink`}>{r.n}</dt>
             <dd className="text-sm text-onink-muted">{r.label}</dd>
           </div>
         ))}
@@ -659,7 +659,7 @@ export function Packages({ block }: { block: Of<"packages"> }) {
               </th>
               {block.tiers.map((t, i) => (
                 <th key={t.name} scope="col" className={`px-3 py-4 text-center ${i === 1 ? "bg-ink text-onink" : ""}`}>
-                  {t.badge && <span className="mb-1 inline-block bg-accent px-1.5 py-0.5 font-sans text-[0.625rem] font-bold uppercase tracking-wider text-white">{t.badge}</span>}
+                  {t.badge && <span className="mb-1 inline-block bg-accent px-1.5 py-0.5 font-sans text-[0.625rem] font-bold uppercase tracking-wider text-onink">{t.badge}</span>}
                   <span className="block font-sans text-base font-extrabold leading-tight">{t.name}</span>
                   <span className={`block text-xs font-normal ${i === 1 ? "text-onink-muted" : "text-ink-soft"}`}>{t.sub}</span>
                   <span className="mt-2 block font-sans text-xl font-extrabold">{t.eu} / {t.non}</span>

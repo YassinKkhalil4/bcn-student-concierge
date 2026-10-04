@@ -696,6 +696,12 @@
   --g-sand: #f2ece1;
   --g-track: #efe9de;
   --g-grey: #8f887a;
+  --g-rail: #b5ae9f;
+  --g-slate: #5a6275;
+  --g-nobody-bg: #ececf0;
+  --g-bar-grey: #a9aec0;
+  --g-old: #cfc8ba;
+  --g-skin: #d8d0c2;
 }
 .g-hatch {
   background: repeating-linear-gradient(135deg, #5a6275 0 5px, #8d94a5 5px 10px);

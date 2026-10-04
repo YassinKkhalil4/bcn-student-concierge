@@ -111,6 +111,17 @@ describe("the download", () => {
     expect(body.length).toBe(statSync("assets/guide/landing-in-barcelona.pdf").size);
   });
 
+  it("serves each language its own file, named for it, and English for anything else", async () => {
+    for (const l of ["es", "ca", "fr", "it", "de"]) {
+      const res = await get(`?l=${l}`);
+      expect(res.headers.get("content-disposition")).toBe(`attachment; filename="${GUIDE_FILENAME.replace(".pdf", `-${l}.pdf`)}"`);
+      const body = Buffer.from(await res.arrayBuffer());
+      expect(body.length).toBe(statSync(`assets/guide/landing-in-barcelona.${l}.pdf`).size);
+    }
+    const unknown = await get("?l=xx");
+    expect(unknown.headers.get("content-disposition")).toContain(GUIDE_FILENAME);
+  });
+
   it("is ungated: no cookie, header or parameter is needed to get the file", async () => {
     const res = await download(new NextRequest(`https://bcnstudent.com${GUIDE_PATH}`));
     expect(res.status).toBe(200);
@@ -144,7 +155,7 @@ describe("the download", () => {
   });
 
   it("answers HEAD without recording a download", async () => {
-    const res = await downloadHead();
+    const res = await downloadHead(new NextRequest(`https://bcnstudent.com${GUIDE_PATH}`));
     expect(res.status).toBe(200);
     expect(res.headers.get("content-disposition")).toContain(GUIDE_FILENAME);
     const { rows } = await client.query("SELECT 1 FROM guide_downloads");
