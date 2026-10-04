@@ -649,7 +649,7 @@ export function Packages({ block }: { block: Of<"packages"> }) {
   return (
     <div className="space-y-5">
       <section className={`${cardBox} relative overflow-x-auto`}>
-        <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
+        <table className="w-full min-w-[28rem] border-collapse text-left text-sm">
           <thead>
             <tr className="align-bottom">
               <th scope="col" className="w-[44%] px-4 py-4 text-xs font-normal text-ink-soft">

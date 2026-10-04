@@ -136,11 +136,11 @@ turning `faq.items` into a keyed object, would stop it happening again.
 
 ## The guide, read online (`/guide/<slug>`)
 
-The free guide "Landing in Barcelona" is published as 13 web pages as well as the PDF.
+The free guide "Landing in Barcelona" is published as 15 web pages and as a PDF, in all six languages.
 
-- **Source.** One typed model (`src/lib/guide/types.ts`, content in `src/lib/guide/chapters/`) renders the page, the `.md` file and the structured data. Edit the content there; never in a template.
-- **English only.** The chapters are not translated. `/es/guide/<slug>` and the other prefixed URLs 308-redirect to the English URL (middleware), the page carries a canonical and no hreflang set, and the sitemap lists each chapter once with no alternates. Chapters are therefore kept out of `PUBLIC_PAGES` (translated pages) and listed in `GUIDE_CHAPTER_PATHS`.
-- **Structured data.** Each chapter emits `Article`, `BreadcrumbList` and, where it has one, `FAQPage` (answers quoted verbatim from the chapter). `/guide` emits a `CollectionPage`/`Book` with `hasPart` and the PDF as its encoding.
-- **For assistants.** `/guide/<slug>.md` and `Accept: text/markdown` return the chapter as Markdown; `/llms.txt` lists them and `/llms-full.txt` is the whole guide in one file.
-- **Prices.** The PDF's Part 5 prints package prices. They are not published on the chapters: the pricing table is the one source (`src/lib/pricing.ts`). A test fails if a package name or price appears in a chapter.
-- **When the PDF is replaced.** Replace `assets/guide/landing-in-barcelona.pdf` and `assets/guide/cover.png`, update the chapter text to match, bump `GUIDE_EDITION` in `src/lib/guide.ts` and `CONTENT_UPDATED` in `src/app/sitemap.ts`.
+- **Source.** One typed model (`src/lib/guide/types.ts`, content in `src/lib/guide/chapters/`) renders the page, the `.md` file and the structured data. The PDF is built from its own HTML (`guide-pdf/`, see its README). Both use the same translation dictionaries (`src/lib/guide/i18n/`), so the PDF and the web page say the same thing in the same words.
+- **Languages.** Each chapter has a URL per language (`/es/guide/<slug>`), a self-referencing canonical, the full hreflang set, and sitemap alternates. Slugs stay English in every language so hreflang pairs line up. A test fails if any string of any chapter has no translation.
+- **Structured data.** Each chapter emits `Article` (with `inLanguage`), `BreadcrumbList` and, where it has one, `FAQPage` (answers quoted verbatim). `/guide` emits a `CollectionPage`/`Book` with `hasPart` and the PDF as its encoding.
+- **For assistants.** `/guide/<slug>.md` (and `/es/guide/<slug>.md`, …) and `Accept: text/markdown` return the chapter as Markdown, charts as tables. `/llms.txt` lists the chapters and `/llms-full.txt` is the English guide in one file.
+- **Prices.** Chapters 13 to 15 and PDF pages 17 to 19 read their prices from `src/lib/pricing.ts` (web) or are checked against it (PDF, by `tests/guide-online.test.ts`). A package the site does not sell cannot appear.
+- **When the text changes.** Edit the chapter data and the matching `guide-pdf/pages/NN.html`, run `guide-pdf/build.mjs en <dir> --extract`, add the new units to each language's dictionaries, run `guide-pdf/build-all.sh`, bump `GUIDE_EDITION` in `src/lib/guide.ts` and `CONTENT_UPDATED` in `src/app/sitemap.ts`.

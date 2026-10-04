@@ -145,7 +145,7 @@ function BlockView({ block, callouts }: { block: Block; callouts?: Labels }) {
       return (
         <figure>
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[22rem] border-collapse text-left text-sm">
+            <table className={`w-full border-collapse text-left text-sm ${block.head.length >= 3 ? "min-w-[30rem]" : "min-w-[20rem]"}`}>
               {block.caption && (
                 <caption className="pb-2 text-left font-sans text-base font-bold tracking-tight text-ink">
                   {block.caption}
@@ -153,8 +153,8 @@ function BlockView({ block, callouts }: { block: Block; callouts?: Labels }) {
               )}
               <thead>
                 <tr className="border-b-2 border-ink">
-                  {block.head.map((h) => (
-                    <th key={h} scope="col" className="py-2 pr-4 font-sans font-bold text-ink">
+                  {block.head.map((h, hi) => (
+                    <th key={h} scope="col" className={`py-2 pr-4 font-sans font-bold text-ink ${block.blankLastColumn && hi === block.head.length - 1 ? "hidden sm:table-cell" : ""}`}>
                       {h}
                     </th>
                   ))}
@@ -168,7 +168,7 @@ function BlockView({ block, callouts }: { block: Block; callouts?: Labels }) {
                         <Inline text={cell} />
                       </td>
                     ))}
-                    {block.blankLastColumn && <td className="w-28 py-2"><span className="block h-px translate-y-5 bg-ink" aria-hidden /></td>}
+                    {block.blankLastColumn && <td className="hidden w-28 py-2 sm:table-cell"><span className="block h-px translate-y-5 bg-ink" aria-hidden /></td>}
                   </tr>
                 ))}
               </tbody>
