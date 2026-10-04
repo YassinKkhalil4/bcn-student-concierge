@@ -69,7 +69,7 @@ export function dictionary(locale: string): Dict {
 }
 
 /** Keys whose string values are identifiers, not words. */
-const SKIP = new Set(["slug", "number", "kind", "tone", "href", "icon", "owner", "url", "id"]);
+const SKIP = new Set(["slug", "number", "kind", "tone", "href", "icon", "owner", "url", "id", "mark"]);
 const needsTranslation = (s: string) => /\p{L}{2}/u.test(s.replace(/\*+/g, "").replace(/\]\([^)]*\)/g, "]"));
 
 /** Every string of a chapter that a translation must cover. */
