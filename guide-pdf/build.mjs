@@ -16,17 +16,20 @@ const files = readdirSync(dir).filter((f) => /^\d\d\.html$/.test(f)).sort();
 const browser = await chromium.launch();
 const page = await (await browser.newContext({ viewport: { width: 794, height: 1123 } })).newPage();
 const unitsSrc = readFileSync(path.join(here, 'units.js'), 'utf8');
-const dictFile = path.join(here, 'i18n', `${locale}.json`);
+const dictFile = path.join(here, '..', 'src', 'lib', 'guide', 'i18n', `pdf-${locale}.json`);
 const dict = locale === 'en' ? null : JSON.parse(readFileSync(dictFile, 'utf8'));
 const extract = flags.includes('--extract');
 const allUnits = {};
 const missingAll = [];
+// Long compounds (German) and long words (French, Catalan) can overrun a fixed
+// column. Let them break, and give the dense map labels a little less size.
+const LOCALE_CSS = `.page{hyphens:auto}.page *{overflow-wrap:anywhere}.st b{font-size:11.5px;line-height:1.2}.nm b{font-size:12.5px}.br .l b{font-size:13px}h1{font-size:52px!important}[style*="28px/1"]{white-space:nowrap;overflow-wrap:normal!important;hyphens:none}`;
 const problems = [];
 const fits = [];
 for (const f of files) {
   const n = f.slice(0, 2);
   const doc = `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><style>${fonts}</style><style>${base}</style><style>${read(`${n}.css`)}</style>
-<style>@page{size:794px 1123px;margin:0}html,body{margin:0;background:#fff}</style></head><body>${read(f)}</body></html>`;
+<style>@page{size:794px 1123px;margin:0}html,body{margin:0;background:#fff}${locale === 'en' ? '' : LOCALE_CSS}</style></head><body>${read(f)}</body></html>`;
   // fonts are referenced relatively: write next to the sources so url(fonts/..) resolves
   const tmp = path.join(here, `.tmp-${n}.html`);
   (await import('node:fs')).writeFileSync(tmp, doc);
