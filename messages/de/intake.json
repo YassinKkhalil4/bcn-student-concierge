@@ -157,24 +157,21 @@
     "errorSummary": "Prüfen Sie diese Angaben, bevor Sie fortfahren",
     "submitFailed": "Wir konnten Ihre Eingabe nicht speichern. Bitte versuchen Sie es erneut.",
     "networkRetry": "Netzwerkfehler. Ihre Antworten sind noch vorhanden – bitte versuchen Sie es erneut.",
-    "checkoutFailed": "Der Bezahlvorgang konnte nicht geöffnet werden. Bitte versuchen Sie es erneut.",
-    "checkoutNetwork": "Netzwerkfehler beim Öffnen des Bezahlvorgangs.",
     "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
     "alreadyPaid": "Diese Akte ist bereits bezahlt.",
     "uploadTitle": "Laden Sie Ihre Dokumente hoch",
     "uploadIntro": "Ihre Akte ist geöffnet. Referenz <code>{ref}</code>. Laden Sie die Ihnen derzeit vorliegenden Unterlagen hoch und fahren Sie anschließend mit der Zahlung fort.",
     "uploadLater": "Fehlt etwas, etwa ein Dokument für den Padrón von Ihrem Vermieter? Das ist normal. Bezahlen Sie jetzt und laden Sie es später über <link>Ihre Akte</link> hoch: Melden Sie sich jederzeit mit der E-Mail-Adresse an, die Sie uns genannt haben.",
-    "openingCheckout": "Sicherer Bezahlvorgang wird geöffnet…",
-    "pay": "Weiter zur Zahlung — {total}",
     "stripeNote": "Karte und Apple Pay, abgewickelt über Stripe. Ihre Kartendaten sehen wir nie."
   },
   "summary": {
     "selected": "Ausgewähltes Paket",
-    "total": "Gesamt",
+    "total": "Paketpreis, zzgl. IVA",
     "change": "Paket ändern",
     "govFees": "Behördengebühren (Modelo 790, Kartenausstellung) zahlen Sie direkt an die spanischen Behörden; sie sind nicht enthalten.",
     "route": "Staatsangehörigkeit",
-    "routePending": "Der Preis hängt von Ihrer Staatsangehörigkeit ab. Er steht fest, sobald Sie sie im ersten Schritt auswählen."
+    "routePending": "Der Preis hängt von Ihrer Staatsangehörigkeit ab. Er steht fest, sobald Sie sie im ersten Schritt auswählen.",
+    "ivaNote": "Beim Bezahlen kommen {rate} % IVA hinzu; dort können Sie auch optionale Extras anhaken."
   },
   "documents": {
     "slots": {

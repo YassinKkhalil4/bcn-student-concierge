@@ -68,7 +68,7 @@ export function Field({
         </p>
       )}
       {error && (
-        <p id={errorId} className="field-error">
+        <p id={errorId} className="field-error enter-alert">
           {error}
         </p>
       )}
@@ -121,7 +121,7 @@ export function SelectField({
       </select>
       {hint && !error && <p id={hintId} className="mt-1.5 text-xs text-ink-soft">{hint}</p>}
       {error && (
-        <p id={errorId} className="field-error">
+        <p id={errorId} className="field-error enter-alert">
           {error}
         </p>
       )}

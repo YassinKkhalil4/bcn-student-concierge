@@ -113,7 +113,7 @@ export function DateSelectField({
         </p>
       )}
       {error && (
-        <p id={errorId} className="field-error">
+        <p id={errorId} className="field-error enter-alert">
           {error}
         </p>
       )}

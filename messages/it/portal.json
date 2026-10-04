@@ -38,9 +38,6 @@
     "checkoutCancelled": "Il pagamento è stato annullato e non è stato addebitato nulla. Può pagare quando vuole.",
     "paymentTitle": "Pagamento in sospeso",
     "paymentBody": "Inizieremo a lavorare non appena il Suo pagamento sarà confermato.",
-    "paymentTotal": "Totale {total}.",
-    "pay": "Paga {total}",
-    "payNow": "Paga ora",
     "passport": "1. Passaporto",
     "enrolment": "2. Iscrizione all’università",
     "padron": "3. Prova di residenza per il Padrón",
@@ -67,7 +64,14 @@
   "pay": {
     "opening": "Avvio della procedura di pagamento sicura…",
     "failed": "Impossibile aprire la pagina di pagamento. Si prega di riprovare.",
-    "network": "Errore di rete. Si prega di riprovare."
+    "network": "Errore di rete. Si prega di riprovare.",
+    "addonsTitle": "Extra opzionali",
+    "addonsHint": "Selezioni quelli che desidera. Ciascuno viene consegnato in digitale e aggiunto a questo pagamento.",
+    "iva": "IVA ({rate} %)",
+    "total": "Totale da pagare",
+    "button": "Paga {total}",
+    "expired": "La Sua sessione è scaduta. La preghiamo di effettuare nuovamente l’accesso.",
+    "paid": "Questa pratica è già stata pagata."
   },
   "padron": {
     "question": "Dove risiede?",

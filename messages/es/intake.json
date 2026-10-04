@@ -157,24 +157,21 @@
     "errorSummary": "Revisa estas respuestas antes de continuar",
     "submitFailed": "No hemos podido guardar su envío. Por favor, inténtelo de nuevo.",
     "networkRetry": "Error de red. Sus respuestas siguen aquí; por favor, vuelva a intentarlo.",
-    "checkoutFailed": "No se ha podido abrir la página de pago. Inténtelo de nuevo.",
-    "checkoutNetwork": "Error de red al abrir la página de pago.",
     "sessionExpired": "Su sesión ha caducado. Por favor, vuelva a iniciar sesión.",
     "alreadyPaid": "Este expediente ya está pagado.",
     "uploadTitle": "Suba sus documentos",
     "uploadIntro": "Su expediente está abierto. Referencia <code>{ref}</code>. Suba la documentación de la que dispone actualmente y, a continuación, continúe con el pago.",
     "uploadLater": "¿Le falta algo, como un documento para el Padrón que debe darle su arrendador? Es normal. Pague ahora y súbalo más tarde desde <link>su expediente</link>: inicie sesión cuando quiera con el correo electrónico que nos facilitó.",
-    "openingCheckout": "Iniciando el proceso de pago seguro…",
-    "pay": "Continuar con el pago — {total}",
     "stripeNote": "Tarjeta y Apple Pay, gestionados por Stripe. Nunca vemos los datos de su tarjeta."
   },
   "summary": {
     "selected": "Paquete seleccionado",
-    "total": "Total",
+    "total": "Precio del paquete, sin IVA",
     "change": "Modificar paquete",
     "govFees": "Las tasas administrativas (Modelo 790, expedición de tarjetas) las abona usted directamente a las autoridades españolas y no están incluidas.",
     "route": "Ciudadanía",
-    "routePending": "El precio depende de su nacionalidad. Se fija en cuanto la elija en el primer paso."
+    "routePending": "El precio depende de su nacionalidad. Se fija en cuanto la elija en el primer paso.",
+    "ivaNote": "Al pagar se añade el {rate} % de IVA, y ahí también puede marcar complementos opcionales."
   },
   "documents": {
     "slots": {

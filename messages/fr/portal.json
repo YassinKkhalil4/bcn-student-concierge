@@ -38,9 +38,6 @@
     "checkoutCancelled": "Le paiement a été annulé et aucun montant n’a été prélevé. Vous pouvez payer dès que vous le souhaitez.",
     "paymentTitle": "Paiement en attente",
     "paymentBody": "Nous commençons à travailler dès que votre paiement est confirmé.",
-    "paymentTotal": "Total {total}.",
-    "pay": "Payer {total}",
-    "payNow": "Payer maintenant",
     "passport": "1. Passeport",
     "enrolment": "2. Inscription à l’université",
     "padron": "3. Justificatif de domicile pour le Padrón",
@@ -67,7 +64,14 @@
   "pay": {
     "opening": "Lancement du paiement sécurisé…",
     "failed": "Impossible d’ouvrir la page de paiement. Veuillez réessayer.",
-    "network": "Erreur réseau. Veuillez réessayer."
+    "network": "Erreur réseau. Veuillez réessayer.",
+    "addonsTitle": "Options facultatives",
+    "addonsHint": "Cochez celles que vous souhaitez. Chacune est livrée en numérique et ajoutée à ce paiement.",
+    "iva": "IVA ({rate} %)",
+    "total": "Total à payer",
+    "button": "Payer {total}",
+    "expired": "Votre session a expiré. Veuillez vous reconnecter.",
+    "paid": "Ce dossier est déjà payé."
   },
   "padron": {
     "question": "Où habitez-vous ?",

@@ -98,6 +98,12 @@ export const cases = pgTable(
      */
     emailIndex: text("email_index"),
     tierId: text("tier_id").notNull(),
+    /**
+     * Optional extras the student ticked at checkout (ids from ADDON_IDS in
+     * lib/pricing.ts). Written when checkout opens and again from the Stripe
+     * session once paid, so it reflects what was actually bought.
+     */
+    addonIds: jsonb("addon_ids").$type<string[]>().notNull().default(sql`'[]'::jsonb`),
     /** Derived from nationality at intake; stored so the dashboard can filter. */
     formId: text("form_id", { enum: FORM_IDS }).notNull(),
     /** Internal workflow stage, set by staff. */

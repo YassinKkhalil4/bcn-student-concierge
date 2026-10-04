@@ -4,18 +4,18 @@
   "hero": {
     "eyebrow": "Barcelona · Internationale Studierende · EU- und Nicht-EU-Weg",
     "title": "Dein TIE, dein Padrón, deine Termine: vorbereitet, gebucht und gleich beim ersten Mal richtig.",
-    "body": "Studierende von außerhalb der EU haben ab der Einreise in der Regel einen Monat Zeit, den TIE zu beantragen, und der Termin ist der Teil, den niemand beschleunigen kann. Wir lesen deine Genehmigung, bauen die Akte auf und buchen den Termin auf deinen Namen — damit dich, wenn einer frei wird, nichts in den Unterlagen wieder nach Hause schickt. Schick uns dein Einreisedatum und wir sagen dir noch heute, wie viele Tage dir bleiben.",
+    "body": "Studierende von außerhalb der EU haben ab der Einreise in der Regel einen Monat Zeit, den TIE zu beantragen, und der Termin ist der Teil, den niemand beschleunigen kann. Wir lesen deine Genehmigung, bauen die Akte auf und buchen — mit The Soft Landing — den Termin auf deinen Namen, damit dich, wenn einer frei wird, nichts in den Unterlagen wieder nach Hause schickt. Schick uns dein Einreisedatum und wir sagen dir noch heute, wie viele Tage dir bleiben.",
     "primaryCta": "Meine Frist kostenlos prüfen",
     "secondaryCta": "Pakete und Preise ansehen",
-    "note": "Die Prüfung ist kostenlos, kommt am selben Tag und braucht keine Karte. Danach sind die Preise fest: Der angezeigte Preis ist der Preis, den du zahlst."
+    "note": "Die Prüfung ist kostenlos, kommt am selben Tag und braucht keine Karte. Danach sind die Preise fest: Der angezeigte Preis ist der Preis zuzüglich IVA, und du siehst den Gesamtbetrag, bevor du zahlst."
   },
   "proof": {
     "heading": "Worauf du uns festnageln kannst",
     "items": [
-      "Ein Festpreis, genannt bevor du zahlst. Wir rechnen nichts nach Stunden ab.",
+      "Ein Festpreis, genannt bevor du zahlst und zuzüglich IVA ausgewiesen. Wir rechnen nichts nach Stunden ab.",
       "Jedes Formular läuft auf deinen Namen. Wir unterschreiben nie als deine Vertretung.",
       "Wir verschlüsseln jeden Passscan mit einem eigenen Schlüssel und löschen ihn 30 Tage nach Abschluss deiner Akte.",
-      "Kein Termin in sechs Wochen? Die Hälfte kommt zurück, und die Akte bleibt deine."
+      "Bei The Soft Landing: kein Termin in sechs Wochen? Die Hälfte kommt zurück, und die Akte bleibt deine."
     ]
   },
   "trust": {
@@ -45,7 +45,7 @@
       {
         "problem": "Der Padrón blockiert lautlos alles Weitere",
         "detail": "In einem Hostel, einem Airbnb oder einer nicht gemeldeten Untermiete kannst du dich derzeit nicht anmelden. Ein Vermieter, der sich weigert, oder eine Wohnung in Sant Cugat, obwohl du von Barcelona ausgingst, blockiert Gesundheitskarte und TIE gleich mit.",
-        "solution": "Mit dem Fixer gehen wir mit dir aufs Rathaus und übersetzen, fragen die Gemeinde nach ihren alternativen Nachweiswegen und kümmern uns um die richtige Gemeinde. Was wir nie tun: dich an einer Adresse anmelden, an der du nicht wohnst."
+        "solution": "Wir bereiten das Vermieterformular für die richtige Gemeinde vor, sagen dir, was das Rathaus zusätzlich verlangt und welche Anmeldewege es für deine Art von Unterkunft gibt. Was wir nie tun: dich an einer Adresse anmelden, an der du nicht wohnst."
       }
     ]
   },
@@ -63,18 +63,18 @@
       },
       {
         "title": "Akte zusammenstellen",
-        "body": "Wir erzeugen das richtige Formular — EX-17 auf dem Nicht-EU-Weg, EX-18 auf dem EU-Weg —, richten das Modelo 790 ein und stellen die Ready File zusammen. Kurier an deine Adresse oder Abholung, dazu ein PDF zum Selbstausdrucken, sobald alles fertig ist."
+        "body": "Wir erzeugen das richtige Formular — EX-17 auf dem Nicht-EU-Weg, EX-18 auf dem EU-Weg —, richten das Modelo 790 ein und stellen die Ready File zusammen. Die ganze Akte bekommst du als PDF zum Selbstausdrucken, sobald alles fertig ist."
       },
       {
         "title": "Termine, dann Nachverfolgung",
-        "body": "Wir suchen und buchen die Padrón- und TIE/CUE-Termine, erklären dir, was gefragt wird, und bleiben erreichbar, während du am Schalter stehst. Die Akte begleiten wir 90 Tage, bis zur Abholung."
+        "body": "Mit The Soft Landing suchen und buchen wir die Padrón- und TIE/CUE-Termine, erklären dir, was gefragt wird, und bleiben erreichbar, während du am Schalter stehst. Mit The Ready File buchst du sie selbst, mit unserer Schritt-für-Schritt-Anleitung."
       }
     ]
   },
   "pricing": {
     "eyebrow": "Transparente Preise",
-    "title": "Drei Pakete. Je zwei Preise, weil es zwei Wege gibt.",
-    "body": "Der EU-Weg ist weniger Arbeit und kostet weniger: keine Fingerabdrücke, keine Gebühr von 16,08 €. Welcher für dich gilt, klären wir bei der Ersteinschätzung — bevor du etwas bezahlst. Staatliche Gebühren zahlst du direkt selbst; sie sind nie in unserem Honorar enthalten.",
+    "title": "Zwei Pakete. Je zwei Preise, weil es zwei Wege gibt.",
+    "body": "Der EU-Weg ist weniger Arbeit und kostet weniger: keine Fingerabdrücke, keine Gebühr von 16,08 €. Welcher für dich gilt, klären wir bei der Ersteinschätzung — bevor du etwas bezahlst. Die Preise verstehen sich zuzüglich IVA, die beim Bezahlen hinzukommt; dort kannst du optionale Extras anhaken: ein T-jove-Ticket, die Carnet Jove, ISIC oder eine eSIM. Staatliche Gebühren zahlst du direkt selbst; sie sind nie in unserem Honorar enthalten.",
     "cta": "Vollständigen Vergleich ansehen"
   },
   "faq": {
@@ -87,11 +87,11 @@
       },
       {
         "q": "Was kostet es, und wann zahle ich?",
-        "a": "Der Preis auf der Karte ist der ganze Preis. Wir schlagen beim Bezahlen nichts drauf, rechnen nichts nach Stunden ab und verstecken keine staatliche Gebühr darin. Du zahlst, sobald die Ersteinschätzung bestätigt hat, welcher Weg für dich gilt. Davor schuldest du uns nichts, und wenn wir nicht helfen können, sagen wir das, statt dein Geld zu nehmen."
+        "a": "Der Preis auf der Karte ist das ganze Honorar, zuzüglich IVA. Beim Bezahlen kommen 21 % IVA und die optionalen Extras hinzu, die du anhakst, und wir zeigen dir den Gesamtbetrag, bevor du zahlst. Wir rechnen nichts nach Stunden ab und verstecken keine staatliche Gebühr darin. Du zahlst, sobald die Ersteinschätzung bestätigt hat, welcher Weg für dich gilt. Davor schuldest du uns nichts, und wenn wir nicht helfen können, sagen wir das, statt dein Geld zu nehmen."
       },
       {
         "q": "Und wenn rechtzeitig kein Termin frei wird?",
-        "a": "Wir suchen bis zu sechs Wochen ab deiner Übermittlung im offiziellen Portal. Wird in diesem Fenster keiner frei, bekommst du die Hälfte zurück und behältst die komplette Ready File (Formulare, Kopien, den Modelo 790, die Prüfung), damit du an dem Tag bereit bist, an dem ein Termin auftaucht. Dazu bekommst du eine datierte Bescheinigung über jeden Versuch. Spanische Ämter akzeptieren das üblicherweise als Begründung für eine verspätete Anmeldung, verpflichtet ist dazu aber niemand."
+        "a": "Bei The Soft Landing suchen wir bis zu sechs Wochen ab deiner Übermittlung im offiziellen Portal. Wird in diesem Fenster keiner frei, bekommst du die Hälfte zurück und behältst die komplette Ready File (Formulare, den Modelo 790, die Prüfung), damit du an dem Tag bereit bist, an dem ein Termin auftaucht. Dazu bekommst du eine datierte Bescheinigung über jeden Versuch. Spanische Ämter akzeptieren das üblicherweise als Begründung für eine verspätete Anmeldung, verpflichtet ist dazu aber niemand."
       },
       {
         "q": "Ich glaube, meine Frist ist schon abgelaufen. Lohnt sich das Nachfragen?",
@@ -99,11 +99,11 @@
       },
       {
         "q": "Muss ich selbst zum Termin?",
-        "a": "Ja. Biometrische Termine verlangen dein persönliches Erscheinen mit den Originaldokumenten. Wir bereiten die Akte vor, sichern den Platz und briefen dich, und du kannst uns vom Schalter aus anrufen, wenn du etwas nicht verstehst. Das Erscheinen ist deines, in deinem eigenen Namen."
+        "a": "Ja. Biometrische Termine verlangen dein persönliches Erscheinen mit den Originaldokumenten. Wir bereiten die Akte vor; mit The Soft Landing sichern wir außerdem den Platz und briefen dich, und du kannst uns vom Schalter aus anrufen, wenn du etwas nicht verstehst. Das Erscheinen ist deines, in deinem eigenen Namen."
       },
       {
         "q": "Meine Eltern zahlen. Können sie eingebunden werden?",
-        "a": "Natürlich. Sie können auf ihren eigenen Namen zahlen und die Rechnung erhalten, und beim Fixer erstellen wir am Ende einen datierten Abschlussbericht: was eingereicht wurde, was registriert ist, was noch offen ist, dein Abholtermin und die Nummern für den Notfall. Was wir nicht tun: den Abschnitt zur gesetzlichen Vertretung auf deinem Formular ausfüllen — dieses Feld bleibt leer, weil weder sie noch wir deine Vertretung sind."
+        "a": "Natürlich. Sie können auf ihren eigenen Namen zahlen und die Rechnung erhalten. Was wir nicht tun: den Abschnitt zur gesetzlichen Vertretung auf deinem Formular ausfüllen — dieses Feld bleibt leer, weil weder sie noch wir deine Vertretung sind."
       },
       {
         "q": "Was passiert danach mit meinen Passscans?",

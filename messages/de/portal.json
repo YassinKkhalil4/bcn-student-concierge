@@ -38,9 +38,6 @@
     "checkoutCancelled": "Die Zahlung wurde abgebrochen, es wurde nichts berechnet. Sie können jederzeit bezahlen.",
     "paymentTitle": "Ausstehende Zahlung",
     "paymentBody": "Wir beginnen mit der Bearbeitung, sobald Ihre Zahlung bestätigt ist.",
-    "paymentTotal": "Gesamtbetrag {total}.",
-    "pay": "{total} bezahlen",
-    "payNow": "Jetzt bezahlen",
     "passport": "1. Reisepass",
     "enrolment": "2. Immatrikulation an der Universität",
     "padron": "3. Adressnachweis für den Padrón",
@@ -67,7 +64,14 @@
   "pay": {
     "opening": "Sicherer Bezahlvorgang wird geöffnet…",
     "failed": "Der Bezahlvorgang konnte nicht geöffnet werden. Bitte versuchen Sie es erneut.",
-    "network": "Netzwerkfehler. Bitte versuchen Sie es erneut."
+    "network": "Netzwerkfehler. Bitte versuchen Sie es erneut.",
+    "addonsTitle": "Optionale Extras",
+    "addonsHint": "Haken Sie an, was Sie möchten. Jedes Extra wird digital geliefert und zu dieser Zahlung hinzugefügt.",
+    "iva": "IVA ({rate} %)",
+    "total": "Gesamtbetrag",
+    "button": "{total} bezahlen",
+    "expired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
+    "paid": "Diese Akte ist bereits bezahlt."
   },
   "padron": {
     "question": "Wo wohnen Sie?",
