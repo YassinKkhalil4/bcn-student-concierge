@@ -12,7 +12,8 @@
     "begin": "Begin",
     "triage": "Free triage",
     "ctaPrimary": "Check my deadline for free",
-    "ctaPrimaryShort": "Free check"
+    "ctaPrimaryShort": "Free check",
+    "guide": "Free guide"
   },
   "language": {
     "label": "Language"
@@ -21,7 +22,7 @@
     "tagline": "We prepare the Spanish residency paperwork international students in Barcelona have to get right: the TIE, the Padrón, the forms, the appointments. Independent, fixed-fee, and always in your own name.",
     "services": "Services",
     "packages": "Packages & pricing",
-    "guide": "Free guide (PDF)",
+    "guide": "Free guide",
     "intake": "Student portal",
     "process": "Process",
     "legal": "Legal",

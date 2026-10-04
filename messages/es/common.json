@@ -12,7 +12,8 @@
     "begin": "Empezar",
     "triage": "Triaje gratuito",
     "ctaPrimary": "Consultar mi plazo gratis",
-    "ctaPrimaryShort": "Consulta gratis"
+    "ctaPrimaryShort": "Consulta gratis",
+    "guide": "Guía gratuita"
   },
   "language": {
     "label": "Idioma"
@@ -21,7 +22,7 @@
     "tagline": "Preparamos el papeleo de residencia en España que los estudiantes internacionales en Barcelona no pueden equivocar: el TIE, el Padrón, los formularios, las citas. Independientes, de precio cerrado y siempre a tu nombre.",
     "services": "Servicios",
     "packages": "Paquetes y precios",
-    "guide": "Free guide (PDF)",
+    "guide": "Guía gratuita",
     "intake": "Portal del estudiante",
     "process": "Proceso",
     "legal": "Aviso legal",

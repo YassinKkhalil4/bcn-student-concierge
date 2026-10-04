@@ -131,7 +131,7 @@ export function faqPage(items: { q: string; a: string }[]): Json {
   };
 }
 
-export function breadcrumbs(trail: { name: string; page: PublicPage }[], locale: string): Json {
+export function breadcrumbs(trail: { name: string; page: PublicPage | string }[], locale: string): Json {
   return {
     "@type": "BreadcrumbList",
     itemListElement: trail.map((step, i) => ({
@@ -146,4 +146,60 @@ export function breadcrumbs(trail: { name: string; page: PublicPage }[], locale:
 /** One `@graph` per page: several nodes, one script, no duplicated @ids. */
 export function graph(...nodes: Json[]): string {
   return JSON.stringify({ "@context": "https://schema.org", "@graph": nodes });
+}
+
+/**
+ * One guide chapter as an Article. The body is the chapter's own plain text,
+ * and `about` carries the terms a student searches for. `datePublished` and
+ * `dateModified` are the guide's edition date, bumped by hand like the sitemap's.
+ */
+export function guideArticle(c: {
+  slug: string;
+  title: string;
+  description: string;
+  keyFacts: string[];
+  sources: { label: string; url?: string }[];
+}, edition: string): Json {
+  const url = `${siteOrigin()}/guide/${c.slug}`;
+  return compact({
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: c.title,
+    description: c.description,
+    abstract: c.keyFacts.join(" "),
+    url,
+    mainEntityOfPage: url,
+    inLanguage: "en",
+    isAccessibleForFree: true,
+    datePublished: edition,
+    dateModified: edition,
+    author: { "@id": ORG_ID() },
+    publisher: { "@id": ORG_ID() },
+    isPartOf: { "@id": `${siteOrigin()}/guide#guide` },
+    citation: c.sources.filter((s) => s.url).map((s) => ({ "@type": "CreativeWork", name: s.label, url: s.url })),
+  });
+}
+
+/** The guide itself: a collection of its chapters, and the PDF as the same work. */
+export function guideCollection(
+  chapters: readonly { slug: string; title: string }[],
+  name: string,
+  description: string,
+  pdfUrl: string,
+  edition: string,
+): Json {
+  const url = `${siteOrigin()}/guide`;
+  return {
+    "@type": ["CollectionPage", "Book"],
+    "@id": `${url}#guide`,
+    name,
+    description,
+    url,
+    inLanguage: "en",
+    isAccessibleForFree: true,
+    dateModified: edition,
+    publisher: { "@id": ORG_ID() },
+    hasPart: chapters.map((c) => ({ "@type": "Article", name: c.title, url: `${siteOrigin()}/guide/${c.slug}` })),
+    encoding: { "@type": "MediaObject", encodingFormat: "application/pdf", contentUrl: pdfUrl },
+  };
 }

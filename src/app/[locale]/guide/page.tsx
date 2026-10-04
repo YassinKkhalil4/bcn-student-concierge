@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import NextLink from "next/link";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { SOURCE_PARAM, parseSource, type GuideSource } from "@/lib/attribution";
 import { GUIDE_FILENAME, GUIDE_FRAMING, GUIDE_PATH } from "@/lib/guide";
 import { alternatesFor } from "@/lib/seo";
-import { DownloadMark } from "@/components/icons";
+import { ArrowMark, DownloadMark } from "@/components/icons";
+import { JsonLd } from "@/components/JsonLd";
+import { CHAPTERS, chapterPath } from "@/lib/guide/chapters";
+import { GUIDE_EDITION } from "@/lib/guide";
+import { siteOrigin } from "@/lib/agents/pages";
+import { breadcrumbs, graph, guideCollection, organization, website } from "@/lib/structured-data";
 import cover from "../../../../assets/guide/cover.png";
 
 /*
@@ -32,28 +38,40 @@ export default async function GuidePage({ params, searchParams }: Params) {
   const { locale } = await params;
   setRequestLocale(locale);
   const s = (await searchParams)[SOURCE_PARAM];
-  return <Guide locale={locale} source={parseSource(Array.isArray(s) ? s[0] : s)} />;
-}
-
-interface Section {
-  number: string;
-  title: string;
-  detail?: string;
+  const t = await getTranslations({ locale, namespace: "guide" });
+  const tc = await getTranslations({ locale, namespace: "common" });
+  return (
+    <>
+      <JsonLd
+        json={graph(
+          organization(tc("brand"), t("metaDescription")),
+          website(tc("brand"), locale),
+          guideCollection(CHAPTERS, t("metaTitle"), t("metaDescription"), `${siteOrigin()}${GUIDE_PATH}`, GUIDE_EDITION),
+          breadcrumbs([{ name: tc("brand"), page: "/" }, { name: t("metaTitle"), page: "/guide" }], locale),
+        )}
+      />
+      <Guide locale={locale} source={parseSource(Array.isArray(s) ? s[0] : s)} />
+    </>
+  );
 }
 
 /**
  * /guide — the lead magnet, UNGATED. No email, no form, no modal before the
- * file: the guide tells readers they can do all of this themselves, and
- * /triage already asks for far more than an email ever would.
+ * guide: it tells readers they can do all of this themselves, and /triage
+ * already asks for far more than an email ever would.
  *
- * Order is fixed: the cover, the promise, the download (the dominant action),
- * what is inside, the edition — and only then, beneath the download, one
- * triage link. Do not move the triage link above the download.
+ * The guide is readable here, chapter by chapter (/guide/<slug>), and still
+ * downloadable. Reading is the dominant action, because most visitors want
+ * the answer and not a file; the PDF stays one click away for anyone who
+ * wants to print it.
+ *
+ * Order is fixed: the cover, the promise, read online (dominant) and the PDF,
+ * the chapter list, the edition — and only then one triage link. Do not move
+ * the triage link above the guide.
  */
 function Guide({ locale, source }: { locale: string; source: GuideSource | null }) {
   const t = useTranslations("guide");
   const framing = (key: "eyebrow" | "lead") => t(`framing.${GUIDE_FRAMING}.${key}`);
-  const sections = t.raw("sections") as Section[];
 
   // The link itself carries the school and the language, so a download is
   // attributed even where the browser keeps no cookie.
@@ -82,15 +100,20 @@ function Guide({ locale, source }: { locale: string; source: GuideSource | null 
             <h1 className="mt-6 max-w-[20ch] text-display-lg text-onink">{t("title")}</h1>
             <p className="mt-5 max-w-xl font-serif text-lede text-onink-muted">{t("subtitle")}</p>
 
-            {/* 3 — the download: the one dominant action on the page */}
-            <a
-              href={downloadHref}
-              download={GUIDE_FILENAME}
-              className="btn-primary mt-8 w-full !px-8 !py-4 !text-base sm:w-auto"
-            >
-              <DownloadMark className="h-5 w-5 flex-none" />
-              {t("download")}
-            </a>
+            {/* 3 — read it here: the one dominant action on the page */}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+              <NextLink
+                href={chapterPath(CHAPTERS[0]!.slug)}
+                className="btn-primary w-full !px-8 !py-4 !text-base sm:w-auto"
+              >
+                {t("readOnline")}
+                <ArrowMark className="h-5 w-5 flex-none" />
+              </NextLink>
+              <a href={downloadHref} download={GUIDE_FILENAME} className="btn-secondary w-full !px-6 !py-4 !text-base sm:w-auto">
+                <DownloadMark className="h-5 w-5 flex-none" />
+                {t("download")}
+              </a>
+            </div>
 
             <p className="mt-7 max-w-xl border-l-2 border-accent pl-4 font-serif text-read italic text-onink-muted">
               {framing("lead")}
@@ -100,23 +123,23 @@ function Guide({ locale, source }: { locale: string; source: GuideSource | null 
       </section>
 
       <section className="container-x section-band">
-        {/* 4 — what's inside */}
-        <h2 className="max-w-2xl text-display-lg text-ink">{t("insideTitle")}</h2>
+        {/* 4 — the chapters, each its own page */}
+        <h2 className="max-w-2xl text-display-lg text-ink">{t("chaptersTitle")}</h2>
+        <p className="prose-body mt-3 max-w-2xl">{t("chaptersNote")}</p>
         <ol className="mt-10 grid border-t-2 border-ink sm:grid-cols-2 sm:gap-x-14">
-          {sections.map((section) => (
-            <li key={section.number} className="flex gap-5 border-b border-paper-line py-4">
-              <span className="w-8 flex-none pt-0.5 font-mono text-sm font-medium text-accent">
-                {section.number}
-              </span>
-              <span className="min-w-0">
-                <span className="block font-sans text-sm font-bold tracking-tight text-ink">
-                  {section.title}
+          {CHAPTERS.map((chapter) => (
+            <li key={chapter.slug} className="border-b border-paper-line">
+              <NextLink href={chapterPath(chapter.slug)} className="flex gap-5 py-4 hover:bg-paper-dim">
+                <span className="w-8 flex-none pt-0.5 font-mono text-sm font-medium text-accent">{chapter.number}</span>
+                <span className="min-w-0">
+                  <span className="block font-sans text-sm font-bold tracking-tight text-ink">{chapter.navTitle}</span>
+                  <span className="prose-body mt-1 block">{chapter.description}</span>
                 </span>
-                {section.detail && <span className="prose-body mt-1 block">{section.detail}</span>}
-              </span>
+              </NextLink>
             </li>
           ))}
         </ol>
+        <p className="mt-4 text-sm text-ink-soft">{t("pdfOnlyNote")}</p>
 
         {/* 5 — the edition */}
         <p className="mt-7 font-mono text-xs text-ink-soft">{t("edition")}</p>

@@ -12,7 +12,8 @@
     "begin": "Comenceu",
     "triage": "Triatge gratuït",
     "ctaPrimary": "Consultar el meu termini gratis",
-    "ctaPrimaryShort": "Consulta gratis"
+    "ctaPrimaryShort": "Consulta gratis",
+    "guide": "Guia gratuïta"
   },
   "language": {
     "label": "Idioma"
@@ -21,7 +22,7 @@
     "tagline": "Preparem la paperassa de residència a Espanya que els estudiants internacionals a Barcelona no poden equivocar: el TIE, el Padró, els formularis, les cites. Independents, de preu tancat i sempre al teu nom.",
     "services": "Serveis",
     "packages": "Paquets i preus",
-    "guide": "Free guide (PDF)",
+    "guide": "Guia gratuïta",
     "intake": "Portal de l’estudiant",
     "process": "Procés",
     "legal": "Legal",

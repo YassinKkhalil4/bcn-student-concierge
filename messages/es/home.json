@@ -121,5 +121,13 @@
     "body": "Ve directo al alta si ya sabes qué paquete quieres: hoy mismo empezamos a montar el expediente. Si todavía lo estás pensando, la consulta gratuita te dice qué vía te corresponde y cuántos días tienes, y no cuesta nada. En cualquier caso sabrás dónde estás antes de gastar nada.",
     "primaryCta": "Consultar mi plazo gratis",
     "secondaryCta": "Iniciar mi alta"
+  },
+  "guideBand": {
+    "eyebrow": "Guía gratuita",
+    "title": "Lee la guía aquí. Sin descargas, sin correo.",
+    "body": "Landing in Barcelona son {count} capítulos breves sobre la TIE, el certificado de registro de ciudadano de la UE, el padrón, el seguro médico y tus primeros 30 días. Abre cualquier capítulo en el navegador o quédate con el PDF.",
+    "read": "Leer en línea",
+    "download": "Descargar el PDF",
+    "note": "Los capítulos están en inglés."
   }
 }

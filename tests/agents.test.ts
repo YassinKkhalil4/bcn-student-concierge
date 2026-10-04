@@ -61,7 +61,9 @@ describe("robots.txt", () => {
 });
 
 describe("sitemap", () => {
-  const entries = sitemap();
+  // The guide's chapters are English only and have their own test
+  // (tests/guide-online.test.ts); this block is about the translated pages.
+  const entries = sitemap().filter((e) => !new URL(e.url).pathname.startsWith("/guide/"));
 
   it("covers every public page in every language, and nothing else", () => {
     expect(entries).toHaveLength(PUBLIC_PAGES.length * LOCALES.length);

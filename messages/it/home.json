@@ -121,5 +121,13 @@
     "body": "Vai dritto alla pratica se sai quale pacchetto vuoi: oggi stesso iniziamo a costruirla. Se ci stai ancora ragionando, il controllo gratuito ti dice quale percorso ti riguarda e quanti giorni hai, e non costa nulla. In ogni caso saprai a che punto sei prima di spendere qualcosa.",
     "primaryCta": "Controlla gratis la mia scadenza",
     "secondaryCta": "Avvia la mia pratica"
+  },
+  "guideBand": {
+    "eyebrow": "Guida gratuita",
+    "title": "Leggi la guida qui. Senza download, senza e-mail.",
+    "body": "Landing in Barcelona sono {count} capitoli brevi su TIE, certificato di registrazione dei cittadini UE, padrón, copertura sanitaria e i tuoi primi 30 giorni. Apri un capitolo nel browser, oppure tieni il PDF.",
+    "read": "Leggi online",
+    "download": "Scarica il PDF",
+    "note": "I capitoli sono in inglese."
   }
 }

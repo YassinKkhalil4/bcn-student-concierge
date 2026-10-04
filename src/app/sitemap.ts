@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { LOCALES, localizedPath } from "@/i18n/routing";
-import { PUBLIC_PAGES, siteOrigin } from "@/lib/agents/pages";
+import { GUIDE_CHAPTER_PATHS, PUBLIC_PAGES, siteOrigin } from "@/lib/agents/pages";
 
 export const dynamic = "force-dynamic";
 
@@ -17,13 +17,21 @@ export const dynamic = "force-dynamic";
  * legal text is edited — a build timestamp would claim every page changed on
  * every deploy, which search engines learn to ignore.
  */
-const CONTENT_UPDATED = new Date("2026-09-17T00:00:00Z");
+const CONTENT_UPDATED = new Date("2026-10-04T00:00:00Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const origin = siteOrigin();
   const url = (locale: string, page: string) => `${origin}${localizedPath(locale, page)}`;
 
-  return PUBLIC_PAGES.flatMap((page) =>
+  // Chapters exist in English only: one entry each, no alternates.
+  const chapters = GUIDE_CHAPTER_PATHS.map((path) => ({
+    url: url("en", path),
+    lastModified: CONTENT_UPDATED,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...PUBLIC_PAGES.flatMap((page) =>
     LOCALES.map((locale) => ({
       url: url(locale, page),
       lastModified: CONTENT_UPDATED,
@@ -36,5 +44,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ]),
       },
     })),
-  );
+  ), ...chapters];
 }

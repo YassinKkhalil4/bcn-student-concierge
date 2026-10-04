@@ -121,5 +121,13 @@
     "body": "Geh direkt zur Aufnahme, wenn du weißt, welches Paket du willst: wir beginnen noch heute mit der Akte. Wenn du noch überlegst, sagt dir die kostenlose Prüfung, welcher Weg gilt und wie viele Tage dir bleiben, und sie kostet nichts. So oder so weißt du, wo du stehst, bevor du etwas ausgibst.",
     "primaryCta": "Meine Frist kostenlos prüfen",
     "secondaryCta": "Meine Aufnahme starten"
+  },
+  "guideBand": {
+    "eyebrow": "Gratis-Ratgeber",
+    "title": "Lies den Ratgeber hier. Ohne Download, ohne E-Mail.",
+    "body": "Landing in Barcelona besteht aus {count} kurzen Kapiteln zu TIE, EU-Anmeldebescheinigung, Padrón, Krankenversicherung und deinen ersten 30 Tagen. Öffne jedes Kapitel im Browser oder behalte das PDF.",
+    "read": "Online lesen",
+    "download": "PDF herunterladen",
+    "note": "Die Kapitel sind auf Englisch."
   }
 }

@@ -12,7 +12,8 @@
     "begin": "Commencer",
     "triage": "Triage gratuit",
     "ctaPrimary": "Vérifier mon délai gratuitement",
-    "ctaPrimaryShort": "Vérifier — gratuit"
+    "ctaPrimaryShort": "Vérifier — gratuit",
+    "guide": "Guide gratuit"
   },
   "language": {
     "label": "Langue"
@@ -21,7 +22,7 @@
     "tagline": "Nous préparons les démarches de résidence en Espagne que les étudiants internationaux à Barcelone ne peuvent pas rater : le TIE, le Padrón, les formulaires, les rendez-vous. Indépendants, à prix fixe, et toujours à votre nom.",
     "services": "Services",
     "packages": "Formules et tarifs",
-    "guide": "Free guide (PDF)",
+    "guide": "Guide gratuit",
     "intake": "Portail étudiant",
     "process": "Processus",
     "legal": "Juridique",

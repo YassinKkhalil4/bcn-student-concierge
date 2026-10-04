@@ -3,7 +3,7 @@ import createIntlMiddleware from "next-intl/middleware";
 import { localizedPath, routing, splitLocale } from "@/i18n/routing";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/admin/session";
 import { SOURCE_COOKIE, SOURCE_PARAM, attributionCookieOptions, parseSource } from "@/lib/attribution";
-import { isPublicPage, markdownPath, type PublicPage } from "@/lib/agents/pages";
+import { isAgentPage, isGuideChapterPath, markdownPath } from "@/lib/agents/pages";
 import { PORTAL_COOKIE, verifyPortalSession } from "@/lib/portal/session";
 
 /**
@@ -53,7 +53,7 @@ const PORTAL_PUBLIC = new Set([
 function markdownRequest(
   request: NextRequest,
   unprefixed: string,
-): { page: PublicPage; negotiated: boolean } | null {
+): { page: string; negotiated: boolean } | null {
   if (request.method !== "GET") return null;
   const asked = (request.headers.get("accept") ?? "").includes("text/markdown");
   const fromUrl = unprefixed.endsWith(".md")
@@ -62,7 +62,7 @@ function markdownRequest(
       : unprefixed.slice(0, -3)
     : null;
   const page = fromUrl ?? unprefixed;
-  if (!isPublicPage(page)) return null;
+  if (!isAgentPage(page)) return null;
   if (fromUrl !== null) return { page, negotiated: false };
   return asked ? { page, negotiated: true } : null;
 }
@@ -109,6 +109,17 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   // Files served by a handler (the guide PDF): no language, no page chrome.
   const download = pathname.startsWith("/downloads/");
   const portal = isPortalPath(api ? pathname : unprefixed);
+
+  // ── Guide chapters are English only ────────────────────────────────
+  // "/fr/guide/getting-your-tie" has no French text to show. Send the reader to
+  // the one real URL rather than serve English under a French address, which
+  // would also be a duplicate of the canonical page.
+  if (locale !== "en" && request.method === "GET" && !admin && !api) {
+    const bare = unprefixed.endsWith(".md") ? unprefixed.slice(0, -3) : unprefixed;
+    if (isGuideChapterPath(bare)) {
+      return NextResponse.redirect(new URL(unprefixed, request.url), 308);
+    }
+  }
 
   // ── Admin gate (first of two) ────────────────────────────────────────
   // Every admin handler verifies the session again itself; this gate is not
@@ -185,7 +196,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 
   // Tell agents the page has a machine-readable form (RFC 8288). Appended:
   // next-intl already put the hreflang alternates in this header.
-  if (!admin && !api && !portal && !download && isPublicPage(unprefixed)) {
+  if (!admin && !api && !portal && !download && isAgentPage(unprefixed)) {
     const md = new URL(markdownPath(unprefixed), request.nextUrl.origin);
     response.headers.append(
       "Link",
@@ -200,5 +211,5 @@ export const config = {
   // Static assets carry no scripts and need neither a nonce nor the gate.
   // robots.txt, sitemap.xml and the site icon are skipped too: they have no
   // language, and next-intl would otherwise route "/robots.txt" to "/en/robots.txt".
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|icon\\.svg|robots\\.txt|sitemap\\.xml).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|icon\\.svg|robots\\.txt|sitemap\\.xml|llms\\.txt|llms-full\\.txt).*)"],
 };

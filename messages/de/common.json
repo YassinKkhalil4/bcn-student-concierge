@@ -12,7 +12,8 @@
     "begin": "Starten",
     "triage": "Kostenlose Ersteinschätzung",
     "ctaPrimary": "Meine Frist kostenlos prüfen",
-    "ctaPrimaryShort": "Gratis prüfen"
+    "ctaPrimaryShort": "Gratis prüfen",
+    "guide": "Gratis-Ratgeber"
   },
   "language": {
     "label": "Sprache"
@@ -21,7 +22,7 @@
     "tagline": "Wir bereiten die spanischen Aufenthaltsunterlagen vor, bei denen internationale Studierende in Barcelona keinen Fehler machen dürfen: den TIE, den Padrón, die Formulare, die Termine. Unabhängig, zum Festpreis und immer auf deinen Namen.",
     "services": "Dienstleistungen",
     "packages": "Pakete & Preise",
-    "guide": "Free guide (PDF)",
+    "guide": "Gratis-Ratgeber",
     "intake": "Studierendenportal",
     "process": "Ablauf",
     "legal": "Rechtliches",

@@ -27,3 +27,5 @@ export const GUIDE_FILENAME = "Landing-in-Barcelona-2026.pdf";
  */
 export type GuideFraming = "arriving" | "already-here";
 export const GUIDE_FRAMING: GuideFraming = "already-here";
+/** The guide's edition date. Bumped by hand, like the sitemap's, when the text changes. */
+export const GUIDE_EDITION = "2026-10-04";

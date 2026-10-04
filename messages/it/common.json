@@ -12,7 +12,8 @@
     "begin": "Inizia",
     "triage": "Triage gratuito",
     "ctaPrimary": "Controlla gratis la mia scadenza",
-    "ctaPrimaryShort": "Verifica gratis"
+    "ctaPrimaryShort": "Verifica gratis",
+    "guide": "Guida gratuita"
   },
   "language": {
     "label": "Lingua"
@@ -21,7 +22,7 @@
     "tagline": "Prepariamo le pratiche di residenza in Spagna che gli studenti internazionali a Barcellona non possono sbagliare: il TIE, il Padrón, i moduli, gli appuntamenti. Indipendenti, a prezzo fisso e sempre a tuo nome.",
     "services": "Servizi",
     "packages": "Pacchetti e prezzi",
-    "guide": "Free guide (PDF)",
+    "guide": "Guida gratuita",
     "intake": "Portale studenti",
     "process": "Procedura",
     "legal": "Informazioni legali",

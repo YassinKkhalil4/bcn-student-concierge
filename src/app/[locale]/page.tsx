@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import Image from "next/image";
+import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
+import { CHAPTERS } from "@/lib/guide/chapters";
+import { GUIDE_PATH } from "@/lib/guide";
+import { ArrowMark, DownloadMark } from "@/components/icons";
+import cover from "../../../assets/guide/cover.png";
 import { TIERS } from "@/lib/pricing";
 import { PricingCard } from "@/components/PricingCard";
 import { LegalDisclaimer } from "@/components/LegalDisclaimer";
@@ -92,6 +98,43 @@ function Landing() {
             <Link href="/pricing" className="btn-secondary">
               {t("hero.secondaryCta")}
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── The free guide ────────────────────────────────────────────────
+          Straight under the cover: it is the one thing on the site that costs
+          nothing and needs no email, and a student who is not ready to talk to
+          anyone can get the answer to "which route am I on?" right here. It is
+          read on the site, so the primary button opens it; the PDF is the
+          second door. */}
+      <section aria-labelledby="home-guide" className="border-b border-paper-line bg-paper-dim">
+        <div className="container-x grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-[minmax(0,3fr)_minmax(0,8fr)] lg:gap-14">
+          <Link href="/guide" aria-hidden tabIndex={-1} className="hidden lg:block">
+            <Image
+              src={cover}
+              alt=""
+              unoptimized
+              className="chamfer w-full max-w-[220px] shadow-xl shadow-ink-deep/30 [--chamfer:14px]"
+            />
+          </Link>
+          <div>
+            <p className="rule-label">{t("guideBand.eyebrow")}</p>
+            <h2 id="home-guide" className="mt-4 max-w-[26ch] text-display-lg text-ink">
+              {t("guideBand.title")}
+            </h2>
+            <p className="prose-lede measure mt-4">{t("guideBand.body", { count: CHAPTERS.length })}</p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+              <NextLink href="/guide/pick-your-route" className="btn-primary">
+                {t("guideBand.read")}
+                <ArrowMark className="h-5 w-5 flex-none" />
+              </NextLink>
+              <a href={GUIDE_PATH} download className="btn-secondary">
+                <DownloadMark className="h-5 w-5 flex-none" />
+                {t("guideBand.download")}
+              </a>
+            </div>
+            <p className="mt-4 font-mono text-xs text-ink-soft">{t("guideBand.note")}</p>
           </div>
         </div>
       </section>

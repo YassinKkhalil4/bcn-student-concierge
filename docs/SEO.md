@@ -133,3 +133,14 @@ file has not been audited.
 whatever question sits fourth today. Three Catalan entries had drifted onto
 different questions before this work started. Keying them by content, or
 turning `faq.items` into a keyed object, would stop it happening again.
+
+## The guide, read online (`/guide/<slug>`)
+
+The free guide "Landing in Barcelona" is published as 13 web pages as well as the PDF.
+
+- **Source.** One typed model (`src/lib/guide/types.ts`, content in `src/lib/guide/chapters/`) renders the page, the `.md` file and the structured data. Edit the content there; never in a template.
+- **English only.** The chapters are not translated. `/es/guide/<slug>` and the other prefixed URLs 308-redirect to the English URL (middleware), the page carries a canonical and no hreflang set, and the sitemap lists each chapter once with no alternates. Chapters are therefore kept out of `PUBLIC_PAGES` (translated pages) and listed in `GUIDE_CHAPTER_PATHS`.
+- **Structured data.** Each chapter emits `Article`, `BreadcrumbList` and, where it has one, `FAQPage` (answers quoted verbatim from the chapter). `/guide` emits a `CollectionPage`/`Book` with `hasPart` and the PDF as its encoding.
+- **For assistants.** `/guide/<slug>.md` and `Accept: text/markdown` return the chapter as Markdown; `/llms.txt` lists them and `/llms-full.txt` is the whole guide in one file.
+- **Prices.** The PDF's Part 5 prints package prices. They are not published on the chapters: the pricing table is the one source (`src/lib/pricing.ts`). A test fails if a package name or price appears in a chapter.
+- **When the PDF is replaced.** Replace `assets/guide/landing-in-barcelona.pdf` and `assets/guide/cover.png`, update the chapter text to match, bump `GUIDE_EDITION` in `src/lib/guide.ts` and `CONTENT_UPDATED` in `src/app/sitemap.ts`.

@@ -3,7 +3,9 @@ import { localizedPath } from "@/i18n/routing";
 import { ADDONS, TIERS, formatEur, hasSinglePrice, tierPriceCents, SERVICE_ROUTES } from "@/lib/pricing";
 import { GUIDE_FRAMING, GUIDE_PATH } from "@/lib/guide";
 import { controllerName } from "@/lib/provider";
-import { siteOrigin, type PublicPage } from "./pages";
+import { chapterIndex, chapterBody } from "@/lib/guide/markdown";
+import { getChapter } from "@/lib/guide/chapters";
+import { isGuideChapterPath, isPublicPage, siteOrigin, type PublicPage } from "./pages";
 
 /**
  * The public pages as Markdown, for agents that would otherwise scrape HTML.
@@ -124,6 +126,8 @@ async function guideDoc(locale: string): Promise<string> {
     `# ${t("title")}`,
     t(`framing.${GUIDE_FRAMING}.lead`),
     t("subtitle"),
+    `## Read it online`,
+    chapterIndex(siteOrigin()),
     `[${t("download")}](${siteOrigin()}${GUIDE_PATH})`,
     `## ${t("insideTitle")}`,
     sections.map((s) => `- **${s.number}** ${s.title}${s.detail ? ` — ${s.detail}` : ""}`).join("\n"),
@@ -212,7 +216,9 @@ async function legalDoc(locale: string, doc: "scope" | "privacy" | "terms"): Pro
 }
 
 /** The Markdown for one public page, or null if the page is not offered. */
-export async function renderPageMarkdown(page: PublicPage, locale: string): Promise<string | null> {
+export async function renderPageMarkdown(page: string, locale: string): Promise<string | null> {
+  if (isGuideChapterPath(page)) return renderChapterMarkdown(page);
+  if (!isPublicPage(page)) return null;
   const body = await (page === "/"
     ? homeDoc(locale)
     : page === "/guide"
@@ -239,5 +245,19 @@ export async function renderPageMarkdown(page: PublicPage, locale: string): Prom
     // The English is the original; only a translation carries the notice.
     locale === "en" ? "" : common("legalPage.translationNotice"),
     `${common("brand")} · ${canonical}`,
+  )}\n`;
+}
+
+/** A guide chapter. English only: the chapters are not translated. */
+async function renderChapterMarkdown(path: string): Promise<string | null> {
+  const chapter = getChapter(path.replace("/guide/", ""));
+  if (!chapter) return null;
+  const common = await translatorFor("en", "common");
+  const origin = siteOrigin();
+  return `${lines(
+    chapterBody(chapter, origin),
+    "---",
+    `**${common("disclaimer.prominentLabel")}** ${common("disclaimer.body")}`,
+    `${common("brand")} · ${origin}${path}`,
   )}\n`;
 }

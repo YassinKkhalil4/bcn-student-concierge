@@ -16,6 +16,7 @@ export function SiteHeader() {
    */
   const nav = [
     { href: "/#how-it-works", label: t("nav.howItWorks") },
+    { href: "/guide", label: t("nav.guide"), wide: true },
     { href: "/pricing", label: t("nav.pricing") },
     { href: "/#faq", label: t("nav.faq") },
     { href: "/intake", label: t("nav.beginIntake") },
@@ -74,8 +75,12 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="whitespace-nowrap font-sans text-[0.8125rem] font-semibold tracking-tight
-                         text-ink-muted transition-colors hover:text-ink"
+              // The guide link only fits the row at 2xl: in Italian and German
+              // a seventh item wraps the header to two rows at 1280. Below
+              // 2xl the guide has the band under the hero, the footer and the
+              // mobile index.
+              className={`whitespace-nowrap font-sans text-[0.8125rem] font-semibold tracking-tight
+                         text-ink-muted transition-colors hover:text-ink ${"wide" in item ? "hidden 2xl:inline" : ""}`}
             >
               {item.label}
             </Link>

@@ -121,5 +121,13 @@
     "body": "Allez directement au dossier si vous savez quelle formule vous voulez : nous commençons à le constituer dès aujourd’hui. Si vous hésitez encore, la vérification gratuite vous dit quel parcours s’applique et combien de jours il vous reste, et ne coûte rien. Dans les deux cas, vous saurez où vous en êtes avant de dépenser quoi que ce soit.",
     "primaryCta": "Vérifier mon délai gratuitement",
     "secondaryCta": "Commencer mon dossier"
+  },
+  "guideBand": {
+    "eyebrow": "Guide gratuit",
+    "title": "Lisez le guide ici. Sans téléchargement, sans e-mail.",
+    "body": "Landing in Barcelona, ce sont {count} chapitres courts sur la TIE, le certificat d’enregistrement des citoyens de l’UE, le padrón, la couverture santé et vos 30 premiers jours. Ouvrez n’importe quel chapitre dans votre navigateur, ou gardez le PDF.",
+    "read": "Lire en ligne",
+    "download": "Télécharger le PDF",
+    "note": "Les chapitres sont en anglais."
   }
 }
