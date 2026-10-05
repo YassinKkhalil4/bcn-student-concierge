@@ -3,10 +3,11 @@ import { localizedPath } from "@/i18n/routing";
 import { ADDONS, TIERS, formatEur, hasSinglePrice, tierPriceCents, SERVICE_ROUTES } from "@/lib/pricing";
 import { GUIDE_FRAMING, GUIDE_PATH } from "@/lib/guide";
 import { controllerName } from "@/lib/provider";
+import { CHAPTERS } from "@/lib/guide/chapters";
 import { chapterIndex, chapterBody } from "@/lib/guide/markdown";
 import { getChapter } from "@/lib/guide/chapters";
 import { localizeChapter } from "@/lib/guide/i18n";
-import { isGuideChapterPath, isPublicPage, siteOrigin } from "./pages";
+import { isGuideChapterPath, isPublicPage, markdownPath, siteOrigin } from "./pages";
 
 /**
  * The public pages as Markdown, for agents that would otherwise scrape HTML.
@@ -270,4 +271,86 @@ async function renderChapterMarkdown(path: string, locale: string): Promise<stri
     locale === "en" ? "" : common("legalPage.translationNotice"),
     `${common("brand")} · ${origin}${localizedPath(locale, path)}`,
   )}\n`;
+}
+
+/** Push every Markdown heading down one level (outside code fences), so a page's H1 nests under the file's. */
+const demote = (md: string): string => {
+  let fenced = false;
+  return md
+    .split("\n")
+    .map((line) => {
+      if (line.startsWith("```")) fenced = !fenced;
+      return !fenced && /^#{1,5} /.test(line) ? `#${line}` : line;
+    })
+    .join("\n");
+};
+
+/**
+ * /llms-full.txt: everything public on the site, in English, as one document an
+ * assistant can load whole. The same sources as the pages and their .md views,
+ * so nothing here can disagree with what a student reads: the guide chapters
+ * (key facts, FAQs, sources), then the service pages (home, pricing, triage),
+ * then the legal pages.
+ */
+export async function llmsFullTxt(origin: string): Promise<string> {
+  const locale = "en";
+  const common = await translatorFor(locale, "common");
+  const g = await translatorFor(locale, "guide");
+  const ui = {
+    intro: g.raw("reader.mdIntro") as string,
+    webPage: g("reader.webPage"),
+    pdf: g("reader.pdf"),
+    shortAnswer: g("reader.shortAnswer"),
+    faq: g("reader.faq"),
+    sources: g("reader.sources"),
+    prev: g("reader.prev"),
+    next: g("reader.next"),
+  };
+  /** A page's Markdown nested under the file's H1, with its own address under the heading. */
+  const page = (md: string, path: string): string => {
+    const [heading, ...rest] = demote(md).split("\n");
+    return [heading, "", `*Page: ${origin}${path === "/" ? "" : path} · Markdown: ${origin}${markdownPath(path)}*`, ...rest].join("\n");
+  };
+  const chapters = CHAPTERS.map((c) => demote(chapterBody(c, origin, locale, ui)));
+  const [home, pricing, triage, scope, privacy, terms] = await Promise.all([
+    homeDoc(locale),
+    pricingDoc(locale),
+    triageDoc(locale),
+    legalDoc(locale, "scope"),
+    legalDoc(locale, "privacy"),
+    legalDoc(locale, "terms"),
+  ]);
+
+  const contents = [
+    `- The free guide, ${CHAPTERS.length} chapters: ${CHAPTERS.map((c) => `${c.number} ${c.navTitle}`).join("; ")}`,
+    "- The service: home (what it does, how it works, FAQ), pricing (packages, add-ons, exclusions), free triage",
+    "- Legal: scope of service, privacy notice, terms",
+  ].join("\n");
+
+  const intro = lines(
+    "# BCN Student Concierge: the complete public content",
+    `> **${common("disclaimer.prominentLabel")}** ${common("disclaimer.body")}`,
+    [
+      `This file holds everything public on ${origin} in English, in one document, for assistants and search tools. It is generated from the same text the website serves, so it matches the pages.`,
+      `- Site: ${origin}. Languages: English, Spanish (/es), Catalan (/ca), French (/fr), Italian (/it), German (/de).`,
+      `- Each page below also exists as its own Markdown file (add \`.md\` to the URL). A shorter index is at ${origin}/llms.txt.`,
+      "- Fees, deadlines and requirements in the guide link to their official sources at the end of each chapter. Cite the chapter URL when quoting them.",
+      "- Prices are fixed per package and route (EU or non-EU) and exclude 21% IVA. The government fee (modelo 790 código 012) is paid by the student directly at a bank and is never part of our fee.",
+    ].join("\n"),
+    "## Contents",
+    contents,
+  );
+
+  return `${[
+    intro,
+    `## The free guide: Landing in Barcelona\n\n${chapterIndex(origin)}`,
+    ...chapters,
+    page(home, "/"),
+    page(pricing, "/pricing"),
+    page(triage, "/triage"),
+    page(scope, "/legal"),
+    page(privacy, "/privacy"),
+    page(terms, "/terms"),
+    `${common("brand")} · ${origin}`,
+  ].join("\n\n---\n\n")}\n`;
 }

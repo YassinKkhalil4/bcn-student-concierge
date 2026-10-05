@@ -232,6 +232,18 @@ describe("agents and crawlers", () => {
       expect(fullText).toContain(c.title);
     }
   });
+
+  it("puts every public page in llms-full.txt, with its own address, and no template leftovers", async () => {
+    const fullText = await (await llmsFull()).text();
+    for (const page of ["/", "/pricing", "/triage", "/legal", "/privacy", "/terms"]) {
+      expect(fullText).toContain(`Markdown: https://bcnstudent.com${markdownPath(page)}`);
+    }
+    expect(fullText).toContain("The short answer");
+    expect(fullText).toContain("Questions people ask");
+    expect(fullText).not.toMatch(/undefined|\[object|\{number\}|<\/?[a-z]+>/);
+    // One H1: the pages nest under it.
+    expect(fullText.match(/^# /gm)).toHaveLength(1);
+  });
 });
 
 describe("structured data", () => {

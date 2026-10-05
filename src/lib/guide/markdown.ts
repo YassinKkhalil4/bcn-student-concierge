@@ -185,34 +185,35 @@ export function llmsTxt(origin: string): string {
   return `${[
     "# BCN Student Concierge",
     "> Paperwork help for international students arriving in Barcelona, and a free, plain-English guide to the student paperwork: TIE (EX-17), EU registration certificate (EX-18), padrón, health insurance, costs. Not a law firm or gestoría.",
-    "## The free guide, readable online",
-    `Each chapter is a web page and a Markdown file: add \`.md\` to any chapter URL. Every chapter is also available in Spanish (/es/guide/…), Catalan (/ca/…), French (/fr/…), Italian (/it/…) and German (/de/…).`,
-    chapterIndex(origin),
-    "## Also",
     [
-      `- [Guide overview and PDF download](${origin}/guide): the same guide as a PDF`,
-      `- [Free triage](${origin}/triage): a free check of where a student's paperwork stands`,
-      `- [Pricing](${origin}/pricing): fixed fees for the paid service`,
-      `- [Full guide in one file](${origin}/llms-full.txt)`,
+      "BCN Student Concierge prepares the paperwork file for international students in Barcelona (TIE for non-EU students, EU registration certificate for EU/EEA/Swiss students, padrón, health-insurance check) for a fixed fee, and publishes the guide below for free. Prices exclude 21% IVA and are quoted per route (EU or non-EU) on the pricing page. It does not give legal advice, does not guarantee appointments, and never pays the government fee on a student's behalf.",
+      "",
+      "- Languages: English (default), Spanish (/es), Catalan (/ca), French (/fr), Italian (/it), German (/de). Every public page exists in all six.",
+      "- Every public page is also available as Markdown: add `.md` to the URL (the home page is `/index.md`), or send `Accept: text/markdown`.",
+      `- Everything below in one file: [llms-full.txt](${origin}/llms-full.txt) (the whole guide with key facts, FAQs and sources, plus home, pricing, triage and legal pages).`,
+      "- When quoting a deadline, fee or requirement, cite the chapter URL and its Sources section: the chapters link to the official government pages.",
+    ].join("\n"),
+    "## The free guide, readable online",
+    `Each chapter is a web page and a Markdown file: add \`.md\` to any chapter URL. Every chapter is also available in Spanish (/es/guide/…), Catalan (/ca/…), French (/fr/…), Italian (/it/…) and German (/de/…). Each chapter opens with key facts, then the detail, then frequently asked questions and sources.`,
+    chapterIndex(origin),
+    "## The service",
+    [
+      `- [Home](${origin}/index.md): what the service does, the problems it solves, how it works, FAQ`,
+      `- [Pricing](${origin}/pricing.md): the two fixed-fee packages per route, add-ons, and what is never included`,
+      `- [Free triage](${origin}/triage.md): a free check of where a student's paperwork stands`,
+      `- [Guide overview and PDF download](${origin}/guide.md): the same guide as a PDF`,
+    ].join("\n"),
+    "## Legal",
+    [
+      `- [Scope of service](${origin}/legal.md): what the service is and is not (not a law firm or gestoría)`,
+      `- [Privacy notice](${origin}/privacy.md): data collected, retention (documents deleted 30 days after completion), rights`,
+      `- [Terms](${origin}/terms.md): terms of service and the package price list`,
+    ].join("\n"),
+    "## Optional",
+    [
+      `- [Full text in one file](${origin}/llms-full.txt)`,
+      `- [Sitemap](${origin}/sitemap.xml): every public URL with language alternates`,
+      `- [Guide as PDF](${origin}/downloads/landing-in-barcelona.pdf)`,
     ].join("\n"),
   ].join("\n\n")}\n`;
-}
-
-const EN_UI: ReaderUi = {
-  intro: "Chapter {number} of the free guide “Landing in Barcelona”.",
-  webPage: "Web page",
-  pdf: "PDF",
-  shortAnswer: "Key facts",
-  faq: "Frequently asked questions",
-  sources: "Sources",
-  prev: "Previous",
-  next: "Next",
-};
-
-export function llmsFullTxt(origin: string): string {
-  return `${[
-    "# Landing in Barcelona: the full guide",
-    "> Free guide to student paperwork in Barcelona from BCN Student Concierge. Not legal advice. Each chapter also has its own page.",
-    ...CHAPTERS.map((c) => chapterBody(c, origin, "en", EN_UI).replace(/^# /, "## ")),
-  ].join("\n\n---\n\n")}\n`;
 }
