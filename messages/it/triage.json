@@ -52,7 +52,8 @@
     "sending": "Invio in corso…",
     "freeNote": "Senza costi, senza impegno, senza carta. Rispondiamo in giornata.",
     "failed": "Non è stato possibile inviare la tua richiesta. Riprova.",
-    "errorSummary": "Controlla queste risposte prima di inviare"
+    "errorSummary": "Controlla queste risposte prima di inviare",
+    "fileTooLarge": "Il file supera i {mb} MB."
   },
   "done": {
     "title": "L’abbiamo ricevuta.",

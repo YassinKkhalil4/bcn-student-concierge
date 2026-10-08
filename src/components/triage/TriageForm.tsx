@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { countryOptions } from "@/lib/countries";
 import { routeForNationality } from "@/lib/forms/field-map";
+import { MAX_UPLOAD_BYTES } from "@/lib/server/uploads";
 import { translateIssue } from "@/lib/validation-keys";
 import { ErrorSummary, type SummarisedError } from "@/components/ErrorSummary";
 import {
@@ -108,6 +109,15 @@ export function TriageForm() {
       setErrors(next);
       setAttempt((n) => n + 1);
       return;
+    }
+
+    // Stop an oversized scan here, with a clear message, instead of letting the proxy answer with a bare 502.
+    for (const kind of TRIAGE_DOCUMENT_KINDS) {
+      const file = files[kind];
+      if (file && file.size > MAX_UPLOAD_BYTES) {
+        setSubmitError(t("form.fileTooLarge", { mb: MAX_UPLOAD_BYTES / 1024 / 1024 }));
+        return;
+      }
     }
 
     const body = new FormData();

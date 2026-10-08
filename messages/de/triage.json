@@ -52,7 +52,8 @@
     "sending": "Wird gesendet…",
     "freeNote": "Kostenlos, unverbindlich, ohne Karte. Wir antworten am selben Tag.",
     "failed": "Deine Anfrage konnte nicht gesendet werden. Bitte versuche es erneut.",
-    "errorSummary": "Prüfen Sie diese Angaben vor dem Senden"
+    "errorSummary": "Prüfen Sie diese Angaben vor dem Senden",
+    "fileTooLarge": "Die Datei ist größer als {mb} MB."
   },
   "done": {
     "title": "Angekommen.",

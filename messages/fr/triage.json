@@ -52,7 +52,8 @@
     "sending": "Envoi…",
     "freeNote": "Sans frais, sans engagement, sans carte bancaire. Nous répondons le jour même.",
     "failed": "Impossible d’envoyer votre demande. Veuillez réessayer.",
-    "errorSummary": "Vérifiez ces réponses avant d’envoyer"
+    "errorSummary": "Vérifiez ces réponses avant d’envoyer",
+    "fileTooLarge": "La taille du fichier est supérieure à {mb} Mo."
   },
   "done": {
     "title": "Nous l’avons bien reçue.",

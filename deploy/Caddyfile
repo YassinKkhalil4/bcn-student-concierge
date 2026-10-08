@@ -29,7 +29,14 @@ bcnstudent.com, www.bcnstudent.com {
 	encode zstd gzip
 
 	# Uploads are capped at 10 MB in the app; allow multipart overhead on top.
-	request_body {
+	# The free triage form can attach three files of up to 10 MB each in ONE request, so it gets
+	# 3 x 10 MB plus multipart overhead. Every other route keeps the 12 MB cap.
+	@triage path /api/triage
+	request_body @triage {
+		max_size 33MB
+	}
+	@notriage not path /api/triage
+	request_body @notriage {
 		max_size 12MB
 	}
 

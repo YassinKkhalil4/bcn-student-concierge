@@ -52,7 +52,8 @@
     "sending": "Sending…",
     "freeNote": "No charge, no obligation, no card. We reply the same day.",
     "failed": "Could not send your enquiry. Please try again.",
-    "errorSummary": "Check these answers before sending"
+    "errorSummary": "Check these answers before sending",
+    "fileTooLarge": "File is larger than {mb} MB."
   },
   "done": {
     "title": "We’ve got it.",

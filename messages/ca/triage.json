@@ -52,7 +52,8 @@
     "sending": "Enviant…",
     "freeNote": "Sense cost, sense compromís i sense targeta. Responem el mateix dia.",
     "failed": "No hem pogut enviar la teva consulta. Torna-ho a provar.",
-    "errorSummary": "Revisa aquestes respostes abans d’enviar"
+    "errorSummary": "Revisa aquestes respostes abans d’enviar",
+    "fileTooLarge": "El fitxer és més gran que {mb} MB."
   },
   "done": {
     "title": "Ho hem rebut.",

@@ -52,7 +52,8 @@
     "sending": "Enviando…",
     "freeNote": "Sin coste, sin compromiso y sin tarjeta. Respondemos el mismo día.",
     "failed": "No hemos podido enviar tu consulta. Inténtalo de nuevo.",
-    "errorSummary": "Revisa estas respuestas antes de enviar"
+    "errorSummary": "Revisa estas respuestas antes de enviar",
+    "fileTooLarge": "El archivo tiene un tamaño superior a {mb} MB."
   },
   "done": {
     "title": "Lo hemos recibido.",
