@@ -55,6 +55,16 @@ export function SiteFooter() {
           <ProviderIdentification />
           <p className="mt-8 font-mono text-xs text-onink-soft">
             {t("footer.copyright", { year: new Date().getFullYear() })}
+            {/* Language-neutral on purpose: the site ships in six languages. */}
+            {" "}
+            <a
+              href="https://ykhalil.com/"
+              rel="noopener"
+              aria-label="Website by Yassin Khalil"
+              className="underline underline-offset-2 hover:text-onink"
+            >
+              ykhalil.com
+            </a>
           </p>
         </div>
       </div>
