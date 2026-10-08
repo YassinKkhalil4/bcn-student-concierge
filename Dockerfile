@@ -5,7 +5,9 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install --no-audit --no-fund
+# The lockfile is written by npm 11; the npm 10 that ships in the image disagrees with it about nested
+# dependencies and refuses `npm ci`. Pinning the same npm makes the install strict and reproducible.
+RUN npm install -g npm@11.21.0 && npm ci --no-audit --no-fund
 
 # ── 2. Build ────────────────────────────────────────────────────────────────
 FROM node:22-alpine AS build
