@@ -212,3 +212,7 @@ regulation, not marketing copy, and it shapes the code:
 - `/legal` explains what the agency will refuse and refer onward
 
 See `docs/FORMS.md` for why each of those form-level rules exists.
+
+---
+
+Built by [Yassin Khalil](https://ykhalil.com)
